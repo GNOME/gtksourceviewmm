@@ -1,0 +1,45 @@
+/* sourcebuffer.hg
+ * 
+ * Copyright (C) 2005-2006 The gtksourceviewmm development team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <glibmm/object.h>
+#include <gtksourceviewmm/sourcelanguage.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace gtksourceview
+{
+_CC_INCLUDE(gtksourceview/gtksourcelanguagesmanager.h)
+_CC_INCLUDE(gtksourceview/gtksourceview-typebuiltins.h)
+
+class SourceLanguagesManager : public Glib::Object
+{
+  _CLASS_GOBJECT(SourceLanguagesManager, GtkSourceLanguagesManager, GTK_SOURCE_LANGUAGES_MANAGER, Glib::Object, GObject)
+  public:
+    _CTOR_DEFAULT()
+
+    _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceLanguage> > get_available_language(), gtk_source_languages_manager_get_available_languages)
+    //_WRAP_METHOD(SourceLanguage& get_language_from_mime_type(const Glib::ustring &mime_type), gtk_source_languages_manager_get_language_from_mime_type)
+    Glib::RefPtr<SourceLanguage> get_language_from_mime_type (const Glib::ustring &mime_type) ;
+    _IGNORE(gtk_source_languages_manager_get_language_from_mime_type)
+    _WRAP_METHOD(Glib::SListHandle<Glib::ustring> get_lang_files_dirs(), gtk_source_languages_manager_get_lang_files_dirs)
+};
+
+} /* namespace gtksourceview */
+

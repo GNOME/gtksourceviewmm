@@ -1,0 +1,31 @@
+Index: ChangeLog
+===================================================================
+RCS file: /var/lib/cvs/gtksourceviewmm/ChangeLog,v
+retrieving revision 1.1.1.1
+diff -u -r1.1.1.1 ChangeLog
+--- ChangeLog	28 May 2006 18:56:55 -0000	1.1.1.1
++++ ChangeLog	3 Jun 2006 07:33:07 -0000
+@@ -1,5 +1,21 @@
++samedi 3 juin 2006, 09:20:41 (UTC+0200) Dodji Seketeli <dodji@gnome.org>
++
++	* gtksourceview/src/sourcelanguage.hg: wrap the set_mime_types()
++	  method.
++	* tools/m4/convert.m4: include convert_gtkmm.m4 before
++	  convert_gtksourceviewmm.m4 so that the later finds the appropriate
++	  macros definitions.
++	* tools/m4/convert_gtksourceviewmm.m4: add a couple of m4 conversion
++	  macros needed by gtksourceview/src/*.hg to be properly generated.
++
++	This entry makes the tree compile properly compile for me. I haven't
++	tried to run it yet, though.
++
+ 2006-05-28 - Rob Page <page.rob@gmail.com>
+-* Mostly rewritten to use hg and ccg files, but is probably not functional at the moment
++
++	* Mostly rewritten to use hg and ccg files, but is probably not functional at the moment
+ 
+ 2006-04-01 - Rob Page <page.rob@gmail.com>
+-* Initial Upload.
++
++	* Initial Upload.
++

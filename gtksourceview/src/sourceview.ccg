@@ -1,0 +1,67 @@
+/* GtkSourceView::SourceView
+ *
+ * Copyright 2004-2005 Jae Jang
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+#include <gtksourceviewmm/sourceview.h>
+#include <gtksourceview/gtksourceview.h>
+#include <gtksourceview/gtksourceview-typebuiltins.h>
+
+namespace gtksourceview
+{
+
+SourceView::SourceView() :
+    _CONSTRUCT
+{
+    GtkSourceBuffer *buffer = gtk_source_buffer_new (NULL) ;
+    gtk_text_view_set_buffer (GTK_TEXT_VIEW (gobject_), GTK_TEXT_BUFFER (buffer));
+}
+
+SourceView::SourceView(Glib::RefPtr<SourceBuffer> &a_buffer) :
+    _CONSTRUCT
+{
+    if (a_buffer) {
+        gtk_text_view_set_buffer (GTK_TEXT_VIEW (gobject_),
+                                  GTK_TEXT_BUFFER (a_buffer->gobj ())) ;
+    } else {
+        gtk_text_view_set_buffer (GTK_TEXT_VIEW (gobject_), NULL) ;
+    }
+}
+
+Glib::RefPtr<const SourceBuffer>
+SourceView::get_source_buffer () const
+{
+    Glib::RefPtr<const SourceBuffer> buffer =
+        Glib::wrap ((GtkSourceBuffer*)get_buffer ()->gobj ());
+    return buffer ;
+}
+
+Glib::RefPtr<SourceBuffer>
+SourceView::get_source_buffer ()
+{
+    Glib::RefPtr<SourceBuffer> buffer =
+        Glib::wrap (reinterpret_cast<GtkSourceBuffer*> (get_buffer ()->gobj ())) ;
+    return buffer ;
+}
+
+void
+SourceView::set_source_buffer (Glib::RefPtr<SourceBuffer> &source_buffer)
+{
+    set_buffer (source_buffer) ;
+}
+
+}//end namespace gtksourceview
+

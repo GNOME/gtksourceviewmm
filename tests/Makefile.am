@@ -1,0 +1,10 @@
+noinst_PROGRAMS=runtestbasic
+
+runtestbasic_SOURCES=test-basic.cpp
+runtestbasic_LDFLAGS=@GTKSOURCEVIEWMM_LIBS@
+
+INCLUDES=-I$(top_srcdir)/gtksourceview \
+@GTKSOURCEVIEWMM_CFLAGS@
+
+LDADD=$(top_builddir)/gtksourceview/gtksourceviewmm/libgtksourceviewmm-1.0.la
+

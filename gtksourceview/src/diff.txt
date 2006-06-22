@@ -1,0 +1,109 @@
+Index: Makefile.am
+===================================================================
+RCS file: /var/lib/cvs/gtksourceviewmm/gtksourceview/src/Makefile.am,v
+retrieving revision 1.1.1.1
+diff -u -r1.1.1.1 Makefile.am
+--- Makefile.am	28 May 2006 18:56:55 -0000	1.1.1.1
++++ Makefile.am	4 Jun 2006 10:47:59 -0000
+@@ -4,8 +4,13 @@
+ sublib_name = gtksourceviewmm
+ sublib_namespace = Gtk
+ sublib_parentdir = gtksourceviewmm
+-files_defs = gtksourceview.defs gtksourceview_methods.defs \
+-			 gtksourceview_docs.xml gtksourceview_docs_override.xml
++files_defs = \
++gtksourceview.defs \
++gtksourceview_signals.defs \
++gtksourceview_methods.defs \
++gtksourceview_docs.xml \
++gtksourceview_docs_override.xml
++
+ 
+ include $(top_srcdir)/build_shared/Makefile_gensrc.am_fragment
+ 
+Index: Makefile_list_of_hg.am_fragment
+===================================================================
+RCS file: /var/lib/cvs/gtksourceviewmm/gtksourceview/src/Makefile_list_of_hg.am_fragment,v
+retrieving revision 1.1.1.1
+diff -u -r1.1.1.1 Makefile_list_of_hg.am_fragment
+--- Makefile_list_of_hg.am_fragment	28 May 2006 18:56:55 -0000	1.1.1.1
++++ Makefile_list_of_hg.am_fragment	4 Jun 2006 10:47:59 -0000
+@@ -2,9 +2,19 @@
+ # The include happens in Makefile.am, not Makefile.in or Makefile,
+ # so it's like copy-and-pasting this into each of those Makefile.am files.
+ 
+-files_posix_hg = 
++files_posix_hg =
+ files_win32_hg =
+-files_general_hg = sourceview.hg sourcebuffer.hg sourcelanguage.hg sourcelanguagesmanager.hg sourcemarker.hg
++files_general_hg = \
++sourcetagstyle.hg \
++sourcestylescheme.hg \
++sourcetag.hg \
++sourcetagtable.hg \
++sourcelanguage.hg \
++sourcelanguagesmanager.hg \
++sourcemarker.hg \
++sourceview.hg \
++sourcebuffer.hg
++
+ files_general_deprecated_hg =
+ 
+ include $(top_srcdir)/build_shared/Makefile_build_gensrc.am_fragment
+Index: gtksourceview.defs
+===================================================================
+RCS file: /var/lib/cvs/gtksourceviewmm/gtksourceview/src/gtksourceview.defs,v
+retrieving revision 1.1.1.1
+diff -u -r1.1.1.1 gtksourceview.defs
+--- gtksourceview.defs	28 May 2006 18:56:55 -0000	1.1.1.1
++++ gtksourceview.defs	4 Jun 2006 10:47:59 -0000
+@@ -1,2 +1,5 @@
+ (include gtksourceview_methods.defs)
++(include gtksourceview_signals.defs)
++
++
+Index: sourcelanguage.hg
+===================================================================
+RCS file: /var/lib/cvs/gtksourceviewmm/gtksourceview/src/sourcelanguage.hg,v
+retrieving revision 1.1.1.1
+diff -u -r1.1.1.1 sourcelanguage.hg
+--- sourcelanguage.hg	28 May 2006 18:56:55 -0000	1.1.1.1
++++ sourcelanguage.hg	4 Jun 2006 10:47:59 -0000
+@@ -18,9 +18,11 @@
+  */
+ 
+ #include <glibmm/object.h>
++#include <gtksourceviewmm/sourcetag.h>
+ 
+ _DEFS(gtksourceviewmm,gtksourceview)
+ _PINCLUDE(glibmm/private/object_p.h)
++_PINCLUDE(gtksourceviewmm/private/sourcetag_p.h)
+ 
+ namespace Gtk
+ {
+@@ -30,18 +32,21 @@
+ class SourceLanguage : public Glib::Object
+ {
+   _CLASS_GOBJECT(SourceLanguage, GtkSourceLanguage, GTK_SOURCE_LANGUAGE, Glib::Object, GObject)
++
+ protected:
+   _CTOR_DEFAULT()
++
+ public:
++
++  _WRAP_METHOD(Glib::ustring get_id(), gtk_source_language_get_id)
+   _WRAP_METHOD(Glib::ustring get_name(), gtk_source_language_get_name)
+   _WRAP_METHOD(Glib::ustring get_section(), gtk_source_language_get_section)
+-  /* TODO Need to wrap GtkSourceTag
+-  _WRAP_METHOD(Glib::ListHandle<SourceTag> get_tags(), gtk_source_language_get_tags)*/
++  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceTag> > get_tags(), gtk_source_language_get_tags)
+   _WRAP_METHOD(gunichar get_escape_char(), gtk_source_language_get_escape_char)
+ 
+   _WRAP_METHOD(Glib::SListHandle<Glib::ustring> get_mime_types() const, gtk_source_language_get_mime_types)
+-/* FIXME Why doesn't this work?
+-_WRAP_METHOD(void set_mime_types(const Glib::ListHandle<const Glib::ustring>& mime_types), gtk_source_language_set_mime_types)*/
++
++_WRAP_METHOD(void set_mime_types(const Glib::SListHandle<const Glib::ustring>& mime_types), gtk_source_language_set_mime_types)
+   
+   /* TODO Need to wrap GtkSourceStyleScheme
+   _WRAP_METHOD(Glib::RefPtr<SourceStyleScheme> get_style_scheme(), gtk_source_language_get_style_scheme)

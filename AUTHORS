@@ -1,0 +1,10 @@
+Rob Page <page.rob@gmail.com>
+Dodji Seketeli <dodji@gnome.org>
+
+Large parts of this wrapper (ie: the tools and scripts directories)
+are taken from the glibmm and gtkmm projects.
+http://www.gtkmm.org
+
+Initial Code by:
+Jae Jang <jjang@users.sourceforge.net>
+

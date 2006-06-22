@@ -1,0 +1,51 @@
+samedi 17 juin 2006, 17:16:40 (UTC+0200) Dodji Seketeli <dodji@gnome.org>
+
+	* grksourceview/src/*: Added sourcelanguagesmanager.[hg|ccg]. Various
+	  fixes to make the sourceview widget work for various testcases.
+	* configure.in: put the version number back to 1.0.0 so that we can
+	  expect to keep track with the underlying gtksourceview numbering
+	  scheme.
+
+dimanche 4 juin 2006, 12:34:10 (UTC+0200) Dodji Seketeli <dodji@gnome.org>
+
+	* gtksourceview/src/*: added gtksourceview_signals.defs
+	   sourcestylescheme.ccg, sourcestylescheme.hg, sourcetag.ccg,
+	   sourcetag.hg, sourcetagstyle.ccg, sourcetagstyle.hg,
+	   sourcetagtable.ccg, sourcetagtable.hg.
+	* gtksourceview/src/Makefile.am,Makefile_list_of_hg.am_fragment: changed this to reflect the file
+	  additions.
+	* gtksourceview/src/gtksourceview.defs: reflect the addition of
+	  gtksourceview_signals.defs. This file is not really used at the
+	  moment. I have generated it with tools/extra_defs_gen/generate_extra_defs.
+	  It seems parts of the generated file cannot be properly parsed by
+	  gmmproc, like some strings delimited by '"' which have the very same
+	  '"' as part of their content, or like the property "no-show-all"
+	  that can not be parse for some obscur reasons. Will look more deeply
+	  into that later. All this gmmproc-foo is still a bit dark to me.
+	* gtksourceview/src/sourcelanguage.ccg: wrapped
+	  gtk_source_language_get_id(), gtk_source_language_get_tags(),
+	  and gtk_source_language_set_mime_types().
+	* tools/m4/convert_gtksourceviewmm.m4: updated a couple of conversion
+	  macros.
+
+samedi 3 juin 2006, 09:20:41 (UTC+0200) Dodji Seketeli <dodji@gnome.org>
+
+	* gtksourceview/src/sourcelanguage.hg: wrap the set_mime_types()
+	  method.
+	* tools/m4/convert.m4: include convert_gtkmm.m4 before
+	  convert_gtksourceviewmm.m4 so that the later finds the appropriate
+	  macros definitions.
+	* tools/m4/convert_gtksourceviewmm.m4: add a couple of m4 conversion
+	  macros needed by gtksourceview/src/*.hg to be properly generated.
+
+	This entry makes the tree compile properly compile for me. I haven't
+	tried to run it yet, though.
+
+2006-05-28 - Rob Page <page.rob@gmail.com>
+
+	* Mostly rewritten to use hg and ccg files, but is probably not functional at the moment
+
+2006-04-01 - Rob Page <page.rob@gmail.com>
+
+	* Initial Upload.
+

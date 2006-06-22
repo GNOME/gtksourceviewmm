@@ -1,0 +1,10 @@
+gtksourceview_signals.defs
+sourcestylescheme.ccg
+sourcestylescheme.hg
+sourcetag.ccg
+sourcetag.hg
+sourcetagstyle.ccg
+sourcetagstyle.hg
+sourcetagtable.ccg
+sourcetagtable.hg
+

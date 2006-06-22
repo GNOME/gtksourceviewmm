@@ -1,0 +1,79 @@
+/* sourcetag.hg
+ * 
+ * Copyright (C) 2005-2006 The gtksourceviewmm development team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <glibmm/slisthandle.h>
+#include <gtkmm/textbuffer.h>
+#include <gtksourceviewmm/sourcetagstyle.h>
+#include <gtksourceview/gtksourcetag.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(gtkmm/private/object_p.h)
+
+namespace gtksourceview
+{
+
+class SourceTag : public Gtk::TextTag
+{
+    _CLASS_GOBJECT(SourceTag, GtkSourceTag, GTK_SOURCE_TAG, Gtk::TextTag, GtkTextTag)
+
+protected:
+    _CTOR_DEFAULT()
+
+public:
+    static Glib::RefPtr<SourceTag> create_syntax_tag (const Glib::ustring &a_id,
+                                                      const Glib::ustring &a_name,
+                                                      const Glib::ustring &a_pat_start,
+                                                      const Glib::ustring &a_pat_end);
+    _IGNORE(gtk_syntax_tag_new)
+
+    static Glib::RefPtr<SourceTag> create_pattern_tag (const Glib::ustring &a_id,
+                                                       const Glib::ustring &a_name,
+                                                       const Glib::ustring &a_pattern);
+    _IGNORE(gtk_pattern_tag_new)
+
+    static Glib::RefPtr<SourceTag> create_keyword_list_tag (const Glib::ustring &a_id,
+                                                            const Glib::ustring &a_name,
+                                                            const Glib::SListHandle<const Glib::ustring> &a_keywords,
+                                                            bool a_case_sensitive,
+                                                            bool a_match_empty_string_at_beginning,
+                                                            bool a_match_empty_string_at_end,
+                                                            const Glib::ustring &a_beginning_regex,
+                                                            const Glib::ustring &a_end_regex) ;
+    _IGNORE(gtk_keyword_list_tag_new)
+
+
+    static Glib::RefPtr<SourceTag> create_line_comment_tag_new (const Glib::ustring &a_id,
+                                                                const Glib::ustring &a_name,
+                                                                const Glib::ustring &a_pattern_start) ;
+    _IGNORE(gtk_line_comment_tag_new)
+
+    static Glib::RefPtr<SourceTag> create_string_tag_new (const Glib::ustring &a_id,
+                                                          const Glib::ustring &a_name,
+                                                          const Glib::ustring &a_pattern_start,
+                                                          const Glib::ustring &a_patten_end,
+                                                          bool a_end_at_line_end) ;
+    _IGNORE(gtk_string_tag_new)
+
+    _WRAP_METHOD(Glib::ustring get_id(), gtk_source_tag_get_id)
+    _WRAP_METHOD(SourceTagStyle get_style(), gtk_source_tag_get_style)
+    _WRAP_METHOD(void set_style(const SourceTagStyle& a_style), gtk_source_tag_set_style)
+
+};//end class SourceTag
+
+}//end namespace gtksourceview

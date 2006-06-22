@@ -1,0 +1,88 @@
+/* sourceview.hg
+ * 
+ * Copyright (C) 2004-2005 Jae Jang
+ * Copyright (C) 2005-2006 Rob Page
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <gtkmm/textview.h>
+#include <gtksourceviewmm/sourcebuffer.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(gtkmm/private/textview_p.h)
+
+namespace gtksourceview
+{
+
+/** Multi-line source editing widget. It displays a Gtk::SourceBuffer.
+ */
+
+class SourceView : public Gtk::TextView
+{
+  _CLASS_GTKOBJECT(SourceView, GtkSourceView, GTK_SOURCE_VIEW, Gtk::TextView, GtkTextView)
+
+public:
+  //_CTOR_DEFAULT(gtk_source_view_new_val) ;
+  //_WRAP_CTOR (SourceView (Glib::RefPtr<SourceBuffer> &buffer), gtk_source_view_new_with_buffer)
+  explicit SourceView () ;
+  explicit SourceView (Glib::RefPtr<SourceBuffer> &buffer) ;
+
+
+  _WRAP_CREATE()
+  _WRAP_CREATE(Glib::RefPtr<SourceBuffer> &buffer)
+
+  Glib::RefPtr<const SourceBuffer> get_source_buffer () const ;
+  Glib::RefPtr<SourceBuffer> get_source_buffer () ;
+  void set_source_buffer (Glib::RefPtr<SourceBuffer> &source_buffer) ;
+
+  _WRAP_METHOD(void set_show_line_numbers(bool show), gtk_source_view_set_show_line_numbers)
+  _WRAP_METHOD(bool get_show_line_numbers(), gtk_source_view_get_show_line_numbers)
+
+  _WRAP_METHOD(void set_show_line_markers(bool show), gtk_source_view_set_show_line_markers)
+  _WRAP_METHOD(bool get_show_line_markers(), gtk_source_view_get_show_line_markers)
+
+  _WRAP_METHOD(void set_tabs_width(guint width), gtk_source_view_set_tabs_width)
+  _WRAP_METHOD(guint get_tabs_width(), gtk_source_view_get_tabs_width)
+
+  _WRAP_METHOD(void set_auto_indent(bool enable), gtk_source_view_set_auto_indent)
+  _WRAP_METHOD(bool get_auto_indent(), gtk_source_view_get_auto_indent)
+
+  _WRAP_METHOD(void set_insert_spaces_instead_of_tabs(bool enable), gtk_source_view_set_insert_spaces_instead_of_tabs)
+  _WRAP_METHOD(bool get_insert_spaces_instead_of_tabs(), gtk_source_view_get_insert_spaces_instead_of_tabs)
+
+  _WRAP_METHOD(void set_show_margin(bool show), gtk_source_view_set_show_margin)
+  _WRAP_METHOD(bool get_show_margin(), gtk_source_view_get_show_margin)
+
+  _WRAP_METHOD(void set_highlight_current_line(bool highlight), gtk_source_view_set_highlight_current_line)
+  _WRAP_METHOD(bool get_highlight_current_line(), gtk_source_view_get_highlight_current_line)
+  
+  _WRAP_METHOD(void set_margin(guint margin), gtk_source_view_set_margin)
+  _WRAP_METHOD(guint get_margin(), gtk_source_view_get_margin)
+
+  _WRAP_METHOD(void set_marker_pixbuf(const Glib::ustring& marker, Glib::RefPtr<Gdk::Pixbuf> pixbuf), gtk_source_view_set_marker_pixbuf)
+  _WRAP_METHOD(Glib::RefPtr<Gdk::Pixbuf> get_marker_pixbuf(const Glib::ustring& marker), gtk_source_view_get_marker_pixbuf)
+
+  _WRAP_METHOD(void set_smart_home_end(bool enable), gtk_source_view_set_smart_home_end)
+  _WRAP_METHOD(bool get_smart_home_end(), gtk_source_view_get_smart_home_end)
+
+  _WRAP_SIGNAL(void redo(), "redo")
+
+  _WRAP_SIGNAL(void undo(), "undo")
+
+};
+
+} /* namespace gtksourceview */
+

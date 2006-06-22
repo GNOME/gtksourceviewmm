@@ -1,0 +1,68 @@
+/* sourcebuffer.hg
+ * 
+ * Copyright (C) 2005-2006 The gtksourceviewmm development team
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <glibmm/object.h>
+#include <gtksourceviewmm/sourcetag.h>
+#include <gtksourceviewmm/sourcestylescheme.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(glibmm/private/object_p.h)
+_PINCLUDE(gtksourceviewmm/private/sourcetag_p.h)
+
+
+namespace gtksourceview
+{
+
+class SourceLanguagesManager ;
+
+_CC_INCLUDE(gtksourceview/gtksourcelanguage.h)
+_CC_INCLUDE(gtksourceview/gtksourceview-typebuiltins.h)
+
+class SourceLanguage : public Glib::Object
+{
+  _CLASS_GOBJECT(SourceLanguage, GtkSourceLanguage, GTK_SOURCE_LANGUAGE, Glib::Object, GObject)
+
+
+protected:
+
+  friend class SourceLanguagesManager ;
+  _CTOR_DEFAULT()
+
+public:
+
+  _WRAP_METHOD(Glib::ustring get_id(), gtk_source_language_get_id)
+  _WRAP_METHOD(Glib::ustring get_name(), gtk_source_language_get_name)
+  _WRAP_METHOD(Glib::ustring get_section(), gtk_source_language_get_section)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceTag> > get_tags(), gtk_source_language_get_tags)
+  _WRAP_METHOD(gunichar get_escape_char(), gtk_source_language_get_escape_char)
+
+  _WRAP_METHOD(Glib::SListHandle<Glib::ustring> get_mime_types() const, gtk_source_language_get_mime_types)
+
+_WRAP_METHOD(void set_mime_types(const Glib::SListHandle<const Glib::ustring>& mime_types), gtk_source_language_set_mime_types)
+  
+  _WRAP_METHOD(Glib::RefPtr<SourceStyleScheme> get_style_scheme(), gtk_source_language_get_style_scheme)
+  _WRAP_METHOD(void set_style_scheme(Glib::RefPtr<SourceStyleScheme> scheme), gtk_source_language_set_style_scheme)
+
+  _WRAP_METHOD(SourceTagStyle get_tag_style(const Glib::ustring& tag_id), gtk_source_language_get_tag_style)
+  _WRAP_METHOD(void set_tag_style(const Glib::ustring& tag_id, const SourceTagStyle& style), gtk_source_language_set_tag_style)
+  _WRAP_METHOD(SourceTagStyle get_tag_default_style(const Glib::ustring& tag_id), gtk_source_language_get_tag_default_style)
+
+};
+
+} /* namespace gtksourceview */

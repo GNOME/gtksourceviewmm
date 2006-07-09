@@ -3,6 +3,7 @@
 #ifndef _GTKSOURCEVIEWMM_SOURCEBUFFER_H
 #define _GTKSOURCEVIEWMM_SOURCEBUFFER_H
 
+
 #include <glibmm.h>
 
 /* sourcebuffer.hg
@@ -117,7 +118,7 @@ public:
   
   void set_highlight(bool highlight=true);
   
-  int get_max_undo_levels();
+  int get_max_undo_levels() const;
   
   void set_max_undo_levels(int max_undo_levels);
 
@@ -191,9 +192,13 @@ public:
 
 public:
   //C++ methods used to invoke GTK+ virtual functions:
+#ifdef GLIBMM_VFUNCS_ENABLED
+#endif //GLIBMM_VFUNCS_ENABLED
 
 protected:
   //GTK+ Virtual Functions (override these to change behaviour):
+#ifdef GLIBMM_VFUNCS_ENABLED
+#endif //GLIBMM_VFUNCS_ENABLED
 
   //Default Signal Handlers::
   virtual void on_can_redo(bool can_redo);

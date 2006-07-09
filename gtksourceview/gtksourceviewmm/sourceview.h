@@ -3,6 +3,7 @@
 #ifndef _GTKSOURCEVIEWMM_SOURCEVIEW_H
 #define _GTKSOURCEVIEWMM_SOURCEVIEW_H
 
+
 #include <glibmm.h>
 
 /* sourceview.hg
@@ -87,9 +88,13 @@ public:
 
 public:
   //C++ methods used to invoke GTK+ virtual functions:
+#ifdef GLIBMM_VFUNCS_ENABLED
+#endif //GLIBMM_VFUNCS_ENABLED
 
 protected:
   //GTK+ Virtual Functions (override these to change behaviour):
+#ifdef GLIBMM_VFUNCS_ENABLED
+#endif //GLIBMM_VFUNCS_ENABLED
 
   //Default Signal Handlers::
   virtual void on_redo();
@@ -186,6 +191,8 @@ namespace Glib
    * @result A C++ instance that wraps this C instance.
    */
   gtksourceview::SourceView* wrap(GtkSourceView* object, bool take_copy = false);
-}
+} //namespace Glib
+
+
 #endif /* _GTKSOURCEVIEWMM_SOURCEVIEW_H */
 

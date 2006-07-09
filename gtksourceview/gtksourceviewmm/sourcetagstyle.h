@@ -3,6 +3,7 @@
 #ifndef _GTKSOURCEVIEWMM_SOURCETAGSTYLE_H
 #define _GTKSOURCEVIEWMM_SOURCETAGSTYLE_H
 
+
 #include <glibmm.h>
 
 /* sourcetagstyle.hg
@@ -74,30 +75,30 @@ private:
     
     SourceTagStyle () ;
 
-    bool get_is_default() const;
-    void set_is_default(const bool& value);
-
-    guint get_mask() const;
-    void set_mask(const guint& value);
-
-    Gdk::Color get_foreground() const;
-    void set_foreground(const Gdk::Color& value);
-
-    Gdk::Color get_background() const;
-    void set_background(const Gdk::Color& value);
-
-    bool get_italic() const;
-    void set_italic(const bool& value);
-
-    bool get_bold() const;
-    void set_bold(const bool& value);
-
-    bool get_underline() const;
-    void set_underline(const bool& value);
-
-    bool get_strikethrough() const;
-    void set_strikethrough(const bool& value);
-
+     bool get_is_default() const;
+      void set_is_default(const bool& value);
+ 
+     guint get_mask() const;
+      void set_mask(const guint& value);
+ 
+     Gdk::Color get_foreground() const;
+      void set_foreground(const Gdk::Color& value);
+ 
+     Gdk::Color get_background() const;
+      void set_background(const Gdk::Color& value);
+ 
+     bool get_italic() const;
+      void set_italic(const bool& value);
+ 
+     bool get_bold() const;
+      void set_bold(const bool& value);
+ 
+     bool get_underline() const;
+      void set_underline(const bool& value);
+ 
+     bool get_strikethrough() const;
+      void set_strikethrough(const bool& value);
+ 
 
 };//end class SourceTagStyle
 
@@ -133,6 +134,7 @@ class Value<gtksourceview::SourceTagStyle> : public Glib::Value_Boxed<gtksourcev
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
 
 } // namespace Glib
+
 
 #endif /* _GTKSOURCEVIEWMM_SOURCETAGSTYLE_H */
 

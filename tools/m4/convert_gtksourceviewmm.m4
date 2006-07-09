@@ -9,14 +9,6 @@ _CONVERSION(`const Glib::SListHandle<const Glib::ustring>&',`const GSList*', `$3
 _CONVERSION(`Glib::ListHandle<const Glib::ustring>&',`const GSList*', `$3.data()')
 _CONVERSION(`Glib::ListHandle<Glib::ustring>',`GSList*', `$3.data()')
 
-
-#SourceMarker
-_CONVERSION(`GtkSourceMarker*',`Glib::RefPtr<SourceMarker>',`Glib::wrap($3)')
-_CONVERSION(`GtkSourceMarker*',`Glib::RefPtr<const SourceMarker>',`Glib::wrap($3)')
-_CONVERSION(`Glib::RefPtr<SourceMarker>',`GtkSourceMarker*',__CONVERT_REFPTR_TO_P)
-
-_CONVERSION(`GSList*',`Glib::SListHandle<Glib::RefPtr<SourceMarker> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
-
 #SourceTagStyle
 _CONVERSION(`GtkSourceTagStyle*',`SourceTagStyle',`Glib::wrap ($3)')
 _CONVERSION(`SourceTagStyle&',`const GtkSourceTagStyle*',`$3.gobj()')
@@ -37,8 +29,8 @@ _CONVERSION(`GtkSourceStyleScheme*',`Glib::RefPtr<SourceStyleScheme>',`Glib::wra
 _CONVERSION(`Glib::RefPtr<SourceStyleScheme>',`GtkSourceStyleScheme*',__CONVERT_REFPTR_TO_P)
 
 #SourceMarker
-_CONVERSION(`GtkSourceMarker*',`Glib::RefPtr<SourceMarker>',`Glib::wrap($3)')
-_CONVERSION(`GtkSourceMarker*',`Glib::RefPtr<const SourceMarker>',`Glib::wrap($3)')
+_CONVERSION(`GtkSourceMarker*',`Glib::RefPtr<SourceMarker>',`Glib::wrap($3, true)')
+_CONVERSION(`GtkSourceMarker*',`Glib::RefPtr<const SourceMarker>',`Glib::wrap($3, true)')
 _CONVERSION(`Glib::RefPtr<SourceMarker>',`GtkSourceMarker*',__CONVERT_REFPTR_TO_P)
 _CONVERSION(`GSList*',`Glib::SListHandle<Glib::RefPtr<SourceMarker> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
 

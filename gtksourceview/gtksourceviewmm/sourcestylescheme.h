@@ -3,6 +3,7 @@
 #ifndef _GTKSOURCEVIEWMM_SOURCESTYLESCHEME_H
 #define _GTKSOURCEVIEWMM_SOURCESTYLESCHEME_H
 
+
 #include <glibmm.h>
 
 /* sourcetag.hg
@@ -102,9 +103,13 @@ public:
 
 public:
   //C++ methods used to invoke GTK+ virtual functions:
+#ifdef GLIBMM_VFUNCS_ENABLED
+#endif //GLIBMM_VFUNCS_ENABLED
 
 protected:
   //GTK+ Virtual Functions (override these to change behaviour):
+#ifdef GLIBMM_VFUNCS_ENABLED
+#endif //GLIBMM_VFUNCS_ENABLED
 
   //Default Signal Handlers::
 
@@ -124,6 +129,7 @@ namespace Glib
   Glib::RefPtr<gtksourceview::SourceStyleScheme> wrap(GtkSourceStyleScheme* object, bool take_copy = false);
 
 } // namespace Glib
+
 
 #endif /* _GTKSOURCEVIEWMM_SOURCESTYLESCHEME_H */
 

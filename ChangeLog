@@ -1,3 +1,12 @@
+lundi 10 juillet 2006, 00:33:30 (UTC+0200) Dodji Seketeli
+
+	* tools/m4/convert_gtksourceviewmm.m4: GtkSourceMarker* to
+	    Glib:RefPtr<SourceMarker> conversion increases refcount,
+	    otherwise crashes occur when accessing GtkSourceMarker.
+	* gtksourceview/src/sourceview.ccg: 
+	 (SourceView::get_source_buffer ()): increase refcount of the
+	 source_buffer() to fix refcount related crashes.
+
 samedi 17 juin 2006, 17:16:40 (UTC+0200) Dodji Seketeli <dodji@gnome.org>
 
 	* grksourceview/src/*: Added sourcelanguagesmanager.[hg|ccg]. Various

@@ -3,6 +3,7 @@
 #ifndef _GTKSOURCEVIEWMM_SOURCETAG_H
 #define _GTKSOURCEVIEWMM_SOURCETAG_H
 
+
 #include <glibmm.h>
 
 /* sourcetag.hg
@@ -135,9 +136,13 @@ public:
 
 public:
   //C++ methods used to invoke GTK+ virtual functions:
+#ifdef GLIBMM_VFUNCS_ENABLED
+#endif //GLIBMM_VFUNCS_ENABLED
 
 protected:
   //GTK+ Virtual Functions (override these to change behaviour):
+#ifdef GLIBMM_VFUNCS_ENABLED
+#endif //GLIBMM_VFUNCS_ENABLED
 
   //Default Signal Handlers::
 

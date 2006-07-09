@@ -34,8 +34,7 @@ SourceView::SourceView(Glib::RefPtr<SourceBuffer> &a_buffer) :
     _CONSTRUCT
 {
     if (a_buffer) {
-        gtk_text_view_set_buffer (GTK_TEXT_VIEW (gobject_),
-                                  GTK_TEXT_BUFFER (a_buffer->gobj ())) ;
+        set_buffer (a_buffer) ;
     } else {
         gtk_text_view_set_buffer (GTK_TEXT_VIEW (gobject_), NULL) ;
     }
@@ -44,17 +43,24 @@ SourceView::SourceView(Glib::RefPtr<SourceBuffer> &a_buffer) :
 Glib::RefPtr<const SourceBuffer>
 SourceView::get_source_buffer () const
 {
-    Glib::RefPtr<const SourceBuffer> buffer =
-        Glib::wrap ((GtkSourceBuffer*)get_buffer ()->gobj ());
+    Glib::RefPtr<SourceBuffer> buffer ;
+    if (!get_buffer ()) {
+        return buffer ;
+    }
+    buffer = Glib::wrap (GTK_SOURCE_BUFFER (get_buffer ()->gobj ()), true);
     return buffer ;
 }
 
 Glib::RefPtr<SourceBuffer>
 SourceView::get_source_buffer ()
 {
-    Glib::RefPtr<SourceBuffer> buffer =
-        Glib::wrap (reinterpret_cast<GtkSourceBuffer*> (get_buffer ()->gobj ())) ;
+    Glib::RefPtr<SourceBuffer> buffer ;
+    if (!get_buffer ()) {
+        return buffer ;
+    }
+    buffer = Glib::wrap (GTK_SOURCE_BUFFER (get_buffer ()->gobj ()), true) ;
     return buffer ;
+
 }
 
 void

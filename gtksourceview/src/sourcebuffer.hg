@@ -53,7 +53,7 @@ public:
 
   _WRAP_METHOD(bool get_highlight(), gtk_source_buffer_get_highlight)
   _WRAP_METHOD(void set_highlight(bool highlight=true), gtk_source_buffer_set_highlight)
-  _WRAP_METHOD(int get_max_undo_levels(), gtk_source_buffer_get_max_undo_levels)
+  _WRAP_METHOD(int get_max_undo_levels() const, gtk_source_buffer_get_max_undo_levels)
   _WRAP_METHOD(void set_max_undo_levels(int max_undo_levels), gtk_source_buffer_set_max_undo_levels)
 
   _WRAP_METHOD(Glib::RefPtr<SourceLanguage> get_language(), gtk_source_buffer_get_language)

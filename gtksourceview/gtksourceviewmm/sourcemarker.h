@@ -3,6 +3,7 @@
 #ifndef _GTKSOURCEVIEWMM_SOURCEMARKER_H
 #define _GTKSOURCEVIEWMM_SOURCEMARKER_H
 
+
 #include <glibmm.h>
 
 /* sourcemarker.hg
@@ -36,6 +37,7 @@ namespace gtksourceview
 typedef Gtk::TextMark SourceMarker;
 
 } /* namespace gtksourceview */
+
 
 #endif /* _GTKSOURCEVIEWMM_SOURCEMARKER_H */
 

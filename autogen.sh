@@ -16,6 +16,14 @@ then :; else
     exit 1
 fi
 
+(automake-1.9 --version) < /dev/null > /dev/null 2>&1 || {
+	echo
+	DIE=1
+	echo "You must have automake installed to compile goupil."
+	echo "Download the appropriate package for your distribution,"
+	echo "or see http://www.gnu.org/software/automake"
+}
+
 MAKE=`which gnumake`
 test -x "$MAKE" || MAKE=`which gmake`
 test -x "$MAKE" || MAKE=`which make`
@@ -41,7 +49,7 @@ aclocal -I "$srcdir/scripts" $ACLOCAL_FLAGS || exit 1
 #autoheader
 
 echo "Building makefiles."
-automake --add-missing || exit 1
+automake-1.9 --add-missing || exit 1
 
 echo "Building configure."
 

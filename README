@@ -1,1 +1,8 @@
-Readme
+GtkSourceViewMM is a C++ binding of GtkSourceView,
+a text widget that extends the standard gtk+ 2.x text widget.
+It improves the gtk+ text widget by implementing syntax highlighting
+and other features typical of a source editor.
+
+GtkSourceViewMM integrates well in the gtkmm framework and philosophy.
+
+

@@ -19,7 +19,7 @@ fi
 (automake-1.9 --version) < /dev/null > /dev/null 2>&1 || {
 	echo
 	DIE=1
-	echo "You must have automake installed to compile goupil."
+	echo "You must have automake installed to compile gtksourceviewmm."
 	echo "Download the appropriate package for your distribution,"
 	echo "or see http://www.gnu.org/software/automake"
 }

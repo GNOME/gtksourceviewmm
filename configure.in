@@ -18,9 +18,9 @@ pushdef([GTKSOURCEVIEWMM_MINOR_VERSION],     [0])
 pushdef([GTKSOURCEVIEWMM_MICRO_VERSION],     [0])
 pushdef([GTKSOURCEVIEWMM_EXTRA_VERSION],     [])
 pushdef([GTKSOURCEVIEWMM_VERSION], GTKSOURCEVIEWMM_MAJOR_VERSION.GTKSOURCEVIEWMM_MINOR_VERSION.GTKSOURCEVIEWMM_MICRO_VERSION[]GTKSOURCEVIEWMM_EXTRA_VERSION)
-AC_INIT([gtksourceviewmm], GTKSOURCEVIEWMM_VERSION, [page.rob@gmail.com])
+AC_INIT([gtksourceviewmm], GTKSOURCEVIEWMM_VERSION, [Rob Page <page.rob@gmail.com>, Dodji Seketeli <dodji@gnome.org>])
 AC_CONFIG_SRCDIR([gtksourceview/gtksourceviewmmconfig.h.in])
-AC_PREREQ(2.59)
+AC_PREREQ(2.60)
 
 #########################################################################
 #  Version and initialization
@@ -36,9 +36,9 @@ popdef([GTKSOURCEVIEWMM_MICRO_VERSION])
 popdef([GTKSOURCEVIEWMM_EXTRA_VERSION])
 popdef([GTKSOURCEVIEWMM_VERSION])
 GTKSOURCEVIEWMM_RELEASE=$GTKSOURCEVIEWMM_MAJOR_VERSION.$GTKSOURCEVIEWMM_MINOR_VERSION
-AC_DEFINE_UNQUOTED(GTKSOURCEVIEWMM_MAJOR_VERSION, $GTKSOURCEVIEWMM_MAJOR_VERSION, [Major version of gtkmm])
-AC_DEFINE_UNQUOTED(GTKSOURCEVIEWMM_MINOR_VERSION, $GTKSOURCEVIEWMM_MINOR_VERSION, [Minor version of gtkmm])
-AC_DEFINE_UNQUOTED(GTKSOURCEVIEWMM_MICRO_VERSION, $GTKSOURCEVIEWMM_MICRO_VERSION, [Micro version of gtkmm])
+AC_DEFINE_UNQUOTED(GTKSOURCEVIEWMM_MAJOR_VERSION, $GTKSOURCEVIEWMM_MAJOR_VERSION, [Major version of gtksourceviewmm])
+AC_DEFINE_UNQUOTED(GTKSOURCEVIEWMM_MINOR_VERSION, $GTKSOURCEVIEWMM_MINOR_VERSION, [Minor version of gtksourceviewmm])
+AC_DEFINE_UNQUOTED(GTKSOURCEVIEWMM_MICRO_VERSION, $GTKSOURCEVIEWMM_MICRO_VERSION, [Micro version of gtksourceviewmm])
 AC_SUBST(GTKSOURCEVIEWMM_MAJOR_VERSION)
 AC_SUBST(GTKSOURCEVIEWMM_MINOR_VERSION)
 AC_SUBST(GTKSOURCEVIEWMM_MICRO_VERSION)
@@ -118,81 +118,6 @@ AL_PROG_GNU_MAKE(AC_MSG_ERROR([dnl
 SUN make does not work for building gtkmm.
 Please install GNU make.]))
 
-# This macro is installed by glibmm
-# Doxygen needs the path to the installed perl.
-GLIBMM_CHECK_PERL([5.6.0])
-
-#########################################################################
-#  Function checks
-#########################################################################
-
-AC_CHECK_FUNC(mkfifo, AC_DEFINE(HAVE_MKFIFO))
-
-# functions used in demos/gtk-demo. Undefined in config.h.
-AC_LANG_PUSH(C++)
-AC_MSG_CHECKING([for flockfile])
-AC_TRY_LINK([
-#include <stdio.h>],[
-flockfile (NULL);],[
-  AC_MSG_RESULT(yes)
-  AC_DEFINE(HAVE_FLOCKFILE, 1,
-    [Define to 1 if you have the `flockfile' function.])],[
-  AC_MSG_RESULT(no)
-  AC_MSG_CHECKING([for flockfile with a custom prototype])
-  AC_TRY_LINK([
-#include <stdio.h>
-
-extern "C" void flockfile (FILE *);],[
-flockfile (NULL);],[
-    AC_MSG_RESULT(yes)
-    AC_DEFINE(HAVE_FLOCKFILE, 1,
-      [Define to 1 if you have the `flockfile' function.])
-    AC_DEFINE(NEED_FLOCKFILE_PROTO, 1,
-      [Define if flockfile() prototype needed.])],[
-    AC_MSG_RESULT(not available)])])
-
-AC_MSG_CHECKING([for funlockfile])
-AC_TRY_LINK([
-#include <stdio.h>],[
-funlockfile (NULL);],[
-  AC_MSG_RESULT(yes)
-  AC_DEFINE(HAVE_FUNLOCKFILE, 1,
-    [Define to 1 if you have the `funlockfile' function.])],[
-  AC_MSG_RESULT(no)
-  AC_MSG_CHECKING([for funlockfile with a custom prototype])
-  AC_TRY_LINK([
-#include <stdio.h>
-
-extern "C" void funlockfile (FILE *);],[
-funlockfile (NULL);],[
-    AC_MSG_RESULT(yes)
-    AC_DEFINE(HAVE_FUNLOCKFILE, 1,
-      [Define to 1 if you have the `funlockfile' function.])
-    AC_DEFINE(NEED_FUNLOCKFILE_PROTO, 1,
-      [Define if funlockfile() prototype needed.])],[
-    AC_MSG_RESULT(not available)])])
-
-AC_MSG_CHECKING([for getc_unlocked])
-AC_TRY_LINK([
-#include <stdio.h>],[
-getc_unlocked (NULL);],[
-  AC_MSG_RESULT(yes)
-  AC_DEFINE(HAVE_GETC_UNLOCKED, 1,
-    [Define to 1 if you have the `getc_unlocked' function.])],[
-  AC_MSG_RESULT(no)
-  AC_MSG_CHECKING([for getc_unlocked with a custom prototype])
-  AC_TRY_LINK([
-#include <stdio.h>
-
-extern "C" int getc_unlocked (FILE *);],[
-getc_unlocked (NULL);],[
-    AC_MSG_RESULT(yes)
-    AC_DEFINE(HAVE_GETC_UNLOCKED, 1,
-      [Define to 1 if you have the `getc_unlocked' function.])
-    AC_DEFINE(NEED_GETC_UNLOCKED_PROTO, 1,
-      [Define if getc_unlocked() prototype needed.])],[
-    AC_MSG_RESULT(not available)])])
-AC_LANG_POP(C++)
 
 #########################################################################
 #  Dependancy checks
@@ -201,16 +126,19 @@ AC_LANG_POP(C++)
 gtksourceviewmm_min_gtkmm_version=2.4
 #gtksourceviewmm_min_gtksourceview_version=1.0
 
+PKG_CHECK_MODULES(GTKSOURCEVIEWMM, gtkmm-2.4 >= ${gtksourceviewmm_min_gtkmm_version} gtksourceview-1.0)
+AC_SUBST(GTKSOURCEVIEWMM_CFLAGS)
+AC_SUBST(GTKSOURCEVIEWMM_LIBS)
+
+# This macro is installed by glibmm
+# Doxygen needs the path to the installed perl.
+GLIBMM_CHECK_PERL([5.6.0])
 
 GLIBMM_LIBDIR=`pkg-config --variable=libdir glibmm-2.4`
 GMMPROC_DIR=$GLIBMM_LIBDIR/glibmm-2.4/proc
 AC_SUBST(GMMPROC_DIR)
 GMMPROC=$GMMPROC_DIR/gmmproc
 AC_SUBST(GMMPROC)
-
-PKG_CHECK_MODULES(GTKSOURCEVIEWMM, gtkmm-2.4 >= ${gtksourceviewmm_min_gtkmm_version} gtksourceview-1.0)
-AC_SUBST(GTKSOURCEVIEWMM_CFLAGS)
-AC_SUBST(GTKSOURCEVIEWMM_LIBS)
 
 
 #########################################################################

@@ -47,23 +47,29 @@ public:
    _WRAP_CREATE(Glib::RefPtr<SourceLanguage> &language)
 
   _WRAP_METHOD(bool get_check_brackets(), gtk_source_buffer_get_check_brackets)
+  _WRAP_METHOD(bool get_check_brackets() const, gtk_source_buffer_get_check_brackets, constversion)
   _WRAP_METHOD(void set_check_brackets(bool check_brackets), gtk_source_buffer_set_check_brackets)
 
   _WRAP_METHOD(void set_bracket_match_style(const SourceTagStyle& style), gtk_source_buffer_set_bracket_match_style)
 
   _WRAP_METHOD(bool get_highlight(), gtk_source_buffer_get_highlight)
+  _WRAP_METHOD(bool get_highlight() const, gtk_source_buffer_get_highlight, constversion)
   _WRAP_METHOD(void set_highlight(bool highlight=true), gtk_source_buffer_set_highlight)
-  _WRAP_METHOD(int get_max_undo_levels() const, gtk_source_buffer_get_max_undo_levels)
+
+  _WRAP_METHOD(int get_max_undo_levels(), gtk_source_buffer_get_max_undo_levels)
+  _WRAP_METHOD(int get_max_undo_levels() const, gtk_source_buffer_get_max_undo_levels, constversion)
   _WRAP_METHOD(void set_max_undo_levels(int max_undo_levels), gtk_source_buffer_set_max_undo_levels)
 
-  _WRAP_METHOD(Glib::RefPtr<SourceLanguage> get_language(), gtk_source_buffer_get_language)
+  _WRAP_METHOD(Glib::RefPtr<SourceLanguage> get_language(), gtk_source_buffer_get_language, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const SourceLanguage> get_language() const, gtk_source_buffer_get_language, refreturn, constversion)
   _WRAP_METHOD(void set_language(Glib::RefPtr<SourceLanguage> language), gtk_source_buffer_set_language)
 
   _WRAP_METHOD(gunichar get_escape_char(), gtk_source_buffer_get_escape_char)
+  _WRAP_METHOD(gunichar get_escape_char() const, gtk_source_buffer_get_escape_char, constversion)
   _WRAP_METHOD(void set_escape_char(gunichar escape_char), gtk_source_buffer_set_escape_char)
 
-  _WRAP_METHOD(bool can_undo(), gtk_source_buffer_can_undo)
-  _WRAP_METHOD(bool can_redo(), gtk_source_buffer_can_redo)
+  _WRAP_METHOD(bool can_undo() const, gtk_source_buffer_can_undo)
+  _WRAP_METHOD(bool can_redo() const, gtk_source_buffer_can_redo)
 
   _WRAP_METHOD(void undo(), gtk_source_buffer_undo)
   _WRAP_METHOD(void redo(), gtk_source_buffer_redo)
@@ -77,15 +83,20 @@ public:
 
   _WRAP_METHOD(void delete_marker(Glib::RefPtr<SourceMarker>), gtk_source_buffer_delete_marker)
 
-  _WRAP_METHOD(Glib::RefPtr<SourceMarker> get_marker(const Glib::ustring& name), gtk_source_buffer_get_marker)
+  _WRAP_METHOD(Glib::RefPtr<SourceMarker> get_marker(const Glib::ustring& name), gtk_source_buffer_get_marker, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<SourceMarker> get_marker(const Glib::ustring& name) const, gtk_source_buffer_get_marker, refreturn, constversion)
 
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceMarker> > get_markers_in_region(const Gtk::TextIter& begin, const Gtk::TextIter& end), gtk_source_buffer_get_markers_in_region)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceMarker> > get_markers_in_region(const Gtk::TextIter& begin, const Gtk::TextIter& end) const, gtk_source_buffer_get_markers_in_region, constversion)
 
-  _WRAP_METHOD(Glib::RefPtr<SourceMarker> get_first_marker(), gtk_source_buffer_get_first_marker)
+  _WRAP_METHOD(Glib::RefPtr<SourceMarker> get_first_marker(), gtk_source_buffer_get_first_marker, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const SourceMarker> get_first_marker() const, gtk_source_buffer_get_first_marker, refreturn, constversion)
 
-  _WRAP_METHOD(Glib::RefPtr<SourceMarker> get_last_marker(), gtk_source_buffer_get_last_marker)
+  _WRAP_METHOD(Glib::RefPtr<SourceMarker> get_last_marker(), gtk_source_buffer_get_last_marker, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const SourceMarker> get_last_marker() const, gtk_source_buffer_get_last_marker, refreturn, constversion)
 
   Gtk::TextIter get_iter_at_marker(Glib::RefPtr<SourceMarker> marker);
+  Gtk::TextIter get_iter_at_marker(Glib::RefPtr<SourceMarker> marker) const;
   _IGNORE(gtk_source_buffer_get_iter_at_marker)
 
   _WRAP_METHOD(Glib::RefPtr<SourceMarker> get_next_marker(Gtk::TextIter& iter), gtk_source_buffer_get_next_marker)

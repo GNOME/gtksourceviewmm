@@ -37,7 +37,7 @@ SourceView::SourceView(Glib::RefPtr<SourceBuffer> &a_buffer) :
         set_buffer (a_buffer) ;
     } else {
         GtkSourceBuffer *buffer = gtk_source_buffer_new (NULL) ;
-        gtk_text_view_set_buffer (GTK_TEXT_VIEW (gobject_), buffer) ;
+        gtk_text_view_set_buffer (GTK_TEXT_VIEW (gobject_), GTK_TEXT_BUFFER (buffer)) ;
     }
 }
 

@@ -1,3 +1,7 @@
+mercredi 6 septembre 2006, 21:09:53 (UTC+0200) Dodji Seketeli
+
+	* gtksourceview/src/sourceview.ccg: forgot a cast.
+
 mercredi 6 septembre 2006, 18:58:39 (UTC+0200) Dodji Seketeli
 
 	* gtksourceview/src/sourceview.ccg: don't init the sourceview with NULL

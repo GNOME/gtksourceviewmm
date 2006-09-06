@@ -44,9 +44,6 @@ Glib::RefPtr<const SourceBuffer>
 SourceView::get_source_buffer () const
 {
     Glib::RefPtr<SourceBuffer> buffer ;
-    if (get_buffer ()) {
-        return buffer ;
-    }
     buffer = Glib::wrap (GTK_SOURCE_BUFFER (get_buffer ()->gobj ()), true);
     return buffer ;
 }
@@ -55,9 +52,6 @@ Glib::RefPtr<SourceBuffer>
 SourceView::get_source_buffer ()
 {
     Glib::RefPtr<SourceBuffer> buffer ;
-    if (!get_buffer ()) {
-        return buffer ;
-    }
     buffer = Glib::wrap (GTK_SOURCE_BUFFER (get_buffer ()->gobj ()), true) ;
     return buffer ;
 

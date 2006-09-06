@@ -1,3 +1,10 @@
+mercredi 6 septembre 2006, 18:04:42 (UTC+0200) Dodji Seketeli
+
+	* gtksourceview/src/sourcelanguagesmanager.hg,
+	  gtksourceview/src/sourcelanguage.hg,
+	  gtksourceview/src/sourcelanguagesmanager.ccg: add const to getters.
+	* gtksourceview/src/sourceview.ccg: second attempt at fixing #346896 .
+
 mercredi 6 septembre 2006, 15:56:32 (UTC+0200) Dodji Seketeli
 
 	* gtksourceview/src/sourceview.ccg: try to fix a stupid error that caused

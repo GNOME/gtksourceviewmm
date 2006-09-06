@@ -46,22 +46,24 @@ protected:
 
 public:
 
-  _WRAP_METHOD(Glib::ustring get_id(), gtk_source_language_get_id)
-  _WRAP_METHOD(Glib::ustring get_name(), gtk_source_language_get_name)
-  _WRAP_METHOD(Glib::ustring get_section(), gtk_source_language_get_section)
-  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceTag> > get_tags(), gtk_source_language_get_tags)
-  _WRAP_METHOD(gunichar get_escape_char(), gtk_source_language_get_escape_char)
+  _WRAP_METHOD(Glib::ustring get_id() const, gtk_source_language_get_id)
+
+  _WRAP_METHOD(Glib::ustring get_name() const, gtk_source_language_get_name)
+
+  _WRAP_METHOD(Glib::ustring get_section() const, gtk_source_language_get_section)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceTag> > get_tags() const, gtk_source_language_get_tags)
+  _WRAP_METHOD(gunichar get_escape_char() const, gtk_source_language_get_escape_char)
 
   _WRAP_METHOD(Glib::SListHandle<Glib::ustring> get_mime_types() const, gtk_source_language_get_mime_types)
 
 _WRAP_METHOD(void set_mime_types(const Glib::SListHandle<const Glib::ustring>& mime_types), gtk_source_language_set_mime_types)
   
-  _WRAP_METHOD(Glib::RefPtr<SourceStyleScheme> get_style_scheme(), gtk_source_language_get_style_scheme)
+  _WRAP_METHOD(Glib::RefPtr<SourceStyleScheme> get_style_scheme() const, gtk_source_language_get_style_scheme, refreturn)
   _WRAP_METHOD(void set_style_scheme(Glib::RefPtr<SourceStyleScheme> scheme), gtk_source_language_set_style_scheme)
 
-  _WRAP_METHOD(SourceTagStyle get_tag_style(const Glib::ustring& tag_id), gtk_source_language_get_tag_style)
+  _WRAP_METHOD(SourceTagStyle get_tag_style(const Glib::ustring& tag_id) const, gtk_source_language_get_tag_style)
   _WRAP_METHOD(void set_tag_style(const Glib::ustring& tag_id, const SourceTagStyle& style), gtk_source_language_set_tag_style)
-  _WRAP_METHOD(SourceTagStyle get_tag_default_style(const Glib::ustring& tag_id), gtk_source_language_get_tag_default_style)
+  _WRAP_METHOD(SourceTagStyle get_tag_default_style(const Glib::ustring& tag_id) const, gtk_source_language_get_tag_default_style)
 
 };
 

@@ -1,3 +1,8 @@
+mercredi 6 septembre 2006, 15:56:32 (UTC+0200) Dodji Seketeli
+
+	* gtksourceview/src/sourceview.ccg: try to fix a stupid error that caused
+	  bug #346896. Hope this fixes the problem.
+
 mardi 5 septembre 2006, 18:27:52 (UTC+0200) Dodji Seketeli
 
 	* gtksourceview/src/sourcebuffer.hg: add const methods overloads to

@@ -1,3 +1,8 @@
+mercredi 6 septembre 2006, 18:58:39 (UTC+0200) Dodji Seketeli
+
+	* gtksourceview/src/sourceview.ccg: don't init the sourceview with NULL
+	  sourcebuffer.
+
 mercredi 6 septembre 2006, 18:04:42 (UTC+0200) Dodji Seketeli
 
 	* gtksourceview/src/sourcelanguagesmanager.hg,

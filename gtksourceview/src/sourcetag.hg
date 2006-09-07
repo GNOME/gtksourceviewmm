@@ -1,6 +1,9 @@
 /* sourcetag.hg
  * 
- * Copyright (C) 2005-2006 The gtksourceviewmm development team
+ *
+ * Copyright (C) 2004-2005 Jae Jang
+ * Copyright (C) 2005-2006 Rob Page
+ * Copyright (C)2006 Dodji Seketeli
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -70,8 +73,8 @@ public:
                                                           bool a_end_at_line_end) ;
     _IGNORE(gtk_string_tag_new)
 
-    _WRAP_METHOD(Glib::ustring get_id(), gtk_source_tag_get_id)
-    _WRAP_METHOD(SourceTagStyle get_style(), gtk_source_tag_get_style)
+    _WRAP_METHOD(Glib::ustring get_id() const, gtk_source_tag_get_id)
+    _WRAP_METHOD(SourceTagStyle get_style() const, gtk_source_tag_get_style)
     _WRAP_METHOD(void set_style(const SourceTagStyle& a_style), gtk_source_tag_set_style)
 
 };//end class SourceTag

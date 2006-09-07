@@ -1,3 +1,12 @@
+jeudi 7 septembre 2006, 15:14:05 (UTC+0200) Dodji Seketeli
+
+	* gtksourceview/src/*.hg, *.ccg: update copyrights.
+	* gtksourceview/src/sourcetag.hg: constify getters.
+	* gtksourceview/src/sourcestylescheme.hg: constify getters, and refreturn
+	  SourceStyleScheme::get_default().
+
+
+
 mercredi 6 septembre 2006, 21:09:53 (UTC+0200) Dodji Seketeli
 
 	* gtksourceview/src/sourceview.ccg: forgot a cast.

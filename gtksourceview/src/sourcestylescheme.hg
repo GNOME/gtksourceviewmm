@@ -1,6 +1,8 @@
 /* sourcetag.hg
  * 
- * Copyright (C) 2005-2006 The gtksourceviewmm development team
+ * Copyright (C) 2004-2005 Jae Jang
+ * Copyright (C) 2005-2006 Rob Page
+ * Copyright (C)2006 Dodji Seketeli
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -34,11 +36,11 @@ class SourceStyleScheme : public Glib::Interface
 
 public:
 
-    _WRAP_METHOD(SourceTagStyle get_tag_style(const Glib::ustring &a_style_name), gtk_source_style_scheme_get_tag_style)
+    _WRAP_METHOD(SourceTagStyle get_tag_style(const Glib::ustring &a_style_name) const, gtk_source_style_scheme_get_tag_style)
 
-    _WRAP_METHOD(Glib::ustring get_name(), gtk_source_style_scheme_get_name)
-    _WRAP_METHOD(Glib::SListHandle<Glib::ustring> get_style_names(), gtk_source_style_scheme_get_style_names)
-    _WRAP_METHOD(static Glib::RefPtr<SourceStyleScheme> get_default(), gtk_source_style_scheme_get_default)
+    _WRAP_METHOD(Glib::ustring get_name() const, gtk_source_style_scheme_get_name)
+    _WRAP_METHOD(Glib::SListHandle<Glib::ustring> get_style_names() const, gtk_source_style_scheme_get_style_names)
+    _WRAP_METHOD(static Glib::RefPtr<SourceStyleScheme> get_default(), gtk_source_style_scheme_get_default, refreturn)
 
 };//end class SourceStyleScheme
 

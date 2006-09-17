@@ -1,3 +1,20 @@
+dimanche 17 septembre 2006, 11:24:22 (UTC+0200) Dodji Seketeli
+
+	* AUTHORS: updated this.
+	* configure.in: changed the name of the project to libgtksourceviewmm
+	  (the former name gtksourceviewmm). This change allows me to start
+	  versioning the projet at version number 0.1.0 which reflects more
+	  the current state of the library. The initial gtksourceviewmm
+	  project I forked from had revision number 1.10.0. As I think that
+	  the library is too young to deserve a revision number > 1.0, I felt
+	  like I had the change the name of the project.
+	  The users just have to change their name configure.ac file and
+	  check for libgtksourceview-1.0.pc file , with version number 0.1.0.
+	  Everything else remains unchanged.
+	* gtksourceview/gtksourceviewmm-1.0.pc.in: renamed this into
+	  libgtksourceviewmm-1.0.pc
+
+
 jeudi 7 septembre 2006, 15:14:05 (UTC+0200) Dodji Seketeli
 
 	* gtksourceview/src/*.hg, *.ccg: update copyrights.

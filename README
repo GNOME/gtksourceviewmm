@@ -6,3 +6,5 @@ and other features typical of a source editor.
 GtkSourceViewMM integrates well in the gtkmm framework and philosophy.
 
 
+Authors: Rob Taylor and Dodji Seketeli
+Copyright (C) 2006  Rob Taylor, Dodji Seketeli

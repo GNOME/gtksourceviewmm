@@ -40,13 +40,11 @@ class SourceLanguage : public Glib::Object
 {
   _CLASS_GOBJECT(SourceLanguage, GtkSourceLanguage, GTK_SOURCE_LANGUAGE, Glib::Object, GObject)
 
-
 protected:
-
-  friend class SourceLanguagesManager ;
   _CTOR_DEFAULT()
 
 public:
+  _WRAP_CREATE()
 
   _WRAP_METHOD(Glib::ustring get_id() const, gtk_source_language_get_id)
 

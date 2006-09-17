@@ -1,5 +1,13 @@
 2006-09-17  Murray Cumming  <murrayc@murrayc.com>
 
+	* gtksourceview/src/sourcelanguage.hg: Added a create() method, 
+	so that instances of this class can be instantiated. Removed the 
+	unnecessary friend statement.
+	* gtksourceview/src/sourcelanguagesmanager.hg: Made the constructor 
+	protected and added a public create() method.
+
+2006-09-17  Murray Cumming  <murrayc@murrayc.com>
+
 	* configure.in: Require autoconf 2.59 instead of 2.60, because 
 	2.59 is more widely available.
 

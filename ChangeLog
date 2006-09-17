@@ -1,3 +1,8 @@
+2006-09-17  Murray Cumming  <murrayc@murrayc.com>
+
+	* configure.in: Require autoconf 2.59 instead of 2.60, because 
+	2.59 is more widely available.
+
 dimanche 17 septembre 2006, 11:24:22 (UTC+0200) Dodji Seketeli
 
 	* AUTHORS: updated this.

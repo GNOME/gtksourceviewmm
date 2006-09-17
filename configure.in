@@ -20,7 +20,7 @@ pushdef([GTKSOURCEVIEWMM_EXTRA_VERSION],     [])
 pushdef([GTKSOURCEVIEWMM_VERSION], GTKSOURCEVIEWMM_MAJOR_VERSION.GTKSOURCEVIEWMM_MINOR_VERSION.GTKSOURCEVIEWMM_MICRO_VERSION[]GTKSOURCEVIEWMM_EXTRA_VERSION)
 AC_INIT([libgtksourceviewmm], GTKSOURCEVIEWMM_VERSION, [Rob Page <page.rob@gmail.com>, Dodji Seketeli <dodji@gnome.org>])
 AC_CONFIG_SRCDIR([gtksourceview/gtksourceviewmmconfig.h.in])
-AC_PREREQ(2.60)
+AC_PREREQ(2.59)
 
 #########################################################################
 #  Version and initialization

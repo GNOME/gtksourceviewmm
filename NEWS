@@ -1,0 +1,9 @@
+0.1.0:
+
+* Initial release of libgtksourceviewmm 0.1.0
+
+* This is a fork of gtksourceviewmm 1.10.0 .
+  It has been totally rewritten to integrate well in the gtkmm environment.
+
+* all the APIs of gtksourceview 1.6.2 are wrapped.
+

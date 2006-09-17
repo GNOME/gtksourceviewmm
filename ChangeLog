@@ -1,3 +1,8 @@
+dimanche 17 septembre 2006, 14:52:01 (UTC+0200) Dodji Seketeli
+
+	* configure.in:  updated version number to 0.2.0 and soversion to
+	1.0.1.
+
 2006-09-17  Murray Cumming  <murrayc@murrayc.com>
 
 	* gtksourceview/src/sourcelanguage.hg: Added a create() method, 
@@ -10,6 +15,8 @@
 
 	* configure.in: Require autoconf 2.59 instead of 2.60, because 
 	2.59 is more widely available.
+
+	========= released 0.1.0 =============
 
 dimanche 17 septembre 2006, 11:24:22 (UTC+0200) Dodji Seketeli
 

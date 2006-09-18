@@ -1,3 +1,14 @@
+0.2.0:
+
+This is a bugfix release that breaks the API a little bit.
+Users of 0.1.0 must recompile their applications, sorry.
+
+* added a create() method to gtksourceview::SourceLanguage
+  and gtksourceview::SourceLanguagesManager . Made the constructor
+  of gtksourceview::SourceLanguagesManager protected, cleanup. [Murray Cumming]
+
+* set the argument of set_*(bool) methods to 'true' by default [Dodji Seketeli]
+
 0.1.0:
 
 * Initial release of libgtksourceviewmm 0.1.0

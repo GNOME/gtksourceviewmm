@@ -1,3 +1,12 @@
+
+========== release 0.2.0 ===========
+
+lundi 18 septembre 2006, 12:45:45 (UTC+0200) Dodji Seketeli
+
+	* gtksourceview/src/sourcebuffer.hg, gtksourceview/src/sourceview.hg:
+	added a default 'true' parameter to the set_* methods that takes a boolean
+	in parameter.
+
 dimanche 17 septembre 2006, 14:52:01 (UTC+0200) Dodji Seketeli
 
 	* configure.in:  updated version number to 0.2.0 and soversion to

@@ -50,7 +50,7 @@ public:
 
   _WRAP_METHOD(bool get_check_brackets(), gtk_source_buffer_get_check_brackets)
   _WRAP_METHOD(bool get_check_brackets() const, gtk_source_buffer_get_check_brackets, constversion)
-  _WRAP_METHOD(void set_check_brackets(bool check_brackets), gtk_source_buffer_set_check_brackets)
+  _WRAP_METHOD(void set_check_brackets(bool check_brackets=true), gtk_source_buffer_set_check_brackets)
 
   _WRAP_METHOD(void set_bracket_match_style(const SourceTagStyle& style), gtk_source_buffer_set_bracket_match_style)
 

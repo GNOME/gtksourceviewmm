@@ -52,7 +52,7 @@ AC_SUBST(GTKSOURCEVIEWMM_RELEASE)
 #  ? :+1 : ?   == just some internal changes, nothing breaks but might work 
 #                 better
 # CURRENT : REVISION : AGE
-LIBGTKSOURCEVIEWMM_SO_VERSION=1:0:1	
+LIBGTKSOURCEVIEWMM_SO_VERSION=1:0:0
 AC_SUBST(LIBGTKSOURCEVIEWMM_SO_VERSION)
 
 AC_CONFIG_AUX_DIR(scripts)

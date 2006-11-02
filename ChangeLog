@@ -1,3 +1,11 @@
+Thu, 02 Nov 2006 08:14:03 +0100 Dodji Seketeli
+
+	* configure.in: renamed this into configure.ac .
+	* docs/reference: added this new directory. Now, make also builds
+	  reference documentation in docs/reference/html
+	* docs/reference/Doxyfile.in: added this new file.
+	* gtksourceview/src/sourcebuffer.hg: started to document this.
+	* gtksourceview/src/sourcetag.hg: started to document this.
 
 ========== release 0.2.0 ===========
 

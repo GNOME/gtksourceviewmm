@@ -229,24 +229,25 @@ AC_SUBST(EXAMPLE_SUBDIR)
 DEMO_SUBDIR=""
 AC_SUBST(DEMO_SUBDIR)
 
-#AC_ARG_ENABLE(docs, [AC_HELP_STRING([--enable-docs],
- #             [build the included docs [default=yes]])],,
-  #                      [enable_docs=yes])
-#if test "x$enable_docs" = "xyes"; then
- # DOCS_SUBDIR="docs"
-#  AC_CONFIG_FILES([
-#    docs/Makefile
-#      docs/FAQ/Makefile
-#      docs/images/Makefile
-#      docs/tutorial/Makefile
-#        docs/tutorial/figures/Makefile
-#        docs/tutorial/icons/Makefile
-#      docs/reference/Makefile
-#      docs/reference/Doxyfile
-#  ])
-#else
+AC_ARG_ENABLE(docs, [AC_HELP_STRING([--enable-docs],
+              [build the included docs [default=yes]])],,
+                      [enable_docs=yes])
+if test "x$enable_docs" = "xyes"; then
+AC_PATH_PROG(DOXYGEN, doxygen)
+    if test x$DOXYGEN = x ; then
+        AC_MSG_ERROR([could not find the doxygen program. Please, install it])
+    fi
+AC_SUBST(DOXYGEN)
+DOCS_SUBDIR="docs"
+  AC_CONFIG_FILES([
+    docs/Makefile
+      docs/reference/Makefile
+      docs/reference/Doxyfile
+  ])
+else
 DOCS_SUBDIR=""
-#fi
+fi
+
 AC_SUBST(DOCS_SUBDIR)
 
 # Dummy conditional just to make automake-1.4 happy.

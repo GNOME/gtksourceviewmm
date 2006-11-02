@@ -2,7 +2,7 @@
  * 
  * Copyright (C) 2004-2005 Jae Jang
  * Copyright (C) 2005-2006 Rob Page
- * Copyright (C)2006 Dodji Seketeli
+ * Copyright (C) 2006 Dodji Seketeli
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -19,6 +19,48 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+/// \file
+/// \brief the model for SourceView widgets
+///
+
+/// \mainpage libgtksourceviewmm - A C++ API for gtksourceview
+///
+/// \section Introduction
+/// libgtksourceviewmm is a C++ wrapper for the
+/// gtksourceview widget library.
+/// It offers all the power of gtksourceview with an interface familiar to
+/// to c++ developers, including use of the gtkmm library.
+///
+/// \section Status
+/// libgtksourceviewmm wraps all relevant parts of the
+/// gtksourceview library and has proven to be robust so far.
+///
+/// \section browse the source code
+/// You can browse the source code from our SVN repository at
+/// http://svn.gna.org/viewcvs/gtksourceviewmm/trunk/.
+///
+/// \section Download
+/// There have been several releases which you can download from
+/// http://ftp.gnome.org/pub/GNOME/sources/libgtksourceviewmm/.
+/// If you want bleeging-edge code (or if you want to help out with development)
+/// of libgtksourceviewmm you can check out libgtksourceviewmm from SVN.
+/// To do so, please read the instructions on using SVN
+/// at https://gna.org/svn/?group=gtksourceviewmm.
+///
+/// \section License
+/// libgtksourceview is free software; you can redistribute it and/or
+/// modify it under the terms of the GNU Library General Public
+/// License as published by the Free Software Foundation; either
+/// version 2 of the License, or (at your option) any later version.
+/// See the text of the LGPL for more details:
+/// http://www.gnu.org/licenses/lgpl.html .
+///
+/// \section contact
+/// to contact the developers of libgtksourceviewmm please send an email to
+/// the mailing list at gtksourceviewmm-list@gna.org
+
+
+
 #include <gtkmm/textbuffer.h>
 #include <gtksourceviewmm/sourcelanguage.h>
 #include <gtksourceviewmm/sourcemarker.h>
@@ -31,9 +73,19 @@ _PINCLUDE(gtkmm/private/textbuffer_p.h)
 namespace gtksourceview
 {
 
-/** Multi-line source editing widget. It displays a Gtk::SourceBuffer.
- */
-
+/// \brief The model for SourceView widgets.
+///
+/// It extends the TextBuffer object by adding features necessary
+/// to display and edit source code: syntax highlighting,
+/// bracket matching and markers.
+/// It also implements support for undo/redo operations.
+/// To create a SourceBuffer use SourceBuffer::create().
+/// By default highlighting is enabled, but you can disable it
+/// with SourceBuffer::set_highlight().
+/// This can be useful if you're not using SourceLanguage
+/// objects to set the highlighting patterns,
+/// and instead you're manually adding SourceTag objects
+/// to the buffer's tag table.
 class SourceBuffer : public Gtk::TextBuffer
 {
   _CLASS_GOBJECT(SourceBuffer, GtkSourceBuffer, GTK_SOURCE_BUFFER, Gtk::TextBuffer, GtkTextBuffer)
@@ -45,7 +97,14 @@ protected:
 
 public:
 
+    /// create a new Sour
+    /// \param tagtable a tag table to be taken in account
+    /// \return a new SourceBuffer
    _WRAP_CREATE(Glib::RefPtr<SourceTagTable> &tagtable)
+
+    /// create a new SourceBuffer
+    /// \param language a tag table to be taken in account
+    /// \return a new SourceBuffer
    _WRAP_CREATE(Glib::RefPtr<SourceLanguage> &language)
 
   _WRAP_METHOD(bool get_check_brackets(), gtk_source_buffer_get_check_brackets)

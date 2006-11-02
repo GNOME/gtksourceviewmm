@@ -34,7 +34,7 @@ _CONVERSION(`GtkSourceMarker*',`Glib::RefPtr<const SourceMarker>',`Glib::wrap($3
 _CONVERSION(`Glib::RefPtr<SourceMarker>',`GtkSourceMarker*',__CONVERT_REFPTR_TO_P)
 _CONVERSION(`GSList*',`Glib::SListHandle<Glib::RefPtr<SourceMarker> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
 
-#SourceBuffer
+#TextIter
 _CONVERSION(`const Gtk::TextIter&',`const GtkTextIter*',`$3.gobj()')
 _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',`$3.gobj()')
 _CONVERSION(`Glib::RefPtr<SourceBuffer>&',`GtkSourceBuffer*',__CONVERT_REFPTR_TO_P)

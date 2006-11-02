@@ -20,6 +20,10 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+/// \file
+/// \brief source text tag abstraction.
+///
+
 #include <glibmm/slisthandle.h>
 #include <gtkmm/textbuffer.h>
 #include <gtksourceviewmm/sourcetagstyle.h>
@@ -28,9 +32,24 @@
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(gtkmm/private/object_p.h)
 
+/// \page patternpage Grammar of SourceTag related patterns
+/// \section introduction
+/// the format of the SourceTag patterns is the POSIX
+/// Extended Regular Expression Syntax, plus GNU operators (word operators
+/// and buffer operators). Look at the GNU grep man pages for more about the
+/// the precise syntax.
+
+
 namespace gtksourceview
 {
-
+/// \brief An attribute of a range of text.
+///
+/// A tag is a an attribute that can be applied to a range of text
+/// One can associate style information to a given Tag.
+/// For example, a tag might be called "bold" and might make the text
+/// inside the tag bold.
+/// GtkSourceView uses SourceTag to perform syntax highlighting.
+///
 class SourceTag : public Gtk::TextTag
 {
     _CLASS_GOBJECT(SourceTag, GtkSourceTag, GTK_SOURCE_TAG, Gtk::TextTag, GtkTextTag)
@@ -39,25 +58,62 @@ protected:
     _CTOR_DEFAULT()
 
 public:
+
+    /// \brief create a syntax tag.
+    ///
+    /// A syntax tag is a tag that applies to a region of text.
+    /// The region is identified by a starting pattern and an ending pattern.
+    /// \param a_id the ID of the tag. That ID must be unique accross all the
+    /// tag IDs.
+    /// \param a_name the name of the tag. Can be translatable.
+    /// \param a_pat_start the regular expression pattern
+    /// that describes the begining of the region
+    /// the tag applied to. See \ref patternpage for more about the syntax.
+    /// \param a_pat_end the pattern that describes the end of the region.
+    /// \return the newly created SourceTag
     static Glib::RefPtr<SourceTag> create_syntax_tag (const Glib::ustring &a_id,
                                                       const Glib::ustring &a_name,
                                                       const Glib::ustring &a_pat_start,
                                                       const Glib::ustring &a_pat_end);
     _IGNORE(gtk_syntax_tag_new)
 
+    /// \brief create a pattern tag.
+    ///
+    /// A pattern tag is a tag that applies to a word (keyword, or term).
+    /// In this case The word is represented by a regular expression pattern.
+    /// \param a_id the id of the tag. Must be unique accross all the pattter ids.
+    /// \param a_name the name of the tag. Is a translatable string.
     static Glib::RefPtr<SourceTag> create_pattern_tag (const Glib::ustring &a_id,
                                                        const Glib::ustring &a_name,
                                                        const Glib::ustring &a_pattern);
     _IGNORE(gtk_pattern_tag_new)
 
+    /// \brief create a tag for a list of keywords.
+    ///
+    /// This is a more user friendly wrapper to SourceTag::create_pattern_tag() .
+    /// \param a_id the ID of the tag. Must be unique accross all the tag IDs.
+    /// \param a_name the name of the the tag. Can be a translated string.
+    /// \param a_keywords the list of keyword the tag applies to.
+    /// \param a_case_sensitive wether the tag should match the keywords
+    /// in a case sentive context or not.
+    /// \param a_match_empty_string_at_begining wether the tag should match
+    /// an empty string at the begining of keywords or not.
+    /// \param a_match_empty_string_at_end wether the tag should match the
+    /// an empty string at the end of keywords or not.
+    /// \param a_beginning_regex a regex that that describes a  pattern that can
+    /// be present at the begining of each keyword. If you don't understand what this is,
+    /// just let it be.
+    /// \param a_end_regex. Same as \link a_beginning_regex \endlink but applies for a pattern at
+    /// the end the keywords.
+    /// \return the newly created SourceTag
     static Glib::RefPtr<SourceTag> create_keyword_list_tag (const Glib::ustring &a_id,
                                                             const Glib::ustring &a_name,
                                                             const Glib::SListHandle<const Glib::ustring> &a_keywords,
-                                                            bool a_case_sensitive,
-                                                            bool a_match_empty_string_at_beginning,
-                                                            bool a_match_empty_string_at_end,
-                                                            const Glib::ustring &a_beginning_regex,
-                                                            const Glib::ustring &a_end_regex) ;
+                                                            bool a_case_sensitive=true,
+                                                            bool a_match_empty_string_at_beginning=true,
+                                                            bool a_match_empty_string_at_end=true,
+                                                            const Glib::ustring &a_beginning_regex="",
+                                                            const Glib::ustring &a_end_regex="") ;
     _IGNORE(gtk_keyword_list_tag_new)
 
 

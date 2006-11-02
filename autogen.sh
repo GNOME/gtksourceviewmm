@@ -7,7 +7,7 @@ test "x$srcdir" = x && srcdir=.
 
 origdir=`pwd`
 
-if test -f "$srcdir/configure.in" && \
+if test -f "$srcdir/configure.ac" && \
    test -d "$srcdir/gtksourceview/src" && \
    test -d "$srcdir/gtksourceview/gtksourceviewmm"
 then :; else

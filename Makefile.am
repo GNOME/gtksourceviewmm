@@ -1,8 +1,8 @@
 
-SUBDIRS		= tools gtksourceview @EXAMPLE_SUBDIR@ @DEMO_SUBDIR@ tests
-DIST_SUBDIRS	= $(SUBDIRS) scripts
+SUBDIRS=tools gtksourceview @EXAMPLE_SUBDIR@ @DEMO_SUBDIR@ @DOCS_SUBDIR@ tests
+DIST_SUBDIRS=$(SUBDIRS) scripts
 
-EXTRA_DIST	= build_shared/Makefile_build.am_fragment \
+EXTRA_DIST= build_shared/Makefile_build.am_fragment \
               build_shared/Makefile_build_gensrc.am_fragment \
               build_shared/Makefile_gensrc.am_fragment \
               build_shared/Makefile_conditional.am_fragment \

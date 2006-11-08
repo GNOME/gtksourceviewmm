@@ -67,7 +67,7 @@ public:
     /// tag IDs.
     /// \param a_name the name of the tag. Can be translatable.
     /// \param a_pat_start the regular expression pattern
-    /// that describes the begining of the region
+    /// that describes the beginning of the region
     /// the tag applied to. See \ref patternpage for more about the syntax.
     /// \param a_pat_end the pattern that describes the end of the region.
     /// \return the newly created SourceTag
@@ -83,6 +83,7 @@ public:
     /// In this case The word is represented by a regular expression pattern.
     /// \param a_id the id of the tag. Must be unique accross all the pattter ids.
     /// \param a_name the name of the tag. Is a translatable string.
+    /// \param a_pattern the word pattern.
     static Glib::RefPtr<SourceTag> create_pattern_tag (const Glib::ustring &a_id,
                                                        const Glib::ustring &a_name,
                                                        const Glib::ustring &a_pattern);
@@ -91,19 +92,19 @@ public:
     /// \brief create a tag for a list of keywords.
     ///
     /// This is a more user friendly wrapper to SourceTag::create_pattern_tag() .
-    /// \param a_id the ID of the tag. Must be unique accross all the tag IDs.
-    /// \param a_name the name of the the tag. Can be a translated string.
+    /// \param a_id the ID of the tag. Must be unique accross all tag IDs.
+    /// \param a_name the name of the tag. Can be a translated string.
     /// \param a_keywords the list of keyword the tag applies to.
     /// \param a_case_sensitive wether the tag should match the keywords
     /// in a case sentive context or not.
-    /// \param a_match_empty_string_at_begining wether the tag should match
-    /// an empty string at the begining of keywords or not.
+    /// \param a_match_empty_string_at_beginning whether the tag should match
+    /// an empty string at the beginning of keywords or not.
     /// \param a_match_empty_string_at_end wether the tag should match the
     /// an empty string at the end of keywords or not.
     /// \param a_beginning_regex a regex that that describes a  pattern that can
-    /// be present at the begining of each keyword. If you don't understand what this is,
+    /// be present at the beginning of each keyword. If you don't understand what this is,
     /// just let it be.
-    /// \param a_end_regex. Same as \link a_beginning_regex \endlink but applies for a pattern at
+    /// \param a_end_regex same as a_beginning_regex but applies for a pattern at
     /// the end the keywords.
     /// \return the newly created SourceTag
     static Glib::RefPtr<SourceTag> create_keyword_list_tag (const Glib::ustring &a_id,
@@ -117,20 +118,47 @@ public:
     _IGNORE(gtk_keyword_list_tag_new)
 
 
+    /// \brief create a tag for a comment.
+    ///
+    /// This is a user friendly way to create a syntax tag for a one liner comment.
+    /// \param a_id the ID of the of the tag. Must be unique accross all tag IDs.
+    /// \param a_name the name of the tag. Can be a translated string.
+    /// \param a_pattern_start the pattern of the beginning of the commented line.
+    /// the tag will applied to the region located between by a_patter_start and the end of line.
+    /// \return the newly created SourceTag
     static Glib::RefPtr<SourceTag> create_line_comment_tag_new (const Glib::ustring &a_id,
                                                                 const Glib::ustring &a_name,
                                                                 const Glib::ustring &a_pattern_start) ;
     _IGNORE(gtk_line_comment_tag_new)
 
+    /// \brief create a tag for a string delimited by two patterns.
+    ///
+    /// \param a_id the ID of the tag. Must be unique accross all tag IDs.
+    /// \param a_name the name of the tag. Can be a translated string.
+    /// \param a_pattern_start the starting pattern of the string.
+    /// \param a_pattern_end the ending pattern of the string.
+    /// \param a_end_at_line_end whether the ending pattern should be suffixed
+    ///  by an end of line character.
     static Glib::RefPtr<SourceTag> create_string_tag_new (const Glib::ustring &a_id,
                                                           const Glib::ustring &a_name,
                                                           const Glib::ustring &a_pattern_start,
-                                                          const Glib::ustring &a_patten_end,
-                                                          bool a_end_at_line_end) ;
+                                                          const Glib::ustring &a_pattern_end,
+                                                          bool a_end_at_line_end=true) ;
     _IGNORE(gtk_string_tag_new)
 
+    /// \brief getter of the tag ID.
+    ///
+    /// \return the ID
     _WRAP_METHOD(Glib::ustring get_id() const, gtk_source_tag_get_id)
+
+    /// \brief getter of the tag style.
+    ///
+    /// \return the style
     _WRAP_METHOD(SourceTagStyle get_style() const, gtk_source_tag_get_style)
+
+    /// \brief setter of the tag style.
+    ///
+    /// \param a_style the new style
     _WRAP_METHOD(void set_style(const SourceTagStyle& a_style), gtk_source_tag_set_style)
 
 };//end class SourceTag

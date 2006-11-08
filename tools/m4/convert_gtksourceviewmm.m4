@@ -30,8 +30,10 @@ _CONVERSION(`Glib::RefPtr<SourceStyleScheme>',`GtkSourceStyleScheme*',__CONVERT_
 
 #SourceMarker
 _CONVERSION(`GtkSourceMarker*',`Glib::RefPtr<SourceMarker>',`Glib::wrap($3, true)')
+_CONVERSION(`GtkSourceMarker*',`Glib::RefPtr<SourceMarker>&',`Glib::wrap($3, true)')
 _CONVERSION(`GtkSourceMarker*',`Glib::RefPtr<const SourceMarker>',`Glib::wrap($3, true)')
 _CONVERSION(`Glib::RefPtr<SourceMarker>',`GtkSourceMarker*',__CONVERT_REFPTR_TO_P)
+_CONVERSION(`Glib::RefPtr<SourceMarker>&',`GtkSourceMarker*',__CONVERT_REFPTR_TO_P)
 _CONVERSION(`GSList*',`Glib::SListHandle<Glib::RefPtr<SourceMarker> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
 
 #TextIter

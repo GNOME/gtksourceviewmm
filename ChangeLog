@@ -1,3 +1,18 @@
+Wed, 08 Nov 2006 23:36:20 +0100 Dodji Seketeli
+
+	* docs/reference/Doxyfile.in: don't generate full path doc names.
+	* tools/m4/convert_gtksourceviewmm.m4: add  more need type conversion macros.
+	* gtksourceview/src/sourcelanguagesmanager.hg: fix typo:
+	  SourceLanguagesManager::get_available_languages(), instead of
+	  ::get_available_language(). This breaks API, but it's for the good.
+	* gtksourceview/src/sourcebuffer.hg: make api doc complete for this
+	  class.
+	* gtksourceview/src/sourcetag.hg: complete apidoc for this class.
+	* gtksourceview/src/sourcetagtable.hg: went forward in apidoc.
+	* tests/Makefile.am, test-langs.cc: added a new test to test languages.
+	* configure.ac: bump revision number, and soname stuff because of api
+	  break.
+
 Thu, 02 Nov 2006 08:14:03 +0100 Dodji Seketeli
 
 	* configure.in: renamed this into configure.ac .

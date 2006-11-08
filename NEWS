@@ -18,7 +18,7 @@ Users of 0.1.0 must recompile their applications, sorry.
 
 * all the APIs of gtksourceview 1.6.2 are wrapped.
 
-* users that used to use gtksourceviewmm from the svn repository must now
+* users who used to use gtksourceviewmm from the svn repository must now
   update their configure.[in|ac] to check against libgtksourceviewmm-1.0, version 0.1.0.
   The former check was against gtksourceviewmm-1.0 (there was no 'lib' prefix),  version 1.10.0.
   I decided to change the name of the project to be able to set the project's version to a number < 1.0,

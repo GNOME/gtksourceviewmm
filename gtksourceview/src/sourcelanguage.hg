@@ -20,7 +20,7 @@
  */
 
 /// \file
-/// the abstraction of a supported language.
+/// The abstraction of a supported language.
 
 #include <glibmm/object.h>
 #include <gtksourceviewmm/sourcetag.h>
@@ -39,7 +39,7 @@ class SourceLanguagesManager ;
 _CC_INCLUDE(gtksourceview/gtksourcelanguage.h)
 _CC_INCLUDE(gtksourceview/gtksourceview-typebuiltins.h)
 
-/// \brief the abstraction of a language.
+/// \brief The abstraction of a language.
 ///
 /// Languages are used in the syntax highlighting
 /// workflow.

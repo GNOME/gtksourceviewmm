@@ -21,7 +21,7 @@
  */
 
 /// \file
-/// \brief source text tag abstraction.
+/// \brief SourceTag class
 ///
 
 #include <glibmm/slisthandle.h>
@@ -42,7 +42,7 @@ _PINCLUDE(gtkmm/private/object_p.h)
 
 namespace gtksourceview
 {
-/// \brief An attribute of a range of text.
+/// \brief An attribute that can be applied to a range of text.
 ///
 /// A tag is a an attribute that can be applied to a range of text
 /// One can associate style information to a given Tag.

@@ -18,6 +18,8 @@
  * License along with this library; if not, write to the Free
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
+/// \file
+/// \brief the SourceTagStyle class
 
 #include <glibmm.h>
 #include <gdkmm/color.h>
@@ -29,40 +31,66 @@ _CC_INCLUDE(gtksourceview/gtksourcetagstyle.h)
 _CC_INCLUDE(gtksourceview/gtksourceview-typebuiltins.h)
 namespace gtksourceview {
 
+/// \brief a styling attribute that can be applied to to a SourceTag
 class SourceTagStyle
 {
     _CLASS_BOXEDTYPE (SourceTagStyle, GtkSourceTagStyle, NONE, gtk_source_tag_style_copy, gtk_source_tag_style_free)
 
     public:
 
+    /// \brief constructor
     _CUSTOM_DEFAULT_CTOR
 
+    /// \brief constructor
     SourceTagStyle () ;
 
+    /// \name accessors to indicate if the style is default or not
+    /// @{
     _MEMBER_GET(is_default, is_default, bool, gboolean) ;
     _MEMBER_SET(is_default, is_default, bool, gboolean) ;
+    /// @}
 
+    /// \name accessors of the style's mask property
+    /// @{
     _MEMBER_GET(mask, mask, guint, guint) ;
     _MEMBER_SET(mask, mask, guint, guint) ;
+    /// @}
 
+    /// \name accessors of the style's foreground property
+    /// @{
     _MEMBER_GET(foreground, foreground, Gdk::Color, GdkColor) ;
     _MEMBER_SET(foreground, foreground, Gdk::Color, GdkColor) ;
+    /// @}
 
+    /// \name accessors of the style's background property
+    /// @{
     _MEMBER_GET(background, background, Gdk::Color, GdkColor) ;
     _MEMBER_SET(background, background, Gdk::Color, GdkColor) ;
+    /// @}
 
+    /// \name accessors of the style's italic property
+    /// @{
     _MEMBER_GET(italic, italic, bool, gboolean) ;
     _MEMBER_SET(italic, italic, bool, gboolean) ;
+    /// @}
 
+    /// \name accessor of the style's bold property
+    /// @{
     _MEMBER_GET(bold, bold, bool, gboolean) ;
     _MEMBER_SET(bold, bold, bool, gboolean) ;
+    /// @}
 
+    /// \name accessor of the style's underline property
+    /// @{
     _MEMBER_GET(underline, underline, bool, gboolean) ;
     _MEMBER_SET(underline, underline, bool, gboolean) ;
+    /// @}
 
+    /// \name accessor of the style's strikethrough property
+    /// @{
     _MEMBER_GET(strikethrough, strikethrough, bool, gboolean) ;
     _MEMBER_SET(strikethrough, strikethrough, bool, gboolean) ;
-
+    /// @}
 };//end class SourceTagStyle
 
 }//end namespace gtksourceview

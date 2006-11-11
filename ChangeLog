@@ -1,3 +1,10 @@
+Sat, 11 Nov 2006 16:20:21 +0100 Dodji Seketeli
+
+	* gtksourceview/src/*.hg: update the API docs. All the classes are now
+	  basically documented.
+	* docs/reference/Makefile.am: make install now installs the docs
+	  in docdir/reference/html. APIDOCs are shipped in the tarball now.
+
 Sat, 11 Nov 2006 01:12:24 +0100 Dodji Seketeli
 
 	* gtksourceview/src/sourcelanguagesmanager.hg: updated API doc

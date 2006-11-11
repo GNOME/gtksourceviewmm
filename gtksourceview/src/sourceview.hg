@@ -19,6 +19,9 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+/// \file
+/// \brief SourceView class
+
 #include <gtkmm/textview.h>
 #include <gtksourceviewmm/sourcebuffer.h>
 
@@ -28,9 +31,9 @@ _PINCLUDE(gtkmm/private/textview_p.h)
 namespace gtksourceview
 {
 
-/** Multi-line source editing widget. It displays a Gtk::SourceBuffer.
- */
-
+/// \brief Multi-line source editing widget.
+///
+/// It displays a Gtk::SourceBuffer.
 class SourceView : public Gtk::TextView
 {
   _CLASS_GTKOBJECT(SourceView, GtkSourceView, GTK_SOURCE_VIEW, Gtk::TextView, GtkTextView)

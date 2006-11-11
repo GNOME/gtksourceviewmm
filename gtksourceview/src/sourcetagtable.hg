@@ -19,7 +19,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 /// \file
-/// an abstraction of SourceTag list
+/// \brief the SourceTagTable class
 
 #include <glibmm/object.h>
 #include <gtksourceviewmm/sourcetag.h>

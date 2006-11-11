@@ -20,7 +20,7 @@
  */
 
 /// \file
-/// The abstraction of a supported language.
+/// \brief the SourceLanguage class
 
 #include <glibmm/object.h>
 #include <gtksourceviewmm/sourcetag.h>

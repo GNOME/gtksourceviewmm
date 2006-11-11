@@ -1,14 +1,22 @@
 doxyfile=Doxyfile
 doxygenprog=@DOXYGEN@
 
-EXTRA_DIST=$(doxyfile)
-
 html/index.html:
 	rm -rf html
 	$(doxygenprog) $(doxyfile)
 
-all-local: html/index.html
+htmlfiles=$(shell ls -1 html/*.html)
+pngfiles=$(shell ls -1 html/*.png)
+giffiles=$(shell ls -1 html/*.gif)
+cssfiles=$(shell ls -1 html/*.css)
+
+htmldocumentationdir=$(docdir)/reference/html
+htmldocumentation_DATA=$(htmlfiles) $(pngfiles) $(giffiles) $(cssfiles)
+
+all: html/index.html
 
 clean-local:
 	rm -rf html
+
+EXTRA_DIST=$(doxyfile) $(htmlfiles) $(pngfiles) $(giffiles) $(cssfiles)
 

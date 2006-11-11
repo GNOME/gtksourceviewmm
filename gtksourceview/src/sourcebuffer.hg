@@ -20,7 +20,7 @@
  */
 
 /// \file
-/// \brief the model for SourceView widgets
+/// \brief SourceBuffer class
 ///
 
 /// \mainpage libgtksourceviewmm - A C++ API for gtksourceview

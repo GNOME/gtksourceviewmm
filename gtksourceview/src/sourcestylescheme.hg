@@ -18,6 +18,10 @@
  * License along with this library; if not, write to the Free
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
+
+/// \file
+/// \brief SourceStyleScheme class
+
 #include <glibmm/interface.h>
 #include <gtksourceviewmm/sourcetagstyle.h>
 #include <gtksourceview/gtksourcestylescheme.h>
@@ -29,6 +33,7 @@ _PINCLUDE(gtksourceviewmm/private/sourcetagstyle_p.h)
 namespace gtksourceview
 {
 
+/// \brief the styling properties applicable to a SourceLanguage.
 class SourceStyleScheme : public Glib::Interface
 {
 
@@ -36,10 +41,25 @@ class SourceStyleScheme : public Glib::Interface
 
 public:
 
+    /// \brief get a tag style from the scheme.
+    ///
+    /// \param a_style_name the name of the tag style to get
+    /// \return the SourceTagStyle
+    /// \todo change the signature of this method to return a bool
     _WRAP_METHOD(SourceTagStyle get_tag_style(const Glib::ustring &a_style_name) const, gtk_source_style_scheme_get_tag_style)
 
+    /// \brief get the name of the scheme
+    ///
+    /// \return the name of the source style
     _WRAP_METHOD(Glib::ustring get_name() const, gtk_source_style_scheme_get_name)
+
+    /// \brief get the list of the different style names associated to this scheme
+    ///
+    /// \return the list of style names
     _WRAP_METHOD(Glib::SListHandle<Glib::ustring> get_style_names() const, gtk_source_style_scheme_get_style_names)
+
+    /// \brief the default style scheme
+    /// \return the default style scheme
     _WRAP_METHOD(static Glib::RefPtr<SourceStyleScheme> get_default(), gtk_source_style_scheme_get_default, refreturn)
 
 };//end class SourceStyleScheme

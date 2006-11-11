@@ -20,7 +20,7 @@
  */
 
 /// \file
-/// SourceLanguagesManager class
+/// \brief SourceLanguagesManager class
 
 #include <glibmm/object.h>
 #include <gtksourceviewmm/sourcelanguage.h>

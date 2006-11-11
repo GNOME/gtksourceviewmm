@@ -1,3 +1,7 @@
+Sat, 11 Nov 2006 00:57:00 +0100 Dodji Seketeli
+
+	* gtksourceview/src/sourcelanguage.hg: updated API doc.
+
 Wed, 08 Nov 2006 23:36:20 +0100 Dodji Seketeli
 
 	* docs/reference/Doxyfile.in: don't generate full path doc names.

@@ -10,6 +10,7 @@ pngfiles=$(shell ls -1 html/*.png)
 giffiles=$(shell ls -1 html/*.gif)
 cssfiles=$(shell ls -1 html/*.css)
 
+docdir = $(datadir)/doc/libgtksourceviewmm-1.0/docs
 htmldocumentationdir=$(docdir)/reference/html
 htmldocumentation_DATA=$(htmlfiles) $(pngfiles) $(giffiles) $(cssfiles)
 

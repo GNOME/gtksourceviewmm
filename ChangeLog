@@ -1,5 +1,9 @@
 2006-11-13  Murray Cumming  <murrayc@murrayc.com>
 
+	* docs/reference/Makefile.am: Define docdir, so make install succeeds.
+
+2006-11-13  Murray Cumming  <murrayc@murrayc.com>
+
 	* gtksourceview/src/sourcebuffer.hg:
 	* gtksourceview/src/sourcelanguage.hg:
 	* gtksourceview/src/sourcemarker.hg:

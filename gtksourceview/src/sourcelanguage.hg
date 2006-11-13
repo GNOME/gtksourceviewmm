@@ -77,7 +77,12 @@ public:
   /// \brief gets the list of tags associated to the given language.
   ///
   /// \return the list of tags associated to the language
-  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceTag> > get_tags() const, gtk_source_language_get_tags)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceTag> > get_tags(), gtk_source_language_get_tags)
+
+  /// \brief gets the list of tags associated to the given language.
+  ///
+  /// \return the list of tags associated to the language
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const SourceTag> > get_tags() const, gtk_source_language_get_tags)
 
   /// \brief Gets the value of the ESC character in the given language.
   ///
@@ -98,7 +103,12 @@ public:
   /// \brief gets the style scheme associated to the language.
   ///
   /// \return the style scheme associated to the language
-  _WRAP_METHOD(Glib::RefPtr<SourceStyleScheme> get_style_scheme() const, gtk_source_language_get_style_scheme, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<SourceStyleScheme> get_style_scheme(), gtk_source_language_get_style_scheme, refreturn)
+
+  /// \brief gets the style scheme associated to the language.
+  ///
+  /// \return the style scheme associated to the language
+  _WRAP_METHOD(Glib::RefPtr<const SourceStyleScheme> get_style_scheme() const, gtk_source_language_get_style_scheme, refreturn)
 
   /// \brief sets the style scheme associated to the language
   ///

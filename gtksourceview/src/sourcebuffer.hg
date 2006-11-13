@@ -112,11 +112,6 @@ public:
    /// \brief Determines whether bracket match highlighting is activated for the source buffer.
    ///
    /// \return true if the source buffer will highlight  matching brackets, false otherwise.
-  _WRAP_METHOD(bool get_check_brackets(), gtk_source_buffer_get_check_brackets)
-
-   /// \brief Determines whether bracket match highlighting is activated for the source buffer.
-   ///
-   /// \return true if the source buffer will highlight  matching brackets, false otherwise.
   _WRAP_METHOD(bool get_check_brackets() const, gtk_source_buffer_get_check_brackets, constversion)
 
    /// \brief controls the bracket match highlighting function in the buffer.
@@ -131,11 +126,6 @@ public:
   ///
   /// \param style the SourceTagStyle specifying colors and text attributes
   _WRAP_METHOD(void set_bracket_match_style(const SourceTagStyle& style), gtk_source_buffer_set_bracket_match_style)
-
-  /// \brief Determines whether text highlighting is activated in the source buffer.
-  ///
-  /// \return true if highlighting is activated, false otherwise.
-  _WRAP_METHOD(bool get_highlight(), gtk_source_buffer_get_highlight)
 
   /// \brief Determines whether text highlighting is activated in the source buffer.
   ///
@@ -155,12 +145,6 @@ public:
   /// SourceTag tags with highlighting disabled and enable it when finished.
   /// \param highlight true if you want to activate highlighting
   _WRAP_METHOD(void set_highlight(bool highlight=true), gtk_source_buffer_set_highlight)
-
-
-  /// \brief Determines the number of undo levels the buffer will track for buffer edits.
-  ///
-  /// \return the maximum number of possible undo levels.
-  _WRAP_METHOD(int get_max_undo_levels(), gtk_source_buffer_get_max_undo_levels)
 
   /// \brief Determines the number of undo levels the buffer will track for buffer edits.
   ///
@@ -201,11 +185,6 @@ public:
   /// The buffer holds a reference to the language set.
   /// \param language a GtkSourceLanguage to set.
   _WRAP_METHOD(void set_language(Glib::RefPtr<SourceLanguage> language), gtk_source_buffer_set_language)
-
-  /// \brief Determines the escaping character used by the source buffer highlighting engine.
-  ///
-  ///\return the UTF-8 character for the escape character the buffer is using.
-  _WRAP_METHOD(gunichar get_escape_char(), gtk_source_buffer_get_escape_char)
 
   /// \brief Determines the escaping character used by the source buffer highlighting engine.
   ///
@@ -305,7 +284,7 @@ public:
   /// \brief Looks up the GtkSourceMarker named name in buffer, returning NULL if it doesn't exists.
   ///
   /// \return the SourceMarker whose name is name, or nil.
-  _WRAP_METHOD(Glib::RefPtr<SourceMarker> get_marker(const Glib::ustring& name) const, gtk_source_buffer_get_marker, refreturn, constversion)
+  _WRAP_METHOD(Glib::RefPtr<const SourceMarker> get_marker(const Glib::ustring& name) const, gtk_source_buffer_get_marker, refreturn, constversion)
 
   /// \brief get an ordered (by position) list of SourceMarker objects inside the region delimited by the GtkTextIter begin and end.
   ///
@@ -317,7 +296,7 @@ public:
   ///
   /// The iters may be in any order.
   /// \return the list of SourceMarkers
-  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceMarker> > get_markers_in_region(const Gtk::TextIter& begin, const Gtk::TextIter& end) const, gtk_source_buffer_get_markers_in_region, constversion)
+  //_WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const SourceMarker> > get_markers_in_region(const Gtk::TextIter& begin, const Gtk::TextIter& end) const, gtk_source_buffer_get_markers_in_region, constversion)
 
   /// \brief gets the first (nearest to the top of the buffer) marker in buffer.
   ///
@@ -343,13 +322,7 @@ public:
   ///
   /// \param marker the marker we want to get the iterator at.
   /// \return the iterator.
-  Gtk::TextIter get_iter_at_marker(Glib::RefPtr<SourceMarker> marker);
-
-  /// \brief gets an iterator pointing at the location of a given marker.
-  ///
-  /// \param marker the marker we want to get the iterator at.
-  /// \return the iterator.
-  Gtk::TextIter get_iter_at_marker(Glib::RefPtr<SourceMarker> marker) const;
+  Gtk::TextIter get_iter_at_marker(const Glib::RefPtr<SourceMarker>& marker);
 
   _IGNORE(gtk_source_buffer_get_iter_at_marker)
 
@@ -361,7 +334,17 @@ public:
   /// You can get the others using SourceMarker::next().
   /// \param iter an iterator pointing to the location to start searching from.
   /// \return the SourceMarker nearest to the right of iter, or nil if there are no more markers after iter.
-  _WRAP_METHOD(Glib::RefPtr<SourceMarker> get_next_marker(Gtk::TextIter& iter), gtk_source_buffer_get_next_marker)
+  _WRAP_METHOD(Glib::RefPtr<SourceMarker> get_next_marker(Gtk::TextIter& iter), gtk_source_buffer_get_next_marker, refreturn)
+
+  /// \brief gets the nearest marker to the right of iter.
+  ///
+  /// If there are multiple markers at the same position,
+  /// this function will always return the first one (from the internal linked list),
+  /// even if starting the search exactly at its location.
+  /// You can get the others using SourceMarker::next().
+  /// \param iter an iterator pointing to the location to start searching from.
+  /// \return the SourceMarker nearest to the right of iter, or nil if there are no more markers after iter.
+  _WRAP_METHOD(Glib::RefPtr<const SourceMarker> get_next_marker(Gtk::TextIter& iter) const, gtk_source_buffer_get_next_marker, refreturn)
 
   /// \brief gets the nearest marker to the left of iter.
   ///
@@ -371,7 +354,17 @@ public:
   /// You can get the others using SourceMarker::prev().
   /// \param iter an iterator pointing to the location to start searching from.
   /// \return the SourceMarker nearest to the right of iter, or nil if there are no more markers before iter.
-  _WRAP_METHOD(Glib::RefPtr<SourceMarker> get_prev_marker(Gtk::TextIter& iter), gtk_source_buffer_get_prev_marker)
+  _WRAP_METHOD(Glib::RefPtr<SourceMarker> get_prev_marker(Gtk::TextIter& iter), gtk_source_buffer_get_prev_marker, refreturn)
+
+  /// \brief gets the nearest marker to the left of iter.
+  ///
+  /// If there are multiple markers at the same position,
+  /// this function will always return the last one (from the internal linked list),
+  /// even if starting the search exactly at its location.
+  /// You can get the others using SourceMarker::prev().
+  /// \param iter an iterator pointing to the location to start searching from.
+  /// \return the SourceMarker nearest to the right of iter, or nil if there are no more markers before iter.
+  _WRAP_METHOD(Glib::RefPtr<const SourceMarker> get_prev_marker(Gtk::TextIter& iter) const, gtk_source_buffer_get_prev_marker, refreturn)
 
   /// \name signals
   /// @{

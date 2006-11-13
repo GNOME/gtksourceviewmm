@@ -26,10 +26,10 @@
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(gtkmm/private/textmark_p.h)
+_CC_INCLUDE(gtksourceview/gtksourcemarker.h)
 
 namespace gtksourceview
 {
-_CC_INCLUDE(gtksourceview/gtksourcemarker.h)
 
 typedef Gtk::TextMark SourceMarker;
 

@@ -1,3 +1,16 @@
+2006-11-13  Murray Cumming  <murrayc@murrayc.com>
+
+	* gtksourceview/src/sourcebuffer.hg:
+	* gtksourceview/src/sourcelanguage.hg:
+	* gtksourceview/src/sourcemarker.hg:
+	* gtksourceview/src/sourceview.hg:
+	* tools/m4/convert_gtksourceviewmm.m4: Various const corrections. Some 
+	get_*() methods were not const. Some get_*() methods had both const and non-const 
+	overloads, although they returned by value. Some get_*() that returned by RefPtr 
+	needed get_*() overloads.
+	Used refreturn in .hg files with get_*() methods, instead of specifying it in the 
+	conversion in the .m4 file, because the extra ref is not always needed.
+
 Sat, 11 Nov 2006 16:20:21 +0100 Dodji Seketeli
 
 	* gtksourceview/src/*.hg: update the API docs. All the classes are now

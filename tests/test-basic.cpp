@@ -1,10 +1,6 @@
 #include <iostream>
 #include <gtkmm.h>
-#include <gtksourceview/gtksourceview.h>
-#include <gtksourceviewmm/sourceview.h>
-#include <gtksourceviewmm/sourcebuffer.h>
-#include <gtksourceviewmm/init.h>
-
+#include <gtksourceviewmm.h>
 using namespace std ;
 using namespace Glib ;
 using namespace Gtk ;

@@ -13,7 +13,8 @@ sourcelanguage.hg \
 sourcelanguagesmanager.hg \
 sourcemarker.hg \
 sourceview.hg \
-sourcebuffer.hg
+sourcebuffer.hg \
+sourceiter.hg
 
 files_general_deprecated_hg =
 

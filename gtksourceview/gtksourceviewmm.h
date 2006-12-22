@@ -23,10 +23,17 @@
  */
 
 
-#include <gtksourceviewmm/sourceview.h>
+#include <gtksourceviewmm/init.h>
 #include <gtksourceviewmm/sourcebuffer.h>
+#include <gtksourceviewmm/sourceiter.h>
 #include <gtksourceviewmm/sourcelanguage.h>
 #include <gtksourceviewmm/sourcelanguagesmanager.h>
+#include <gtksourceviewmm/sourcemarker.h>
+#include <gtksourceviewmm/sourcestylescheme.h>
+#include <gtksourceviewmm/sourcetag.h>
+#include <gtksourceviewmm/sourcetagstyle.h>
+#include <gtksourceviewmm/sourcetagtable.h>
+#include <gtksourceviewmm/sourceview.h>
 
 #endif /* #ifndef _GTKSOURCEVIEWMM_H */
 

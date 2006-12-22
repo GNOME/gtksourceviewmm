@@ -1,0 +1,109 @@
+/* sourceiter.hg
+ * 
+ * Copyright (C) 2004-2005 Jae Jang
+ * Copyright (C) 2005-2006 Rob Page
+ * Copyright (C) 2005-2006 Dodji Seketeli
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+/// \file
+/// \brief SourceIter class
+
+#include <gtkmm/textiter.h>
+_DEFS(gtksourceviewmm,gtksourceview)
+_CC_INCLUDE(gtksourceview/gtksourceiter.h)
+
+namespace gtksourceview
+{
+    enum SearchFlags {
+        SEARCH_VISIBLE_ONLY           = 1 << 0,
+        SEARCH_TEXT_ONLY              = 1 << 1,
+        SEARCH_CASE_INSENSITIVE       = 1 << 2
+    };//end enum searchFlags
+
+
+    SearchFlags operator| (SearchFlags lhs, SearchFlags rhs) ;
+
+    SearchFlags operator& (SearchFlags lhs, SearchFlags rhs) ;
+
+    SearchFlags operator^ (SearchFlags lhs, SearchFlags rhs) ;
+
+    SearchFlags operator- (SearchFlags lhs) ;
+
+    SearchFlags operator|= (SearchFlags &lhs, SearchFlags rhs) ;
+
+    SearchFlags operator&= (SearchFlags &lhs, SearchFlags rhs) ;
+
+    SearchFlags operator^= (SearchFlags &lhs, SearchFlags rhs) ;
+
+/// \brief an iterator type for gtksourceview::SourceBuffer.
+///
+/// it provides search features
+class SourceIter : public Gtk::TextIter
+{
+    public:
+
+        /// \name constructors
+        /// @{
+        SourceIter () ;
+        SourceIter (const Gtk::TextIter &iter) ;
+        SourceIter (const GtkTextIter* gobject) ;
+        SourceIter (const SourceIter &a_iter) ;
+        /// @}
+
+        ~SourceIter () ;
+
+
+
+        /// \brief search forward in the buffer
+        ///
+        /// \param a_str the string to search for
+        /// \param a_flags search flags, to be combined with the '|' operator
+        /// \param a_match_start out parameter. Points the the beginning
+        ///        of the region that matches the search. This is applicable
+        ///        if and only if the function returns true.
+        /// \param a_match_end out parameter.  Points the the end
+        ///        of the region that matches the search. This is applicable
+        ///        if and only if the function returns true.
+        /// \return true if the search was successful, false otherwise.
+        bool forward_search (const Glib::ustring &a_str,
+                             SearchFlags a_flags,
+                             Gtk::TextIter &a_match_start,
+                             Gtk::TextIter &a_match_end,
+                             const Gtk::TextIter &a_limit) const ;
+
+        /// \brief search backward in the buffer
+        ///
+        /// \param a_str the string to search for
+        /// \param a_flags search flags, to be combined with the '|' operator
+        /// \param a_match_start out parameter. Points the the beginning
+        ///        of the region that matches the search. This is applicable
+        ///        if and only if the function returns true.
+        /// \param a_match_end out parameter.  Points the the end
+        ///        of the region that matches the search. This is applicable
+        ///         if and only if the function returns true.
+        /// \return true if the search was successful, false otherwise.
+        bool backward_search (const Glib::ustring &a_str,
+                              SearchFlags a_flags,
+                              Gtk::TextIter &a_match_start,
+                              Gtk::TextIter &a_match_end,
+                              const Gtk::TextIter &a_limit) const ;
+
+};//end class SourceIter
+
+
+}//end namespace gtksourceview
+

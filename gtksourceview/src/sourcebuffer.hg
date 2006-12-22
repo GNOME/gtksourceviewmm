@@ -122,7 +122,7 @@ public:
    /// \param check_brackets true if you want matching brackets highlighted.
   _WRAP_METHOD(void set_check_brackets(bool check_brackets=true), gtk_source_buffer_set_check_brackets)
 
-  /// brief Sets the style used for highlighting matching brackets.
+  /// \brief Sets the style used for highlighting matching brackets.
   ///
   /// \param style the SourceTagStyle specifying colors and text attributes
   _WRAP_METHOD(void set_bracket_match_style(const SourceTagStyle& style), gtk_source_buffer_set_bracket_match_style)
@@ -239,7 +239,7 @@ public:
   ///
   /// When the last not undoable block is closed through the call to this function,
   /// the list of undo actions is cleared and the undo manager is re-enabled.
-  _WRAP_METHOD(void end_notundoable_action(), gtk_source_buffer_end_not_undoable_action)
+  _WRAP_METHOD(void end_not_undoable_action(), gtk_source_buffer_end_not_undoable_action)
 
   /// \brief Creates a marker in the buffer of type type.
   ///

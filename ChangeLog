@@ -7,6 +7,12 @@ Fri, 22 Dec 2006 23:46:21 +0100 Dodji Seketeli
 	* tests/test-basic.cpp: udpated this to include <gtksourceviewmm.h>
 	  only.
 
+2006-12-06  Johannes Schmid <jhs@gnome.org>
+
+	* gtksourceview/src/sourcebuffer.hg:
+	   Fixed type in end_not_undoable_action() which was actually
+	   end_notundoable_action()
+
 2006-11-13  Murray Cumming  <murrayc@murrayc.com>
 
 	* docs/reference/Makefile.am: Define docdir, so make install succeeds.

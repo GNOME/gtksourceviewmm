@@ -1,3 +1,23 @@
+0.3.0
+
+    [Dodji Seketeli]
+
+    * updated API documentation
+    * added gtksourceview/gtksourceviewmm.h as a shortcut header to include
+      all the gtksourviewmm headers.
+    * wrapped the GtkSourceIter class.
+
+    [Murray Cumming]
+
+    * various API cleanless fixes. Added needed const to various getters.
+    * cleaned documentation make install process
+
+    [Johannes Schmid]
+
+    * fixed a typo. Renamed SourceBuffer::end_notundoable_action() into
+     SourceBuffer::end_not_undoable_action().
+
+
 0.2.0:
 
 This is a bugfix release that breaks the API a little bit.

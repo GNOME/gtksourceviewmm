@@ -1,0 +1,48 @@
+/*!
+
+ \mainpage libgtksourceviewmm - A C++ API for gtksourceview
+
+ \section Introduction
+ libgtksourceviewmm is a C++ wrapper for the
+ gtksourceview widget library.
+ It offers all the power of gtksourceview with an interface familiar
+ to c++ developers, including users of the gtkmm library.
+
+ \section Status
+ libgtksourceviewmm wraps all relevant parts of the
+ gtksourceview library and has proven to be useable so far.
+
+ \section Browse the source code
+ You can browse the source code from our SVN repository at
+ http://svn.gna.org/viewcvs/gtksourceviewmm/trunk/.
+
+ \section get the bleeding edge code from svn
+ You can get the source code from our svn repository by typing the command:
+ \code svn co http://svn.gna.org/svn/gtksourceviewmm/trunk gsvmm \endcode
+
+ \section Download
+ There have been several releases which you can download from
+ http://ftp.gnome.org/pub/GNOME/sources/libgtksourceviewmm/.
+ If you want bleeging-edge code (or if you want to help out with development)
+ of libgtksourceviewmm you can check out libgtksourceviewmm from SVN.
+ To do so, please read the instructions on using SVN
+ at https://gna.org/svn/?group=gtksourceviewmm.
+
+ \section License
+ libgtksourceview is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Library General Public
+ License as published by the Free Software Foundation; either
+ version 2 of the License, or (at your option) any later version.
+ See the text of the LGPL for more details:
+ http://www.gnu.org/licenses/lgpl.html .
+
+ \section Contact
+ to contact the developers of libgtksourceviewmm please send an email to
+ the mailing list at gtksourceviewmm-list@gna.org
+
+ \section About
+ Dodji Seketeli wrote most of the code of this project,
+ based on the initial work of Rob Page.
+ You can consult his web page at http://www.seketeli.org/dodji
+
+*/

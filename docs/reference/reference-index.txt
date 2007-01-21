@@ -38,7 +38,9 @@
 
  \section Contact
  to contact the developers of libgtksourceviewmm please send an email to
- the mailing list at gtksourceviewmm-list@gna.org
+ the mailing list at gtksourceviewmm-list@gna.org.
+ You can browse the mailing list archives at https://mail.gna.org/public/gtksourceviewmm-list .
+ More generaly, you can browse the project page on GNA at https://gna.org/projects/gtksourceviewmm .
 
  \section About
  Dodji Seketeli wrote most of the code of this project,

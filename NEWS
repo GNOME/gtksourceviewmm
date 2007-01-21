@@ -1,5 +1,9 @@
 0.3.0
 
+    This is a bug fix and feature release that breaks the API a little bit, but that is for the good.
+    Users of 0.1.0 and 0.2.0 must recompile their applications, sorry.
+    GtkSourceViewMM is slowly reaching a state where API/ABI stability will become possible, though.
+
     [Dodji Seketeli]
 
     * updated API documentation

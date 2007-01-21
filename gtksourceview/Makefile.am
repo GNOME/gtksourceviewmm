@@ -1,6 +1,7 @@
 SUBDIRS = src gtksourceviewmm
 
-EXTRA_DIST = README gtksourceviewmmconfig.h.in libgtksourceviewmm-1.0.pc.in
+EXTRA_DIST = README gtksourceviewmmconfig.h.in \
+libgtksourceviewmm-1.0.pc.in gtksourceviewmm.h
 
 gtkmm_includedir      = $(includedir)/gtksourceviewmm-1.0
 gtkmm_include_HEADER  = gtksourceviewmm.h

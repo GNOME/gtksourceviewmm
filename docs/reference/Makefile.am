@@ -18,8 +18,8 @@ htmldocumentation_DATA=$(htmlfiles) $(pngfiles) $(giffiles) $(cssfiles)
 all: html/index.html
 
 clean-local:
-	rm -rf html
-	rm doxygen-warnings.txt
+	-rm -rf html
+	-rm doxygen-warnings.txt
 
 EXTRA_DIST=$(doxyfile) $(htmlfiles) \
 $(pngfiles) $(giffiles) $(cssfiles) \

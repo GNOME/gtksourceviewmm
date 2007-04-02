@@ -76,7 +76,8 @@ SourceIter::SourceIter (const GtkTextIter* gobject) :
 {
 }
 
-SourceIter::SourceIter (const SourceIter &a_iter)
+SourceIter::SourceIter (const SourceIter &a_iter) :
+    Gtk::TextIter (a_iter)
 {
     if (a_iter == *this) {return;}
     *this = a_iter ;

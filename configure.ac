@@ -229,6 +229,22 @@ AC_SUBST(EXAMPLE_SUBDIR)
 DEMO_SUBDIR=""
 AC_SUBST(DEMO_SUBDIR)
 
+AC_ARG_ENABLE(debug, [AC_HELP_STRING([--enable-debug],
+                                     [compile with debugging options [default=no]])],
+              enable_debug=$enableval,
+              [enable_debug=no])
+
+AC_MSG_NOTICE([got enable_debug=$enable_debug])
+if test x$GSVMM_DEVEL = xon ; then
+    enable_debug=yes
+fi
+
+if test x$enable_debug = xyes ; then
+    DEBUG_OPTIONS="-Wall -g -Werror -Wextra"
+    CXXFLAGS="$DEBUG_OPTIONS"
+    CFLAGS="$DEBUG_OPTIONS"
+fi
+
 AC_ARG_ENABLE(docs, [AC_HELP_STRING([--enable-docs],
               [build the included docs [default=yes]])],,
                       [enable_docs=yes])

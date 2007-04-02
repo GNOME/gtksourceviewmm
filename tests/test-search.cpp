@@ -106,7 +106,7 @@ public:
 
     sigc::signal<void>& backward_search_requested_signal ()
     {
-        m_backward_search_requested_signal ;
+        return m_backward_search_requested_signal ;
     }
 };//end class SearchDialog
 
@@ -340,7 +340,7 @@ public:
             LOG ("Could not open file " + locale_to_utf8 (a_path)) ;
             return ;
         }
-        static const unsigned BUFFER_SIZE=1024*10 ;
+        static const int BUFFER_SIZE=1024*10 ;
 
         static char buffer[BUFFER_SIZE + 1] ;
         memset (buffer, 0, BUFFER_SIZE + 1) ;

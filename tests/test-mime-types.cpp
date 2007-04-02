@@ -15,8 +15,10 @@ const char * s_mime_types [] = {
 };
 
 int
-main (int argc, char **a_argv)
+main (int argc, char **argv)
 {
+    if (argc || argv) {}
+
     gtksourceview::init () ;
 
     Glib::RefPtr<SourceLanguagesManager> lang_mgr =

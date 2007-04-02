@@ -1,3 +1,14 @@
+Mon, 02 Apr 2007 10:49:44 +0200 Dodji Seketeli
+
+	* configure.ac: added a --enable-debug to compile in debug mode
+	* gtksourceview/src/sourceiter.ccg:
+	  SourceIter::SourceIter(const SourceIter &): chain up Gtk::TextIter
+	  constructor.
+	* tests/test-mime-types.cpp: fix a dump compiler warning
+	* tests/test-search.cpp:
+	  SearchDialog::backward_search_requested_signal(): fix a
+	  a silly crasher.
+
 Mon, 26 Mar 2007 19:50:31 +0200 Dodji Seketeli
 
 	* configure.ac: bumped version name to 0.3.1

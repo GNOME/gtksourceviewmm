@@ -13,20 +13,20 @@
  gtksourceview library and has proven to be useable so far.
 
  \section Browse the source code
- You can browse the source code from our SVN repository at
- http://svn.gna.org/viewcvs/gtksourceviewmm/trunk/.
+ You can browse the source code from the GNOME SVN repository at
+ http://svn.gnome.org/viewcvs/gtksourceviewmm/trunk/.
 
  \section get the bleeding edge code from svn
- You can get the source code from our svn repository by typing the command:
- \code svn co http://svn.gna.org/svn/gtksourceviewmm/trunk gsvmm \endcode
+ You can get the source code from the GNOME svn repository by typing the command:
+ \code svn co http://svn.gnome.org/svn/gtksourceviewmm/trunk gsvmm \endcode
 
  \section Download
  There have been several releases which you can download from
  http://ftp.gnome.org/pub/GNOME/sources/libgtksourceviewmm/.
  If you want bleeging-edge code (or if you want to help out with development)
  of libgtksourceviewmm you can check out libgtksourceviewmm from SVN.
- To do so, please read the instructions on using SVN
- at https://gna.org/svn/?group=gtksourceviewmm.
+ To do so, please read the instructions on using the GNOME SVN
+ at http://developer.gnome.org/tools/svn.html .
 
  \section License
  libgtksourceview is free software; you can redistribute it and/or

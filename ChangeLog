@@ -1,3 +1,9 @@
+2007-09-02  Murray Cumming  <murrayc@murrayc.com>
+
+	* autogen.sh: Specify aclocal-1.9 instead of aclocal, as automake-1.9 
+	is already specified. Otherwise the autogen fails with warnings 
+	about incompatibilities when aclocal 1.10 is installed.
+
 2007-05-01 Dodji Seketeli <dodji@gnome.org>
 
 	* docs/reference/reference-index.txt: update svn info to reflect

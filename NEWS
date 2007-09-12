@@ -1,3 +1,39 @@
+1.9.1:
+
+Updated to build against the new gtksourceview 2.0 API:
+
+* SourceBuffer: The constructor now 
+  takes a TextTagTable instead of a SourceTagTable.
+  Removed set_bracket_match_style().
+* SourceLanguage: Removed get_tags(), 
+  get_escape_char(), set_mime_types(), get_style_scheme(), 
+  set_style_scheme(), get_tag_style(), set_tag_style(), 
+  get_tag_default_style().
+  Added get_hidden() and get_style_name().
+* SourceLanguageManager.ccg:
+  Renamed SourceLanguagesManager to SourceLanguageManager.
+  Removed get_language_from_mime_type() - there is no replacement 
+  yet. Removed get_available_languages(), get_lang_files_dirs().
+  Added get_default(), get_search_path(), get_language_ids(), and 
+  get_language().
+* SourceStyle: Added this class.
+* SourceStyleScheme: Removed get_tag_style(), 
+  get_style_names(), get_default().
+  Added get_id(), get_name(), get_description(), get_authors(), 
+  get_filename(), get_style().
+* SourceView: Added the 
+  SourceSmartHomeEndType enum, and used it in 
+  set_smart_home_end() and get_smart_home_end().
+  Renamed set_tabs_width() to set_tab_width(), and 
+  get_tabs_width() to get_tab_width().
+  Renamed set_show_margin() to set_show_right_margin(), and 
+  get_show_margin() to get_show_right_margin().
+  Renamed set_margin() to set_right_margin_position(), and 
+  get_margin() to get_right_margin_position().
+* Removed SourceTag, SourceTagStyle, SourceTagTable
+  Regular Gtk::TextTags should now be used instead.
+
+ 
 0.3.0
 
     This is a bug fix and feature release that breaks the API a little bit, but that is for the good.

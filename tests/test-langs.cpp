@@ -1,7 +1,7 @@
 #include <iostream>
 #include <gtkmm.h>
 #include <gtksourceviewmm/sourceview.h>
-#include<gtksourceviewmm/sourcelanguagesmanager.h>
+#include<gtksourceviewmm/sourcelanguagemanager.h>
 #include<gtksourceviewmm/init.h>
 
 using namespace std ;
@@ -13,17 +13,17 @@ main (int argc, char **argv)
     Gtk::Main loop (argc, argv) ;
     gtksourceview::init () ;
 
-    Glib::RefPtr<SourceLanguagesManager> language_manager =
-                                                SourceLanguagesManager::create();
-    vector<Glib::RefPtr<SourceLanguage> > langs;
-    langs = language_manager->get_available_languages ();
-    vector<Glib::RefPtr<SourceLanguage> >::iterator iter;
-    cout << "number of languages found: '" << langs.size () << "'\n";
-    for (iter = langs.begin(); iter != langs.end (); ++iter) {
-        if (*iter) {
-            cout << "language: '" << (*iter)->get_name () << "'\n";
+    Glib::RefPtr<SourceLanguageManager> language_manager =
+                                                SourceLanguageManager::create();
+    vector<Glib::ustring > langs = language_manager->get_language_ids ();
+    cout << "number of languages found:'" << langs.size () << std::endl;;
+
+    for (vector<Glib::ustring>::const_iterator iter = langs.begin(); iter != langs.end (); ++iter) {
+        if (!(iter->empty())) {
+            Glib::RefPtr<SourceLanguage> lang = language_manager->get_language (*iter);
+            cout << "language: " << lang->get_name () << std::endl;
         } else {
-            cout << "language: null\n" ;
+            cout << "language: null" << std::endl;;
         }
     }
     return 0 ;

@@ -19,21 +19,10 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include "gtksourceviewmm/sourcelanguagesmanager.h"
+#include "gtksourceviewmm/sourcelanguagemanager.h"
 
 namespace gtksourceview
 {
-
-Glib::RefPtr<SourceLanguage>
-SourceLanguagesManager::get_language_from_mime_type (const Glib::ustring &mime_type) const
-{
-    Glib::RefPtr<SourceLanguage> result =
-        Glib::wrap(gtk_source_languages_manager_get_language_from_mime_type
-                                (const_cast<GtkSourceLanguagesManager*> (gobj()),
-                                 mime_type.c_str()),
-                   true) ;
-    return result ;
-}
 
 }//end namespace gtksourceview
 

@@ -1,0 +1,35 @@
+; These were not parsed by h2defs.py, so we write them manually:
+
+
+(define-method get_authors
+  (of-object "GtkSourceStyleScheme")
+  (c-name "gtk_source_style_scheme_get_authors")
+  (return-type "gchar**")
+)
+
+
+(define-method get_search_path
+  (of-object "GtkSourceLanguageManager")
+  (c-name "gtk_source_language_manager_get_search_path")
+  (return-type "gchar**")
+)
+
+(define-method get_language_ids
+  (of-object "GtkSourceLanguageManager")
+  (c-name "gtk_source_language_manager_get_language_ids")
+  (return-type "gchar**")
+)
+
+
+(define-method get_search_path
+  (of-object "GtkSourceStyleSchemeManager")
+  (c-name "gtk_source_style_scheme_manager_get_search_path")
+  (return-type "gchar**")
+)
+
+(define-method get_scheme_ids
+  (of-object "GtkSourceStyleSchemeManager")
+  (c-name "gtk_source_style_scheme_manager_get_scheme_ids")
+  (return-type "gchar**")
+)
+

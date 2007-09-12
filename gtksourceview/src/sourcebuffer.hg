@@ -26,8 +26,6 @@
 #include <gtkmm/textbuffer.h>
 #include <gtksourceviewmm/sourcelanguage.h>
 #include <gtksourceviewmm/sourcemarker.h>
-#include <gtksourceviewmm/sourcetagstyle.h>
-#include <gtksourceviewmm/sourcetagtable.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(gtkmm/private/textbuffer_p.h)
@@ -53,23 +51,26 @@ class SourceBuffer : public Gtk::TextBuffer
   _CLASS_GOBJECT(SourceBuffer, GtkSourceBuffer, GTK_SOURCE_BUFFER, Gtk::TextBuffer, GtkTextBuffer)
 
 protected:
-  _CTOR_DEFAULT ;
-  _WRAP_CTOR(SourceBuffer(Glib::RefPtr<SourceTagTable> &tagtable), gtk_source_buffer_new)
-  explicit SourceBuffer (Glib::RefPtr<SourceLanguage> &language) ;
+  _CTOR_DEFAULT
+
+#m4 _CONVERSION(`const Glib::RefPtr<Gtk::TextTagTable>&',`GtkTextTagTable*',__CONVERT_REFPTR_TO_P)
+
+  _WRAP_CTOR(SourceBuffer(const Glib::RefPtr<Gtk::TextTagTable>& tagtable), gtk_source_buffer_new)
+  explicit SourceBuffer (const Glib::RefPtr<SourceLanguage> &language) ;
 
 public:
 
-    /// \brief create a new SourceBuffer, from a SourceTagTable.
+    /// \brief create a new SourceBuffer, from a Gtk::TextTagTable.
     ///
     /// \param tagtable a tag table to be taken in account
     /// \return a new SourceBuffer
-   _WRAP_CREATE(Glib::RefPtr<SourceTagTable> &tagtable)
+   _WRAP_CREATE(const Glib::RefPtr<Gtk::TextTagTable>& tagtable)
 
     /// brief create a new SourceBuffer
     ///
     /// \param language the language to be considered by the SourceBuffer for syntax highlighting.
     /// \return a new SourceBuffer
-   _WRAP_CREATE(Glib::RefPtr<SourceLanguage> &language)
+   _WRAP_CREATE(const Glib::RefPtr<SourceLanguage>& language)
 
    /// \brief Determines whether bracket match highlighting is activated for the source buffer.
    ///
@@ -83,11 +84,6 @@ public:
    /// You can specify the style with the SourceBuffer::set_bracket_match_style() function.
    /// \param check_brackets true if you want matching brackets highlighted.
   _WRAP_METHOD(void set_check_brackets(bool check_brackets=true), gtk_source_buffer_set_check_brackets)
-
-  /// \brief Sets the style used for highlighting matching brackets.
-  ///
-  /// \param style the SourceTagStyle specifying colors and text attributes
-  _WRAP_METHOD(void set_bracket_match_style(const SourceTagStyle& style), gtk_source_buffer_set_bracket_match_style)
 
   /// \brief Determines whether text highlighting is activated in the source buffer.
   ///
@@ -146,7 +142,7 @@ public:
   /// in the buffer's tag table.
   /// The buffer holds a reference to the language set.
   /// \param language a GtkSourceLanguage to set.
-  _WRAP_METHOD(void set_language(Glib::RefPtr<SourceLanguage> language), gtk_source_buffer_set_language)
+  _WRAP_METHOD(void set_language(const Glib::RefPtr<SourceLanguage>& language), gtk_source_buffer_set_language)
 
   /// \brief Determines the escaping character used by the source buffer highlighting engine.
   ///
@@ -229,14 +225,14 @@ public:
   /// \brief Moves marker to the a new location.
   /// \param marker the marker you want to move in the SourceBuffer.
   /// \param where the new location you want to  move the marker to.
-  _WRAP_METHOD(void move_marker(Glib::RefPtr<SourceMarker> &marker, const Gtk::TextIter& where), gtk_source_buffer_move_marker)
+  _WRAP_METHOD(void move_marker(const Glib::RefPtr<SourceMarker> &marker, const Gtk::TextIter& where), gtk_source_buffer_move_marker)
 
   /// \brief  Deletes marker from the source buffer.
   /// The same conditions as for Gtk::TextMark apply here.
   /// The marker is no longer accessible from the buffer,
   /// but if you held a reference to it, it will not be destroyed.
   /// \param marker the marker to delete.
-  _WRAP_METHOD(void delete_marker(Glib::RefPtr<SourceMarker> &marker), gtk_source_buffer_delete_marker)
+  _WRAP_METHOD(void delete_marker(const Glib::RefPtr<SourceMarker> &marker), gtk_source_buffer_delete_marker)
 
   /// \brief Looks up the GtkSourceMarker named name in buffer, returning NULL if it doesn't exists.
   ///
@@ -347,14 +343,14 @@ public:
   /// Usually only view widgets displaying this buffer will be interested in this signal.
   /// parameter start: an iterator at the start of the updated region.
   /// parameter end: and iterator at the end of the updated region.
-  _WRAP_SIGNAL(void highlight_updated (Gtk::TextIter &start, Gtk::TextIter &end), "highlight-updated")
+  _WRAP_SIGNAL(void highlight_updated (Gtk::TextIter &start, Gtk::TextIter &end), "highlight-updated", no_default_handler)
 
   /// \brief Emitted whenever a marker of sourcebuffer has changed and needs to be redisplayed by the view.
   ///
   /// A change in a marker's type or location can trigger this signal.
   /// Note that moving a marker causes the emission of this signal twice: one for the old location and one for the new. 
   /// parameter where:  an iterator at the location where the change occurred.
-  _WRAP_SIGNAL(void marker_updated (Gtk::TextIter &where), "marker-updated")
+  _WRAP_SIGNAL(void marker_updated (Gtk::TextIter &where), "marker-updated", no_default_handler)
   /// @}
 };
 

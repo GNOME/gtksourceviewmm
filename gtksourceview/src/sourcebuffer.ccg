@@ -23,7 +23,7 @@
 namespace gtksourceview
 {
 
-SourceBuffer::SourceBuffer (Glib::RefPtr<SourceLanguage> &language) :
+SourceBuffer::SourceBuffer (const Glib::RefPtr<SourceLanguage> &language) :
     _CONSTRUCT
 {
     if (language)

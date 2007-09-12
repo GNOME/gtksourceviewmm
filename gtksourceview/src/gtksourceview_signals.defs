@@ -1,23 +1,5 @@
 ;; From GtkSourceBuffer
 
-(define-signal can-undo
-  (of-object "GtkSourceBuffer")
-  (return-type "void")
-  (when "last")
-  (parameters
-    '("gboolean" "p0")
-  )
-)
-
-(define-signal can-redo
-  (of-object "GtkSourceBuffer")
-  (return-type "void")
-  (when "last")
-  (parameters
-    '("gboolean" "p0")
-  )
-)
-
 (define-signal highlight-updated
   (of-object "GtkSourceBuffer")
   (return-type "void")
@@ -55,28 +37,73 @@
   (construct-only #f)
 )
 
-(define-property escape-char
-  (of-object "GtkSourceBuffer")
-  (prop-type "GParamUnichar")
-  (docs "Escaping character for syntax patterns")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property check-brackets
+(define-property has-selection
   (of-object "GtkSourceBuffer")
   (prop-type "GParamBoolean")
-  (docs "Whether to check and highlight matching brackets")
+  (docs "Whether the buffer has some text currently selected")
   (readable #t)
-  (writable #t)
+  (writable #f)
   (construct-only #f)
 )
 
-(define-property highlight
+(define-property cursor-position
+  (of-object "GtkSourceBuffer")
+  (prop-type "GParamInt")
+  (docs "The position of the insert mark (as offset from the beginning of the buffer)")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property copy-target-list
+  (of-object "GtkSourceBuffer")
+  (prop-type "GParamBoxed")
+  (docs "The list of targets this buffer supports for clipboard copying and DND source")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property paste-target-list
+  (of-object "GtkSourceBuffer")
+  (prop-type "GParamBoxed")
+  (docs "The list of targets this buffer supports for clipboard pasting and DND destination")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property can-undo
+  (of-object "GtkSourceBuffer")
+  (prop-type "GParamBoolean")
+  (docs "Whether Undo operation is possible")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property can-redo
+  (of-object "GtkSourceBuffer")
+  (prop-type "GParamBoolean")
+  (docs "Whether Redo operation is possible")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property highlight-syntax
   (of-object "GtkSourceBuffer")
   (prop-type "GParamBoolean")
   (docs "Whether to highlight syntax in the buffer")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property highlight-matching-brackets
+  (of-object "GtkSourceBuffer")
+  (prop-type "GParamBoolean")
+  (docs "Whether to highlight matching brackets")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -100,1968 +127,91 @@
   (construct-only #f)
 )
 
-;; From GtkSourceLanguage
-
-(define-signal tag-style-changed
-  (of-object "GtkSourceLanguage")
-  (return-type "void")
-  (when "last")
-  (parameters
-    '("const-gchar*" "p0")
-  )
+(define-property style-scheme
+  (of-object "GtkSourceBuffer")
+  (prop-type "GParamObject")
+  (docs "Style scheme")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
 )
 
-;; From GtkSourceLanguagesManager
+;; From GtkSourceLanguage
 
-(define-property lang-files-dirs
-  (of-object "GtkSourceLanguagesManager")
-  (prop-type "GParamPointer")
+(define-property name
+  (of-object "GtkSourceLanguage")
+  (prop-type "GParamString")
+  (docs "Language name")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property id
+  (of-object "GtkSourceLanguage")
+  (prop-type "GParamString")
+  (docs "Language id")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property section
+  (of-object "GtkSourceLanguage")
+  (prop-type "GParamString")
+  (docs "Language section")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property hidden
+  (of-object "GtkSourceLanguage")
+  (prop-type "GParamBoolean")
+  (docs "Whether the language should be hidden from the user")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+;; From GtkSourceLanguageManager
+
+(define-property search-path
+  (of-object "GtkSourceLanguageManager")
+  (prop-type "GParamBoxed")
   (docs "List of directories where the language specification files (.lang) are located")
   (readable #t)
   (writable #t)
-  (construct-only #t)
+  (construct-only #f)
+)
+
+(define-property language-ids
+  (of-object "GtkSourceLanguageManager")
+  (prop-type "GParamBoxed")
+  (docs "List of the ids of the available languages")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
 )
 
 ;; From GtkTextMark
 
-;; From GtkSourcePrintJob
-
-(define-signal begin-page
-  (of-object "GtkSourcePrintJob")
-  (return-type "void")
-  (when "last")
-)
-
-(define-signal finished
-  (of-object "GtkSourcePrintJob")
-  (return-type "void")
-  (when "first")
-)
-
-(define-property config
-  (of-object "GtkSourcePrintJob")
-  (prop-type "GParamObject")
-  (docs "Configuration options for the print job")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property buffer
-  (of-object "GtkSourcePrintJob")
-  (prop-type "GParamObject")
-  (docs "GtkSourceBuffer object to print")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property tabs-width
-  (of-object "GtkSourcePrintJob")
-  (prop-type "GParamUInt")
-  (docs "Width in equivalent space characters of tabs")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property wrap-mode
-  (of-object "GtkSourcePrintJob")
-  (prop-type "GParamEnum")
-  (docs "Word wrapping mode")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property highlight
-  (of-object "GtkSourcePrintJob")
-  (prop-type "GParamBoolean")
-  (docs "Whether to print the document with highlighted syntax")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property font
-  (of-object "GtkSourcePrintJob")
-  (prop-type "GParamString")
-  (docs "GnomeFont name to use for the document text (deprecated)")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property font-desc
-  (of-object "GtkSourcePrintJob")
-  (prop-type "GParamBoxed")
-  (docs "Font to use for the document text (e.g. 'Monospace 10')")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property numbers-font
-  (of-object "GtkSourcePrintJob")
-  (prop-type "GParamString")
-  (docs "GnomeFont name to use for the line numbers (deprecated)")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property numbers-font-desc
-  (of-object "GtkSourcePrintJob")
-  (prop-type "GParamBoxed")
-  (docs "Font description to use for the line numbers")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property print-numbers
-  (of-object "GtkSourcePrintJob")
-  (prop-type "GParamUInt")
-  (docs "Interval of printed line numbers (0 means no numbers)")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property print-header
-  (of-object "GtkSourcePrintJob")
-  (prop-type "GParamBoolean")
-  (docs "Whether to print a header in each page")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property print-footer
-  (of-object "GtkSourcePrintJob")
-  (prop-type "GParamBoolean")
-  (docs "Whether to print a footer in each page")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property header-footer-font
-  (of-object "GtkSourcePrintJob")
-  (prop-type "GParamString")
-  (docs "GnomeFont name to use for the header and footer (deprecated)")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property header-footer-font-desc
-  (of-object "GtkSourcePrintJob")
-  (prop-type "GParamBoxed")
-  (docs "Font to use for headers and footers (e.g. 'Monospace 10')")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GtkSourceTag
-
 (define-property name
-  (of-object "GtkSourceTag")
+  (of-object "GtkTextMark")
   (prop-type "GParamString")
-  (docs "Name used to refer to the text tag. NULL for anonymous tags")
+  (docs "Mark name")
   (readable #t)
   (writable #t)
   (construct-only #t)
 )
 
-(define-property background
-  (of-object "GtkSourceTag")
-  (prop-type "GParamString")
-  (docs "Background color as a string")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property foreground
-  (of-object "GtkSourceTag")
-  (prop-type "GParamString")
-  (docs "Foreground color as a string")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property background-gdk
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoxed")
-  (docs "Background color as a (possibly unallocated) GdkColor")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property foreground-gdk
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoxed")
-  (docs "Foreground color as a (possibly unallocated) GdkColor")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property background-stipple
-  (of-object "GtkSourceTag")
-  (prop-type "GParamObject")
-  (docs "Bitmap to use as a mask when drawing the text background")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property foreground-stipple
-  (of-object "GtkSourceTag")
-  (prop-type "GParamObject")
-  (docs "Bitmap to use as a mask when drawing the text foreground")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property font
-  (of-object "GtkSourceTag")
-  (prop-type "GParamString")
-  (docs "Font description as a string, e.g. 'Sans Italic 12'")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property font-desc
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoxed")
-  (docs "Font description as a PangoFontDescription struct")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property family
-  (of-object "GtkSourceTag")
-  (prop-type "GParamString")
-  (docs "Name of the font family, e.g. Sans, Helvetica, Times, Monospace")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property style
-  (of-object "GtkSourceTag")
-  (prop-type "GParamEnum")
-  (docs "Font style as a PangoStyle, e.g. PANGO_STYLE_ITALIC")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property variant
-  (of-object "GtkSourceTag")
-  (prop-type "GParamEnum")
-  (docs "Font variant as a PangoVariant, e.g. PANGO_VARIANT_SMALL_CAPS")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property weight
-  (of-object "GtkSourceTag")
-  (prop-type "GParamInt")
-  (docs "Font weight as an integer, see predefined values in PangoWeight; for example, PANGO_WEIGHT_BOLD")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property stretch
-  (of-object "GtkSourceTag")
-  (prop-type "GParamEnum")
-  (docs "Font stretch as a PangoStretch, e.g. PANGO_STRETCH_CONDENSED")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property size
-  (of-object "GtkSourceTag")
-  (prop-type "GParamInt")
-  (docs "Font size in Pango units")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property size-points
-  (of-object "GtkSourceTag")
-  (prop-type "GParamDouble")
-  (docs "Font size in points")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property scale
-  (of-object "GtkSourceTag")
-  (prop-type "GParamDouble")
-  (docs "Font size as a scale factor relative to the default font size. This properly adapts to theme changes etc. so is recommended. Pango predefines some scales such as PANGO_SCALE_X_LARGE")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property pixels-above-lines
-  (of-object "GtkSourceTag")
-  (prop-type "GParamInt")
-  (docs "Pixels of blank space above paragraphs")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property pixels-below-lines
-  (of-object "GtkSourceTag")
-  (prop-type "GParamInt")
-  (docs "Pixels of blank space below paragraphs")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property pixels-inside-wrap
-  (of-object "GtkSourceTag")
-  (prop-type "GParamInt")
-  (docs "Pixels of blank space between wrapped lines in a paragraph")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property editable
-  (of-object "GtkSourceTag")
+(define-property left-gravity
+  (of-object "GtkTextMark")
   (prop-type "GParamBoolean")
-  (docs "Whether the text can be modified by the user")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property wrap-mode
-  (of-object "GtkSourceTag")
-  (prop-type "GParamEnum")
-  (docs "Whether to wrap lines never, at word boundaries, or at character boundaries")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property justification
-  (of-object "GtkSourceTag")
-  (prop-type "GParamEnum")
-  (docs "Left, right, or center justification")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property direction
-  (of-object "GtkSourceTag")
-  (prop-type "GParamEnum")
-  (docs "Text direction, e.g. right-to-left or left-to-right")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property left-margin
-  (of-object "GtkSourceTag")
-  (prop-type "GParamInt")
-  (docs "Width of the left margin in pixels")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property indent
-  (of-object "GtkSourceTag")
-  (prop-type "GParamInt")
-  (docs "Amount to indent the paragraph, in pixels")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property strikethrough
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether to strike through the text")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property right-margin
-  (of-object "GtkSourceTag")
-  (prop-type "GParamInt")
-  (docs "Width of the right margin in pixels")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property underline
-  (of-object "GtkSourceTag")
-  (prop-type "GParamEnum")
-  (docs "Style of underline for this text")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property rise
-  (of-object "GtkSourceTag")
-  (prop-type "GParamInt")
-  (docs "Offset of text above the baseline (below the baseline if rise is negative) in Pango units")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property background-full-height
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether the background color fills the entire line height or only the height of the tagged characters")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property language
-  (of-object "GtkSourceTag")
-  (prop-type "GParamString")
-  (docs "The language this text is in, as an ISO code. Pango can use this as a hint when rendering the text. If not set, an appropriate default will be used.")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property tabs
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoxed")
-  (docs "Custom tabs for this text")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property invisible
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this text is hidden.")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property paragraph-background
-  (of-object "GtkSourceTag")
-  (prop-type "GParamString")
-  (docs "Paragraph background color as a string")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property paragraph-background-gdk
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoxed")
-  (docs "Paragraph background color as a (possibly unallocated) GdkColor")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property background-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the background color")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property foreground-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the foreground color")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property background-stipple-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the background stipple")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property foreground-stipple-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the foreground stipple")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property family-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the font family")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property style-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the font style")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property variant-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the font variant")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property weight-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the font weight")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property stretch-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the font stretch")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property size-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the font size")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property scale-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag scales the font size by a factor")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property pixels-above-lines-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the number of pixels above lines")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property pixels-below-lines-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the number of pixels above lines")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property pixels-inside-wrap-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the number of pixels between wrapped lines")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property editable-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects text editability")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property wrap-mode-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects line wrap mode")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property justification-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects paragraph justification")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property left-margin-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the left margin")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property indent-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects indentation")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property strikethrough-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects strikethrough")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property right-margin-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the right margin")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property underline-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects underlining")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property rise-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the rise")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property background-full-height-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects background height")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property language-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the language the text is rendered as")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property tabs-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects tabs")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property invisible-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects text visibility")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property paragraph-background-set
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the paragraph background color")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property id
-  (of-object "GtkSourceTag")
-  (prop-type "GParamString")
-  (docs "ID used to refer to the source tag")
+  (docs "Whether the mark has left gravity")
   (readable #t)
   (writable #t)
   (construct-only #t)
-)
-
-(define-property tag-style
-  (of-object "GtkSourceTag")
-  (prop-type "GParamBoxed")
-  (docs "The style associated with the source tag")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GtkSourceStyleScheme
-
-;; From GtkSyntaxTag
-
-(define-property name
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamString")
-  (docs "Name used to refer to the text tag. NULL for anonymous tags")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property background
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamString")
-  (docs "Background color as a string")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property foreground
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamString")
-  (docs "Foreground color as a string")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property background-gdk
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoxed")
-  (docs "Background color as a (possibly unallocated) GdkColor")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property foreground-gdk
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoxed")
-  (docs "Foreground color as a (possibly unallocated) GdkColor")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property background-stipple
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamObject")
-  (docs "Bitmap to use as a mask when drawing the text background")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property foreground-stipple
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamObject")
-  (docs "Bitmap to use as a mask when drawing the text foreground")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property font
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamString")
-  (docs "Font description as a string, e.g. 'Sans Italic 12'")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property font-desc
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoxed")
-  (docs "Font description as a PangoFontDescription struct")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property family
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamString")
-  (docs "Name of the font family, e.g. Sans, Helvetica, Times, Monospace")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property style
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamEnum")
-  (docs "Font style as a PangoStyle, e.g. PANGO_STYLE_ITALIC")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property variant
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamEnum")
-  (docs "Font variant as a PangoVariant, e.g. PANGO_VARIANT_SMALL_CAPS")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property weight
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamInt")
-  (docs "Font weight as an integer, see predefined values in PangoWeight; for example, PANGO_WEIGHT_BOLD")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property stretch
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamEnum")
-  (docs "Font stretch as a PangoStretch, e.g. PANGO_STRETCH_CONDENSED")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property size
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamInt")
-  (docs "Font size in Pango units")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property size-points
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamDouble")
-  (docs "Font size in points")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property scale
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamDouble")
-  (docs "Font size as a scale factor relative to the default font size. This properly adapts to theme changes etc. so is recommended. Pango predefines some scales such as PANGO_SCALE_X_LARGE")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property pixels-above-lines
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamInt")
-  (docs "Pixels of blank space above paragraphs")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property pixels-below-lines
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamInt")
-  (docs "Pixels of blank space below paragraphs")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property pixels-inside-wrap
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamInt")
-  (docs "Pixels of blank space between wrapped lines in a paragraph")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property editable
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether the text can be modified by the user")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property wrap-mode
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamEnum")
-  (docs "Whether to wrap lines never, at word boundaries, or at character boundaries")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property justification
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamEnum")
-  (docs "Left, right, or center justification")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property direction
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamEnum")
-  (docs "Text direction, e.g. right-to-left or left-to-right")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property left-margin
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamInt")
-  (docs "Width of the left margin in pixels")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property indent
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamInt")
-  (docs "Amount to indent the paragraph, in pixels")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property strikethrough
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether to strike through the text")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property right-margin
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamInt")
-  (docs "Width of the right margin in pixels")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property underline
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamEnum")
-  (docs "Style of underline for this text")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property rise
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamInt")
-  (docs "Offset of text above the baseline (below the baseline if rise is negative) in Pango units")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property background-full-height
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether the background color fills the entire line height or only the height of the tagged characters")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property language
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamString")
-  (docs "The language this text is in, as an ISO code. Pango can use this as a hint when rendering the text. If not set, an appropriate default will be used.")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property tabs
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoxed")
-  (docs "Custom tabs for this text")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property invisible
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this text is hidden.")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property paragraph-background
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamString")
-  (docs "Paragraph background color as a string")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property paragraph-background-gdk
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoxed")
-  (docs "Paragraph background color as a (possibly unallocated) GdkColor")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property background-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the background color")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property foreground-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the foreground color")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property background-stipple-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the background stipple")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property foreground-stipple-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the foreground stipple")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property family-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the font family")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property style-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the font style")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property variant-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the font variant")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property weight-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the font weight")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property stretch-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the font stretch")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property size-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the font size")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property scale-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag scales the font size by a factor")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property pixels-above-lines-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the number of pixels above lines")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property pixels-below-lines-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the number of pixels above lines")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property pixels-inside-wrap-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the number of pixels between wrapped lines")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property editable-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects text editability")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property wrap-mode-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects line wrap mode")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property justification-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects paragraph justification")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property left-margin-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the left margin")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property indent-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects indentation")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property strikethrough-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects strikethrough")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property right-margin-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the right margin")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property underline-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects underlining")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property rise-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the rise")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property background-full-height-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects background height")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property language-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the language the text is rendered as")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property tabs-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects tabs")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property invisible-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects text visibility")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property paragraph-background-set
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the paragraph background color")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property id
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamString")
-  (docs "ID used to refer to the source tag")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property tag-style
-  (of-object "GtkSyntaxTag")
-  (prop-type "GParamBoxed")
-  (docs "The style associated with the source tag")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GtkPatternTag
-
-(define-property name
-  (of-object "GtkPatternTag")
-  (prop-type "GParamString")
-  (docs "Name used to refer to the text tag. NULL for anonymous tags")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property background
-  (of-object "GtkPatternTag")
-  (prop-type "GParamString")
-  (docs "Background color as a string")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property foreground
-  (of-object "GtkPatternTag")
-  (prop-type "GParamString")
-  (docs "Foreground color as a string")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property background-gdk
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoxed")
-  (docs "Background color as a (possibly unallocated) GdkColor")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property foreground-gdk
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoxed")
-  (docs "Foreground color as a (possibly unallocated) GdkColor")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property background-stipple
-  (of-object "GtkPatternTag")
-  (prop-type "GParamObject")
-  (docs "Bitmap to use as a mask when drawing the text background")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property foreground-stipple
-  (of-object "GtkPatternTag")
-  (prop-type "GParamObject")
-  (docs "Bitmap to use as a mask when drawing the text foreground")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property font
-  (of-object "GtkPatternTag")
-  (prop-type "GParamString")
-  (docs "Font description as a string, e.g. 'Sans Italic 12'")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property font-desc
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoxed")
-  (docs "Font description as a PangoFontDescription struct")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property family
-  (of-object "GtkPatternTag")
-  (prop-type "GParamString")
-  (docs "Name of the font family, e.g. Sans, Helvetica, Times, Monospace")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property style
-  (of-object "GtkPatternTag")
-  (prop-type "GParamEnum")
-  (docs "Font style as a PangoStyle, e.g. PANGO_STYLE_ITALIC")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property variant
-  (of-object "GtkPatternTag")
-  (prop-type "GParamEnum")
-  (docs "Font variant as a PangoVariant, e.g. PANGO_VARIANT_SMALL_CAPS")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property weight
-  (of-object "GtkPatternTag")
-  (prop-type "GParamInt")
-  (docs "Font weight as an integer, see predefined values in PangoWeight; for example, PANGO_WEIGHT_BOLD")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property stretch
-  (of-object "GtkPatternTag")
-  (prop-type "GParamEnum")
-  (docs "Font stretch as a PangoStretch, e.g. PANGO_STRETCH_CONDENSED")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property size
-  (of-object "GtkPatternTag")
-  (prop-type "GParamInt")
-  (docs "Font size in Pango units")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property size-points
-  (of-object "GtkPatternTag")
-  (prop-type "GParamDouble")
-  (docs "Font size in points")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property scale
-  (of-object "GtkPatternTag")
-  (prop-type "GParamDouble")
-  (docs "Font size as a scale factor relative to the default font size. This properly adapts to theme changes etc. so is recommended. Pango predefines some scales such as PANGO_SCALE_X_LARGE")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property pixels-above-lines
-  (of-object "GtkPatternTag")
-  (prop-type "GParamInt")
-  (docs "Pixels of blank space above paragraphs")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property pixels-below-lines
-  (of-object "GtkPatternTag")
-  (prop-type "GParamInt")
-  (docs "Pixels of blank space below paragraphs")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property pixels-inside-wrap
-  (of-object "GtkPatternTag")
-  (prop-type "GParamInt")
-  (docs "Pixels of blank space between wrapped lines in a paragraph")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property editable
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether the text can be modified by the user")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property wrap-mode
-  (of-object "GtkPatternTag")
-  (prop-type "GParamEnum")
-  (docs "Whether to wrap lines never, at word boundaries, or at character boundaries")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property justification
-  (of-object "GtkPatternTag")
-  (prop-type "GParamEnum")
-  (docs "Left, right, or center justification")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property direction
-  (of-object "GtkPatternTag")
-  (prop-type "GParamEnum")
-  (docs "Text direction, e.g. right-to-left or left-to-right")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property left-margin
-  (of-object "GtkPatternTag")
-  (prop-type "GParamInt")
-  (docs "Width of the left margin in pixels")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property indent
-  (of-object "GtkPatternTag")
-  (prop-type "GParamInt")
-  (docs "Amount to indent the paragraph, in pixels")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property strikethrough
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether to strike through the text")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property right-margin
-  (of-object "GtkPatternTag")
-  (prop-type "GParamInt")
-  (docs "Width of the right margin in pixels")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property underline
-  (of-object "GtkPatternTag")
-  (prop-type "GParamEnum")
-  (docs "Style of underline for this text")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property rise
-  (of-object "GtkPatternTag")
-  (prop-type "GParamInt")
-  (docs "Offset of text above the baseline (below the baseline if rise is negative) in Pango units")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property background-full-height
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether the background color fills the entire line height or only the height of the tagged characters")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property language
-  (of-object "GtkPatternTag")
-  (prop-type "GParamString")
-  (docs "The language this text is in, as an ISO code. Pango can use this as a hint when rendering the text. If not set, an appropriate default will be used.")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property tabs
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoxed")
-  (docs "Custom tabs for this text")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property invisible
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this text is hidden.")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property paragraph-background
-  (of-object "GtkPatternTag")
-  (prop-type "GParamString")
-  (docs "Paragraph background color as a string")
-  (readable #f)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property paragraph-background-gdk
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoxed")
-  (docs "Paragraph background color as a (possibly unallocated) GdkColor")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property background-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the background color")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property foreground-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the foreground color")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property background-stipple-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the background stipple")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property foreground-stipple-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the foreground stipple")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property family-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the font family")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property style-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the font style")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property variant-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the font variant")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property weight-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the font weight")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property stretch-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the font stretch")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property size-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the font size")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property scale-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag scales the font size by a factor")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property pixels-above-lines-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the number of pixels above lines")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property pixels-below-lines-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the number of pixels above lines")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property pixels-inside-wrap-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the number of pixels between wrapped lines")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property editable-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects text editability")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property wrap-mode-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects line wrap mode")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property justification-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects paragraph justification")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property left-margin-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the left margin")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property indent-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects indentation")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property strikethrough-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects strikethrough")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property right-margin-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the right margin")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property underline-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects underlining")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property rise-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the rise")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property background-full-height-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects background height")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property language-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the language the text is rendered as")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property tabs-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects tabs")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property invisible-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects text visibility")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property paragraph-background-set
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoolean")
-  (docs "Whether this tag affects the paragraph background color")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property id
-  (of-object "GtkPatternTag")
-  (prop-type "GParamString")
-  (docs "ID used to refer to the source tag")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
-(define-property tag-style
-  (of-object "GtkPatternTag")
-  (prop-type "GParamBoxed")
-  (docs "The style associated with the source tag")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-;; From GtkSourceTagStyle
-
-;; From GtkSourceTagTable
-
-(define-signal changed
-  (of-object "GtkSourceTagTable")
-  (return-type "void")
-  (when "last")
 )
 
 ;; From GtkSourceView
@@ -2240,15 +390,41 @@
   (construct-only #f)
 )
 
-;TODO: why can't this property definition be parsed ?
-;(define-property no-show-all
-;  (of-object "GtkSourceView")
-;  (prop-type "GParamBoolean")
-;  (docs "Whether gtk_widget_show_all() should not affect this widget")
-;  (readable #t)
-;  (writable #t)
-;  (construct-only #f)
-;)
+(define-property no-show-all
+  (of-object "GtkSourceView")
+  (prop-type "GParamBoolean")
+  (docs "Whether gtk_widget_show_all() should not affect this widget")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property has-tooltip
+  (of-object "GtkSourceView")
+  (prop-type "GParamBoolean")
+  (docs "Whether this widget has a tooltip")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property tooltip-markup
+  (of-object "GtkSourceView")
+  (prop-type "GParamString")
+  (docs "The contents of the tooltip for this widget")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property tooltip-text
+  (of-object "GtkSourceView")
+  (prop-type "GParamString")
+  (docs "The contents of the tooltip for this widget")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
 
 (define-property border-width
   (of-object "GtkSourceView")
@@ -2421,10 +597,19 @@
   (construct-only #f)
 )
 
-(define-property tabs-width
+(define-property tab-width
   (of-object "GtkSourceView")
   (prop-type "GParamUInt")
-  (docs "Tabs Width")
+  (docs "Width of a tab character expressed in spaces")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property indent-width
+  (of-object "GtkSourceView")
+  (prop-type "GParamInt")
+  (docs "Number of spaces to use for each step of indent")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -2448,7 +633,7 @@
   (construct-only #f)
 )
 
-(define-property show-margin
+(define-property show-right-margin
   (of-object "GtkSourceView")
   (prop-type "GParamBoolean")
   (docs "Whether to display the right margin")
@@ -2457,7 +642,7 @@
   (construct-only #f)
 )
 
-(define-property margin
+(define-property right-margin-position
   (of-object "GtkSourceView")
   (prop-type "GParamUInt")
   (docs "Position of the right margin")
@@ -2468,7 +653,7 @@
 
 (define-property smart-home-end
   (of-object "GtkSourceView")
-  (prop-type "GParamBoolean")
+  (prop-type "GParamEnum")
   (docs "HOME and END keys move to first/last non whitespace characters on line before going to the start/end of the line")
   (readable #t)
   (writable #t)
@@ -2484,7 +669,14 @@
   (construct-only #f)
 )
 
-;; From GtkSourceSearchFlags
+(define-property indent-on-tab
+  (of-object "GtkSourceView")
+  (prop-type "GParamBoolean")
+  (docs "Whether to indent the selected text when the tab key is pressed")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
 
-;; From GtkSourceTagStyleMask
+;; From GtkSourceSearchFlags
 

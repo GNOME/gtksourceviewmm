@@ -31,6 +31,8 @@ _PINCLUDE(gtkmm/private/textview_p.h)
 namespace gtksourceview
 {
 
+_WRAP_ENUM(SourceSmartHomeEndType, GtkSourceSmartHomeEndType)
+
 /// \brief Multi-line source editing widget.
 ///
 /// It displays a Gtk::SourceBuffer.
@@ -40,7 +42,7 @@ class SourceView : public Gtk::TextView
 
 public:
   //_CTOR_DEFAULT(gtk_source_view_new_val) ;
-  //_WRAP_CTOR (SourceView (Glib::RefPtr<SourceBuffer> &buffer), gtk_source_view_new_with_buffer)
+  //_WRAP_CTOR (SourceView (const Glib::RefPtr<SourceBuffer> &buffer), gtk_source_view_new_with_buffer)
 
   /// \brief default constructor
   explicit SourceView () ;
@@ -49,11 +51,11 @@ public:
   ///
   /// create an instance of SourceView displaying a given buffer
   /// \param buffer the buffer to display in the SourceView
-  explicit SourceView (Glib::RefPtr<SourceBuffer> &buffer) ;
+  explicit SourceView (const Glib::RefPtr<SourceBuffer> &buffer) ;
 
 
   _WRAP_CREATE()
-  _WRAP_CREATE(Glib::RefPtr<SourceBuffer> &buffer)
+  _WRAP_CREATE(const Glib::RefPtr<SourceBuffer> &buffer)
 
   /// \brief get the source buffer associated to the current instance
   ///
@@ -68,7 +70,7 @@ public:
   /// \brief set the source buffer to be displayed by the SourceView
   ///
   /// \param source_buffer the source buffer to set
-  void set_source_buffer (Glib::RefPtr<SourceBuffer> &source_buffer) ;
+  void set_source_buffer (const Glib::RefPtr<SourceBuffer> &source_buffer) ;
 
   /// \brief display line numbers beside the text, or not
   ///
@@ -93,12 +95,12 @@ public:
   /// \brief set tabs width
   ///
   /// \param width the new tab width
-  _WRAP_METHOD(void set_tabs_width(guint width), gtk_source_view_set_tabs_width)
+  _WRAP_METHOD(void set_tab_width(guint width), gtk_source_view_set_tab_width)
 
   /// \brief get tab width
   ///
   /// \return the tab width
-  _WRAP_METHOD(guint get_tabs_width() const, gtk_source_view_get_tabs_width)
+  _WRAP_METHOD(guint get_tab_width() const, gtk_source_view_get_tab_width)
 
   /// \brief set automatic text indention or not
   ///
@@ -123,12 +125,12 @@ public:
   /// \brief activate (or de-activate) the display of a margin
   ///
   /// \param show if true, activate the display of a margin
-  _WRAP_METHOD(void set_show_margin(bool show=true), gtk_source_view_set_show_margin)
+  _WRAP_METHOD(void set_show_right_margin(bool show = true), gtk_source_view_set_show_right_margin)
 
   /// \brief test if a margin is displayed
   ///
   /// \return true if a margin is displayed, false otherwise
-  _WRAP_METHOD(bool get_show_margin() const, gtk_source_view_get_show_margin)
+  _WRAP_METHOD(bool get_show_right_margin() const, gtk_source_view_get_show_right_margin)
 
   /// \brief do highlight the currently selected line, or not
   ///
@@ -143,12 +145,12 @@ public:
   /// \brief  set the position of the right margin
   ///
   /// \param margin the position (in pixels) of the right margin
-  _WRAP_METHOD(void set_margin(guint margin), gtk_source_view_set_margin)
+  _WRAP_METHOD(void set_right_margin_position(guint margin), gtk_source_view_set_right_margin_position)
 
   /// \brief get the position of the right margin
   ///
   /// \return the position of the right margin
-  _WRAP_METHOD(guint get_margin() const, gtk_source_view_get_margin)
+  _WRAP_METHOD(guint get_right_margin_position() const, gtk_source_view_get_right_margin_position)
 
   /// \brief associates a marker pixbuf with a given marker name
   ///
@@ -171,16 +173,18 @@ public:
   /// \brief activate whether if HOME and END keys will move to the first/last non space character of the line before moving to the start/end
   ///
   /// if true, HOME and END keys will move to the first/last non space character of the line before moving to the start/end
-  _WRAP_METHOD(void set_smart_home_end(bool enable=true), gtk_source_view_set_smart_home_end)
+  _WRAP_METHOD(void set_smart_home_end(SourceSmartHomeEndType smart_he), gtk_source_view_set_smart_home_end)
 
   /// \brief test whether if HOME and END keys will move to the first/last non space character of the line before moving to the start/end
   ///
   /// \return true if HOME and END keys will move to the first/last non space character of the line before moving to the start/end, false otherwise
-  _WRAP_METHOD(bool get_smart_home_end() const, gtk_source_view_get_smart_home_end)
+  _WRAP_METHOD(SourceSmartHomeEndType get_smart_home_end() const, gtk_source_view_get_smart_home_end)
 
   _WRAP_SIGNAL(void redo(), "redo")
 
   _WRAP_SIGNAL(void undo(), "undo")
+
+  //TODO: Properties.
 
 };
 

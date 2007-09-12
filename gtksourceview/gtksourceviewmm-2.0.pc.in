@@ -7,5 +7,5 @@ Name: Gtksourceviewmm
 Description: C++ wrapper for gtksourceview
 Requires: gtksourceview-1.0 gtkmm-2.4
 Version: @VERSION@
-Libs: -L${libdir} -lgtksourceviewmm-1.0
-Cflags: -I${includedir}/gtksourceviewmm-1.0 -I${libdir}/gtksourceviewmm-1.0/include
+Libs: -L${libdir} -lgtksourceviewmm-2.0
+Cflags: -I${includedir}/gtksourceviewmm-2.0 -I${libdir}/gtksourceviewmm-2.0/include

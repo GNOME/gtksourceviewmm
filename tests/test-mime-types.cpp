@@ -1,6 +1,6 @@
 #include <iostream>
 #include <gtkmm.h>
-#include <gtksourceviewmm/sourcelanguagesmanager.h>
+#include <gtksourceviewmm/sourcelanguagemanager.h>
 #include <gtksourceviewmm/init.h>
 
 using namespace std ;
@@ -21,23 +21,25 @@ main (int argc, char **argv)
 
     gtksourceview::init () ;
 
-    Glib::RefPtr<SourceLanguagesManager> lang_mgr =
-                                            SourceLanguagesManager::create () ;
+    Glib::RefPtr<SourceLanguageManager> lang_mgr =
+                                            SourceLanguageManager::create () ;
     if (!lang_mgr) {
-        cerr << "Could not create the languages manager\n" ;
+        cerr << "Could not create the languages manager" << std::endl;
         return -1 ;
     }
 
-    Glib::RefPtr<SourceLanguage> lang ;
+    Glib::RefPtr<SourceLanguage> lang;
     for (int i=0 ; s_mime_types[i] ; ++i) {
         cout << "Looking for language that matches mime type '"
              << s_mime_types[i]
-             << "'\n";
+             << "'" << std::endl;
+
+        //TODO: This function was removed in gtksourceview 2: http://live.gnome.org/GtkSourceView/PortingGuide        
         lang = lang_mgr->get_language_from_mime_type (s_mime_types[i]) ;
         if (lang) {
-            cout << "Found language '" << lang->get_name () << "'\n";
+            cout << "Found language '" << lang->get_name () << "'" << std::endl;
         } else {
-            cout << "No language matching that mime type \n" ;
+            cout << "No language matching that mime type" << std::endl;
         }
     }
     return 0 ;

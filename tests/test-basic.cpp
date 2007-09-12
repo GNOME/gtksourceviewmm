@@ -15,7 +15,7 @@ main (int a_argc, char *a_argv[])
     SourceView source_view ;
     RefPtr<SourceBuffer> buffer = source_view.get_source_buffer () ;
     if (!buffer) {
-        cerr << "gtksourceview::SourceView::get_source_buffer () failed\n" ;
+        cerr << "gtksourceview::SourceView::get_source_buffer () failed" << std::endl ;
         return -1;
     }
     buffer->set_text ("coin") ;

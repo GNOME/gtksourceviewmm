@@ -23,18 +23,16 @@
 /// \brief the SourceLanguage class
 
 #include <glibmm/object.h>
-#include <gtksourceviewmm/sourcetag.h>
 #include <gtksourceviewmm/sourcestylescheme.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
-_PINCLUDE(gtksourceviewmm/private/sourcetag_p.h)
 
 
 namespace gtksourceview
 {
 
-class SourceLanguagesManager ;
+class SourceLanguageManager ;
 
 _CC_INCLUDE(gtksourceview/gtksourcelanguage.h)
 _CC_INCLUDE(gtksourceview/gtksourceview-typebuiltins.h)
@@ -74,65 +72,19 @@ public:
   /// \return the localized section of the language.
   _WRAP_METHOD(Glib::ustring get_section() const, gtk_source_language_get_section)
 
-  /// \brief gets the list of tags associated to the given language.
+  /// \brief Whether the language should be hidden from the user.
   ///
-  /// \return the list of tags associated to the language
-  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceTag> > get_tags(), gtk_source_language_get_tags)
+  /// \return true if the language should be hidden, false otherwise.
+  _WRAP_METHOD(gboolean get_hidden() const, gtk_source_language_get_boolean)
 
-  /// \brief gets the list of tags associated to the given language.
-  ///
-  /// \return the list of tags associated to the language
-  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const SourceTag> > get_tags() const, gtk_source_language_get_tags)
-
-  /// \brief Gets the value of the ESC character in the given language.
-  ///
-  /// \return the value of the ESC character in the given language.
-  _WRAP_METHOD(gunichar get_escape_char() const, gtk_source_language_get_escape_char)
-
+#m4 _CONVERSION(`gchar**',`Glib::StringArrayHandle',`Glib::StringArrayHandle($3)')
   /// \brief gets the list of mime types for the given language.
   ///
   /// After usage you should free each element of the list as well as the list itself.
   /// \return the list of  mime types for the given language.
-  _WRAP_METHOD(Glib::SListHandle<Glib::ustring> get_mime_types() const, gtk_source_language_get_mime_types)
+  _WRAP_METHOD(Glib::StringArrayHandle get_mime_types() const, gtk_source_language_get_mime_types)
 
-  /// \brief Sets a list of mime_types for the given language.
-  ///
-  /// \param mime_types the list of new mime types to set.
-  _WRAP_METHOD(void set_mime_types(const Glib::SListHandle<const Glib::ustring>& mime_types), gtk_source_language_set_mime_types)
-  
-  /// \brief gets the style scheme associated to the language.
-  ///
-  /// \return the style scheme associated to the language
-  _WRAP_METHOD(Glib::RefPtr<SourceStyleScheme> get_style_scheme(), gtk_source_language_get_style_scheme, refreturn)
-
-  /// \brief gets the style scheme associated to the language.
-  ///
-  /// \return the style scheme associated to the language
-  _WRAP_METHOD(Glib::RefPtr<const SourceStyleScheme> get_style_scheme() const, gtk_source_language_get_style_scheme, refreturn)
-
-  /// \brief sets the style scheme associated to the language
-  ///
-  /// \param scheme the new style scheme
-  _WRAP_METHOD(void set_style_scheme(Glib::RefPtr<SourceStyleScheme> scheme), gtk_source_language_set_style_scheme)
-
-  /// \brief gets the style of the tag which ID is tag_id .
-  ///
-  /// \param tag_id the tag ID
-  /// \return the style of the tag which ID is tag_id
-  _WRAP_METHOD(SourceTagStyle get_tag_style(const Glib::ustring& tag_id) const, gtk_source_language_get_tag_style)
-
-  /// \brief sets the style of the tag which ID is tag_id
-  ///
-  /// \param tag_id the tag ID
-  /// \param style the new style.
-  _WRAP_METHOD(void set_tag_style(const Glib::ustring& tag_id, const SourceTagStyle& style), gtk_source_language_set_tag_style)
-
-  /// \brief gets the default style of the tag which ID is tag_id
-  ///
-  /// \param tag_id the ID of the tag to consider
-  /// \return the default SourceTagStyle.
-  _WRAP_METHOD(SourceTagStyle get_tag_default_style(const Glib::ustring& tag_id) const, gtk_source_language_get_tag_default_style)
-
+  _WRAP_METHOD(Glib::ustring get_style_name(const Glib::ustring& style_id) const, gtk_source_language_get_style_name)
 };
 
 } /* namespace gtksourceview */

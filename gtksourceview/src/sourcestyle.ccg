@@ -1,11 +1,6 @@
-#ifndef _GTKSOURCEVIEWMM_H
-#define _GTKSOURCEVIEWMM_H
-
-/* sourceviewmm.h
- * 
- * Based on gtksourceviewmm by Jae Jang
- * Copyright (C) 2005 Rob Page
- * 
+/* sourcestyles.hg
+ *
+ * Copyright (C) 2007 The gtksourceviewmm team.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -22,15 +17,4 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-
-#include <gtksourceviewmm/init.h>
-#include <gtksourceviewmm/sourcebuffer.h>
-#include <gtksourceviewmm/sourceiter.h>
-#include <gtksourceviewmm/sourcelanguage.h>
-#include <gtksourceviewmm/sourcelanguagemanager.h>
-#include <gtksourceviewmm/sourcemarker.h>
-#include <gtksourceviewmm/sourcestylescheme.h>
-#include <gtksourceviewmm/sourceview.h>
-
-#endif /* #ifndef _GTKSOURCEVIEWMM_H */
-
+#include <gtksourceview/gtksourcestyle.h>

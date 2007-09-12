@@ -1,0 +1,64 @@
+/* sourcebuffer.hg
+ * 
+ * Copyright (C) 2004-2005 Jae Jang
+ * Copyright (C) 2005-2006 Rob Page
+ * Copyright (C)2006 Dodji Seketeli
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+/// \file
+/// \brief SourceLanguageManager class
+
+#include <glibmm/object.h>
+#include <gtksourceviewmm/sourcelanguage.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace gtksourceview
+{
+_CC_INCLUDE(gtksourceview/gtksourcelanguagemanager.h)
+_CC_INCLUDE(gtksourceview/gtksourceview-typebuiltins.h)
+
+/// \brief manages the languages supported by the SourceBuffer.
+class SourceLanguageManager : public Glib::Object
+{
+  _CLASS_GOBJECT(SourceLanguageManager, GtkSourceLanguageManager, GTK_SOURCE_LANGUAGE_MANAGER, Glib::Object, GObject)
+protected:
+  _CTOR_DEFAULT()
+
+public:
+
+  /// \brief creates an instance of SourceLanguageManager
+  ///
+  /// \return the newly created instance of SourceLanguageManager
+  _WRAP_CREATE()
+
+  _WRAP_METHOD(static Glib::RefPtr<SourceLanguageManager> get_default(), gtk_source_language_manager_get_default, refreturn)
+
+#m4 _CONVERSION(`gchar**',`Glib::StringArrayHandle',`$2($3)')
+  _WRAP_METHOD(Glib::StringArrayHandle get_search_path() const, gtk_source_language_manager_get_search_path)
+  _WRAP_METHOD(void set_search_path(const Glib::StringArrayHandle& dirs), gtk_source_language_manager_set_search_path)
+
+  _WRAP_METHOD(Glib::StringArrayHandle get_language_ids() const, gtk_source_language_manager_get_language_ids)
+
+  _WRAP_METHOD(Glib::RefPtr<SourceLanguage> get_language(const Glib::ustring& id), gtk_source_language_manager_get_language, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const SourceLanguage> get_language(const Glib::ustring& id) const, gtk_source_language_manager_get_language, constversion, refreturn)
+
+};
+
+} /* namespace gtksourceview */
+

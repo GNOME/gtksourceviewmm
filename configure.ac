@@ -124,9 +124,9 @@ Please install GNU make.]))
 #########################################################################
 #gtksourceviewmm_min_glibmm_version=2.8.0
 gtksourceviewmm_min_gtkmm_version=2.4
-#gtksourceviewmm_min_gtksourceview_version=1.0
+#gtksourceviewmm_min_gtksourceview_version=2.0
 
-PKG_CHECK_MODULES(GTKSOURCEVIEWMM, gtkmm-2.4 >= ${gtksourceviewmm_min_gtkmm_version} gtksourceview-1.0)
+PKG_CHECK_MODULES(GTKSOURCEVIEWMM, gtkmm-2.4 >= ${gtksourceviewmm_min_gtkmm_version} gtksourceview-2.0)
 AC_SUBST(GTKSOURCEVIEWMM_CFLAGS)
 AC_SUBST(GTKSOURCEVIEWMM_LIBS)
 
@@ -279,7 +279,7 @@ AC_CONFIG_FILES([
   Makefile
 
   gtksourceview/Makefile
-  gtksourceview/libgtksourceviewmm-1.0.pc
+  gtksourceview/gtksourceviewmm-2.0.pc
     gtksourceview/src/Makefile
     gtksourceview/gtksourceviewmm/Makefile
       gtksourceview/gtksourceviewmm/private/Makefile

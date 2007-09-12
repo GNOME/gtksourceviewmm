@@ -12,9 +12,9 @@ main (int argc, char* argv[])
     Gsv::SourceView view ;
     Glib::RefPtr<Gsv::SourceBuffer> buf = view.get_source_buffer () ;
     if (buf) {
-        std::cout << "PASSED\n" ;
+        std::cout << "PASSED" << std::endl;
     } else {
-        std::cout << "FAILED\n" ;
+        std::cout << "FAILED" << std::endl;
     }
     return 0 ;
 }

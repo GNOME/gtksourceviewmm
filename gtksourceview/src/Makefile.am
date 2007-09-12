@@ -8,6 +8,8 @@ files_defs = \
 gtksourceview.defs \
 gtksourceview_signals.defs \
 gtksourceview_methods.defs \
+gtksourceview_others.defs \
+gtksourceview_enums.defs \
 gtksourceview_docs.xml \
 gtksourceview_docs_override.xml
 

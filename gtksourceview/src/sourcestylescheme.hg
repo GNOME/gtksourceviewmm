@@ -1,4 +1,4 @@
-/* sourcetag.hg
+/* sourcestylescheme.hg
  * 
  * Copyright (C) 2004-2005 Jae Jang
  * Copyright (C) 2005-2006 Rob Page
@@ -23,12 +23,11 @@
 /// \brief SourceStyleScheme class
 
 #include <glibmm/interface.h>
-#include <gtksourceviewmm/sourcetagstyle.h>
+#include <gtksourceviewmm/sourcestyle.h>
 #include <gtksourceview/gtksourcestylescheme.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/interface_p.h)
-_PINCLUDE(gtksourceviewmm/private/sourcetagstyle_p.h)
 
 namespace gtksourceview
 {
@@ -41,27 +40,17 @@ class SourceStyleScheme : public Glib::Interface
 
 public:
 
-    /// \brief get a tag style from the scheme.
-    ///
-    /// \param a_style_name the name of the tag style to get
-    /// \return the SourceTagStyle
-    /// \todo change the signature of this method to return a bool
-    _WRAP_METHOD(SourceTagStyle get_tag_style(const Glib::ustring &a_style_name) const, gtk_source_style_scheme_get_tag_style)
+  _WRAP_METHOD(Glib::ustring get_id() const, gtk_source_style_scheme_get_id)
+  _WRAP_METHOD(Glib::ustring get_name() const, gtk_source_style_scheme_get_name)
+  _WRAP_METHOD(Glib::ustring get_description() const, gtk_source_style_scheme_get_description)
 
-    /// \brief get the name of the scheme
-    ///
-    /// \return the name of the source style
-    _WRAP_METHOD(Glib::ustring get_name() const, gtk_source_style_scheme_get_name)
+#m4 _CONVERSION(`gchar**',`Glib::StringArrayHandle',`$2($3)')
+  _WRAP_METHOD(Glib::StringArrayHandle get_authors() const, gtk_source_style_scheme_get_authors)
 
-    /// \brief get the list of the different style names associated to this scheme
-    ///
-    /// \return the list of style names
-    _WRAP_METHOD(Glib::SListHandle<Glib::ustring> get_style_names() const, gtk_source_style_scheme_get_style_names)
+  _WRAP_METHOD(std::string get_filename() const, gtk_source_style_scheme_get_filename)
 
-    /// \brief the default style scheme
-    /// \return the default style scheme
-    _WRAP_METHOD(static Glib::RefPtr<SourceStyleScheme> get_default(), gtk_source_style_scheme_get_default, refreturn)
-
+  _WRAP_METHOD(Glib::RefPtr<SourceStyle> get_style(const Glib::ustring& style_id), gtk_source_style_scheme_get_style, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const SourceStyle> get_style(const Glib::ustring& style_id) const, gtk_source_style_scheme_get_style, refreturn, constversion)
 };//end class SourceStyleScheme
 
 }//end namespace gtksourceview

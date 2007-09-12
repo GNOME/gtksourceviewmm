@@ -4,7 +4,7 @@
 SUBDIRS                 = private
 
 sublib_name             = gtksourceviewmm
-sublib_libname          = gtksourceviewmm-1.0
+sublib_libname          = gtksourceviewmm-2.0
 sublib_libversion       = $(LIBGTKSOURCEVIEWMM_SO_VERSION)
 sublib_namespace        = Gtk
 sublib_cflags           = $(GTKSOURCEVIEWMM_CFLAGS)
@@ -23,8 +23,8 @@ sublib_files_extra_general_deprecated_h =
 
 include $(top_srcdir)/build_shared/Makefile_build.am_fragment
 
-lib_LTLIBRARIES	                  = libgtksourceviewmm-1.0.la
-libgtksourceviewmm_1_0_la_SOURCES = $(files_built_cc) $(files_extra_cc)
-libgtksourceviewmm_1_0_la_LDFLAGS = $(common_ldflags)
-libgtksourceviewmm_1_0_la_LIBADD  = $(GTKSOURCEVIEWMM_LIBS)
+lib_LTLIBRARIES	                  = libgtksourceviewmm-2.0.la
+libgtksourceviewmm_2_0_la_SOURCES = $(files_built_cc) $(files_extra_cc)
+libgtksourceviewmm_2_0_la_LDFLAGS = $(common_ldflags)
+libgtksourceviewmm_2_0_la_LIBADD  = $(GTKSOURCEVIEWMM_LIBS)
 

@@ -1,8 +1,6 @@
-/* sourcetagstyle.ccg
- *
- * Copyright (C) 2004-2005 Jae Jang
- * Copyright (C) 2005-2006 Rob Page
- * Copyright (C)2006 Dodji Seketeli
+/* sourcestyle.hg
+ * 
+ * Copyright (C) 2007 The gtksourceviewmm team.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -19,15 +17,23 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <gtksourceviewmm/sourcetagstyle.h>
+#include <glibmm/object.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(glibmm/private/object_p.h)
 
 namespace gtksourceview
 {
-SourceTagStyle::SourceTagStyle ()
+
+class SourceStyle : public Glib::Object
 {
-    GtkSourceTagStyle tmp ;
-    memset (&tmp, 0, sizeof (GtkSourceTagStyle)) ;
-    gobject_ = gtk_source_tag_style_copy (&tmp) ;
-}
+  _CLASS_GOBJECT(SourceStyle, GtkSourceStyle, GTK_SOURCE_STYLE, Glib::Object, GObject)
+
+public:
+
+  //TODO: GtkSourceStyle	*gtk_source_style_copy		(const GtkSourceStyle *style);
+};
+
 }//end namespace gtksourceview
+
 

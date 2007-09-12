@@ -32,7 +32,7 @@ SourceView::SourceView() :
     gtk_text_view_set_buffer (GTK_TEXT_VIEW (gobject_), GTK_TEXT_BUFFER (buffer));
 }
 
-SourceView::SourceView(Glib::RefPtr<SourceBuffer> &a_buffer) :
+SourceView::SourceView(const Glib::RefPtr<SourceBuffer> &a_buffer) :
     _CONSTRUCT
 {
     if (a_buffer) {
@@ -61,7 +61,7 @@ SourceView::get_source_buffer ()
 }
 
 void
-SourceView::set_source_buffer (Glib::RefPtr<SourceBuffer> &source_buffer)
+SourceView::set_source_buffer (const Glib::RefPtr<SourceBuffer> &source_buffer)
 {
     set_buffer (source_buffer) ;
 }

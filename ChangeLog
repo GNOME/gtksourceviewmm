@@ -1,3 +1,9 @@
+2007-09-13  Murray Cumming  <murrayc@murrayc.com>
+
+	* gtksourceview/src/sourcebuffer.hg:
+	Renamed get/set_highlight() to get/set_highlight_syntax() 
+	so that it is actually wrapped.
+
 1.9.1:
 
 2007-09-12  Murray Cumming  <murrayc@murrayc.com>

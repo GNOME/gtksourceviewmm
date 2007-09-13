@@ -41,7 +41,7 @@ namespace gtksourceview
 /// It also implements support for undo/redo operations.
 /// To create a SourceBuffer use SourceBuffer::create().
 /// By default highlighting is enabled, but you can disable it
-/// with SourceBuffer::set_highlight().
+/// with SourceBuffer::set_highlight_syntax().
 /// This can be useful if you're not using SourceLanguage
 /// objects to set the highlighting patterns,
 /// and instead you're manually adding SourceTag objects
@@ -75,7 +75,7 @@ public:
    /// \brief Determines whether bracket match highlighting is activated for the source buffer.
    ///
    /// \return true if the source buffer will highlight  matching brackets, false otherwise.
-  _WRAP_METHOD(bool get_check_brackets() const, gtk_source_buffer_get_check_brackets, constversion)
+  _WRAP_METHOD(bool get_check_brackets() const, gtk_source_buffer_get_check_brackets)
 
    /// \brief controls the bracket match highlighting function in the buffer.
    ///
@@ -88,7 +88,7 @@ public:
   /// \brief Determines whether text highlighting is activated in the source buffer.
   ///
   /// \return true if highlighting is activated, false otherwise.
-  _WRAP_METHOD(bool get_highlight() const, gtk_source_buffer_get_highlight, constversion)
+  _WRAP_METHOD(bool get_highlight_syntax() const, gtk_source_buffer_get_highlight_syntax)
 
   /// \brief controls whether text is highlighted in the buffer.
   ///
@@ -102,12 +102,12 @@ public:
   /// it is recommended for performance reasons that you add all the
   /// SourceTag tags with highlighting disabled and enable it when finished.
   /// \param highlight true if you want to activate highlighting
-  _WRAP_METHOD(void set_highlight(bool highlight=true), gtk_source_buffer_set_highlight)
+  _WRAP_METHOD(void set_highlight_syntax(bool highlight = true), gtk_source_buffer_set_highlight_syntax)
 
   /// \brief Determines the number of undo levels the buffer will track for buffer edits.
   ///
   /// \return the maximum number of possible undo levels.
-  _WRAP_METHOD(int get_max_undo_levels() const, gtk_source_buffer_get_max_undo_levels, constversion)
+  _WRAP_METHOD(int get_max_undo_levels() const, gtk_source_buffer_get_max_undo_levels)
 
   /// \brief Sets the number of undo levels for user actions the buffer will track.
   ///
@@ -147,7 +147,7 @@ public:
   /// \brief Determines the escaping character used by the source buffer highlighting engine.
   ///
   ///\return the UTF-8 character for the escape character the buffer is using.
-  _WRAP_METHOD(gunichar get_escape_char() const, gtk_source_buffer_get_escape_char, constversion)
+  _WRAP_METHOD(gunichar get_escape_char() const, gtk_source_buffer_get_escape_char)
 
   /// \brief Sets the escape character to be used by the highlighting engine.
   ///

@@ -28,7 +28,6 @@
 #include <gtksourceviewmm/sourceiter.h>
 #include <gtksourceviewmm/sourcelanguage.h>
 #include <gtksourceviewmm/sourcelanguagemanager.h>
-#include <gtksourceviewmm/sourcemarker.h>
 #include <gtksourceviewmm/sourcestylescheme.h>
 #include <gtksourceviewmm/sourceview.h>
 

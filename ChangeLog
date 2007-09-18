@@ -1,3 +1,25 @@
+1.9.2:
+
+2007-09-18  Murray Cumming  <murrayc@murrayc.com>
+
+	* gtksourceview/gtksourceviewmm.h:
+	* gtksourceview/src/Makefile_list_of_hg.am_fragment:
+	* tools/extra_defs_gen/generate_defs_gtk.cc:
+	* gtksourceview/src/sourcemarker.ccg:
+	* gtksourceview/src/sourcemarker.hg: Removed SourceMarker, 
+	because GtkSourceMarker was removed from the C API.
+	* gtksourceview/src/sourcebuffer.ccg:
+	* gtksourceview/src/sourcebuffer.hg: Removed create_marker(), 
+	move_marker(), delete_marker(), get_marker(), 
+	get_markers_in_region(), get_first_marker(), get_last_marker(), 
+	get_iter_at_marker(), get_next_marker(), get_prev_marker(), 
+	* gtksourceview/src/sourceview.hg: Remove set_marker_pixbuf(), 
+	get_marker_pixbuf(), set_show_line_markers(), and 
+	get_show_line_markers(), because the C functions were removed 
+	from the C API.
+
+	This fixes the build with the latest gtksourceview-2.0.
+
 2007-09-13  Murray Cumming  <murrayc@murrayc.com>
 
 	* gtksourceview/src/sourcebuffer.hg:

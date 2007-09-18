@@ -1,3 +1,15 @@
+1.9.2:
+
+* Removed SourceMarker because GtkSourceMarker was removed from the C API.
+* SourceBuffer: Removed create_marker(), move_marker(), delete_marker(), 
+  get_marker(), get_markers_in_region(), get_first_marker(), 
+  get_last_marker(), get_iter_at_marker(), get_next_marker(), 
+  and get_prev_marker(), because the C functions were removed 
+  from the C API.
+* SourceView: Remove set_marker_pixbuf(), get_marker_pixbuf(), 
+  set_show_line_markers(), and get_show_line_markers(), 
+  because the C functions were removed from the C API.
+
 1.9.1:
 
 Updated to build against the new gtksourceview 2.0 API:

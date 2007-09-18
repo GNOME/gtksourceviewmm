@@ -9,7 +9,6 @@ sourcestyle.hg \
 sourcestylescheme.hg \
 sourcelanguage.hg \
 sourcelanguagemanager.hg \
-sourcemarker.hg \
 sourceview.hg \
 sourcebuffer.hg \
 sourceiter.hg

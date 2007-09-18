@@ -25,7 +25,6 @@
 
 #include <gtkmm/textbuffer.h>
 #include <gtksourceviewmm/sourcelanguage.h>
-#include <gtksourceviewmm/sourcemarker.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(gtkmm/private/textbuffer_p.h)
@@ -199,130 +198,6 @@ public:
   /// the list of undo actions is cleared and the undo manager is re-enabled.
   _WRAP_METHOD(void end_not_undoable_action(), gtk_source_buffer_end_not_undoable_action)
 
-  /// \brief Creates a marker in the buffer of type type.
-  ///
-  /// A marker is semantically very similar to a GtkTextMark,
-  /// except it has a type which is used by the SourceView displaying the buffer
-  /// to show a pixmap on the left margin, at the line the marker is in.
-  /// Because of this, a marker is generally associated
-  /// to a line and not a character position.
-  /// Markers are also accessible through a position or range in the buffer.
-  /// Markers are implemented using Gtk::TextMark, so all characteristics
-  /// and restrictions to marks apply to markers too.
-  /// These includes life cycle issues and "mark-set" and "mark-deleted" signal emissions.
-  /// Like a Gtk::TextMark, a SourceMarker can be anonymous if the passed name is "".
-  /// Also, the buffer owns the markers so you shouldn't unreference it.
-  /// Markers always have left gravity and are moved to the beginning
-  /// of the line when the user deletes the line they were in.
-  /// Also, if the user deletes a region of text which contained lines with markers, those are deleted.
-  /// Typical uses for a marker are bookmarks, breakpoints, current executing instruction indication in a source file, etc..
-  /// \param name the name of the marker.
-  /// \param type a string defining the marker type.
-  /// \param where location to place the marker
-  /// \return a newly created SourceMarker, owned by the buffer.
-  _WRAP_METHOD(Glib::RefPtr<SourceMarker> create_marker(const Glib::ustring& name, const Glib::ustring& type, const Gtk::TextIter& where), gtk_source_buffer_create_marker, refreturn)
-
-  /// \brief Moves marker to the a new location.
-  /// \param marker the marker you want to move in the SourceBuffer.
-  /// \param where the new location you want to  move the marker to.
-  _WRAP_METHOD(void move_marker(const Glib::RefPtr<SourceMarker> &marker, const Gtk::TextIter& where), gtk_source_buffer_move_marker)
-
-  /// \brief  Deletes marker from the source buffer.
-  /// The same conditions as for Gtk::TextMark apply here.
-  /// The marker is no longer accessible from the buffer,
-  /// but if you held a reference to it, it will not be destroyed.
-  /// \param marker the marker to delete.
-  _WRAP_METHOD(void delete_marker(const Glib::RefPtr<SourceMarker> &marker), gtk_source_buffer_delete_marker)
-
-  /// \brief Looks up the GtkSourceMarker named name in buffer, returning NULL if it doesn't exists.
-  ///
-  /// \return the SourceMarker whose name is name, or nil.
-  _WRAP_METHOD(Glib::RefPtr<SourceMarker> get_marker(const Glib::ustring& name), gtk_source_buffer_get_marker, refreturn)
-
-  /// \brief Looks up the GtkSourceMarker named name in buffer, returning NULL if it doesn't exists.
-  ///
-  /// \return the SourceMarker whose name is name, or nil.
-  _WRAP_METHOD(Glib::RefPtr<const SourceMarker> get_marker(const Glib::ustring& name) const, gtk_source_buffer_get_marker, refreturn, constversion)
-
-  /// \brief get an ordered (by position) list of SourceMarker objects inside the region delimited by the GtkTextIter begin and end.
-  ///
-  /// The iters may be in any order.
-  /// \return the list of SourceMarkers
-  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceMarker> > get_markers_in_region(const Gtk::TextIter& begin, const Gtk::TextIter& end), gtk_source_buffer_get_markers_in_region)
-
-  /// \brief get an ordered (by position) list of SourceMarker objects inside the region delimited by the GtkTextIter begin and end.
-  ///
-  /// The iters may be in any order.
-  /// \return the list of SourceMarkers
-  //_WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<const SourceMarker> > get_markers_in_region(const Gtk::TextIter& begin, const Gtk::TextIter& end) const, gtk_source_buffer_get_markers_in_region, constversion)
-
-  /// \brief gets the first (nearest to the top of the buffer) marker in buffer.
-  ///
-  /// \return the first marker in buffer
-  _WRAP_METHOD(Glib::RefPtr<SourceMarker> get_first_marker(), gtk_source_buffer_get_first_marker, refreturn)
-
-  /// \brief gets the first (nearest to the top of the buffer) marker in buffer.
-  ///
-  /// \return the first marker in buffer or nil if there are no  markers in the buffer.
-  _WRAP_METHOD(Glib::RefPtr<const SourceMarker> get_first_marker() const, gtk_source_buffer_get_first_marker, refreturn, constversion)
-
-  /// \brief returns the last (nearest to the bottom of the buffer) marker in buffer.
-  ///
-  /// \return a reference to the last SourceMarker, or nil if there are no markers in the buffer.
-  _WRAP_METHOD(Glib::RefPtr<SourceMarker> get_last_marker(), gtk_source_buffer_get_last_marker, refreturn)
-
-  /// \brief returns the last (nearest to the bottom of the buffer) marker in buffer.
-  ///
-  /// \return a reference to the last SourceMarker, or nil if there are no markers in the buffer.
-  _WRAP_METHOD(Glib::RefPtr<const SourceMarker> get_last_marker() const, gtk_source_buffer_get_last_marker, refreturn, constversion)
-
-  /// \brief gets an iterator pointing at the location of a given marker.
-  ///
-  /// \param marker the marker we want to get the iterator at.
-  /// \return the iterator.
-  Gtk::TextIter get_iter_at_marker(const Glib::RefPtr<SourceMarker>& marker);
-
-  _IGNORE(gtk_source_buffer_get_iter_at_marker)
-
-  /// \brief gets the nearest marker to the right of iter.
-  ///
-  /// If there are multiple markers at the same position,
-  /// this function will always return the first one (from the internal linked list),
-  /// even if starting the search exactly at its location.
-  /// You can get the others using SourceMarker::next().
-  /// \param iter an iterator pointing to the location to start searching from.
-  /// \return the SourceMarker nearest to the right of iter, or nil if there are no more markers after iter.
-  _WRAP_METHOD(Glib::RefPtr<SourceMarker> get_next_marker(Gtk::TextIter& iter), gtk_source_buffer_get_next_marker, refreturn)
-
-  /// \brief gets the nearest marker to the right of iter.
-  ///
-  /// If there are multiple markers at the same position,
-  /// this function will always return the first one (from the internal linked list),
-  /// even if starting the search exactly at its location.
-  /// You can get the others using SourceMarker::next().
-  /// \param iter an iterator pointing to the location to start searching from.
-  /// \return the SourceMarker nearest to the right of iter, or nil if there are no more markers after iter.
-  _WRAP_METHOD(Glib::RefPtr<const SourceMarker> get_next_marker(Gtk::TextIter& iter) const, gtk_source_buffer_get_next_marker, refreturn)
-
-  /// \brief gets the nearest marker to the left of iter.
-  ///
-  /// If there are multiple markers at the same position,
-  /// this function will always return the last one (from the internal linked list),
-  /// even if starting the search exactly at its location.
-  /// You can get the others using SourceMarker::prev().
-  /// \param iter an iterator pointing to the location to start searching from.
-  /// \return the SourceMarker nearest to the right of iter, or nil if there are no more markers before iter.
-  _WRAP_METHOD(Glib::RefPtr<SourceMarker> get_prev_marker(Gtk::TextIter& iter), gtk_source_buffer_get_prev_marker, refreturn)
-
-  /// \brief gets the nearest marker to the left of iter.
-  ///
-  /// If there are multiple markers at the same position,
-  /// this function will always return the last one (from the internal linked list),
-  /// even if starting the search exactly at its location.
-  /// You can get the others using SourceMarker::prev().
-  /// \param iter an iterator pointing to the location to start searching from.
-  /// \return the SourceMarker nearest to the right of iter, or nil if there are no more markers before iter.
-  _WRAP_METHOD(Glib::RefPtr<const SourceMarker> get_prev_marker(Gtk::TextIter& iter) const, gtk_source_buffer_get_prev_marker, refreturn)
 
   /// \name signals
   /// @{

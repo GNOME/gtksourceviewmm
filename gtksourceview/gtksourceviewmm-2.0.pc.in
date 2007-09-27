@@ -5,7 +5,7 @@ includedir=@includedir@
 
 Name: Gtksourceviewmm
 Description: C++ wrapper for gtksourceview
-Requires: gtksourceview-1.0 gtkmm-2.4
+Requires: gtksourceview-2.0 gtkmm-2.4
 Version: @VERSION@
 Libs: -L${libdir} -lgtksourceviewmm-2.0
 Cflags: -I${includedir}/gtksourceviewmm-2.0 -I${libdir}/gtksourceviewmm-2.0/include

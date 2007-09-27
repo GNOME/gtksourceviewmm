@@ -1,3 +1,8 @@
+2007-09-27  Armin Burgmeier  <armin@openismus.com>
+
+	* gtksourceview/gtksourceviewmm-2.0.pc.in: Depend on gtksourceview-2.0
+	instead of gtksourceview-1.0.
+
 1.9.2:
 
 2007-09-18  Murray Cumming  <murrayc@murrayc.com>

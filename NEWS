@@ -1,3 +1,8 @@
+1.9.3:
+
+* A correction in the pkg-config file.
+  (Armin Burgmeier)
+
 1.9.2:
 
 * Removed SourceMarker because GtkSourceMarker was removed from the C API.

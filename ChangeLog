@@ -1,3 +1,9 @@
+2007-12-09  Yselkowitz <yselkowitz@users.sourceforge.net>
+
+	* docs/reference/Makefile.am (docdir):
+	* tools/m4/Makefile.am (tools_m4_includedir):
+	Install to 2.0-versioned directories.
+
 1.9.3:
 
 2007-09-27  Armin Burgmeier  <armin@openismus.com>

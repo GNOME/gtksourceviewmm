@@ -11,7 +11,7 @@ giffiles=$(shell ls -1 html/*.gif)
 cssfiles=$(shell ls -1 html/*.css)
 websitefiles=reference-index.txt
 
-docdir = $(datadir)/doc/libgtksourceviewmm-1.0/docs
+docdir = $(datadir)/doc/libgtksourceviewmm-2.0/docs
 htmldocumentationdir=$(docdir)/reference/html
 htmldocumentation_DATA=$(htmlfiles) $(pngfiles) $(giffiles) $(cssfiles)
 

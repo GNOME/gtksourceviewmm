@@ -13,7 +13,8 @@ _CONVERSION(`Glib::ListHandle<Glib::ustring>',`GSList*', `$3.data()')
 #SourceStyleScheme
 _CONVERSION(`GtkSourceStyleScheme*',`Glib::RefPtr<SourceStyleScheme>',`Glib::wrap($3)')
 _CONVERSION(`GtkSourceStyleScheme*',`Glib::RefPtr<const SourceStyleScheme>',`Glib::wrap($3)')
-#_CONVERSION(`Glib::RefPtr<SourceStyleScheme>',`GtkSourceStyleScheme*',__CONVERT_REFPTR_TO_P)
+_CONVERSION(`Glib::RefPtr<SourceStyleScheme>',`GtkSourceStyleScheme*',__CONVERT_REFPTR_TO_P)
+_CONVERSION(`const Glib::RefPtr<SourceStyleScheme>&',`GtkSourceStyleScheme*',__CONVERT_REFPTR_TO_P)
 
 _CONVERSION(`GtkSourceStyle*',`Glib::RefPtr<SourceStyle>',`Glib::wrap($3)')
 

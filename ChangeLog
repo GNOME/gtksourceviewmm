@@ -1,3 +1,16 @@
+2008-01-12  Jonathon Jongsma <jjongsma@gnome.org>
+
+	* gtksourceview/src/gtksourceview_enums.defs:
+	* gtksourceview/src/gtksourceview_signals.defs:
+	* gtksourceview/src/gtksourceview_methods.defs: re-generated .defs file for
+	new API in gtksourceview 2.1
+	* tools/m4/convert_gtksourceviewmm.m4:
+	* tools/extra_defs_gen/generate_defs_gtk.cc:
+	* gtksourceview/src/sourcebuffer.hg:
+	* gtksourceview/src/sourceview.hg:
+	* gtksourceview/src/sourcelanguage.hg: wrapped some additional API in
+	SourceView, SourceBuffer, and SourceLanguage
+
 2007-12-09  Yselkowitz <yselkowitz@users.sourceforge.net>
 
 	* docs/reference/Makefile.am (docdir):

@@ -25,7 +25,10 @@
 #include <gtksourceview/gtksourceiter.h>
 #include <gtksourceview/gtksourcelanguage.h>
 #include <gtksourceview/gtksourcelanguagemanager.h>
+#include <gtksourceview/gtksourcemark.h>
+#include <gtksourceview/gtksourcestyle.h>
 #include <gtksourceview/gtksourcestylescheme.h>
+#include <gtksourceview/gtksourcestyleschememanager.h>
 #include <gtksourceview/gtksourceview.h>
 #include <gtksourceview/gtksourceview-typebuiltins.h>
 
@@ -36,7 +39,10 @@ int main (int argc, char *argv[])
   std::cout << get_defs ( GTK_TYPE_SOURCE_BUFFER )
 	        << get_defs ( GTK_TYPE_SOURCE_LANGUAGE )
 	        << get_defs ( GTK_TYPE_SOURCE_LANGUAGE_MANAGER )
+	        << get_defs ( GTK_TYPE_SOURCE_MARK )
+	        << get_defs ( GTK_TYPE_SOURCE_STYLE )
 	        << get_defs ( GTK_TYPE_SOURCE_STYLE_SCHEME )
+	        << get_defs ( GTK_TYPE_SOURCE_STYLE_SCHEME_MANAGER )
 	        << get_defs ( GTK_TYPE_SOURCE_VIEW )
 	        << get_defs ( GTK_TYPE_SOURCE_SEARCH_FLAGS );
   return 0;

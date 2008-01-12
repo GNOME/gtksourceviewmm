@@ -1,29 +1,4 @@
-;; From /home/murrayc/svn/gnome220/gtksourceview/gtksourceview/gtksourcecontextengine.h
-
-(define-flags-extended SourceContextFlags
-  (in-module "Gtk")
-  (c-name "GtkSourceContextFlags")
-  (values
-    '("extend-parent" "GTK_SOURCE_CONTEXT_EXTEND_PARENT" "1 << 0")
-    '("end-parent" "GTK_SOURCE_CONTEXT_END_PARENT" "1 << 1")
-    '("end-at-line-end" "GTK_SOURCE_CONTEXT_END_AT_LINE_END" "1 << 2")
-    '("first-line-only" "GTK_SOURCE_CONTEXT_FIRST_LINE_ONLY" "1 << 3")
-    '("once-only" "GTK_SOURCE_CONTEXT_ONCE_ONLY" "1 << 4")
-    '("style-inside" "GTK_SOURCE_CONTEXT_STYLE_INSIDE" "1 << 5")
-  )
-)
-
-(define-flags-extended SourceContextRefOptions
-  (in-module "Gtk")
-  (c-name "GtkSourceContextRefOptions")
-  (values
-    '("ignore-style" "GTK_SOURCE_CONTEXT_IGNORE_STYLE" "1 << 0")
-    '("override-style" "GTK_SOURCE_CONTEXT_OVERRIDE_STYLE" "1 << 1")
-    '("ref-original" "GTK_SOURCE_CONTEXT_REF_ORIGINAL" "1 << 2")
-  )
-)
-
-;; From /home/murrayc/svn/gnome220/gtksourceview/gtksourceview/gtksourceiter.h
+;; From /opt/gnome2/include/gtksourceview-2.0/gtksourceview/gtksourceiter.h
 
 (define-flags-extended SourceSearchFlags
   (in-module "Gtk")
@@ -35,7 +10,7 @@
   )
 )
 
-;; From /home/murrayc/svn/gnome220/gtksourceview/gtksourceview/gtksourceview.h
+;; From /opt/gnome2/include/gtksourceview-2.0/gtksourceview/gtksourceview.h
 
 (define-enum-extended SourceSmartHomeEndType
   (in-module "Gtk")

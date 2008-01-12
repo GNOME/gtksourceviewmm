@@ -74,15 +74,15 @@ public:
    /// \brief Determines whether bracket match highlighting is activated for the source buffer.
    ///
    /// \return true if the source buffer will highlight  matching brackets, false otherwise.
-  _WRAP_METHOD(bool get_check_brackets() const, gtk_source_buffer_get_check_brackets)
+  _WRAP_METHOD(bool get_highlight_matching_brackets() const, gtk_source_buffer_get_highlight_matching_brackets)
 
    /// \brief controls the bracket match highlighting function in the buffer.
    ///
    /// If activated, when you position your cursor over a bracket character (a parenthesis, a square bracket, etc.)
    /// the matching opening or closing bracket character will be highlighted.
    /// You can specify the style with the SourceBuffer::set_bracket_match_style() function.
-   /// \param check_brackets true if you want matching brackets highlighted.
-  _WRAP_METHOD(void set_check_brackets(bool check_brackets=true), gtk_source_buffer_set_check_brackets)
+   /// \param highlight true if you want matching brackets highlighted.
+  _WRAP_METHOD(void set_highlight_matching_brackets(bool highlight=true), gtk_source_buffer_set_highlight_matching_brackets)
 
   /// \brief Determines whether text highlighting is activated in the source buffer.
   ///
@@ -197,6 +197,19 @@ public:
   /// When the last not undoable block is closed through the call to this function,
   /// the list of undo actions is cleared and the undo manager is re-enabled.
   _WRAP_METHOD(void end_not_undoable_action(), gtk_source_buffer_end_not_undoable_action)
+
+  _WRAP_METHOD(bool backward_iter_to_mark(Gtk::TextIter& iter, const Glib::ustring& category), gtk_source_buffer_backward_iter_to_mark)
+  // overload with category == NULL
+  //_WRAP_METHOD(bool backward_iter_to_mark(Gtk::TextIter& iter), gtk_source_buffer_backward_iter_to_mark)
+
+  _WRAP_METHOD(bool forward_iter_to_mark(Gtk::TextIter& iter, const Glib::ustring& category), gtk_source_buffer_forward_iter_to_mark)
+  // overload with category == NULL
+  //_WRAP_METHOD(bool forward_iter_to_mark(Gtk::TextIter& iter), gtk_source_buffer_forward_iter_to_mark)
+
+  _WRAP_METHOD(void ensure_highlight(const Gtk::TextIter& start, const Gtk::TextIter& end), gtk_source_buffer_ensure_highlight)
+  _WRAP_METHOD(void set_style_scheme(const Glib::RefPtr<SourceStyleScheme>& scheme), gtk_source_buffer_set_style_scheme)
+  _WRAP_METHOD(Glib::RefPtr<SourceStyleScheme> get_style_scheme(), gtk_source_buffer_get_style_scheme, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const SourceStyleScheme> get_style_scheme() const, gtk_source_buffer_get_style_scheme, constversion, refreturn)
 
 
   /// \name signals

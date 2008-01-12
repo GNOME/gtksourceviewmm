@@ -152,6 +152,17 @@ public:
   /// \return true if HOME and END keys will move to the first/last non space character of the line before moving to the start/end, false otherwise
   _WRAP_METHOD(SourceSmartHomeEndType get_smart_home_end() const, gtk_source_view_get_smart_home_end)
 
+  _WRAP_METHOD(void set_show_line_marks(bool show = true), gtk_source_view_set_show_line_marks)
+  _WRAP_METHOD(bool get_show_line_marks() const, gtk_source_view_get_show_line_marks)
+  _WRAP_METHOD(void set_indent_on_tab(bool show = true), gtk_source_view_set_indent_on_tab)
+  _WRAP_METHOD(bool get_indent_on_tab() const, gtk_source_view_get_indent_on_tab)
+  _WRAP_METHOD(void set_indent_width(gint width), gtk_source_view_set_indent_width)
+  _WRAP_METHOD(gint get_indent_width() const, gtk_source_view_get_indent_width)
+  _WRAP_METHOD(void set_mark_category_priority(const Glib::ustring& category, gint priority), gtk_source_view_set_mark_category_priority)
+  _WRAP_METHOD(gint get_mark_category_priority(const Glib::ustring& category) const, gtk_source_view_get_mark_category_priority)
+  _WRAP_METHOD(void set_mark_category_pixbuf(const Glib::ustring& category, const Glib::RefPtr<Gdk::Pixbuf>& pixbuf), gtk_source_view_set_mark_category_pixbuf)
+  _WRAP_METHOD(Glib::RefPtr<Gdk::Pixbuf> get_mark_category_pixbuf(const Glib::ustring& category) const, gtk_source_view_get_mark_category_pixbuf)
+
   _WRAP_SIGNAL(void redo(), "redo")
 
   _WRAP_SIGNAL(void undo(), "undo")

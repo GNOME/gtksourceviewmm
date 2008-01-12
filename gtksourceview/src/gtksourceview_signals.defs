@@ -10,12 +10,12 @@
   )
 )
 
-(define-signal marker-updated
+(define-signal source-mark-updated
   (of-object "GtkSourceBuffer")
   (return-type "void")
   (when "last")
   (parameters
-    '("GtkTextIter*" "p0")
+    '("GtkTextMark*" "p0")
   )
 )
 
@@ -138,10 +138,10 @@
 
 ;; From GtkSourceLanguage
 
-(define-property name
+(define-property section
   (of-object "GtkSourceLanguage")
   (prop-type "GParamString")
-  (docs "Language name")
+  (docs "Language section")
   (readable #t)
   (writable #f)
   (construct-only #f)
@@ -156,10 +156,10 @@
   (construct-only #f)
 )
 
-(define-property section
+(define-property name
   (of-object "GtkSourceLanguage")
   (prop-type "GParamString")
-  (docs "Language section")
+  (docs "Language name")
   (readable #t)
   (writable #f)
   (construct-only #f)
@@ -194,10 +194,10 @@
   (construct-only #f)
 )
 
-;; From GtkTextMark
+;; From GtkSourceMark
 
 (define-property name
-  (of-object "GtkTextMark")
+  (of-object "GtkSourceMark")
   (prop-type "GParamString")
   (docs "Mark name")
   (readable #t)
@@ -206,12 +206,207 @@
 )
 
 (define-property left-gravity
-  (of-object "GtkTextMark")
+  (of-object "GtkSourceMark")
   (prop-type "GParamBoolean")
   (docs "Whether the mark has left gravity")
   (readable #t)
   (writable #t)
   (construct-only #t)
+)
+
+(define-property category
+  (of-object "GtkSourceMark")
+  (prop-type "GParamString")
+  (docs "The mark category")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+;; From GtkSourceStyle
+
+(define-property line-background
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamString")
+  (docs "Line background color")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property line-background-set
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamBoolean")
+  (docs "Whether line background color is set")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property background
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamString")
+  (docs "Background color")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property background-set
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamBoolean")
+  (docs "Whether background color is set")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property foreground
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamString")
+  (docs "Foreground color")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property foreground-set
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamBoolean")
+  (docs "Whether foreground color is set")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property bold
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamBoolean")
+  (docs "Bold")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property bold-set
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamBoolean")
+  (docs "Whether bold attribute is set")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property italic
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamBoolean")
+  (docs "Italic")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property italic-set
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamBoolean")
+  (docs "Whether italic attribute is set")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property underline
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamBoolean")
+  (docs "Underline")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property underline-set
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamBoolean")
+  (docs "Whether underline attribute is set")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property strikethrough
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamBoolean")
+  (docs "Strikethrough")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property strikethrough-set
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamBoolean")
+  (docs "Whether strikethrough attribute is set")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+;; From GtkSourceStyleScheme
+
+(define-property id
+  (of-object "GtkSourceStyleScheme")
+  (prop-type "GParamString")
+  (docs "Style scheme id")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property description
+  (of-object "GtkSourceStyleScheme")
+  (prop-type "GParamString")
+  (docs "Style scheme description")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property name
+  (of-object "GtkSourceStyleScheme")
+  (prop-type "GParamString")
+  (docs "Style scheme name")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property filename
+  (of-object "GtkSourceStyleScheme")
+  (prop-type "GParamString")
+  (docs "Style scheme filename")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+;; From GtkSourceStyleSchemeManager
+
+(define-property search-path
+  (of-object "GtkSourceStyleSchemeManager")
+  (prop-type "GParamBoxed")
+  (docs "List of directories and files where the style schemes are located")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property scheme-ids
+  (of-object "GtkSourceStyleSchemeManager")
+  (prop-type "GParamBoxed")
+  (docs "List of the ids of the available style schemes")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
 )
 
 ;; From GtkSourceView
@@ -588,10 +783,10 @@
   (construct-only #f)
 )
 
-(define-property show-line-markers
+(define-property show-line-marks
   (of-object "GtkSourceView")
   (prop-type "GParamBoolean")
-  (docs "Whether to display line marker pixbufs")
+  (docs "Whether to display line mark pixbufs")
   (readable #t)
   (writable #t)
   (construct-only #f)

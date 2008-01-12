@@ -75,7 +75,7 @@ public:
   /// \brief Whether the language should be hidden from the user.
   ///
   /// \return true if the language should be hidden, false otherwise.
-  _WRAP_METHOD(gboolean get_hidden() const, gtk_source_language_get_boolean)
+  _WRAP_METHOD(gboolean get_hidden() const, gtk_source_language_get_hidden)
 
 #m4 _CONVERSION(`gchar**',`Glib::StringArrayHandle',`Glib::StringArrayHandle($3)')
   /// \brief gets the list of mime types for the given language.
@@ -83,8 +83,11 @@ public:
   /// After usage you should free each element of the list as well as the list itself.
   /// \return the list of  mime types for the given language.
   _WRAP_METHOD(Glib::StringArrayHandle get_mime_types() const, gtk_source_language_get_mime_types)
+  _WRAP_METHOD(Glib::StringArrayHandle get_globs() const, gtk_source_language_get_globs)
+  _WRAP_METHOD(Glib::StringArrayHandle get_style_ids() const, gtk_source_language_get_style_ids)
 
   _WRAP_METHOD(Glib::ustring get_style_name(const Glib::ustring& style_id) const, gtk_source_language_get_style_name)
+  _WRAP_METHOD(Glib::ustring get_metadata(const Glib::ustring& name) const, gtk_source_language_get_metadata)
 };
 
 } /* namespace gtksourceview */

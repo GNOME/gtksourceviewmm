@@ -1,5 +1,13 @@
 2008-01-12  Jonathon Jongsma  <jjongsma@gnome.org>
 
+	* AUTHORS: may as well add myself here
+	* gtksourceview/src/Makefile_list_of_hg.am_fragment:
+	* gtksourceview/src/sourcestyleschememanager.ccg:
+	* gtksourceview/src/sourcestyleschememanager.hg: add the
+	SourceStyleSchemeManager class, though not fully wrapped
+
+2008-01-12  Jonathon Jongsma  <jjongsma@gnome.org>
+
 	* gtksourceview/src/Makefile_list_of_hg.am_fragment:
 	* gtksourceview/src/sourcebuffer.ccg:
 	* gtksourceview/src/sourcebuffer.hg:

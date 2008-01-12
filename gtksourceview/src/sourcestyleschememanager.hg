@@ -1,0 +1,55 @@
+/* sourcestyleschememanager.hg
+ * 
+ * Copyright (C)2008 Jonathon Jongsma
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+/// \file
+/// \brief SourceStyleSchemeManager class
+
+#include <gtksourceviewmm/sourcestylescheme.h>
+#include <gtksourceview/gtksourcestyleschememanager.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace gtksourceview
+{
+
+class SourceStyleSchemeManager : public Glib::Object
+{
+
+    _CLASS_GOBJECT(SourceStyleSchemeManager, GtkSourceStyleSchemeManager, GTK_SOURCE_STYLE_SCHEME_MANAGER, Glib::Object, GObject)
+
+protected:
+    _CTOR_DEFAULT
+
+public:
+    _WRAP_CREATE()
+    static Glib::RefPtr<SourceStyleSchemeManager> get_default();
+
+  // TODO: set_search_path() and get_search_path()
+  _WRAP_METHOD(void append_search_path(const Glib::ustring& path), gtk_source_style_scheme_manager_append_search_path)
+  _WRAP_METHOD(void prepend_search_path(const Glib::ustring& path), gtk_source_style_scheme_manager_prepend_search_path)
+  // TODO: get_scheme_ids
+  _WRAP_METHOD(Glib::RefPtr<SourceStyleScheme> get_scheme(const Glib::ustring& scheme_id) const, gtk_source_style_scheme_manager_get_scheme)
+  _WRAP_METHOD(void force_rescan(), gtk_source_style_scheme_manager_force_rescan)
+
+};//end class SourceStyleSchemeManager
+
+}//end namespace gtksourceview
+
+

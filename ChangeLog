@@ -1,5 +1,9 @@
 2008-01-12  Jonathon Jongsma  <jjongsma@gnome.org>
 
+	* gtksourceview/src/gtksourceview_docs.xml: re-generate documentation
+
+2008-01-12  Jonathon Jongsma  <jjongsma@gnome.org>
+
 	* AUTHORS: may as well add myself here
 	* gtksourceview/src/Makefile_list_of_hg.am_fragment:
 	* gtksourceview/src/sourcestyleschememanager.ccg:

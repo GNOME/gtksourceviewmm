@@ -1,2 +1,4572 @@
 <root>
+<function name="gtk_source_style_scheme_manager_get_scheme">
+<description>
+Looks up style scheme by id.
+
+
+</description>
+<parameters>
+<parameter name="manager">
+<parameter_description> a #GtkSourceStyleSchemeManager
+</parameter_description>
+</parameter>
+<parameter name="scheme_id">
+<parameter_description> style scheme id to find
+</parameter_description>
+</parameter>
+</parameters>
+<return> a #GtkSourceStyleScheme object. Returned value is owned by
+@manager and must not be unref&apos;ed.
+</return>
+</function>
+
+<function name="get_line_info">
+<description>
+@buffer: #GtkTextBuffer.
+@line_start: iterator pointing to the beginning of line.
+@line_start: iterator pointing to the beginning of next line or to the end
+of this line if it&apos;s the last line in @buffer.
+@line: #LineInfo structure to be filled.
+
+Retrieves line text from the buffer, finds line terminator and fills
+@line structure.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_view_get_mark_category_priority">
+<description>
+Gets the priority which is associated with the given @category.
+
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="category">
+<parameter_description> a mark category.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the priority or if @category
+exists but no priority was set, it defaults to 0.
+
+Since: 2.2
+</return>
+</function>
+
+<function name="idle_worker">
+<description>
+@ce: #GtkSourceContextEngine.
+
+Analyzes a batch in idle. Stops when
+whole buffer is analyzed.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_buffer_set_style_scheme">
+<description>
+Sets style scheme used by the buffer.
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="scheme">
+<parameter_description> style scheme.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="container_context_starts_here">
+<description>
+See child_starts_here().
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_style_scheme_manager_prepend_search_path">
+<description>
+Prepends @path to the list of directories where the @manager looks
+for style scheme files.
+See gtk_source_style_scheme_manager_set_search_path() for details.
+
+</description>
+<parameters>
+<parameter name="manager">
+<parameter_description> a #GtkSourceStyleSchemeManager.
+</parameter_description>
+</parameter>
+<parameter name="path">
+<parameter_description> a directory or a filename.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="segment_ends_here">
+<description>
+@state: the segment.
+@line: analyzed line.
+@pos: the position inside @line, bytes.
+
+Checks whether given segment ends at pos. Unlike
+child_starts_here() it doesn&apos;t modify tree, it merely
+calls regex_match() for the end regex.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_buffer_new_with_language">
+<description>
+Creates a new source buffer using the highlighting patterns in
+@language.  This is equivalent to creating a new source buffer with
+a new tag table and then calling gtk_source_buffer_set_language().
+
+
+</description>
+<parameters>
+<parameter name="language">
+<parameter_description> a #GtkSourceLanguage.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a new source buffer which will highlight text
+according to the highlighting patterns in @language.
+</return>
+</function>
+
+<function name="gtk_source_iter_forward_search">
+<description>
+Searches forward for @str. Any match is returned by setting 
+@match_start to the first character of the match and @match_end to the 
+first character after the match. The search will not continue past
+@limit. Note that a search is a linear or O(n) operation, so you
+may wish to use @limit to avoid locking up your UI on large
+buffers.
+
+If the #GTK_SOURCE_SEARCH_VISIBLE_ONLY flag is present, the match may
+have invisible text interspersed in @str. i.e. @str will be a
+possibly-noncontiguous subsequence of the matched range. similarly,
+if you specify #GTK_SOURCE_SEARCH_TEXT_ONLY, the match may have
+pixbufs or child widgets mixed inside the matched range. If these
+flags are not given, the match must be exact; the special 0xFFFC
+character in @str will match embedded pixbufs or child widgets.
+If you specify the #GTK_SOURCE_SEARCH_CASE_INSENSITIVE flag, the text will
+be matched regardless of what case it is in.
+
+Same as gtk_text_iter_forward_search(), but supports case insensitive
+searching.
+
+
+</description>
+<parameters>
+<parameter name="iter">
+<parameter_description> start of search.
+</parameter_description>
+</parameter>
+<parameter name="str">
+<parameter_description> a search string.
+</parameter_description>
+</parameter>
+<parameter name="flags">
+<parameter_description> flags affecting how the search is done.
+</parameter_description>
+</parameter>
+<parameter name="match_start">
+<parameter_description> return location for start of match, or %%NULL.
+</parameter_description>
+</parameter>
+<parameter name="match_end">
+<parameter_description> return location for end of match, or %%NULL.
+</parameter_description>
+</parameter>
+<parameter name="limit">
+<parameter_description> bound for the search, or %%NULL for the end of the buffer.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether a match was found.
+</return>
+</function>
+
+<function name="gtk_source_style_scheme_set_style">
+<description>
+Since: 2.0
+
+</description>
+<parameters>
+<parameter name="scheme">
+<parameter_description> a #GtkSourceStyleScheme.
+</parameter_description>
+</parameter>
+<parameter name="name">
+<parameter_description> style name.
+</parameter_description>
+</parameter>
+<parameter name="style">
+<parameter_description> style to set or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="install_first_update">
+<description>
+@ce: #GtkSourceContextEngine.
+
+Schedules first_update_callback call.
+Always safe to call.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_language_get_metadata">
+<description>
+
+</description>
+<parameters>
+<parameter name="language">
+<parameter_description> a #GtkSourceLanguage.
+</parameter_description>
+</parameter>
+<parameter name="name">
+<parameter_description> metadata property name.
+</parameter_description>
+</parameter>
+</parameters>
+<return> value of property @name stored in the metadata of @language
+or %NULL if language doesn&apos;t contain that metadata property.
+The returned string is owned by @language and should not be freed
+or modified.
+</return>
+</function>
+
+<function name="segment_destroy">
+<description>
+@ce: the engine.
+@context: the segment to destroy.
+
+Recursively frees given segment. It removes the segment
+from ce structure, but it doesn&apos;t update parent and
+siblings. segment_remove() is the function that takes
+care of everything.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="_gtk_source_style_scheme_get_default">
+<description>
+
+</description>
+<parameters>
+</parameters>
+<return> default style scheme to be used when user didn&apos;t set
+style scheme explicitly.
+
+Since: 2.0
+</return>
+</function>
+
+<function name="gtk_source_view_get_indent_width">
+<description>
+Return value: indent width.
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+</parameters>
+<return> indent width.
+</return>
+</function>
+
+<function name="find_insertion_place_forward_">
+<description>
+@segment: (grand)parent segment the new one should be inserted into.
+@offset: offset at which text is inserted.
+@start: segment from which to start search (to avoid
+walking whole tree).
+@parent: initialized with the parent of new segment.
+@prev: initialized with the previous sibling of new segment.
+@next: initialized with the next sibling of new segment.
+
+Auxiliary function used in find_insertion_place().
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="ancestor_context_ends_here">
+<description>
+@state: current context.
+@line: the line to analyze.
+@line_pos: the position inside @line, bytes.
+
+Verifies if some ancestor context ends at the current position.
+This function only checks conetxts and does not modify the tree,
+it&apos;s used by ancestor_ends_here().
+
+
+</description>
+<parameters>
+</parameters>
+<return> the ancestor context that terminates here or %NULL.
+</return>
+</function>
+
+<function name="gtk_source_undo_manager_merge_action">
+<description>
+This function tries to merge the undo action at the top of
+the stack with a new undo action. So when we undo for example
+typing, we can undo the whole word and not each letter by itself.
+
+
+</description>
+<parameters>
+<parameter name="um">
+<parameter_description> a #GtkSourceUndoManager.
+</parameter_description>
+</parameter>
+<parameter name="undo_action">
+<parameter_description> a #GtkSourceUndoAction.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE is merge was sucessful, %FALSE otherwise.²
+</return>
+</function>
+
+<function name="gtk_source_view_get_mark_category_pixbuf">
+<description>
+Gets the pixbuf which is associated with the given mark @category.
+
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="category">
+<parameter_description> a mark category.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the associated #GdkPixbuf, or %NULL if not found.
+
+Since: 2.2
+</return>
+</function>
+
+<function name="g_match_info_next">
+<description>
+Scans for the next match using the same parameters of the previous
+call to g_regex_match_full() or g_regex_match() that returned
+@match_info.
+
+The match is done on the string passed to the match function, so you
+cannot free it before calling this function.
+
+
+</description>
+<parameters>
+<parameter name="match_info">
+<parameter_description> a #GMatchInfo structure
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> location to store the error occuring, or NULL to ignore errors
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE is the string matched, %FALSE otherwise
+
+Since: 2.14
+</return>
+</function>
+
+<function name="gtk_source_buffer_forward_iter_to_mark">
+<description>
+Moves @iter to the position of the next #GtkSourceMark of the given
+@category. Returns #TRUE if @iter was moved. If @category is NULL, the
+next source mark can be of any category.
+
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> an iterator.
+</parameter_description>
+</parameter>
+<parameter name="category">
+<parameter_description> category to search for or %NULL
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether iter moved.
+
+Since: 2.2
+</return>
+</function>
+
+<function name="gtk_source_style_scheme_manager_force_rescan">
+<description>
+Mark any currently cached information about the available style scehems
+as invalid. All the available style schemes will be reloaded next time
+the @manager is accessed.
+
+</description>
+<parameters>
+<parameter name="manager">
+<parameter_description> a #GtkSourceStyleSchemeManager
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="_gtk_source_style_scheme_new">
+<description>
+
+</description>
+<parameters>
+<parameter name="id">
+<parameter_description> scheme id.
+</parameter_description>
+</parameter>
+<parameter name="name">
+<parameter_description> scheme name.
+</parameter_description>
+</parameter>
+</parameters>
+<return> new empty #GtkSourceStyleScheme.
+
+Since: 2.0
+</return>
+</function>
+
+<function name="g_match_info_get_match_count">
+<description>
+Retrieves the number of matched substrings (including substring 0, that
+is the whole matched text), so 1 is returned if the pattern has no
+substrings in it and 0 is returned if the match failed.
+
+If the last match was obtained using the DFA algorithm, that is using
+g_regex_match_all() or g_regex_match_all_full(), the retrieved
+count is not that of the number of capturing parentheses but that of
+the number of matched substrings.
+
+
+</description>
+<parameters>
+<parameter name="match_info">
+<parameter_description> a #GMatchInfo structure
+</parameter_description>
+</parameter>
+</parameters>
+<return>  Number of matched substrings, or -1 if an error occurred
+
+Since: 2.14
+</return>
+</function>
+
+<function name="erase_segments">
+<description>
+@ce: #GtkSourceContextEngine.
+@start: start offset of region to erase, characters.
+@end: end offset of region to erase, characters.
+@hint: segment around @start to make it faster.
+
+Erases all non-toplevel segments in the interval
+[@start, @end]. Its action on the tree is roughly
+equivalent to segment_erase_range_(ce-&amp;gt;priv-&amp;gt;root_segment, start, end)
+(but that does not accept toplevel segment).
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_buffer_get_language">
+<description>
+Return value: #GtkSourceLanguage associated with the buffer, or %NULL.
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+</parameters>
+<return> #GtkSourceLanguage associated with the buffer, or %NULL.
+</return>
+</function>
+
+<function name="g_match_info_fetch_named_pos">
+<description>
+Retrieves the position of the capturing parentheses named @name.
+
+If @name is a valid sub pattern name but it didn&apos;t match anything (e.g.
+sub pattern &quot;X&quot;, matching &quot;b&quot; against &quot;(?P&amp;lt;X&amp;gt;a)?b&quot;) then @start_pos and
+@end_pos are set to -1 and %TRUE is returned.
+
+
+</description>
+<parameters>
+<parameter name="match_info">
+<parameter_description> #GMatchInfo structure
+</parameter_description>
+</parameter>
+<parameter name="name">
+<parameter_description> name of the subexpression
+</parameter_description>
+</parameter>
+<parameter name="start_pos">
+<parameter_description> pointer to location where to store the start position
+</parameter_description>
+</parameter>
+<parameter name="end_pos">
+<parameter_description> pointer to location where to store the end position
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if the position was fetched, %FALSE otherwise. If the
+position cannot be fetched, @start_pos and @end_pos are left
+unchanged.
+
+Since: 2.14
+</return>
+</function>
+
+<function name="gtk_source_language_get_style_name">
+<description>
+Returns: the name of the style with ID @style_id defined by this @language or
+
+</description>
+<parameters>
+<parameter name="language">
+<parameter_description> a #GtkSourceLanguage
+</parameter_description>
+</parameter>
+<parameter name="style_id">
+<parameter_description> a style ID
+</parameter_description>
+</parameter>
+</parameters>
+<return> the name of the style with ID @style_id defined by this @language or
+%NULL if the style has no name or there is no style with ID @style_id defined
+by this @language. The returned string is owned by the @language and must
+not be modified.
+</return>
+</function>
+
+<function name="g_match_info_fetch">
+<description>
+Retrieves the text matching the @match_num&amp;lt;!-- --&amp;gt;&apos;th capturing parentheses.
+0 is the full text of the match, 1 is the first paren set, 2 the second,
+and so on.
+
+If @match_num is a valid sub pattern but it didn&apos;t match anything (e.g.
+sub pattern 1, matching &quot;b&quot; against &quot;(a)?b&quot;) then an empty string is
+returned.
+
+If the match was obtained using the DFA algorithm, that is using
+g_regex_match_all() or g_regex_match_all_full(), the retrieved
+string is not that of a set of parentheses but that of a matched
+substring. Substrings are matched in reverse order of length, so 0 is
+the longest match.
+
+The string is fetched from the string passed to the match function,
+so you cannot call this function after freeing the string.
+
+
+</description>
+<parameters>
+<parameter name="match_info">
+<parameter_description> #GMatchInfo structure
+</parameter_description>
+</parameter>
+<parameter name="match_num">
+<parameter_description> number of the sub expression
+</parameter_description>
+</parameter>
+</parameters>
+<return> The matched substring, or %NULL if an error occurred.
+You have to free the string yourself
+
+Since: 2.14
+</return>
+</function>
+
+<function name="gtk_source_style_scheme_manager_new">
+<description>
+Creates a new style manager. If you do not need more than one style
+manager then use gtk_source_style_scheme_manager_get_default() instead.
+
+
+</description>
+<parameters>
+</parameters>
+<return> a #GtkSourceStyleSchemeManager.
+</return>
+</function>
+
+<function name="gtk_source_buffer_end_not_undoable_action">
+<description>
+Marks the end of a not undoable action on the buffer.  When the
+last not undoable block is closed through the call to this
+function, the list of undo actions is cleared and the undo manager
+is re-enabled.
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="g_match_info_get_string">
+<description>
+Returns: the string searched with @match_info
+
+</description>
+<parameters>
+<parameter name="match_info">
+<parameter_description> a #GMatchInfo
+</parameter_description>
+</parameter>
+</parameters>
+<return> the string searched with @match_info
+
+Since: 2.14
+</return>
+</function>
+
+<function name="gtk_source_buffer_backward_iter_to_mark">
+<description>
+Moves @iter to the position of the previous #GtkSourceMark of the given
+category. Returns #TRUE if @iter was moved. If @category is NULL, the
+previous source mark can be of any category.
+
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> an iterator.
+</parameter_description>
+</parameter>
+<parameter name="category">
+<parameter_description> category to search for or %NULL
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether iter moved.
+
+Since: 2.2
+</return>
+</function>
+
+<function name="find_single_byte_escape">
+<description>
+@string: the pattern.
+
+Checks whether pattern contains \C escape sequence,
+which means &quot;single byte&quot; in pcre and naturally leads
+to crash if used for highlighting.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="segment_tree_zero_len">
+<description>
+@ce: #GtkSoucreContextEngine.
+
+Erases syntax tree and sets root segment length to zero.
+It&apos;s a shortcut for case when all the text is deleted from
+the buffer.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_buffer_begin_not_undoable_action">
+<description>
+Marks the beginning of a not undoable action on the buffer,
+disabling the undo manager.  Typically you would call this function
+before initially setting the contents of the buffer (e.g. when
+loading a file in a text editor).
+
+You may nest gtk_source_buffer_begin_not_undoable_action() /
+gtk_source_buffer_end_not_undoable_action() blocks.
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="sub_pattern_new">
+<description>
+@segment: the segment.
+@start_at: start offset of the subpattern.
+@end_at: end offset of the subpattern.
+@sp_def: the subppatern definition.
+
+Creates new subpattern and adds it to the segment&apos;s
+subpatterns list.
+
+
+</description>
+<parameters>
+</parameters>
+<return> new subpattern.
+</return>
+</function>
+
+<function name="GtkSourceBuffer">
+<description>
+The ::source_mark_updated signal is emitted each time 
+a mark is added to, moved or removed from the @buffer.
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> the buffer that received the signal
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="insert_range">
+<description>
+@ce: a #GtkSourceContextEngine.
+@offset: the start of new segment.
+@length: the length of the segment.
+
+Updates segment tree after insertion: it updates tree
+offsets as appropriate, and inserts a new invalid segment
+or extends existing invalid segment as @offset, so
+after the call segment [@offset, @offset + @length) is marked
+invalid in the tree.
+It may be safely called with length == 0 at any moment
+to invalidate some offset (and it&apos;s used here and there).
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="create_segment">
+<description>
+@ce: the engine.
+@parent: parent segment (%NULL for the root segment).
+@context: context for this segment (%NULL for invalid segments).
+@start_at: start offset, characters.
+@end_at: end offset, characters.
+@is_start: is_start flag.
+@hint: a segment somewhere near new one, to omtimize search.
+
+Creates a new segment and inserts it into the tree.
+
+
+</description>
+<parameters>
+</parameters>
+<return> newly created segment.
+</return>
+</function>
+
+<function name="gtk_source_buffer_get_max_undo_levels">
+<description>
+Determines the number of undo levels the buffer will track for
+buffer edits.
+
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the maximum number of possible undo levels or
+-1 if no limit is set.
+</return>
+</function>
+
+<function name="gtk_source_view_get_right_margin_position">
+<description>
+Gets the position of the right margin in the given @view.
+
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the position of the right margin.
+</return>
+</function>
+
+<function name="gtk_source_buffer_remove_marks">
+<description>
+Remove all marks of @category between @start and @end from the buffer.
+If @category is NULL, all marks in the range will be removed.
+
+Since: 2.2
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="start">
+<parameter_description> a #GtkTextIter
+</parameter_description>
+</parameter>
+<parameter name="end">
+<parameter_description> a #GtkTextIter
+</parameter_description>
+</parameter>
+<parameter name="category">
+<parameter_description> category to search for or NULL
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="_gtk_source_style_scheme_new_from_file">
+<description>
+
+</description>
+<parameters>
+<parameter name="filename">
+<parameter_description> file to parse.
+</parameter_description>
+</parameter>
+</parameters>
+<return> new #GtkSourceStyleScheme created from file, or
+%NULL on error.
+
+Since: 2.0
+</return>
+</function>
+
+<function name="g_regex_split">
+<description>
+Breaks the string on the pattern, and returns an array of the tokens.
+If the pattern contains capturing parentheses, then the text for each
+of the substrings will also be returned. If the pattern does not match
+anywhere in the string, then the whole string is returned as the first
+token.
+
+As a special case, the result of splitting the empty string &quot;&quot; is an
+empty vector, not a vector containing a single string. The reason for
+this special case is that being able to represent a empty vector is
+typically more useful than consistent handling of empty elements. If
+you do need to represent empty elements, you&apos;ll need to check for the
+empty string before calling this function.
+
+A pattern that can match empty strings splits @string into separate
+characters wherever it matches the empty string between characters.
+For example splitting &quot;ab c&quot; using as a separator &quot;\s*&quot;, you will get
+&quot;a&quot;, &quot;b&quot; and &quot;c&quot;.
+
+
+</description>
+<parameters>
+<parameter name="regex">
+<parameter_description> a #GRegex structure
+</parameter_description>
+</parameter>
+<parameter name="string">
+<parameter_description> the string to split with the pattern
+</parameter_description>
+</parameter>
+<parameter name="match_options">
+<parameter_description> match time option flags
+</parameter_description>
+</parameter>
+</parameters>
+<return> a %NULL-terminated gchar ** array. Free it using g_strfreev()
+
+Since: 2.14
+</return>
+</function>
+
+<function name="gtk_source_context_engine_text_inserted">
+<description>
+@ce: a #GtkSourceContextEngine.
+@start_offset: the start of inserted text.
+@end_offset: the end of inserted text.
+
+Called from GtkTextBuffer::insert_text.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="_gtk_source_language_get_language_manager">
+<description>
+
+</description>
+<parameters>
+<parameter name="language">
+<parameter_description> a #GtkSourceLanguage.
+</parameter_description>
+</parameter>
+</parameters>
+<return> #GtkSourceLanguageManager for @language.
+</return>
+</function>
+
+<function name="_gtk_source_context_data_unref">
+<description>
+@ctx_data: #GtkSourceContextData.
+
+Decreases reference count in ctx_data. When reference count
+drops to zero, ctx_data is freed, and ctx_data-&amp;gt;lang-&amp;gt;priv-&amp;gt;ctx_data
+is unset.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="ensure_highlighted">
+<description>
+@ce: a #GtkSourceContextEngine.
+@start: the beginning of the region to highlight.
+@end: the end of the region to highlight.
+
+Updates text tags in reanalyzed parts of given area.
+It applies tags according to whatever is in the syntax
+tree currently, so highlighting may not be correct
+(gtk_source_context_engine_update_highlight is the method
+that actually ensures correct highlighting).
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_language_get_section">
+<description>
+Returns: the section of @language.
+
+</description>
+<parameters>
+<parameter name="language">
+<parameter_description> a #GtkSourceLanguage.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the section of @language.
+The returned string is owned by @language and should not be freed
+or modified.
+</return>
+</function>
+
+<function name="gtk_source_buffer_create_mark">
+<description>
+Creates a source mark in the @buffer of category @category.  A source mark is
+a #GtkTextMark but organised into categories. Depending on the category
+a pixbuf can be specified that will be displayed along the line of the mark.
+
+Like a #GtkTextMark, a #GtkSourceMark can be anonymous if the
+passed @name is %NULL.  Also, the buffer owns the marks so you
+shouldn&apos;t unreference it.
+
+Marks always have left gravity and are moved to the beginning of
+the line when the user deletes the line they were in.
+
+Typical uses for a source mark are bookmarks, breakpoints, current
+executing instruction indication in a source file, etc..
+
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="name">
+<parameter_description> the name of the mark, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="category">
+<parameter_description> a string defining the mark category.
+</parameter_description>
+</parameter>
+<parameter name="where">
+<parameter_description> location to place the mark.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a new #GtkSourceMark, owned by the buffer.
+
+Since: 2.2
+</return>
+</function>
+
+<function name="gtk_source_buffer_redo">
+<description>
+Redoes the last undo operation.  Use gtk_source_buffer_can_redo()
+to check whether a call to this function will have any effect.
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_buffer_ensure_highlight">
+<description>
+Forces buffer to analyze and highlight the given area synchronously.
+
+&amp;lt;note&amp;gt;
+&amp;lt;para&amp;gt;
+This is a potentially slow operation and should be used only
+when you need to make sure that some text not currently
+visible is highlighted, for instance before printing.
+&amp;lt;/para&amp;gt;
+&amp;lt;/note&amp;gt;
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="start">
+<parameter_description> start of the area to highlight.
+</parameter_description>
+</parameter>
+<parameter name="end">
+<parameter_description> end of the area to highlight.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_context_engine_attach_buffer">
+<description>
+@ce: #GtkSourceContextEngine.
+@buffer: buffer.
+
+Detaches engine from previous buffer, and attaches to @buffer if
+it&apos;s not %NULL.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_buffer_set_highlight_syntax">
+<description>
+Controls whether syntax is highlighted in the buffer. If @highlight
+is %TRUE, the text will be highlighted according to the syntax
+patterns specified in the language set with
+gtk_source_buffer_set_language(). If @highlight is %FALSE, syntax highlighting
+is disabled and all the GtkTextTag objects that have been added by the 
+syntax highlighting engine are removed from the buffer.
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="highlight">
+<parameter_description> %TRUE to enable syntax highlighting, %FALSE to disable it.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_view_get_show_line_marks">
+<description>
+Return value: %TRUE if the line marks are displayed.
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if the line marks are displayed.
+
+Since: 2.2
+</return>
+</function>
+
+<function name="g_regex_ref">
+<description>
+Increases reference count of @regex by 1.
+
+
+</description>
+<parameters>
+<parameter name="regex">
+<parameter_description> a #GRegex
+</parameter_description>
+</parameter>
+</parameters>
+<return> @regex
+
+Since: 2.14
+</return>
+</function>
+
+<function name="invalidate_region">
+<description>
+@ce: a #GtkSourceContextEngine.
+@offset: the start of invalidated area.
+@length: the length of the area.
+
+Adds the area to the invalid region and queues highlighting.
+@length may be negative which means deletion; positive
+means insertion; 0 means &quot;something happened here&quot;, it&apos;s
+treated as zero-length insertion.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="apply_match">
+<description>
+@state: the current state of the parser.
+@line: the line to analyze.
+@line_pos: position in the line, bytes.
+@regex: regex that matched.
+@where: kind of sub patterns to apply.
+
+Moves @line_pos after the matched text. @line_pos is not
+updated and the function returns %FALSE if the match cannot be
+applied because an ancestor ends in the middle of the matched
+text.
+
+If the match can be applied the function applies the appropriate
+sub patterns.
+
+
+</description>
+<parameters>
+</parameters>
+<return> %TRUE if the match can be applied.
+</return>
+</function>
+
+<function name="gtk_source_language_get_name">
+<description>
+Returns: the name of @language.
+
+</description>
+<parameters>
+<parameter name="language">
+<parameter_description> a #GtkSourceLanguage.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the name of @language.
+The returned string is owned by @language and should not be freed
+or modified.
+</return>
+</function>
+
+<function name="g_regex_replace_eval">
+<description>
+Replaces occurances of the pattern in regex with the output of @eval
+for that occurance.
+
+Setting @start_position differs from just passing over a shortened string
+and  setting #G_REGEX_MATCH_NOTBOL in the case of a pattern that begins
+with any kind of lookbehind assertion, such as &quot;\b&quot;.
+
+
+</description>
+<parameters>
+<parameter name="regex">
+<parameter_description> a #GRegex structure from g_regex_new()
+</parameter_description>
+</parameter>
+<parameter name="string">
+<parameter_description> string to perform matches against
+</parameter_description>
+</parameter>
+<parameter name="string_len">
+<parameter_description> the length of @string, or -1 if @string is nul-terminated
+</parameter_description>
+</parameter>
+<parameter name="start_position">
+<parameter_description> starting index of the string to match
+</parameter_description>
+</parameter>
+<parameter name="match_options">
+<parameter_description> options for the match
+</parameter_description>
+</parameter>
+<parameter name="eval">
+<parameter_description> a function to call for each match
+</parameter_description>
+</parameter>
+<parameter name="user_data">
+<parameter_description> user data to pass to the function
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> location to store the error occuring, or %NULL to ignore errors
+</parameter_description>
+</parameter>
+</parameters>
+<return> a newly allocated string containing the replacements
+
+Since: 2.14
+</return>
+</function>
+
+<function name="simple_segment_split_">
+<description>
+@ce: the engine.
+@segment: segment to split.
+@offset: offset at which text insertion occurred.
+
+Creates a new invalid segment and inserts it in the middle
+of the given one. Called from insert_range() to mark inserted
+text.
+
+
+</description>
+<parameters>
+</parameters>
+<return> new invalid segment.
+</return>
+</function>
+
+<function name="gtk_source_view_get_smart_home_end">
+<description>
+Return value: a #GtkSourceSmartHomeEndType
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a #GtkSourceSmartHomeEndType
+</return>
+</function>
+
+<function name="gtk_source_style_scheme_manager_get_scheme_ids">
+<description>
+Returns: a %NULL-terminated array of string containing the ids of the
+
+</description>
+<parameters>
+<parameter name="manager">
+<parameter_description> a #GtkSourceStyleSchemeManager
+</parameter_description>
+</parameter>
+</parameters>
+<return> a %NULL-terminated array of string containing the ids of the
+available style schemes or %NULL if no style scheme is available. The array
+is owned by the @manager and must not be modified.
+</return>
+</function>
+
+<function name="gtk_source_buffer_can_undo">
+<description>
+Determines whether a source buffer can undo the last action.
+
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if it&apos;s possible to undo the last action.
+</return>
+</function>
+
+<function name="g_match_info_expand_references">
+<description>
+Returns: the expanded string, or %NULL if an error occurred
+
+</description>
+<parameters>
+<parameter name="match_info">
+<parameter_description> a #GMatchInfo or %NULL
+</parameter_description>
+</parameter>
+<parameter name="string_to_expand">
+<parameter_description> the string to expand
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> location to store the error occuring, or %NULL to ignore errors
+</parameter_description>
+</parameter>
+</parameters>
+<return> the expanded string, or %NULL if an error occurred
+
+Since: 2.14
+</return>
+</function>
+
+<function name="gtk_source_buffer_undo">
+<description>
+Undoes the last user action which modified the buffer.  Use
+gtk_source_buffer_can_undo() to check whether a call to this
+function will have any effect.
+
+Actions are defined as groups of operations between a call to
+gtk_text_buffer_begin_user_action() and
+gtk_text_buffer_end_user_action(), or sequences of similar edits
+(inserts or deletes) on the same line.
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_view_set_auto_indent">
+<description>
+If %TRUE auto indentation of text is enabled.
+
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="enable">
+<parameter_description> whether to enable auto indentation.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="_gtk_source_style_scheme_get_parent_id">
+<description>
+
+</description>
+<parameters>
+<parameter name="scheme">
+<parameter_description> a #GtkSourceStyleScheme.
+</parameter_description>
+</parameter>
+</parameters>
+<return> parent style scheme id or %NULL.
+
+Since: 2.0
+</return>
+</function>
+
+<function name="gtk_source_mark_get_category">
+<description>
+Returns: the category of the #GtkSourceMark
+
+</description>
+<parameters>
+<parameter name="mark">
+<parameter_description> a #GtkSourceMark
+</parameter_description>
+</parameter>
+</parameters>
+<return> the category of the #GtkSourceMark
+
+Since: 2.2
+</return>
+</function>
+
+<function name="GtkSourceView">
+<description>
+Set the behavior of the HOME and END keys.
+
+Since: 2.0
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="_gtk_source_style_scheme_set_parent">
+<description>
+Sets @parent_scheme as parent scheme for @scheme, @scheme will
+look for styles in @parent_scheme if it doesn&apos;t have style set
+for given name.
+
+Since: 2.0
+
+</description>
+<parameters>
+<parameter name="scheme">
+<parameter_description> a #GtkSourceStyleScheme.
+</parameter_description>
+</parameter>
+<parameter name="parent_scheme">
+<parameter_description> parent #GtkSourceStyleScheme for @scheme.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="get_invalid_at">
+<description>
+@ce: the engine.
+@offset: the offset.
+
+Finds invalid segment adjacent to offset (i.e. such that start &amp;lt;= offset &amp;lt;= end),
+if any.
+
+
+</description>
+<parameters>
+</parameters>
+<return> invalid segment or %NULL.
+</return>
+</function>
+
+<function name="gtk_source_view_set_mark_category_pixbuf">
+<description>
+Associates a given @pixbuf with a given mark @category.
+If @pixbuf is #NULL, the pixbuf is unset.
+
+Since: 2.2
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="category">
+<parameter_description> a mark category.
+</parameter_description>
+</parameter>
+<parameter name="pixbuf">
+<parameter_description> a #GdkPixbuf or #NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_view_set_show_right_margin">
+<description>
+If %TRUE a right margin is displayed
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="show">
+<parameter_description> whether to show a right margin.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_language_manager_new">
+<description>
+Creates a new language manager. If you do not need more than one language
+manager or a private language manager instance then use
+gtk_source_language_manager_get_default() instead.
+
+
+</description>
+<parameters>
+</parameters>
+<return> a #GtkSourceLanguageManager.
+</return>
+</function>
+
+<function name="gtk_source_view_style_set">
+<description>
+
+
+</description>
+<parameters>
+<parameter name="widget">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="previous_style">
+<parameter_description>
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="g_regex_new">
+<description>
+Compiles the regular expression to an internal form, and does the initial
+setup of the #GRegex structure.  
+
+
+</description>
+<parameters>
+<parameter name="pattern">
+<parameter_description> the regular expression
+</parameter_description>
+</parameter>
+<parameter name="compile_options">
+<parameter_description> compile options for the regular expression
+</parameter_description>
+</parameter>
+<parameter name="match_options">
+<parameter_description> match options for the regular expression
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> return location for a #GError
+</parameter_description>
+</parameter>
+</parameters>
+<return> a #GRegex structure. Call g_regex_unref() when you are done
+with it.
+
+Since: 2.14
+</return>
+</function>
+
+<function name="fix_offset_delete_one_">
+<description>
+@offset: segment.
+@start: start of deleted text.
+@length: length of deleted text.
+
+
+</description>
+<parameters>
+</parameters>
+<return> new offset depending on location of @offset
+relative to deleted text.
+Called only from fix_offsets_delete_().
+</return>
+</function>
+
+<function name="find_insertion_place_backward_">
+<description>
+@segment: (grand)parent segment the new one should be inserted into.
+@offset: offset at which text is inserted.
+@start: segment from which to start search (to avoid
+walking whole tree).
+@parent: initialized with the parent of new segment.
+@prev: initialized with the previous sibling of new segment.
+@next: initialized with the next sibling of new segment.
+
+Auxiliary function used in find_insertion_place().
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="g_regex_escape_string">
+<description>
+Escapes the special characters used for regular expressions in @string,
+for instance &quot;a.b*c&quot; becomes &quot;a\.b\*c&quot;. This function is useful to
+dynamically generate regular expressions.
+
+@string can contain nul characters that are replaced with &quot;\0&quot;, in this
+case remember to specify the correct length of @string in @length.
+
+
+</description>
+<parameters>
+<parameter name="string">
+<parameter_description> the string to escape
+</parameter_description>
+</parameter>
+<parameter name="length">
+<parameter_description> the length of @string, or -1 if @string is nul-terminated
+</parameter_description>
+</parameter>
+</parameters>
+<return> a newly-allocated escaped string
+
+Since: 2.14
+</return>
+</function>
+
+<function name="segment_new">
+<description>
+@ce: the engine.
+@parent: parent segment (%NULL for the root segment).
+@context: context for this segment (%NULL for invalid segments).
+@start_at: start offset in the buffer, characters.
+@end_at: end offset in the buffer, characters.
+@is_start: is_start flag.
+
+Creates a new segment structure. It doesn&apos;t take care about
+parent or siblings, create_segment() is the function to
+create new segments in the tree.
+
+
+</description>
+<parameters>
+</parameters>
+<return> newly created segment.
+</return>
+</function>
+
+<function name="gtk_source_style_scheme_manager_get_default">
+<description>
+Returns: a #GtkSourceStyleSchemeManager. Return value is owned
+
+</description>
+<parameters>
+</parameters>
+<return> a #GtkSourceStyleSchemeManager. Return value is owned
+by GtkSourceView library and must not be unref&apos;ed.
+</return>
+</function>
+
+<function name="gtk_source_language_manager_set_search_path">
+<description>
+Sets the list of directories where the @lm looks for
+language files.
+If @dirs is %NULL, the search path is reset to default.
+
+&amp;lt;note&amp;gt;
+&amp;lt;para&amp;gt;
+At the moment this function can be called only before the
+language files are loaded for the first time. In practice
+to set a custom search path for a #GtkSourceLanguageManager,
+you have to call this function right after creating it.
+&amp;lt;/para&amp;gt;
+&amp;lt;/note&amp;gt;
+
+</description>
+<parameters>
+<parameter name="lm">
+<parameter_description> a #GtkSourceLanguageManager.
+</parameter_description>
+</parameter>
+<parameter name="dirs">
+<parameter_description> a %NULL-terminated array of strings or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_view_set_insert_spaces_instead_of_tabs">
+<description>
+If %TRUE any tabulator character inserted is replaced by a group
+of space characters.
+
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="enable">
+<parameter_description> whether to insert spaces instead of tabs.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="ancestor_ends_here">
+<description>
+@state: current state.
+@line: the line to analyze.
+@line_pos: the position inside @line, bytes.
+@new_state: where to store the new state.
+
+Verifies if some ancestor context ends at given position. If
+state changed and @new_state is not %NULL, then the new state is stored
+in @new_state, and descendants of @new_state are closed, so the
+terminating segment becomes current state.
+
+
+</description>
+<parameters>
+</parameters>
+<return> %TRUE if an ancestor ends at the given position.
+</return>
+</function>
+
+<function name="gtk_source_mark_new">
+<description>
+Creates a text mark. Add it to a buffer using gtk_text_buffer_add_mark(). 
+If name is NULL, the mark is anonymous; otherwise, the mark can be retrieved
+by name using gtk_text_buffer_get_mark().
+Normally marks are created using the utility function 
+gtk_source_buffer_create_mark().
+
+
+</description>
+<parameters>
+<parameter name="name">
+<parameter_description> Name of the #GtkSourceMark, can be NULL when not using a name
+@category is used to classify marks according to common characteristics
+(e.g. all the marks representing a bookmark could belong to the &quot;bookmark&quot; 
+category, or all the marks representing a compilation error could belong to 
+&quot;error&quot; category).
+</parameter_description>
+</parameter>
+</parameters>
+<return> a new #GtkSourceMark that can be added using gtk_text_buffer_add_mark()
+
+Since: 2.2
+</return>
+</function>
+
+<function name="gtk_source_style_scheme_get_name">
+<description>
+
+</description>
+<parameters>
+<parameter name="scheme">
+<parameter_description> a #GtkSourceStyleScheme.
+</parameter_description>
+</parameter>
+</parameters>
+<return> @scheme name.
+
+Since: 2.0
+</return>
+</function>
+
+<function name="gtk_source_view_set_show_line_numbers">
+<description>
+If %TRUE line numbers will be displayed beside the text.
+
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="show">
+<parameter_description> whether line numbers should be displayed.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_view_set_mark_category_priority">
+<description>
+Set the @priority for the given mark @category. When there are
+multiple marks on the same line, marks of categories with
+higher priorities will be drawn on top.
+
+Since: 2.2
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="category">
+<parameter_description> a mark category.
+</parameter_description>
+</parameter>
+<parameter name="priority">
+<parameter_description> the priority for the category
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="find_segment_position">
+<description>
+@parent: parent segment (not %NULL).
+@hint: segment somewhere near new segment position.
+@start_at: start offset.
+@end_at: end offset.
+@prev: location to return previous sibling.
+@next: location to return next sibling.
+
+Finds siblings of a new segment to be created at interval
+(start_at, end_at). It uses hint to avoid walking whole
+parent-&amp;gt;children list.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="g_regex_check_replacement">
+<description>
+Checks whether @replacement is a valid replacement string (see g_regex_replace()),
+i.e. that all escape sequences in it are valid.
+
+If @has_references is not %NULL then @replacement is checked for
+pattern references. For instance, replacement text &apos;foo\n&apos;
+does not contain references and may be evaluated without information
+about actual match, but &apos;\0\1&apos; (whole match followed by first subpattern)
+requires valid #GMatchInfo object.
+
+
+</description>
+<parameters>
+<parameter name="replacement">
+<parameter_description> the replacement string
+</parameter_description>
+</parameter>
+<parameter name="has_references">
+<parameter_description> location to store information about
+references in @replacement or %NULL
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> location to store error
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether @replacement is a valid replacement string
+
+Since: 2.14
+</return>
+</function>
+
+<function name="g_regex_match">
+<description>
+Scans for a match in string for the pattern in @regex. The @match_options
+are combined with the match options specified when the @regex structure
+was created, letting you have more flexibility in reusing #GRegex
+structures.
+
+A #GMatchInfo structure, used to get information on the match, is stored
+in @match_info if not %NULL. Note that if @match_info is not %NULL then
+it is created even if the function returns %FALSE, i.e. you must free it
+regardless if regular expression actually matched.
+
+To retrieve all the non-overlapping matches of the pattern in string you
+can use g_match_info_next().
+
+&amp;lt;informalexample&amp;gt;&amp;lt;programlisting&amp;gt;
+static void
+print_uppercase_words (const gchar *string)
+{
+/&amp;ast; Print all uppercase-only words. &amp;ast;/
+GRegex *regex;
+GMatchInfo *match_info;
+&amp;nbsp;
+regex = g_regex_new (&quot;[A-Z]+&quot;, 0, 0, NULL);
+g_regex_match (regex, string, 0, &amp;match_info);
+while (g_match_info_matches (match_info))
+{
+gchar *word = g_match_info_fetch (match_info, 0);
+g_print (&quot;Found: %s\n&quot;, word);
+g_free (word);
+g_match_info_next (match_info, NULL);
+}
+g_match_info_free (match_info);
+g_regex_unref (regex);
+}
+&amp;lt;/programlisting&amp;gt;&amp;lt;/informalexample&amp;gt;
+
+
+</description>
+<parameters>
+<parameter name="regex">
+<parameter_description> a #GRegex structure from g_regex_new()
+</parameter_description>
+</parameter>
+<parameter name="string">
+<parameter_description> the string to scan for matches
+</parameter_description>
+</parameter>
+<parameter name="match_options">
+<parameter_description> match options
+</parameter_description>
+</parameter>
+<parameter name="match_info">
+<parameter_description> pointer to location where to store the #GMatchInfo, or
+%NULL if you do not need it
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE is the string matched, %FALSE otherwise
+
+Since: 2.14
+</return>
+</function>
+
+<function name="gtk_source_language_get_id">
+<description>
+Returns: the ID of @language.
+
+</description>
+<parameters>
+<parameter name="language">
+<parameter_description> a #GtkSourceLanguage.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the ID of @language.
+The returned string is owned by @language and should not be freed
+or modified.
+</return>
+</function>
+
+<function name="can_apply_match">
+<description>
+@state: the current state of the parser.
+@line: the line to analyze.
+@match_start: start position of match, bytes.
+@match_end: where to put end of match, bytes.
+@where: kind of sub patterns to apply.
+
+See apply_match(), this function is a helper function
+called from where, it doesn&apos;t modify syntax tree.
+
+
+</description>
+<parameters>
+</parameters>
+<return> %TRUE if the match can be applied.
+</return>
+</function>
+
+<function name="g_regex_replace_literal">
+<description>
+Replaces all occurances of the pattern in @regex with the
+replacement text. @replacement is replaced literally, to
+include backreferences use g_regex_replace().
+
+Setting @start_position differs from just passing over a shortened string
+and  setting #G_REGEX_MATCH_NOTBOL in the case of a pattern that begins
+with any kind of lookbehind assertion, such as &quot;\b&quot;.
+
+
+</description>
+<parameters>
+<parameter name="regex">
+<parameter_description> a #GRegex structure
+</parameter_description>
+</parameter>
+<parameter name="string">
+<parameter_description> the string to perform matches against
+</parameter_description>
+</parameter>
+<parameter name="string_len">
+<parameter_description> the length of @string, or -1 if @string is nul-terminated
+</parameter_description>
+</parameter>
+<parameter name="start_position">
+<parameter_description> starting index of the string to match
+</parameter_description>
+</parameter>
+<parameter name="replacement">
+<parameter_description> text to replace each match with
+</parameter_description>
+</parameter>
+<parameter name="match_options">
+<parameter_description> options for the match
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> location to store the error occuring, or %NULL to ignore errors
+</parameter_description>
+</parameter>
+</parameters>
+<return> a newly allocated string containing the replacements
+
+Since: 2.14
+</return>
+</function>
+
+<function name="gtk_source_style_scheme_get_authors">
+<description>
+
+</description>
+<parameters>
+<parameter name="scheme">
+<parameter_description> a #GtkSourceStyleScheme.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a %NULL-terminated array containing the @scheme authors or
+%NULL if no author is specified by the style
+scheme.
+
+Since: 2.0
+</return>
+</function>
+
+<function name="gtk_source_view_get_tab_width">
+<description>
+Return value: width of tab.
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+</parameters>
+<return> width of tab.
+</return>
+</function>
+
+<function name="g_regex_get_capture_count">
+<description>
+Returns: the number of capturing subpatterns.
+
+</description>
+<parameters>
+<parameter name="regex">
+<parameter_description> a #GRegex
+</parameter_description>
+</parameter>
+</parameters>
+<return> the number of capturing subpatterns.
+
+Since: 2.14
+</return>
+</function>
+
+<function name="update_tree">
+<description>
+@ce: a #GtkSourceContextEngine.
+
+Modifies syntax tree according to data in invalid_region.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_view_set_right_margin_position">
+<description>
+Sets the position of the right margin in the given @view.
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="pos">
+<parameter_description> the position of the margin to set.
+</parameter_description>
+</parameter>
+<parameter name="pos">
+<parameter_description> the width in characters where to position the right margin.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_style_scheme_manager_get_search_path">
+<description>
+Returns: a NULL-terminated array of string containing the search path.
+
+</description>
+<parameters>
+<parameter name="manager">
+<parameter_description> a #GtkSourceStyleSchemeManager.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a NULL-terminated array of string containing the search path.
+The array is owned by the @manager and must not be modified.
+</return>
+</function>
+
+<function name="sub_pattern_free">
+<description>
+@sp: subppatern.
+
+Calls g_free on subpattern, was useful for debugging.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="context_unref">
+<description>
+@context: the context.
+
+Decreases reference count and removes @context
+from the tree when it drops to zero.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_view_get_insert_spaces_instead_of_tabs">
+<description>
+Return value: %TRUE if spaces are inserted instead of tabs.
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if spaces are inserted instead of tabs.
+</return>
+</function>
+
+<function name="gtk_source_buffer_get_highlight_syntax">
+<description>
+Determines whether syntax highlighting is activated in the source
+buffer.
+
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if syntax highlighting is enabled, %FALSE otherwise.
+</return>
+</function>
+
+<function name="g_match_info_fetch_pos">
+<description>
+Retrieves the position of the @match_num&amp;lt;!-- --&amp;gt;&apos;th capturing parentheses.
+0 is the full text of the match, 1 is the first paren set, 2 the second,
+and so on.
+
+If @match_num is a valid sub pattern but it didn&apos;t match anything (e.g.
+sub pattern 1, matching &quot;b&quot; against &quot;(a)?b&quot;) then @start_pos and @end_pos
+are set to -1 and %TRUE is returned.
+
+If the match was obtained using the DFA algorithm, that is using
+g_regex_match_all() or g_regex_match_all_full(), the retrieved
+position is not that of a set of parentheses but that of a matched
+substring. Substrings are matched in reverse order of length, so 0 is
+the longest match.
+
+
+</description>
+<parameters>
+<parameter name="match_info">
+<parameter_description> #GMatchInfo structure
+</parameter_description>
+</parameter>
+<parameter name="match_num">
+<parameter_description> number of the sub expression
+</parameter_description>
+</parameter>
+<parameter name="start_pos">
+<parameter_description> pointer to location where to store the start position
+</parameter_description>
+</parameter>
+<parameter name="end_pos">
+<parameter_description> pointer to location where to store the end position
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if the position was fetched, %FALSE otherwise. If the
+position cannot be fetched, @start_pos and @end_pos are left
+unchanged.
+
+Since: 2.14
+</return>
+</function>
+
+<function name="gtk_source_buffer_new">
+<description>
+Creates a new source buffer.
+
+
+</description>
+<parameters>
+<parameter name="table">
+<parameter_description> a #GtkTextTagTable, or %NULL to create a new one.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a new source buffer.
+</return>
+</function>
+
+<function name="context_thaw">
+<description>
+@context: the context.
+
+Recursively decrements reference count in context and its children,
+if it was incremented by context_freeze().
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_style_copy">
+<description>
+Creates a copy of @style, that is a new #GtkSourceStyle instance which
+has the same attributes set.
+
+
+</description>
+<parameters>
+<parameter name="style">
+<parameter_description> a #GtkSourceStyle structure to copy.
+</parameter_description>
+</parameter>
+</parameters>
+<return> copy of @style, call g_object_unref() when you are done with it.
+
+Since: 2.0
+</return>
+</function>
+
+<function name="gtk_source_mark_next">
+<description>
+Returns: the next #GtkSourceMark or %NULL
+
+</description>
+<parameters>
+<parameter name="mark">
+<parameter_description> a #GtkSourceMark
+</parameter_description>
+</parameter>
+<parameter name="category">
+<parameter_description> a string specifying the mark category or %NULL
+</parameter_description>
+</parameter>
+</parameters>
+<return> the next #GtkSourceMark or %NULL
+
+Since: 2.2
+</return>
+</function>
+
+<function name="gtk_source_style_scheme_get_style">
+<description>
+
+</description>
+<parameters>
+<parameter name="scheme">
+<parameter_description> a #GtkSourceStyleScheme.
+</parameter_description>
+</parameter>
+<parameter name="style_id">
+<parameter_description> id of the style to retrieve.
+</parameter_description>
+</parameter>
+</parameters>
+<return> style which corresponds to @style_id in the @scheme,
+or %NULL when no style with this name found. It is owned by @scheme
+and may not be unref&apos;ed.
+
+Since: 2.0
+</return>
+</function>
+
+<function name="refresh_range">
+<description>
+@ce: a #GtkSourceContextEngine.
+@start: the beginning of updated area.
+@end: the end of updated area.
+@modify_refresh_region: whether updated area should be added to
+refresh_region.
+
+Marks the area as updated - notifies view about it, and adds it to
+refresh_region if @modify_refresh_region is %TRUE (update_syntax may
+process huge area though actually updated is couple of lines, so in
+that case update_syntax() takes care of refresh_region, and this
+function only notifies the view).
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="g_regex_match_all_full">
+<description>
+Using the standard algorithm for regular expression matching only the
+longest match in the string is retrieved, it is not possibile to obtain
+all the available matches. For instance matching
+&quot;&amp;lt;a&amp;gt; &amp;lt;b&amp;gt; &amp;lt;c&amp;gt;&quot; against the pattern &quot;&amp;lt;.*&amp;gt;&quot; you get
+&quot;&amp;lt;a&amp;gt; &amp;lt;b&amp;gt; &amp;lt;c&amp;gt;&quot;.
+
+This function uses a different algorithm (called DFA, i.e. deterministic
+finite automaton), so it can retrieve all the possible matches, all
+starting at the same point in the string. For instance matching
+&quot;&amp;lt;a&amp;gt; &amp;lt;b&amp;gt; &amp;lt;c&amp;gt;&quot; against the pattern &quot;&amp;lt;.*&amp;gt;&quot; you
+would obtain three matches: &quot;&amp;lt;a&amp;gt; &amp;lt;b&amp;gt; &amp;lt;c&amp;gt;&quot;,
+&quot;&amp;lt;a&amp;gt; &amp;lt;b&amp;gt;&quot; and &quot;&amp;lt;a&amp;gt;&quot;.
+
+The number of matched strings is retrieved using
+g_match_info_get_match_count().
+To obtain the matched strings and their position you can use,
+respectively, g_match_info_fetch() and g_match_info_fetch_pos(). Note that
+the strings are returned in reverse order of length; that is, the longest
+matching string is given first.
+
+Note that the DFA algorithm is slower than the standard one and it is not
+able to capture substrings, so backreferences do not work.
+
+Setting @start_position differs from just passing over a shortened string
+and  setting #G_REGEX_MATCH_NOTBOL in the case of a pattern that begins
+with any kind of lookbehind assertion, such as &quot;\b&quot;.
+
+A #GMatchInfo structure, used to get information on the match, is stored
+in @match_info if not %NULL. Note that if @match_info is not %NULL then
+it is created even if the function returns %FALSE, i.e. you must free it
+regardless if regular expression actually matched.
+
+
+</description>
+<parameters>
+<parameter name="regex">
+<parameter_description> a #GRegex structure from g_regex_new()
+</parameter_description>
+</parameter>
+<parameter name="string">
+<parameter_description> the string to scan for matches
+</parameter_description>
+</parameter>
+<parameter name="string_len">
+<parameter_description> the length of @string, or -1 if @string is nul-terminated
+</parameter_description>
+</parameter>
+<parameter name="start_position">
+<parameter_description> starting index of the string to match
+</parameter_description>
+</parameter>
+<parameter name="match_options">
+<parameter_description> match options
+</parameter_description>
+</parameter>
+<parameter name="match_info">
+<parameter_description> pointer to location where to store the #GMatchInfo, or
+%NULL if you do not need it
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> location to store the error occuring, or %NULL to ignore errors
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE is the string matched, %FALSE otherwise
+
+Since: 2.14
+</return>
+</function>
+
+<function name="destroy_tags_hash">
+<description>
+@ce: #GtkSourceContextEngine.
+
+Destroys syntax tags cache.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_view_get_indent_on_tab">
+<description>
+Return value: %TRUE if the selection is indented when tab is pressed.
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if the selection is indented when tab is pressed.
+
+Since: 1.8
+</return>
+</function>
+
+<function name="check_line_end">
+<description>
+@state: current state.
+@hint: child of @state used in analyze_line() and next_segment().
+
+Closes the contexts that cannot contain end of lines if needed.
+Updates hint if new state is different from @state.
+
+
+</description>
+<parameters>
+</parameters>
+<return> the new state.
+</return>
+</function>
+
+<function name="GtkSourceMark">
+<description>
+The category of the #GtkSourceMark, classified the mark and control
+what pixbuf is used and with which priority it is drawn.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_buffer_can_redo">
+<description>
+Determines whether a source buffer can redo the last action
+(i.e. if the last operation was an undo).
+
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if a redo is possible.
+</return>
+</function>
+
+<function name="segment_cmp">
+<description>
+@s1: first segment.
+@s2: second segment.
+
+Compares segments by their offset, used to sort list of invalid segments.
+
+
+</description>
+<parameters>
+</parameters>
+<return> an integer like strcmp() does.
+</return>
+</function>
+
+<function name="gtk_source_view_set_indent_on_tab">
+<description>
+If %TRUE, when the tab key is pressed and there is a selection, the
+selected text is indented of one level instead of being replaced with
+the \t characters. Shift+Tab unindents the selection.
+
+Since: 1.8
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="enable">
+<parameter_description> whether to indent a block when tab is pressed.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="update_syntax">
+<description>
+@ce: #GtkSourceContextEngine.
+@end: desired end of region to analyze or %NULL.
+@time: maximal amount of time in milliseconds allowed to spend here
+or 0 for &apos;unlimited&apos;.
+
+Updates syntax tree. If @end is not %NULL, then it analyzes
+(reanalyzes invalid areas in) region from start of buffer
+to @end. Otherwise, it analyzes batch of text starting at
+first invalid line.
+In order to avoid blocking ui it uses a timer and stops
+when time elapsed is greater than @time, so analyzed region is
+not necessarily what&apos;s requested (unless @time is 0).
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_language_manager_get_default">
+<description>
+Returns: a #GtkSourceLanguageManager. Return value is owned
+
+</description>
+<parameters>
+</parameters>
+<return> a #GtkSourceLanguageManager. Return value is owned
+by GtkSourceView library and must not be unref&apos;ed.
+</return>
+</function>
+
+<function name="get_segment_at_offset">
+<description>
+@ce: #GtkSoucreContextEngine.
+@hint: segment to start search from or %NULL.
+@offset: the offset, characters.
+
+Finds the deepest segment &quot;at @offset&quot;.
+More precisely, it returns toplevel segment if
+@offset is equal to length of buffer; or non-zero-length
+segment which contains character at @offset; or zero-length
+segment at @offset. In case when there are several zero-length
+segments, it returns the first one.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="regex_new">
+<description>
+@pattern: the regular expression.
+@flags: compile options for @pattern.
+@error: location to store the error occuring, or %NULL to ignore errors.
+
+Creates a new regex.
+
+
+</description>
+<parameters>
+</parameters>
+<return> a newly-allocated #Regex.
+</return>
+</function>
+
+<function name="first_update_callback">
+<description>
+@ce: a #GtkSourceContextEngine.
+
+Same as idle_worker, except: it runs once, and install idle_worker
+if not everything was analyzed at once.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_style_scheme_get_id">
+<description>
+
+</description>
+<parameters>
+<parameter name="scheme">
+<parameter_description> a #GtkSourceStyleScheme.
+</parameter_description>
+</parameter>
+</parameters>
+<return> @scheme id.
+
+Since: 2.0
+</return>
+</function>
+
+<function name="gtk_source_style_scheme_manager_append_search_path">
+<description>
+Appends @path to the list of directories where the @manager looks for
+style scheme files.
+See gtk_source_style_scheme_manager_set_search_path() for details.
+
+</description>
+<parameters>
+<parameter name="manager">
+<parameter_description> a #GtkSourceStyleSchemeManager.
+</parameter_description>
+</parameter>
+<parameter name="path">
+<parameter_description> a directory or a filename.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_view_get_auto_indent">
+<description>
+Return value: %TRUE if auto indentation is enabled.
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if auto indentation is enabled.
+</return>
+</function>
+
+<function name="_gtk_source_context_data_new">
+<description>
+@lang: #GtkSourceLanguage.
+
+Creates new context definition set. It does not set lang-&amp;gt;priv-&amp;gt;ctx_data,
+that&apos;s lang business.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_view_get_highlight_current_line">
+<description>
+Return value: %TRUE if the current line is highlighted.
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if the current line is highlighted.
+</return>
+</function>
+
+<function name="gtk_source_view_new_with_buffer">
+<description>
+Creates a new #GtkSourceView widget displaying the buffer
+@buffer. One buffer can be shared among many widgets.
+
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a new #GtkTextView.
+</return>
+</function>
+
+<function name="gtk_source_iter_backward_search">
+<description>
+Same as gtk_text_iter_backward_search(), but supports case insensitive
+searching.
+
+
+</description>
+<parameters>
+<parameter name="iter">
+<parameter_description> a #GtkTextIter where the search begins.
+</parameter_description>
+</parameter>
+<parameter name="str">
+<parameter_description> search string.
+</parameter_description>
+</parameter>
+<parameter name="flags">
+<parameter_description> bitmask of flags affecting the search.
+</parameter_description>
+</parameter>
+<parameter name="match_start">
+<parameter_description> return location for start of match, or %%NULL.
+</parameter_description>
+</parameter>
+<parameter name="match_end">
+<parameter_description> return location for end of match, or %%NULL.
+</parameter_description>
+</parameter>
+<parameter name="limit">
+<parameter_description> location of last possible @match_start, or %%NULL for start of buffer.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether a match was found.
+</return>
+</function>
+
+<function name="segment_add_subpattern">
+<description>
+@state: the segment.
+@sp: subpattern.
+
+Prepends subpattern to subpatterns list in the segment.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="g_match_info_get_regex">
+<description>
+Returns: #GRegex object used in @match_info
+
+</description>
+<parameters>
+<parameter name="match_info">
+<parameter_description> a #GMatchInfo
+</parameter_description>
+</parameter>
+</parameters>
+<return> #GRegex object used in @match_info
+
+Since: 2.14
+</return>
+</function>
+
+<function name="gtk_source_view_get_show_right_margin">
+<description>
+Return value: %TRUE if the right margin is shown.
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if the right margin is shown.
+</return>
+</function>
+
+<function name="gtk_source_context_engine_set_style_scheme">
+<description>
+@engine: #GtkSourceContextEngine.
+@scheme: #GtkSourceStyleScheme to set.
+
+GtkSourceEngine::set_style_scheme method.
+Sets current style scheme, updates tag styles and everything.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_mark_prev">
+<description>
+Returns: the previous #GtkSourceMark or %NULL
+
+</description>
+<parameters>
+<parameter name="mark">
+<parameter_description> a #GtkSourceMark
+</parameter_description>
+</parameter>
+<parameter name="category">
+<parameter_description> a string specifying the mark category or %NULL
+</parameter_description>
+</parameter>
+</parameters>
+<return> the previous #GtkSourceMark or %NULL
+
+Since: 2.2
+</return>
+</function>
+
+<function name="enable_highlight">
+<description>
+@ce: a #GtkSourceContextEngine.
+@enable: whether to enable highlighting.
+
+Whether to highlight (i.e. apply tags) analyzed area.
+Note that this does not turn on/off the analyzis stuff,
+it affects only text tags.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="apply_sub_patterns">
+<description>
+@contextstate: a #Context.
+@line_starts_at: beginning offset of the line.
+@line: the line to analyze.
+@line_pos: the position inside @line.
+@line_length: the length of @line.
+@regex: regex that matched.
+@where: kind of sub patterns to apply.
+
+Applies sub patterns of kind @where to the matched text.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_buffer_set_highlight_matching_brackets">
+<description>
+Controls the bracket match highlighting function in the buffer.  If
+activated, when you position your cursor over a bracket character
+(a parenthesis, a square bracket, etc.) the matching opening or
+closing bracket character will be highlighted.  You can specify the
+style with the gtk_source_buffer_set_bracket_match_style()
+function.
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="highlight">
+<parameter_description> %TRUE if you want matching brackets highlighted.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_style_scheme_get_filename">
+<description>
+
+</description>
+<parameters>
+<parameter name="scheme">
+<parameter_description> a #GtkSourceStyleScheme.
+</parameter_description>
+</parameter>
+</parameters>
+<return> @scheme file name if the scheme was created parsing a
+style scheme file or NULL in the other cases.
+
+Since: 2.0
+</return>
+</function>
+
+<function name="gtk_source_buffer_get_marks_at_line">
+<description>
+Returns: a newly allocated #GSList.
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="line">
+<parameter_description> a line number.
+</parameter_description>
+</parameter>
+<parameter name="category">
+<parameter_description> category to search for or %NULL
+</parameter_description>
+</parameter>
+</parameters>
+<return> a newly allocated #GSList.
+
+Since: 2.2
+</return>
+</function>
+
+<function name="_gtk_source_buffer_update_highlight">
+<description>
+Asks the buffer to analyze and highlight given area.
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="start">
+<parameter_description> start of the area to highlight.
+</parameter_description>
+</parameter>
+<parameter name="end">
+<parameter_description> end of the area to highlight.
+</parameter_description>
+</parameter>
+<parameter name="synchronous">
+<parameter_description> whether the area should be highlighted synchronously.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="g_regex_unref">
+<description>
+Decreases reference count of @regex by 1. When reference count drops
+to zero, it frees all the memory associated with the regex structure.
+
+Since: 2.14
+
+</description>
+<parameters>
+<parameter name="regex">
+<parameter_description> a #GRegex
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="get_invalid_segment">
+<description>
+@ce: a #GtkSourceContextEngine.
+
+
+</description>
+<parameters>
+</parameters>
+<return> first invalid segment, or %NULL.
+</return>
+</function>
+
+<function name="gtk_source_view_get_show_line_numbers">
+<description>
+Return value: %TRUE if the line numbers are displayed.
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if the line numbers are displayed.
+</return>
+</function>
+
+<function name="_gtk_source_language_manager_get_rng_file">
+<description>
+Returns: path to RNG file. It belongs to %lm and must not be freed or modified.
+
+</description>
+<parameters>
+<parameter name="lm">
+<parameter_description> a #GtkSourceLanguageManager.
+</parameter_description>
+</parameter>
+</parameters>
+<return> path to RNG file. It belongs to %lm and must not be freed or modified.
+</return>
+</function>
+
+<function name="g_match_info_is_partial_match">
+<description>
+Usually if the string passed to g_regex_match*() matches as far as
+it goes, but is too short to match the entire pattern, %FALSE is
+returned. There are circumstances where it might be helpful to
+distinguish this case from other cases in which there is no match.
+
+Consider, for example, an application where a human is required to
+type in data for a field with specific formatting requirements. An
+example might be a date in the form ddmmmyy, defined by the pattern
+&quot;^\d?\d(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\d\d$&quot;.
+If the application sees the userâ€™s keystrokes one by one, and can
+check that what has been typed so far is potentially valid, it is
+able to raise an error as soon as a mistake is made.
+
+GRegex supports the concept of partial matching by means of the
+#G_REGEX_MATCH_PARTIAL flag. When this is set the return code for
+g_regex_match() or g_regex_match_full() is, as usual, %TRUE
+for a complete match, %FALSE otherwise. But, when this functions
+Returns: %TRUE if the match was partial, %FALSE otherwise
+
+</description>
+<parameters>
+<parameter name="match_info">
+<parameter_description> a #GMatchInfo structure
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if the match was partial, %FALSE otherwise
+
+Since: 2.14
+</return>
+</function>
+
+<function name="gtk_source_view_set_smart_home_end">
+<description>
+Set the desired movement of the cursor when HOME and END keys
+are pressed.
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="smart_he">
+<parameter_description> the desired behavior among #GtkSourceSmartHomeEndType
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_buffer_set_language">
+<description>
+Associate a #GtkSourceLanguage with the source buffer. If @language is 
+not-%NULL and syntax highlighting is enabled (see gtk_source_buffer_set_highlight_syntax()),
+the syntax patterns defined in @language will be used to highlight the text
+contained in the buffer. If @language is %NULL, the text contained in the 
+buffer is not highlighted.
+
+The buffer holds a reference to @language.
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="language">
+<parameter_description> a #GtkSourceLanguage to set, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="add_invalid">
+<description>
+@ce: the engine.
+@segment: segment.
+
+Inserts segment into the list of invalid segments.
+Called whenever new invalid segment is created or when
+a segment is marked invalid.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="g_match_info_fetch_all">
+<description>
+Bundles up pointers to each of the matching substrings from a match
+and stores them in an array of gchar pointers. The first element in
+the returned array is the match number 0, i.e. the entire matched
+text.
+
+If a sub pattern didn&apos;t match anything (e.g. sub pattern 1, matching
+&quot;b&quot; against &quot;(a)?b&quot;) then an empty string is inserted.
+
+If the last match was obtained using the DFA algorithm, that is using
+g_regex_match_all() or g_regex_match_all_full(), the retrieved
+strings are not that matched by sets of parentheses but that of the
+matched substring. Substrings are matched in reverse order of length,
+so the first one is the longest match.
+
+The strings are fetched from the string passed to the match function,
+so you cannot call this function after freeing the string.
+
+
+</description>
+<parameters>
+<parameter name="match_info">
+<parameter_description> a #GMatchInfo structure
+</parameter_description>
+</parameter>
+</parameters>
+<return> a %NULL-terminated array of gchar * pointers. It must be freed
+using g_strfreev(). If the previous match failed %NULL is
+returned.
+
+Since: 2.14
+</return>
+</function>
+
+<function name="find_insertion_place">
+<description>
+@segment: (grand)parent segment the new one should be inserted into.
+@offset: offset at which text is inserted.
+@start: segment from which to start search (to avoid
+walking whole tree).
+@parent: initialized with the parent of new segment.
+@prev: initialized with the previous sibling of new segment.
+@hint: a segment somewhere near insertion place to optimize search.
+
+After text is inserted, a new invalid segment is created and inserted
+into the tree. This function finds an appropriate position for the new
+segment. To make it faster, it uses hint and calls
+find_insertion_place_forward_ or find_insertion_place_backward_ depending
+on position of offset relative to hint.
+There is no return value, it always succeeds (or crashes).
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="child_starts_here">
+<description>
+@ce: the engine.
+@state: current state.
+@child_def: the child.
+@line: line to analyze.
+@line_pos: the position inside @line, bytes.
+@new_state: where to store the new state.
+
+Verifies if a context of the type in @curr_definition starts at
+@line_pos in @line. If the contexts start here @new_state and
+@line_pos are updated.
+
+
+</description>
+<parameters>
+</parameters>
+<return> %TRUE if the context starts here.
+</return>
+</function>
+
+<function name="simple_context_starts_here">
+<description>
+See child_starts_here().
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_context_engine_update_highlight">
+<description>
+@ce: a #GtkSourceContextEngine.
+@start: start of area to update.
+@end: start of area to update.
+@synchronous: whether it should block until everything
+is analyzed/highlighted.
+
+GtkSourceEngine::update_highlight method.
+
+Makes sure the area is analyzed and highlighted. If @asynchronous
+is %FALSE, then it queues idle worker.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="g_regex_match_full">
+<description>
+Scans for a match in string for the pattern in @regex. The @match_options
+are combined with the match options specified when the @regex structure
+was created, letting you have more flexibility in reusing #GRegex
+structures.
+
+Setting @start_position differs from just passing over a shortened string
+and  setting #G_REGEX_MATCH_NOTBOL in the case of a pattern that begins
+with any kind of lookbehind assertion, such as &quot;\b&quot;.
+
+A #GMatchInfo structure, used to get information on the match, is stored
+in @match_info if not %NULL. Note that if @match_info is not %NULL then
+it is created even if the function returns %FALSE, i.e. you must free it
+regardless if regular expression actually matched.
+
+@string is not copied and is used in #GMatchInfo internally. If you use
+any #GMatchInfo method (except g_match_info_free()) after freeing or
+modifying @string then the behaviour is undefined.
+
+To retrieve all the non-overlapping matches of the pattern in string you
+can use g_match_info_next().
+
+&amp;lt;informalexample&amp;gt;&amp;lt;programlisting&amp;gt;
+static void
+print_uppercase_words (const gchar *string)
+{
+/&amp;ast; Print all uppercase-only words. &amp;ast;/
+GRegex *regex;
+GMatchInfo *match_info;
+GError *error = NULL;
+&amp;nbsp;
+regex = g_regex_new (&quot;[A-Z]+&quot;, 0, 0, NULL);
+g_regex_match_full (regex, string, -1, 0, 0, &amp;match_info, &amp;error);
+while (g_match_info_matches (match_info))
+{
+gchar *word = g_match_info_fetch (match_info, 0);
+g_print (&quot;Found: %s\n&quot;, word);
+g_free (word);
+g_match_info_next (match_info, &amp;error);
+}
+g_match_info_free (match_info);
+g_regex_unref (regex);
+if (error != NULL)
+{
+g_printerr (&quot;Error while matching: %s\n&quot;, error-&amp;gt;message);
+g_error_free (error);
+}
+}
+&amp;lt;/programlisting&amp;gt;&amp;lt;/informalexample&amp;gt;
+
+
+</description>
+<parameters>
+<parameter name="regex">
+<parameter_description> a #GRegex structure from g_regex_new()
+</parameter_description>
+</parameter>
+<parameter name="string">
+<parameter_description> the string to scan for matches
+</parameter_description>
+</parameter>
+<parameter name="string_len">
+<parameter_description> the length of @string, or -1 if @string is nul-terminated
+</parameter_description>
+</parameter>
+<parameter name="start_position">
+<parameter_description> starting index of the string to match
+</parameter_description>
+</parameter>
+<parameter name="match_options">
+<parameter_description> match options
+</parameter_description>
+</parameter>
+<parameter name="match_info">
+<parameter_description> pointer to location where to store the #GMatchInfo, or
+%NULL if you do not need it
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> location to store the error occuring, or %NULL to ignore errors
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE is the string matched, %FALSE otherwise
+
+Since: 2.14
+</return>
+</function>
+
+<function name="gtk_source_view_set_indent_width">
+<description>
+Sets the number of spaces to use for each step of indent.
+If @width is -1, the value of the GtkSourceView::tab-width property
+will be used.
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="width">
+<parameter_description> indent width in characters.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="delete_range_">
+<description>
+@ce: a #GtkSourceContextEngine.
+@start: the start of deleted area.
+@end: the end of deleted area.
+
+Updates segment tree after deletion: removes segments at deleted
+interval, updates tree offsets, etc.
+It&apos;s called only from update_tree().
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="analyze_line">
+<description>
+@ce: #GtkSourceContextEngine.
+@state: the state at the beginning of line.
+@line: the line.
+@hint: a child of @state around start of line, to make it faster.
+
+Finds contexts at the line and updates the syntax tree on it.
+
+
+</description>
+<parameters>
+</parameters>
+<return> starting state at the next line.
+</return>
+</function>
+
+<function name="gtk_source_view_set_highlight_current_line">
+<description>
+If @show is %TRUE the current line is highlighted.
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView
+</parameter_description>
+</parameter>
+<parameter name="show">
+<parameter_description> whether to highlight the current line
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="segment_extend">
+<description>
+@state: the semgent.
+@end_at: new end offset, characters.
+
+Updates end offset in the segment and its ancestors.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_iter_find_matching_bracket">
+<description>
+Tries to match the bracket character currently at @iter with its
+opening/closing counterpart, and if found moves @iter to the position
+where it was found.
+
+@iter must be a #GtkTextIter belonging to a #GtkSourceBuffer.
+
+
+</description>
+<parameters>
+<parameter name="iter">
+<parameter_description> a #GtkTextIter.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if the matching bracket was found and the @iter
+iter moved.
+</return>
+</function>
+
+<function name="g_match_info_free">
+<description>
+Frees all the memory associated with the #GMatchInfo structure.
+
+Since: 2.14
+
+</description>
+<parameters>
+<parameter name="match_info">
+<parameter_description> a #GMatchInfo
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="highlight_region">
+<description>
+@ce: a #GtkSourceContextEngine.
+@start: the beginning of the region to highlight.
+@end: the end of the region to highlight.
+
+Highlights the specified region.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_style_scheme_get_description">
+<description>
+
+</description>
+<parameters>
+<parameter name="scheme">
+<parameter_description> a #GtkSourceStyleScheme.
+</parameter_description>
+</parameter>
+</parameters>
+<return> @scheme description (if defined) or NULL.
+
+Since: 2.0
+</return>
+</function>
+
+<function name="context_freeze">
+<description>
+@context: the context.
+
+Recursively increments reference count in context and its children,
+and marks them, so context_thaw is able to correctly decrement
+reference count.
+This function is for update_syntax: we want to preserve existing
+contexts when possible, and update_syntax erases contexts from
+reanalyzed lines; so to avoid destructing and recreating contexts
+every time, we need to increment reference count on existing contexts,
+and decrement it when we are done with analysis, so no more needed
+contexts go away. Keeping a list of referenced contexts is painful
+or slow, so we just reference all contexts present at the moment.
+
+Note this is not reentrant, context_freeze()/context_thaw() pair is called
+only from update_syntax().
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_buffer_get_marks_at_iter">
+<description>
+Returns: a newly allocated #GSList.
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> an iterator.
+</parameter_description>
+</parameter>
+<parameter name="category">
+<parameter_description> category to search for or %NULL
+</parameter_description>
+</parameter>
+</parameters>
+<return> a newly allocated #GSList.
+
+Since: 2.2
+</return>
+</function>
+
+<function name="gtk_source_buffer_get_highlight_matching_brackets">
+<description>
+Determines whether bracket match highlighting is activated for the
+source buffer.
+
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if the source buffer will highlight matching
+brackets.
+</return>
+</function>
+
+<function name="line_info_destroy">
+<description>
+@line: #LineInfo.
+
+Destroys data allocated by get_line_info().
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="g_regex_replace">
+<description>
+Replaces all occurances of the pattern in @regex with the
+replacement text. Backreferences of the form &apos;\number&apos; or &apos;\g&amp;lt;number&amp;gt;&apos;
+in the replacement text are interpolated by the number-th captured
+subexpression of the match, &apos;\g&amp;lt;name&amp;gt;&apos; refers to the captured subexpression
+with the given name. &apos;\0&apos; refers to the complete match, but &apos;\0&apos; followed
+by a number is the octal representation of a character. To include a
+literal &apos;\&apos; in the replacement, write &apos;\\&apos;.
+There are also escapes that changes the case of the following text:
+
+&amp;lt;variablelist&amp;gt;
+&amp;lt;varlistentry&amp;gt;&amp;lt;term&amp;gt;\l&amp;lt;/term&amp;gt;
+&amp;lt;listitem&amp;gt;
+&amp;lt;para&amp;gt;Convert to lower case the next character&amp;lt;/para&amp;gt;
+&amp;lt;/listitem&amp;gt;
+&amp;lt;/varlistentry&amp;gt;
+&amp;lt;varlistentry&amp;gt;&amp;lt;term&amp;gt;\u&amp;lt;/term&amp;gt;
+&amp;lt;listitem&amp;gt;
+&amp;lt;para&amp;gt;Convert to upper case the next character&amp;lt;/para&amp;gt;
+&amp;lt;/listitem&amp;gt;
+&amp;lt;/varlistentry&amp;gt;
+&amp;lt;varlistentry&amp;gt;&amp;lt;term&amp;gt;\L&amp;lt;/term&amp;gt;
+&amp;lt;listitem&amp;gt;
+&amp;lt;para&amp;gt;Convert to lower case till \E&amp;lt;/para&amp;gt;
+&amp;lt;/listitem&amp;gt;
+&amp;lt;/varlistentry&amp;gt;
+&amp;lt;varlistentry&amp;gt;&amp;lt;term&amp;gt;\U&amp;lt;/term&amp;gt;
+&amp;lt;listitem&amp;gt;
+&amp;lt;para&amp;gt;Convert to upper case till \E&amp;lt;/para&amp;gt;
+&amp;lt;/listitem&amp;gt;
+&amp;lt;/varlistentry&amp;gt;
+&amp;lt;varlistentry&amp;gt;&amp;lt;term&amp;gt;\E&amp;lt;/term&amp;gt;
+&amp;lt;listitem&amp;gt;
+&amp;lt;para&amp;gt;End case modification&amp;lt;/para&amp;gt;
+&amp;lt;/listitem&amp;gt;
+&amp;lt;/varlistentry&amp;gt;
+&amp;lt;/variablelist&amp;gt;
+
+If you do not need to use backreferences use g_regex_replace_literal().
+
+The @replacement string must be UTF-8 encoded even if #G_REGEX_RAW was
+passed to g_regex_new(). If you want to use not UTF-8 encoded stings
+you can use g_regex_replace_literal().
+
+Setting @start_position differs from just passing over a shortened string
+and  setting #G_REGEX_MATCH_NOTBOL in the case of a pattern that begins
+with any kind of lookbehind assertion, such as &quot;\b&quot;.
+
+
+</description>
+<parameters>
+<parameter name="regex">
+<parameter_description> a #GRegex structure
+</parameter_description>
+</parameter>
+<parameter name="string">
+<parameter_description> the string to perform matches against
+</parameter_description>
+</parameter>
+<parameter name="string_len">
+<parameter_description> the length of @string, or -1 if @string is nul-terminated
+</parameter_description>
+</parameter>
+<parameter name="start_position">
+<parameter_description> starting index of the string to match
+</parameter_description>
+</parameter>
+<parameter name="replacement">
+<parameter_description> text to replace each match with
+</parameter_description>
+</parameter>
+<parameter name="match_options">
+<parameter_description> options for the match
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> location to store the error occuring, or %NULL to ignore errors
+</parameter_description>
+</parameter>
+</parameters>
+<return> a newly allocated string containing the replacements
+
+Since: 2.14
+</return>
+</function>
+
+<function name="g_regex_get_string_number">
+<description>
+Retrieves the number of the subexpression named @name.
+
+
+</description>
+<parameters>
+<parameter name="regex">
+<parameter_description> #GRegex structure
+</parameter_description>
+</parameter>
+<parameter name="name">
+<parameter_description> name of the subexpression
+</parameter_description>
+</parameter>
+</parameters>
+<return> The number of the subexpression or -1 if @name does not exists
+
+Since: 2.14
+</return>
+</function>
+
+<function name="g_match_info_matches">
+<description>
+
+</description>
+<parameters>
+<parameter name="match_info">
+<parameter_description> a #GMatchInfo structure
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if the previous match operation succeeded, %FALSE
+otherwise
+
+Since: 2.14
+</return>
+</function>
+
+<function name="segment_merge">
+<description>
+@ce: #GtkSourceContextEngine.
+@first: first segment.
+@second: second segment.
+
+Merges adjacent segments @first and @second given
+their contexts are equal.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_view_set_tab_width">
+<description>
+Sets the width of tabulation in characters.
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="width">
+<parameter_description> width of tab in characters.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="remove_invalid">
+<description>
+@ce: the engine.
+@segment: segment.
+
+Removes segment from the list of invalid segments;
+Called when an invalid segment is destroyed (invalid
+segments never become valid).
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="install_idle_worker">
+<description>
+@ce: #GtkSourceContextEngine.
+
+Schedules reanalyzing buffer in idle.
+Always safe to call.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="fix_offsets_delete_">
+<description>
+@segment: segment.
+@start: start offset.
+@length: length of deleted text.
+@hint: some segment somewhere near deleted text to optimize search.
+
+Recursively updates offsets after deleting text. To be called
+only from delete_range_().
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="sub_pattern_to_int">
+<description>
+@name: the string from lang file.
+
+Tries to convert @name to a number and assumes
+it&apos;s a name if that fails. Used for references in
+subpattern contexts (e.g. \%{1@start} or \%{blah@start}).
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="g_regex_match_simple">
+<description>
+Scans for a match in @string for @pattern.
+
+This function is equivalent to g_regex_match() but it does not
+require to compile the pattern with g_regex_new(), avoiding some
+lines of code when you need just to do a match without extracting
+substrings, capture counts, and so on.
+
+If this function is to be called on the same @pattern more than
+once, it&apos;s more efficient to compile the pattern once with
+g_regex_new() and then use g_regex_match().
+
+
+</description>
+<parameters>
+<parameter name="pattern">
+<parameter_description> the regular expression
+</parameter_description>
+</parameter>
+<parameter name="string">
+<parameter_description> the string to scan for matches
+</parameter_description>
+</parameter>
+<parameter name="compile_options">
+<parameter_description> compile options for the regular expression
+</parameter_description>
+</parameter>
+<parameter name="match_options">
+<parameter_description> match options
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE is the string matched, %FALSE otherwise
+
+Since: 2.14
+</return>
+</function>
+
+<function name="g_regex_match_all">
+<description>
+Using the standard algorithm for regular expression matching only the
+longest match in the string is retrieved. This function uses a
+different algorithm so it can retrieve all the possible matches.
+For more documentation see g_regex_match_all_full().
+
+A #GMatchInfo structure, used to get information on the match, is stored
+in @match_info if not %NULL. Note that if @match_info is not %NULL then
+it is created even if the function returns %FALSE, i.e. you must free it
+regardless if regular expression actually matched.
+
+
+</description>
+<parameters>
+<parameter name="regex">
+<parameter_description> a #GRegex structure from g_regex_new()
+</parameter_description>
+</parameter>
+<parameter name="string">
+<parameter_description> the string to scan for matches
+</parameter_description>
+</parameter>
+<parameter name="match_options">
+<parameter_description> match options
+</parameter_description>
+</parameter>
+<parameter name="match_info">
+<parameter_description> pointer to location where to store the #GMatchInfo, or
+%NULL if you do not need it
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE is the string matched, %FALSE otherwise
+
+Since: 2.14
+</return>
+</function>
+
+<function name="_gtk_source_style_apply">
+<description>
+Applies text styles set in @style if it&apos;s not %NULL, or
+unsets style fields in @tag set with _gtk_source_style_apply()
+if @style is %NULL. Note that it does not touch fields which
+are not set in @style. To reset everything use @style == %NULL.
+
+Since: 2.0
+
+</description>
+<parameters>
+<parameter name="style">
+<parameter_description> a #GtkSourceStyle to apply.
+</parameter_description>
+</parameter>
+<parameter name="tag">
+<parameter_description> a #GtkTextTag to apply styles to.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="GtkSourceStyleScheme">
+<description>
+Style scheme filename or NULL.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_language_get_style_ids">
+<description>
+Returns: a  %NULL terminated array containing
+
+</description>
+<parameters>
+<parameter name="language">
+<parameter_description> a #GtkSourceLanguage
+</parameter_description>
+</parameter>
+</parameters>
+<return> a  %NULL terminated array containing
+ids of the styles defined by this @language or %NULL if no style is
+defined.  The returned array must be freed with g_strfreev().
+</return>
+</function>
+
+<function name="gtk_source_language_get_mime_types">
+<description>
+Returns: a newly-allocated %NULL terminated array containing
+
+</description>
+<parameters>
+<parameter name="language">
+<parameter_description> a #GtkSourceLanguage.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a newly-allocated %NULL terminated array containing
+the mime types or %NULL if no mime types are found.
+The returned array must be freed with g_strfreev().
+</return>
+</function>
+
+<function name="gtk_source_language_manager_get_search_path">
+<description>
+Gets the list directories where @lm looks for language files.
+
+
+</description>
+<parameters>
+<parameter name="lm">
+<parameter_description> a #GtkSourceLanguageManager.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %NULL-terminated array containg a list of language files directories.
+The array is owned by @lm and must not be modified.
+</return>
+</function>
+
+<function name="gtk_source_language_manager_get_language">
+<description>
+Gets the #GtkSourceLanguage identified by the given @id in the language
+manager.
+
+
+</description>
+<parameters>
+<parameter name="lm">
+<parameter_description> a #GtkSourceLanguageManager.
+</parameter_description>
+</parameter>
+<parameter name="id">
+<parameter_description> a language id.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a #GtkSourceLanguage, or %NULL if there is no language
+identified by the given @id. Return value is owned by @lm and should not
+be freed.
+</return>
+</function>
+
+<function name="g_regex_get_pattern">
+<description>
+Gets the pattern string associated with @regex, i.e. a copy of 
+the string passed to g_regex_new().
+
+
+</description>
+<parameters>
+<parameter name="regex">
+<parameter_description> a #GRegex structure
+</parameter_description>
+</parameter>
+</parameters>
+<return> the pattern of @regex
+
+Since: 2.14
+</return>
+</function>
+
+<function name="gtk_source_buffer_get_style_scheme">
+<description>
+Returns: the #GtkSourceStyleScheme set by
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the #GtkSourceStyleScheme set by
+gtk_source_buffer_set_style_scheme(), or %NULL.
+</return>
+</function>
+
+<function name="g_regex_get_max_backref">
+<description>
+Returns: the number of the highest back reference.
+
+</description>
+<parameters>
+<parameter name="regex">
+<parameter_description> a #GRegex
+</parameter_description>
+</parameter>
+</parameters>
+<return> the number of the highest back reference.
+
+Since: 2.14
+</return>
+</function>
+
+<function name="segment_erase_range_">
+<description>
+@ce: #GtkSourceContextEngine.
+@segment: the segment.
+@start: start offset of range to erase, characters.
+@end: end offset of range to erase, characters.
+
+Recurisvely removes segments from [@start, @end] interval
+starting from @segment. If @segment belongs to the range,
+or it&apos;s a zero-length segment at @end offset, and it&apos;s not
+the toplevel segment, then it&apos;s removed from the tree.
+If @segment intersects with the range (unless it&apos;s the toplevel
+segment), then its ends are adjusted appropriately, and it&apos;s
+split into two if it completely contains the range.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="segment_make_invalid_">
+<description>
+@ce: the engine.
+@segment: segment to invalidate.
+
+Invalidates segment. Called only from insert_range().
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="resolve_reference">
+<description>
+Checks whether all children of a context definition refer to valid
+contexts. Called from _gtk_source_context_data_finish_parse.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="_gtksourceview_dgettext">
+<description>
+Try to translate string from given domain. It returns
+duplicated string which must be freed with g_free().
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="fix_offsets_insert_">
+<description>
+@segment: segment.
+@start: start offset.
+@delta: length of inserted text.
+
+Recursively updates offsets after inserting text. To be called
+only from insert_range().
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="regex_resolve">
+<description>
+@regex: a #Regex.
+@start_regex: a #Regex.
+@matched_text: the text matched against @start_regex.
+
+If the regular expression does not contain references to the start
+regular expression, the functions increases the reference count
+of @regex and returns it.
+
+If the regular expression contains references to the start regular
+expression in the form &quot;\%{start_sub_pattern@start}&quot;, it replaces
+them (they are extracted from @start_regex and @matched_text) and
+Returns: a #Regex.
+
+</description>
+<parameters>
+</parameters>
+<return> a #Regex.
+</return>
+</function>
+
+<function name="gtk_source_language_manager_get_language_ids">
+<description>
+Returns: a %NULL-terminated array of string containing the ids of the
+
+</description>
+<parameters>
+<parameter name="lm">
+<parameter_description> a #GtkSourceLanguageManager
+</parameter_description>
+</parameter>
+</parameters>
+<return> a %NULL-terminated array of string containing the ids of the
+available languages or %NULL if no language is available. The array
+is owned by @lm and must not be modified.
+</return>
+</function>
+
+<function name="all_analyzed">
+<description>
+@ce: a #GtkSourceContextEngine.
+
+
+</description>
+<parameters>
+</parameters>
+<return> whether everything is analyzed (but it doesn&apos;t care about the tags).
+</return>
+</function>
+
+<function name="segment_remove">
+<description>
+@ce: #GtkSoucreContextEngine.
+@segment: segment to remove.
+
+Removes the segment from syntax tree and frees it.
+It correctly updates parent&apos;s children list, not
+like segment_destroy() where caller has to take care
+of tree integrity.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_buffer_set_max_undo_levels">
+<description>
+Sets the number of undo levels for user actions the buffer will
+track.  If the number of user actions exceeds the limit set by this
+function, older actions will be discarded.
+
+If @max_undo_levels is -1, no limit is set.
+
+A new action is started whenever the function
+gtk_text_buffer_begin_user_action() is called.  In general, this
+happens whenever the user presses any key which modifies the
+buffer, but the undo manager will try to merge similar consecutive
+actions, such as multiple character insertions into one action.
+But, inserting a newline does start a new action.
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="max_undo_levels">
+<parameter_description> the desired maximum number of undo levels.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="_gtk_source_style_scheme_apply">
+<description>
+Sets text colors from @scheme in the @widget.
+
+Since: 2.0
+
+</description>
+<parameters>
+<parameter name="scheme">
+<parameter_description> a #GtkSourceStyleScheme or NULL.
+</parameter_description>
+</parameter>
+<parameter name="widget">
+<parameter_description> a #GtkWidget to apply styles to.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_style_scheme_manager_set_search_path">
+<description>
+Sets the list of directories where the @manager looks for
+style scheme files.
+If @dirs is %NULL, the search path is reset to default.
+
+</description>
+<parameters>
+<parameter name="manager">
+<parameter_description> a #GtkSourceStyleSchemeManager.
+</parameter_description>
+</parameter>
+<parameter name="path">
+<parameter_description> a %NULL-terminated array of strings or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_context_engine_text_deleted">
+<description>
+@ce: a #GtkSourceContextEngine.
+@offset: the start of deleted text.
+@length: the length (in characters) of deleted text.
+
+Called from GtkTextBuffer::delete_range.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="g_regex_split_simple">
+<description>
+Breaks the string on the pattern, and returns an array of the tokens.
+If the pattern contains capturing parentheses, then the text for each
+of the substrings will also be returned. If the pattern does not match
+anywhere in the string, then the whole string is returned as the first
+token.
+
+This function is equivalent to g_regex_split() but it does not
+require to compile the pattern with g_regex_new(), avoiding some
+lines of code when you need just to do a split without extracting
+substrings, capture counts, and so on.
+
+If this function is to be called on the same @pattern more than
+once, it&apos;s more efficient to compile the pattern once with
+g_regex_new() and then use g_regex_split().
+
+As a special case, the result of splitting the empty string &quot;&quot; is an
+empty vector, not a vector containing a single string. The reason for
+this special case is that being able to represent a empty vector is
+typically more useful than consistent handling of empty elements. If
+you do need to represent empty elements, you&apos;ll need to check for the
+empty string before calling this function.
+
+A pattern that can match empty strings splits @string into separate
+characters wherever it matches the empty string between characters.
+For example splitting &quot;ab c&quot; using as a separator &quot;\s*&quot;, you will get
+&quot;a&quot;, &quot;b&quot; and &quot;c&quot;.
+
+
+</description>
+<parameters>
+<parameter name="pattern">
+<parameter_description> the regular expression
+</parameter_description>
+</parameter>
+<parameter name="string">
+<parameter_description> the string to scan for matches
+</parameter_description>
+</parameter>
+<parameter name="compile_options">
+<parameter_description> compile options for the regular expression
+</parameter_description>
+</parameter>
+<parameter name="match_options">
+<parameter_description> match options
+</parameter_description>
+</parameter>
+</parameters>
+<return> a %NULL-terminated gchar ** array. Free it using g_strfreev()
+
+Since: 2.14
+</return>
+</function>
+
+<function name="gtk_source_view_set_show_line_marks">
+<description>
+If %TRUE line marks will be displayed beside the text.
+
+Since: 2.2
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="show">
+<parameter_description> whether line marks should be displayed.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="create_reg_all">
+<description>
+@context: context.
+@definition: context definition.
+
+Creates regular expression for all possible transitions: it
+combines terminating regex, terminating regexes of parent
+contexts if those can terminate this one, and start regexes
+of child contexts.
+
+It takes as an argument actual context or a context definition. In
+case when context end depends on start (\%{foo@start} references),
+it must use the context, definition is not enough. If there are no
+those references, then the reg_all is created right in the definition
+when no contexts exist yet. This is why this function has its funny
+arguments.
+
+
+</description>
+<parameters>
+</parameters>
+<return> resulting regex or %NULL when pcre failed to compile the regex.
+</return>
+</function>
+
+<function name="gtk_source_language_get_globs">
+<description>
+Returns: a newly-allocated %NULL terminated array containing
+
+</description>
+<parameters>
+<parameter name="language">
+<parameter_description> a #GtkSourceLanguage.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a newly-allocated %NULL terminated array containing
+the globs or %NULL if no globs are found.
+The returned array must be freed with g_strfreev().
+</return>
+</function>
+
+<function name="get_invalid_line">
+<description>
+@ce: a #GtkSourceContextEngine.
+
+
+</description>
+<parameters>
+</parameters>
+<return> first invalid line, or -1.
+</return>
+</function>
+
+<function name="get_color_by_name">
+<description>
+
+</description>
+<parameters>
+<parameter name="scheme">
+<parameter_description> a #GtkSourceStyleScheme.
+</parameter_description>
+</parameter>
+<parameter name="name">
+<parameter_description> color name to find.
+</parameter_description>
+</parameter>
+</parameters>
+<return> color which corresponds to @name in the @scheme.
+Returned value is actual color string suitable for gdk_color_parse().
+It may be @name or part of @name so copy it or something, if you need
+it to stay around.
+
+Since: 2.0
+</return>
+</function>
+
+<function name="g_regex_split_full">
+<description>
+Breaks the string on the pattern, and returns an array of the tokens.
+If the pattern contains capturing parentheses, then the text for each
+of the substrings will also be returned. If the pattern does not match
+anywhere in the string, then the whole string is returned as the first
+token.
+
+As a special case, the result of splitting the empty string &quot;&quot; is an
+empty vector, not a vector containing a single string. The reason for
+this special case is that being able to represent a empty vector is
+typically more useful than consistent handling of empty elements. If
+you do need to represent empty elements, you&apos;ll need to check for the
+empty string before calling this function.
+
+A pattern that can match empty strings splits @string into separate
+characters wherever it matches the empty string between characters.
+For example splitting &quot;ab c&quot; using as a separator &quot;\s*&quot;, you will get
+&quot;a&quot;, &quot;b&quot; and &quot;c&quot;.
+
+Setting @start_position differs from just passing over a shortened string
+and  setting #G_REGEX_MATCH_NOTBOL in the case of a pattern that begins
+with any kind of lookbehind assertion, such as &quot;\b&quot;.
+
+
+</description>
+<parameters>
+<parameter name="regex">
+<parameter_description> a #GRegex structure
+</parameter_description>
+</parameter>
+<parameter name="string">
+<parameter_description> the string to split with the pattern
+</parameter_description>
+</parameter>
+<parameter name="string_len">
+<parameter_description> the length of @string, or -1 if @string is nul-terminated
+</parameter_description>
+</parameter>
+<parameter name="start_position">
+<parameter_description> starting index of the string to match
+</parameter_description>
+</parameter>
+<parameter name="match_options">
+<parameter_description> match time option flags
+</parameter_description>
+</parameter>
+<parameter name="max_tokens">
+<parameter_description> the maximum number of tokens to split @string into. If this
+is less than 1, the string is split completely
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> return location for a #GError
+</parameter_description>
+</parameter>
+</parameters>
+<return> a %NULL-terminated gchar ** array. Free it using g_strfreev()
+
+Since: 2.14
+</return>
+</function>
+
+<function name="next_segment">
+<description>
+@ce: #GtkSourceContextEngine.
+@state: current state.
+@line: analyzed line.
+@line_pos: position inside @line, bytes.
+@new_state: where to store the new state.
+@hint: child of @state used to optimize tree operations.
+
+Verifies if a context starts or ends in @line at @line_pos of after it.
+If the contexts starts or ends here @new_state and @line_pos are updated.
+
+
+</description>
+<parameters>
+</parameters>
+<return> %FALSE is there are no more contexts in @line.
+</return>
+</function>
+
+<function name="gtk_source_view_new">
+<description>
+Creates a new #GtkSourceView. An empty default buffer will be
+created for you. If you want to specify your own buffer, consider
+gtk_source_view_new_with_buffer().
+
+
+</description>
+<parameters>
+</parameters>
+<return> a new #GtkSourceView
+</return>
+</function>
+
+<function name="_gtk_source_context_data_finish_parse">
+<description>
+@ctx_data: #GtkSourceContextData.
+@overrides: list of #GtkSourceContextOverride objects.
+@error: error structure to be filled in when failed.
+
+Checks all context references and applies overrides. Lang file may
+use cross-references between contexts, e.g. context A may include
+context B, and context B in turn include context A. Hence during
+parsing it just records referenced context id, and then it needs to
+check the references and replace them with actual context definitions
+(which in turn may be overridden using &amp;lt;override&amp;gt; or &amp;lt;replace&amp;gt; tags).
+May be called any number of times, must be called after parsing is
+done.
+
+
+</description>
+<parameters>
+</parameters>
+<return> %TRUE on success, %FALSE if there were unresolved
+references.
+</return>
+</function>
+
+<function name="context_is_pure_container">
+<description>
+@def: context definition.
+
+Checks whether context is a container with no start regex.
+References to such contexts are implicitly translated to
+wildcard references (context_id:*).
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_language_get_hidden">
+<description>
+Returns: TRUE if the language should be hidden, FALSE otherwise.
+
+</description>
+<parameters>
+<parameter name="language">
+<parameter_description> a #GtkSourceLanguage
+</parameter_description>
+</parameter>
+</parameters>
+<return> TRUE if the language should be hidden, FALSE otherwise.
+</return>
+</function>
+
+<function name="g_match_info_fetch_named">
+<description>
+Retrieves the text matching the capturing parentheses named @name.
+
+If @name is a valid sub pattern name but it didn&apos;t match anything (e.g.
+sub pattern &quot;X&quot;, matching &quot;b&quot; against &quot;(?P&amp;lt;X&amp;gt;a)?b&quot;) then an empty
+string is returned.
+
+The string is fetched from the string passed to the match function,
+so you cannot call this function after freeing the string.
+
+
+</description>
+<parameters>
+<parameter name="match_info">
+<parameter_description> #GMatchInfo structure
+</parameter_description>
+</parameter>
+<parameter name="name">
+<parameter_description> name of the subexpression
+</parameter_description>
+</parameter>
+</parameters>
+<return> The matched substring, or %NULL if an error occurred.
+You have to free the string yourself
+
+Since: 2.14
+</return>
+</function>
+
 </root>

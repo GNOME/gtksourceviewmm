@@ -1,5 +1,10 @@
 2008-01-12  Jonathon Jongsma  <jjongsma@gnome.org>
 
+	* configure.ac: bump version to 1.9.4 so we can detect a version with
+	SourceMark api.  Also require at least version 2.1.0 of gtksourceview
+
+2008-01-12  Jonathon Jongsma  <jjongsma@gnome.org>
+
 	* gtksourceview/src/gtksourceview_docs.xml: re-generate documentation
 
 2008-01-12  Jonathon Jongsma  <jjongsma@gnome.org>

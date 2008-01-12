@@ -1,0 +1,55 @@
+/* sourcemark.hg
+ * 
+ * Copyright (C)2008 Jonathon Jongsma
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+/// \file
+/// \brief SourceMark class
+
+#include <gtkmm/textmark.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(gtkmm/private/textmark_p.h)
+
+namespace gtksourceview
+{
+
+class SourceMark : public Gtk::TextMark
+{
+
+    _CLASS_GOBJECT(SourceMark, GtkSourceMark, GTK_SOURCE_MARK, Gtk::TextMark, GtkTextMark)
+
+protected:
+  _CTOR_DEFAULT
+
+  _WRAP_CTOR(SourceMark(const Glib::ustring& category), gtk_source_mark_new)
+
+public:
+   _WRAP_CREATE(const Glib::ustring& category)
+
+  _WRAP_METHOD(Glib::ustring get_category() const, gtk_source_mark_get_category)
+  _WRAP_METHOD(Glib::RefPtr<SourceMark> next(const Glib::ustring& category) const, gtk_source_mark_next)
+  // overloaded for category == NULL
+  Glib::RefPtr<SourceMark> next() const;
+  _WRAP_METHOD(Glib::RefPtr<SourceMark> prev(const Glib::ustring& category) const, gtk_source_mark_prev)
+  // overloaded for category == NULL
+  Glib::RefPtr<SourceMark> prev() const;
+};//end class SourceMark
+
+}//end namespace gtksourceview
+
+

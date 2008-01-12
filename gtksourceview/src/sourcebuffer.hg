@@ -25,6 +25,7 @@
 
 #include <gtkmm/textbuffer.h>
 #include <gtksourceviewmm/sourcelanguage.h>
+#include <gtksourceviewmm/sourcemark.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(gtkmm/private/textbuffer_p.h)
@@ -200,16 +201,23 @@ public:
 
   _WRAP_METHOD(bool backward_iter_to_mark(Gtk::TextIter& iter, const Glib::ustring& category), gtk_source_buffer_backward_iter_to_mark)
   // overload with category == NULL
-  //_WRAP_METHOD(bool backward_iter_to_mark(Gtk::TextIter& iter), gtk_source_buffer_backward_iter_to_mark)
+  bool backward_iter_to_mark(Gtk::TextIter& iter);
 
   _WRAP_METHOD(bool forward_iter_to_mark(Gtk::TextIter& iter, const Glib::ustring& category), gtk_source_buffer_forward_iter_to_mark)
   // overload with category == NULL
-  //_WRAP_METHOD(bool forward_iter_to_mark(Gtk::TextIter& iter), gtk_source_buffer_forward_iter_to_mark)
+  bool forward_iter_to_mark(Gtk::TextIter& iter);
 
   _WRAP_METHOD(void ensure_highlight(const Gtk::TextIter& start, const Gtk::TextIter& end), gtk_source_buffer_ensure_highlight)
   _WRAP_METHOD(void set_style_scheme(const Glib::RefPtr<SourceStyleScheme>& scheme), gtk_source_buffer_set_style_scheme)
   _WRAP_METHOD(Glib::RefPtr<SourceStyleScheme> get_style_scheme(), gtk_source_buffer_get_style_scheme, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const SourceStyleScheme> get_style_scheme() const, gtk_source_buffer_get_style_scheme, constversion, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<SourceMark> create_mark(const Glib::ustring& name, const Glib::ustring& category, const Gtk::TextIter& where), gtk_source_buffer_create_mark)
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceMark> > get_marks_at_line(int line, const Glib::ustring& category) const, gtk_source_buffer_get_marks_at_line)
+  // overloaded with category == NULL
+  Glib::SListHandle<Glib::RefPtr<SourceMark> > get_marks_at_line(int line) const;
+  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceMark> > get_marks_at_iter(Gtk::TextIter& iter, const Glib::ustring& category) const, gtk_source_buffer_get_marks_at_iter)
+  // overloaded with category == NULL
+  Glib::SListHandle<Glib::RefPtr<SourceMark> > get_marks_at_iter(Gtk::TextIter& iter) const;
 
 
   /// \name signals

@@ -39,6 +39,26 @@ SourceBuffer::SourceBuffer (const Glib::RefPtr<SourceLanguage> &language) :
     }
 }
 
+bool SourceBuffer::backward_iter_to_mark(Gtk::TextIter& iter)
+{
+    return gtk_source_buffer_backward_iter_to_mark(gobj(), iter.gobj(), NULL);
+}
+
+bool SourceBuffer::forward_iter_to_mark(Gtk::TextIter& iter)
+{
+    return gtk_source_buffer_forward_iter_to_mark(gobj(), iter.gobj(), NULL);
+}
+
+Glib::SListHandle<Glib::RefPtr<SourceMark> > SourceBuffer::get_marks_at_line(int line) const
+{
+    return Glib::SListHandle<Glib::RefPtr<SourceMark> >(gtk_source_buffer_get_marks_at_line(const_cast<GtkSourceBuffer*>(gobj()), line, NULL), Glib::OWNERSHIP_SHALLOW);
+}
+
+Glib::SListHandle<Glib::RefPtr<SourceMark> > SourceBuffer::get_marks_at_iter(Gtk::TextIter& iter) const
+{
+    return Glib::SListHandle<Glib::RefPtr<SourceMark> >(gtk_source_buffer_get_marks_at_iter(const_cast<GtkSourceBuffer*>(gobj()), iter.gobj(), NULL), Glib::OWNERSHIP_SHALLOW);
+}
+
 }//end namespace gtksourceview
 
 

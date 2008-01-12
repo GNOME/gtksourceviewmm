@@ -1,3 +1,13 @@
+2008-01-12  Jonathon Jongsma  <jjongsma@gnome.org>
+
+	* gtksourceview/src/Makefile_list_of_hg.am_fragment:
+	* gtksourceview/src/sourcebuffer.ccg:
+	* gtksourceview/src/sourcebuffer.hg:
+	* gtksourceview/src/sourcemark.ccg:
+	* gtksourceview/src/sourcemark.hg:
+	* tools/m4/convert_gtksourceviewmm.m4: added SourceMark class and
+	SourceMark-related API to SourceBuffer
+
 2008-01-12  Jonathon Jongsma <jjongsma@gnome.org>
 
 	* gtksourceview/src/gtksourceview_enums.defs:

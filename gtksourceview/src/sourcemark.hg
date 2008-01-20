@@ -30,24 +30,30 @@ namespace gtksourceview
 
 class SourceMark : public Gtk::TextMark
 {
-
-    _CLASS_GOBJECT(SourceMark, GtkSourceMark, GTK_SOURCE_MARK, Gtk::TextMark, GtkTextMark)
+  _CLASS_GOBJECT(SourceMark, GtkSourceMark, GTK_SOURCE_MARK, Gtk::TextMark, GtkTextMark)
 
 protected:
-  _CTOR_DEFAULT
+   _CTOR_DEFAULT
 
   _WRAP_CTOR(SourceMark(const Glib::ustring& category), gtk_source_mark_new)
 
 public:
-   _WRAP_CREATE(const Glib::ustring& category)
+  _WRAP_CREATE(const Glib::ustring& category)
 
   _WRAP_METHOD(Glib::ustring get_category() const, gtk_source_mark_get_category)
-  _WRAP_METHOD(Glib::RefPtr<SourceMark> next(const Glib::ustring& category) const, gtk_source_mark_next)
+  _WRAP_METHOD(Glib::RefPtr<SourceMark> next(const Glib::ustring& category), gtk_source_mark_next, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const SourceMark> next(const Glib::ustring& category) const, gtk_source_mark_next, refreturn, constversion)
+
   // overloaded for category == NULL
-  Glib::RefPtr<SourceMark> next() const;
-  _WRAP_METHOD(Glib::RefPtr<SourceMark> prev(const Glib::ustring& category) const, gtk_source_mark_prev)
+  Glib::RefPtr<SourceMark> next();
+  Glib::RefPtr<const SourceMark> next() const;
+
+  _WRAP_METHOD(Glib::RefPtr<SourceMark> prev(const Glib::ustring& category), gtk_source_mark_prev, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const SourceMark> prev(const Glib::ustring& category) const, gtk_source_mark_prev, refreturn, constversion)
+
   // overloaded for category == NULL
-  Glib::RefPtr<SourceMark> prev() const;
+  Glib::RefPtr<SourceMark> prev();
+  Glib::RefPtr<const SourceMark> prev() const;
 };//end class SourceMark
 
 }//end namespace gtksourceview

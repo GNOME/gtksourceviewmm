@@ -31,21 +31,21 @@ namespace gtksourceview
 
 class SourceStyleSchemeManager : public Glib::Object
 {
-
-    _CLASS_GOBJECT(SourceStyleSchemeManager, GtkSourceStyleSchemeManager, GTK_SOURCE_STYLE_SCHEME_MANAGER, Glib::Object, GObject)
+  _CLASS_GOBJECT(SourceStyleSchemeManager, GtkSourceStyleSchemeManager, GTK_SOURCE_STYLE_SCHEME_MANAGER, Glib::Object, GObject)
 
 protected:
-    _CTOR_DEFAULT
+  _CTOR_DEFAULT
 
 public:
-    _WRAP_CREATE()
-    static Glib::RefPtr<SourceStyleSchemeManager> get_default();
+  _WRAP_CREATE()
+  static Glib::RefPtr<SourceStyleSchemeManager> get_default();
 
   // TODO: set_search_path() and get_search_path()
   _WRAP_METHOD(void append_search_path(const Glib::ustring& path), gtk_source_style_scheme_manager_append_search_path)
   _WRAP_METHOD(void prepend_search_path(const Glib::ustring& path), gtk_source_style_scheme_manager_prepend_search_path)
   // TODO: get_scheme_ids
-  _WRAP_METHOD(Glib::RefPtr<SourceStyleScheme> get_scheme(const Glib::ustring& scheme_id) const, gtk_source_style_scheme_manager_get_scheme)
+  _WRAP_METHOD(Glib::RefPtr<SourceStyleScheme> get_scheme(const Glib::ustring& scheme_id), gtk_source_style_scheme_manager_get_scheme, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const SourceStyleScheme> get_scheme(const Glib::ustring& scheme_id) const, gtk_source_style_scheme_manager_get_scheme, refreturn, constversion)
   _WRAP_METHOD(void force_rescan(), gtk_source_style_scheme_manager_force_rescan)
 
 };//end class SourceStyleSchemeManager

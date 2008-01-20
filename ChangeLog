@@ -1,3 +1,16 @@
+2008-01-20  Murray Cumming  <murrayc@murrayc.com>
+
+	* gtksourceview/src/sourcebuffer.hg:
+	* gtksourceview/src/sourcemark.ccg:
+	* gtksourceview/src/sourcemark.hg:
+	* gtksourceview/src/sourcestyleschememanager.hg:
+	* gtksourceview/src/sourceview.hg:
+	Const corrections and ref-counting corrections for getter methods.
+	* tools/m4/convert_gtksourceview.m4:
+	* tools/m4/convert_gtksourceviewmm.m4: Moved GList and GSList 
+	conversions to the .m4 files, because the ownership is dependent on 
+	the particular function.
+
 2008-01-12  Jonathon Jongsma  <jjongsma@gnome.org>
 
 	* configure.ac: bump version to 1.9.4 so we can detect a version with

@@ -161,7 +161,8 @@ public:
   _WRAP_METHOD(void set_mark_category_priority(const Glib::ustring& category, gint priority), gtk_source_view_set_mark_category_priority)
   _WRAP_METHOD(gint get_mark_category_priority(const Glib::ustring& category) const, gtk_source_view_get_mark_category_priority)
   _WRAP_METHOD(void set_mark_category_pixbuf(const Glib::ustring& category, const Glib::RefPtr<Gdk::Pixbuf>& pixbuf), gtk_source_view_set_mark_category_pixbuf)
-  _WRAP_METHOD(Glib::RefPtr<Gdk::Pixbuf> get_mark_category_pixbuf(const Glib::ustring& category) const, gtk_source_view_get_mark_category_pixbuf)
+  _WRAP_METHOD(Glib::RefPtr<Gdk::Pixbuf> get_mark_category_pixbuf(const Glib::ustring& category), gtk_source_view_get_mark_category_pixbuf, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Gdk::Pixbuf> get_mark_category_pixbuf(const Glib::ustring& category) const, gtk_source_view_get_mark_category_pixbuf, refreturn, constversion)
 
   _WRAP_SIGNAL(void redo(), "redo")
 

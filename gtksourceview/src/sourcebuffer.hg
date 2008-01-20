@@ -212,7 +212,11 @@ public:
   _WRAP_METHOD(Glib::RefPtr<SourceStyleScheme> get_style_scheme(), gtk_source_buffer_get_style_scheme, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const SourceStyleScheme> get_style_scheme() const, gtk_source_buffer_get_style_scheme, constversion, refreturn)
   _WRAP_METHOD(Glib::RefPtr<SourceMark> create_mark(const Glib::ustring& name, const Glib::ustring& category, const Gtk::TextIter& where), gtk_source_buffer_create_mark)
+
+#m4 _CONVERSION(`GSList*',`Glib::SListHandle<Glib::RefPtr<SourceMark> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+#m4 _CONVERSION(`GSList*',`Glib::SListHandle<Glib::RefPtr<const SourceMark> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceMark> > get_marks_at_line(int line, const Glib::ustring& category) const, gtk_source_buffer_get_marks_at_line)
+
   // overloaded with category == NULL
   Glib::SListHandle<Glib::RefPtr<SourceMark> > get_marks_at_line(int line) const;
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceMark> > get_marks_at_iter(Gtk::TextIter& iter, const Glib::ustring& category) const, gtk_source_buffer_get_marks_at_iter)
@@ -226,12 +230,12 @@ public:
   /// \brief Emitted whenever there is a change in the buffer's ability to redo an operation.
   ///
   /// parameter can_redo: true if the buffer can now perform a redo, false otherwise.
-  _WRAP_SIGNAL(void can_redo (bool can_redo), "can-redo")
+  _WRAP_SIGNAL(void can_redo(bool can_redo), "can-redo")
 
   /// \brief Emitted whenever there is a change in the buffer's ability to undo an operation.
   ///
   /// parameter can_undo: true if the buffer can now perfom  an undo, false otherwise.
-  _WRAP_SIGNAL(void can_undo (bool can_redo), "can-undo")
+  _WRAP_SIGNAL(void can_undo(bool can_redo), "can-undo")
 
   /// \brief Emitted whenever the syntax highlighting information has been updated,
   /// so that views can request a redraw if the region changed is visible.
@@ -239,14 +243,14 @@ public:
   /// Usually only view widgets displaying this buffer will be interested in this signal.
   /// parameter start: an iterator at the start of the updated region.
   /// parameter end: and iterator at the end of the updated region.
-  _WRAP_SIGNAL(void highlight_updated (Gtk::TextIter &start, Gtk::TextIter &end), "highlight-updated", no_default_handler)
+  _WRAP_SIGNAL(void highlight_updated(Gtk::TextIter& start, Gtk::TextIter& end), "highlight-updated", no_default_handler)
 
   /// \brief Emitted whenever a marker of sourcebuffer has changed and needs to be redisplayed by the view.
   ///
   /// A change in a marker's type or location can trigger this signal.
   /// Note that moving a marker causes the emission of this signal twice: one for the old location and one for the new. 
   /// parameter where:  an iterator at the location where the change occurred.
-  _WRAP_SIGNAL(void marker_updated (Gtk::TextIter &where), "marker-updated", no_default_handler)
+  _WRAP_SIGNAL(void marker_updated(Gtk::TextIter &where), "marker-updated", no_default_handler)
   /// @}
 };
 

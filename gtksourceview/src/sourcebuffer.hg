@@ -223,8 +223,7 @@ public:
   // overloaded with category == NULL
   Glib::SListHandle<Glib::RefPtr<SourceMark> > get_source_marks_at_iter(Gtk::TextIter& iter) const;
 
-  //TODO Fix the constness in the C API. See bug #
-  //_WRAP_METHOD(void remove_source_marks(const Gtk::TextIter& start, const Gtk::TextIter& end, const Glib::ustring& category), gtk_source_buffer_remove_source_marks)
+  _WRAP_METHOD(void remove_source_marks(const Gtk::TextIter& start, const Gtk::TextIter& end, const Glib::ustring& category), gtk_source_buffer_remove_source_marks)
 
   /// \name signals
   /// @{

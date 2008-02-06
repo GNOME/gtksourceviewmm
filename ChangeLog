@@ -1,3 +1,16 @@
+2008-02-06  Murray Cumming  <murrayc@murrayc.com>
+
+	* gtksourceview/src/gtksourceview_docs.xml: Removed an odd character that 
+	was causing a warning.
+
+	* gtksourceview/src/gtksourceview_methods.defs: Regenerated with 
+	h2defs.py
+	* gtksourceview/src/sourcebuffer.ccg:
+	* gtksourceview/src/sourcebuffer.hg: Renamed the mark methods to match 
+	the latest API in gtksourceview.
+	
+	I notice that there are some gmmproc warnings during the build too.
+
 2008-01-20  Murray Cumming  <murrayc@murrayc.com>
 
 	* gtksourceview/src/sourcebuffer.hg:

@@ -18,3 +18,4 @@
  */
 
 #include <gtksourceview/gtksourcestyle.h>
+#include <cstring>

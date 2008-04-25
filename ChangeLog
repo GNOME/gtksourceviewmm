@@ -1,3 +1,9 @@
+2008-04-25  Deng Xiyue  <manphiz@gmail.com>
+
+	* gtksourceview/src/sourcestyle.ccg:
+	* tests/test-search.cpp: Include <cstring> to fix the build with 
+	gcc 4.3.
+
 1.9.5:
 
 2008-04-25  Murray Cumming  <murrayc@murrayc.com>

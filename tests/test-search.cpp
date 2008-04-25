@@ -3,6 +3,7 @@
 #include <fstream>
 #include <stdexcept>
 #include <string>
+#include <cstring>
 #include <gtkmm.h>
 #include <gtksourceviewmm.h>
 #include <glib/gmessages.h>

@@ -21,8 +21,13 @@
 
 namespace gtksourceview
 {
-    Glib::RefPtr<SourceStyleSchemeManager> SourceStyleSchemeManager::get_default()
-    {
-        return Glib::wrap(gtk_source_style_scheme_manager_get_default());
-    }
+
+
+void SourceStyleSchemeManager::reset_search_path()
+{
+  gtk_source_style_scheme_manager_set_search_path(gobj(), NULL);
 }
+
+}
+
+

@@ -35,10 +35,12 @@ class SourceMark : public Gtk::TextMark
 protected:
    _CTOR_DEFAULT
 
-  _WRAP_CTOR(SourceMark(const Glib::ustring& category), gtk_source_mark_new)
+  //We reversed the parameter order, because name can be NULL:
+  explicit SourceMark(const Glib::ustring& category, const Glib::ustring& name = Glib::ustring());
+  _IGNORE(gtk_source_mark_new)
 
 public:
-  _WRAP_CREATE(const Glib::ustring& category)
+  _WRAP_CREATE(const Glib::ustring& category, const Glib::ustring& name = Glib::ustring())
 
   _WRAP_METHOD(Glib::ustring get_category() const, gtk_source_mark_get_category)
   _WRAP_METHOD(Glib::RefPtr<SourceMark> next(const Glib::ustring& category), gtk_source_mark_next, refreturn)
@@ -54,6 +56,9 @@ public:
   // overloaded for category == NULL
   Glib::RefPtr<SourceMark> prev();
   Glib::RefPtr<const SourceMark> prev() const;
+
+  _WRAP_PROPERTY("category", Glib::ustring)
+
 };//end class SourceMark
 
 }//end namespace gtksourceview

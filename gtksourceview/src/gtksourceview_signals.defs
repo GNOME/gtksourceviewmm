@@ -15,7 +15,7 @@
   (return-type "void")
   (when "last")
   (parameters
-    '("GtkTextMark*" "p0")
+    '("GtkSourceMark*" "p0")
   )
 )
 
@@ -138,15 +138,6 @@
 
 ;; From GtkSourceLanguage
 
-(define-property section
-  (of-object "GtkSourceLanguage")
-  (prop-type "GParamString")
-  (docs "Language section")
-  (readable #t)
-  (writable #f)
-  (construct-only #f)
-)
-
 (define-property id
   (of-object "GtkSourceLanguage")
   (prop-type "GParamString")
@@ -160,6 +151,15 @@
   (of-object "GtkSourceLanguage")
   (prop-type "GParamString")
   (docs "Language name")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property section
+  (of-object "GtkSourceLanguage")
+  (prop-type "GParamString")
+  (docs "Language section")
   (readable #t)
   (writable #f)
   (construct-only #f)
@@ -362,19 +362,19 @@
   (construct-only #t)
 )
 
-(define-property description
+(define-property name
   (of-object "GtkSourceStyleScheme")
   (prop-type "GParamString")
-  (docs "Style scheme description")
+  (docs "Style scheme name")
   (readable #t)
   (writable #f)
   (construct-only #f)
 )
 
-(define-property name
+(define-property description
   (of-object "GtkSourceStyleScheme")
   (prop-type "GParamString")
-  (docs "Style scheme name")
+  (docs "Style scheme description")
   (readable #t)
   (writable #f)
   (construct-only #f)

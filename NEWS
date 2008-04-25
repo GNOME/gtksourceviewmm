@@ -1,3 +1,12 @@
+1.9.5:
+
+* SourceBuffer: Added the source_mark_updated  signal.
+* SourceMark: Constructor: Added the optional name parameter.
+* SourceStyle: Added the copy() method.
+* SourceStyleSchemeManager: Added set_search_path(), reset_search_path, 
+  get_search_path(), and get_scheme_ids() methods.
+* SourceView: Added properties.
+
 1.9.4:
 
 * SourceBuffer: Added *_source_mark() methods.

@@ -31,7 +31,7 @@ class SourceStyle : public Glib::Object
 
 public:
 
-  //TODO: GtkSourceStyle	*gtk_source_style_copy		(const GtkSourceStyle *style);
+  _WRAP_METHOD(Glib::RefPtr<SourceStyle> copy() const, gtk_source_style_copy);
 };
 
 }//end namespace gtksourceview

@@ -165,10 +165,19 @@ public:
   _WRAP_METHOD(Glib::RefPtr<const Gdk::Pixbuf> get_mark_category_pixbuf(const Glib::ustring& category) const, gtk_source_view_get_mark_category_pixbuf, refreturn, constversion)
 
   _WRAP_SIGNAL(void redo(), "redo")
-
   _WRAP_SIGNAL(void undo(), "undo")
 
-  //TODO: Properties.
+  _WRAP_PROPERTY("show-line-numbers", bool)
+  _WRAP_PROPERTY("show-line-marks", bool)
+  _WRAP_PROPERTY("tab-width", guint)
+  _WRAP_PROPERTY("indent-width", int)
+  _WRAP_PROPERTY("auto_indent", bool)
+  _WRAP_PROPERTY("insert_spaces_instead_of_tabs", bool)
+  _WRAP_PROPERTY("show-right-margin", bool)
+  _WRAP_PROPERTY("right-margin-position", guint)
+  _WRAP_PROPERTY("smart_home_end", SourceSmartHomeEndType)
+  _WRAP_PROPERTY("highlight_current_line", bool)
+  _WRAP_PROPERTY("indent_on_tab", bool)
 
 };
 

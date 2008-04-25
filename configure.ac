@@ -15,7 +15,7 @@
 #We use pushdef here because we can't use shell variables before AC_INIT, but we want to use a variable with AC_INIT:
 pushdef([GTKSOURCEVIEWMM_MAJOR_VERSION],     [1])
 pushdef([GTKSOURCEVIEWMM_MINOR_VERSION],     [9])
-pushdef([GTKSOURCEVIEWMM_MICRO_VERSION],     [4])
+pushdef([GTKSOURCEVIEWMM_MICRO_VERSION],     [5])
 pushdef([GTKSOURCEVIEWMM_EXTRA_VERSION],     [])
 pushdef([GTKSOURCEVIEWMM_VERSION], GTKSOURCEVIEWMM_MAJOR_VERSION.GTKSOURCEVIEWMM_MINOR_VERSION.GTKSOURCEVIEWMM_MICRO_VERSION[]GTKSOURCEVIEWMM_EXTRA_VERSION)
 AC_INIT([libgtksourceviewmm], GTKSOURCEVIEWMM_VERSION, [Rob Page <page.rob@gmail.com>, Dodji Seketeli <dodji@gnome.org>])
@@ -52,7 +52,7 @@ AC_SUBST(GTKSOURCEVIEWMM_RELEASE)
 #  ? :+1 : ?   == just some internal changes, nothing breaks but might work 
 #                 better
 # CURRENT : REVISION : AGE
-LIBGTKSOURCEVIEWMM_SO_VERSION=1:0:0
+LIBGTKSOURCEVIEWMM_SO_VERSION=2:0:0
 AC_SUBST(LIBGTKSOURCEVIEWMM_SO_VERSION)
 
 AC_CONFIG_AUX_DIR(scripts)
@@ -126,7 +126,7 @@ Please install GNU make.]))
 gtksourceviewmm_min_gtkmm_version=2.4
 #gtksourceviewmm_min_gtksourceview_version=2.0
 
-PKG_CHECK_MODULES(GTKSOURCEVIEWMM, gtkmm-2.4 >= ${gtksourceviewmm_min_gtkmm_version} gtksourceview-2.0 >= 2.1.0)
+PKG_CHECK_MODULES(GTKSOURCEVIEWMM, gtkmm-2.4 >= ${gtksourceviewmm_min_gtkmm_version} gtksourceview-2.0 >= 2.2.0)
 AC_SUBST(GTKSOURCEVIEWMM_CFLAGS)
 AC_SUBST(GTKSOURCEVIEWMM_LIBS)
 

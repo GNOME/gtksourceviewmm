@@ -144,21 +144,6 @@ public:
   /// \param language a GtkSourceLanguage to set.
   _WRAP_METHOD(void set_language(const Glib::RefPtr<SourceLanguage>& language), gtk_source_buffer_set_language)
 
-  /// \brief Determines the escaping character used by the source buffer highlighting engine.
-  ///
-  ///\return the UTF-8 character for the escape character the buffer is using.
-  _WRAP_METHOD(gunichar get_escape_char() const, gtk_source_buffer_get_escape_char)
-
-  /// \brief Sets the escape character to be used by the highlighting engine.
-  ///
-  /// When performing the initial analysis,
-  /// the engine will discard a matching syntax pattern if it's prefixed
-  /// with an odd number of escape characters.
-  /// This allows for example to correctly highlight strings with escaped quotes embedded.
-  /// This setting affects only syntax patterns (i.e. those defined in GtkSyntaxTag tags).
-  /// \param escape_char the escape character the buffer should use.
-  _WRAP_METHOD(void set_escape_char(gunichar escape_char), gtk_source_buffer_set_escape_char)
-
   /// \brief Determines whether a source buffer can undo the last action
   /// \return true if it's possible to undo the last action, false otherwise.
   _WRAP_METHOD(bool can_undo() const, gtk_source_buffer_can_undo)
@@ -228,16 +213,6 @@ public:
   /// \name signals
   /// @{
 
-  /// \brief Emitted whenever there is a change in the buffer's ability to redo an operation.
-  ///
-  /// parameter can_redo: true if the buffer can now perform a redo, false otherwise.
-  _WRAP_SIGNAL(void can_redo(bool can_redo), "can-redo")
-
-  /// \brief Emitted whenever there is a change in the buffer's ability to undo an operation.
-  ///
-  /// parameter can_undo: true if the buffer can now perfom  an undo, false otherwise.
-  _WRAP_SIGNAL(void can_undo(bool can_redo), "can-undo")
-
   /// \brief Emitted whenever the syntax highlighting information has been updated,
   /// so that views can request a redraw if the region changed is visible.
   ///
@@ -246,12 +221,14 @@ public:
   /// parameter end: and iterator at the end of the updated region.
   _WRAP_SIGNAL(void highlight_updated(Gtk::TextIter& start, Gtk::TextIter& end), "highlight-updated", no_default_handler)
 
+#m4 _CONVERSION(`GtkSourceMark*',`const Glib::RefPtr<SourceMark>&',`Glib::wrap($3, true)')
+
   /// \brief Emitted whenever a marker of sourcebuffer has changed and needs to be redisplayed by the view.
   ///
   /// A change in a marker's type or location can trigger this signal.
   /// Note that moving a marker causes the emission of this signal twice: one for the old location and one for the new. 
   /// parameter where:  an iterator at the location where the change occurred.
-  _WRAP_SIGNAL(void marker_updated(Gtk::TextIter &where), "marker-updated", no_default_handler)
+  _WRAP_SIGNAL(void source_mark_updated(const Glib::RefPtr<SourceMark>& where), "source-mark-updated", no_default_handler)
   /// @}
 };
 

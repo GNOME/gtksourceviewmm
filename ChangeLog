@@ -1,3 +1,20 @@
+1.9.5:
+
+2008-04-25  Murray Cumming  <murrayc@murrayc.com>
+
+	* gtksourceview/src/gtksourceview_signals.defs: Regenerated.
+	* gtksourceview/src/sourcebuffer.hg: Added the source_mark_updated 
+	signal.
+	* gtksourceview/src/sourcemark.ccg:
+	* gtksourceview/src/sourcemark.hg: Constructor: Added the optional 
+	name parameter.
+	* gtksourceview/src/sourcestyle.hg: Added the copy() method.
+	* gtksourceview/src/sourcestyleschememanager.ccg:
+	* gtksourceview/src/sourcestyleschememanager.hg:
+	Added set_search_path(), reset_search_path, get_search_path(), and 
+	get_scheme_ids().
+	* gtksourceview/src/sourceview.hg: Added properties.
+
 1.9.4:
 
 2008-02-06  Murray Cumming  <murrayc@murrayc.com>

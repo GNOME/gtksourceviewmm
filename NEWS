@@ -1,3 +1,15 @@
+1.9.4:
+
+* SourceBuffer: Added *_source_mark() methods.
+* Added SourceMark.
+* Added SourceStyleSchemeManager.
+  (Jonathon Jongsma)
+* SourceBuffer, SourceMark, SourceView:
+  Some const corrections and refcounting corrections.
+  (Murray Cumming)
+* Correct the installation of the .m4 gmmproc files.
+  (Yselkowitz)
+
 1.9.3:
 
 * A correction in the pkg-config file.

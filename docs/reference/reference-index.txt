@@ -1,15 +1,15 @@
 /*!
 
- \mainpage libgtksourceviewmm - A C++ API for gtksourceview
+ \mainpage gtksourceviewmm - A C++ API for gtksourceview
 
  \section Introduction
- libgtksourceviewmm is a C++ wrapper for the
+ gtksourceviewmm is a C++ wrapper for the
  gtksourceview widget library.
  It offers all the power of gtksourceview with an interface familiar
- to c++ developers, including users of the gtkmm library.
+ to C++ developers, including users of the gtkmm library.
 
  \section Status
- libgtksourceviewmm wraps all relevant parts of the
+ gtksourceviewmm wraps all relevant parts of the
  gtksourceview library and has proven to be useable so far.
 
  \section Browse the source code
@@ -18,13 +18,13 @@
 
  \section get the bleeding edge code from svn
  You can get the source code from the GNOME svn repository by typing the command:
- \code svn co http://svn.gnome.org/svn/gtksourceviewmm/trunk gsvmm \endcode
+ \code svn co http://svn.gnome.org/svn/gtksourceviewmm/trunk gtksourceviewmm \endcode
 
  \section Download
  There have been several releases which you can download from
- http://ftp.gnome.org/pub/GNOME/sources/libgtksourceviewmm/.
+ http://ftp.gnome.org/pub/GNOME/sources/gtksourceviewmm/.
  If you want bleeging-edge code (or if you want to help out with development)
- of libgtksourceviewmm you can check out libgtksourceviewmm from SVN.
+ of gtksourceviewmm you can check out gtksourceviewmm from SVN.
  To do so, please read the instructions on using the GNOME SVN
  at http://developer.gnome.org/tools/svn.html .
 
@@ -37,10 +37,9 @@
  http://www.gnu.org/licenses/lgpl.html .
 
  \section Contact
- to contact the developers of libgtksourceviewmm please send an email to
- the mailing list at gtksourceviewmm-list@gna.org.
- You can browse the mailing list archives at https://mail.gna.org/public/gtksourceviewmm-list .
- More generaly, you can browse the project page on GNA at https://gna.org/projects/gtksourceviewmm .
+ to contact the developers of gtksourceviewmm please send an email to
+ the gtkmm mailing list at gtkmm-list@gnome.org.
+ See http://www.gtkmm.org/mailinglist.shtml
 
  \section About
  Dodji Seketeli wrote most of the code of this project,

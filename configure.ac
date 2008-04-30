@@ -13,12 +13,12 @@
 #
 
 #We use pushdef here because we can't use shell variables before AC_INIT, but we want to use a variable with AC_INIT:
-pushdef([GTKSOURCEVIEWMM_MAJOR_VERSION],     [1])
-pushdef([GTKSOURCEVIEWMM_MINOR_VERSION],     [9])
-pushdef([GTKSOURCEVIEWMM_MICRO_VERSION],     [5])
+pushdef([GTKSOURCEVIEWMM_MAJOR_VERSION],     [2])
+pushdef([GTKSOURCEVIEWMM_MINOR_VERSION],     [2])
+pushdef([GTKSOURCEVIEWMM_MICRO_VERSION],     [0])
 pushdef([GTKSOURCEVIEWMM_EXTRA_VERSION],     [])
 pushdef([GTKSOURCEVIEWMM_VERSION], GTKSOURCEVIEWMM_MAJOR_VERSION.GTKSOURCEVIEWMM_MINOR_VERSION.GTKSOURCEVIEWMM_MICRO_VERSION[]GTKSOURCEVIEWMM_EXTRA_VERSION)
-AC_INIT([libgtksourceviewmm], GTKSOURCEVIEWMM_VERSION, [Rob Page <page.rob@gmail.com>, Dodji Seketeli <dodji@gnome.org>])
+AC_INIT([gtksourceviewmm], GTKSOURCEVIEWMM_VERSION, [Rob Page <page.rob@gmail.com>, Dodji Seketeli <dodji@gnome.org>])
 AC_CONFIG_SRCDIR([gtksourceview/gtksourceviewmmconfig.h.in])
 AC_PREREQ(2.59)
 

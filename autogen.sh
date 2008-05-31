@@ -43,13 +43,13 @@ echo "Adding libtools."
 libtoolize --automake || exit 1
 
 echo "Building macros."
-aclocal-1.9 -I "$srcdir/scripts" $ACLOCAL_FLAGS || exit 1
+aclocal-1.10 -I "$srcdir/scripts" $ACLOCAL_FLAGS || exit 1
 
 #echo "Building config header."
 #autoheader
 
 echo "Building makefiles."
-automake-1.9 --add-missing || exit 1
+automake-1.10 --add-missing || exit 1
 
 echo "Building configure."
 

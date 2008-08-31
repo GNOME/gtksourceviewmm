@@ -152,31 +152,137 @@ public:
   /// \return true if HOME and END keys will move to the first/last non space character of the line before moving to the start/end, false otherwise
   _WRAP_METHOD(SourceSmartHomeEndType get_smart_home_end() const, gtk_source_view_get_smart_home_end)
 
+  /// \brief if true line marks will be displayed beside the text.
+  ///
+  /// \param show whether line marks should be displayed.
   _WRAP_METHOD(void set_show_line_marks(bool show = true), gtk_source_view_set_show_line_marks)
+
+  /// \brief Returns whether line marks are displayed beside the text.
+  ///
+  /// \return true if the line marks are displayed.
   _WRAP_METHOD(bool get_show_line_marks() const, gtk_source_view_get_show_line_marks)
+
+  /// If true, when the tab key is pressed and there is a
+  /// selection, the selected text is indented of one level instead of being
+  /// replaced with the \t characters. Shift+Tab unindents the selection.
+  /// \param show true if the selection is indented when tab is pressed.
   _WRAP_METHOD(void set_indent_on_tab(bool show = true), gtk_source_view_set_indent_on_tab)
+
+  /// Returns whether when the tab key is pressed the current selection
+  /// should get indented instead of replaced with the \t character.
+  ///
+  /// \return true if the selection is indented when tab is pressed.
   _WRAP_METHOD(bool get_indent_on_tab() const, gtk_source_view_get_indent_on_tab)
+
+  /// \brief Sets the number of spaces to use for each step of indent.
+  ///
+  /// If width is
+  /// -1, the value of the GtkSourceView::tab-width property will be used.
+  ///
+  /// \param width indent width in characters
   _WRAP_METHOD(void set_indent_width(gint width), gtk_source_view_set_indent_width)
+
+  /// \brief Set Returns the number of spaces to use for each step of indent.
+  ///
+  /// See SourceView::set_indent_width(gint) for details.
+  ///
+  /// \return indent width.
   _WRAP_METHOD(gint get_indent_width() const, gtk_source_view_get_indent_width)
+
+  /// \brief Set the priority for the given mark category.
+  ///
+  /// When there are multiple
+  /// marks on the same line, marks of categories with higher priorities will
+  /// be drawn on top.
+  /// \param category a mark category.
+  /// \param priority the priority of #category
   _WRAP_METHOD(void set_mark_category_priority(const Glib::ustring& category, gint priority), gtk_source_view_set_mark_category_priority)
+
+  /// \brief Gets the priority which is associated with the given category.
+  ///
+  /// \param category a mark category.
+  /// \return the priority or if category exists but no priority was set,
+  /// it defaults to 0.
   _WRAP_METHOD(gint get_mark_category_priority(const Glib::ustring& category) const, gtk_source_view_get_mark_category_priority)
+
+  /// \brief Associates a given pixbuf with a given mark category.
+  /// If pixbuf is NULL, the pixbuf is unset.
+  ///
+  /// \param category a mark category.
+  /// \param pixbuf the pixbuf to associate the mark category to.
   _WRAP_METHOD(void set_mark_category_pixbuf(const Glib::ustring& category, const Glib::RefPtr<Gdk::Pixbuf>& pixbuf), gtk_source_view_set_mark_category_pixbuf)
+  /// \brief Gets the pixbuf which is associated with the given mark category.
+  ///
+  /// \param category a mark category.
+  /// \return the associated GdkPixbuf, or NULL if not found.
   _WRAP_METHOD(Glib::RefPtr<Gdk::Pixbuf> get_mark_category_pixbuf(const Glib::ustring& category), gtk_source_view_get_mark_category_pixbuf, refreturn)
+
+  /// \brief Gets the pixbuf which is associated with the given mark category.
+  ///
+  /// \param category a mark category.
+  /// \return the associated GdkPixbuf, or NULL if not found.
   _WRAP_METHOD(Glib::RefPtr<const Gdk::Pixbuf> get_mark_category_pixbuf(const Glib::ustring& category) const, gtk_source_view_get_mark_category_pixbuf, refreturn, constversion)
 
   _WRAP_SIGNAL(void redo(), "redo")
   _WRAP_SIGNAL(void undo(), "undo")
 
+  /// \brief Whether to display line numbers
+  ///
+  /// default value is false
   _WRAP_PROPERTY("show-line-numbers", bool)
+
+  /// \brief Whether to display line mark pixbufs
+  ///
+  /// default value is false.
   _WRAP_PROPERTY("show-line-marks", bool)
+
+  /// \brief Width of an tab character expressed in number of spaces.
+  ///
+  /// Allowed values are [1,32]
+  /// Default value is 8
   _WRAP_PROPERTY("tab-width", guint)
+
+  /// \brief Width of an indentation step expressed in number of spaces.
+  ///
+  /// Allowed values are [-1,32]
+  /// Default value is -1
   _WRAP_PROPERTY("indent-width", int)
+
+  /// \brief Whether to enable auto indentation.
+  ///
+  /// Default value is false
   _WRAP_PROPERTY("auto_indent", bool)
+
+  /// \brief Whether to insert spaces instead of tabs.
+  ///
+  /// Default value is false
   _WRAP_PROPERTY("insert_spaces_instead_of_tabs", bool)
+
+  /// \brief Whether to display the right margin.
+  ///
+  /// Default value is false
   _WRAP_PROPERTY("show-right-margin", bool)
+
+  /// \brief Position of the right margin.
+  ///
+  /// Allowed values are [1,200]
+  /// Default value is 80
   _WRAP_PROPERTY("right-margin-position", guint)
+
+  /// \brief Set the behavior of the HOME and END keys.
+  ///
+  /// Default value is GTK_SOURCE_SMART_HOME_END_DISABLED
   _WRAP_PROPERTY("smart_home_end", SourceSmartHomeEndType)
+
+  /// \brief Whether to highlight the current line.
+  ///
+  /// Default value is false
   _WRAP_PROPERTY("highlight_current_line", bool)
+
+  /// \brief Whether to indent the selected text when the tab key is
+  /// pressed.
+  ///
+  /// Default value is true.
   _WRAP_PROPERTY("indent_on_tab", bool)
 
 };

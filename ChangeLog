@@ -1,3 +1,8 @@
+2008-09-01  Dodji Seketeli  <dodji@gnome.org>
+
+	* gtksourceview/src/sourcebuffer.hg: Update API Documentation.
+	* gtksourceview/src/sourceview.hg: Likewise.
+
 2008-05-31 Dodji Seketeli <dodji@gnome.org>
 
 	* autogen.sh: use automake 1.10

@@ -184,30 +184,123 @@ public:
   /// the list of undo actions is cleared and the undo manager is re-enabled.
   _WRAP_METHOD(void end_not_undoable_action(), gtk_source_buffer_end_not_undoable_action)
 
+  /// \brief Moves iter to the position of the previous GtkSourceMark of the
+  /// given category.
+  ///
+  /// Returns true if iter was moved. If category is NULL, the
+  /// previous source mark can be of any category.
+  ///
+  /// \param iter the iterator to consider.
+  /// \param category the category to search for or NULL.
+  /// \return true if iter moved, false otherwise.
   _WRAP_METHOD(bool backward_iter_to_source_mark(Gtk::TextIter& iter, const Glib::ustring& category), gtk_source_buffer_backward_iter_to_source_mark)
   // overload with category == NULL
   bool backward_iter_to_source_mark(Gtk::TextIter& iter);
 
+  /// \brief Moves iter to the position of the next #SourceMark of the given
+  /// category.
+  ///
+  /// Returns true if iter was moved. If category is NULL, the next
+  /// source mark can be of any category.
+  /// \param iter the iterator to move.
+  /// \param category the category to search for, or NULL.
+  /// \return true if iter moved, false otherwise.
   _WRAP_METHOD(bool forward_iter_to_source_mark(Gtk::TextIter& iter, const Glib::ustring& category), gtk_source_buffer_forward_iter_to_source_mark)
-  // overload with category == NULL
+
+  /// \brief Moves iter to the position of the next #SourceMark
+  ///
+  /// Returns true if iter was moved. The category of the next #SourceMark
+  /// is considered to be NULL so that #SourceMark can be of any category.
+  ///
+  /// \param iter the iterator to move.
+  /// \return true if iter moved, false otherwise.
   bool forward_iter_to_source_mark(Gtk::TextIter& iter);
 
+  /// \brief Forces buffer to analyze and highlight the given area
+  /// synchronously.
+  ///
+  /// \param start start of the area to highlight.
+  /// \param end end of the area to highlight.
   _WRAP_METHOD(void ensure_highlight(const Gtk::TextIter& start, const Gtk::TextIter& end), gtk_source_buffer_ensure_highlight)
+
+  /// \brief Sets style scheme used by the buffer.
+  ///
+  /// \param scheme the style scheme to be used by the buffer
   _WRAP_METHOD(void set_style_scheme(const Glib::RefPtr<SourceStyleScheme>& scheme), gtk_source_buffer_set_style_scheme)
+
+  /// \brief Returns the style scheme currently used by the buffer.
+  ///
+  /// \return the style scheme currently used the buffer.
   _WRAP_METHOD(Glib::RefPtr<SourceStyleScheme> get_style_scheme(), gtk_source_buffer_get_style_scheme, refreturn)
+
+  /// \brief Returns the style scheme currently used by the buffer.
+  ///
+  /// This method is const and returns a const value.
   _WRAP_METHOD(Glib::RefPtr<const SourceStyleScheme> get_style_scheme() const, gtk_source_buffer_get_style_scheme, constversion, refreturn)
+
+  /// \brief Creates a source mark in the buffer of category #category.
+  ///
+  /// A source mark is a Gtk::TextMark but organised into categories. Depending on
+  /// the category a pixbuf can be specified that will be displayed along the
+  /// line of the mark.
+  /// Like a Gtk::TextMark, a #SourceMark can be anonymous if the passed name is
+  /// NULL.
+  ///
+  /// Note that the buffer owns the marks.
+  ///
+  /// Marks always have left gravity and are moved to the beginning of the line
+  /// when the user deletes the line they were in.
+  /// Typical uses for a source mark are bookmarks, breakpoints, current executing
+  /// instruction indication in a source file, etc..
+  ///
+  /// \param name the name of the mark, can be "".
+  /// \param category a string defining the mark category.
+  /// \param where location where to place the mark.
+  /// \return the newly created #SourceMark
   _WRAP_METHOD(Glib::RefPtr<SourceMark> create_source_mark(const Glib::ustring& name, const Glib::ustring& category, const Gtk::TextIter& where), gtk_source_buffer_create_source_mark)
 
 #m4 _CONVERSION(`GSList*',`Glib::SListHandle<Glib::RefPtr<SourceMark> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
 #m4 _CONVERSION(`GSList*',`Glib::SListHandle<Glib::RefPtr<const SourceMark> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+
+   /// \brief Returns the list of marks of the given category at line.
+   ///
+   /// If category is NULL, all marks at line are returned.
+   ///
+   /// \param line the line number to consider.
+   /// \param category category to search for or NULL.
+   /// \param a newly allocated GSList.
+   /// \return the list of marks.
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceMark> > get_source_marks_at_line(int line, const Glib::ustring& category) const, gtk_source_buffer_get_source_marks_at_line)
 
-  // overloaded with category == NULL
+   /// \brief Returns all source marks marks at line.
+   ///
+   /// \param line the line number to consider.
+   /// \param a newly allocated GSList.
+   /// \return the list of marks.
   Glib::SListHandle<Glib::RefPtr<SourceMark> > get_source_marks_at_line(int line) const;
+
+  /// \brief returns the list of marks of the given category at a given
+  /// itertor.
+  ///
+  /// If category is NULL it returns all marks at iter.
+  ///
+  /// \param iter the iterator to consider.
+  /// \param category the category to search for, or NULL.
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceMark> > get_source_marks_at_iter(Gtk::TextIter& iter, const Glib::ustring& category) const, gtk_source_buffer_get_source_marks_at_iter)
-  // overloaded with category == NULL
+
+  /// \brief returns all the marks at a given iterator.
+  ///
+  /// \param iter the iterator to consider.
   Glib::SListHandle<Glib::RefPtr<SourceMark> > get_source_marks_at_iter(Gtk::TextIter& iter) const;
 
+  /// \brief Remove all marks of a given category, from a given region of the
+  //// buffer
+  ///
+  /// If category is NULL, all marks in the range will be removed.
+  ///
+  /// \param start the begining of the region to consider
+  /// \param end the end of the region to consider.
+  /// \param category the category of the marks to consider.
   _WRAP_METHOD(void remove_source_marks(const Gtk::TextIter& start, const Gtk::TextIter& end, const Glib::ustring& category), gtk_source_buffer_remove_source_marks)
 
   /// \name signals

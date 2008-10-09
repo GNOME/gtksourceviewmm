@@ -1,3 +1,7 @@
+2008-10-09  Murray Cumming  <murrayc@murrayc.com>
+
+	* gtksourceview/src/sourcebuffer.hg: Wrapped properties.
+
 2008-09-01  Dodji Seketeli  <dodji@gnome.org>
 
 	* gtksourceview/src/sourcebuffer.hg: Update API Documentation.

@@ -303,6 +303,14 @@ public:
   /// \param category the category of the marks to consider.
   _WRAP_METHOD(void remove_source_marks(const Gtk::TextIter& start, const Gtk::TextIter& end, const Glib::ustring& category), gtk_source_buffer_remove_source_marks)
 
+  _WRAP_PROPERTY("highlight-syntax", bool)
+  _WRAP_PROPERTY("highlight-matching-brackets", bool)
+  _WRAP_PROPERTY("max-undo-levels", int)
+  _WRAP_PROPERTY("language", Glib::RefPtr<SourceLanguage>)
+  _WRAP_PROPERTY("can-undo", bool)
+  _WRAP_PROPERTY("can-redo", bool)
+  _WRAP_PROPERTY("style_scheme", Glib::RefPtr<SourceStyleScheme>)
+
   /// \name signals
   /// @{
 

@@ -480,6 +480,15 @@
   )
 )
 
+(define-method guess_language
+  (of-object "GtkSourceLanguageManager")
+  (c-name "gtk_source_language_manager_guess_language")
+  (return-type "GtkSourceLanguage*")
+  (parameters
+    '("const-gchar*" "filename")
+    '("const-gchar*" "content_type")
+  )
+)
 
 
 ;; From gtksourcelanguage-private.h

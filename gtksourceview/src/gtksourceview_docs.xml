@@ -3964,6 +3964,31 @@ be freed.
 </return>
 </function>
 
+<function name="gtk_source_language_manager_guess_language">
+<description>
+Picks a #GtkSourceLanguage for given file name and content type, according to the information in lang files. Either filename or content_type may be empty. This function can be used as follows: 
+
+</description>
+<parameters>
+<parameter name="lm">
+<parameter_description> a #GtkSourceLanguageManager.
+</parameter_description>
+</parameter>
+<parameter name="filename">
+<parameter_description> a filename in Glib filename encoding, or NULL. 
+</parameter_description>
+</parameter>
+<parameter name="content_type">
+<parameter_description> a content type (as in GIO API), or NULL. 
+</parameter_description>
+</parameter>
+</parameters>
+<return>
+a #GtkSourceLanguage, or %NULL if there is no suitable language for given @filename and/or @content_type.
+Return value is owned by @lm and should not be freed. 
+</return>
+</function>
+
 <function name="g_regex_get_pattern">
 <description>
 Gets the pattern string associated with @regex, i.e. a copy of 

@@ -39,7 +39,7 @@ protected:
 public:
   _WRAP_CREATE()
 
-  _WRAP_METHOD(static Glib::RefPtr<SourceStyleSchemeManager> get_default(), gtk_source_style_scheme_manager_get_default, refreturn);
+  _WRAP_METHOD(static Glib::RefPtr<SourceStyleSchemeManager> get_default(), gtk_source_style_scheme_manager_get_default, refreturn)
 
   _WRAP_METHOD(void set_search_path(const Glib::StringArrayHandle& path), gtk_source_style_scheme_manager_set_search_path)
 

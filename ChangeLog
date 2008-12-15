@@ -1,3 +1,9 @@
+2008-12-15  Murray Cumming  <murrayc@murrayc.com>
+
+	* gtksourceview/src/sourcestyle.hg:
+	* gtksourceview/src/sourcestyleschememanager.hg: Remove extra ;s to 
+	avoid compiler warnings.
+
 2008-12-12  Balazs Tirpak  <balazs.tirpak@gmail.com>
 
 	* gtksourceview/src/sourcelanguagemanager.hg: Wrapped

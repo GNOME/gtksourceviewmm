@@ -1,3 +1,14 @@
+2.3.1:
+
+* SourceBuffer: Added properties.
+  (Murray Cumming)
+* SourceLanguageManager: Added guess_language().
+  (Balazs Tirpak)
+* Documentation: Updated reference documentation.
+  (Dodji Seketeli)
+* Build: Fix warnings caused by extra ;s.
+  (Murray Cumming)
+
 2.2.0:
 
 gtksourceviewmm-2.0 is now API/ABI is now stable.

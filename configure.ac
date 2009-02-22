@@ -14,8 +14,8 @@
 
 #We use pushdef here because we can't use shell variables before AC_INIT, but we want to use a variable with AC_INIT:
 pushdef([GTKSOURCEVIEWMM_MAJOR_VERSION],     [2])
-pushdef([GTKSOURCEVIEWMM_MINOR_VERSION],     [2])
-pushdef([GTKSOURCEVIEWMM_MICRO_VERSION],     [0])
+pushdef([GTKSOURCEVIEWMM_MINOR_VERSION],     [3])
+pushdef([GTKSOURCEVIEWMM_MICRO_VERSION],     [1])
 pushdef([GTKSOURCEVIEWMM_EXTRA_VERSION],     [])
 pushdef([GTKSOURCEVIEWMM_VERSION], GTKSOURCEVIEWMM_MAJOR_VERSION.GTKSOURCEVIEWMM_MINOR_VERSION.GTKSOURCEVIEWMM_MICRO_VERSION[]GTKSOURCEVIEWMM_EXTRA_VERSION)
 AC_INIT([gtksourceviewmm], GTKSOURCEVIEWMM_VERSION, [Rob Page <page.rob@gmail.com>, Dodji Seketeli <dodji@gnome.org>])
@@ -126,7 +126,7 @@ Please install GNU make.]))
 gtksourceviewmm_min_gtkmm_version=2.4
 #gtksourceviewmm_min_gtksourceview_version=2.0
 
-PKG_CHECK_MODULES(GTKSOURCEVIEWMM, gtkmm-2.4 >= ${gtksourceviewmm_min_gtkmm_version} gtksourceview-2.0 >= 2.2.0)
+PKG_CHECK_MODULES(GTKSOURCEVIEWMM, gtkmm-2.4 >= ${gtksourceviewmm_min_gtkmm_version} gtksourceview-2.0 >= 2.4.0)
 AC_SUBST(GTKSOURCEVIEWMM_CFLAGS)
 AC_SUBST(GTKSOURCEVIEWMM_LIBS)
 

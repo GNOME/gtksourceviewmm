@@ -127,6 +127,18 @@
   )
 )
 
+(define-flags SourceDrawSpacesFlags
+  (in-module "Gtk")
+  (c-name "GtkSourceDrawSpacesFlags")
+  (gtype-id "GTK_TYPE_SOURCE_DRAW_SPACES_FLAGS")
+  (values
+    '("space" "GTK_SOURCE_DRAW_SPACES_SPACE")
+    '("tab" "GTK_SOURCE_DRAW_SPACES_TAB")
+    '("newline" "GTK_SOURCE_DRAW_SPACES_NEWLINE")
+    '("nbsp" "GTK_SOURCE_DRAW_SPACES_NBSP")
+    '("all" "GTK_SOURCE_DRAW_SPACES_ALL")
+  )
+)
 
 ;; From gtksourcebuffer.h
 
@@ -1267,6 +1279,20 @@
   (return-type "GtkSourceSmartHomeEndType")
 )
 
+(define-method set_draw_spaces
+  (of-object "GtkSourceView")
+  (c-name "gtk_source_view_set_draw_spaces")
+  (return-type "none")
+  (parameters
+    '("GtkSourceDrawSpacesFlags" "flags")
+  )
+)
+
+(define-method get_draw_spaces
+  (of-object "GtkSourceView")
+  (c-name "gtk_source_view_get_draw_spaces")
+  (return-type "GtkSourceDrawSpacesFlags")
+)
 
 
 ;; From gtksourceview-i18n.h

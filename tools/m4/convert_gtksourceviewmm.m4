@@ -48,4 +48,5 @@ _CONVERSION(`GdkPixbuf*',`Glib::RefPtr<const Gdk::Pixbuf>',`Glib::wrap($3)')
 _CONVERSION(`GtkSourceStyleSchemeManager*',`Glib::RefPtr<SourceStyleSchemeManager>',`Glib::wrap($3)')
 
 _CONV_ENUM(Gtk,SourceSmartHomeEndType)
+_CONV_ENUM(Gtk,SourceDrawSpacesFlags)
 

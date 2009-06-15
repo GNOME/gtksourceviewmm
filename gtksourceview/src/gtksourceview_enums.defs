@@ -23,3 +23,15 @@
   )
 )
 
+(define-flags-extended SourceDrawSpacesFlags
+  (in-module "Gtk")
+  (c-name "GtkSourceDrawSpacesFlags")
+  (values
+    '("space" "GTK_SOURCE_DRAW_SPACES_SPACE" "1 << 0")
+    '("tab" "GTK_SOURCE_DRAW_SPACES_TAB" "1 << 1")
+    '("newline" "GTK_SOURCE_DRAW_SPACES_NEWLINE" "1 << 2")
+    '("nbsp" "GTK_SOURCE_DRAW_SPACES_NBSP" "1 << 3")
+    '("all" "GTK_SOURCE_DRAW_SPACES_ALL" "SOURCE_DRAW_SPACES_SPACE | SOURCE_DRAW_SPACES_TAB | SOURCE_DRAW_SPACES_NEWLINE | SOURCE_DRAW_SPACES_NBSP")
+  )
+)
+

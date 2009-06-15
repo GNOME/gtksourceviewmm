@@ -873,5 +873,14 @@
   (construct-only #f)
 )
 
+(define-property draw-spaces
+  (of-object "GtkSourceView")
+  (prop-type "GParamFlags")
+  (docs "Set if and how the spaces should be visualized")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
 ;; From GtkSourceSearchFlags
 

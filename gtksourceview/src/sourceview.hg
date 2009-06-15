@@ -32,6 +32,7 @@ namespace gtksourceview
 {
 
 _WRAP_ENUM(SourceSmartHomeEndType, GtkSourceSmartHomeEndType)
+_WRAP_ENUM(SourceDrawSpacesFlags, GtkSourceDrawSpacesFlags)
 
 /// \brief Multi-line source editing widget.
 ///
@@ -222,6 +223,17 @@ public:
   /// \param category a mark category.
   /// \return the associated GdkPixbuf, or NULL if not found.
   _WRAP_METHOD(Glib::RefPtr<const Gdk::Pixbuf> get_mark_category_pixbuf(const Glib::ustring& category) const, gtk_source_view_get_mark_category_pixbuf, refreturn, constversion)
+  
+  /// \brief Set if and how the spaces should be visualized/
+  ///
+  /// \param flags specifing how white spaces should be displayed.
+  _WRAP_METHOD(void set_draw_spaces(SourceDrawSpacesFlags flags = static_cast<SourceDrawSpacesFlags>(SOURCE_DRAW_SPACES_ALL)), gtk_source_view_set_draw_spaces)
+  
+  /// \brief Returns the SourceDrawSpacesFlags specifying if and how
+  /// spaces should be displayed for this view 
+  ///
+  /// \return flags the SourceDrawSpacesFlags, 0 if no spaces should be drawn.
+  _WRAP_METHOD(SourceDrawSpacesFlags get_draw_spaces() const, gtk_source_view_get_draw_spaces)
 
   _WRAP_SIGNAL(void redo(), "redo")
   _WRAP_SIGNAL(void undo(), "undo")
@@ -284,6 +296,11 @@ public:
   ///
   /// Default value is true.
   _WRAP_PROPERTY("indent_on_tab", bool)
+  
+  /// \brief Set if and how the spaces should be visualized.
+  ///
+  /// Default value is 0.
+  _WRAP_PROPERTY("draw-spaces", SourceDrawSpacesFlags)
 
 };
 

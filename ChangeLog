@@ -1,3 +1,15 @@
+2009-06-15  Parent Fabien  <parent.f@gmail.com>
+
+	Added SourceView::get/set_draw_spaces().
+	
+	* gtksourceview/src/gtksourceview_enums.defs:
+	* gtksourceview/src/gtksourceview_methods.defs:
+	* gtksourceview/src/gtksourceview_signals.defs: Regenerated.
+	* gtksourceview/src/sourceview.hg: Added get/set_draw_spaces() and the 
+	property and related enum.
+	* tools/m4/convert_gtksourceviewmm.m4: Add a conversion for the enum.
+	Bug #585278.
+
 2.3.1:
 
 2008-12-15  Murray Cumming  <murrayc@murrayc.com>

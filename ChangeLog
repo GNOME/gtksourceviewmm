@@ -1,3 +1,8 @@
+2009-08-04  Fabien Parent  <parent.f@gmail.com>
+
+	* gtksourceview/src/sourcebuffer.hg: Fix the constructor taken a
+	Glib::RefPtr<Gtk::TextTagTable> parameter.
+
 2009-06-15  Parent Fabien  <parent.f@gmail.com>
 
 	Added SourceView::get/set_draw_spaces().

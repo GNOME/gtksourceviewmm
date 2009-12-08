@@ -1,6 +1,0 @@
-Base directory for gtksourceviewmm. 
-
-Here is the layout
-
-  src - actual sources used to build
-  gtksourceviewmm - built sources (do not edit)

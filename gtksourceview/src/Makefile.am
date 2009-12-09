@@ -1,18 +1,7 @@
-## Copyright (c) 2001
-## The gtkmm development team.
+binding_name = gtksourceviewmm
+wrap_init_flags = --namespace=gtksourceview --parent_dir=gtksourceviewmm
 
-sublib_name = gtksourceviewmm
-sublib_namespace = gtksourceview
-sublib_parentdir = gtksourceviewmm
-files_defs = \
-gtksourceview.defs \
-gtksourceview_signals.defs \
-gtksourceview_methods.defs \
-gtksourceview_others.defs \
-gtksourceview_enums.defs \
-gtksourceview_docs.xml \
-gtksourceview_docs_override.xml
-
-
-include $(top_srcdir)/build_shared/Makefile_gensrc.am_fragment
+include $(srcdir)/filelist.am
+include $(top_srcdir)/codegen/m4/filelist.am
+include $(top_srcdir)/build/generate-binding.am
 

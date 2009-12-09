@@ -1,0 +1,19 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+datarootdir=@datarootdir@
+datadir=@datadir@
+includedir=@includedir@
+
+docdir=${datarootdir}/doc/@GTKSOURCEVIEWMM_MODULE_NAME@
+doxytagfile=${docdir}/reference/@GTKSOURCEVIEWMM_MODULE_NAME@.tag
+htmlrefdir=${docdir}/reference/html
+htmlrefpub=http://library.gnome.org/devel/@PACKAGE_TARNAME@/unstable/
+
+Name: gtksourceviewmm
+Description: C++ binding for gtksourceview
+Version: @PACKAGE_VERSION@
+URL: http://projects.gnome.org/gtksourceviewmm/
+Requires: @GTKSOURCEVIEWMM_MODULES@
+Libs: -L${libdir} -lgtksourceviewmm-@GTKSOURCEVIEWMM_API_VERSION@
+Cflags: -I${includedir}/@GTKSOURCEVIEWMM_MODULE_NAME@ -I${libdir}/@GTKSOURCEVIEWMM_MODULE_NAME@/include

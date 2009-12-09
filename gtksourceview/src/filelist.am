@@ -1,0 +1,21 @@
+files_defs =				\
+	gtksourceview.defs		\
+	gtksourceview_signals.defs	\
+	gtksourceview_methods.defs	\
+	gtksourceview_others.defs	\
+	gtksourceview_enums.defs	\
+	gtksourceview_docs.xml		\
+	gtksourceview_docs_override.xml
+
+files_hg =				\
+	sourcestyle.hg			\
+	sourcestylescheme.hg		\
+	sourcelanguage.hg		\
+	sourcelanguagemanager.hg	\
+	sourceview.hg			\
+	sourcebuffer.hg			\
+	sourceiter.hg			\
+	sourcemark.hg			\
+	sourcestyleschememanager.hg
+
+files_ccg = $(files_hg:.hg=.ccg)

@@ -51,7 +51,7 @@ AC_CONFIG_FILES([Makefile
                  gtksourceview/${GTKSOURCEVIEWMM_MODULE_NAME}-uninstalled.pc:gtksourceview/gtksourceviewmm-uninstalled.pc.in
                  gtksourceview/src/Makefile
                  gtksourceview/gtksourceviewmm/Makefile
-                 examples/Makefile
+                 tests/Makefile
                  docs/Makefile
                  docs/reference/Doxyfile])
 

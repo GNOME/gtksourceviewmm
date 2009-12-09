@@ -4,6 +4,6 @@ include $(top_srcdir)/gtksourceview/gtksourceviewmm/filelist.am
 gtksourceviewmm_files_h = $(files_built_h) $(filter-out wrap_init.h,$(files_extra_h))
 
 book_name = $(GTKSOURCEVIEWMM_MODULE_NAME)
-doc_input = $(addprefix $(top_srcdir)/gtksourceview/gtksourceviewmm/,$(gtksourceviewmm_files_h)) $(srcdir)/reference/reference_index.txt
+doc_input = $(addprefix $(top_srcdir)/gtksourceview/gtksourceviewmm/,$(gtksourceviewmm_files_h)) $(srcdir)/reference/reference-index.txt
 
 include $(top_srcdir)/build/doc-reference.am

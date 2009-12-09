@@ -4,9 +4,10 @@
 /config.status
 /configure
 /libtool
-/gtksourceviewmm-*.tar.*
+/gtksourceviewmm-*
 /INSTALL
 /gtksourceview/gtksourceviewmmconfig.h
+/tests/*/test
 
 Makefile
 Makefile.in
@@ -18,3 +19,4 @@ stamp-*
 *.libs/
 *.pc
 *~
+.dirstamp

@@ -1,3 +1,7 @@
+2009-12-09  Krzesimir Nowak  <qdlacz@gmail.com>
+
+	* gtksourceview: Move to mm-common build system.
+
 2009-08-04  Fabien Parent  <parent.f@gmail.com>
 
 	* gtksourceview/src/sourcebuffer.hg: Fix the constructor taken a

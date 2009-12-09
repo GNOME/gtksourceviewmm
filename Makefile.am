@@ -25,5 +25,3 @@ nodist_gtksourceviewmm_libinclude_HEADERS = gtksourceview/gtksourceviewmmconfig.
 
 pkgconfigdir = $(libdir)/pkgconfig
 nodist_pkgconfig_DATA = gtksourceview/$(GTKSOURCEVIEWMM_MODULE_NAME).pc
-
-include $(top_srcdir)/build/dist-changelog.am

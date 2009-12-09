@@ -1,25 +1,24 @@
-noinst_PROGRAMS=\
-runtestbasic runtestlangs \
-runtestsearch \
-runtestgetbuffer
+AUTOMAKE_OPTIONS = subdir-objects
 
-runtestbasic_SOURCES=test-basic.cpp
-runtestbasic_LDFLAGS=@GTKSOURCEVIEWMM_LIBS@
+check_PROGRAMS =	\
+	basic/test	\
+	langs/test	\
+	search/test	\
+	mime_types/test	\
+	get_buffer/test
 
-runtestlangs_SOURCES=test-langs.cpp
-runtestlangs_LDFLAGS=@GTKSOURCEVIEWMM_LIBS@
+basic_test_SOURCES      = basic/main.cc
+langs_test_SOURCES      = langs/main.cc
+search_test_SOURCES     = search/main.cc
+mime_types_test_SOURCES = mime_types/main.cc
+get_buffer_test_SOURCES = get_buffer/main.cc
 
-runtestsearch_SOURCES=test-search.cpp
-runtestsearch_LDFLAGS=@GTKSOURCEVIEWMM_LIBS@
+gtksourceviewmm_includes = -I$(top_builddir)/gtksourceview $(if $(srcdir:.=),-I$(top_srcdir)/gtksourceview)
+gtksourceviewmm_ldadd    = $(top_builddir)/gtksourceview/gtksourceviewmm/libgtksourceviewmm-$(GTKSOURCEVIEWMM_API_VERSION).la
 
-#runtestmimetypes_SOURCES=test-mime-types.cpp
-#runtestmimetypes_LDFLAGS=@GTKSOURCEVIEWMM_LIBS@
+local_includes = -I$(top_builddir) $(gtksourceviewmm_includes)
+local_ldadd    = $(gtksourceviewmm_ldadd)
 
-runtestgetbuffer_SOURCES=test-get-buffer.cpp
-runtestgetbuffer_LDFLAGS=@GTKSOURCEVIEWMM_LIBS@
-
-INCLUDES=-I$(top_srcdir) -I$(top_srcdir)/gtksourceview \
-@GTKSOURCEVIEWMM_CFLAGS@
-
-LDADD=$(top_builddir)/gtksourceview/gtksourceviewmm/libgtksourceviewmm-2.0.la
-
+AM_CPPFLAGS = $(local_includes) $(GTHREAD_CFLAGS) $(GTKSOURCEVIEWMM_CFLAGS)
+AM_CXXFLAGS = $(GTKSOURCEVIEWMM_WXXFLAGS)
+LDADD       = $(GTKSOURCEVIEWMM_LIBS) $(local_ldadd)

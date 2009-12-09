@@ -1,0 +1,17 @@
+/compile-binding.am
+/config.h
+/depcomp
+/doc-reference.am
+/install-sh
+/ltmain.sh
+/ltoptions.m4
+/ltversion.m4
+/config.guess
+/config.h.in
+/config.sub
+/dist-changelog.am
+/generate-binding.am
+/libtool.m4
+/lt~obsolete.m4
+/ltsugar.m4
+/missing

@@ -15,7 +15,7 @@
   (return-type "void")
   (when "last")
   (parameters
-    '("GtkSourceMark*" "p0")
+    '("GtkTextMark*" "p0")
   )
 )
 
@@ -423,6 +423,22 @@
   (when "last")
 )
 
+(define-signal show-completion
+  (of-object "GtkSourceView")
+  (return-type "void")
+  (when "last")
+)
+
+(define-signal line-mark-activated
+  (of-object "GtkSourceView")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("GtkTextIter*" "p0")
+    '("gpointer" "p1")
+  )
+)
+
 (define-property user-data
   (of-object "GtkSourceView")
   (prop-type "GParamPointer")
@@ -621,6 +637,24 @@
   (construct-only #f)
 )
 
+(define-property window
+  (of-object "GtkSourceView")
+  (prop-type "GParamObject")
+  (docs "The widget's window if it is realized")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property double-buffered
+  (of-object "GtkSourceView")
+  (prop-type "GParamBoolean")
+  (docs "Whether or not the widget is double buffered")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
 (define-property border-width
   (of-object "GtkSourceView")
   (prop-type "GParamUInt")
@@ -774,6 +808,24 @@
   (construct-only #f)
 )
 
+(define-property im-module
+  (of-object "GtkSourceView")
+  (prop-type "GParamString")
+  (docs "Which IM module should be used")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property completion
+  (of-object "GtkSourceView")
+  (prop-type "GParamObject")
+  (docs "The completion object associated with the view")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
 (define-property show-line-numbers
   (of-object "GtkSourceView")
   (prop-type "GParamBoolean")
@@ -882,5 +934,972 @@
   (construct-only #f)
 )
 
-;; From GtkSourceSearchFlags
+;; From GtkSourceCompletion
+
+(define-signal show
+  (of-object "GtkSourceCompletion")
+  (return-type "void")
+  (when "last")
+)
+
+(define-signal hide
+  (of-object "GtkSourceCompletion")
+  (return-type "void")
+  (when "last")
+)
+
+(define-signal populate-context
+  (of-object "GtkSourceCompletion")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("GtkSourceCompletionContext*" "p0")
+  )
+)
+
+(define-signal move-cursor
+  (of-object "GtkSourceCompletion")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("GtkScrollStep" "p0")
+    '("gint" "p1")
+  )
+)
+
+(define-signal move-page
+  (of-object "GtkSourceCompletion")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("GtkScrollStep" "p0")
+    '("gint" "p1")
+  )
+)
+
+(define-signal activate-proposal
+  (of-object "GtkSourceCompletion")
+  (return-type "void")
+  (when "last")
+)
+
+(define-property user-data
+  (of-object "GtkSourceCompletion")
+  (prop-type "GParamPointer")
+  (docs "Anonymous User Data Pointer")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property view
+  (of-object "GtkSourceCompletion")
+  (prop-type "GParamObject")
+  (docs "The GtkSourceView bound to the completion")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property remember-info-visibility
+  (of-object "GtkSourceCompletion")
+  (prop-type "GParamBoolean")
+  (docs "Remember the last info window visibility state")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property select-on-show
+  (of-object "GtkSourceCompletion")
+  (prop-type "GParamBoolean")
+  (docs "Select first proposal when completion is shown")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property show-headers
+  (of-object "GtkSourceCompletion")
+  (prop-type "GParamBoolean")
+  (docs "Show provider headers when proposals from multiple providers are available")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property accelerators
+  (of-object "GtkSourceCompletion")
+  (prop-type "GParamUInt")
+  (docs "Number of proposal accelerators to show")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property auto-complete-delay
+  (of-object "GtkSourceCompletion")
+  (prop-type "GParamUInt")
+  (docs "Completion popup delay for interactive completion")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property provider-page-size
+  (of-object "GtkSourceCompletion")
+  (prop-type "GParamUInt")
+  (docs "Provider scrolling page size")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property proposal-page-size
+  (of-object "GtkSourceCompletion")
+  (prop-type "GParamUInt")
+  (docs "Proposal scrolling page size")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GtkSourceCompletionContext
+
+(define-signal cancelled
+  (of-object "GtkSourceCompletionContext")
+  (return-type "void")
+  (when "last")
+)
+
+(define-property completion
+  (of-object "GtkSourceCompletionContext")
+  (prop-type "GParamObject")
+  (docs "The completion object to which the context belongs")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property view
+  (of-object "GtkSourceCompletionContext")
+  (prop-type "GParamObject")
+  (docs "The GtkSourceView")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property iter
+  (of-object "GtkSourceCompletionContext")
+  (prop-type "GParamPointer")
+  (docs "The GtkTextIter at which the completion was invoked")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property activation
+  (of-object "GtkSourceCompletionContext")
+  (prop-type "GParamFlags")
+  (docs "The type of activation")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GtkSourceCompletionInfo
+
+(define-signal before-show
+  (of-object "GtkSourceCompletionInfo")
+  (return-type "void")
+  (when "last")
+)
+
+(define-property user-data
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamPointer")
+  (docs "Anonymous User Data Pointer")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property name
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamString")
+  (docs "The name of the widget")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property parent
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamObject")
+  (docs "The parent widget of this widget. Must be a Container widget")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property width-request
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamInt")
+  (docs "Override for width request of the widget, or -1 if natural request should be used")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property height-request
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamInt")
+  (docs "Override for height request of the widget, or -1 if natural request should be used")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property visible
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether the widget is visible")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property sensitive
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether the widget responds to input")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property app-paintable
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether the application will paint directly on the widget")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property can-focus
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether the widget can accept the input focus")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property has-focus
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether the widget has the input focus")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property is-focus
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether the widget is the focus widget within the toplevel")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property can-default
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether the widget can be the default widget")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property has-default
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether the widget is the default widget")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property receives-default
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "If TRUE, the widget will receive the default action when it is focused")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property composite-child
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether the widget is part of a composite widget")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property style
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamObject")
+  (docs "The style of the widget, which contains information about how it will look (colors etc)")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property events
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamFlags")
+  (docs "The event mask that decides what kind of GdkEvents this widget gets")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property extension-events
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamEnum")
+  (docs "The mask that decides what kind of extension events this widget gets")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property no-show-all
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether gtk_widget_show_all() should not affect this widget")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property has-tooltip
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether this widget has a tooltip")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property tooltip-markup
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamString")
+  (docs "The contents of the tooltip for this widget")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property tooltip-text
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamString")
+  (docs "The contents of the tooltip for this widget")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property window
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamObject")
+  (docs "The widget's window if it is realized")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property double-buffered
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether or not the widget is double buffered")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property border-width
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamUInt")
+  (docs "The width of the empty border outside the containers children")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property resize-mode
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamEnum")
+  (docs "Specify how resize events are handled")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property child
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamObject")
+  (docs "Can be used to add a new child to the container")
+  (readable #f)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property type
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamEnum")
+  (docs "The type of the window")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property title
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamString")
+  (docs "The title of the window")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property role
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamString")
+  (docs "Unique identifier for the window to be used when restoring a session")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property allow-shrink
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "If TRUE, the window has no mimimum size. Setting this to TRUE is 99% of the time a bad idea")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property allow-grow
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "If TRUE, users can expand the window beyond its minimum size")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property resizable
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "If TRUE, users can resize the window")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property modal
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "If TRUE, the window is modal (other windows are not usable while this one is up)")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property window-position
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamEnum")
+  (docs "The initial position of the window")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property default-width
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamInt")
+  (docs "The default width of the window, used when initially showing the window")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property default-height
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamInt")
+  (docs "The default height of the window, used when initially showing the window")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property destroy-with-parent
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "If this window should be destroyed when the parent is destroyed")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property icon
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamObject")
+  (docs "Icon for this window")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property icon-name
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamString")
+  (docs "Name of the themed icon for this window")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property screen
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamObject")
+  (docs "The screen where this window will be displayed")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property type-hint
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamEnum")
+  (docs "Hint to help the desktop environment understand what kind of window this is and how to treat it.")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property skip-taskbar-hint
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "TRUE if the window should not be in the task bar.")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property skip-pager-hint
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "TRUE if the window should not be in the pager.")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property urgency-hint
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "TRUE if the window should be brought to the user's attention.")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property accept-focus
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "TRUE if the window should receive the input focus.")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property focus-on-map
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "TRUE if the window should receive the input focus when mapped.")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property decorated
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether the window should be decorated by the window manager")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property deletable
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether the window frame should have a close button")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property gravity
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamEnum")
+  (docs "The window gravity of the window")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property transient-for
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamObject")
+  (docs "The transient parent of the dialog")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property opacity
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamDouble")
+  (docs "The opacity of the window, from 0 to 1")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property is-active
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether the toplevel is the current active window")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property has-toplevel-focus
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether the input focus is within this GtkWindow")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property startup-id
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamString")
+  (docs "Unique startup identifier for the window used by startup-notification")
+  (readable #f)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property max-width
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamInt")
+  (docs "The maximum allowed width")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property max-height
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamInt")
+  (docs "The maximum allowed height")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property shrink-width
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether the window should shrink width to fit the contents")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property shrink-height
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether the window should shrink height to fit the contents")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GtkSourceCompletionItem
+
+(define-property label
+  (of-object "GtkSourceCompletionItem")
+  (prop-type "GParamString")
+  (docs "Label to be shown for this item")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property markup
+  (of-object "GtkSourceCompletionItem")
+  (prop-type "GParamString")
+  (docs "Markup to be shown for this item")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property text
+  (of-object "GtkSourceCompletionItem")
+  (prop-type "GParamString")
+  (docs "Item text")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property icon
+  (of-object "GtkSourceCompletionItem")
+  (prop-type "GParamObject")
+  (docs "Icon to be shown for this item")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property info
+  (of-object "GtkSourceCompletionItem")
+  (prop-type "GParamString")
+  (docs "Info to be shown for this item")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GtkSourceCompletionProposal
+
+(define-signal changed
+  (of-object "GtkSourceCompletionProposal")
+  (return-type "void")
+  (when "last")
+)
+
+;; From GtkSourceCompletionProvider
+
+;; From GtkSourceGutter
+
+(define-signal cell-activated
+  (of-object "GtkSourceGutter")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("GtkCellRenderer*" "p0")
+    '("GtkTextIter*" "p1")
+    '("gpointer" "p2")
+  )
+)
+
+(define-signal query-tooltip
+  (of-object "GtkSourceGutter")
+  (return-type "gboolean")
+  (when "last")
+  (parameters
+    '("GtkCellRenderer*" "p0")
+    '("GtkTextIter*" "p1")
+    '("GtkTooltip*" "p2")
+  )
+)
+
+(define-property view
+  (of-object "GtkSourceGutter")
+  (prop-type "GParamObject")
+  (docs "The gutters' GtkSourceView")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property window-type
+  (of-object "GtkSourceGutter")
+  (prop-type "GParamEnum")
+  (docs "The gutters text window type")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+;; From GtkSourcePrintCompositor
+
+(define-property buffer
+  (of-object "GtkSourcePrintCompositor")
+  (prop-type "GParamObject")
+  (docs "The GtkSourceBuffer object to print")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property tab-width
+  (of-object "GtkSourcePrintCompositor")
+  (prop-type "GParamUInt")
+  (docs "Width of a tab character expressed in spaces")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property wrap-mode
+  (of-object "GtkSourcePrintCompositor")
+  (prop-type "GParamEnum")
+  (docs "Whether to wrap lines never, at word boundaries, or at character boundaries.")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property highlight-syntax
+  (of-object "GtkSourcePrintCompositor")
+  (prop-type "GParamBoolean")
+  (docs "Whether to print the document with highlighted syntax")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property print-line-numbers
+  (of-object "GtkSourcePrintCompositor")
+  (prop-type "GParamUInt")
+  (docs "Interval of printed line numbers (0 means no numbers)")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property print-header
+  (of-object "GtkSourcePrintCompositor")
+  (prop-type "GParamBoolean")
+  (docs "Whether to print a header in each page")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property print-footer
+  (of-object "GtkSourcePrintCompositor")
+  (prop-type "GParamBoolean")
+  (docs "Whether to print a footer in each page")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property body-font-name
+  (of-object "GtkSourcePrintCompositor")
+  (prop-type "GParamString")
+  (docs "Name of the font to use for the text body (e.g. 'Monospace 10')")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property line-numbers-font-name
+  (of-object "GtkSourcePrintCompositor")
+  (prop-type "GParamString")
+  (docs "Name of the font to use for the line numbers (e.g. 'Monospace 10')")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property header-font-name
+  (of-object "GtkSourcePrintCompositor")
+  (prop-type "GParamString")
+  (docs "Name of the font to use for the page header (e.g. 'Monospace 10')")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property footer-font-name
+  (of-object "GtkSourcePrintCompositor")
+  (prop-type "GParamString")
+  (docs "Name of the font to use for the page footer (e.g. 'Monospace 10')")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property n-pages
+  (of-object "GtkSourcePrintCompositor")
+  (prop-type "GParamInt")
+  (docs "The number of pages in the document (-1 means the document has not been completely paginated).")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+;; From GtkSourceCompletionWords
+
+(define-property name
+  (of-object "GtkSourceCompletionWords")
+  (prop-type "GParamString")
+  (docs "The provider name")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property icon
+  (of-object "GtkSourceCompletionWords")
+  (prop-type "GParamObject")
+  (docs "The provider icon")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property proposals-batch-size
+  (of-object "GtkSourceCompletionWords")
+  (prop-type "GParamUInt")
+  (docs "Number of proposals added in one batch")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property scan-batch-size
+  (of-object "GtkSourceCompletionWords")
+  (prop-type "GParamUInt")
+  (docs "Number of lines scanned in one batch")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property minimum-word-size
+  (of-object "GtkSourceCompletionWords")
+  (prop-type "GParamUInt")
+  (docs "The minimum word size to complete")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
 

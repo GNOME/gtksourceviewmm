@@ -1,0 +1,73 @@
+/* sourcegutter.h
+ * 
+ * Copyright (C) 2009 Krzesimir Nowak
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+/// \file
+/// \brief SourceGutter class
+
+#include <gdkmm/window.h>
+#include <glibmm/object.h>
+#include <glibmm/refptr.h>
+#include <gtkmm/cellrenderer.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace gtksourceview
+{
+
+class SourceGutter : public Glib::Object
+{
+  _CLASS_GOBJECT(SourceGutter, GtkSourceGutter, GTK_SOURCE_GUTTER, Glib::Object, GObject)
+
+protected:
+   _CTOR_DEFAULT
+
+public:
+  _WRAP_CREATE()
+
+  _WRAP_METHOD(Glib::RefPtr<Gdk::Window> get_window(), gtk_source_gutter_get_window, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Gdk::Window> get_window() const, gtk_source_gutter_get_window, constversion, refreturn)
+  
+  _WRAP_METHOD(void insert(Gtk::CellRenderer* renderer, int position), gtk_source_gutter_insert)
+  _WRAP_METHOD(void reorder(Gtk::CellRenderer* renderer, int position), gtk_source_gutter_reorder)
+  _WRAP_METHOD(void remove(Gtk::CellRenderer* renderer), gtk_source_gutter_remove)
+  
+  _WRAP_METHOD(void queue_draw(), gtk_source_gutter_queue_draw)
+  
+  /// For instance,
+  /// void on_cell_data(Gtk::CellRenderer& cell, int line_number, bool current_line);
+  typedef sigc::slot<void, Gtk::CellRenderer* /* cell */, int /* line_number */, bool /* current_line */> SlotData;
+  /// For instance,
+  /// void on_cell_size(Gtk::CellRenderer& cell);
+  typedef sigc::slot<void, Gtk::CellRenderer* /* cell */> SlotSize;
+  _IGNORE(gtk_source_gutter_set_cell_data_func, gtk_source_gutter_set_cell_size_func)
+  void set_cell_data_func(Gtk::CellRenderer* renderer, const SlotData& slot);
+  void set_cell_size_func(Gtk::CellRenderer* renderer, const SlotSize& slot);
+
+  _WRAP_PROPERTY("view", SourceView*);
+  _WRAP_PROPERTY("window-type", Gtk::TextWindowType);
+  
+  _WRAP_SIGNAL(void cell_activated(const Gtk::CellRenderer* renderer, const Gtk::TextIter& iter, GdkEvent* event), "cell-activated")
+  _WRAP_SIGNAL(bool query_tooltip(const Gtk::CellRenderer* renderer, const Gtk::TextIter& iter, const Glib::RefPtr<Tooltip>& tooltip), "query-tooltip")
+
+};
+
+} // namespace gtksourceview
+
+

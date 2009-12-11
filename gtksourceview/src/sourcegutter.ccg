@@ -1,0 +1,96 @@
+/* 
+ *
+ * Copyright (C) 2009 Krzesimir Nowak
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+static void SignalProxy_CellData_gtk_callback(GtkSourceGutter *gutter,
+                                              GtkCellRenderer *cell,
+                                              gint line_number,
+                                              gboolean current_line,
+                                              gpointer data)
+{
+  gtksourceview::SourceGutter::SlotData* the_slot = static_cast<gtksourceview::SourceGutter::SlotData*>(user_data);
+
+  #ifdef GLIBMM_EXCEPTIONS_ENABLED
+  try
+  {
+  #endif //GLIBMM_EXCEPTIONS_ENABLED
+    (*the_slot)(Glib::wrap(cell), line_number, current_line);
+  #ifdef GLIBMM_EXCEPTIONS_ENABLED
+  }
+  catch(...)
+  {
+    Glib::exception_handlers_invoke();
+  }
+  #endif //GLIBMM_EXCEPTIONS_ENABLED
+}
+
+static void SignalProxy_CellData_gtk_callback_destroy(void* data)
+{
+  delete static_cast<gtksourceview::SourceGutter::SlotData*>(data);
+}
+
+static void SignalProxy_CellSize_gtk_callback(GtkSourceGutter *gutter,
+                                              GtkCellRenderer *cell,
+                                              gint line_number,
+                                              gboolean current_line,
+                                              gpointer data)
+{
+  gtksourceview::SourceGutter::SlotSize* the_slot = static_cast<gtksourceview::SourceGutter::SlotData*>(user_data);
+
+  #ifdef GLIBMM_EXCEPTIONS_ENABLED
+  try
+  {
+  #endif //GLIBMM_EXCEPTIONS_ENABLED
+    (*the_slot)(Glib::wrap(cell));
+  #ifdef GLIBMM_EXCEPTIONS_ENABLED
+  }
+  catch(...)
+  {
+    Glib::exception_handlers_invoke();
+  }
+  #endif //GLIBMM_EXCEPTIONS_ENABLED
+}
+
+static void SignalProxy_CellSize_gtk_callback_destroy(void* data)
+{
+  delete static_cast<gtksourceview::SourceGutter::SlotSize*>(data);
+}
+
+namespace gtksourceview
+{
+
+void SourceGutter::set_cell_data_func(Gtk::CellRenderer* renderer, const SlotData& slot)
+{
+  SlotData* slot_copy = new SlotData(slot);
+
+  gtk_source_gutter_set_cell_data_func(gobj(), renderer->gobj(),
+      &SignalProxy_CellData_gtk_callback, slot_copy,
+      &SignalProxy_CellData_gtk_callback_destroy);
+}
+
+void SourceGutter::set_cell_size_func(Gtk::CellRenderer& renderer, const SlotSize& slot)
+{
+  SlotSize* slot_copy = new SlotSize(slot);
+
+  gtk_source_gutter_set_cell_size_func(gobj(), renderer->gobj(),
+      &SignalProxy_CellSize_gtk_callback, slot_copy,
+      &SignalProxy_CellSize_gtk_callback_destroy);
+}
+
+}//end namespace gtksourceview
+

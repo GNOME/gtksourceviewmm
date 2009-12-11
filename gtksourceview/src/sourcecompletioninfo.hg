@@ -1,0 +1,54 @@
+/* sourcecompletioninfo.h
+ * 
+ * Copyright (C) 2009 Krzesimir Nowak
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <glibmm/object.h>
+#include <gtkmm/widget.h>
+#include <gtkmm/textview.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(gtkmm/private/window_p.h)
+
+
+namespace gtksourceview
+{
+
+class SourceCompletionInfo : public Gtk::Window
+{
+  _CLASS_GTKOBJECT(SourceCompletionInfo, GtkSourceCompletionInfo, GTK_SOURCE_COMPLETION_INFO, Gtk::Window, GtkWindow)
+
+public:
+  _CTOR_DEFAULT()
+  
+  _WRAP_METHOD(void move_to_iter(const Gtk::Textview& view, const Gtk::TextIter& iter), gtk_source_completion_info_move_to_iter)
+  _WRAP_METHOD(void set_sizing(int width, int height, bool shrink_width, bool shrink_height), gtk_source_completion_info_set_sizing)
+  _WRAP_METHOD(void set_widget(Gtk::Widget& widget), gtk_source_completion_info_set_widget)
+  _WRAP_METHOD(Gtk::Widget* get_widget(), gtk_source_completion_info_get_widget)
+  _WRAP_METHOD(const Gtk::Widget* get_widget() const, gtk_source_completion_info_get_widget, constversion)
+  _WRAP_METHOD(void process_resize(), gtk_source_completion_info_process_resize)
+
+  _WRAP_PROPERTY("max-height", int)
+  _WRAP_PROPERTY("max-width", int)
+  _WRAP_PROPERTY("shrink-height", bool)
+  _WRAP_PROPERTY("shrink-width", bool)
+
+  _WRAP_SIGNAL(void before_show(), "before-show")
+};
+
+} /* namespace gtksourceview */
+

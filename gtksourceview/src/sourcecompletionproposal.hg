@@ -1,0 +1,50 @@
+/* sourcecompletionproposal.h
+ * 
+ * Copyright (C) 2009 Krzesimir Nowak
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <glibmm/interface.h>
+#include <glibmm/ustring.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace gtksourceview
+{
+
+class SourceCompletionProposal : public Glib::Interface
+{
+  _CLASS_INTERFACE(SourceCompletionProposal, GtkSourceCompletionProposal, GTK_SOURCE_COMPLETION_PROPOSAL, GtkSourceCompletionProposalIface)
+
+public:
+  _WRAP_METHOD(Glib::ustring get_label() const, gtk_source_completion_proposal_get_label)
+  _WRAP_METHOD(Glib::ustring get_markup() const, gtk_source_completion_proposal_get_markup)
+  _WRAP_METHOD(Glib::ustring get_text() const, gtk_source_completion_proposal_get_text)
+  _WRAP_METHOD(Glib::RefPtr<Gdk::Pixbuf> get_icon(), gtk_source_completion_proposal_get_icon, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Gdk::Pixbuf> get_icon() const, gtk_source_completion_proposal_get_icon, constversion, refreturn)
+  _WRAP_METHOD(Glib::ustring get_info() const, gtk_source_completion_proposal_get_info)
+  _WRAP_METHOD(void changed(), gtk_source_completion_proposal_changed)
+  _WRAP_METHOD(guint hash() const, gtk_source_completion_proposal_hash)
+  _WRAP_METHOD(bool equal(const SourceCompletionProposal& other) const, gtk_source_completion_proposal_equal)
+//  bool operator==(const SourceCompletionProposal& other) const;
+  
+  _WRAP_SIGNAL(void changed(), "changed")
+};
+
+} // namespace gtksourceview
+
+

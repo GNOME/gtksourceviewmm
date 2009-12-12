@@ -91,22 +91,22 @@ SourceView::set_source_buffer (const Glib::RefPtr<SourceBuffer> &source_buffer)
     set_buffer (source_buffer) ;
 }
 
-void SourceView::set_mark_category_tooltip_func(const SlotMarkTooltip& slot)
+void SourceView::set_mark_category_tooltip_func(const Glib::ustring& category, const SlotMarkTooltip& slot)
 {
   SlotMarkTooltip* slot_copy = new SlotMarkTooltip(slot);
 
-  gtk_source_view_set_mark_category_tooltip_func(gobj(),
-      &SignalProxy_MarkTooltip_gtk_callback, slot_copy,
-      &SignalProxy_MarkTooltip_gtk_callback_destroy);
+  gtk_source_view_set_mark_category_tooltip_func(gobj(), category.c_str(),
+    &SignalProxy_MarkTooltip_gtk_callback, slot_copy,
+    &SignalProxy_MarkTooltip_gtk_callback_destroy);
 }
 
-void SourceView::set_mark_category_tooltip_markup_func(const SlotMarkTooltip& slot)
+void SourceView::set_mark_category_tooltip_markup_func(const Glib::ustring& category, const SlotMarkTooltip& slot)
 {
   SlotMarkTooltip* slot_copy = new SlotMarkTooltip(slot);
 
   gtk_source_view_set_mark_category_tooltip_markup_func(gobj(),
-      &SignalProxy_MarkTooltip_gtk_callback, slot_copy,
-      &SignalProxy_MarkTooltip_gtk_callback_destroy);
+    category.c_str(), &SignalProxy_MarkTooltip_gtk_callback, slot_copy,
+    &SignalProxy_MarkTooltip_gtk_callback_destroy);
 }
 
 }//end namespace gtksourceview

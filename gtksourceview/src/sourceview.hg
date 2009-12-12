@@ -249,8 +249,8 @@ public:
   typedef sigc::slot<Glib::ustring, const Glib::RefPtr<SourceMark>& /* mark */> SlotMarkTooltip;
   
   _IGNORE(gtk_source_view_set_mark_category_tooltip_func, gtk_source_view_set_mark_category_tooltip_markup_func)
-  void set_mark_category_tooltip_func(const SlotMarkTooltip& slot);
-  void set_mark_category_tooltip_markup_func(const SlotMarkTooltip& slot);
+  void set_mark_category_tooltip_func(const Glib::ustring& category, const SlotMarkTooltip& slot);
+  void set_mark_category_tooltip_markup_func(const Glib::ustring& category, const SlotMarkTooltip& slot);
 
   _WRAP_SIGNAL(void redo(), "redo")
   _WRAP_SIGNAL(void undo(), "undo")

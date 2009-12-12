@@ -19,6 +19,8 @@
 
 #include <glibmm/interface.h>
 #include <glibmm/ustring.h>
+#include <gdkmm/pixbuf.h>
+#include <gtksourceview/gtksourcecompletionproposal.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -39,8 +41,11 @@ public:
   _WRAP_METHOD(Glib::ustring get_info() const, gtk_source_completion_proposal_get_info)
   _WRAP_METHOD(void changed(), gtk_source_completion_proposal_changed)
   _WRAP_METHOD(guint hash() const, gtk_source_completion_proposal_hash)
+
+#m4 _CONVERSION(`const SourceCompletionProposal&',`GtkSourceCompletionProposal*',`const_cast<GtkSourceCompletionProposal*>(($3).gobj())')
   _WRAP_METHOD(bool equal(const SourceCompletionProposal& other) const, gtk_source_completion_proposal_equal)
-//  bool operator==(const SourceCompletionProposal& other) const;
+#m4 _CONVERSION(`const Glib::RefPtr<SourceCompletionProposal>&',`GtkSourceCompletionProposal*',`const_cast<GtkSourceCompletionProposal*>(($3)->gobj())')
+  _WRAP_METHOD(bool equal(const Glib::RefPtr<SourceCompletionProposal>& other) const, gtk_source_completion_proposal_equal)
   
   _WRAP_SIGNAL(void changed(), "changed")
 };

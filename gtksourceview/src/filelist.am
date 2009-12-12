@@ -15,6 +15,9 @@ files_hg =				\
 	sourcebuffer.hg			\
 	sourceiter.hg			\
 	sourcemark.hg			\
-	sourcestyleschememanager.hg
+	sourcestyleschememanager.hg	\
+	sourcegutter.hg			\
+	sourcecompletioninfo.hg		\
+	sourcecompletionproposal.hg
 
 files_ccg = $(files_hg:.hg=.ccg)

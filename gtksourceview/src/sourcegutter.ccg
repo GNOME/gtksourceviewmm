@@ -17,13 +17,15 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-static void SignalProxy_CellData_gtk_callback(GtkSourceGutter *gutter,
+#include <gtksourceview/gtksourcegutter.h>
+
+static void SignalProxy_CellData_gtk_callback(GtkSourceGutter *gutter G_GNUC_UNUSED,
                                               GtkCellRenderer *cell,
                                               gint line_number,
                                               gboolean current_line,
                                               gpointer data)
 {
-  gtksourceview::SourceGutter::SlotData* the_slot = static_cast<gtksourceview::SourceGutter::SlotData*>(user_data);
+  gtksourceview::SourceGutter::SlotData* the_slot = static_cast<gtksourceview::SourceGutter::SlotData*>(data);
 
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
@@ -44,13 +46,11 @@ static void SignalProxy_CellData_gtk_callback_destroy(void* data)
   delete static_cast<gtksourceview::SourceGutter::SlotData*>(data);
 }
 
-static void SignalProxy_CellSize_gtk_callback(GtkSourceGutter *gutter,
+static void SignalProxy_CellSize_gtk_callback(GtkSourceGutter *gutter G_GNUC_UNUSED,
                                               GtkCellRenderer *cell,
-                                              gint line_number,
-                                              gboolean current_line,
                                               gpointer data)
 {
-  gtksourceview::SourceGutter::SlotSize* the_slot = static_cast<gtksourceview::SourceGutter::SlotData*>(user_data);
+  gtksourceview::SourceGutter::SlotSize* the_slot = static_cast<gtksourceview::SourceGutter::SlotSize*>(data);
 
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
@@ -83,7 +83,7 @@ void SourceGutter::set_cell_data_func(Gtk::CellRenderer* renderer, const SlotDat
       &SignalProxy_CellData_gtk_callback_destroy);
 }
 
-void SourceGutter::set_cell_size_func(Gtk::CellRenderer& renderer, const SlotSize& slot)
+void SourceGutter::set_cell_size_func(Gtk::CellRenderer* renderer, const SlotSize& slot)
 {
   SlotSize* slot_copy = new SlotSize(slot);
 

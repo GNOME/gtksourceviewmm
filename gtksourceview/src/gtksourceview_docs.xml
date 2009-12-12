@@ -579,7 +579,7 @@ typing, we can undo the whole word and not each letter by itself.
 </parameter_description>
 </parameter>
 </parameters>
-<return> %TRUE is merge was sucessful, %FALSE otherwise.²
+<return> %TRUE is merge was sucessful, %FALSE otherwise.
 </return>
 </function>
 

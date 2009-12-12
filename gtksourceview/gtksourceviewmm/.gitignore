@@ -8,3 +8,6 @@
 /sourcestyleschememanager.*
 /sourceview.*
 /wrap_init.cc
+/sourcegutter.*
+/sourcecompletionproposal.*
+/sourcecompletioninfo.*

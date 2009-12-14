@@ -435,7 +435,7 @@
   (when "last")
   (parameters
     '("GtkTextIter*" "p0")
-    '("gpointer" "p1")
+    '("GdkEvent*" "p1")
   )
 )
 
@@ -1713,7 +1713,7 @@
   (parameters
     '("GtkCellRenderer*" "p0")
     '("GtkTextIter*" "p1")
-    '("gpointer" "p2")
+    '("GdkEvent*" "p2")
   )
 )
 

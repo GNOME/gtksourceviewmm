@@ -1,0 +1,56 @@
+/* sourcecompletioncontext.h
+ *
+ * Copyright (C) 2009 Krzesimir Nowak
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <glibmm/object.h>
+#include <gtksourceviewmm/sourceiter.h>
+#include <gtksourceviewmm/sourceview.h>
+#include <gtksourceviewmm/sourcecompletionprovider.h>
+#include <gtksourceviewmm/sourcecompletionproposal.h>
+#include <gtksourceviewmm/sourcecompletion.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(glibmm/private/object_p.h)
+
+
+namespace gtksourceview
+{
+
+_WRAP_ENUM(SourceCompletionActivation, GtkSourceCompletionActivation)
+
+class SourceCompletionContext : public Glib::Object
+{
+  _CLASS_GOBJECT(SourceCompletionContext, GtkSourceCompletionContext, GTK_SOURCE_COMPLETION_CONTEXT, Glib::Object, GObject)
+public:
+  _WRAP_METHOD(void add_proposals(const Glib::RefPtr<SourceCompletionProvider>& provider, const Glib::ListHandle<Glib::RefPtr<SourceCompletionProposal> >& proposals, bool finished), gtk_source_completion_context_add_proposals)
+  _WRAP_METHOD(SourceView* get_view(), gtk_source_completion_context_get_view)
+  _WRAP_METHOD(const SourceView* get_view() const, gtk_source_completion_context_get_view, constversion)
+  _IGNORE(gtk_source_completion_context_get_iter)
+  SourceMark get_iter() const;
+
+  _WRAP_PROPERTY("activation", SourceCompletionActivation)
+  _WRAP_PROPERTY("completion", SourceCompletion*)
+// TODO: wait until #604777 is fixed
+//  _WRAP_PROPERTY("iter", SourceIter)
+  _WRAP_PROPERTY("view", SourceView*)
+
+  _WRAP_SIGNAL(void cancelled(), "cancelled")
+};
+
+} /* namespace gtksourceview */
+

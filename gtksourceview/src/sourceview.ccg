@@ -56,6 +56,7 @@ SourceView::SourceView() :
 {
     GtkSourceBuffer *buffer = gtk_source_buffer_new (NULL) ;
     gtk_text_view_set_buffer (GTK_TEXT_VIEW (gobject_), GTK_TEXT_BUFFER (buffer));
+    g_object_unref(buffer);
 }
 
 SourceView::SourceView(const Glib::RefPtr<SourceBuffer> &a_buffer) :
@@ -66,6 +67,7 @@ SourceView::SourceView(const Glib::RefPtr<SourceBuffer> &a_buffer) :
     } else {
         GtkSourceBuffer *buffer = gtk_source_buffer_new (NULL) ;
         gtk_text_view_set_buffer (GTK_TEXT_VIEW (gobject_), GTK_TEXT_BUFFER (buffer)) ;
+        g_object_unref(buffer);
     }
 }
 
@@ -90,6 +92,18 @@ void
 SourceView::set_source_buffer (const Glib::RefPtr<SourceBuffer> &source_buffer)
 {
     set_buffer (source_buffer) ;
+}
+
+Glib::RefPtr<Gdk::Pixbuf>
+SourceView::get_mark_category_pixbuf(const Glib::ustring&)
+{
+  return Glib::RefPtr<Gdk::Pixbuf>();
+}
+
+Glib::RefPtr<const Gdk::Pixbuf>
+SourceView::get_mark_category_pixbuf(const Glib::ustring&) const
+{
+  return Glib::RefPtr<const Gdk::Pixbuf>();
 }
 
 void SourceView::set_mark_category_tooltip_func(const Glib::ustring& category, const SlotMarkTooltip& slot)

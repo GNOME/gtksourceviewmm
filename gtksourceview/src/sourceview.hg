@@ -25,6 +25,7 @@
 
 #include <gtkmm/textview.h>
 #include <gtksourceviewmm/sourcebuffer.h>
+#include <gtksourceviewmm/sourcegutter.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(gtkmm/private/textview_p.h)
@@ -32,8 +33,9 @@ _PINCLUDE(gtkmm/private/textview_p.h)
 namespace gtksourceview
 {
 
+class SourceGutter;
+
 _WRAP_ENUM(SourceSmartHomeEndType, GtkSourceSmartHomeEndType)
-// TODO: wrap it by hand, because last enum value is not wrapped.
 _WRAP_ENUM(SourceDrawSpacesFlags, GtkSourceDrawSpacesFlags)
 
 /// \brief Multi-line source editing widget.
@@ -213,18 +215,28 @@ public:
   ///
   /// \param category a mark category.
   /// \param pixbuf the pixbuf to associate the mark category to.
+  ///
+  /// \deprecated Use set_mark_category_icon().
   _WRAP_METHOD(void set_mark_category_pixbuf(const Glib::ustring& category, const Glib::RefPtr<Gdk::Pixbuf>& pixbuf), gtk_source_view_set_mark_category_pixbuf, deprecated)
+
+  _IGNORE(gtk_source_view_get_mark_category_pixbuf)
+#ifndef GTKSOURCEVIEWMM_DISABLE_DEPRECATED
   /// \brief Gets the pixbuf which is associated with the given mark category.
   ///
   /// \param category a mark category.
-  /// \return the associated GdkPixbuf, or NULL if not found.
-  _WRAP_METHOD(Glib::RefPtr<Gdk::Pixbuf> get_mark_category_pixbuf(const Glib::ustring& category), gtk_source_view_get_mark_category_pixbuf, refreturn, deprecated)
+  /// \return empty Glib::RefPtr<Gdk::Pixbuf>.
+  ///
+  /// \deprecated Don't use it.
+  Glib::RefPtr<Gdk::Pixbuf> get_mark_category_pixbuf(const Glib::ustring& category);
 
   /// \brief Gets the pixbuf which is associated with the given mark category.
   ///
   /// \param category a mark category.
-  /// \return the associated GdkPixbuf, or NULL if not found.
-  _WRAP_METHOD(Glib::RefPtr<const Gdk::Pixbuf> get_mark_category_pixbuf(const Glib::ustring& category) const, gtk_source_view_get_mark_category_pixbuf, refreturn, constversion, deprecated)
+  /// \return empty Glib::RefPtr<const Gdk::Pixbuf>.
+  ///
+  /// \deprecated Don't use it.
+  Glib::RefPtr<const Gdk::Pixbuf> get_mark_category_pixbuf(const Glib::ustring& category) const;
+#endif // GTKSOURCEVIEWMM_DISABLE_DEPRECATED
 
   _WRAP_METHOD(void set_mark_category_icon(const Glib::ustring& category, const Glib::RefPtr<Gdk::Pixbuf>& pixbuf), gtk_source_view_set_mark_category_icon_from_pixbuf)
   _WRAP_METHOD(void set_mark_category_icon(const Glib::ustring& category, const Gtk::StockID& stock_id), gtk_source_view_set_mark_category_icon_from_stock)
@@ -234,32 +246,35 @@ public:
   _WRAP_METHOD(void set_mark_category_background(const Glib::ustring& category, const Gdk::Color& color), gtk_source_view_set_mark_category_background)
 #m4 _CONVERSION(`Gdk::Color&',`GdkColor*',`($3).gobj()')
   _WRAP_METHOD(bool set_mark_category_background(const Glib::ustring& category, Gdk::Color& dest) const, gtk_source_view_get_mark_category_background)
-  /// \brief Set if and how the spaces should be visualized/
+  /// \brief Set if and how the spaces should be visualized.
   ///
   /// \param flags specifing how white spaces should be displayed.
   _WRAP_METHOD(void set_draw_spaces(SourceDrawSpacesFlags flags = SOURCE_DRAW_SPACES_ALL), gtk_source_view_set_draw_spaces)
-  
+
   /// \brief Returns the SourceDrawSpacesFlags specifying if and how
-  /// spaces should be displayed for this view 
+  /// spaces should be displayed for this view
   ///
   /// \return flags the SourceDrawSpacesFlags, 0 if no spaces should be drawn.
   _WRAP_METHOD(SourceDrawSpacesFlags get_draw_spaces() const, gtk_source_view_get_draw_spaces)
-  
+
   /// For instance,
   /// Glib::ustring on_mark_tooltip(const Glib::RefPtr<SourceMark>& mark);
   typedef sigc::slot<Glib::ustring, const Glib::RefPtr<SourceMark>& /* mark */> SlotMarkTooltip;
-  
+
   _IGNORE(gtk_source_view_set_mark_category_tooltip_func, gtk_source_view_set_mark_category_tooltip_markup_func)
   void set_mark_category_tooltip_func(const Glib::ustring& category, const SlotMarkTooltip& slot);
   void set_mark_category_tooltip_markup_func(const Glib::ustring& category, const SlotMarkTooltip& slot);
+#m4 _CONVERSION(`GtkSourceGutter*',`Glib::RefPtr<SourceGutter>',`Glib::wrap($3)')
+#m4 _CONVERSION(`GtkSourceGutter*',`Glib::RefPtr<const SourceGutter>',`Glib::wrap($3)')
+  _WRAP_METHOD(Glib::RefPtr<SourceGutter> get_gutter(Gtk::TextWindowType window_type), gtk_source_view_get_gutter, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const SourceGutter> get_gutter(Gtk::TextWindowType window_type) const, gtk_source_view_get_gutter, refreturn, constversion)
 
   _WRAP_SIGNAL(void redo(), "redo")
   _WRAP_SIGNAL(void undo(), "undo")
   _WRAP_SIGNAL(void show_completion(), "show-completion", no_default_handler)
 #m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap($3)')
-#m4 _CONVERSION(`gpointer',`GdkEvent*',`static_cast<GdkEvent*>($3)')
-  _WRAP_SIGNAL(void line_mark_activated(const Gtk::TextIter& mark, GdkEvent* event), "line-mark-activated", no_default_handler)
-  
+  _WRAP_SIGNAL(void line_mark_activated(const Gtk::TextIter& mark, GdkEvent* event), "line-mark-activated")
+
 
   /// \brief Whether to display line numbers
   ///

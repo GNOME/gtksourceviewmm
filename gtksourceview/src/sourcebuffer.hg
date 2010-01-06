@@ -310,7 +310,7 @@ public:
   _WRAP_PROPERTY("language", Glib::RefPtr<SourceLanguage>)
   _WRAP_PROPERTY("can-undo", bool)
   _WRAP_PROPERTY("can-redo", bool)
-  _WRAP_PROPERTY("style_scheme", Glib::RefPtr<SourceStyleScheme>)
+  _WRAP_PROPERTY("style-scheme", Glib::RefPtr<SourceStyleScheme>)
 
   /// \name signals
   /// @{
@@ -328,7 +328,7 @@ public:
   /// \brief Emitted whenever a marker of sourcebuffer has changed and needs to be redisplayed by the view.
   ///
   /// A change in a marker's type or location can trigger this signal.
-  /// Note that moving a marker causes the emission of this signal twice: one for the old location and one for the new. 
+  /// Note that moving a marker causes the emission of this signal twice: one for the old location and one for the new.
   /// parameter where:  an iterator at the location where the change occurred.
   _WRAP_SIGNAL(void source_mark_updated(const Glib::RefPtr<Gtk::TextMark>& where), "source-mark-updated", no_default_handler)
   /// @}

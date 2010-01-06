@@ -33,6 +33,21 @@ class SourceStyle : public Glib::Object
 public:
 
   _WRAP_METHOD(Glib::RefPtr<SourceStyle> copy() const, gtk_source_style_copy)
+
+  _WRAP_PROPERTY("background", Glib::ustring)
+  _WRAP_PROPERTY("background-set", bool)
+  _WRAP_PROPERTY("bold", bool)
+  _WRAP_PROPERTY("bold-set", bool)
+  _WRAP_PROPERTY("foreground", Glib::ustring)
+  _WRAP_PROPERTY("foreground-set", bool)
+  _WRAP_PROPERTY("italic", bool)
+  _WRAP_PROPERTY("italic-set", bool)
+  _WRAP_PROPERTY("line-background", Glib::ustring)
+  _WRAP_PROPERTY("line-background-set", bool)
+  _WRAP_PROPERTY("strikethrough", bool)
+  _WRAP_PROPERTY("strikethrough-set", bool)
+  _WRAP_PROPERTY("underline", bool)
+  _WRAP_PROPERTY("underline-set", bool)
 };
 
 }//end namespace gtksourceview

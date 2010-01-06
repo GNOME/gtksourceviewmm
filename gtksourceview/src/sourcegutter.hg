@@ -1,5 +1,5 @@
 /* sourcegutter.h
- * 
+ *
  * Copyright (C) 2009 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
@@ -50,9 +50,9 @@ public:
   _WRAP_METHOD(void insert(Gtk::CellRenderer* renderer, int position), gtk_source_gutter_insert)
   _WRAP_METHOD(void reorder(Gtk::CellRenderer* renderer, int position), gtk_source_gutter_reorder)
   _WRAP_METHOD(void remove(Gtk::CellRenderer* renderer), gtk_source_gutter_remove)
-  
+
   _WRAP_METHOD(void queue_draw(), gtk_source_gutter_queue_draw)
-  
+
   /// For instance,
   /// void on_cell_data(Gtk::CellRenderer& cell, int line_number, bool current_line);
   typedef sigc::slot<void, Gtk::CellRenderer* /* cell */, int /* line_number */, bool /* current_line */> SlotData;

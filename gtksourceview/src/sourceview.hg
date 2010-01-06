@@ -1,8 +1,9 @@
 /* sourceview.h
- * 
+ *
  * Copyright (C) 2004-2005 Jae Jang
  * Copyright (C) 2005-2006 Rob Page
  * Copyright (C) 2005-2006 Dodji Seketeli
+ * Copyright (C) 2009 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -133,7 +134,7 @@ public:
   ///
   /// \return true if the currently selected line is to be highlighted, false otherwise
   _WRAP_METHOD(bool get_highlight_current_line() const, gtk_source_view_get_highlight_current_line)
-  
+
   /// \brief  set the position of the right margin
   ///
   /// \param margin the position (in pixels) of the right margin
@@ -318,7 +319,7 @@ public:
   ///
   /// Default value is true.
   _WRAP_PROPERTY("indent_on_tab", bool)
-  
+
   /// \brief Set if and how the spaces should be visualized.
   ///
   /// Default value is 0.

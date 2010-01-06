@@ -1,8 +1,7 @@
-/* $Id: generate_defs_gtk.cc,v 1.1.1.1 2006/05/28 18:56:55 rob Exp $ */
-
-/* generate_defs_gtk.cc
+/* generate_extra_defs_gtksourceview.cc
  *
  * Copyright (C) 2001 The Free Software Foundation
+ * Copyright (C) 2009 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public

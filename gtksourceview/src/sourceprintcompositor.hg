@@ -1,0 +1,115 @@
+/* sourceprintcompositor.h
+ *
+ * Copyright (C) 2009 Krzesimir Nowak
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <gtkmm/printcontext.h>
+
+#include <gtksourceviewmm/sourceview.h>
+#include <gtksourceviewmm/sourcebuffer.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace gtksourceview
+{
+
+class SourcePrintCompositor : public Glib::Object
+{
+  _CLASS_GOBJECT(SourcePrintCompositor, GtkSourcePrintCompositor, GTK_SOURCE_PRINT_COMPOSITOR, Glib::Object, GObject)
+
+protected:
+  _WRAP_CTOR(SourcePrintCompositor(const Glib::RefPtr<SourceBuffer>& buffer), gtk_source_print_compositor_new)
+#m4 _CONVERSION(`const SourceView&',`GtkSourceView*',`($3).gobj()')
+  _WRAP_CTOR(SourcePrintCompositor(const SourceView& view), gtk_source_print_compositor_new_from_view)
+public:
+  _WRAP_CREATE(const Glib::RefPtr<SourceBuffer>& buffer)
+  _WRAP_CREATE(const SourceView& view)
+
+#m4 _CONVERSION(`GtkSourceBuffer*',`Glib::RefPtr<SourceBuffer>',`Glib::wrap($3)')
+  _WRAP_METHOD(Glib::RefPtr<SourceBuffer> get_buffer(), gtk_source_print_compositor_get_buffer, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const SourceBuffer> get_buffer() const, gtk_source_print_compositor_get_buffer, refreturn, constversion)
+
+  _WRAP_METHOD(void set_tab_width(guint width), gtk_source_print_compositor_set_tab_width)
+  _WRAP_METHOD(guint get_tab_width() const, gtk_source_print_compositor_get_tab_width)
+
+  _WRAP_METHOD(void set_wrap_mode(Gtk::WrapMode wrap_mode), gtk_source_print_compositor_set_wrap_mode)
+  _WRAP_METHOD(Gtk::WrapMode get_wrap_mode() const, gtk_source_print_compositor_get_wrap_mode)
+
+  _WRAP_METHOD(void set_highlight_syntax(bool highlight), gtk_source_print_compositor_set_highlight_syntax)
+  _WRAP_METHOD(bool get_highlight_syntax() const, gtk_source_print_compositor_get_highlight_syntax)
+
+  _WRAP_METHOD(void set_print_line_numbers(guint interval), gtk_source_print_compositor_set_print_line_numbers)
+  _WRAP_METHOD(guint get_print_line_numbers() const, gtk_source_print_compositor_get_print_line_numbers)
+
+  _WRAP_METHOD(void set_body_font_name(const Glib::ustring& font_name), gtk_source_print_compositor_set_body_font_name)
+  _WRAP_METHOD(Glib::ustring get_body_font_name() const, gtk_source_print_compositor_get_body_font_name)
+
+  _WRAP_METHOD(void set_line_numbers_font_name(const Glib::ustring& font_name), gtk_source_print_compositor_set_line_numbers_font_name)
+  _WRAP_METHOD(Glib::ustring get_line_numbers_font_name() const, gtk_source_print_compositor_get_line_numbers_font_name)
+
+  _WRAP_METHOD(void set_header_font_name(const Glib::ustring& font_name), gtk_source_print_compositor_set_header_font_name)
+  _WRAP_METHOD(Glib::ustring get_header_font_name() const, gtk_source_print_compositor_get_header_font_name)
+
+  _WRAP_METHOD(void set_footer_font_name(const Glib::ustring& font_name), gtk_source_print_compositor_set_footer_font_name)
+  _WRAP_METHOD(Glib::ustring get_footer_font_name() const, gtk_source_print_compositor_get_footer_font_name)
+
+#m4 _CONV_ENUM(Gtk,Unit)
+  _WRAP_METHOD(void set_top_margin(double margin, Gtk::Unit unit), gtk_source_print_compositor_set_top_margin)
+  _WRAP_METHOD(double get_top_margin(Gtk::Unit unit) const, gtk_source_print_compositor_get_top_margin)
+
+  _WRAP_METHOD(void set_bottom_margin(double margin, Gtk::Unit unit), gtk_source_print_compositor_set_bottom_margin)
+  _WRAP_METHOD(double get_bottom_margin(Gtk::Unit unit) const, gtk_source_print_compositor_get_bottom_margin)
+
+  _WRAP_METHOD(void set_left_margin(double margin, Gtk::Unit unit), gtk_source_print_compositor_set_left_margin)
+  _WRAP_METHOD(double get_left_margin(Gtk::Unit unit) const, gtk_source_print_compositor_get_left_margin)
+
+  _WRAP_METHOD(void set_right_margin(double margin, Gtk::Unit unit), gtk_source_print_compositor_set_right_margin)
+  _WRAP_METHOD(double get_right_margin(Gtk::Unit unit) const, gtk_source_print_compositor_get_right_margin)
+
+  _WRAP_METHOD(void set_print_header(bool print), gtk_source_print_compositor_set_print_header)
+  _WRAP_METHOD(bool get_print_header() const, gtk_source_print_compositor_get_print_header)
+
+  _WRAP_METHOD(void set_print_footer(bool print), gtk_source_print_compositor_set_print_footer)
+  _WRAP_METHOD(bool get_print_footer() const, gtk_source_print_compositor_get_print_footer)
+
+  _WRAP_METHOD(void set_header_format(bool separator, const Glib::ustring& left, const Glib::ustring& center, const Glib::ustring& right), gtk_source_print_compositor_set_header_format)
+  _WRAP_METHOD(void set_footer_format(bool separator, const Glib::ustring& left, const Glib::ustring& center, const Glib::ustring& right), gtk_source_print_compositor_set_footer_format)
+
+  _WRAP_METHOD(int get_n_pages() const, gtk_source_print_compositor_get_n_pages)
+#m4 _CONVERSION(`const Glib::RefPtr<Gtk::PrintContext>&',`GtkPrintContext*',__CONVERT_REFPTR_TO_P($3))
+  _WRAP_METHOD(bool paginate(const Glib::RefPtr<Gtk::PrintContext>& context), gtk_source_print_compositor_paginate)
+  _WRAP_METHOD(double get_pagination_process(), gtk_source_print_compositor_get_pagination_progress)
+  _WRAP_METHOD(void draw_page(const Glib::RefPtr<Gtk::PrintContext>& context, int page_nr), gtk_source_print_compositor_draw_page)
+
+
+  _WRAP_PROPERTY("body-font-name", Glib::ustring)
+  _WRAP_PROPERTY("buffer", Glib::RefPtr<SourceBuffer>)
+  _WRAP_PROPERTY("footer-font-name", Glib::ustring)
+  _WRAP_PROPERTY("header-font-name", Glib::ustring)
+  _WRAP_PROPERTY("highlight-syntax", bool)
+  _WRAP_PROPERTY("line-numbers-font-name", Glib::ustring)
+  _WRAP_PROPERTY("n-pages", int)
+  _WRAP_PROPERTY("print-footer", bool)
+  _WRAP_PROPERTY("print-header", bool)
+  _WRAP_PROPERTY("print-line-numbers", guint)
+  _WRAP_PROPERTY("tab-width", guint)
+  _WRAP_PROPERTY("wrap-mode", Gtk::WrapMode)
+};
+
+} /* namespace gtksourceview */
+

@@ -18,6 +18,11 @@ files_hg =				\
 	sourcestyleschememanager.hg	\
 	sourcegutter.hg			\
 	sourcecompletioninfo.hg		\
-	sourcecompletionproposal.hg
+	sourcecompletionproposal.hg	\
+	sourcecompletionitem.hg		\
+	sourcecompletioncontext.hg	\
+	sourcecompletion.hg		\
+	sourcecompletionprovider.hg	\
+	sourceprintcompositor.hg
 
 files_ccg = $(files_hg:.hg=.ccg)

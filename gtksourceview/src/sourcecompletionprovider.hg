@@ -1,0 +1,50 @@
+/* sourcecompletionprovider.h
+ *
+ * Copyright (C) 2009 Krzesimir Nowak
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <glibmm/interface.h>
+#include <gtksourceview/gtksourcecompletionprovider.h>
+
+#include <gtksourceviewmm/sourcecompletioncontext.h>
+#include <gtksourceviewmm/sourcecompletionproposal.h>
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace gtksourceview
+{
+
+class SourceCompletionContext;
+
+class SourceCompletionProvider : public Glib::Interface
+{
+  _CLASS_INTERFACE(SourceCompletionProvider, GtkSourceCompletionProvider, GTK_SOURCE_COMPLETION_PROVIDER, GtkSourceCompletionProviderIface)
+public:
+  _WRAP_METHOD(Glib::ustring get_name() const, gtk_source_completion_provider_get_name)
+  _WRAP_METHOD(Glib::RefPtr<Gdk::Pixbuf> get_icon(), gtk_source_completion_provider_get_icon, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Gdk::Pixbuf> get_icon() const, gtk_source_completion_provider_get_icon, refreturn, constversion)
+  _WRAP_METHOD(void populate(const Glib::RefPtr<SourceCompletionContext>& context), gtk_source_completion_provider_populate)
+  _WRAP_METHOD(bool match(const Glib::RefPtr<const SourceCompletionContext>& context) const, gtk_source_completion_provider_match)
+  _WRAP_METHOD(Gtk::Widget* get_info_widget(const Glib::RefPtr<const SourceCompletionProposal>& proposal) const, gtk_source_completion_provider_get_info_widget)
+  _WRAP_METHOD(void update_info(const Glib::RefPtr<const SourceCompletionProposal>& proposal, const SourceCompletionInfo& info), gtk_source_completion_provider_update_info)
+  _WRAP_METHOD(bool get_start_iter(const Glib::RefPtr<const SourceCompletionContext>& context, const Glib::RefPtr<const SourceCompletionProposal>& proposal))
+  _WRAP_METHOD(bool activate_proposal(const Glib::RefPtr<SourceCompletionProposal>& proposal, const Gtk::TextIter& iter)
+};
+
+} // namespace gtksourceview
+
+

@@ -33,6 +33,8 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace gtksourceview
 {
 
+class SourceView;
+
 class SourceGutter : public Glib::Object
 {
   _CLASS_GOBJECT(SourceGutter, GtkSourceGutter, GTK_SOURCE_GUTTER, Glib::Object, GObject)
@@ -66,16 +68,14 @@ public:
   _WRAP_PROPERTY("view", SourceView*)
   _WRAP_PROPERTY("window-type", Gtk::TextWindowType)
 
-#m4 _CONVERSION(`GtkCellRenderer*',`const Gtk::CellRenderer*',`Glib::wrap($3)')
+#m4 _CONVERSION(`GtkCellRenderer*',`Gtk::CellRenderer*',`Glib::wrap($3)')
 #m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap($3)')
-#m4 _CONVERSION(`gpointer',`GdkEvent*',`static_cast<GdkEvent*>($3)')
-#m4 _CONVERSION(`const Gtk::CellRenderer*',`GtkCellRenderer*',`const_cast<GtkCellRenderer*>(($3)->gobj())')
+#m4 _CONVERSION(`Gtk::CellRenderer*',`GtkCellRenderer*',`const_cast<GtkCellRenderer*>(($3)->gobj())')
 #m4 _CONVERSION(`const Gtk::TextIter&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
-#m4 _CONVERSION(`GdkEvent*',`gpointer',`static_cast<gpointer>($3)')
 #m4 _CONVERSION(`GtkTooltip*',`const Glib::RefPtr<Gtk::Tooltip>&',`Glib::wrap($3)')
 #m4 _CONVERSION(`const Glib::RefPtr<Gtk::Tooltip>&',`GtkTooltip*',`const_cast<GtkTooltip*>(($3)->gobj())')
-  _WRAP_SIGNAL(void cell_activated(const Gtk::CellRenderer* renderer, const Gtk::TextIter& iter, GdkEvent* event), "cell-activated")
-  _WRAP_SIGNAL(bool query_tooltip(const Gtk::CellRenderer* renderer, const Gtk::TextIter& iter, const Glib::RefPtr<Gtk::Tooltip>& tooltip), "query-tooltip")
+  _WRAP_SIGNAL(void cell_activated(Gtk::CellRenderer* renderer, const Gtk::TextIter& iter, GdkEvent* event), "cell-activated")
+  _WRAP_SIGNAL(bool query_tooltip(Gtk::CellRenderer* renderer, const Gtk::TextIter& iter, const Glib::RefPtr<Gtk::Tooltip>& tooltip), "query-tooltip")
 
 };
 

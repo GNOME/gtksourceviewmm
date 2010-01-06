@@ -11,3 +11,8 @@
 /sourcegutter.*
 /sourcecompletionproposal.*
 /sourcecompletioninfo.*
+/sourcecompletion.*
+/sourcecompletioncontext.*
+/sourcecompletionitem.*
+/sourcecompletionprovider.*
+/sourceprintcompositor.*

@@ -304,6 +304,15 @@ public:
   /// \param category the category of the marks to consider.
   _WRAP_METHOD(void remove_source_marks(const Gtk::TextIter& start, const Gtk::TextIter& end, const Glib::ustring& category), gtk_source_buffer_remove_source_marks)
 
+  _WRAP_METHOD(bool iter_has_context_class(const Gtk::TextIter& iter, const Glib::ustring& context) const, gtk_source_buffer_iter_has_context_class)
+
+  _WRAP_METHOD(bool iter_backward_to_context_class_toggle(Gtk::TextIter& iter, const Glib::ustring& context) const, gtk_source_buffer_iter_backward_to_context_class_toggle)
+
+  _WRAP_METHOD(bool iter_forward_to_context_class_toggle(Gtk::TextIter& iter, const Glib::ustring& context) const, gtk_source_buffer_iter_forward_to_context_class_toggle)
+
+#m4 _CONVERSION(`gchar**',`Glib::StringArrayHandle',`$2($3, Glib::OWNERSHIP_DEEP)')
+  _WRAP_METHOD(Glib::StringArrayHandle get_context_classes_at_iter(const Gtk::TextIter& iter) const, gtk_source_buffer_get_context_classes_at_iter)
+
   _WRAP_PROPERTY("highlight-syntax", bool)
   _WRAP_PROPERTY("highlight-matching-brackets", bool)
   _WRAP_PROPERTY("max-undo-levels", int)
@@ -335,6 +344,9 @@ public:
   _WRAP_SIGNAL(void source_mark_updated(const Glib::RefPtr<SourceMark>& where), "source-mark-updated", no_default_handler)
 //  _WRAP_SIGNAL(void source_mark_updated(const Glib::RefPtr<Gtk::TextMark>& where), "source-mark-updated", no_default_handler)
   /// @}
+
+  _WRAP_SIGNAL(void undo(), "undo", no_default_handler)
+  _WRAP_SIGNAL(void redo(), "redo", no_default_handler)
 };
 
 } /* namespace gtksourceview */

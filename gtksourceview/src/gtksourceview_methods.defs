@@ -383,6 +383,45 @@
   )
 )
 
+(define-method iter_has_context_class
+  (of-object "GtkSourceBuffer")
+  (c-name "gtk_source_buffer_iter_has_context_class")
+  (return-type "gboolean")
+  (parameters
+    '("const-GtkTextIter*" "iter")
+    '("const-gchar*" "context_class")
+  )
+)
+
+(define-method get_context_classes_at_iter
+  (of-object "GtkSourceBuffer")
+  (c-name "gtk_source_buffer_get_context_classes_at_iter")
+  (return-type "gchar**")
+  (parameters
+    '("const-GtkTextIter*" "iter")
+  )
+)
+
+(define-method iter_forward_to_context_class_toggle
+  (of-object "GtkSourceBuffer")
+  (c-name "gtk_source_buffer_iter_forward_to_context_class_toggle")
+  (return-type "gboolean")
+  (parameters
+    '("GtkTextIter*" "iter")
+    '("const-gchar*" "context_class")
+  )
+)
+
+(define-method iter_backward_to_context_class_toggle
+  (of-object "GtkSourceBuffer")
+  (c-name "gtk_source_buffer_iter_backward_to_context_class_toggle")
+  (return-type "gboolean")
+  (parameters
+    '("GtkTextIter*" "iter")
+    '("const-gchar*" "context_class")
+  )
+)
+
 
 
 ;; From gtksourcecompletioncontext.h
@@ -496,6 +535,18 @@
   (parameters
     '("GtkTextIter*" "iter")
   )
+)
+
+(define-method block_interactive
+  (of-object "GtkSourceCompletion")
+  (c-name "gtk_source_completion_block_interactive")
+  (return-type "none")
+)
+
+(define-method unblock_interactive
+  (of-object "GtkSourceCompletion")
+  (c-name "gtk_source_completion_unblock_interactive")
+  (return-type "none")
 )
 
 
@@ -742,6 +793,18 @@
     '("GtkSourceCompletionProposal*" "proposal")
     '("GtkTextIter*" "iter")
   )
+)
+
+(define-method get_interactive_delay
+  (of-object "GtkSourceCompletionProvider")
+  (c-name "gtk_source_completion_provider_get_interactive_delay")
+  (return-type "gint")
+)
+
+(define-method get_priority
+  (of-object "GtkSourceCompletionProvider")
+  (c-name "gtk_source_completion_provider_get_priority")
+  (return-type "gint")
 )
 
 

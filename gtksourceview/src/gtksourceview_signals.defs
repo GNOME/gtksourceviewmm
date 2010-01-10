@@ -1,5 +1,17 @@
 ;; From GtkSourceBuffer
 
+(define-signal undo
+  (of-object "GtkSourceBuffer")
+  (return-type "void")
+  (when "last")
+)
+
+(define-signal redo
+  (of-object "GtkSourceBuffer")
+  (return-type "void")
+  (when "last")
+)
+
 (define-signal highlight-updated
   (of-object "GtkSourceBuffer")
   (return-type "void")
@@ -1028,6 +1040,15 @@
   (construct-only #f)
 )
 
+(define-property show-icons
+  (of-object "GtkSourceCompletion")
+  (prop-type "GParamBoolean")
+  (docs "Show provider and proposal icons in the completion popup")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
 (define-property accelerators
   (of-object "GtkSourceCompletion")
   (prop-type "GParamUInt")
@@ -1092,7 +1113,7 @@
 
 (define-property iter
   (of-object "GtkSourceCompletionContext")
-  (prop-type "GParamPointer")
+  (prop-type "GParamBoxed")
   (docs "The GtkTextIter at which the completion was invoked")
   (readable #t)
   (writable #t)
@@ -1611,6 +1632,15 @@
   (construct-only #f)
 )
 
+(define-property mnemonics-visible
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether mnemonics are currently visible in this window")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
 (define-property max-width
   (of-object "GtkSourceCompletionInfo")
   (prop-type "GParamInt")
@@ -1898,6 +1928,24 @@
   (of-object "GtkSourceCompletionWords")
   (prop-type "GParamUInt")
   (docs "The minimum word size to complete")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property interactive-delay
+  (of-object "GtkSourceCompletionWords")
+  (prop-type "GParamInt")
+  (docs "The delay before initiating interactive completion")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property priority
+  (of-object "GtkSourceCompletionWords")
+  (prop-type "GParamInt")
+  (docs "Provider priority")
   (readable #t)
   (writable #t)
   (construct-only #f)

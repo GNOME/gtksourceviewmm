@@ -42,7 +42,7 @@ their contexts are equal.
 <description>
 @buffer: #GtkTextBuffer.
 @line_start: iterator pointing to the beginning of line.
-@line_start: iterator pointing to the beginning of next line or to the end
+@line_end: iterator pointing to the beginning of next line or to the end
 of this line if it's the last line in @buffer.
 @line: #LineInfo structure to be filled.
 
@@ -111,7 +111,8 @@ whole buffer is analyzed.
 
 <function name="gtk_source_buffer_set_style_scheme">
 <description>
-Sets style scheme used by the buffer.
+Sets style scheme used by the buffer. If @scheme is %NULL no
+style scheme is used.
 
 </description>
 <parameters>
@@ -138,7 +139,6 @@ Sets style scheme used by the buffer.
 <parameters>
 </parameters>
 <return> the current word
-
 </return>
 </function>
 
@@ -2105,21 +2105,26 @@ Since: 2.2
 <return></return>
 </function>
 
-<function name="gtk_source_style_scheme_get_authors">
+<function name="gtk_source_buffer_get_context_classes_at_iter">
 <description>
+Get all defined context classes at @iter.
+
 
 </description>
 <parameters>
-<parameter name="scheme">
-<parameter_description> a #GtkSourceStyleScheme.
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> a #GtkTextIter
 </parameter_description>
 </parameter>
 </parameters>
-<return> a %NULL-terminated array containing the @scheme authors or
-%NULL if no author is specified by the style
-scheme.
+<return> a new %NULL terminated array of context class names. Use
+#g_strfreev to free the array if it is no longer needed.
 
-Since: 2.0
+Since: 2.10
 </return>
 </function>
 
@@ -2905,6 +2910,25 @@ Calls g_free on subpattern, was useful for debugging.
 <return></return>
 </function>
 
+<function name="gtk_source_completion_provider_get_interactive_delay">
+<description>
+Get the delay in milliseconds before starting interactive completion for
+this provider. A value of -1 indicates to use the default value as set
+by #GtkSourceCompletion::auto-complete-delay.
+
+
+</description>
+<parameters>
+<parameter name="provider">
+<parameter_description> A # GtkSourceCompletionProvider
+</parameter_description>
+</parameter>
+</parameters>
+<return> the interactive delay in milliseconds.
+
+</return>
+</function>
+
 <function name="context_unref">
 <description>
 @context: the context.
@@ -3199,16 +3223,22 @@ Return value: #GtkSourceLanguage associated with the buffer, or %NULL.
 
 <function name="SECTION">
 <description>
-TODO
+GtkSourceView is the main object of the gtksourceview library. It provides
+a text view which syntax highlighting, undo/redo and text marks. Use a 
+#GtkSourceBuffer to display text with a GtkSourceView.
 
 </description>
 <parameters>
-<parameter name="title">
-<parameter_description> GtkSourceCompletion
+<parameter name="Short_description">
+<parameter_description> The view object
 </parameter_description>
 </parameter>
-<parameter name="short_description">
-<parameter_description> Main Completion Object
+<parameter name="Title">
+<parameter_description> GtkSourceView
+</parameter_description>
+</parameter>
+<parameter name="See_also">
+<parameter_description> #GtkTextView,#GtkSourceBuffer
 </parameter_description>
 </parameter>
 </parameters>
@@ -3280,23 +3310,20 @@ Since: 2.2
 </return>
 </function>
 
-<function name="gsc_utils_view_replace_current_word">
+<function name="gtk_source_completion_utils_is_separator">
 <description>
-Replaces the current word in the #GtkSourceBuffer with the new word
+A separator is a character like (, an space etc. An _ is not a separator
 
 
 </description>
 <parameters>
-<parameter name="source_buffer">
-<parameter_description> The #GtkSourceBuffer
-</parameter_description>
-</parameter>
-<parameter name="text">
-<parameter_description> The text to be inserted instead of the current word
+<parameter name="ch">
+<parameter_description> The character to check
 </parameter_description>
 </parameter>
 </parameters>
-<return></return>
+<return> TRUE if @ch is a separator
+</return>
 </function>
 
 <function name="GtkSourceCompletionItem">
@@ -3362,8 +3389,8 @@ function only notifies the view).
 
 <function name="GtkSourceMark">
 <description>
-The category of the #GtkSourceMark, classified the mark and control
-what pixbuf is used and with which priority it is drawn.
+The category of the #GtkSourceMark, classifies the mark and controls
+which pixbuf is used and with which priority it is drawn.
 
 </description>
 <parameters>
@@ -3441,22 +3468,6 @@ Get the icon of the provider.
 </parameters>
 <return> The icon to be used for the provider, or %NULL if the provider does
 not have a special icon.
-</return>
-</function>
-
-<function name="gsc_utils_char_is_separator">
-<description>
-A separator is a character like (, an space etc. An _ is not a separator
-
-
-</description>
-<parameters>
-<parameter name="ch">
-<parameter_description> The character to check
-</parameter_description>
-</parameter>
-</parameters>
-<return>TRUE if the ch is a separator
 </return>
 </function>
 
@@ -3713,6 +3724,30 @@ treated as zero-length insertion.
 
 </description>
 <parameters>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_buffer_iter_has_context_class">
+<description>
+Check if the class @context_klass is set on @iter.
+
+Since: 2.10
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> a #GtkTextIter
+</parameter_description>
+</parameter>
+<parameter name="context_class">
+<parameter_description> class to search for
+</parameter_description>
+</parameter>
 </parameters>
 <return></return>
 </function>
@@ -4076,6 +4111,36 @@ Asks the buffer to analyze and highlight given area.
 <return></return>
 </function>
 
+<function name="gtk_source_buffer_iter_backward_to_context_class_toggle">
+<description>
+Moves backward to the next toggle (on or off) of the context class. If no
+matching context class toggles are found, returns %FALSE, otherwise %TRUE.
+Does not return toggles located at @iter, only toggles after @iter. Sets
+@iter to the location of the toggle, or to the end of the buffer if no
+toggle is found.
+
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> a #GtkTextIter
+</parameter_description>
+</parameter>
+<parameter name="context_class">
+<parameter_description> the context class
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether we found a context class toggle before @iter
+
+Since: 2.10
+</return>
+</function>
+
 <function name="gtk_source_completion_proposal_get_text">
 <description>
 Gets the text of @proposal. The text that is inserted into
@@ -4318,6 +4383,24 @@ The buffer holds a reference to @language.
 <return></return>
 </function>
 
+<function name="gtk_source_style_scheme_get_authors">
+<description>
+
+</description>
+<parameters>
+<parameter name="scheme">
+<parameter_description> a #GtkSourceStyleScheme.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a %NULL-terminated array containing the @scheme authors or
+%NULL if no author is specified by the style
+scheme.
+
+Since: 2.0
+</return>
+</function>
+
 <function name="add_invalid">
 <description>
 @ce: the engine.
@@ -4477,6 +4560,45 @@ Returns: a #GtkSourceLanguageManager. Return value is owned
 <return> a #GtkSourceLanguageManager. Return value is owned
 by GtkSourceView library and must not be unref'ed.
 </return>
+</function>
+
+<function name="gtk_source_completion_provider_get_priority">
+<description>
+Get the provider priority. The priority determines the order in which
+proposals appear in the completion popup. Higher priorities are sorted
+before lower priorities. The default priority is 0.
+
+
+</description>
+<parameters>
+<parameter name="provider">
+<parameter_description> A # GtkSourceCompletionProvider
+</parameter_description>
+</parameter>
+</parameters>
+<return> the provider priority.
+
+</return>
+</function>
+
+<function name="gtk_source_view_set_show_line_marks">
+<description>
+If %TRUE line marks will be displayed beside the text.
+
+Since: 2.2
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="show">
+<parameter_description> whether line marks should be displayed.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
 </function>
 
 <function name="gtk_source_print_compositor_set_highlight_syntax">
@@ -4730,6 +4852,24 @@ Gets the left margin in units of @unit.
 
 Since: 2.2
 </return>
+</function>
+
+<function name="gtk_source_completion_block_interactive">
+<description>
+Block interactive completion. This can be used to disable interactive
+completion when inserting or deleting text from the buffer associated with
+the completion. Use #gtk_source_completion_unblock_interactive to enable
+interactive completion again.
+
+
+</description>
+<parameters>
+<parameter name="completion">
+<parameter_description> A # GtkSourceCompletion
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
 </function>
 
 <function name="gtk_source_gutter_insert">
@@ -5112,6 +5252,23 @@ Looks up style scheme by id.
 <return> a #GtkSourceStyleScheme object. Returned value is owned by
 @manager and must not be unref'ed.
 </return>
+</function>
+
+<function name="gtk_source_completion_unblock_interactive">
+<description>
+Unblock interactive completion. This can be used after using
+#gtk_source_completion_block_interactive to enable interactive completion
+again.
+
+
+</description>
+<parameters>
+<parameter name="completion">
+<parameter_description> A # GtkSourceCompletion
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
 </function>
 
 <function name="gtk_source_completion_info_move_to_iter">
@@ -5545,6 +5702,36 @@ of tree integrity.
 <return></return>
 </function>
 
+<function name="gtk_source_buffer_iter_forward_to_context_class_toggle">
+<description>
+Moves forward to the next toggle (on or off) of the context class. If no
+matching context class toggles are found, returns %FALSE, otherwise %TRUE.
+Does not return toggles located at @iter, only toggles after @iter. Sets
+@iter to the location of the toggle, or to the end of the buffer if no
+toggle is found.
+
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> a #GtkTextIter
+</parameter_description>
+</parameter>
+<parameter name="context_class">
+<parameter_description> the context class
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether we found a context class toggle after @iter
+
+Since: 2.10
+</return>
+</function>
+
 <function name="_gtk_source_style_scheme_apply">
 <description>
 Sets text colors from @scheme in the @widget.
@@ -5646,20 +5833,18 @@ But, inserting a newline does start a new action.
 <return></return>
 </function>
 
-<function name="gtk_source_view_set_show_line_marks">
+<function name="gtk_source_completion_utils_replace_current_word">
 <description>
-If %TRUE line marks will be displayed beside the text.
-
-Since: 2.2
+Replaces the current word in the #GtkSourceBuffer with the new word
 
 </description>
 <parameters>
-<parameter name="view">
-<parameter_description> a #GtkSourceView.
+<parameter name="source_buffer">
+<parameter_description> The #GtkSourceBuffer
 </parameter_description>
 </parameter>
-<parameter name="show">
-<parameter_description> whether line marks should be displayed.
+<parameter name="text">
+<parameter_description> The text to be inserted instead of the current word
 </parameter_description>
 </parameter>
 </parameters>

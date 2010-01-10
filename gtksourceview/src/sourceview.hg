@@ -213,6 +213,7 @@ public:
   _WRAP_METHOD(gint get_mark_category_priority(const Glib::ustring& category) const, gtk_source_view_get_mark_category_priority)
 
 #ifndef GTKSOURCEVIEWMM_DISABLE_DEPRECATED
+  _IGNORE(gtk_source_view_set_mark_category_pixbuf)
   /// \brief Associates a given pixbuf with a given mark category.
   /// If pixbuf is NULL, the pixbuf is unset.
   ///

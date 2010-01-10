@@ -3,6 +3,7 @@
  * Copyright (C) 2004-2005 Jae Jang
  * Copyright (C) 2005-2006 Rob Page
  * Copyright (C) 2005-2006 Dodji Seketeli
+ * Copyright (C) 2010 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -21,46 +22,9 @@
 
 #include "sourceiter.h"
 #include <glib/gmessages.h>
+#include <gtksourceview/gtksourceview-typebuiltins.h>
 namespace gtksourceview
 {
-
-SearchFlags operator| (SearchFlags lhs, SearchFlags rhs)
-{
-    return SearchFlags ((unsigned)lhs | (unsigned)rhs) ;
-}
-
-SearchFlags operator& (SearchFlags lhs, SearchFlags rhs)
-{
-    return  (SearchFlags) ((unsigned)lhs & (unsigned)rhs) ;
-}
-
-SearchFlags operator^ (SearchFlags lhs, SearchFlags rhs)
-{
-    return (SearchFlags) ((unsigned)lhs ^ (unsigned)rhs) ;
-}
-
-SearchFlags operator- (SearchFlags lhs)
-{
-    return (SearchFlags) (-(unsigned)lhs) ;
-}
-
-SearchFlags operator|= (SearchFlags &lhs, SearchFlags rhs)
-{
-    lhs = (SearchFlags) ((unsigned)lhs | (unsigned)rhs) ;
-    return lhs ;
-}
-
-SearchFlags operator&= (SearchFlags &lhs, SearchFlags rhs)
-{
-    lhs = (SearchFlags) ((unsigned)lhs & (unsigned)rhs) ;
-    return lhs ;
-}
-
-SearchFlags operator^= (SearchFlags &lhs, SearchFlags rhs)
-{
-    lhs = (SearchFlags) ((unsigned)lhs ^ (unsigned)rhs) ;
-    return lhs ;
-}
 
 SourceIter::SourceIter ()
 {

@@ -24,6 +24,7 @@ files_hg =				\
 	sourcecompletioncontext.hg	\
 	sourcecompletion.hg		\
 	sourcecompletionprovider.hg	\
-	sourceprintcompositor.hg
+	sourceprintcompositor.hg	\
+	sourcecompletionactivation.hg
 
 files_ccg = $(files_hg:.hg=.ccg)

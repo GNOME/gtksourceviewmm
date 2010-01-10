@@ -49,4 +49,6 @@ _CONVERSION(`GtkSourceStyleSchemeManager*',`Glib::RefPtr<SourceStyleSchemeManage
 
 _CONV_ENUM(Gtk,SourceSmartHomeEndType)
 _CONV_ENUM(Gtk,SourceDrawSpacesFlags)
+_CONV_ENUM(Gtk,SourceSearchFlags)
+_CONV_ENUM(Gtk,SourceCompletionActivation)
 

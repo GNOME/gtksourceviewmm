@@ -94,6 +94,13 @@ SourceView::set_source_buffer (const Glib::RefPtr<SourceBuffer> &source_buffer)
     set_buffer (source_buffer) ;
 }
 
+#ifndef GTKSOURCEVIEWMM_DISABLE_DEPRECATED
+void
+SourceView::set_mark_category_pixbuf(const Glib::ustring& category, const Glib::RefPtr<Gdk::Pixbuf>& pixbuf)
+{
+  gtk_source_view_set_mark_category_icon_from_pixbuf(gobj(), category.c_str(), pixbuf->gobj());
+}
+
 Glib::RefPtr<Gdk::Pixbuf>
 SourceView::get_mark_category_pixbuf(const Glib::ustring&)
 {
@@ -105,6 +112,7 @@ SourceView::get_mark_category_pixbuf(const Glib::ustring&) const
 {
   return Glib::RefPtr<const Gdk::Pixbuf>();
 }
+#endif
 
 void SourceView::set_mark_category_tooltip_func(const Glib::ustring& category, const SlotMarkTooltip& slot)
 {

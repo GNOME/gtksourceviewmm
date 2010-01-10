@@ -26,6 +26,7 @@
 #include <gtkmm/textview.h>
 #include <gtksourceviewmm/sourcebuffer.h>
 #include <gtksourceviewmm/sourcegutter.h>
+#include <gtksourceviewmm/sourcecompletion.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(gtkmm/private/textview_p.h)
@@ -34,6 +35,7 @@ namespace gtksourceview
 {
 
 class SourceGutter;
+class SourceCompletion;
 
 _WRAP_ENUM(SourceSmartHomeEndType, GtkSourceSmartHomeEndType)
 _WRAP_ENUM(SourceDrawSpacesFlags, GtkSourceDrawSpacesFlags)
@@ -210,6 +212,7 @@ public:
   /// it defaults to 0.
   _WRAP_METHOD(gint get_mark_category_priority(const Glib::ustring& category) const, gtk_source_view_get_mark_category_priority)
 
+#ifndef GTKSOURCEVIEWMM_DISABLE_DEPRECATED
   /// \brief Associates a given pixbuf with a given mark category.
   /// If pixbuf is NULL, the pixbuf is unset.
   ///
@@ -217,10 +220,9 @@ public:
   /// \param pixbuf the pixbuf to associate the mark category to.
   ///
   /// \deprecated Use set_mark_category_icon().
-  _WRAP_METHOD(void set_mark_category_pixbuf(const Glib::ustring& category, const Glib::RefPtr<Gdk::Pixbuf>& pixbuf), gtk_source_view_set_mark_category_pixbuf, deprecated)
+  void set_mark_category_pixbuf(const Glib::ustring& category, const Glib::RefPtr<Gdk::Pixbuf>& pixbuf);
 
   _IGNORE(gtk_source_view_get_mark_category_pixbuf)
-#ifndef GTKSOURCEVIEWMM_DISABLE_DEPRECATED
   /// \brief Gets the pixbuf which is associated with the given mark category.
   ///
   /// \param category a mark category.
@@ -269,11 +271,16 @@ public:
   _WRAP_METHOD(Glib::RefPtr<SourceGutter> get_gutter(Gtk::TextWindowType window_type), gtk_source_view_get_gutter, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const SourceGutter> get_gutter(Gtk::TextWindowType window_type) const, gtk_source_view_get_gutter, refreturn, constversion)
 
+#m4 _CONVERSION(`GtkSourceCompletion*',`SourceCompletion*',`Glib::wrap($3)')
+#m4 _CONVERSION(`GtkSourceCompletion*',`const SourceCompletion*',`Glib::wrap($3)')
+  _WRAP_METHOD(SourceCompletion* get_completion(), gtk_source_view_get_completion, refreturn)
+  _WRAP_METHOD(const SourceCompletion* get_completion() const, gtk_source_view_get_completion, refreturn, constversion)
+
   _WRAP_SIGNAL(void redo(), "redo")
   _WRAP_SIGNAL(void undo(), "undo")
   _WRAP_SIGNAL(void show_completion(), "show-completion", no_default_handler)
-#m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap($3)')
-  _WRAP_SIGNAL(void line_mark_activated(const Gtk::TextIter& mark, GdkEvent* event), "line-mark-activated")
+//#m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap($3)')
+  _WRAP_SIGNAL(void line_mark_activated(Gtk::TextIter& mark, GdkEvent* event), "line-mark-activated")
 
 
   /// \brief Whether to display line numbers

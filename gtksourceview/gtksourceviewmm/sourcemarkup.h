@@ -21,6 +21,7 @@
  */
 
 #include <glibmm/ustring.h>
+#include <glibmm/containerhandle_shared.h>
 
 namespace gtksourceview
 {

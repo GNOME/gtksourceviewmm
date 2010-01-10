@@ -278,9 +278,9 @@ public:
 
   _WRAP_SIGNAL(void redo(), "redo")
   _WRAP_SIGNAL(void undo(), "undo")
+// TODO: remove no_default_handler when we will break API/ABI.
   _WRAP_SIGNAL(void show_completion(), "show-completion", no_default_handler)
-//#m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap($3)')
-  _WRAP_SIGNAL(void line_mark_activated(Gtk::TextIter& mark, GdkEvent* event), "line-mark-activated")
+  _WRAP_SIGNAL(void line_mark_activated(Gtk::TextIter& mark, GdkEvent* event), "line-mark-activated", no_default_handler)
 
 
   /// \brief Whether to display line numbers

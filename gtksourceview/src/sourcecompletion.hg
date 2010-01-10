@@ -18,6 +18,10 @@
  */
 
 #include <gtkmm/object.h>
+#include <gtksourceviewmm/sourcecompletioncontext.h>
+#include <gtksourceviewmm/sourcecompletionprovider.h>
+#include <gtksourceviewmm/sourceview.h>
+#include <gtksourceviewmm/sourcecompletioninfo.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(gtkmm/private/object_p.h)
@@ -25,9 +29,61 @@ _PINCLUDE(gtkmm/private/object_p.h)
 namespace gtksourceview
 {
 
+class SourceCompletionContext;
+class SourceCompletionProvider;
+
 class SourceCompletion : public Gtk::Object
 {
   _CLASS_GTKOBJECT(SourceCompletion, GtkSourceCompletion, GTK_SOURCE_COMPLETION, Gtk::Object, GtkObject)
+public:
+#m4 _CONVERSION(`const Glib::RefPtr<SourceCompletionProvider>&',`GtkSourceCompletionProvider*',`($3)->gobj()')
+  _WRAP_METHOD(bool add_provider(const Glib::RefPtr<SourceCompletionProvider>& provider), gtk_source_completion_add_provider, errthrow)
+
+  _WRAP_METHOD(bool remove_provider(const Glib::RefPtr<SourceCompletionProvider>& provider), gtk_source_completion_remove_provider, errthrow)
+
+#m4 _CONVERSION(`GList*',`Glib::ListHandle<Glib::RefPtr<SourceCompletionProvider> >',`$2($3, Glib::OWNERSHIP_NONE)')
+#m4 _CONVERSION(`const Glib::RefPtr<SourceCompletionContext>&',`GtkSourceCompletionContext*',`($3)->gobj()')
+  _WRAP_METHOD(Glib::ListHandle<Glib::RefPtr<SourceCompletionProvider> > get_providers() const, gtk_source_completion_get_providers)
+
+#m4 _CONVERSION(`const Glib::ListHandle<Glib::RefPtr<SourceCompletionProvider> >&',`GList*',`($3).data()')
+  _WRAP_METHOD(bool show(const Glib::ListHandle<Glib::RefPtr<SourceCompletionProvider> >& providers, const Glib::RefPtr<SourceCompletionContext>& context), gtk_source_completion_show)
+
+  _WRAP_METHOD(void hide(), gtk_source_completion_hide)
+
+#m4 _CONVERSION(`GtkSourceCompletionInfo*',`SourceCompletionInfo*',`Glib::wrap($3)')
+  _WRAP_METHOD(SourceCompletionInfo* get_info_window() const, gtk_source_completion_get_info_window)
+
+#m4 _CONVERSION(`GtkSourceView*',`SourceView*',`Glib::wrap($3)')
+  _WRAP_METHOD(SourceView* get_view() const, gtk_source_completion_get_view)
+
+#m4 _CONVERSION(`GtkSourceCompletionContext*',`Glib::RefPtr<SourceCompletionContext>',`Glib::wrap($3)')
+#m4 _CONVERSION(`const Gtk::TextIter&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
+  _WRAP_METHOD(Glib::RefPtr<SourceCompletionContext> create_context(const Gtk::TextIter& position), gtk_source_completion_create_context)
+
+  _WRAP_METHOD(void move_window(const Gtk::TextIter& position), gtk_source_completion_move_window)
+
+  _WRAP_METHOD(void block_interactive(), gtk_source_completion_block_interactive)
+  _WRAP_METHOD(void unblock_interactive(), gtk_source_completion_unblock_interactive)
+
+  _WRAP_SIGNAL(void hide(), "hide")
+#m4 _CONVERSION(`GtkSourceCompletionContext*',`const Glib::RefPtr<SourceCompletionContext>&',`Glib::wrap($3)')
+#m4 _CONVERSION(`const Glib::RefPtr<SourceCompletionContext>&',`GtkSourceCompletionContext*',`($3)->gobj()')
+  _WRAP_SIGNAL(void populate_context(const Glib::RefPtr<SourceCompletionContext>& context), "populate-context")
+  _WRAP_SIGNAL(void show(), "show")
+// those are keybinding signals, so ignore them
+  _IGNORE_SIGNAL(activate-proposal)
+  _IGNORE_SIGNAL(move-cursor)
+  _IGNORE_SIGNAL(move-page)
+
+  _WRAP_PROPERTY("accelerators", guint)
+  _WRAP_PROPERTY("auto-complete-delay", guint)
+  _WRAP_PROPERTY("proposal-page-size", guint)
+  _WRAP_PROPERTY("provider-page-size", guint)
+  _WRAP_PROPERTY("remember-info-visibility", bool)
+  _WRAP_PROPERTY("select-on-show", bool)
+  _WRAP_PROPERTY("show-headers", bool)
+  _WRAP_PROPERTY("show-icons", bool)
+  _WRAP_PROPERTY("view", SourceView*)
 };
 
 } /* namespace gtksourceview */

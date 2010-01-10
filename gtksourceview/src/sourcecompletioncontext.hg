@@ -35,6 +35,8 @@ namespace gtksourceview
 {
 
 class SourceCompletionProvider;
+class SourceCompletion;
+class SourceView;
 
 class SourceCompletionContext : public Glib::Object
 {

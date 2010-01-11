@@ -105,6 +105,22 @@ class SourceIter : public Gtk::TextIter
                              Gtk::TextIter &a_match_end,
                              const Gtk::TextIter &a_limit) const ;
 
+        /// \brief same as forward_search(), but searchs to the end.
+        ///
+        /// \param a_str the string to search for
+        /// \param a_flags search flags, to be combined with the '|' operator
+        /// \param a_match_start out parameter. Points the the beginning
+        ///        of the region that matches the search. This is applicable
+        ///        if and only if the function returns true.
+        /// \param a_match_end out parameter.  Points the the end
+        ///        of the region that matches the search. This is applicable
+        ///        if and only if the function returns true.
+        /// \return true if the search was successful, false otherwise.
+        bool forward_search (const Glib::ustring &a_str,
+                             SourceSearchFlags a_flags,
+                             Gtk::TextIter &a_match_start,
+                             Gtk::TextIter &a_match_end) const ;
+
         /// \brief search backward in the buffer
         ///
         /// \param a_str the string to search for
@@ -121,6 +137,22 @@ class SourceIter : public Gtk::TextIter
                               Gtk::TextIter &a_match_start,
                               Gtk::TextIter &a_match_end,
                               const Gtk::TextIter &a_limit) const ;
+
+        /// \brief same as backward_search(), but searchs to the start.
+        ///
+        /// \param a_str the string to search for
+        /// \param a_flags search flags, to be combined with the '|' operator
+        /// \param a_match_start out parameter. Points the the beginning
+        ///        of the region that matches the search. This is applicable
+        ///        if and only if the function returns true.
+        /// \param a_match_end out parameter.  Points the the end
+        ///        of the region that matches the search. This is applicable
+        ///         if and only if the function returns true.
+        /// \return true if the search was successful, false otherwise.
+        bool backward_search (const Glib::ustring &a_str,
+                              SourceSearchFlags a_flags,
+                              Gtk::TextIter &a_match_start,
+                              Gtk::TextIter &a_match_end) const ;
 
 };//end class SourceIter
 

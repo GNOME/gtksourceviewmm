@@ -60,7 +60,7 @@ public:
   /// \param buffer the buffer to display in the SourceView
   explicit SourceView (const Glib::RefPtr<SourceBuffer> &buffer) ;
 
-
+// TODO: remove these when breaking API/ABI?
   _WRAP_CREATE()
   _WRAP_CREATE(const Glib::RefPtr<SourceBuffer> &buffer)
 
@@ -242,8 +242,13 @@ public:
 #endif // GTKSOURCEVIEWMM_DISABLE_DEPRECATED
 
   _WRAP_METHOD(void set_mark_category_icon(const Glib::ustring& category, const Glib::RefPtr<Gdk::Pixbuf>& pixbuf), gtk_source_view_set_mark_category_icon_from_pixbuf)
-  _WRAP_METHOD(void set_mark_category_icon(const Glib::ustring& category, const Gtk::StockID& stock_id), gtk_source_view_set_mark_category_icon_from_stock)
-  _WRAP_METHOD(void set_mark_category_icon(const Glib::ustring& category, const Glib::ustring& icon_name), gtk_source_view_set_mark_category_icon_from_icon_name)
+// XXX: wrapped by hand, because stock_id or icon_name could be empty, which means NULL.
+//  _WRAP_METHOD(void set_mark_category_icon(const Glib::ustring& category, const Gtk::StockID& stock_id), gtk_source_view_set_mark_category_icon_from_stock)
+//  _WRAP_METHOD(void set_mark_category_icon(const Glib::ustring& category, const Glib::ustring& icon_name), gtk_source_view_set_mark_category_icon_from_icon_name)
+  _WRAP_METHOD_DOCS_ONLY(gtk_source_view_set_mark_category_icon_from_stock)
+  void set_mark_category_icon(const Glib::ustring& category, const Gtk::StockID& stock_id);
+  _WRAP_METHOD_DOCS_ONLY(gtk_source_view_set_mark_category_icon_from_icon_name)
+  void set_mark_category_icon(const Glib::ustring& category, const Glib::ustring& icon_name);
 
 #m4 _CONVERSION(`const Gdk::Color&',`const GdkColor*',`($3).gobj()')
   _WRAP_METHOD(void set_mark_category_background(const Glib::ustring& category, const Gdk::Color& color), gtk_source_view_set_mark_category_background)
@@ -267,6 +272,7 @@ public:
   _IGNORE(gtk_source_view_set_mark_category_tooltip_func, gtk_source_view_set_mark_category_tooltip_markup_func)
   void set_mark_category_tooltip_func(const Glib::ustring& category, const SlotMarkTooltip& slot);
   void set_mark_category_tooltip_markup_func(const Glib::ustring& category, const SlotMarkTooltip& slot);
+  void unset_mark_category_tooltip_func(const Glib::ustring& category);
 #m4 _CONVERSION(`GtkSourceGutter*',`Glib::RefPtr<SourceGutter>',`Glib::wrap($3)')
 #m4 _CONVERSION(`GtkSourceGutter*',`Glib::RefPtr<const SourceGutter>',`Glib::wrap($3)')
   _WRAP_METHOD(Glib::RefPtr<SourceGutter> get_gutter(Gtk::TextWindowType window_type), gtk_source_view_get_gutter, refreturn)

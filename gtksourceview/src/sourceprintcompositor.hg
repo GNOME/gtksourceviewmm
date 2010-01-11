@@ -87,8 +87,14 @@ public:
   _WRAP_METHOD(void set_print_footer(bool print), gtk_source_print_compositor_set_print_footer)
   _WRAP_METHOD(bool get_print_footer() const, gtk_source_print_compositor_get_print_footer)
 
-  _WRAP_METHOD(void set_header_format(bool separator, const Glib::ustring& left, const Glib::ustring& center, const Glib::ustring& right), gtk_source_print_compositor_set_header_format)
-  _WRAP_METHOD(void set_footer_format(bool separator, const Glib::ustring& left, const Glib::ustring& center, const Glib::ustring& right), gtk_source_print_compositor_set_footer_format)
+// XXX: wrapped by hand, because here NULL could be passed.
+//  _WRAP_METHOD(void set_header_format(bool separator, const Glib::ustring& left, const Glib::ustring& center, const Glib::ustring& right), gtk_source_print_compositor_set_header_format)
+//  _WRAP_METHOD(void set_footer_format(bool separator, const Glib::ustring& left, const Glib::ustring& center, const Glib::ustring& right), gtk_source_print_compositor_set_footer_format)
+
+  _WRAP_METHOD_DOCS_ONLY(gtk_source_print_compositor_set_header_format)
+  void set_header_format(bool separator, const Glib::ustring& left, const Glib::ustring& center, const Glib::ustring& right);
+  _WRAP_METHOD_DOCS_ONLY(gtk_source_print_compositor_set_footer_format)
+  void set_footer_format(bool separator, const Glib::ustring& left, const Glib::ustring& center, const Glib::ustring& right);
 
   _WRAP_METHOD(int get_n_pages() const, gtk_source_print_compositor_get_n_pages)
 #m4 _CONVERSION(`const Glib::RefPtr<Gtk::PrintContext>&',`GtkPrintContext*',__CONVERT_REFPTR_TO_P($3))

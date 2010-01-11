@@ -18,3 +18,20 @@
  */
 
 #include <gtksourceview/gtksourceprintcompositor.h>
+
+namespace gtksourceview
+{
+
+void
+SourcePrintCompositor::set_header_format(bool separator, const Glib::ustring& left, const Glib::ustring& center, const Glib::ustring& right)
+{
+  gtk_source_print_compositor_set_header_format(gobj(), static_cast<gboolean>(separator), (left.empty() ? 0 : left.c_str()), (center.empty() ? 0 : center.c_str()), (right.empty() ? 0 : right.c_str()));
+}
+
+void
+SourcePrintCompositor::set_footer_format(bool separator, const Glib::ustring& left, const Glib::ustring& center, const Glib::ustring& right)
+{
+  gtk_source_print_compositor_set_footer_format(gobj(), static_cast<gboolean>(separator), (left.empty() ? 0 : left.c_str()), (center.empty() ? 0 : center.c_str()), (right.empty() ? 0 : right.c_str()));
+}
+
+} // namespace gtksourceview

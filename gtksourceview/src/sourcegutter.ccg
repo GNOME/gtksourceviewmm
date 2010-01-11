@@ -78,7 +78,7 @@ void SourceGutter::set_cell_data_func(Gtk::CellRenderer* renderer, const SlotDat
 {
   SlotData* slot_copy = new SlotData(slot);
 
-  gtk_source_gutter_set_cell_data_func(gobj(), renderer->gobj(),
+  gtk_source_gutter_set_cell_data_func(gobj(), Glib::unwrap(renderer),
       &SignalProxy_CellData_gtk_callback, slot_copy,
       &SignalProxy_CellData_gtk_callback_destroy);
 }
@@ -87,9 +87,21 @@ void SourceGutter::set_cell_size_func(Gtk::CellRenderer* renderer, const SlotSiz
 {
   SlotSize* slot_copy = new SlotSize(slot);
 
-  gtk_source_gutter_set_cell_size_func(gobj(), renderer->gobj(),
+  gtk_source_gutter_set_cell_size_func(gobj(), Glib::unwrap(renderer),
       &SignalProxy_CellSize_gtk_callback, slot_copy,
       &SignalProxy_CellSize_gtk_callback_destroy);
+}
+
+void
+SourceGutter::reset_cell_data_func(Gtk::CellRenderer* renderer)
+{
+  gtk_source_gutter_set_cell_data_func(gobj(), Glib::unwrap(renderer), 0, 0, 0);
+}
+
+void
+SourceGutter::reset_cell_size_func(Gtk::CellRenderer* renderer)
+{
+  gtk_source_gutter_set_cell_size_func(gobj(), Glib::unwrap(renderer), 0, 0, 0);
 }
 
 }//end namespace gtksourceview

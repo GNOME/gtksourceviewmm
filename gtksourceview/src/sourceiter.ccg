@@ -80,9 +80,11 @@ SourceIter::forward_search (const Glib::ustring &a_str,
                             Gtk::TextIter &a_match_end,
                             const Gtk::TextIter &a_limit) const
 {
+// what is the use of these things? krnowak
+    /*
     const GtkTextIter *gobject (gobj ()) ;
-    g_return_val_if_fail (gobject, FALSE) ;
-    g_return_val_if_fail (a_str.c_str (), FALSE) ;
+    g_return_val_if_fail (gobject, FALSE) ; // that will never fail, since gobject is always not null.
+    g_return_val_if_fail (a_str.c_str (), FALSE) ; // ditto.
 
     GtkTextIter match_start, match_end ;
     gboolean res = gtk_source_iter_forward_search (gobject,
@@ -96,6 +98,13 @@ SourceIter::forward_search (const Glib::ustring &a_str,
     a_match_start = res_match_start ;
     a_match_end = res_match_end ;
     return res ;
+    */
+  return gtk_source_iter_forward_search(const_cast<GtkTextIter*>(gobj()),
+                                        a_str.c_str(),
+                                        static_cast<GtkSourceSearchFlags>(a_flags),
+                                        a_match_start.gobj(),
+                                        a_match_end.gobj(),
+                                        a_limit.gobj());
 }
 
 bool
@@ -105,9 +114,11 @@ SourceIter::backward_search (const Glib::ustring &a_str,
                               Gtk::TextIter &a_match_end,
                               const Gtk::TextIter &a_limit) const
 {
+// what is the use of these things? krnowak
+    /*
     const GtkTextIter *gobject (gobj ()) ;
-    g_return_val_if_fail (gobject, FALSE) ;
-    g_return_val_if_fail (a_str.c_str (), FALSE) ;
+    g_return_val_if_fail (gobject, FALSE) ; // that will never fail, since gobject is always not null.
+    g_return_val_if_fail (a_str.c_str (), FALSE) ; // ditto.
 
     GtkTextIter match_start, match_end ;
     gboolean res = gtk_source_iter_backward_search (gobject,
@@ -121,6 +132,41 @@ SourceIter::backward_search (const Glib::ustring &a_str,
     a_match_start = res_match_start ;
     a_match_end = res_match_end ;
     return res ;
+    */
+  return gtk_source_iter_backward_search(const_cast<GtkTextIter*>(gobj()),
+                                        a_str.c_str(),
+                                        static_cast<GtkSourceSearchFlags>(a_flags),
+                                        a_match_start.gobj(),
+                                        a_match_end.gobj(),
+                                        a_limit.gobj());
+}
+
+bool
+SourceIter::forward_search (const Glib::ustring &a_str,
+                            SourceSearchFlags a_flags,
+                            Gtk::TextIter &a_match_start,
+                            Gtk::TextIter &a_match_end) const
+{
+  return gtk_source_iter_forward_search(const_cast<GtkTextIter*>(gobj()),
+                                        a_str.c_str(),
+                                        static_cast<GtkSourceSearchFlags>(a_flags),
+                                        a_match_start.gobj(),
+                                        a_match_end.gobj(),
+                                        0);
+}
+
+bool
+SourceIter::backward_search (const Glib::ustring &a_str,
+                              SourceSearchFlags a_flags,
+                              Gtk::TextIter &a_match_start,
+                              Gtk::TextIter &a_match_end) const
+{
+  return gtk_source_iter_backward_search(const_cast<GtkTextIter*>(gobj()),
+                                        a_str.c_str(),
+                                        static_cast<GtkSourceSearchFlags>(a_flags),
+                                        a_match_start.gobj(),
+                                        a_match_end.gobj(),
+                                        0);
 }
 
 }//end namespace gtksourceview

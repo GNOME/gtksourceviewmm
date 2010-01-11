@@ -98,7 +98,7 @@ SourceView::set_source_buffer (const Glib::RefPtr<SourceBuffer> &source_buffer)
 void
 SourceView::set_mark_category_pixbuf(const Glib::ustring& category, const Glib::RefPtr<Gdk::Pixbuf>& pixbuf)
 {
-  gtk_source_view_set_mark_category_icon_from_pixbuf(gobj(), category.c_str(), pixbuf->gobj());
+  gtk_source_view_set_mark_category_icon_from_pixbuf(gobj(), category.c_str(), Glib::unwrap(pixbuf));
 }
 
 Glib::RefPtr<Gdk::Pixbuf>
@@ -114,7 +114,20 @@ SourceView::get_mark_category_pixbuf(const Glib::ustring&) const
 }
 #endif
 
-void SourceView::set_mark_category_tooltip_func(const Glib::ustring& category, const SlotMarkTooltip& slot)
+void
+SourceView::set_mark_category_icon(const Glib::ustring& category, const Gtk::StockID& stock_id)
+{
+  gtk_source_view_set_mark_category_icon_from_stock(gobj(), category.c_str(), ((stock_id) ? stock_id.get_c_str() : 0));
+}
+
+void
+SourceView::set_mark_category_icon(const Glib::ustring& category, const Glib::ustring& icon_name)
+{
+  gtk_source_view_set_mark_category_icon_from_icon_name(gobj(), category.c_str(), (icon_name.empty() ? 0 : icon_name.c_str()));
+}
+
+void
+SourceView::set_mark_category_tooltip_func(const Glib::ustring& category, const SlotMarkTooltip& slot)
 {
   SlotMarkTooltip* slot_copy = new SlotMarkTooltip(slot);
 
@@ -123,13 +136,20 @@ void SourceView::set_mark_category_tooltip_func(const Glib::ustring& category, c
     &SignalProxy_MarkTooltip_gtk_callback_destroy);
 }
 
-void SourceView::set_mark_category_tooltip_markup_func(const Glib::ustring& category, const SlotMarkTooltip& slot)
+void
+SourceView::set_mark_category_tooltip_markup_func(const Glib::ustring& category, const SlotMarkTooltip& slot)
 {
   SlotMarkTooltip* slot_copy = new SlotMarkTooltip(slot);
 
   gtk_source_view_set_mark_category_tooltip_markup_func(gobj(),
     category.c_str(), &SignalProxy_MarkTooltip_gtk_callback, slot_copy,
     &SignalProxy_MarkTooltip_gtk_callback_destroy);
+}
+
+void
+SourceView::unset_mark_category_tooltip_func(const Glib::ustring& category)
+{
+  gtk_source_view_set_mark_category_tooltip_func(gobj(), category.c_str(), 0, 0, 0);
 }
 
 }//end namespace gtksourceview

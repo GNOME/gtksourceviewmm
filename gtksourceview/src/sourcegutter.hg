@@ -64,6 +64,8 @@ public:
   _IGNORE(gtk_source_gutter_set_cell_data_func, gtk_source_gutter_set_cell_size_func)
   void set_cell_data_func(Gtk::CellRenderer* renderer, const SlotData& slot);
   void set_cell_size_func(Gtk::CellRenderer* renderer, const SlotSize& slot);
+  void reset_cell_data_func(Gtk::CellRenderer* renderer);
+  void reset_cell_size_func(Gtk::CellRenderer* renderer);
 
   _WRAP_PROPERTY("view", SourceView*)
   _WRAP_PROPERTY("window-type", Gtk::TextWindowType)

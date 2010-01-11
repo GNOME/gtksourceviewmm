@@ -237,7 +237,7 @@ public:
             limit = source_buffer->end () ;
             found = search_iter.forward_search
                                     (a_text,
-                                     SEARCH_TEXT_ONLY|SEARCH_CASE_INSENSITIVE,
+                                     SOURCE_SEARCH_TEXT_ONLY | SOURCE_SEARCH_CASE_INSENSITIVE,
                                      start,
                                      end,
                                      limit) ;
@@ -248,7 +248,7 @@ public:
             limit = source_buffer->begin () ;
             found = search_iter.backward_search
                                     (a_text,
-                                     SEARCH_TEXT_ONLY|SEARCH_CASE_INSENSITIVE,
+                                     SOURCE_SEARCH_TEXT_ONLY | SOURCE_SEARCH_CASE_INSENSITIVE,
                                      start,
                                      end,
                                      limit) ;

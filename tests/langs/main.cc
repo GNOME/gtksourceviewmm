@@ -16,7 +16,7 @@ main (int argc, char **argv)
     Glib::RefPtr<SourceLanguageManager> language_manager =
                                                 SourceLanguageManager::create();
     vector<Glib::ustring > langs = language_manager->get_language_ids ();
-    cout << "number of languages found:'" << langs.size () << std::endl;;
+    cout << "number of languages found: " << langs.size () << std::endl;;
 
     for (vector<Glib::ustring>::const_iterator iter = langs.begin(); iter != langs.end (); ++iter) {
         if (!(iter->empty())) {

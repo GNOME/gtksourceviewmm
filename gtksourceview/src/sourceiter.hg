@@ -30,9 +30,10 @@ _CC_INCLUDE(gtksourceview/gtksourceiter.h)
 namespace gtksourceview
 {
 
-// TODO: rename all SearchFlags into SourceSearchFlags and remove the typedef when breaking API/ABI.
+#ifndef GTKSOURCEVIEWMM_DISABLE_DEPRECATED
+  _WRAP_ENUM(SearchFlags, GtkSourceSearchFlags, s#^SOURCE_##)
+#endif // GTKSOURCEVIEWMM_DISABLE_DEPRECATED
   _WRAP_ENUM(SourceSearchFlags, GtkSourceSearchFlags)
-  typedef SourceSearchFlags SearchFlags;
 
 /// \brief an iterator type for gtksourceview::SourceBuffer.
 ///
@@ -51,8 +52,7 @@ class SourceIter : public Gtk::TextIter
 
         ~SourceIter () ;
 
-
-
+#ifndef GTKSOURCEVIEWMM_DISABLE_DEPRECATED
         /// \brief search forward in the buffer
         ///
         /// \param a_str the string to search for
@@ -83,6 +83,41 @@ class SourceIter : public Gtk::TextIter
         /// \return true if the search was successful, false otherwise.
         bool backward_search (const Glib::ustring &a_str,
                               SearchFlags a_flags,
+                              Gtk::TextIter &a_match_start,
+                              Gtk::TextIter &a_match_end,
+                              const Gtk::TextIter &a_limit) const ;
+#endif // GTKSOURCEVIEWMM_DISABLE_DEPRECATED
+
+        /// \brief search forward in the buffer
+        ///
+        /// \param a_str the string to search for
+        /// \param a_flags search flags, to be combined with the '|' operator
+        /// \param a_match_start out parameter. Points the the beginning
+        ///        of the region that matches the search. This is applicable
+        ///        if and only if the function returns true.
+        /// \param a_match_end out parameter.  Points the the end
+        ///        of the region that matches the search. This is applicable
+        ///        if and only if the function returns true.
+        /// \return true if the search was successful, false otherwise.
+        bool forward_search (const Glib::ustring &a_str,
+                             SourceSearchFlags a_flags,
+                             Gtk::TextIter &a_match_start,
+                             Gtk::TextIter &a_match_end,
+                             const Gtk::TextIter &a_limit) const ;
+
+        /// \brief search backward in the buffer
+        ///
+        /// \param a_str the string to search for
+        /// \param a_flags search flags, to be combined with the '|' operator
+        /// \param a_match_start out parameter. Points the the beginning
+        ///        of the region that matches the search. This is applicable
+        ///        if and only if the function returns true.
+        /// \param a_match_end out parameter.  Points the the end
+        ///        of the region that matches the search. This is applicable
+        ///         if and only if the function returns true.
+        /// \return true if the search was successful, false otherwise.
+        bool backward_search (const Glib::ustring &a_str,
+                              SourceSearchFlags a_flags,
                               Gtk::TextIter &a_match_start,
                               Gtk::TextIter &a_match_end,
                               const Gtk::TextIter &a_limit) const ;

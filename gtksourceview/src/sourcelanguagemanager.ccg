@@ -25,5 +25,28 @@
 namespace gtksourceview
 {
 
+void
+SourceLanguageManager::reset_search_path()
+{
+  gtk_source_language_manager_set_search_path(gobj(), NULL);
+}
+
+Glib::RefPtr<SourceLanguage>
+SourceLanguageManager::guess_language(const Glib::ustring& filename, const Glib::ustring& content_type)
+{
+  Glib::RefPtr<SourceLanguage> retvalue = Glib::wrap(gtk_source_language_manager_guess_language(gobj(), (filename.empty() ? 0 : filename.c_str()), (content_type.empty() ? 0 : content_type.c_str())));
+  if (retvalue)
+  {
+    retvalue->reference(); //The function does not do a ref for us.
+  }
+  return retvalue;
+}
+
+Glib::RefPtr<const SourceLanguage>
+SourceLanguageManager::guess_language(const Glib::ustring& filename, const Glib::ustring& content_type) const
+{
+  return const_cast<SourceLanguageManager*>(this)->guess_language(filename, content_type);
+}
+
 }//end namespace gtksourceview
 

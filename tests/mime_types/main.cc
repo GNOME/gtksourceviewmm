@@ -2,6 +2,7 @@
 #include <gtkmm.h>
 #include <gtksourceviewmm/sourcelanguagemanager.h>
 #include <gtksourceviewmm/init.h>
+#include <gtksourceview/gtksourcelanguagemanager.h>
 
 using namespace std ;
 using namespace gtksourceview ;
@@ -33,9 +34,7 @@ main (int argc, char **argv)
         cout << "Looking for language that matches mime type '"
              << s_mime_types[i]
              << "'" << std::endl;
-
-        //TODO: This function was removed in gtksourceview 2: http://live.gnome.org/GtkSourceView/PortingGuide        
-        lang = lang_mgr->get_language_from_mime_type (s_mime_types[i]) ;
+        lang = lang_mgr->guess_language(std::string(), s_mime_types[i]);
         if (lang) {
             cout << "Found language '" << lang->get_name () << "'" << std::endl;
         } else {

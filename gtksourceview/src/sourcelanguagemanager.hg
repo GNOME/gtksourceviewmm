@@ -54,12 +54,20 @@ public:
   _WRAP_METHOD(Glib::StringArrayHandle get_search_path() const, gtk_source_language_manager_get_search_path)
   _WRAP_METHOD(void set_search_path(const Glib::StringArrayHandle& dirs), gtk_source_language_manager_set_search_path)
 
+  void reset_search_path();
+
   _WRAP_METHOD(Glib::StringArrayHandle get_language_ids() const, gtk_source_language_manager_get_language_ids)
 
   _WRAP_METHOD(Glib::RefPtr<SourceLanguage> get_language(const Glib::ustring& id), gtk_source_language_manager_get_language, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const SourceLanguage> get_language(const Glib::ustring& id) const, gtk_source_language_manager_get_language, constversion, refreturn)
-  _WRAP_METHOD(Glib::RefPtr<SourceLanguage> guess_language(const Glib::ustring& filename, const Glib::ustring& content_type), gtk_source_language_manager_guess_language, filename, content_type, refreturn)
-  _WRAP_METHOD(Glib::RefPtr<const SourceLanguage> guess_language(const Glib::ustring& filename, const Glib::ustring& content_type) const, gtk_source_language_manager_guess_language, filename, content_type, constversion, refreturn)
+// XXX: wrapped by hand, because empty string means NULL.
+//  _WRAP_METHOD(Glib::RefPtr<SourceLanguage> guess_language(const Glib::ustring& filename, const Glib::ustring& content_type), gtk_source_language_manager_guess_language, filename, content_type, refreturn)
+//  _WRAP_METHOD(Glib::RefPtr<const SourceLanguage> guess_language(const Glib::ustring& filename, const Glib::ustring& content_type) const, gtk_source_language_manager_guess_language, filename, content_type, constversion, refreturn)
+  _WRAP_METHOD_DOCS_ONLY(gtk_source_language_manager_guess_language)
+// TODO: change filename parameter to std::string, when we break API/ABI.
+  Glib::RefPtr<SourceLanguage> guess_language(const Glib::ustring& filename, const Glib::ustring& content_type);
+  _WRAP_METHOD_DOCS_ONLY(gtk_source_language_manager_guess_language)
+  Glib::RefPtr<const SourceLanguage> guess_language(const Glib::ustring& filename, const Glib::ustring& content_type) const;
 };
 
 } /* namespace gtksourceview */

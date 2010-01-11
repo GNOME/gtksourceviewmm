@@ -1,6 +1,6 @@
 ACLOCAL_AMFLAGS = -I build ${ACLOCAL_FLAGS}
-# change level of warnings to fatal, when deprecations are fixed.
-DISTCHECK_CONFIGURE_FLAGS = --enable-warnings=max
+
+DISTCHECK_CONFIGURE_FLAGS = --enable-warnings=fatal
 
 if MAINTAINER_MODE
 src_subdirs = codegen gtksourceview/src

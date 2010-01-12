@@ -260,6 +260,8 @@ public:
   /// \return the newly created #SourceMark
   _WRAP_METHOD(Glib::RefPtr<SourceMark> create_source_mark(const Glib::ustring& name, const Glib::ustring& category, const Gtk::TextIter& where), gtk_source_buffer_create_source_mark)
 
+  Glib::RefPtr<SourceMark> create_source_mark(const Glib::ustring& category, const Gtk::TextIter& where);
+
 #m4 _CONVERSION(`GSList*',`Glib::SListHandle<Glib::RefPtr<SourceMark> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
 #m4 _CONVERSION(`GSList*',`Glib::SListHandle<Glib::RefPtr<const SourceMark> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
 
@@ -303,6 +305,7 @@ public:
   /// \param end the end of the region to consider.
   /// \param category the category of the marks to consider.
   _WRAP_METHOD(void remove_source_marks(const Gtk::TextIter& start, const Gtk::TextIter& end, const Glib::ustring& category), gtk_source_buffer_remove_source_marks)
+  void remove_source_marks(const Gtk::TextIter& start, const Gtk::TextIter& end);
 
   _WRAP_METHOD(bool iter_has_context_class(const Gtk::TextIter& iter, const Glib::ustring& context) const, gtk_source_buffer_iter_has_context_class)
 

@@ -36,28 +36,40 @@ SourceBuffer::SourceBuffer (const Glib::RefPtr<SourceLanguage> &language) :
     else
     {
         gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (gobject_),
-                                        NULL) ;
+                                        0) ;
     }
 }
 
 bool SourceBuffer::backward_iter_to_source_mark(Gtk::TextIter& iter)
 {
-    return gtk_source_buffer_backward_iter_to_source_mark(gobj(), iter.gobj(), NULL);
+    return gtk_source_buffer_backward_iter_to_source_mark(gobj(), iter.gobj(), 0);
 }
 
 bool SourceBuffer::forward_iter_to_source_mark(Gtk::TextIter& iter)
 {
-    return gtk_source_buffer_forward_iter_to_source_mark(gobj(), iter.gobj(), NULL);
+    return gtk_source_buffer_forward_iter_to_source_mark(gobj(), iter.gobj(), 0);
+}
+
+Glib::RefPtr<SourceMark>
+SourceBuffer::create_source_mark(const Glib::ustring& category, const Gtk::TextIter& where)
+{
+  return Glib::wrap(gtk_source_buffer_create_source_mark(gobj(), 0, category.c_str(), where.gobj()));
 }
 
 Glib::SListHandle<Glib::RefPtr<SourceMark> > SourceBuffer::get_source_marks_at_line(int line) const
 {
-    return Glib::SListHandle<Glib::RefPtr<SourceMark> >(gtk_source_buffer_get_source_marks_at_line(const_cast<GtkSourceBuffer*>(gobj()), line, NULL), Glib::OWNERSHIP_SHALLOW);
+    return Glib::SListHandle<Glib::RefPtr<SourceMark> >(gtk_source_buffer_get_source_marks_at_line(const_cast<GtkSourceBuffer*>(gobj()), line, 0), Glib::OWNERSHIP_SHALLOW);
 }
 
 Glib::SListHandle<Glib::RefPtr<SourceMark> > SourceBuffer::get_source_marks_at_iter(Gtk::TextIter& iter) const
 {
-    return Glib::SListHandle<Glib::RefPtr<SourceMark> >(gtk_source_buffer_get_source_marks_at_iter(const_cast<GtkSourceBuffer*>(gobj()), iter.gobj(), NULL), Glib::OWNERSHIP_SHALLOW);
+    return Glib::SListHandle<Glib::RefPtr<SourceMark> >(gtk_source_buffer_get_source_marks_at_iter(const_cast<GtkSourceBuffer*>(gobj()), iter.gobj(), 0), Glib::OWNERSHIP_SHALLOW);
+}
+
+void
+SourceBuffer::remove_source_marks(const Gtk::TextIter& start, const Gtk::TextIter& end)
+{
+  gtk_source_buffer_remove_source_marks(gobj(), start.gobj(), end.gobj(), 0);
 }
 
 }//end namespace gtksourceview

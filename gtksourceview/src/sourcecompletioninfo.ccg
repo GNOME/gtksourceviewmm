@@ -18,3 +18,14 @@
  */
 
 #include <gtksourceview/gtksourcecompletioninfo.h>
+
+namespace gtksourceview
+{
+
+void
+SourceCompletionInfo::move_to_iter(const Gtk::TextView& view)
+{
+  gtk_source_completion_info_move_to_iter(gobj(), const_cast<GtkTextView*>(view.gobj()), 0);
+}
+
+}

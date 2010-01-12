@@ -77,7 +77,7 @@ public:
   /// \return true if the language should be hidden, false otherwise.
   _WRAP_METHOD(gboolean get_hidden() const, gtk_source_language_get_hidden)
 
-#m4 _CONVERSION(`gchar**',`Glib::StringArrayHandle',`Glib::StringArrayHandle($3)')
+#m4 _CONVERSION(`gchar**',`Glib::StringArrayHandle',`Glib::StringArrayHandle($3, Glib::OWNERSHIP_DEEP)')
   /// \brief gets the list of mime types for the given language.
   ///
   /// After usage you should free each element of the list as well as the list itself.

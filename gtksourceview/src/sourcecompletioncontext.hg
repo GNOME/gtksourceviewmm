@@ -42,7 +42,7 @@ class SourceCompletionContext : public Glib::Object
 {
   _CLASS_GOBJECT(SourceCompletionContext, GtkSourceCompletionContext, GTK_SOURCE_COMPLETION_CONTEXT, Glib::Object, GObject)
 public:
-#m4 _CONVERSION(`const Glib::RefPtr<SourceCompletionProvider>&',`struct _GtkSourceCompletionProvider*',`($3)->gobj()')
+#m4 _CONVERSION(`const Glib::RefPtr<SourceCompletionProvider>&',`struct _GtkSourceCompletionProvider*',`Glib::unwrap($3)')
 #m4 _CONVERSION(`const Glib::ListHandle<Glib::RefPtr<SourceCompletionProposal> >&',`GList*',`($3).data()')
   _WRAP_METHOD(void add_proposals(const Glib::RefPtr<SourceCompletionProvider>& provider, const Glib::ListHandle<Glib::RefPtr<SourceCompletionProposal> >& proposals, bool finished), gtk_source_completion_context_add_proposals)
 

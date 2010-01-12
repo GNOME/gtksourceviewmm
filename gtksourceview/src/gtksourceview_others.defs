@@ -2,11 +2,12 @@
 
 ;; From gtksourcecompletioncontext.h
 
-(define-method get_view
-  (of-object "GtkSourceCompletionContext")
-  (c-name "gtk_source_completion_context_get_view")
-  (return-type "GtkSourceView*")
-)
+; that got removed recently
+;(define-method get_view
+;  (of-object "GtkSourceCompletionContext")
+;  (c-name "gtk_source_completion_context_get_view")
+;  (return-type "GtkSourceView*")
+;)
 
 ;; From gtksourcecompletion.h
 

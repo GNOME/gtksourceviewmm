@@ -32,6 +32,8 @@ namespace gtksourceview
 class SourceCompletionContext;
 class SourceCompletionProvider;
 
+_WRAP_GERROR(SourceCompletionError, GtkSourceCompletionError, GTK_SOURCE_COMPLETION_ERROR)
+
 class SourceCompletion : public Gtk::Object
 {
   _CLASS_GTKOBJECT(SourceCompletion, GtkSourceCompletion, GTK_SOURCE_COMPLETION, Gtk::Object, GtkObject)

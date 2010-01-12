@@ -42,22 +42,16 @@ public:
   _WRAP_METHOD(Glib::RefPtr<Gdk::Pixbuf> get_icon(), gtk_source_completion_provider_get_icon, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const Gdk::Pixbuf> get_icon() const, gtk_source_completion_provider_get_icon, refreturn, constversion)
 
-#m4 _CONVERSION(`const Glib::RefPtr<SourceCompletionContext>&',`GtkSourceCompletionContext*',`($3)->gobj()')
   _WRAP_METHOD(void populate(const Glib::RefPtr<SourceCompletionContext>& context), gtk_source_completion_provider_populate)
 
-#m4 _CONVERSION(`const Glib::RefPtr<const SourceCompletionContext>&',`GtkSourceCompletionContext*',`const_cast<GtkSourceCompletionContext*>(($3)->gobj())')
   _WRAP_METHOD(bool match(const Glib::RefPtr<const SourceCompletionContext>& context) const, gtk_source_completion_provider_match)
 
-#m4 _CONVERSION(`const Glib::RefPtr<const SourceCompletionProposal>&',`GtkSourceCompletionProposal*',`const_cast<GtkSourceCompletionProposal*>(($3)->gobj())')
   _WRAP_METHOD(Gtk::Widget* get_info_widget(const Glib::RefPtr<const SourceCompletionProposal>& proposal) const, gtk_source_completion_provider_get_info_widget)
 
-#m4 _CONVERSION(`const SourceCompletionInfo&',`GtkSourceCompletionInfo*',`const_cast<GtkSourceCompletionInfo*>(($3).gobj())')
   _WRAP_METHOD(void update_info(const Glib::RefPtr<const SourceCompletionProposal>& proposal, const SourceCompletionInfo& info), gtk_source_completion_provider_update_info)
 
   _WRAP_METHOD(bool get_start_iter(const Glib::RefPtr<const SourceCompletionContext>& context, const Glib::RefPtr<const SourceCompletionProposal>& proposal, Gtk::TextIter& iter), gtk_source_completion_provider_get_start_iter)
 
-#m4 _CONVERSION(`const Glib::RefPtr<SourceCompletionProposal>&',`GtkSourceCompletionProposal*',`($3)->gobj()')
-#m4 _CONVERSION(`const Gtk::TextIter&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
   _WRAP_METHOD(bool activate_proposal(const Glib::RefPtr<SourceCompletionProposal>& proposal, const Gtk::TextIter& iter), gtk_source_completion_provider_activate_proposal)
 
   _WRAP_METHOD(SourceCompletionActivation get_activation() const, gtk_source_completion_provider_get_activation)

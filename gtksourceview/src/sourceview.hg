@@ -242,17 +242,12 @@ public:
 #endif // GTKSOURCEVIEWMM_DISABLE_DEPRECATED
 
   _WRAP_METHOD(void set_mark_category_icon(const Glib::ustring& category, const Glib::RefPtr<Gdk::Pixbuf>& pixbuf), gtk_source_view_set_mark_category_icon_from_pixbuf)
-// XXX: wrapped by hand, because stock_id or icon_name could be empty, which means NULL.
-//  _WRAP_METHOD(void set_mark_category_icon(const Glib::ustring& category, const Gtk::StockID& stock_id), gtk_source_view_set_mark_category_icon_from_stock)
-//  _WRAP_METHOD(void set_mark_category_icon(const Glib::ustring& category, const Glib::ustring& icon_name), gtk_source_view_set_mark_category_icon_from_icon_name)
   _WRAP_METHOD_DOCS_ONLY(gtk_source_view_set_mark_category_icon_from_stock)
   void set_mark_category_icon(const Glib::ustring& category, const Gtk::StockID& stock_id);
   _WRAP_METHOD_DOCS_ONLY(gtk_source_view_set_mark_category_icon_from_icon_name)
   void set_mark_category_icon(const Glib::ustring& category, const Glib::ustring& icon_name);
 
-#m4 _CONVERSION(`const Gdk::Color&',`const GdkColor*',`($3).gobj()')
   _WRAP_METHOD(void set_mark_category_background(const Glib::ustring& category, const Gdk::Color& color), gtk_source_view_set_mark_category_background)
-#m4 _CONVERSION(`Gdk::Color&',`GdkColor*',`($3).gobj()')
   _WRAP_METHOD(bool set_mark_category_background(const Glib::ustring& category, Gdk::Color& dest) const, gtk_source_view_get_mark_category_background)
   /// \brief Set if and how the spaces should be visualized.
   ///
@@ -273,13 +268,9 @@ public:
   void set_mark_category_tooltip_func(const Glib::ustring& category, const SlotMarkTooltip& slot);
   void set_mark_category_tooltip_markup_func(const Glib::ustring& category, const SlotMarkTooltip& slot);
   void unset_mark_category_tooltip_func(const Glib::ustring& category);
-#m4 _CONVERSION(`GtkSourceGutter*',`Glib::RefPtr<SourceGutter>',`Glib::wrap($3)')
-#m4 _CONVERSION(`GtkSourceGutter*',`Glib::RefPtr<const SourceGutter>',`Glib::wrap($3)')
   _WRAP_METHOD(Glib::RefPtr<SourceGutter> get_gutter(Gtk::TextWindowType window_type), gtk_source_view_get_gutter, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const SourceGutter> get_gutter(Gtk::TextWindowType window_type) const, gtk_source_view_get_gutter, refreturn, constversion)
 
-#m4 _CONVERSION(`GtkSourceCompletion*',`SourceCompletion*',`Glib::wrap($3)')
-#m4 _CONVERSION(`GtkSourceCompletion*',`const SourceCompletion*',`Glib::wrap($3)')
   _WRAP_METHOD(SourceCompletion* get_completion(), gtk_source_view_get_completion, refreturn)
   _WRAP_METHOD(const SourceCompletion* get_completion() const, gtk_source_view_get_completion, refreturn, constversion)
 

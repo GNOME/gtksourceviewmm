@@ -1,3 +1,2 @@
 files_codegen_m4 = convert_gtksourceview.m4	\
-	convert_gtksourceviewmm.m4 		\
 	convert.m4

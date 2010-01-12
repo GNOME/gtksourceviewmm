@@ -41,9 +41,6 @@ public:
   _WRAP_METHOD(Glib::ustring get_info() const, gtk_source_completion_proposal_get_info)
   _WRAP_METHOD(void changed(), gtk_source_completion_proposal_changed)
   _WRAP_METHOD(guint hash() const, gtk_source_completion_proposal_hash)
-
-  // TODO: think about `const Glib::RefPtr<const SourceCompletionProposal>&'
-#m4 _CONVERSION(`const Glib::RefPtr<const SourceCompletionProposal>&',`GtkSourceCompletionProposal*',`const_cast<GtkSourceCompletionProposal*>(($3)->gobj())')
   _WRAP_METHOD(bool equal(const Glib::RefPtr<const SourceCompletionProposal>& other) const, gtk_source_completion_proposal_equal)
 
   _WRAP_SIGNAL(void changed(), "changed")

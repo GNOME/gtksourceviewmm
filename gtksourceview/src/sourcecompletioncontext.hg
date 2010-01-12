@@ -46,9 +46,6 @@ public:
 #m4 _CONVERSION(`const Glib::ListHandle<Glib::RefPtr<SourceCompletionProposal> >&',`GList*',`($3).data()')
   _WRAP_METHOD(void add_proposals(const Glib::RefPtr<SourceCompletionProvider>& provider, const Glib::ListHandle<Glib::RefPtr<SourceCompletionProposal> >& proposals, bool finished), gtk_source_completion_context_add_proposals)
 
-#m4 _CONVERSION(`GtkSourceView*',`SourceView*',`Glib::wrap($3)')
-  _WRAP_METHOD(SourceView* get_view(), gtk_source_completion_context_get_view)
-  _WRAP_METHOD(const SourceView* get_view() const, gtk_source_completion_context_get_view, constversion)
   _IGNORE(gtk_source_completion_context_get_iter)
   SourceIter get_iter() const;
 

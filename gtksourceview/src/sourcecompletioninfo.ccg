@@ -22,6 +22,10 @@
 namespace gtksourceview
 {
 
+SourceCompletionInfo::SourceCompletionInfo() :
+  _CONSTRUCT("type", GTK_WINDOW_POPUP)
+{}
+
 void
 SourceCompletionInfo::move_to_iter(const Gtk::TextView& view)
 {

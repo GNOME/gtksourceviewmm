@@ -34,15 +34,13 @@ class SourceCompletionItem : public Glib::Object
   _CLASS_GOBJECT(SourceCompletionItem, GtkSourceCompletionItem, GTK_SOURCE_COMPLETION_ITEM, Glib::Object, GObject)
   _IMPLEMENTS_INTERFACE(SourceCompletionProposal)
 protected:
-#m4 _CONVERSION(`const Glib::RefPtr<const Gdk::Pixbuf>&',`GdkPixbuf*',`const_cast<GdkPixbuf*>(($3)->gobj())')
-#m4 _CONVERSION(`const SourceMarkup&',`const gchar*',`($3).get_c_str()')
-  _WRAP_CTOR(SourceCompletionItem(const Glib::ustring& label, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info), gtk_source_completion_item_new)
-  _WRAP_CTOR(SourceCompletionItem(const SourceMarkup& markup, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info), gtk_source_completion_item_new_with_markup)
-  _WRAP_CTOR(SourceCompletionItem(const SourceMarkup& markup, const Glib::ustring& text, const Gtk::StockID& stock, const Glib::ustring& info), gtk_source_completion_item_new_from_stock)
+  explicit SourceCompletionItem(const Glib::ustring& label, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info);
+  explicit SourceCompletionItem(const SourceMarkup& markup, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info);
+  explicit SourceCompletionItem(const Glib::ustring& label, const Glib::ustring& text, const Gtk::StockID& stock, const Glib::ustring& info);
 public:
   _WRAP_CREATE(const Glib::ustring& label, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info)
   _WRAP_CREATE(const SourceMarkup& markup, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info)
-  _WRAP_CREATE(const SourceMarkup& markup, const Glib::ustring& text, const Gtk::StockID& stock, const Glib::ustring& info)
+  _WRAP_CREATE(const Glib::ustring& label, const Glib::ustring& text, const Gtk::StockID& stock, const Glib::ustring& info)
 
   _WRAP_PROPERTY("icon", Glib::RefPtr<Gdk::Pixbuf>)
   _WRAP_PROPERTY("info", Glib::ustring)

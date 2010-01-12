@@ -34,8 +34,7 @@ class SourcePrintCompositor : public Glib::Object
 
 protected:
   _WRAP_CTOR(SourcePrintCompositor(const Glib::RefPtr<SourceBuffer>& buffer), gtk_source_print_compositor_new)
-#m4 _CONVERSION(`const SourceView&',`GtkSourceView*',`($3).gobj()')
-  _WRAP_CTOR(SourcePrintCompositor(const SourceView& view), gtk_source_print_compositor_new_from_view)
+  explicit SourcePrintCompositor(const SourceView& view);
 public:
   _WRAP_CREATE(const Glib::RefPtr<SourceBuffer>& buffer)
   _WRAP_CREATE(const SourceView& view)

@@ -18,3 +18,53 @@
  */
 
 #include <gtksourceview/gtksourcecompletionitem.h>
+
+namespace gtksourceview
+{
+
+SourceCompletionItem::SourceCompletionItem(const Glib::ustring& label, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info) :
+  _CONSTRUCT("label", label.c_str(), "text", text.c_str(), "icon", Glib::unwrap(icon), "info", (info.empty() ? 0 : info.c_str()))
+{}
+
+SourceCompletionItem::SourceCompletionItem(const SourceMarkup& markup, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info) :
+  _CONSTRUCT("markup", markup.get_c_str(), "text", text.c_str(), "icon", Glib::unwrap(icon), "info", (info.empty() ? 0 : info.c_str()))
+{}
+
+SourceCompletionItem::SourceCompletionItem(const Glib::ustring& label, const Glib::ustring& text, const Gtk::StockID& stock, const Glib::ustring& info) :
+  _CONSTRUCT("text", text.c_str(), "info", (info.empty() ? 0 : info.c_str()))
+{
+  GdkPixbuf* icon;
+  Glib::ustring temp_label(label);
+
+  if (stock)
+  {
+    GtkIconTheme* theme = gtk_icon_theme_get_default();
+
+    int width, height;
+    gtk_icon_size_lookup (GTK_ICON_SIZE_MENU, &width, &height);
+    icon = gtk_icon_theme_load_icon (theme,
+                                     stock.get_c_str(),
+                                     width,
+                                     GTK_ICON_LOOKUP_USE_BUILTIN,
+                                     NULL);
+
+    GtkStockItem stock_item;
+    if (temp_label.empty() && gtk_stock_lookup (stock.get_c_str(), &stock_item))
+    {
+      temp_label = stock_item.label;
+    }
+  }
+  else
+  {
+    icon = NULL;
+  }
+
+  g_object_set(gobj(), "label", temp_label.c_str(), "icon", icon, NULL);
+
+  if (icon)
+  {
+    g_object_unref(icon);
+  }
+}
+
+} // namespace gtksourceview

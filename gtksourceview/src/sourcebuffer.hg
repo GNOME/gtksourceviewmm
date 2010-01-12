@@ -54,9 +54,7 @@ class SourceBuffer : public Gtk::TextBuffer
 protected:
   _CTOR_DEFAULT
 
-#m4 _CONVERSION(`const Glib::RefPtr<Gtk::TextTagTable>&',`GtkTextTagTable*',__CONVERT_REFPTR_TO_P)
-
-  _WRAP_CTOR(SourceBuffer(const Glib::RefPtr<Gtk::TextTagTable>& tag_table), gtk_source_buffer_new)
+  explicit SourceBuffer (const Glib::RefPtr<Gtk::TextTagTable>& tag_table) ;
   explicit SourceBuffer (const Glib::RefPtr<SourceLanguage> &language) ;
 
 public:

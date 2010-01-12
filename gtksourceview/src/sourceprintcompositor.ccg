@@ -22,6 +22,12 @@
 namespace gtksourceview
 {
 
+SourcePrintCompositor::SourcePrintCompositor(const SourceView& view) :
+  _CONSTRUCT("buffer", Glib::unwrap(view.get_source_buffer()), "tab-width", view.get_tab_width(), "highlight-syntax", view.get_source_buffer()->get_highlight_syntax(), "wrap-mode", static_cast<GtkWrapMode>(view.get_wrap_mode()), "print-line-numbers", (view.get_show_line_numbers() ? 0 : 1))
+{
+  set_body_font_name(const_cast<SourceView&>(view).get_pango_context()->get_font_description().to_string());
+}
+
 void
 SourcePrintCompositor::set_header_format(bool separator, const Glib::ustring& left, const Glib::ustring& center, const Glib::ustring& right)
 {

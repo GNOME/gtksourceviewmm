@@ -33,7 +33,7 @@ class SourceCompletionInfo : public Gtk::Window
   _CLASS_GTKOBJECT(SourceCompletionInfo, GtkSourceCompletionInfo, GTK_SOURCE_COMPLETION_INFO, Gtk::Window, GtkWindow)
 
 public:
-  _CTOR_DEFAULT()
+  SourceCompletionInfo();
 
 #m4 _CONVERSION(`const Gtk::TextView&',`GtkTextView*',`const_cast<GtkTextView*>(($3).gobj())')
 #m4 _CONVERSION(`const Gtk::TextIter&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')

@@ -50,6 +50,7 @@ protected:
 
 public:
 
+  // TODO: C API does not provide any constructor for GtkSourceLanguage, should we delete it on API/ABI break? krnowak
   /// \brief create a language.
   ///
   /// \return the newly created language

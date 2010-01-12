@@ -60,7 +60,7 @@ public:
   /// \param buffer the buffer to display in the SourceView
   explicit SourceView (const Glib::RefPtr<SourceBuffer> &buffer) ;
 
-// TODO: remove these when breaking API/ABI?
+// TODO: remove these when breaking API/ABI? SourceView is derived from GtkObject, so it does not need to be accessed by Glib::RefPtr. krnowak
   _WRAP_CREATE()
   _WRAP_CREATE(const Glib::RefPtr<SourceBuffer> &buffer)
 

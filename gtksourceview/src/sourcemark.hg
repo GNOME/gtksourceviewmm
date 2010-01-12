@@ -33,6 +33,7 @@ class SourceMark : public Gtk::TextMark
   _CLASS_GOBJECT(SourceMark, GtkSourceMark, GTK_SOURCE_MARK, Gtk::TextMark, GtkTextMark)
 
 protected:
+  // TODO: C API does not provide default constructor for GtkSourceMark, should we delete it on API/ABI break? krnowak
    _CTOR_DEFAULT
 
   //We reversed the parameter order, because name can be NULL:

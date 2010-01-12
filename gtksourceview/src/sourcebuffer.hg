@@ -52,6 +52,7 @@ class SourceBuffer : public Gtk::TextBuffer
   _CLASS_GOBJECT(SourceBuffer, GtkSourceBuffer, GTK_SOURCE_BUFFER, Gtk::TextBuffer, GtkTextBuffer)
 
 protected:
+  // TODO: C API does not provide default constructor for GtkSourceBuffer, should we delete it on API/ABI break? krnowak
   _CTOR_DEFAULT
 
   explicit SourceBuffer (const Glib::RefPtr<Gtk::TextTagTable>& tag_table) ;

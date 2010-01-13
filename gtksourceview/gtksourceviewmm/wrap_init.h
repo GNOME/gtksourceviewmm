@@ -5,7 +5,7 @@
 #include <glibmm.h>
 
 /* wrap_init.h
- * 
+ *
  * Copyright (C) 2005-2006 The gtksourceviewmm development team
  *
  * This library is free software; you can redistribute it and/or

@@ -1,6 +1,7 @@
 Dodji Seketeli <dodji@gnome.org>
 Rob Page <page.rob@gmail.com>
 Jonathon Jongsma <jjongsma@gnome.org>
+Krzesimir Nowak <qdlacz@gmail.com>
 
 Large parts of this wrapper (ie: the tools and scripts directories)
 are taken from the glibmm and gtkmm projects.

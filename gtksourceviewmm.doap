@@ -6,9 +6,12 @@
 
   <name xml:lang="en">gtksourceviewmm</name>
   <shortdesc xml:lang="en">C++ bindings for GtkSourceView</shortdesc>
+
   <homepage rdf:resource="http://www.gtkmm.org/" />
   <mailing-list rdf:resource="mailto:gtkmm-list@gnome.org" />
   <category rdf:resource="http://api.gnome.org/doap-extensions#bindings" />
+  <bug-database rdf:resource="https://bugzilla.gnome.org/browse.cgi?product=gtksourceviewmm" />
+  <download-page rdf:resource="http://download.gnome.org/sources/gtksourceviewmm/" />
 
   <maintainer>
     <foaf:Person>
@@ -20,6 +23,11 @@
       <foaf:name>Murray Cumming</foaf:name>
       <foaf:mbox rdf:resource="mailto:murrayc@murrayc.com" />
       <gnome:userid>murrayc</gnome:userid>
+    </foaf:Person>
+    <foaf:Person>
+      <foaf:name>Krzesimir Nowak</foaf:name>
+      <foaf:mbox rdf:resource="mailto:qdlacz@gmail.com" />
+      <gnome:userid>krnowak</gnome:userid>
     </foaf:Person>
   </maintainer>
 </Project>

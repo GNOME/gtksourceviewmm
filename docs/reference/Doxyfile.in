@@ -48,20 +48,20 @@ SYMBOL_CACHE_SIZE      = 0
 #---------------------------------------------------------------------------
 # Build related configuration options
 #---------------------------------------------------------------------------
-EXTRACT_ALL            = YES
-EXTRACT_PRIVATE        = NO
+EXTRACT_ALL            = NO
+EXTRACT_PRIVATE        = YES
 EXTRACT_STATIC         = NO
 EXTRACT_LOCAL_CLASSES  = NO
 EXTRACT_LOCAL_METHODS  = NO
 EXTRACT_ANON_NSPACES   = NO
-HIDE_UNDOC_MEMBERS     = NO
+HIDE_UNDOC_MEMBERS     = YES
 HIDE_UNDOC_CLASSES     = YES
 HIDE_FRIEND_COMPOUNDS  = YES
 HIDE_IN_BODY_DOCS      = YES
 INTERNAL_DOCS          = NO
 CASE_SENSE_NAMES       = YES
 HIDE_SCOPE_NAMES       = NO
-SHOW_INCLUDE_FILES     = NO
+SHOW_INCLUDE_FILES     = YES
 INLINE_INFO            = YES
 SORT_MEMBER_DOCS       = YES
 SORT_BRIEF_DOCS        = NO
@@ -74,7 +74,7 @@ GENERATE_BUGLIST       = NO
 GENERATE_DEPRECATEDLIST= YES
 ENABLED_SECTIONS       =
 MAX_INITIALIZER_LINES  = 2
-SHOW_USED_FILES        = YES
+SHOW_USED_FILES        = NO
 SHOW_DIRECTORIES       = NO
 SHOW_FILES             = NO
 SHOW_NAMESPACES        = YES
@@ -87,7 +87,7 @@ QUIET                  = NO
 WARNINGS               = YES
 WARN_IF_UNDOCUMENTED   = YES
 WARN_IF_DOC_ERROR      = YES
-WARN_NO_PARAMDOC       = NO
+WARN_NO_PARAMDOC       = YES
 WARN_FORMAT            = "$file:$line: $text"
 WARN_LOGFILE           = reference/doxygen.log
 #---------------------------------------------------------------------------
@@ -130,7 +130,7 @@ VERBATIM_HEADERS       = NO
 #---------------------------------------------------------------------------
 # configuration options related to the alphabetical class index
 #---------------------------------------------------------------------------
-ALPHABETICAL_INDEX     = YES
+ALPHABETICAL_INDEX     = NO
 COLS_IN_ALPHA_INDEX    = 5
 IGNORE_PREFIX          =
 #---------------------------------------------------------------------------
@@ -141,7 +141,6 @@ HTML_OUTPUT            = html
 HTML_FILE_EXTENSION    = .html
 HTML_HEADER            =
 HTML_FOOTER            =
-HTML_TIMESTAMP         = NO
 HTML_STYLESHEET        = "@MMDOCTOOLDIR@/doxygen.css"
 HTML_ALIGN_MEMBERS     = YES
 HTML_DYNAMIC_SECTIONS  = NO
@@ -262,18 +261,18 @@ PERL_PATH              = @PERL@
 #---------------------------------------------------------------------------
 # Configuration options related to the dot tool
 #---------------------------------------------------------------------------
-CLASS_DIAGRAMS         = NO
+CLASS_DIAGRAMS         = YES
 MSCGEN_PATH            =
 HIDE_UNDOC_RELATIONS   = NO
 HAVE_DOT               = YES
-DOT_FONTNAME           = FreeSans
+DOT_FONTNAME           = Sans
 DOT_FONTSIZE           = 10
 DOT_FONTPATH           =
 CLASS_GRAPH            = YES
-COLLABORATION_GRAPH    = YES
-GROUP_GRAPHS           = YES
+COLLABORATION_GRAPH    = NO
+GROUP_GRAPHS           = NO
 UML_LOOK               = NO
-TEMPLATE_RELATIONS     = YES
+TEMPLATE_RELATIONS     = NO
 INCLUDE_GRAPH          = NO
 INCLUDED_BY_GRAPH      = NO
 CALL_GRAPH             = NO

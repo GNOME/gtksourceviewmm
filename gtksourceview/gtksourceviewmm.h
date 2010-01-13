@@ -23,6 +23,55 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+/** @mainpage gtksourceviewmm - A C++ binding for gtksourceview
+ *
+ * @section introduction Introduction
+ * gtksourceviewmm is a C++ wrapper for the gtksourceview widget library.
+ * It offers all the power of gtksourceview with an interface familiar to C++
+ * developers, including users of the gtkmm library.
+ *
+ * @section status Status
+ * gtksourceviewmm wraps all relevant parts of the gtksourceview library and has
+ * proven to be useable so far.
+ *
+ * @section sourcecode Source code
+ *
+ * Source code is developed on GNOME git and release tarballs are stored on
+ * GNOME FTP site.
+ *
+ * @subsection browsecode Browse the source code
+ *
+ * See: <tt>http://git.gnome.org/browse/gtksourceviewmm/</tt>.
+ *
+ * @subsection bleedingedge Getting bleeding edge code from git
+ *
+ * <tt>git clone git://git.gnome.org/gtksourceviewmm gtksourceviewmm</tt>
+ *
+ * @subsection download Download releases tarballs
+ *
+ * See <tt>http://download.gnome.org/sources/gtksourceviewmm/</tt>.
+ *
+ * @section license License
+ * gtksourceviewmm is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ * See the text of the LGPL for more details:
+ * http://www.gnu.org/licenses/lgpl.html .
+ *
+ * @section Contact
+ * To contact the developers of gtksourceviewmm please send an email to
+ * the gtkmm mailing list at gtkmm-list@gnome.org. See
+ * <tt>http://www.gtkmm.org/mailinglist.shtml</tt>. Or join @c c++ channel at
+ * <tt>irc.gnome.org</tt>. See <tt>http://live.gnome.org/GnomeIrcChannels</tt>.
+ *
+ * @section about About
+ * Initial work has been done by Rob Page.
+ * Dodji Seketeli, Murray Cumming, Daniel Elstner, Jonathon Jongsma and
+ * Krzesimir Nowak with contributions from other people wrote most of the code
+ * of this project.
+ */
+
 #include <gtksourceviewmm/init.h>
 #include <gtksourceviewmm/sourcebuffer.h>
 #include <gtksourceviewmm/sourcecompletionactivation.h>

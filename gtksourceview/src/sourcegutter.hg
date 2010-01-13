@@ -45,7 +45,7 @@ protected:
 
 public:
   // TODO: C API does not provide any constructor for GtkSourceGutter, should we delete it on API/ABI break? krnowak
-  _WRAP_CREATE
+  _WRAP_CREATE()
 
   _WRAP_METHOD(Glib::RefPtr<Gdk::Window> get_window(), gtk_source_gutter_get_window, refreturn)
   _WRAP_METHOD(Glib::RefPtr<const Gdk::Window> get_window() const, gtk_source_gutter_get_window, constversion, refreturn)

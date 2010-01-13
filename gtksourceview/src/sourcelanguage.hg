@@ -59,7 +59,7 @@ public:
   /// \brief get language ID
   ///
   /// a language ID is unique among language IDs.
-  /// \return the langugae ID.
+  /// \return the language ID.
   _WRAP_METHOD(Glib::ustring get_id() const, gtk_source_language_get_id)
 
   /// \brief gets the localized name of the language.

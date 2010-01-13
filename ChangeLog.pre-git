@@ -1,0 +1,598 @@
+2009-12-09  Krzesimir Nowak  <qdlacz@gmail.com>
+
+	* gtksourceview: Move to mm-common build system.
+
+2009-08-04  Fabien Parent  <parent.f@gmail.com>
+
+	* gtksourceview/src/sourcebuffer.hg: Fix the constructor taken a
+	Glib::RefPtr<Gtk::TextTagTable> parameter.
+
+2009-06-15  Parent Fabien  <parent.f@gmail.com>
+
+	Added SourceView::get/set_draw_spaces().
+	
+	* gtksourceview/src/gtksourceview_enums.defs:
+	* gtksourceview/src/gtksourceview_methods.defs:
+	* gtksourceview/src/gtksourceview_signals.defs: Regenerated.
+	* gtksourceview/src/sourceview.hg: Added get/set_draw_spaces() and the 
+	property and related enum.
+	* tools/m4/convert_gtksourceviewmm.m4: Add a conversion for the enum.
+	Bug #585278.
+
+2.3.1:
+
+2008-12-15  Murray Cumming  <murrayc@murrayc.com>
+
+	* gtksourceview/src/sourcestyle.hg:
+	* gtksourceview/src/sourcestyleschememanager.hg: Remove extra ;s to 
+	avoid compiler warnings.
+
+2008-12-12  Balazs Tirpak  <balazs.tirpak@gmail.com>
+
+	* gtksourceview/src/sourcelanguagemanager.hg: Wrapped
+	gtk_source_language_manager_guess_language().
+
+2008-10-09  Murray Cumming  <murrayc@murrayc.com>
+
+	* gtksourceview/src/sourcebuffer.hg: Wrapped properties.
+
+2008-09-01  Dodji Seketeli  <dodji@gnome.org>
+
+	* gtksourceview/src/sourcebuffer.hg: Update API Documentation.
+	* gtksourceview/src/sourceview.hg: Likewise.
+
+2008-05-31 Dodji Seketeli <dodji@gnome.org>
+
+	* autogen.sh: use automake 1.10
+
+2008-04-30  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/reference/reference-index.txt: Updated the download link
+	because I changed that tarball name to gtksourceviewmm*.tar.gz instead 
+	of libgtksourceviewmm.tar.gz, to be consistent with the other similar 
+	changes. Mentioned gtkmm-list instead of the gtksourceviewmm list.
+
+2.2.0:
+
+2008-04-25  Deng Xiyue  <manphiz@gmail.com>
+
+	* gtksourceview/src/sourcestyle.ccg:
+	* tests/test-search.cpp: Include <cstring> to fix the build with 
+	gcc 4.3.
+
+1.9.5:
+
+2008-04-25  Murray Cumming  <murrayc@murrayc.com>
+
+	* gtksourceview/src/gtksourceview_signals.defs: Regenerated.
+	* gtksourceview/src/sourcebuffer.hg: Added the source_mark_updated 
+	signal.
+	* gtksourceview/src/sourcemark.ccg:
+	* gtksourceview/src/sourcemark.hg: Constructor: Added the optional 
+	name parameter.
+	* gtksourceview/src/sourcestyle.hg: Added the copy() method.
+	* gtksourceview/src/sourcestyleschememanager.ccg:
+	* gtksourceview/src/sourcestyleschememanager.hg:
+	Added set_search_path(), reset_search_path, get_search_path(), and 
+	get_scheme_ids().
+	* gtksourceview/src/sourceview.hg: Added properties.
+
+1.9.4:
+
+2008-02-06  Murray Cumming  <murrayc@murrayc.com>
+
+	* gtksourceview/src/gtksourceview_methods.defs:
+	* gtksourceview/src/sourcebuffer.hg: Added remove_source_marks(), 
+	using the latest gtksourceview API with my const correction.
+
+2008-02-06  Murray Cumming  <murrayc@murrayc.com>
+
+	* gtksourceview/src/gtksourceview_docs.xml: Removed an odd character that 
+	was causing a warning.
+
+	* gtksourceview/src/gtksourceview_methods.defs: Regenerated with 
+	h2defs.py
+	* gtksourceview/src/sourcebuffer.ccg:
+	* gtksourceview/src/sourcebuffer.hg: Renamed the mark methods to match 
+	the latest API in gtksourceview.
+	
+	I notice that there are some gmmproc warnings during the build too.
+
+2008-01-20  Murray Cumming  <murrayc@murrayc.com>
+
+	* gtksourceview/src/sourcebuffer.hg:
+	* gtksourceview/src/sourcemark.ccg:
+	* gtksourceview/src/sourcemark.hg:
+	* gtksourceview/src/sourcestyleschememanager.hg:
+	* gtksourceview/src/sourceview.hg:
+	Const corrections and ref-counting corrections for getter methods.
+	* tools/m4/convert_gtksourceview.m4:
+	* tools/m4/convert_gtksourceviewmm.m4: Moved GList and GSList 
+	conversions to the .m4 files, because the ownership is dependent on 
+	the particular function.
+
+2008-01-12  Jonathon Jongsma  <jjongsma@gnome.org>
+
+	* configure.ac: bump version to 1.9.4 so we can detect a version with
+	SourceMark api.  Also require at least version 2.1.0 of gtksourceview
+
+2008-01-12  Jonathon Jongsma  <jjongsma@gnome.org>
+
+	* gtksourceview/src/gtksourceview_docs.xml: re-generate documentation
+
+2008-01-12  Jonathon Jongsma  <jjongsma@gnome.org>
+
+	* AUTHORS: may as well add myself here
+	* gtksourceview/src/Makefile_list_of_hg.am_fragment:
+	* gtksourceview/src/sourcestyleschememanager.ccg:
+	* gtksourceview/src/sourcestyleschememanager.hg: add the
+	SourceStyleSchemeManager class, though not fully wrapped
+
+2008-01-12  Jonathon Jongsma  <jjongsma@gnome.org>
+
+	* gtksourceview/src/Makefile_list_of_hg.am_fragment:
+	* gtksourceview/src/sourcebuffer.ccg:
+	* gtksourceview/src/sourcebuffer.hg:
+	* gtksourceview/src/sourcemark.ccg:
+	* gtksourceview/src/sourcemark.hg:
+	* tools/m4/convert_gtksourceviewmm.m4: added SourceMark class and
+	SourceMark-related API to SourceBuffer
+
+2008-01-12  Jonathon Jongsma <jjongsma@gnome.org>
+
+	* gtksourceview/src/gtksourceview_enums.defs:
+	* gtksourceview/src/gtksourceview_signals.defs:
+	* gtksourceview/src/gtksourceview_methods.defs: re-generated .defs file for
+	new API in gtksourceview 2.1
+	* tools/m4/convert_gtksourceviewmm.m4:
+	* tools/extra_defs_gen/generate_defs_gtk.cc:
+	* gtksourceview/src/sourcebuffer.hg:
+	* gtksourceview/src/sourceview.hg:
+	* gtksourceview/src/sourcelanguage.hg: wrapped some additional API in
+	SourceView, SourceBuffer, and SourceLanguage
+
+2007-12-09  Yselkowitz <yselkowitz@users.sourceforge.net>
+
+	* docs/reference/Makefile.am (docdir):
+	* tools/m4/Makefile.am (tools_m4_includedir):
+	Install to 2.0-versioned directories.
+
+1.9.3:
+
+2007-09-27  Armin Burgmeier  <armin@openismus.com>
+
+	* gtksourceview/gtksourceviewmm-2.0.pc.in: Depend on gtksourceview-2.0
+	instead of gtksourceview-1.0.
+
+1.9.2:
+
+2007-09-18  Murray Cumming  <murrayc@murrayc.com>
+
+	* gtksourceview/gtksourceviewmm.h:
+	* gtksourceview/src/Makefile_list_of_hg.am_fragment:
+	* tools/extra_defs_gen/generate_defs_gtk.cc:
+	* gtksourceview/src/sourcemarker.ccg:
+	* gtksourceview/src/sourcemarker.hg: Removed SourceMarker, 
+	because GtkSourceMarker was removed from the C API.
+	* gtksourceview/src/sourcebuffer.ccg:
+	* gtksourceview/src/sourcebuffer.hg: Removed create_marker(), 
+	move_marker(), delete_marker(), get_marker(), 
+	get_markers_in_region(), get_first_marker(), get_last_marker(), 
+	get_iter_at_marker(), get_next_marker(), get_prev_marker(), 
+	* gtksourceview/src/sourceview.hg: Remove set_marker_pixbuf(), 
+	get_marker_pixbuf(), set_show_line_markers(), and 
+	get_show_line_markers(), because the C functions were removed 
+	from the C API.
+
+	This fixes the build with the latest gtksourceview-2.0.
+
+2007-09-13  Murray Cumming  <murrayc@murrayc.com>
+
+	* gtksourceview/src/sourcebuffer.hg:
+	Renamed get/set_highlight() to get/set_highlight_syntax() 
+	so that it is actually wrapped.
+
+1.9.1:
+
+2007-09-12  Murray Cumming  <murrayc@murrayc.com>
+
+	* configure.ac:
+	* gtksourceview/Makefile.am:
+	* gtksourceview/libgtksourceviewmm-1.0.pc.in: Renamed to
+	* gtksourceview/gtksourceviewmm-2.0.pc.in:
+	* gtksourceview/gtksourceviewmm/Makefile.am:
+	* gtksourceview/gtksourceviewmm/private/Makefile.am:
+	* gtksourceview/src/Makefile.am:
+	Rename the library, headers install location, and 
+	pkg-config name to use 2-0 in the name, so we can wrap 
+	the new gtksourceview 2.0 API but keep the old versions of 
+	gtksourceviewmm parallel installable.
+ 
+	* gtksourceview/src/gtksourceview.defs:
+	* gtksourceview/src/gtksourceview_enums.defs:
+	* gtksourceview/src/gtksourceview_methods.defs:
+	* gtksourceview/src/gtksourceview_others.defs:
+	* gtksourceview/src/gtksourceview_signals.defs: Regenerated.
+	* tools/m4/convert_gtksourceview.m4:
+	* tools/m4/convert_gtksourceviewmm.m4:
+	* gtksourceview/gtksourceviewmm.h:
+	* gtksourceview/src/Makefile_list_of_hg.am_fragment:
+	* gtksourceview/src/sourcebuffer.ccg:
+	* gtksourceview/src/sourcebuffer.hg: The constructor now 
+	takes a TextTagTable instead of a SourceTagTable.
+	Removed set_bracket_match_style().
+	* gtksourceview/src/sourcelanguage.hg: Removed get_tags(), 
+	get_escape_char(), set_mime_types(), get_style_scheme(), 
+	set_style_scheme(), get_tag_style(), set_tag_style(), 
+	get_tag_default_style().
+	Added get_hidden() and get_style_name().
+	* gtksourceview/src/sourcelanguagemanager.ccg:
+	* gtksourceview/src/sourcelanguagemanager.hg: 
+	Renamed SourceLanguagesManager to SourceLanguageManager.
+	Removed get_language_from_mime_type() - there is no replacement 
+	yet. Removed get_available_languages(), get_lang_files_dirs().
+	Added get_default(), get_search_path(), get_language_ids(), and 
+	get_language().
+	* gtksourceview/src/sourcestyle.ccg:
+	* gtksourceview/src/sourcestyle.hg: Added.
+	* gtksourceview/src/sourcestylescheme.ccg:
+	* gtksourceview/src/sourcestylescheme.hg: Removed get_tag_style(), 
+	get_style_names(), get_default().
+	Added get_id(), get_name(), get_description(), get_authors(), 
+	get_filename(), get_style().
+	* gtksourceview/src/sourceview.ccg:
+	* gtksourceview/src/sourceview.hg: Added the 
+	SourceSmartHomeEndType enum, and used it in 
+	set_smart_home_end() and get_smart_home_end().
+	Renamed set_tabs_width() to set_tab_width(), and 
+	get_tabs_width() to get_tab_width().
+	Renamed set_show_margin() to set_show_right_margin(), and 
+	get_show_margin() to get_show_right_margin().
+	Renamed set_margin() to set_right_margin_position(), and 
+	get_margin() to get_right_margin_position().
+
+	* gtksourceview/src/sourcetag.ccg:
+	* gtksourceview/src/sourcetag.hg:
+	* gtksourceview/src/sourcetagstyle.ccg:
+	* gtksourceview/src/sourcetagstyle.hg:
+	* gtksourceview/src/sourcetagtable.hg:
+	Removed. I think that regular Gtk::TextTags should now 
+	be used instead.
+
+	Also pass RefPtr parameters by const reference.
+
+	* tests/Makefile.am:
+	* tests/test-basic.cpp:
+	* tests/test-get-buffer.cpp:
+	* tests/test-langs.cpp:
+	* tests/test-mime-types.cpp:
+	* tools/extra_defs_gen/generate_defs_gtk.cc:
+	Updated for the new API, though I removed 
+	test-mime-types from the build because there that 
+	API is no longer in gtksourceview, for now.
+
+2007-09-02  Murray Cumming  <murrayc@murrayc.com>
+
+	* autogen.sh: Specify aclocal-1.9 instead of aclocal, as automake-1.9 
+	is already specified. Otherwise the autogen fails with warnings 
+	about incompatibilities when aclocal 1.10 is installed.
+
+2007-05-01 Dodji Seketeli <dodji@gnome.org>
+
+	* docs/reference/reference-index.txt: update svn info to reflect
+	  the move to the gnome repository.
+
+2007-04-24  Yselkowitz <yselkowitz@users.sourceforge.net>
+
+	* scripts/macros.m4: Check for both m4 and M4 in the GNU m4 output,
+	to fix the build on some platforms.
+	Bug #423990
+
+Mon, 02 Apr 2007 11:11:13 +0200 Dodji Seketeli
+
+	* gtksourceview/Makefile.am: properly install
+	  gtksourceviewmm.h into $prefix/include/gtksourceviewmm-1.0
+
+Mon, 02 Apr 2007 11:03:32 +0200 Dodji Seketeli
+
+	* tests/Makefile.am, test/test-get-buffer.cc:
+	  Added a new test case test-get-buffer.cc.
+
+Mon, 02 Apr 2007 10:49:44 +0200 Dodji Seketeli
+
+	* configure.ac: added a --enable-debug to compile in debug mode
+	* gtksourceview/src/sourceiter.ccg:
+	  SourceIter::SourceIter(const SourceIter &): chain up Gtk::TextIter
+	  constructor.
+	* tests/test-mime-types.cpp: fix a dump compiler warning
+	* tests/test-search.cpp:
+	  SearchDialog::backward_search_requested_signal(): fix a
+	  a silly crasher.
+
+Mon, 26 Mar 2007 19:50:31 +0200 Dodji Seketeli
+
+	* configure.ac: bumped version name to 0.3.1
+
+Sun, 21 Jan 2007 16:43:39 +0100 Dodji Seketeli
+
+	* docs/reference/reference-index.txt: updated mailing list information
+	  on the website
+	* gtksourceview/gtksourceviewmm/init.cc: call Glib::init() in the
+	  init function so that people can call gtksourceview::init() only
+	  when they need to use non graphical stuff.
+	* tests/test-mime-types.cpp: added this test case to make
+	  sure mime type related stuff works.
+
+================== 0.3.0 release =============================
+
+Sun, 21 Jan 2007 12:22:02 +0100 Dodji Seketeli
+
+	* docs/reference/Doxyfile.in: generate doc files in builddir, not
+	  srcdir.
+	* docs/reference/Makefile.am: remove the doxygen-warning.txt
+	  at dist-clean time.
+	* NEWS: update this to prepare 0.3
+
+Sat, 20 Jan 2007 18:37:25 +0100 Dodji Seketeli
+
+	* gtksourceview/src/sourcebuffer.hg, docs/reference/reference-index.txt:
+	  remove the main page doc from sourcebuffer.hg and put it in
+	  doc/reference/reference-index.txt
+	* docs/reference/Doxyfile.in, docs/reference/Makefile.am:
+	  change this accordingly.
+
+Sun, 14 Jan 2007 11:28:25 +0100 Dodji Seketeli
+
+	*  gtksourceview/src/sourceview.hg: updated API docs.
+	*  NEWS: updated this
+
+Fri, 22 Dec 2006 23:46:21 +0100 Dodji Seketeli
+
+	* gtksourceview/gtksourceviewmm.h: updated this to include all the *.h
+	  files of gsvmm.
+	* gtksourceview/src/sourceiter.ccg,hg: wrapped the SourceIter class.
+	* tests/test-search.cpp: added a test for the search api.
+	* tests/test-basic.cpp: udpated this to include <gtksourceviewmm.h>
+	  only.
+
+2006-12-06  Johannes Schmid <jhs@gnome.org>
+
+	* gtksourceview/src/sourcebuffer.hg:
+	   Fixed type in end_not_undoable_action() which was actually
+	   end_notundoable_action()
+
+2006-11-13  Murray Cumming  <murrayc@murrayc.com>
+
+	* docs/reference/Makefile.am: Define docdir, so make install succeeds.
+
+2006-11-13  Murray Cumming  <murrayc@murrayc.com>
+
+	* gtksourceview/src/sourcebuffer.hg:
+	* gtksourceview/src/sourcelanguage.hg:
+	* gtksourceview/src/sourcemarker.hg:
+	* gtksourceview/src/sourceview.hg:
+	* tools/m4/convert_gtksourceviewmm.m4: Various const corrections. Some 
+	get_*() methods were not const. Some get_*() methods had both const and non-const 
+	overloads, although they returned by value. Some get_*() that returned by RefPtr 
+	needed get_*() overloads.
+	Used refreturn in .hg files with get_*() methods, instead of specifying it in the 
+	conversion in the .m4 file, because the extra ref is not always needed.
+
+Sat, 11 Nov 2006 16:20:21 +0100 Dodji Seketeli
+
+	* gtksourceview/src/*.hg: update the API docs. All the classes are now
+	  basically documented.
+	* docs/reference/Makefile.am: make install now installs the docs
+	  in docdir/reference/html. APIDOCs are shipped in the tarball now.
+
+Sat, 11 Nov 2006 01:12:24 +0100 Dodji Seketeli
+
+	* gtksourceview/src/sourcelanguagesmanager.hg: updated API doc
+
+Sat, 11 Nov 2006 00:57:00 +0100 Dodji Seketeli
+
+	* gtksourceview/src/sourcelanguage.hg: updated API doc.
+
+Wed, 08 Nov 2006 23:36:20 +0100 Dodji Seketeli
+
+	* docs/reference/Doxyfile.in: don't generate full path doc names.
+	* tools/m4/convert_gtksourceviewmm.m4: add  more need type conversion macros.
+	* gtksourceview/src/sourcelanguagesmanager.hg: fix typo:
+	  SourceLanguagesManager::get_available_languages(), instead of
+	  ::get_available_language(). This breaks API, but it's for the good.
+	* gtksourceview/src/sourcebuffer.hg: make api doc complete for this
+	  class.
+	* gtksourceview/src/sourcetag.hg: complete apidoc for this class.
+	* gtksourceview/src/sourcetagtable.hg: went forward in apidoc.
+	* tests/Makefile.am, test-langs.cc: added a new test to test languages.
+	* configure.ac: bump revision number, and soname stuff because of api
+	  break.
+
+Thu, 02 Nov 2006 08:14:03 +0100 Dodji Seketeli
+
+	* configure.in: renamed this into configure.ac .
+	* docs/reference: added this new directory. Now, make also builds
+	  reference documentation in docs/reference/html
+	* docs/reference/Doxyfile.in: added this new file.
+	* gtksourceview/src/sourcebuffer.hg: started to document this.
+	* gtksourceview/src/sourcetag.hg: started to document this.
+
+========== release 0.2.0 ===========
+
+lundi 18 septembre 2006, 12:45:45 (UTC+0200) Dodji Seketeli
+
+	* gtksourceview/src/sourcebuffer.hg, gtksourceview/src/sourceview.hg:
+	added a default 'true' parameter to the set_* methods that takes a boolean
+	in parameter.
+
+dimanche 17 septembre 2006, 14:52:01 (UTC+0200) Dodji Seketeli
+
+	* configure.in:  updated version number to 0.2.0 and soversion to
+	1.0.1.
+
+2006-09-17  Murray Cumming  <murrayc@murrayc.com>
+
+	* gtksourceview/src/sourcelanguage.hg: Added a create() method, 
+	so that instances of this class can be instantiated. Removed the 
+	unnecessary friend statement.
+	* gtksourceview/src/sourcelanguagesmanager.hg: Made the constructor 
+	protected and added a public create() method.
+
+2006-09-17  Murray Cumming  <murrayc@murrayc.com>
+
+	* configure.in: Require autoconf 2.59 instead of 2.60, because 
+	2.59 is more widely available.
+
+	========= released 0.1.0 =============
+
+dimanche 17 septembre 2006, 11:24:22 (UTC+0200) Dodji Seketeli
+
+	* AUTHORS: updated this.
+	* configure.in: changed the name of the project to libgtksourceviewmm
+	  (the former name gtksourceviewmm). This change allows me to start
+	  versioning the projet at version number 0.1.0 which reflects more
+	  the current state of the library. The initial gtksourceviewmm
+	  project I forked from had revision number 1.10.0. As I think that
+	  the library is too young to deserve a revision number > 1.0, I felt
+	  like I had the change the name of the project.
+	  The users just have to change their name configure.ac file and
+	  check for libgtksourceview-1.0.pc file , with version number 0.1.0.
+	  Everything else remains unchanged.
+	* gtksourceview/gtksourceviewmm-1.0.pc.in: renamed this into
+	  libgtksourceviewmm-1.0.pc
+
+
+jeudi 7 septembre 2006, 15:14:05 (UTC+0200) Dodji Seketeli
+
+	* gtksourceview/src/*.hg, *.ccg: update copyrights.
+	* gtksourceview/src/sourcetag.hg: constify getters.
+	* gtksourceview/src/sourcestylescheme.hg: constify getters, and refreturn
+	  SourceStyleScheme::get_default().
+
+
+
+mercredi 6 septembre 2006, 21:09:53 (UTC+0200) Dodji Seketeli
+
+	* gtksourceview/src/sourceview.ccg: forgot a cast.
+
+mercredi 6 septembre 2006, 18:58:39 (UTC+0200) Dodji Seketeli
+
+	* gtksourceview/src/sourceview.ccg: don't init the sourceview with NULL
+	  sourcebuffer.
+
+mercredi 6 septembre 2006, 18:04:42 (UTC+0200) Dodji Seketeli
+
+	* gtksourceview/src/sourcelanguagesmanager.hg,
+	  gtksourceview/src/sourcelanguage.hg,
+	  gtksourceview/src/sourcelanguagesmanager.ccg: add const to getters.
+	* gtksourceview/src/sourceview.ccg: second attempt at fixing #346896 .
+
+mercredi 6 septembre 2006, 15:56:32 (UTC+0200) Dodji Seketeli
+
+	* gtksourceview/src/sourceview.ccg: try to fix a stupid error that caused
+	  bug #346896. Hope this fixes the problem.
+
+mardi 5 septembre 2006, 18:27:52 (UTC+0200) Dodji Seketeli
+
+	* gtksourceview/src/sourcebuffer.hg: add const methods overloads to
+	getters (using the constversion param to reduce code size) and add
+	refreturn where needed. I need to that throughout all the code now.
+
+samedi 26 août 2006, 08:22:37 (UTC+0200) Dodji Seketeli
+
+	* CVS: remove these directories
+	* configure.in, autogen.sh : cleanup
+
+
+jeudi 24 août 2006, 10:51:40 (UTC+0200) Dodji Seketeli
+
+	* README, COPYING: updated these files
+
+mercredi 23 août 2006, 12:21:20 (UTC+0200) Dodji Seketeli
+
+	* autogen.sh: force usage of automake-1.9, otherwise, bad things happen.
+
+2006-08-01  Murray Cumming  <murrayc@murrayc.com>
+
+	* Makefile.in:
+	* aclocal.m4:
+	* gtksourceview/Makefile.in:
+	* gtksourceview/gtksourceviewmm/Makefile.in:
+	* gtksourceview/gtksourceviewmm/private/Makefile.in:
+	* gtksourceview/src/Makefile.in:
+	* scripts/Makefile.in:
+	* scripts/config.guess:
+	* scripts/config.sub:
+	* scripts/depcomp:
+	* scripts/install-sh:
+	* scripts/ltmain.sh:
+	* scripts/missing:
+	* tests/Makefile.in:
+	* tools/Makefile.in:
+	* tools/extra_defs_gen/Makefile.in:
+	* tools/m4/Makefile.in: Removed generated files.
+
+lundi 10 juillet 2006, 00:47:49 (UTC+0200) Dodji Seketeli
+
+	* gtksourceview/gtksourceviewmm/*.(h|cc): remove the generated files.
+
+lundi 10 juillet 2006, 00:33:30 (UTC+0200) Dodji Seketeli
+
+	* tools/m4/convert_gtksourceviewmm.m4: GtkSourceMarker* to
+	    Glib:RefPtr<SourceMarker> conversion increases refcount,
+	    otherwise crashes occur when accessing GtkSourceMarker.
+	* gtksourceview/src/sourceview.ccg: 
+	 (SourceView::get_source_buffer ()): increase refcount of the
+	 source_buffer() to fix refcount related crashes.
+
+samedi 17 juin 2006, 17:16:40 (UTC+0200) Dodji Seketeli <dodji@gnome.org>
+
+	* grksourceview/src/*: Added sourcelanguagesmanager.[hg|ccg]. Various
+	  fixes to make the sourceview widget work for various testcases.
+	* configure.in: put the version number back to 1.0.0 so that we can
+	  expect to keep track with the underlying gtksourceview numbering
+	  scheme.
+
+dimanche 4 juin 2006, 12:34:10 (UTC+0200) Dodji Seketeli <dodji@gnome.org>
+
+	* gtksourceview/src/*: added gtksourceview_signals.defs
+	   sourcestylescheme.ccg, sourcestylescheme.hg, sourcetag.ccg,
+	   sourcetag.hg, sourcetagstyle.ccg, sourcetagstyle.hg,
+	   sourcetagtable.ccg, sourcetagtable.hg.
+	* gtksourceview/src/Makefile.am,Makefile_list_of_hg.am_fragment: changed this to reflect the file
+	  additions.
+	* gtksourceview/src/gtksourceview.defs: reflect the addition of
+	  gtksourceview_signals.defs. This file is not really used at the
+	  moment. I have generated it with tools/extra_defs_gen/generate_extra_defs.
+	  It seems parts of the generated file cannot be properly parsed by
+	  gmmproc, like some strings delimited by '"' which have the very same
+	  '"' as part of their content, or like the property "no-show-all"
+	  that can not be parse for some obscur reasons. Will look more deeply
+	  into that later. All this gmmproc-foo is still a bit dark to me.
+	* gtksourceview/src/sourcelanguage.ccg: wrapped
+	  gtk_source_language_get_id(), gtk_source_language_get_tags(),
+	  and gtk_source_language_set_mime_types().
+	* tools/m4/convert_gtksourceviewmm.m4: updated a couple of conversion
+	  macros.
+
+samedi 3 juin 2006, 09:20:41 (UTC+0200) Dodji Seketeli <dodji@gnome.org>
+
+	* gtksourceview/src/sourcelanguage.hg: wrap the set_mime_types()
+	  method.
+	* tools/m4/convert.m4: include convert_gtkmm.m4 before
+	  convert_gtksourceviewmm.m4 so that the later finds the appropriate
+	  macros definitions.
+	* tools/m4/convert_gtksourceviewmm.m4: add a couple of m4 conversion
+	  macros needed by gtksourceview/src/*.hg to be properly generated.
+
+	This entry makes the tree compile properly compile for me. I haven't
+	tried to run it yet, though.
+
+2006-05-28 - Rob Page <page.rob@gmail.com>
+
+	* Mostly rewritten to use hg and ccg files, but is probably not functional at the moment
+
+2006-04-01 - Rob Page <page.rob@gmail.com>
+
+	* Initial Upload.
+

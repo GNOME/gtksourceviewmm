@@ -1,4 +1,4 @@
-AC_INIT([gtksourceviewmm], [2.3.1],
+AC_INIT([gtksourceviewmm], [2.9.0],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gtksourceviewmm],
         [gtksourceviewmm], [http://projects.gnome.org/gtksourceviewmm/])
 AC_PREREQ([2.62])
@@ -16,7 +16,7 @@ AC_ARG_VAR([ACLOCAL_FLAGS], [aclocal flags, e.g. -I <macro dir>])
 MM_PREREQ([0.8])
 MM_INIT_MODULE([gtksourceviewmm-2.0])
 
-AC_SUBST([GTKSOURCEVIEWMM_SO_VERSION], [2:0:0])
+AC_SUBST([GTKSOURCEVIEWMM_SO_VERSION], [3:0:1])
 
 # AC_DISABLE_STATIC
 # AC_LIBTOOL_WIN32_DLL

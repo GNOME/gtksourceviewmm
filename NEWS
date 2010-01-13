@@ -1,3 +1,19 @@
+2.9.0:
+* Transition to mm-common build infrastructure.
+  (Krzesimir Nowak)
+* Added SourceGutter, SourceCompletionInfo, SourceCompletionProposal,
+  SourceCompletionContext, SourceCompletionItem, SourceMarkup,
+  SourceCompletionProvider, SourcePrintCompositor and SourceCompletion.
+  (Krzesimir Nowak)
+* SourceView: Deprecated set_mark_category_pixbuf() in favor of
+  set_mark_category_icon() methods. Deprecated set_mark_category_pixbuf()
+  method - now it always return empty refptr.
+  (Krzesimir Nowak)
+* SourceIter: Deprecated SearchFlags in favor of SourceSearchFlags.
+  (Krzesimir Nowak)
+* SourceStyle: Added properties.
+  (Krzesimir Nowak)
+
 2.3.1:
 
 * SourceBuffer: Added properties.
@@ -19,7 +35,7 @@ This release wraps gtksourceview 2.0
 * SourceBuffer: Added the source_mark_updated  signal.
 * SourceMark: Constructor: Added the optional name parameter.
 * SourceStyle: Added the copy() method.
-* SourceStyleSchemeManager: Added set_search_path(), reset_search_path, 
+* SourceStyleSchemeManager: Added set_search_path(), reset_search_path,
   get_search_path(), and get_scheme_ids() methods.
 * SourceView: Added properties.
 
@@ -43,51 +59,51 @@ This release wraps gtksourceview 2.0
 1.9.2:
 
 * Removed SourceMarker because GtkSourceMarker was removed from the C API.
-* SourceBuffer: Removed create_marker(), move_marker(), delete_marker(), 
-  get_marker(), get_markers_in_region(), get_first_marker(), 
-  get_last_marker(), get_iter_at_marker(), get_next_marker(), 
-  and get_prev_marker(), because the C functions were removed 
+* SourceBuffer: Removed create_marker(), move_marker(), delete_marker(),
+  get_marker(), get_markers_in_region(), get_first_marker(),
+  get_last_marker(), get_iter_at_marker(), get_next_marker(),
+  and get_prev_marker(), because the C functions were removed
   from the C API.
-* SourceView: Remove set_marker_pixbuf(), get_marker_pixbuf(), 
-  set_show_line_markers(), and get_show_line_markers(), 
+* SourceView: Remove set_marker_pixbuf(), get_marker_pixbuf(),
+  set_show_line_markers(), and get_show_line_markers(),
   because the C functions were removed from the C API.
 
 1.9.1:
 
 Updated to build against the new gtksourceview 2.0 API:
 
-* SourceBuffer: The constructor now 
+* SourceBuffer: The constructor now
   takes a TextTagTable instead of a SourceTagTable.
   Removed set_bracket_match_style().
-* SourceLanguage: Removed get_tags(), 
-  get_escape_char(), set_mime_types(), get_style_scheme(), 
-  set_style_scheme(), get_tag_style(), set_tag_style(), 
+* SourceLanguage: Removed get_tags(),
+  get_escape_char(), set_mime_types(), get_style_scheme(),
+  set_style_scheme(), get_tag_style(), set_tag_style(),
   get_tag_default_style().
   Added get_hidden() and get_style_name().
 * SourceLanguageManager.ccg:
   Renamed SourceLanguagesManager to SourceLanguageManager.
-  Removed get_language_from_mime_type() - there is no replacement 
+  Removed get_language_from_mime_type() - there is no replacement
   yet. Removed get_available_languages(), get_lang_files_dirs().
-  Added get_default(), get_search_path(), get_language_ids(), and 
+  Added get_default(), get_search_path(), get_language_ids(), and
   get_language().
 * SourceStyle: Added this class.
-* SourceStyleScheme: Removed get_tag_style(), 
+* SourceStyleScheme: Removed get_tag_style(),
   get_style_names(), get_default().
-  Added get_id(), get_name(), get_description(), get_authors(), 
+  Added get_id(), get_name(), get_description(), get_authors(),
   get_filename(), get_style().
-* SourceView: Added the 
-  SourceSmartHomeEndType enum, and used it in 
+* SourceView: Added the
+  SourceSmartHomeEndType enum, and used it in
   set_smart_home_end() and get_smart_home_end().
-  Renamed set_tabs_width() to set_tab_width(), and 
+  Renamed set_tabs_width() to set_tab_width(), and
   get_tabs_width() to get_tab_width().
-  Renamed set_show_margin() to set_show_right_margin(), and 
+  Renamed set_show_margin() to set_show_right_margin(), and
   get_show_margin() to get_show_right_margin().
-  Renamed set_margin() to set_right_margin_position(), and 
+  Renamed set_margin() to set_right_margin_position(), and
   get_margin() to get_right_margin_position().
 * Removed SourceTag, SourceTagStyle, SourceTagTable
   Regular Gtk::TextTags should now be used instead.
 
- 
+
 0.3.0
 
     This is a bug fix and feature release that breaks the API a little bit, but that is for the good.

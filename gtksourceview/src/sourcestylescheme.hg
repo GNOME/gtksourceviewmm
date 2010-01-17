@@ -20,9 +20,6 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/// \file
-/// \brief SourceStyleScheme class
-
 #include <glibmm/interface.h>
 #include <gtksourceviewmm/sourcestyle.h>
 #include <gtksourceview/gtksourcestylescheme.h>
@@ -33,7 +30,18 @@ _PINCLUDE(glibmm/private/interface_p.h)
 namespace gtksourceview
 {
 
-/// \brief the styling properties applicable to a SourceLanguage.
+/** Object controlling apperance of SourceView.
+ *
+ * SourceStyleScheme contains all the text styles to be used in SourceView and
+ * SourceBuffer. For instance, it contains text styles for syntax highlighting,
+ * it may contain foreground and background color for non-highlighted text,
+ * color for the line numbers, etc.
+ *
+ * Style schemes are stored in XML files. The format of a scheme file is
+ * the documented in the C library gtksourceview documentation.
+ *
+ * @newin{2,2}
+ */
 class SourceStyleScheme : public Glib::Interface
 {
 
@@ -41,16 +49,69 @@ class SourceStyleScheme : public Glib::Interface
 
 public:
 
+  /** Gets scheme id.
+   *
+   * @return Scheme id.
+   *
+   * @newin{2,2}
+   */
   _WRAP_METHOD(Glib::ustring get_id() const, gtk_source_style_scheme_get_id)
+
+  /** Gets scheme name.
+   *
+   * @return Scheme name.
+   *
+   * @newin{2,2}
+   */
   _WRAP_METHOD(Glib::ustring get_name() const, gtk_source_style_scheme_get_name)
+
+  /** Gets scheme description.
+   *
+   * @return Scheme description.
+   *
+   * @newin{2,2}
+   */
   _WRAP_METHOD(Glib::ustring get_description() const, gtk_source_style_scheme_get_description)
 
 #m4 _CONVERSION(`const gchar**',`Glib::StringArrayHandle',`$2($3)')
+
+  /** Gets scheme authors.
+   *
+   * @return Array with scheme authors.
+   *
+   * @newin{2,2}
+   */
   _WRAP_METHOD(Glib::StringArrayHandle get_authors() const, gtk_source_style_scheme_get_authors)
 
+  /** Gets scheme filename.
+   *
+   * @return Scheme file name if the scheme was created parsing a style scheme
+   * file or empty string in the other cases.
+   *
+   * @newin{2,2}
+   */
   _WRAP_METHOD(std::string get_filename() const, gtk_source_style_scheme_get_filename)
 
+  /** Gets style corresponding to @a style_id in scheme.
+   *
+   * @param style_id Id of the style to retrieve.
+   *
+   * @return Style which corresponds to @a style_id in the scheme,
+   * or empty Glib::RefPtr when no style with this name found.
+   *
+   * @newin{2,2}
+   */
   _WRAP_METHOD(Glib::RefPtr<SourceStyle> get_style(const Glib::ustring& style_id), gtk_source_style_scheme_get_style, refreturn)
+
+  /** Gets style corresponding to @a style_id in scheme.
+   *
+   * @param style_id Id of the style to retrieve.
+   *
+   * @return Style which corresponds to @a style_id in the scheme,
+   * or empty Glib::RefPtr when no style with this name found.
+   *
+   * @newin{2,2}
+   */
   _WRAP_METHOD(Glib::RefPtr<const SourceStyle> get_style(const Glib::ustring& style_id) const, gtk_source_style_scheme_get_style, refreturn, constversion)
 };//end class SourceStyleScheme
 

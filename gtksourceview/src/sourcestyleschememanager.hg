@@ -18,9 +18,6 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/// \file
-/// \brief SourceStyleSchemeManager class
-
 #include <gtksourceviewmm/sourcestylescheme.h>
 #include <gtksourceview/gtksourcestyleschememanager.h>
 
@@ -30,6 +27,8 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace gtksourceview
 {
 
+/** Class providing access to SourceStyleSchemes.
+ */
 class SourceStyleSchemeManager : public Glib::Object
 {
   _CLASS_GOBJECT(SourceStyleSchemeManager, GtkSourceStyleSchemeManager, GTK_SOURCE_STYLE_SCHEME_MANAGER, Glib::Object, GObject)
@@ -38,29 +37,80 @@ protected:
   _CTOR_DEFAULT
 
 public:
+  /** Creates a new style manager.
+   *
+   * If you do not need more than one style manager then use get_default()
+   * instead.
+   *
+   * @return A SourceStyleSchemeManager.
+   */
   _WRAP_CREATE()
 
+  /** Returns the default SourceStyleSchemeManager instance.
+   *
+   * @return A SourceStyleSchemeManager.
+   */
   _WRAP_METHOD(static Glib::RefPtr<SourceStyleSchemeManager> get_default(), gtk_source_style_scheme_manager_get_default, refreturn)
 
+#m4 _CONVERSION(`const gchar**',`Glib::StringArrayHandle',`$2($3)')
+
+  // TODO: define own string array to use std::string, instead of Glib::ustring, when we break API/ABI. krnowak
+  /** Returns the current search path for the manager.
+   *
+   * See set_search_path() for details.
+   *
+   * @return An array of string containing the search path.
+   */
+  _WRAP_METHOD(Glib::StringArrayHandle get_search_path() const, gtk_source_style_scheme_manager_get_search_path)
+
 #m4 _CONVERSION(`const Glib::StringArrayHandle&',`gchar**',`const_cast<gchar**>(($3).data())')
+
+  // TODO: see previous one. Also this is probably buggy, because we need NULL termination in C array and Glib::StringArrayHandle does not provide it - fixing it will break ABI. krnowak
+  /** Sets the list of directories where the manager looks for style scheme
+   *  files.
+   *
+   * @param path An empty string terminated array of strings.
+   */
   _WRAP_METHOD(void set_search_path(const Glib::StringArrayHandle& path), gtk_source_style_scheme_manager_set_search_path)
 
-  /** Set the search path to the default.
+  /** Resets the list of directories where the manager looks for style scheme
+   * files to default.
    */
   void reset_search_path();
 
-#m4 _CONVERSION(`const gchar**',`Glib::StringArrayHandle',`$2($3)')
-  _WRAP_METHOD(Glib::StringArrayHandle get_search_path() const, gtk_source_style_scheme_manager_get_search_path)
-
-
-
   _WRAP_METHOD(void append_search_path(const Glib::ustring& path), gtk_source_style_scheme_manager_append_search_path)
+
   _WRAP_METHOD(void prepend_search_path(const Glib::ustring& path), gtk_source_style_scheme_manager_prepend_search_path)
 
+  /** Looks up style scheme by id.
+   *
+   * @param scheme_id Style scheme id to find.
+   *
+   * @return A SourceStyleScheme object.
+   */
   _WRAP_METHOD(Glib::RefPtr<SourceStyleScheme> get_scheme(const Glib::ustring& scheme_id), gtk_source_style_scheme_manager_get_scheme, refreturn)
+
+  /** Looks up style scheme by id.
+   *
+   * @param scheme_id Style scheme id to find.
+   *
+   * @return A SourceStyleScheme object.
+   */
   _WRAP_METHOD(Glib::RefPtr<const SourceStyleScheme> get_scheme(const Glib::ustring& scheme_id) const, gtk_source_style_scheme_manager_get_scheme, refreturn, constversion)
+
+  /** Mark any currently cached information about the available style schemes
+   *  as invalid.
+   *
+   * All the available style schemes will be reloaded next time the manager is
+   * accessed.
+   */
   _WRAP_METHOD(void force_rescan(), gtk_source_style_scheme_manager_force_rescan)
 
+  /** Returns the ids of the available style schemes.
+   *
+   * @return An array of string containing the ids of the available style
+   * schemes.
+   */
   _WRAP_METHOD(Glib::StringArrayHandle get_scheme_ids() const, gtk_source_style_scheme_manager_get_scheme_ids)
 
 };//end class SourceStyleSchemeManager

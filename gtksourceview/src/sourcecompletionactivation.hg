@@ -21,7 +21,22 @@ _DEFS(gtksourceviewmm,gtksourceview)
 
 namespace gtksourceview
 {
-
+// TODO: need docs.
+/** An enum type specifying something bla bla bla, probably type of activation.
+ *
+ * @newin{2,10}
+ */
 _WRAP_ENUM(SourceCompletionActivation, GtkSourceCompletionActivation)
+ /** @var SourceCompletionActivation SOURCE_COMPLETION_ACTIVATION_NONE
+  * None.
+  */
+ /** @var SourceCompletionActivation SOURCE_COMPLETION_ACTIVATION_INTERACTIVE
+  * Interactive activation.
+  */
+ /** @var SourceCompletionActivation SOURCE_COMPLETION_ACTIVATION_USER_REQUESTED
+  * User requested activation.
+  *
+  * For example through a keyboard accelerator from the view.
+  */
 
 } // namespace gtksourceview

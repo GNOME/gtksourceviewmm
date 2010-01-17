@@ -74,13 +74,13 @@ SourceIter::backward_search (const Glib::ustring &a_str,
 #endif // GTKSOURCEVIEWMM_DISABLE_DEPRECATED
 
 bool
-SourceIter::forward_search (const Glib::ustring &a_str,
-                            SourceSearchFlags a_flags,
-                            Gtk::TextIter &a_match_start,
-                            Gtk::TextIter &a_match_end,
-                            const Gtk::TextIter &a_limit) const
+SourceIter::forward_search (const Glib::ustring &str,
+                            SourceSearchFlags flags,
+                            Gtk::TextIter &match_start,
+                            Gtk::TextIter &match_end,
+                            const Gtk::TextIter &limit) const
 {
-// what is the use of these things? krnowak
+// TODO: what is the use of these things? krnowak
     /*
     const GtkTextIter *gobject (gobj ()) ;
     g_return_val_if_fail (gobject, FALSE) ; // that will never fail, since gobject is always not null.
@@ -100,21 +100,21 @@ SourceIter::forward_search (const Glib::ustring &a_str,
     return res ;
     */
   return gtk_source_iter_forward_search(const_cast<GtkTextIter*>(gobj()),
-                                        a_str.c_str(),
-                                        static_cast<GtkSourceSearchFlags>(a_flags),
-                                        a_match_start.gobj(),
-                                        a_match_end.gobj(),
-                                        a_limit.gobj());
+                                        str.c_str(),
+                                        static_cast<GtkSourceSearchFlags>(flags),
+                                        match_start.gobj(),
+                                        match_end.gobj(),
+                                        limit.gobj());
 }
 
 bool
-SourceIter::backward_search (const Glib::ustring &a_str,
-                              SourceSearchFlags a_flags,
-                              Gtk::TextIter &a_match_start,
-                              Gtk::TextIter &a_match_end,
-                              const Gtk::TextIter &a_limit) const
+SourceIter::backward_search (const Glib::ustring &str,
+                              SourceSearchFlags flags,
+                              Gtk::TextIter &match_start,
+                              Gtk::TextIter &match_end,
+                              const Gtk::TextIter &limit) const
 {
-// what is the use of these things? krnowak
+// TODO: what is the use of these things? krnowak
     /*
     const GtkTextIter *gobject (gobj ()) ;
     g_return_val_if_fail (gobject, FALSE) ; // that will never fail, since gobject is always not null.
@@ -134,39 +134,30 @@ SourceIter::backward_search (const Glib::ustring &a_str,
     return res ;
     */
   return gtk_source_iter_backward_search(const_cast<GtkTextIter*>(gobj()),
-                                        a_str.c_str(),
-                                        static_cast<GtkSourceSearchFlags>(a_flags),
-                                        a_match_start.gobj(),
-                                        a_match_end.gobj(),
-                                        a_limit.gobj());
+    str.c_str(), static_cast<GtkSourceSearchFlags>(flags), match_start.gobj(),
+    match_end.gobj(), limit.gobj());
 }
 
 bool
-SourceIter::forward_search (const Glib::ustring &a_str,
-                            SourceSearchFlags a_flags,
-                            Gtk::TextIter &a_match_start,
-                            Gtk::TextIter &a_match_end) const
+SourceIter::forward_search (const Glib::ustring &str,
+                            SourceSearchFlags flags,
+                            Gtk::TextIter &match_start,
+                            Gtk::TextIter &match_end) const
 {
   return gtk_source_iter_forward_search(const_cast<GtkTextIter*>(gobj()),
-                                        a_str.c_str(),
-                                        static_cast<GtkSourceSearchFlags>(a_flags),
-                                        a_match_start.gobj(),
-                                        a_match_end.gobj(),
-                                        0);
+    str.c_str(), static_cast<GtkSourceSearchFlags>(flags), match_start.gobj(),
+    match_end.gobj(), 0);
 }
 
 bool
-SourceIter::backward_search (const Glib::ustring &a_str,
-                              SourceSearchFlags a_flags,
-                              Gtk::TextIter &a_match_start,
-                              Gtk::TextIter &a_match_end) const
+SourceIter::backward_search (const Glib::ustring &str,
+                              SourceSearchFlags flags,
+                              Gtk::TextIter &match_start,
+                              Gtk::TextIter &match_end) const
 {
   return gtk_source_iter_backward_search(const_cast<GtkTextIter*>(gobj()),
-                                        a_str.c_str(),
-                                        static_cast<GtkSourceSearchFlags>(a_flags),
-                                        a_match_start.gobj(),
-                                        a_match_end.gobj(),
-                                        0);
+    str.c_str(), static_cast<GtkSourceSearchFlags>(flags), match_start.gobj(),
+    match_end.gobj(), 0);
 }
 
 }//end namespace gtksourceview

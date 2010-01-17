@@ -20,9 +20,6 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/// \file
-/// \brief SourceIter class
-
 #include <gtkmm/textiter.h>
 _DEFS(gtksourceviewmm,gtksourceview)
 _CC_INCLUDE(gtksourceview/gtksourceiter.h)
@@ -31,128 +28,221 @@ namespace gtksourceview
 {
 
 #ifndef GTKSOURCEVIEWMM_DISABLE_DEPRECATED
+  /** Flags specifying how search has to be done.
+   *
+   * @deprecated Use SourceSearchFlags.
+   */
   _WRAP_ENUM(SearchFlags, GtkSourceSearchFlags, s#^SOURCE_##)
+  /** @var SearchFlags SEARCH_VISIBLE_ONLY
+   * No whitespaces?
+   */
+  /** @var SearchFlags SEARCH_TEXT_ONLY
+   * Text only?
+   */
+  /** @var SearchFlags SEARCH_CASE_INSENSITIVE
+   * Perform a case insensitive search.
+   */
 #endif // GTKSOURCEVIEWMM_DISABLE_DEPRECATED
+  /** Flags specifying how search has to be done.
+   *
+   * @newin{2,10}
+   */
   _WRAP_ENUM(SourceSearchFlags, GtkSourceSearchFlags)
+  /** @var SourceSearchFlags SOURCE_SEARCH_VISIBLE_ONLY
+   * No whitespaces?
+   */
+  /** @var SourceSearchFlags SOURCE_SEARCH_TEXT_ONLY
+   * Text only?
+   */
+  /** @var SourceSearchFlags SOURCE_SEARCH_CASE_INSENSITIVE
+   * Perform a case insensitive search.
+   */
 
-/// \brief an iterator type for gtksourceview::SourceBuffer.
-///
-/// it provides search features
+/** An iterator type for SourceBuffer.
+ *
+ * Provides search features.
+ */
 class SourceIter : public Gtk::TextIter
 {
-    public:
+public:
 
-        /// \name constructors
-        /// @{
-        SourceIter () ;
-        SourceIter (const Gtk::TextIter &iter) ;
-        SourceIter (const GtkTextIter* gobject) ;
-        SourceIter (const SourceIter &a_iter) ;
-        /// @}
+  /** Default constructor.
+   *
+   * @return New SourceIter.
+   */
+  SourceIter () ;
 
-        ~SourceIter () ;
+  /* Constructs SourceIter from Gtk::TextIter.
+   *
+   * @return New SourceIter.
+   */
+  SourceIter (const Gtk::TextIter &iter) ;
+
+  /* Constructs SourceIter from C GtkTextIter.
+   *
+   * @return New SourceIter.
+   */
+  SourceIter (const GtkTextIter* gobject) ;
+
+  /* Copy constructor.
+   *
+   * @return New SourceIter.
+   */
+  SourceIter (const SourceIter &a_iter) ;
+
+  ~SourceIter () ;
 
 #ifndef GTKSOURCEVIEWMM_DISABLE_DEPRECATED
-        /// \brief search forward in the buffer
-        ///
-        /// \param a_str the string to search for
-        /// \param a_flags search flags, to be combined with the '|' operator
-        /// \param a_match_start out parameter. Points the the beginning
-        ///        of the region that matches the search. This is applicable
-        ///        if and only if the function returns true.
-        /// \param a_match_end out parameter.  Points the the end
-        ///        of the region that matches the search. This is applicable
-        ///        if and only if the function returns true.
-        /// \return true if the search was successful, false otherwise.
-        bool forward_search (const Glib::ustring &a_str,
-                             SearchFlags a_flags,
-                             Gtk::TextIter &a_match_start,
-                             Gtk::TextIter &a_match_end,
-                             const Gtk::TextIter &a_limit) const ;
+  /** Searches forward for @a a_str.
+   *
+   * Any match is returned by setting @a a_match_start to the first character of
+   * the match and @a a_match_end to the first character after the match. The
+   * search will not continue past @a a_limit. Note that a search is a linear or
+   * O(n) operation, so you may wish to use @a a_limit to avoid locking up your
+   * UI on large buffers.
+   *
+   * If the SEARCH_VISIBLE_ONLY flag is present, the match may have invisible
+   * text interspersed in @a a_str. i.e. @a a_str will be a
+   * possibly-noncontiguous subsequence of the matched range. Similarly, if you
+   * specify SEARCH_TEXT_ONLY, the match may have pixbufs or child widgets mixed
+   * inside the matched range. If these flags are not given, the match must be
+   * exact; the special @c 0xFFFC character in @a a_str will match embedded
+   * pixbufs or child widgets. If you specify the SEARCH_CASE_INSENSITIVE flag,
+   * the text will be matched regardless of what case it is in.
+   *
+   * Same as Gtk::TextIter::forward_search(), but supports case insensitive
+   * searching.
+   *
+   * @param a_str A search string.
+   * @param a_flags Flags affecting how the search is done.
+   * @param a_match_start Return location for start of match.
+   * @param a_match_end Return location for end of match.
+   * @param a_limit Bound for the search.
+   *
+   * @return Whether a match was found
+   *
+   * @deprecated Use method using SourceSearchFlags.
+   */
+  bool forward_search (const Glib::ustring &a_str,
+                       SearchFlags a_flags,
+                       Gtk::TextIter &a_match_start,
+                       Gtk::TextIter &a_match_end,
+                       const Gtk::TextIter &a_limit) const ;
 
-        /// \brief search backward in the buffer
-        ///
-        /// \param a_str the string to search for
-        /// \param a_flags search flags, to be combined with the '|' operator
-        /// \param a_match_start out parameter. Points the the beginning
-        ///        of the region that matches the search. This is applicable
-        ///        if and only if the function returns true.
-        /// \param a_match_end out parameter.  Points the the end
-        ///        of the region that matches the search. This is applicable
-        ///         if and only if the function returns true.
-        /// \return true if the search was successful, false otherwise.
-        bool backward_search (const Glib::ustring &a_str,
-                              SearchFlags a_flags,
-                              Gtk::TextIter &a_match_start,
-                              Gtk::TextIter &a_match_end,
-                              const Gtk::TextIter &a_limit) const ;
+  /** Searches backward for @a a_str.
+   *
+   * Same as forward_search(), but backwards.
+   *
+   * @param a_str A search string.
+   * @param a_flags Flags affecting how the search is done.
+   * @param a_match_start Return location for start of match.
+   * @param a_match_end Return location for end of match.
+   * @param a_limit Bound for the search.
+   *
+   * @return Whether a match was found.
+   *
+   * @deprecated Use method using SourceSearchFlags.
+   */
+  bool backward_search (const Glib::ustring &a_str,
+                        SearchFlags a_flags,
+                        Gtk::TextIter &a_match_start,
+                        Gtk::TextIter &a_match_end,
+                        const Gtk::TextIter &a_limit) const ;
 #endif // GTKSOURCEVIEWMM_DISABLE_DEPRECATED
 
-        /// \brief search forward in the buffer
-        ///
-        /// \param a_str the string to search for
-        /// \param a_flags search flags, to be combined with the '|' operator
-        /// \param a_match_start out parameter. Points the the beginning
-        ///        of the region that matches the search. This is applicable
-        ///        if and only if the function returns true.
-        /// \param a_match_end out parameter.  Points the the end
-        ///        of the region that matches the search. This is applicable
-        ///        if and only if the function returns true.
-        /// \return true if the search was successful, false otherwise.
-        bool forward_search (const Glib::ustring &a_str,
-                             SourceSearchFlags a_flags,
-                             Gtk::TextIter &a_match_start,
-                             Gtk::TextIter &a_match_end,
-                             const Gtk::TextIter &a_limit) const ;
+  /** Searches forward for @a str.
+   *
+   * Any match is returned by setting @a match_start to the first character of
+   * the match and @a match_end to the first character after the match. The
+   * search will not continue past @a limit. Note that a search is a linear or
+   * O(n) operation, so you may wish to use @a limit to avoid locking up your
+   * UI on large buffers.
+   *
+   * If the SEARCH_VISIBLE_ONLY flag is present, the match may have invisible
+   * text interspersed in @a str. i.e. @a str will be a
+   * possibly-noncontiguous subsequence of the matched range. Similarly, if you
+   * specify SEARCH_TEXT_ONLY, the match may have pixbufs or child widgets mixed
+   * inside the matched range. If these flags are not given, the match must be
+   * exact; the special @c 0xFFFC character in @a str will match embedded
+   * pixbufs or child widgets. If you specify the SEARCH_CASE_INSENSITIVE flag,
+   * the text will be matched regardless of what case it is in.
+   *
+   * Same as Gtk::TextIter::forward_search(), but supports case insensitive
+   * searching.
+   *
+   * @param str A search string.
+   * @param flags Flags affecting how the search is done.
+   * @param match_start Return location for start of match.
+   * @param match_end Return location for end of match.
+   * @param limit Bound for the search.
+   *
+   * @return Whether a match was found
+   *
+   * @newin{2,10}
+   */
+  bool forward_search (const Glib::ustring& str,
+                       SourceSearchFlags flags,
+                       Gtk::TextIter& match_start,
+                       Gtk::TextIter& match_end,
+                       const Gtk::TextIter& limit) const ;
 
-        /// \brief same as forward_search(), but searchs to the end.
-        ///
-        /// \param a_str the string to search for
-        /// \param a_flags search flags, to be combined with the '|' operator
-        /// \param a_match_start out parameter. Points the the beginning
-        ///        of the region that matches the search. This is applicable
-        ///        if and only if the function returns true.
-        /// \param a_match_end out parameter.  Points the the end
-        ///        of the region that matches the search. This is applicable
-        ///        if and only if the function returns true.
-        /// \return true if the search was successful, false otherwise.
-        bool forward_search (const Glib::ustring &a_str,
-                             SourceSearchFlags a_flags,
-                             Gtk::TextIter &a_match_start,
-                             Gtk::TextIter &a_match_end) const ;
+  /** Searches forward for @a str.
+   *
+   * Same as forward_search(), but searches to the
+   * end.
+   *
+   * @param str A search string.
+   * @param flags Flags affecting how the search is done.
+   * @param match_start Return location for start of match.
+   * @param match_end Return location for end of match.
+   *
+   * @return Whether a match was found.
+   *
+   * @newin{2,10}
+   */
+  bool forward_search (const Glib::ustring& str,
+                       SourceSearchFlags flags,
+                       Gtk::TextIter& match_start,
+                       Gtk::TextIter& match_end) const ;
 
-        /// \brief search backward in the buffer
-        ///
-        /// \param a_str the string to search for
-        /// \param a_flags search flags, to be combined with the '|' operator
-        /// \param a_match_start out parameter. Points the the beginning
-        ///        of the region that matches the search. This is applicable
-        ///        if and only if the function returns true.
-        /// \param a_match_end out parameter.  Points the the end
-        ///        of the region that matches the search. This is applicable
-        ///         if and only if the function returns true.
-        /// \return true if the search was successful, false otherwise.
-        bool backward_search (const Glib::ustring &a_str,
-                              SourceSearchFlags a_flags,
-                              Gtk::TextIter &a_match_start,
-                              Gtk::TextIter &a_match_end,
-                              const Gtk::TextIter &a_limit) const ;
+  /** Searches backward for @a str.
+   *
+   * Same as Same as forward_search(), but backwards.
+   *
+   * @param str A search string.
+   * @param flags Flags affecting how the search is done.
+   * @param match_start Return location for start of match.
+   * @param match_end Return location for end of match.
+   * @param limit Bound for the search.
+   *
+   * @return Whether a match was found.
+   *
+   * @newin{2,10}
+   */
+  bool backward_search (const Glib::ustring& str,
+                        SourceSearchFlags flags,
+                        Gtk::TextIter& match_start,
+                        Gtk::TextIter& match_end,
+                        const Gtk::TextIter& limit) const ;
 
-        /// \brief same as backward_search(), but searchs to the start.
-        ///
-        /// \param a_str the string to search for
-        /// \param a_flags search flags, to be combined with the '|' operator
-        /// \param a_match_start out parameter. Points the the beginning
-        ///        of the region that matches the search. This is applicable
-        ///        if and only if the function returns true.
-        /// \param a_match_end out parameter.  Points the the end
-        ///        of the region that matches the search. This is applicable
-        ///         if and only if the function returns true.
-        /// \return true if the search was successful, false otherwise.
-        bool backward_search (const Glib::ustring &a_str,
-                              SourceSearchFlags a_flags,
-                              Gtk::TextIter &a_match_start,
-                              Gtk::TextIter &a_match_end) const ;
+  /** Searches backward for @a str.
+   *
+   * Same as backward_search(), but searches to the
+   * start.
+   *
+   * @param str A search string.
+   * @param flags Flags affecting how the search is done.
+   * @param match_start Return location for start of match.
+   * @param match_end Return location for end of match.
+   *
+   * @return Whether a match was found.
+   *
+   * @newin{2,10}
+   */
+  bool backward_search (const Glib::ustring& str,
+                        SourceSearchFlags flags,
+                        Gtk::TextIter& match_start,
+                        Gtk::TextIter& match_end) const ;
 
 };//end class SourceIter
 

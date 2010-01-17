@@ -28,6 +28,10 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace gtksourceview
 {
 
+/** Compose a SourceBuffer for printing.
+ *
+ * @newin{2,10}
+ */
 class SourcePrintCompositor : public Glib::Object
 {
   _CLASS_GOBJECT(SourcePrintCompositor, GtkSourcePrintCompositor, GTK_SOURCE_PRINT_COMPOSITOR, Glib::Object, GObject)
@@ -36,63 +40,569 @@ protected:
   _WRAP_CTOR(SourcePrintCompositor(const Glib::RefPtr<SourceBuffer>& buffer), gtk_source_print_compositor_new)
   explicit SourcePrintCompositor(const SourceView& view);
 public:
+  /** Creates a new print compositor that can be used to print @a buffer.
+   *
+   * @param buffer the SourceBuffer to print.
+   *
+   * @return a new print compositor object.
+   *
+   * @newin{2,10}
+   */
   _WRAP_CREATE(const Glib::RefPtr<SourceBuffer>& buffer)
+
+  /** Creates a new print compositor that can be used to print the buffer
+   *  associated with @a view.
+   *
+   * This constructor sets some configuration properties to make the
+   * printed output match @a view as much as possible.  The properties set are
+   * SourcePrintCompositor::property_tab_width(),
+   * SourcePrintCompositor::property_highlight_syntax(),
+   * SourcePrintCompositor::property_wrap_mode(),
+   * SourcePrintCompositor::property_body_font_name() and
+   * SourcePrintCompositor::property_print_line_numbers().
+   *
+   * @param view A SourceView to get configuration from.
+   *
+   * Return value: a new print compositor object.
+   *
+   * @newin{2,10}
+   */
   _WRAP_CREATE(const SourceView& view)
 
+  /** Gets the SourceBuffer associated with the compositor.
+   *
+   * @return The SourceBuffer associated with the compositor.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(Glib::RefPtr<SourceBuffer> get_buffer(), gtk_source_print_compositor_get_buffer, refreturn)
+
+  /** Gets the SourceBuffer associated with the compositor.
+   *
+   * @return The SourceBuffer associated with the compositor.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(Glib::RefPtr<const SourceBuffer> get_buffer() const, gtk_source_print_compositor_get_buffer, refreturn, constversion)
 
+  /** Sets the width of tabulation in characters for printed text.
+   *
+   * This function cannot be called anymore after the first call to the
+   * paginate() function.
+   *
+   * @param width Width of tab in characters.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void set_tab_width(guint width), gtk_source_print_compositor_set_tab_width)
+
+  /** Returns the width of tabulation in characters for printed text.
+   *
+   * @return Width of tab.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(guint get_tab_width() const, gtk_source_print_compositor_get_tab_width)
 
+  /** Sets the line wrapping mode for the printed text.
+   *
+   * This function cannot be called anymore after the first call to the
+   * paginate() function.
+   *
+   * @param wrap_mode A Gtk::WrapMode.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void set_wrap_mode(Gtk::WrapMode wrap_mode), gtk_source_print_compositor_set_wrap_mode)
+
+  /** Gets the line wrapping mode for the printed text.
+   *
+   * @return The line wrap mode.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(Gtk::WrapMode get_wrap_mode() const, gtk_source_print_compositor_get_wrap_mode)
 
-  _WRAP_METHOD(void set_highlight_syntax(bool highlight), gtk_source_print_compositor_set_highlight_syntax)
+  /** Sets whether the printed text will be highlighted according to the
+   *  buffer rules.
+   *
+   * Both color and font style are applied. This function cannot be called
+   * anymore after the first call to the paginate() function.
+   *
+   * @param highlight Whether syntax should be highlighted.
+   *
+   * @newin{2,10}
+   */
+  _WRAP_METHOD(void set_highlight_syntax(bool highlight = true), gtk_source_print_compositor_set_highlight_syntax)
+
+  /** Determines whether the printed text will be highlighted according to the
+   *  buffer rules.
+   *
+   * Note that highlighting will happen only if the buffer to print has
+   * highlighting activated.
+   *
+   * @return @c true if the printed output will be highlighted.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(bool get_highlight_syntax() const, gtk_source_print_compositor_get_highlight_syntax)
 
-  _WRAP_METHOD(void set_print_line_numbers(guint interval), gtk_source_print_compositor_set_print_line_numbers)
+  /** Sets the interval for printed line numbers.
+   *
+   * If @a interval is 0 no numbers will be printed.  If greater than 0,
+   * a number will be printed every @a interval lines (i.e. 1 will print all
+   * line numbers).
+   *
+   * Maximum accepted value for @a interval is 100.
+   *
+   * This function cannot be called anymore after the first call to the
+   * paginate() function.
+   *
+   * @param interval Interval for printed line numbers.
+   *
+   * @newin{2,10}
+   */
+  _WRAP_METHOD(void set_print_line_numbers(guint interval = 1), gtk_source_print_compositor_set_print_line_numbers)
+
+  /** Returns the interval used for line number printing.
+   *
+   * If the value is 0, no line numbers will be printed. The default value is
+   * 1 (i.e. numbers printed in all lines).
+   *
+   * @return The interval of printed line numbers.
+   *
+   * @newin{2,10}
+   **/
   _WRAP_METHOD(guint get_print_line_numbers() const, gtk_source_print_compositor_get_print_line_numbers)
 
+  /** Sets the default font for the printed text.
+   *
+   * @a font_name should be a string representation of a font description Pango
+   * can understand. (e.g. "Monospace 10").
+   * See Pango::FontDescription() for a description of the format
+   * of the string representation.
+   *
+   * This function cannot be called anymore after the first call to the
+   * paginate() function.
+   *
+   * @param font_name The name of the default font for the body text.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void set_body_font_name(const Glib::ustring& font_name), gtk_source_print_compositor_set_body_font_name)
+
+  /** Returns the name of the font used to print the text body.
+   *
+   * @return A string containing the name of the font used to print the text
+   * body.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(Glib::ustring get_body_font_name() const, gtk_source_print_compositor_get_body_font_name)
 
+  /** Sets the font for printing line numbers on the left margin.
+   *
+   * @a font_name should be a string representation of a font description Pango
+   * can understand (e.g. "Monospace 10"). See
+   * Pango::FontDescription() for a description of the format of
+   * the string representation.
+   *
+   * This function cannot be called anymore after the first call to the
+   * paginate() function.
+   *
+   * @param font_name The name of the font for line numbers.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void set_line_numbers_font_name(const Glib::ustring& font_name), gtk_source_print_compositor_set_line_numbers_font_name)
+
+  // TODO: set_default_line_numbers_font_name() or set_line_numbers_font_name()? krnowak
+  /** Sets the default font for printing line numbers on the left margin.
+   *
+   * The font to be used will be the same used as used for the text.
+   *
+   * This function cannot be called anymore after the first call to the
+   * paginate() function.
+   *
+   * @newin{2,10}
+   */
+  void set_default_line_numbers_font_name();
+
+  /** Returns the name of the font used to print line numbers on the left
+   *  margin.
+   *
+   * @return A string containing the name of the font used to print line numbers
+   * on the left margin.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(Glib::ustring get_line_numbers_font_name() const, gtk_source_print_compositor_get_line_numbers_font_name)
 
+  /** Sets the font for printing the page header.
+   *
+   * @a font_name should be a string representation of a font description Pango
+   * can understand (e.g. "Monospace 10"). See
+   * Pango::FontDescription() for a description of the format of
+   * the string representation.
+   *
+   * This function cannot be called anymore after the first call to the
+   * paginate() function.
+   *
+   * @param font_name The name of the font for the page header.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void set_header_font_name(const Glib::ustring& font_name), gtk_source_print_compositor_set_header_font_name)
+
+  // TODO: set_default_header_font_name() or set_header_font_name()? krnowak
+  /** Sets the default font for printing the page header.
+   *
+   * The font to be used will be the same used as used for the text.
+   *
+   * This function cannot be called anymore after the first call to the
+   * paginate() function.
+   *
+   * @newin{2,10}
+   */
+  void set_default_header_font_name();
+
+  /** Returns the name of the font used to print the page header.
+   *
+   * @return A string containing the name of the font used to print the page
+   * header.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(Glib::ustring get_header_font_name() const, gtk_source_print_compositor_get_header_font_name)
 
+  /** Sets the font for printing the page footer.
+   *
+   * @a font_name should be a string representation of a font description Pango
+   * can understand (e.g. "Monospace 10"). See
+   * Pango::FontDescription() for a description of the format of
+   * the string representation.
+   *
+   * This function cannot be called anymore after the first call to the
+   * paginate() function.
+   *
+   * @param font_name The name of the font for the page footer.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void set_footer_font_name(const Glib::ustring& font_name), gtk_source_print_compositor_set_footer_font_name)
+
+  // TODO: set_default_footer_font_name() or set_footer_font_name()? krnowak
+  /** Sets the default font for printing the page footer.
+   *
+   * The font to be used will be the same used as used for the text.
+   *
+   * This function cannot be called anymore after the first call to the
+   * paginate() function.
+   *
+   * @newin{2,10}
+   */
+  void set_default_footer_font_name();
+
+  /** Returns the name of the font used to print the page footer.
+   *
+   * @return A string containing the name of the font used to print the page
+   * footer.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(Glib::ustring get_footer_font_name() const, gtk_source_print_compositor_get_footer_font_name)
 
 #m4 _CONV_ENUM(Gtk,Unit)
+  /** Sets the top margin used by @a compositor.
+   *
+   * @param margin The new top margin in units of @a unit.
+   * @param unit The units for @a margin.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void set_top_margin(double margin, Gtk::Unit unit), gtk_source_print_compositor_set_top_margin)
+
+  /** Gets the top margin in units of @a unit.
+   *
+   * @param unit The unit for the return value.
+   * @return The top margin.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(double get_top_margin(Gtk::Unit unit) const, gtk_source_print_compositor_get_top_margin)
 
+  /** Sets the bottom margin used by @a compositor.
+   *
+   * @param margin The new bottom margin in units of @a unit.
+   * @param unit The units for @a margin.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void set_bottom_margin(double margin, Gtk::Unit unit), gtk_source_print_compositor_set_bottom_margin)
+
+  /** Gets the bottom margin in units of @a unit.
+   *
+   * @param unit The unit for the return value.
+   * @return The top margin.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(double get_bottom_margin(Gtk::Unit unit) const, gtk_source_print_compositor_get_bottom_margin)
 
+  /** Sets the left margin used by @a compositor.
+   *
+   * @param margin The new bottom margin in units of @a unit.
+   * @param unit The units for @a margin.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void set_left_margin(double margin, Gtk::Unit unit), gtk_source_print_compositor_set_left_margin)
+
+  /** Gets the left margin in units of @a unit.
+   *
+   * @param unit The unit for the return value.
+   * @return The top margin.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(double get_left_margin(Gtk::Unit unit) const, gtk_source_print_compositor_get_left_margin)
 
+  /** Sets the right margin used by @a compositor.
+   *
+   * @param margin The new bottom margin in units of @a unit.
+   * @param unit The units for @a margin.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void set_right_margin(double margin, Gtk::Unit unit), gtk_source_print_compositor_set_right_margin)
+
+  /** Gets the right margin in units of @a unit.
+   *
+   * @param unit The unit for the return value.
+   * @return The top margin.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(double get_right_margin(Gtk::Unit unit) const, gtk_source_print_compositor_get_right_margin)
 
-  _WRAP_METHOD(void set_print_header(bool print), gtk_source_print_compositor_set_print_header)
+  /** Sets whether you want to print a header in each page.
+   *
+   * The header consists of three pieces of text and an optional line separator,
+   * configurable with set_header_format().
+   *
+   * Note that by default the header format is unspecified, and if it's
+   * empty it will not be printed, regardless of this setting.
+   *
+   * This function cannot be called anymore after the first call to the
+   * paginate() function.
+   *
+   * @param print @c true if you want the header to be printed.
+   *
+   * @newin{2,10}
+   */
+  _WRAP_METHOD(void set_print_header(bool print = true), gtk_source_print_compositor_set_print_header)
+
+  /** Determines if a header is set to be printed for each page.
+   *
+   * A header will be printed if this function returns @c true @e and some
+   * format strings have been specified with set_header_format().
+   *
+   * @return @c true if the header is set to be printed.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(bool get_print_header() const, gtk_source_print_compositor_get_print_header)
 
-  _WRAP_METHOD(void set_print_footer(bool print), gtk_source_print_compositor_set_print_footer)
+  /** Sets whether you want to print a footer in each page.
+   *
+   * The footer consists of three pieces of text and an optional line separator,
+   * configurable with set_header_format().
+   *
+   * Note that by default the footer format is unspecified, and if it's
+   * empty it will not be printed, regardless of this setting.
+   *
+   * This function cannot be called anymore after the first call to the
+   * paginate() function.
+   *
+   * @param print @c true if you want the footer to be printed.
+   *
+   * @newin{2,10}
+   */
+  _WRAP_METHOD(void set_print_footer(bool print = true), gtk_source_print_compositor_set_print_footer)
+
+  /** Determines if a footer is set to be printed for each page.
+   *
+   * A footer will be printed if this function returns @c true @e and some
+   * format strings have been specified with set_footer_format().
+   *
+   * @return @c true if the header is set to be printed.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(bool get_print_footer() const, gtk_source_print_compositor_get_print_footer)
 
-  _WRAP_METHOD_DOCS_ONLY(gtk_source_print_compositor_set_header_format)
+  _IGNORE(gtk_source_print_compositor_set_header_format)
+  /** Sets strftime like header format strings, to be printed on the
+   *  left, center and right of the top of each page.
+   *
+   * The strings may include strftime(3) codes which will be expanded at print
+   * time. All strftime(3) codes are accepted, with the addition of %N for the
+   * page number and %Q for the page count.
+   *
+   * @a separator specifies if a solid line should be drawn to separate
+   * the header from the document text.
+   *
+   * If empty string is given for any of the three arguments, that particular
+   * string will not be printed.
+   *
+   * For the header to be printed, in addition to specifying format strings, you
+   * need to enable header printing with set_print_header().
+   *
+   * This function cannot be called anymore after the first call to the
+   * paginate() function.
+   *
+   * @param separator @c true if you want a separator line to be printed.
+   * @param left A format string to print on the left of the header.
+   * @param center A format string to print on the center of the header.
+   * @param right A format string to print on the right of the header.
+   *
+   * @newin{2,10}
+   */
   void set_header_format(bool separator, const Glib::ustring& left, const Glib::ustring& center, const Glib::ustring& right);
-  _WRAP_METHOD_DOCS_ONLY(gtk_source_print_compositor_set_footer_format)
+  _IGNORE(gtk_source_print_compositor_set_footer_format)
+  /** Sets strftime like footer format strings, to be printed on the
+   *  left, center and right of the top of each page.
+   *
+   * The strings may include strftime(3) codes which will be expanded at print
+   * time. All strftime(3) codes are accepted, with the addition of %N for the
+   * page number and %Q for the page count.
+   *
+   * @a separator specifies if a solid line should be drawn to separate
+   * the footer from the document text.
+   *
+   * If empty string is given for any of the three arguments, that particular
+   * string will not be printed.
+   *
+   * For the footer to be printed, in addition to specifying format strings, you
+   * need to enable footer printing with set_print_footer().
+   *
+   * This function cannot be called anymore after the first call to the
+   * paginate() function.
+   *
+   * @param separator @c true if you want a separator line to be printed.
+   * @param left A format string to print on the left of the footer.
+   * @param center A format string to print on the center of the footer.
+   * @param right A format string to print on the right of the footer.
+   *
+   * @newin{2,10}
+   */
   void set_footer_format(bool separator, const Glib::ustring& left, const Glib::ustring& center, const Glib::ustring& right);
 
+  /** Returns the number of pages in the document or @c -1 if the
+   *  document has not been completely paginated.
+   *
+   * @return The number of pages in the document or @c -1 if the document has
+   * not been completely paginated.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(int get_n_pages() const, gtk_source_print_compositor_get_n_pages)
+
+  /** Paginate the document associated with the @a compositor.
+   *
+   * In order to support non-blocking pagination, document is paginated in small
+   * chunks. Each time paginate() is invoked, a chunk of the document is
+   * paginated. To paginate the entire document, paginate() must be invoked
+   * multiple times. It returns @c true if the document has been completely
+   * paginated, otherwise it returns @c false.
+   *
+   * This method has been designed to be invoked in the handler of the
+   * Gtk::PrintOperation::paginate signal, as shown in the following example:
+   *
+   * @code
+   * // Signal handler for the GtkPrintOperation::paginate signal.
+   * // Extended with sigc::bind().
+   *
+   * static bool
+   * paginate (Glib::RefPtr<Gtk::PrintOperation> operation,
+   *           Glib::RefPtr<Gtk::PrintContext> context,
+   *           Glib::RefPtr<gtksourceview::SourcePrintCompositor> compositor)
+   * {
+   *   if (compositor->paginate(context))
+   *   {
+   *     int n_pages = compositor->get_n_pages();
+   *     operation->set_n_pages(n_pages);
+   *
+   *     return true;
+   *   }
+   *
+   *   return false;
+   * }
+   * @endcode
+   *
+   * If you don't need to do pagination in chunks, you can simply do it all in
+   * the Gtk::PrintOperation::begin-print handler, and set the number of pages
+   * from there, like in the following example:
+   *
+   * @code
+   * // Signal handler for the Gtk::PrintOperation::begin-print signal
+   * // Extended with sigc::bind().
+   *
+   * static void
+   * begin_print (Glib::RefPtr< Gtk::PrintOperation > operation,
+   *              Glib::RefPtr< Gtk::PrintContext > context,
+   *              Glib::RefPtr< gtksourceview::SourcePrintCompositor > compositor)
+   * {
+   *   while (!compositor->paginate(context));
+   *
+   *   int n_pages = compositor->get_n_pages();
+   *   operation->set_n_pages(n_pages);
+   * }
+   * @endcode
+   *
+   * @param context The Gtk::PrintContext whose parameters (e.g. paper size,
+   * print margins, etc.) are used by the the compositor to paginate the
+   * document.
+   *
+   * @return @c true if the document has been completely paginated, @c false
+   * otherwise.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(bool paginate(const Glib::RefPtr<Gtk::PrintContext>& context), gtk_source_print_compositor_paginate)
+
+  /** Return value: a fraction from 0.0 to 1.0 inclusive
+   * @return A fraction from 0.0 to 1.0 inclusive
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(double get_pagination_process(), gtk_source_print_compositor_get_pagination_progress)
+
+  /** Draw page @a page_nr for printing on the the Cairo context encapsuled in @a context.
+   *
+   * This method has been designed to be called in the handler of the Gtk::PrintOperation::draw_page signal
+   * as shown in the following example:
+   *
+   * @code
+   * // Signal handler for the Gtk::PrintOperation::draw_page signal.
+   * // Extended with sigc::bind().
+   *
+   * static void
+   * draw_page (Glib::RefPtr< Gtk::PrintOperation > operation,
+   *            Glib::RefPtr< GtkPrintContext > context,
+   *            int page_nr,
+   *            Glib::RefPtr< gtksourceview::SourcePrintCompositor > compositor)
+   * {
+   *   compositor->draw_page(context, page_nr);
+   * }
+   * @endcode
+   *
+   * @param context The Gtk::PrintContext encapsulating the context information
+   * that is required when drawing the page for printing.
+   * @param page_nr The number of the page to print.
+   *
+   * newin{2,10}
+   */
   _WRAP_METHOD(void draw_page(const Glib::RefPtr<Gtk::PrintContext>& context, int page_nr), gtk_source_print_compositor_draw_page)
 
 

@@ -20,9 +20,6 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/// \file
-/// \brief SourceView class
-
 #include <gtkmm/textview.h>
 #include <gtksourceviewmm/sourcebuffer.h>
 #include <gtksourceviewmm/sourcegutter.h>
@@ -37,314 +34,535 @@ namespace gtksourceview
 class SourceGutter;
 class SourceCompletion;
 
+/** Defines a behaviour of smart Home/End keys.
+ */
 _WRAP_ENUM(SourceSmartHomeEndType, GtkSourceSmartHomeEndType)
-_WRAP_ENUM(SourceDrawSpacesFlags, GtkSourceDrawSpacesFlags)
+/** @var SourceSmartHomeEndType SOURCE_SMART_HOME_END_DISABLED
+ * Smart-home-end disabled.
+ */
+/** @var SourceSmartHomeEndType SOURCE_SMART_HOME_END_BEFORE
+ * Move to the first/last non-whitespace character on the first press of the
+ * HOME/END keys and to the beginning/end of the line on the second press.
+ */
+/** @var SourceSmartHomeEndType SOURCE_SMART_HOME_END_AFTER
+ * Move to the beginning/end of the line on the first press of the HOME/END keys
+ * and to the first/last non-whitespace character on the second press.
+ */
+/** @var SourceSmartHomeEndType SOURCE_SMART_HOME_END_ALWAYS
+ * Always move to the first/last non-whitespace character when the HOME/END keys
+ * are pressed.
+ */
 
-/// \brief Multi-line source editing widget.
-///
-/// It displays a Gtk::SourceBuffer.
+/** Determines what kind of whitespaces whould be drawn.
+ */
+_WRAP_ENUM(SourceDrawSpacesFlags, GtkSourceDrawSpacesFlags)
+/** @var SourceDrawSpacesFlags SOURCE_DRAW_SPACES_SPACE
+ * Whether the space character should be drawn.
+ */
+/** @var SourceDrawSpacesFlags SOURCE_DRAW_SPACES_TAB
+ * Whether the tab character should be drawn.
+ */
+/** @var SourceDrawSpacesFlags SOURCE_DRAW_SPACES_NEWLINE
+ * Whether the line breaks should be drawn.
+ */
+/** @var SourceDrawSpacesFlags SOURCE_DRAW_SPACES_NBSP
+ * Whether the non-breaking whitespaces should be drawn.
+ */
+/** @var SourceDrawSpacesFlags SOURCE_DRAW_SPACES_ALL
+ * Wheter all kind of whitespaces should be drawn.
+ */
+
+/** The view object.
+ *
+ * SourceView is the main object of the gtksourceviewmm library. It provides
+ * a text view which has syntax highlighting, undo/redo and text marks. Use a
+ * SourceBuffer to display text with a GtkSourceView.
+ */
 class SourceView : public Gtk::TextView
 {
   _CLASS_GTKOBJECT(SourceView, GtkSourceView, GTK_SOURCE_VIEW, Gtk::TextView, GtkTextView)
 
 public:
-  //_CTOR_DEFAULT(gtk_source_view_new_val) ;
-  //_WRAP_CTOR (SourceView (const Glib::RefPtr<SourceBuffer> &buffer), gtk_source_view_new_with_buffer)
+  /// Position of a builtin line number renderer in gutter.
+  static const int gutter_position_lines = -30;
+  /// Position of a builtin marks renderer in gutter.
+  static const int gutter_position_marks = -20;
 
-  /// \brief default constructor
+  /** Creates a new SourceView.
+   *
+   * An empty default buffer will be created for you. If you want to specify
+   * your own buffer, consider the other constructor.
+   *
+   * @return A new SourceView.
+   */
   explicit SourceView () ;
 
-  /// \brief constructor.
-  ///
-  /// create an instance of SourceView displaying a given buffer
-  /// \param buffer the buffer to display in the SourceView
+  /** Creates a new SourceView widget displaying the buffer @a buffer.
+   *
+   * One buffer can be shared among many widgets.
+   *
+   * @param buffer A SourceBuffer.
+   *
+   * @return: A new SourceView.
+   **/
   explicit SourceView (const Glib::RefPtr<SourceBuffer> &buffer) ;
 
 // TODO: remove these when breaking API/ABI? SourceView is derived from GtkObject, so it does not need to be accessed by Glib::RefPtr. krnowak
   _WRAP_CREATE()
   _WRAP_CREATE(const Glib::RefPtr<SourceBuffer> &buffer)
 
-  /// \brief get the source buffer associated to the current instance
-  ///
-  /// \return the source buffer associated to the current instance
+  /** Returns the GtkTextBuffer being displayed by this text view.
+   *
+   * @return A SourceBuffer.
+   */
   Glib::RefPtr<const SourceBuffer> get_source_buffer () const ;
 
-  /// \brief get the source buffer associated to the current instance
-  ///
-  /// \return the source buffer associated to the current instance
+  /** Returns the GtkTextBuffer being displayed by this text view.
+   *
+   * @return A SourceBuffer.
+   */
   Glib::RefPtr<SourceBuffer> get_source_buffer () ;
 
-  /// \brief set the source buffer to be displayed by the SourceView
-  ///
-  /// \param source_buffer the source buffer to set
+  /** Sets a source_buffer as the buffer being displayed by source view.
+   *
+   * The previous buffer displayed by the text view is unreferenced, and a
+   * reference is added to buffer.
+   *
+   * @param source_buffer A SourceBuffer.
+   */
   void set_source_buffer (const Glib::RefPtr<SourceBuffer> &source_buffer) ;
 
-  /// \brief display line numbers beside the text, or not
-  ///
-  /// \param show if true, line numbers will be displayed beside test text.
   _WRAP_METHOD(void set_show_line_numbers(bool show=true), gtk_source_view_set_show_line_numbers)
 
-  /// \brief test whether line numbers are displayed beside the text
-  ///
-  /// \return true if line numbers are displayed beside the text, false otherwise
+  /** Returns whether line numbers are displayed beside the text.
+   *
+   * @return @c true if the line numbers are displayed.
+   */
   _WRAP_METHOD(bool get_show_line_numbers() const, gtk_source_view_get_show_line_numbers)
 
-  /// \brief set tabs width
-  ///
-  /// \param width the new tab width
   _WRAP_METHOD(void set_tab_width(guint width), gtk_source_view_set_tab_width)
 
-  /// \brief get tab width
-  ///
-  /// \return the tab width
+  /** Returns the width of tabulation in characters.
+   *
+   * @return Width of tab.
+   */
   _WRAP_METHOD(guint get_tab_width() const, gtk_source_view_get_tab_width)
 
-  /// \brief set automatic text indention or not
-  ///
-  /// \param enable if true, automatic text indentation is activated
   _WRAP_METHOD(void set_auto_indent(bool enable=true), gtk_source_view_set_auto_indent)
 
-  /// \brief test whether automatic text indentation is activated
-  ///
-  /// \return true if automatic text indentation is activated, false otherwise
+  /** Returns whether auto indentation of text is enabled.
+   *
+   * @return @c true if auto indentation is enabled.
+   */
   _WRAP_METHOD(bool get_auto_indent() const, gtk_source_view_get_auto_indent)
 
-  /// \brief activate (or de-activate) the replacement of any inserted tabulator character by a group of space character
-  ///
-  /// \param enable if true, any tabulator character inserted is replaced by a group of space character
   _WRAP_METHOD(void set_insert_spaces_instead_of_tabs(bool enable=true), gtk_source_view_set_insert_spaces_instead_of_tabs)
 
-  /// \brief test whether the replacement of any inserted tabulator character by a group of space character is activated
-  ///
-  /// \return true if the replacement of any inserted tabulator character by a group of space character is activated, false otherwise
+  /** Returns whether when inserting a tabulator character it should
+   *  be replaced by a group of space characters.
+   *
+   * @return @c true if spaces are inserted instead of tabs.
+   */
   _WRAP_METHOD(bool get_insert_spaces_instead_of_tabs() const, gtk_source_view_get_insert_spaces_instead_of_tabs)
 
-  /// \brief activate (or de-activate) the display of a margin
-  ///
-  /// \param show if true, activate the display of a margin
   _WRAP_METHOD(void set_show_right_margin(bool show = true), gtk_source_view_set_show_right_margin)
 
-  /// \brief test if a margin is displayed
-  ///
-  /// \return true if a margin is displayed, false otherwise
+  /** Returns whether a right margin is displayed.
+   *
+   * @return @c true if the right margin is shown.
+   */
   _WRAP_METHOD(bool get_show_right_margin() const, gtk_source_view_get_show_right_margin)
 
-  /// \brief do highlight the currently selected line, or not
-  ///
-  /// \param highlight if true, do highlight the currently selected line
-  _WRAP_METHOD(void set_highlight_current_line(bool highlight=true), gtk_source_view_set_highlight_current_line)
+  /** If @a highlight is @c true the current line is highlighted.
+   *
+   * @param highlight Whether to highlight the current line.
+   */
+  _WRAP_METHOD(void set_highlight_current_line(bool highlight = true), gtk_source_view_set_highlight_current_line)
 
-  /// \brief test if the currently selected line is to be hightlighted
-  ///
-  /// \return true if the currently selected line is to be highlighted, false otherwise
+  /** Returns whether the current line is highlighted.
+   *
+   * @return @c true if the current line is highlighted.
+   */
   _WRAP_METHOD(bool get_highlight_current_line() const, gtk_source_view_get_highlight_current_line)
 
-  /// \brief  set the position of the right margin
-  ///
-  /// \param margin the position (in pixels) of the right margin
+  /** Sets the position of the right margin.
+   *
+   * @param margin The width in characters where to position the right margin.
+   */
   _WRAP_METHOD(void set_right_margin_position(guint margin), gtk_source_view_set_right_margin_position)
 
-  /// \brief get the position of the right margin
-  ///
-  /// \return the position of the right margin
+  /** Gets the position of the right margin.
+   *
+   * @return The position of the right margin.
+   */
   _WRAP_METHOD(guint get_right_margin_position() const, gtk_source_view_get_right_margin_position)
 
-  /// \brief activate whether if HOME and END keys will move to the first/last non space character of the line before moving to the start/end
-  ///
-  /// if true, HOME and END keys will move to the first/last non space character of the line before moving to the start/end
+  /** Set the desired movement of the cursor when HOME and END keys are pressed.
+   *
+   * @param smart_he The desired behavior among SourceSmartHomeEndType.
+   */
   _WRAP_METHOD(void set_smart_home_end(SourceSmartHomeEndType smart_he), gtk_source_view_set_smart_home_end)
 
-  /// \brief test whether if HOME and END keys will move to the first/last non space character of the line before moving to the start/end
-  ///
-  /// \return true if HOME and END keys will move to the first/last non space character of the line before moving to the start/end, false otherwise
+  /** Returns a SourceSmartHomeEndType end value specifying how the cursor will
+   *  move when HOME and END keys are pressed.
+   *
+   * @return A SourceSmartHomeEndType value.
+   */
   _WRAP_METHOD(SourceSmartHomeEndType get_smart_home_end() const, gtk_source_view_get_smart_home_end)
 
-  /// \brief if true line marks will be displayed beside the text.
-  ///
-  /// \param show whether line marks should be displayed.
+  /** If @c true line marks will be displayed beside the text.
+   *
+   * @param show Whether line marks should be displayed.
+   *
+   * @newin{2,2}
+   */
   _WRAP_METHOD(void set_show_line_marks(bool show = true), gtk_source_view_set_show_line_marks)
 
-  /// \brief Returns whether line marks are displayed beside the text.
-  ///
-  /// \return true if the line marks are displayed.
+  /** Returns whether line marks are displayed beside the text.
+   *
+   * @return @c true if the line marks are displayed.
+   *
+   * @newin{2,2}
+   */
   _WRAP_METHOD(bool get_show_line_marks() const, gtk_source_view_get_show_line_marks)
 
-  /// If true, when the tab key is pressed and there is a
-  /// selection, the selected text is indented of one level instead of being
-  /// replaced with the \t characters. Shift+Tab unindents the selection.
-  /// \param show true if the selection is indented when tab is pressed.
-  _WRAP_METHOD(void set_indent_on_tab(bool show = true), gtk_source_view_set_indent_on_tab)
+  /** If @c true, when the tab key is pressed and there is a selection, the
+   *  selected text is indented of one level instead of being replaced with
+   *  the @\t characters. Shift+Tab unindents the selection.
+   *
+   * @param enable Whether to indent a block when tab is pressed.
+   *
+   * @newin{2,2}
+   */
+  _WRAP_METHOD(void set_indent_on_tab(bool enable = true), gtk_source_view_set_indent_on_tab)
 
-  /// Returns whether when the tab key is pressed the current selection
-  /// should get indented instead of replaced with the \t character.
-  ///
-  /// \return true if the selection is indented when tab is pressed.
+  /** Returns whether when the tab key is pressed the current selection
+   *  should get indented instead of replaced with the @\t character.
+   *
+   * @return @c true if the selection is indented when tab is pressed.
+   *
+   * @newin{2,2}
+   */
   _WRAP_METHOD(bool get_indent_on_tab() const, gtk_source_view_get_indent_on_tab)
 
-  /// \brief Sets the number of spaces to use for each step of indent.
-  ///
-  /// If width is
-  /// -1, the value of the GtkSourceView::tab-width property will be used.
-  ///
-  /// \param width indent width in characters
+  /** Sets the number of spaces to use for each step of indent.
+   *
+   * If @a width is -1, the value of the SourceView::property_tab_width property
+   * will be used.
+   *
+   * @param width Indent width in characters.
+   */
   _WRAP_METHOD(void set_indent_width(gint width), gtk_source_view_set_indent_width)
 
-  /// \brief Set Returns the number of spaces to use for each step of indent.
-  ///
-  /// See SourceView::set_indent_width(gint) for details.
-  ///
-  /// \return indent width.
+  /** Returns the number of spaces to use for each step of indent.
+   *
+   * See set_indent_width() for details.
+   *
+   * @return Indent width.
+   */
   _WRAP_METHOD(gint get_indent_width() const, gtk_source_view_get_indent_width)
 
-  /// \brief Set the priority for the given mark category.
-  ///
-  /// When there are multiple
-  /// marks on the same line, marks of categories with higher priorities will
-  /// be drawn on top.
-  /// \param category a mark category.
-  /// \param priority the priority of #category
+  /** Set the @a priority for the given mark @a category.
+   *
+   * When there are multiple marks on the same line, marks of categories with
+   * higher priorities will be drawn on top.
+   *
+   * @param category A mark category.
+   * @param priority The priority for the category.
+   *
+   * @newin{2,2}
+   */
   _WRAP_METHOD(void set_mark_category_priority(const Glib::ustring& category, gint priority), gtk_source_view_set_mark_category_priority)
 
-  /// \brief Gets the priority which is associated with the given category.
-  ///
-  /// \param category a mark category.
-  /// \return the priority or if category exists but no priority was set,
-  /// it defaults to 0.
+  /** Gets the priority which is associated with the given @a category.
+   *
+   * @param category A mark category.
+   *
+   * @return The priority or if @a category exists but no priority was set, it
+   * defaults to 0.
+   *
+   * @newin{2,2}
+   */
   _WRAP_METHOD(gint get_mark_category_priority(const Glib::ustring& category) const, gtk_source_view_get_mark_category_priority)
 
 #ifndef GTKSOURCEVIEWMM_DISABLE_DEPRECATED
   _IGNORE(gtk_source_view_set_mark_category_pixbuf)
-  /// \brief Associates a given pixbuf with a given mark category.
-  /// If pixbuf is NULL, the pixbuf is unset.
-  ///
-  /// \param category a mark category.
-  /// \param pixbuf the pixbuf to associate the mark category to.
-  ///
-  /// \deprecated Use set_mark_category_icon().
+
+  /** Associates a given @a pixbuf with a given mark @a category.
+   *
+   * If @a pixbuf is empty, the pixbuf is unset.
+   *
+   * @param category A mark category.
+   * @param pixbuf A Gdk::Pixbuf or empty Glib::RefPtr.
+   *
+   * @deprecated Use set_mark_category_icon() instead.
+   *
+   * @newin{2,2}
+   */
   void set_mark_category_pixbuf(const Glib::ustring& category, const Glib::RefPtr<Gdk::Pixbuf>& pixbuf);
 
   _IGNORE(gtk_source_view_get_mark_category_pixbuf)
-  /// \brief Gets the pixbuf which is associated with the given mark category.
-  ///
-  /// \param category a mark category.
-  /// \return empty Glib::RefPtr<Gdk::Pixbuf>.
-  ///
-  /// \deprecated Don't use it.
+
+  /** Gets the pixbuf which is associated with the given mark @a category.
+   *
+   * @param category A mark category.
+   *
+   * @return Empty Glib::RefPtr.
+   *
+   * @deprecated Do not use it.
+   *
+   * @newin{2,2}
+   */
   Glib::RefPtr<Gdk::Pixbuf> get_mark_category_pixbuf(const Glib::ustring& category);
 
-  /// \brief Gets the pixbuf which is associated with the given mark category.
-  ///
-  /// \param category a mark category.
-  /// \return empty Glib::RefPtr<const Gdk::Pixbuf>.
-  ///
-  /// \deprecated Don't use it.
+  /** Gets the pixbuf which is associated with the given mark @a category.
+   *
+   * @param category A mark category.
+   *
+   * @return Empty Glib::RefPtr.
+   *
+   * @deprecated Do not use it.
+   *
+   * @newin{2,2}
+   */
   Glib::RefPtr<const Gdk::Pixbuf> get_mark_category_pixbuf(const Glib::ustring& category) const;
 #endif // GTKSOURCEVIEWMM_DISABLE_DEPRECATED
 
+  /** Sets the icon to be used for @a category to @a pixbuf.
+   *
+   * @param category A mark category.
+   * @param pixbuf A Gdk::Pixbuf or empty Glib::RefPtr.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void set_mark_category_icon(const Glib::ustring& category, const Glib::RefPtr<Gdk::Pixbuf>& pixbuf), gtk_source_view_set_mark_category_icon_from_pixbuf)
-  _WRAP_METHOD_DOCS_ONLY(gtk_source_view_set_mark_category_icon_from_stock)
-  void set_mark_category_icon(const Glib::ustring& category, const Gtk::StockID& stock_id);
-  _WRAP_METHOD_DOCS_ONLY(gtk_source_view_set_mark_category_icon_from_icon_name)
-  void set_mark_category_icon(const Glib::ustring& category, const Glib::ustring& icon_name);
 
+  /** Sets the icon to be used for @a category to the stock item @a stock_id.
+   *
+   * @param category A mark category.
+   * @param stock_id The stock id.
+   *
+   * @newin{2,10}
+   */
+  _WRAP_METHOD(void set_mark_category_icon(const Glib::ustring& category, const Gtk::StockID& stock_id), gtk_source_view_set_mark_category_icon_from_stock)
+
+  /** Sets the icon to be used for @a category to the named theme item @a name.
+   *
+   * @param category A mark category.
+   * @param name The themed icon name.
+   *
+   * @newin{2,10}
+   */
+  _WRAP_METHOD(void set_mark_category_icon(const Glib::ustring& category, const Glib::ustring& name), gtk_source_view_set_mark_category_icon_from_icon_name)
+
+  /** Unsets the icon used for @a category.
+   *
+   * @param category A mark category.
+   *
+   * @newin{2,10}
+   */
+  void unset_mark_category_icon(const Glib::ustring& category);
+
+  /** Sets given background @a color for mark @a category.
+   *
+   * @param category A mark category.
+   * @param color Background color.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void set_mark_category_background(const Glib::ustring& category, const Gdk::Color& color), gtk_source_view_set_mark_category_background)
-  _WRAP_METHOD(bool set_mark_category_background(const Glib::ustring& category, Gdk::Color& dest) const, gtk_source_view_get_mark_category_background)
-  /// \brief Set if and how the spaces should be visualized.
-  ///
-  /// \param flags specifing how white spaces should be displayed.
+
+  /** Unsets background for mark @a category.
+   *
+   * @param category A mark category.
+   *
+   * @newin{2,10}
+   */
+  void unset_mark_category_background(const Glib::ustring& category);
+
+  /** Gets the background color associated with given @a category.
+   *
+   * @param category A mark category.
+   * @param dest Destination Gdk::Color structure to fill in.
+   *
+   * @return @c true if background color for @a category was set and @a dest is
+   * set to a valid color, or @c false otherwise.
+   *
+   * @newin{2,10}
+   */
+  _WRAP_METHOD(bool get_mark_category_background(const Glib::ustring& category, Gdk::Color& dest) const, gtk_source_view_get_mark_category_background)
+
+  /** Set if and how the spaces should be visualized.
+   *
+   * Specifying @a flags as 0 will disable display of spaces.
+   *
+   * @param flags SourceDrawSpacesFlags specifing how white spaces should be
+   * displayed.
+   */
   _WRAP_METHOD(void set_draw_spaces(SourceDrawSpacesFlags flags = SOURCE_DRAW_SPACES_ALL), gtk_source_view_set_draw_spaces)
 
-  /// \brief Returns the SourceDrawSpacesFlags specifying if and how
-  /// spaces should be displayed for this view
-  ///
-  /// \return flags the SourceDrawSpacesFlags, 0 if no spaces should be drawn.
+  /** Returns the SourceDrawSpacesFlags specifying if and how spaces should be
+   *  displayed.
+   *
+   * @return The SourceDrawSpacesFlags, 0 if no spaces should be drawn.
+   */
   _WRAP_METHOD(SourceDrawSpacesFlags get_draw_spaces() const, gtk_source_view_get_draw_spaces)
 
-  /// For instance,
-  /// Glib::ustring on_mark_tooltip(const Glib::RefPtr<SourceMark>& mark);
+  /** Slot holding a function.
+   *
+   * @par Prototype:
+   * <tt>Glib::ustring on_mark_tooltip(const Glib::RefPtr<SourceMark>& mark);</tt>
+   *
+   * @newin{2,10}
+   */
   typedef sigc::slot<Glib::ustring, const Glib::RefPtr<SourceMark>& /* mark */> SlotMarkTooltip;
 
   _IGNORE(gtk_source_view_set_mark_category_tooltip_func, gtk_source_view_set_mark_category_tooltip_markup_func)
+
+  /** Set a SlotMarkTooltip used to set tooltip on marks from the given mark
+   *  @a category.
+   *
+   * If you also specified a function with
+   * set_mark_category_tooltip_markup_func() the markup variant takes
+   * precedence.
+   *
+   * @code
+   * static Glib::ustring
+   * tooltip_func (gtksourceview::SourceMark *mark)
+   * {
+   *   return get_tooltip_for_mark(mark);
+   * }
+   *
+   * ...
+   *
+   * SourceView view;
+   *
+   * view->set_mark_category_tooltip_func("other-mark",
+   *                                      sigc::ptr_fun(&tooltip_func));
+   * @endcode
+   *
+   * @param category A mark category.
+   * @param slot A SlotMarkTooltip.
+   *
+   * @newin{2,10}
+   */
   void set_mark_category_tooltip_func(const Glib::ustring& category, const SlotMarkTooltip& slot);
+
+  /** Set a SlotMarkTooltip used to set tooltip on marks from the given mark
+   *  @a category.
+   *
+   * See set_mark_category_tooltip_func() for more information.
+   *
+   * @param category A mark category.
+   * @param slot A SlotMarkTooltip.
+   *
+   * @newin{2,10}
+   */
   void set_mark_category_tooltip_markup_func(const Glib::ustring& category, const SlotMarkTooltip& slot);
+
+  /** Unsets a function used to set tooltip marks from the given mark
+   *  @a category.
+   *
+   * @param category A mark category.
+   *
+   * @newin{2,10}
+   */
   void unset_mark_category_tooltip_func(const Glib::ustring& category);
+
+  /** Returns the SourceGutter object associated with @a window_type for this
+   *  view.
+   *
+   * Only Gtk::TEXT_WINDOW_LEFT and Gtk::TEXT_WINDOW_RIGHT are supported,
+   * respectively corresponding to the left and right gutter. The line numbers
+   * and mark category icons are rendered in the gutter corresponding to
+   * Gtk::TEXT_WINDOW_LEFT.
+   *
+   * @param window_type The gutter window type
+   *
+   * @return The SourceGutter.
+   *
+   * @newin{2,10}
+   **/
   _WRAP_METHOD(Glib::RefPtr<SourceGutter> get_gutter(Gtk::TextWindowType window_type), gtk_source_view_get_gutter, refreturn)
+
+  /** Returns the SourceGutter object associated with @a window_type for this
+   *  view.
+   *
+   * Only Gtk::TEXT_WINDOW_LEFT and Gtk::TEXT_WINDOW_RIGHT are supported,
+   * respectively corresponding to the left and right gutter. The line numbers
+   * and mark category icons are rendered in the gutter corresponding to
+   * Gtk::TEXT_WINDOW_LEFT.
+   *
+   * @param window_type The gutter window type
+   *
+   * @return The SourceGutter.
+   *
+   * @newin{2,10}
+   **/
   _WRAP_METHOD(Glib::RefPtr<const SourceGutter> get_gutter(Gtk::TextWindowType window_type) const, gtk_source_view_get_gutter, refreturn, constversion)
 
+  /** Gets the SourceCompletion associated with this view.
+   *
+   * @return The SourceCompletion associated with this view.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(SourceCompletion* get_completion(), gtk_source_view_get_completion, refreturn)
+
+  /** Gets the SourceCompletion associated with this view.
+   *
+   * @return The SourceCompletion associated with this view.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(const SourceCompletion* get_completion() const, gtk_source_view_get_completion, refreturn, constversion)
 
+  /** Emitted when redo action is requested.
+   */
   _WRAP_SIGNAL(void redo(), "redo")
+
+  /** Emitted when undo action is requested.
+   */
   _WRAP_SIGNAL(void undo(), "undo")
 // TODO: remove no_default_handler when we will break API/ABI.
-  _WRAP_SIGNAL(void show_completion(), "show-completion", no_default_handler)
+
+  /** Emitted when a line mark has been activated (for instance when there
+   * was a button press in the line marks gutter).
+   *
+   * You can use @a iter to determine on which line the activation took place.
+   *
+   * @par Handler parameters:
+   * iter A Gtk::TextIter.
+   * event The GdkEvent that activated the event.
+   */
   _WRAP_SIGNAL(void line_mark_activated(Gtk::TextIter& mark, GdkEvent* event), "line-mark-activated", no_default_handler)
 
+  // this is a keybinding signal, so we ignore it.
+  _IGNORE_SIGNAL(show-completion)
 
-  /// \brief Whether to display line numbers
-  ///
-  /// default value is false
   _WRAP_PROPERTY("show-line-numbers", bool)
 
-  /// \brief Whether to display line mark pixbufs
-  ///
-  /// default value is false.
   _WRAP_PROPERTY("show-line-marks", bool)
 
-  /// \brief Width of an tab character expressed in number of spaces.
-  ///
-  /// Allowed values are [1,32]
-  /// Default value is 8
   _WRAP_PROPERTY("tab-width", guint)
 
-  /// \brief Width of an indentation step expressed in number of spaces.
-  ///
-  /// Allowed values are [-1,32]
-  /// Default value is -1
   _WRAP_PROPERTY("indent-width", int)
 
-  /// \brief Whether to enable auto indentation.
-  ///
-  /// Default value is false
   _WRAP_PROPERTY("auto_indent", bool)
 
-  /// \brief Whether to insert spaces instead of tabs.
-  ///
-  /// Default value is false
   _WRAP_PROPERTY("insert_spaces_instead_of_tabs", bool)
 
-  /// \brief Whether to display the right margin.
-  ///
-  /// Default value is false
   _WRAP_PROPERTY("show-right-margin", bool)
 
-  /// \brief Position of the right margin.
-  ///
-  /// Allowed values are [1,200]
-  /// Default value is 80
   _WRAP_PROPERTY("right-margin-position", guint)
 
-  /// \brief Set the behavior of the HOME and END keys.
-  ///
-  /// Default value is GTK_SOURCE_SMART_HOME_END_DISABLED
   _WRAP_PROPERTY("smart_home_end", SourceSmartHomeEndType)
 
-  /// \brief Whether to highlight the current line.
-  ///
-  /// Default value is false
   _WRAP_PROPERTY("highlight_current_line", bool)
 
-  /// \brief Whether to indent the selected text when the tab key is
-  /// pressed.
-  ///
-  /// Default value is true.
   _WRAP_PROPERTY("indent_on_tab", bool)
 
-  /// \brief Set if and how the spaces should be visualized.
-  ///
-  /// Default value is 0.
   _WRAP_PROPERTY("draw-spaces", SourceDrawSpacesFlags)
-
 };
 
 } /* namespace gtksourceview */

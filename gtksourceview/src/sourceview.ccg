@@ -115,15 +115,17 @@ SourceView::get_mark_category_pixbuf(const Glib::ustring&) const
 #endif
 
 void
-SourceView::set_mark_category_icon(const Glib::ustring& category, const Gtk::StockID& stock_id)
+SourceView::unset_mark_category_icon(const Glib::ustring& category)
 {
-  gtk_source_view_set_mark_category_icon_from_stock(gobj(), category.c_str(), ((stock_id) ? stock_id.get_c_str() : 0));
+  gtk_source_view_set_mark_category_icon_from_icon_name(gobj(), category.c_str(), 0);
+  gtk_source_view_set_mark_category_icon_from_stock(gobj(), category.c_str(), 0);
+  gtk_source_view_set_mark_category_icon_from_pixbuf(gobj(), category.c_str(), 0);
 }
 
 void
-SourceView::set_mark_category_icon(const Glib::ustring& category, const Glib::ustring& icon_name)
+SourceView::unset_mark_category_background(const Glib::ustring& category)
 {
-  gtk_source_view_set_mark_category_icon_from_icon_name(gobj(), category.c_str(), (icon_name.empty() ? 0 : icon_name.c_str()));
+  gtk_source_view_set_mark_category_background(gobj(), category.c_str(), 0);
 }
 
 void

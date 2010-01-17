@@ -26,12 +26,20 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace gtksourceview
 {
 
+/** Class representing a style.
+ */
 class SourceStyle : public Glib::Object
 {
   _CLASS_GOBJECT(SourceStyle, GtkSourceStyle, GTK_SOURCE_STYLE, Glib::Object, GObject)
 
 public:
-
+  /** Creates a copy of a style, that is a new SourceStyle instance which has
+   *  the same attributes set.
+   *
+   * @return Copy of a style.
+   *
+   * @newin{2,2}
+   */
   _WRAP_METHOD(Glib::RefPtr<SourceStyle> copy() const, gtk_source_style_copy)
 
   _WRAP_PROPERTY("background", Glib::ustring)

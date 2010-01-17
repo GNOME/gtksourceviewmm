@@ -35,45 +35,184 @@ namespace gtksourceview
 
 class SourceView;
 
+/** Gutter object for SourceView
+ *
+ * The SourceGutter object represents the left and right gutters of the text
+ * view. It is used by SourceView to draw the line numbers and category marks
+ * that might be present on a line. By packing additional CellRenderer objects
+ * in the gutter, you can extend the gutter with your own custom drawings.
+ *
+ * The gutter works very much the same way as cells rendered in a Gtk::TreeView.
+ * The concept is similar, with the exception that the gutter does not have an
+ * underlying Gtk::TreeModel. Instead, you should use set_cell_data_func() to
+ * set a callback to fill in any of the cell renderers properties, given the
+ * line for which the cell is to be rendered. Renderers are inserted into the
+ * gutter at a certain position. The builtin line number renderer is at position
+ * SourceView::gutter_position_lines (-30) and the marks renderer is at
+ * SourceView::gutter_position_marks (-20). You can use these values to
+ * position custom renderers accordingly. The width of a cell renderer can be
+ * specified as either fixed (using Gtk::CellRenderer::set_fixed_size()) or
+ * dynamic, in which case you @e must set set_cell_size_func(). This callback is
+ * used to set the properties of the renderer such that
+ * Gtk::CellRenderer::get_size() yields the maximum width of the cell.
+ *
+ * @newin{2,10}
+ */
 class SourceGutter : public Glib::Object
 {
   _CLASS_GOBJECT(SourceGutter, GtkSourceGutter, GTK_SOURCE_GUTTER, Glib::Object, GObject)
 
-protected:
-  // TODO: C API does not provide any constructor for GtkSourceGutter, should we delete it on API/ABI break? krnowak
-  _CTOR_DEFAULT
-
 public:
-  // TODO: C API does not provide any constructor for GtkSourceGutter, should we delete it on API/ABI break? krnowak
-  _WRAP_CREATE()
-
+  /** Get the Gdk::Window of the gutter.
+   *
+   * The window will only be available when the gutter has at least one,
+   * non-zero width, cell renderer packed.
+   *
+   * @return The Gdk::Window of the gutter, or empty Glib::RefPtr if the gutter
+   * has no window.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(Glib::RefPtr<Gdk::Window> get_window(), gtk_source_gutter_get_window, refreturn)
+
+  /** Get the Gdk::Window of the gutter.
+   *
+   * The window will only be available when the gutter has at least one,
+   * non-zero width, cell renderer packed.
+   *
+   * @return The Gdk::Window of the gutter, or empty Glib::RefPtr if the gutter
+   * has no window.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(Glib::RefPtr<const Gdk::Window> get_window() const, gtk_source_gutter_get_window, constversion, refreturn)
 
+  /** Inserts @a renderer into a gutter at @a position.
+   *
+   * @param renderer A Gtk::CellRenderer.
+   * @param position The renderers position.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void insert(Gtk::CellRenderer* renderer, int position), gtk_source_gutter_insert)
+
+  /** Reorders @a renderer in a gutter to new @a position.
+   *
+   * @param renderer A Gtk::CellRenderer.
+   * @param position The new renderer position.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void reorder(Gtk::CellRenderer* renderer, int position), gtk_source_gutter_reorder)
+
+  /** Removes @a renderer from a gutter.
+   *
+   * @param renderer A Gtk::CellRenderer.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void remove(Gtk::CellRenderer* renderer), gtk_source_gutter_remove)
 
+  /** Invalidates the drawable area of the gutter.
+   *
+   * You can use this to force a redraw of the gutter if something has changed
+   * and needs to be redrawn.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void queue_draw(), gtk_source_gutter_queue_draw)
 
-  /// For instance,
-  /// void on_cell_data(Gtk::CellRenderer& cell, int line_number, bool current_line);
+  /** Slot holding a function.
+   *
+   * @par Prototype:
+   * <tt>void on_cell_data(Gtk::CellRenderer& cell, int line_number, bool current_line);</tt>
+   *
+   * @newin{2,10}
+   */
   typedef sigc::slot<void, Gtk::CellRenderer* /* cell */, int /* line_number */, bool /* current_line */> SlotData;
-  /// For instance,
-  /// void on_cell_size(Gtk::CellRenderer& cell);
+
+  /** Slot holding a function.
+   *
+   * @par Prototype:
+   * <tt>void on_cell_size(Gtk::CellRenderer& cell);</tt>
+   *
+   * @newin{2,10}
+   */
   typedef sigc::slot<void, Gtk::CellRenderer* /* cell */> SlotSize;
   _IGNORE(gtk_source_gutter_set_cell_data_func, gtk_source_gutter_set_cell_size_func)
+
+  /** Sets the SlotData to use for @a renderer.
+   *
+   * This function is used to setup the cell renderer properties for rendering
+   * the current cell.
+   *
+   * @param renderer A Gtk::CellRenderer.
+   * @param slot A slot containing function to use.
+   *
+   * @newin{2,10}
+   */
   void set_cell_data_func(Gtk::CellRenderer* renderer, const SlotData& slot);
+
+  /** Sets the SlotSize to use for @a renderer.
+   *
+   * This function is used to setup the cell renderer properties for measuring
+   * the maximum size of the cell.
+   *
+   * @param renderer A Gtk::CellRenderer.
+   * @param slot A slot containing function to use.
+   *
+   * @newin{2,10}
+   */
   void set_cell_size_func(Gtk::CellRenderer* renderer, const SlotSize& slot);
+
+  /** Resets a SlotData to use for @a renderer.
+   *
+   * @param renderer A Gtk::CellRenderer.
+   *
+   * @newin{2,10}
+   */
   void reset_cell_data_func(Gtk::CellRenderer* renderer);
+
+  /** Resets a SlotSize to use for @a renderer.
+   *
+   * @param renderer A Gtk::CellRenderer.
+   *
+   * @newin{2,10}
+   */
   void reset_cell_size_func(Gtk::CellRenderer* renderer);
 
   _WRAP_PROPERTY("view", SourceView*)
   _WRAP_PROPERTY("window-type", Gtk::TextWindowType)
 
+  /** Emitted when a cell has been activated (for instance when there was
+   *  a button press on the cell).
+   *
+   * The signal is only emitted for cells that have the @c activatable property
+   * set to @c true.
+   *
+   * @par Handler parameters:
+   * renderer A Gtk::CellRenderer which was activated.
+   * iter The Gtk::TextIter at which the cell was activated.
+   * event An event with which the cell was activated.
+   *
+   * @newin{2,10}
+   */
   _WRAP_SIGNAL(void cell_activated(Gtk::CellRenderer* renderer, const Gtk::TextIter& iter, GdkEvent* event), "cell-activated")
-  _WRAP_SIGNAL(bool query_tooltip(Gtk::CellRenderer* renderer, const Gtk::TextIter& iter, const Glib::RefPtr<Gtk::Tooltip>& tooltip), "query-tooltip")
 
+  /** Emitted when a tooltip is requested for a specific cell.
+   *
+   * Signal handlers can return @c true to notify the tooltip has been handled.
+   *
+   * @par Handler parameters:
+   * renderer A Gtk::CellRenderer which was activated.
+   * iter The Gtk::TextIter at which the cell was activated.
+   * tooltip A Gtk::Tooltip.
+   *
+   * @return @c true if tooltip has been handled, otherwise @c false.
+   *
+   * @newin{2,10}
+   */
+  _WRAP_SIGNAL(bool query_tooltip(Gtk::CellRenderer* renderer, const Gtk::TextIter& iter, const Glib::RefPtr<Gtk::Tooltip>& tooltip), "query-tooltip")
 };
 
 } // namespace gtksourceview

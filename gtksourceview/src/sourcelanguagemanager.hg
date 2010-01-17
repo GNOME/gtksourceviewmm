@@ -34,7 +34,16 @@ namespace gtksourceview
 _CC_INCLUDE(gtksourceview/gtksourcelanguagemanager.h)
 _CC_INCLUDE(gtksourceview/gtksourceview-typebuiltins.h)
 
-/// \brief manages the languages supported by the SourceBuffer.
+/** Class which provides access to SourceLanguages.
+ *
+ * SourceLanguageManager is a class which processes language description files
+ * and creates and stores SourceLanguage objects, and provides API to access
+ * them.
+ *
+ * Use get_default() to retrieve the default instance of SourceLanguageManager,
+ * and guess_language() to get a SourceLanguage for given file name and content
+ * type.
+ */
 class SourceLanguageManager : public Glib::Object
 {
   _CLASS_GOBJECT(SourceLanguageManager, GtkSourceLanguageManager, GTK_SOURCE_LANGUAGE_MANAGER, Glib::Object, GObject)
@@ -43,28 +52,168 @@ protected:
 
 public:
 
-  /// \brief creates an instance of SourceLanguageManager
-  ///
-  /// \return the newly created instance of SourceLanguageManager
+  /** Creates a new language manager.
+   *
+   * If you do not need more than one language manager or a private language
+   * manager instance then use get_default() instead.
+   *
+   * Returns: A SourceLanguageManager.
+   */
   _WRAP_CREATE()
 
+  /** Returns the default SourceLanguageManager instance.
+   *
+   * Returns: A SourceLanguageManager.
+   */
   _WRAP_METHOD(static Glib::RefPtr<SourceLanguageManager> get_default(), gtk_source_language_manager_get_default, refreturn)
 
 #m4 _CONVERSION(`const gchar**',`Glib::StringArrayHandle',`$2($3)')
+
+  // TODO: define own string array to use std::string, instead of Glib::ustring, when we break API/ABI. krnowak
+  /** Gets the list directories where language manager looks for language files.
+   *
+   * @return An array containg a list of language files directories.
+   */
   _WRAP_METHOD(Glib::StringArrayHandle get_search_path() const, gtk_source_language_manager_get_search_path)
+
 #m4 _CONVERSION(`const Glib::StringArrayHandle&',`gchar**',`const_cast<gchar**>(($3).data())')
+
+  // TODO: see previous one. Also this is probably buggy, because we need NULL termination in C array and Glib::StringArrayHandle does not provide it - fixing it will break ABI. krnowak
+  /** Sets the list of directories where the language manager looks for language
+   *  files.
+   *
+   * @note At the moment this function can be called only before the language
+   * files are loaded for the first time. In practice to set a custom search
+   * path for a SourceLanguageManager, you have to call this function right
+   * after creating it.
+   *
+   * @param dirs An empty string terminated array of strings.
+   */
   _WRAP_METHOD(void set_search_path(const Glib::StringArrayHandle& dirs), gtk_source_language_manager_set_search_path)
 
+  /** Resets the list of directories where the language manager looks for
+   *  language files to default.
+   *
+   * @note At the moment this function can be called only before the language
+   * files are loaded for the first time. In practice to set a custom search
+   * path for a SourceLanguageManager, you have to call this function right
+   * after creating it.
+   */
   void reset_search_path();
 
+  /** Returns the ids of the available languages.
+   *
+   * @return An array of string containing the ids of the available languages.
+   */
   _WRAP_METHOD(Glib::StringArrayHandle get_language_ids() const, gtk_source_language_manager_get_language_ids)
 
+  /** Gets the SourceLanguage identified by the given @a id in the language
+   *  manager.
+   *
+   * @param id A language id.
+   *
+   * @return A SourceLanguage, or empty Glib::RefPtr if there is no language
+   * identified by the given @a id.
+   */
   _WRAP_METHOD(Glib::RefPtr<SourceLanguage> get_language(const Glib::ustring& id), gtk_source_language_manager_get_language, refreturn)
+
+  /** Gets the SourceLanguage identified by the given @a id in the language
+   *  manager.
+   *
+   * @param id A language id.
+   *
+   * @return A SourceLanguage, or empty Glib::RefPtr if there is no language
+   * identified by the given @a id.
+   */
   _WRAP_METHOD(Glib::RefPtr<const SourceLanguage> get_language(const Glib::ustring& id) const, gtk_source_language_manager_get_language, constversion, refreturn)
-  _WRAP_METHOD_DOCS_ONLY(gtk_source_language_manager_guess_language)
+  _IGNORE(gtk_source_language_manager_guess_language)
 // TODO: change filename parameter to std::string, when we break API/ABI.
-  Glib::RefPtr<SourceLanguage> guess_language(const Glib::ustring& filename, const Glib::ustring& content_type);
-  _WRAP_METHOD_DOCS_ONLY(gtk_source_language_manager_guess_language)
+  /** Picks a SourceLanguage for given file name and content type,
+   *  according to the information in lang files.
+   *
+   * Either @a filename or @a content_type may be an empty string. This function
+   * can be used as follows:
+   *
+   * @code
+   * Glib::RefPtr<SourceLanguage> lang;
+   * lang = lm->guess_language(filename, Glib::ustring());
+   * buffer->set_language(lang);
+   * @endcode
+   *
+   * or
+   *
+   * @code
+   * Glib::RefPtr<SourceLanguage> lang;
+   * bool result_uncertain = FALSE;
+   * Glib::ustring content_type;
+   *
+   * content_type = Gio::content_type_guess(filename, 0, 0, &result_uncertain);
+   * if (result_uncertain)
+   * {
+   *   content_type.clear();
+   * }
+   *
+   * lang = lm->guess_language(filename, content_type);
+   * buffer->set_language(lang);
+   * @endcode
+   *
+   * etc. Use get_mime_types() and get_globs() if you need full control over
+   * file -> language mapping.
+   *
+   * @param filename A filename, or empty string.
+   * @param content_type A content type (as in GIO API), or empty string.
+   *
+   * @return A SourceLanguage, or empty Glib::RefPtr if there is no suitable
+   * language for given @a filename and/or @a content_type.
+   */
+  _WRAP_METHOD(Glib::RefPtr<SourceLanguage> guess_language(const Glib::ustring& filename, const Glib::ustring& content_type), gtk_source_language_manager_guess_language)
+
+  /** Picks a SourceLanguage for given file name and content type,
+   *  according to the information in lang files.
+   *
+   * Either @a filename or @a content_type may be an empty string. This function
+   * can be used as follows:
+   *
+   * @code
+   * Glib::RefPtr<SourceLanguageManager> lm = SourceLanguageManager::get_default();
+   * Glib::RefPtr<SourceLanguage> lang;
+   * Glib::RefPtr<SourceBuffer> buffer = SourceBuffer::create();
+   * lang = lm->guess_language(filename, Glib::ustring());
+   * buffer->set_language(lang);
+   * // or just:
+   * // Glib::RefPtr<SourceBuffer> buffer = SourceBuffer::create(lang);
+   * @endcode
+   *
+   * or
+   *
+   * @code
+   * Glib::RefPtr<SourceLanguage> lang;
+   * Glib::RefPtr<SourceLanguageManager> lm = SourceLanguageManager::get_default();
+   * Glib::RefPtr<SourceBuffer> buffer = SourceBuffer::create();
+   * bool result_uncertain = FALSE;
+   * Glib::ustring content_type;
+   *
+   * content_type = Gio::content_type_guess(filename, 0, 0, &result_uncertain);
+   * if (result_uncertain)
+   * {
+   *   content_type.clear();
+   * }
+   *
+   * lang = lm->guess_language(filename, content_type);
+   * buffer->set_language(lang);
+   * // or just:
+   * // Glib::RefPtr<SourceBuffer> buffer = SourceBuffer::create(lang);
+   * @endcode
+   *
+   * etc. Use SourceLanguage::get_mime_types() and SourceLanguage::get_globs()
+   * if you need full control over file -> language mapping.
+   *
+   * @param filename A filename, or empty string.
+   * @param content_type A content type (as in GIO API), or empty string.
+   *
+   * @return A SourceLanguage, or empty Glib::RefPtr if there is no suitable
+   * language for given @a filename and/or @a content_type.
+   */
   Glib::RefPtr<const SourceLanguage> guess_language(const Glib::ustring& filename, const Glib::ustring& content_type) const;
 };
 

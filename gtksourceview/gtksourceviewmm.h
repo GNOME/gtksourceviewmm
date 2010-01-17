@@ -2,11 +2,10 @@
 #define _GTKSOURCEVIEWMM_H
 
 /* sourceviewmm.h
- * 
+ *
  * Based on gtksourceviewmm by Jae Jang
  * Copyright (C) 2005 Rob Page
  * Copyright (C) 2010 Krzesimir Nowak
- * 
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public

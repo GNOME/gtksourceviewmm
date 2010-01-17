@@ -25,6 +25,10 @@
 namespace gtksourceview
 {
 
+SourceBuffer::SourceBuffer () :
+  _CONSTRUCT("tag-table", NULL)
+{}
+
 SourceBuffer::SourceBuffer (const Glib::RefPtr<Gtk::TextTagTable>& tag_table) :
   _CONSTRUCT("tag-table", Glib::unwrap(tag_table))
 {}
@@ -78,6 +82,12 @@ void
 SourceBuffer::remove_source_marks(const Gtk::TextIter& start, const Gtk::TextIter& end)
 {
   gtk_source_buffer_remove_source_marks(gobj(), start.gobj(), end.gobj(), 0);
+}
+
+void
+SourceBuffer::unset_style_scheme()
+{
+  gtk_source_buffer_set_style_scheme(gobj(), 0);
 }
 
 }//end namespace gtksourceview

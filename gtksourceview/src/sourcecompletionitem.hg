@@ -29,6 +29,11 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace gtksourceview
 {
 
+// TODO: need docs here.
+/** SourceCompletionItem
+ *
+ * @newin{2,10}
+ */
 class SourceCompletionItem : public Glib::Object
 {
   _CLASS_GOBJECT(SourceCompletionItem, GtkSourceCompletionItem, GTK_SOURCE_COMPLETION_ITEM, Glib::Object, GObject)
@@ -38,8 +43,53 @@ protected:
   explicit SourceCompletionItem(const SourceMarkup& markup, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info);
   explicit SourceCompletionItem(const Glib::ustring& label, const Glib::ustring& text, const Gtk::StockID& stock, const Glib::ustring& info);
 public:
+  /** Create a new SourceCompletionItem with label @a label, icon @a icon and
+   *  extra information @a info.
+   *
+   * If @a icon is empty, then there will be no icon shown. If @a info is empty,
+   * then no extra information will be available.
+   *
+   * @param label The item label.
+   * @param text The item text.
+   * @param icon The item icon.
+   * @param info The item extra information.
+   *
+   * @return New SourceCompletionInfo.
+   *
+   * @newin{2,10}
+   */
   _WRAP_CREATE(const Glib::ustring& label, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info)
+
+  /** Create a new SourceCompletionItem with markup label @a markup, icon
+   *  @a icon and extra information @a info.
+   *
+   * If @a icon is empty, then there will be no icon shown. If @a info is empty,
+   * then no extra information will be available.
+   *
+   * @param markup The item markup label.
+   * @param text The item text.
+   * @param icon The item icon.
+   * @param info The item extra information.
+   *
+   * @return New SourceCompletionInfo.
+   *
+   * @newin{2,10}
+   */
   _WRAP_CREATE(const SourceMarkup& markup, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info)
+
+  /** Creates a new SourceCompletionItem from a stock item.
+   *
+   * If @a label is empty, then stock label will be used.
+   *
+   * @param label The item label.
+   * @param text The item text.
+   * @param stock The stock icon.
+   * @param info The item extra information.
+   *
+   * @return New SourceCompletionInfo.
+   *
+   * @newin{2,10}
+   */
   _WRAP_CREATE(const Glib::ustring& label, const Glib::ustring& text, const Gtk::StockID& stock, const Glib::ustring& info)
 
   _WRAP_PROPERTY("icon", Glib::RefPtr<Gdk::Pixbuf>)

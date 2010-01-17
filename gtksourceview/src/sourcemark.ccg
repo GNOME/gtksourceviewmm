@@ -31,7 +31,7 @@ SourceMark::SourceMark(const Glib::ustring& category, const Glib::ustring& name)
 
 Glib::RefPtr<SourceMark> SourceMark::next()
 {
-  Glib::RefPtr<SourceMark> result = Glib::wrap (gtk_source_mark_next(const_cast<GtkSourceMark*>(gobj()), NULL));
+  Glib::RefPtr<SourceMark> result = Glib::wrap (gtk_source_mark_next(const_cast<GtkSourceMark*>(gobj()), 0));
   if (result)
   {
     result->reference();
@@ -41,7 +41,7 @@ Glib::RefPtr<SourceMark> SourceMark::next()
 
 Glib::RefPtr<const SourceMark> SourceMark::next() const
 {
-  Glib::RefPtr<const SourceMark> result = Glib::wrap (gtk_source_mark_next(const_cast<GtkSourceMark*>(gobj()), NULL));
+  Glib::RefPtr<const SourceMark> result = Glib::wrap (gtk_source_mark_next(const_cast<GtkSourceMark*>(gobj()), 0));
   if (result)
   {
     result->reference();
@@ -51,7 +51,7 @@ Glib::RefPtr<const SourceMark> SourceMark::next() const
 
 Glib::RefPtr<SourceMark> SourceMark::prev()
 {
-  Glib::RefPtr<SourceMark> result =  Glib::wrap (gtk_source_mark_prev(const_cast<GtkSourceMark*>(gobj()), NULL));
+  Glib::RefPtr<SourceMark> result =  Glib::wrap (gtk_source_mark_prev(const_cast<GtkSourceMark*>(gobj()), 0));
   if (result)
   {
     result->reference();
@@ -61,7 +61,7 @@ Glib::RefPtr<SourceMark> SourceMark::prev()
 
 Glib::RefPtr<const SourceMark> SourceMark::prev() const
 {
-  Glib::RefPtr<const SourceMark> result =  Glib::wrap (gtk_source_mark_prev(const_cast<GtkSourceMark*>(gobj()), NULL));
+  Glib::RefPtr<const SourceMark> result =  Glib::wrap (gtk_source_mark_prev(const_cast<GtkSourceMark*>(gobj()), 0));
   if (result)
   {
     result->reference();

@@ -39,7 +39,7 @@ static gchar* SignalProxy_MarkTooltip_gtk_callback(GtkSourceMark* mark, gpointer
     Glib::exception_handlers_invoke();
   }
 
-  return NULL; //An arbitary default, just to avoid the compiler warning.
+  return 0; //An arbitary default, just to avoid the compiler warning.
   #endif //GLIBMM_EXCEPTIONS_ENABLED
 }
 
@@ -54,7 +54,7 @@ namespace gtksourceview
 SourceView::SourceView() :
     _CONSTRUCT
 {
-    GtkSourceBuffer *buffer = gtk_source_buffer_new (NULL) ;
+    GtkSourceBuffer *buffer = gtk_source_buffer_new (0) ;
     gtk_text_view_set_buffer (GTK_TEXT_VIEW (gobject_), GTK_TEXT_BUFFER (buffer));
     g_object_unref(buffer);
 }
@@ -65,7 +65,7 @@ SourceView::SourceView(const Glib::RefPtr<SourceBuffer> &a_buffer) :
     if (a_buffer) {
         set_buffer (a_buffer) ;
     } else {
-        GtkSourceBuffer *buffer = gtk_source_buffer_new (NULL) ;
+        GtkSourceBuffer *buffer = gtk_source_buffer_new (0) ;
         gtk_text_view_set_buffer (GTK_TEXT_VIEW (gobject_), GTK_TEXT_BUFFER (buffer)) ;
         g_object_unref(buffer);
     }

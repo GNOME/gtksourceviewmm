@@ -28,7 +28,7 @@ namespace gtksourceview
 void
 SourceLanguageManager::reset_search_path()
 {
-  gtk_source_language_manager_set_search_path(gobj(), NULL);
+  gtk_source_language_manager_set_search_path(gobj(), 0);
 }
 
 }//end namespace gtksourceview

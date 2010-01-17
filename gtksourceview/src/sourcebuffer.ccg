@@ -26,7 +26,7 @@ namespace gtksourceview
 {
 
 SourceBuffer::SourceBuffer () :
-  _CONSTRUCT("tag-table", NULL)
+  _CONSTRUCT("tag-table", 0)
 {}
 
 SourceBuffer::SourceBuffer (const Glib::RefPtr<Gtk::TextTagTable>& tag_table) :
@@ -35,8 +35,8 @@ SourceBuffer::SourceBuffer (const Glib::RefPtr<Gtk::TextTagTable>& tag_table) :
 
 // TODO: check later how bug 606732 goes.
 SourceBuffer::SourceBuffer (const Glib::RefPtr<SourceLanguage> &language) :
-//    _CONSTRUCT("tag-table, NULL")
-    _CONSTRUCT("tag-table", NULL, "language", Glib::unwrap(language))
+//    _CONSTRUCT("tag-table, 0")
+    _CONSTRUCT("tag-table", 0, "language", Glib::unwrap(language))
 {
     /*
     if (language)

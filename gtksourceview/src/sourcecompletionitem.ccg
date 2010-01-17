@@ -46,7 +46,7 @@ SourceCompletionItem::SourceCompletionItem(const Glib::ustring& label, const Gli
                                      stock.get_c_str(),
                                      width,
                                      GTK_ICON_LOOKUP_USE_BUILTIN,
-                                     NULL);
+                                     0);
 
     GtkStockItem stock_item;
     if (temp_label.empty() && gtk_stock_lookup (stock.get_c_str(), &stock_item))
@@ -56,10 +56,10 @@ SourceCompletionItem::SourceCompletionItem(const Glib::ustring& label, const Gli
   }
   else
   {
-    icon = NULL;
+    icon = 0;
   }
 
-  g_object_set(gobj(), "label", temp_label.c_str(), "icon", icon, NULL);
+  g_object_set(gobj(), "label", temp_label.c_str(), "icon", icon, static_cast<char*>(0));
 
   if (icon)
   {

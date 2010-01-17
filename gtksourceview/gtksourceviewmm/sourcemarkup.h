@@ -3,6 +3,8 @@
 
 /* markup.h
  *
+ * Based on Gtk::StockID.
+ *
  * Copyright (C) 2009, 2010 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
@@ -25,37 +27,119 @@
 
 namespace gtksourceview
 {
-
+/** It is just a class holding markup string.
+ *
+ * This class exists because now nice constructor overload could be used in some
+ * places.
+ *
+ * @newin{2,10}
+ */
 class SourceMarkup
 {
 public:
+  /** Creates empty SourceMarkup.
+   *
+   * @return A new SourceMarkup.
+   *
+   * @newin{2,10}
+   */
   SourceMarkup();
 
-  explicit SourceMarkup(const Glib::ustring& id);
+  /** Creates SourceMarkup containing text from @a markup.
+   *
+   * @param markup A markup string.
+   *
+   * @return A new SourceMarkup.
+   *
+   * @newin{2,10}
+   */
+  explicit SourceMarkup(const Glib::ustring& markup);
 
-  explicit SourceMarkup(const char* id);
+  /** Creates SourceMarkup containing text from @a markup.
+   *
+   * @param markup A markup C string.
+   *
+   * @return A new SourceMarkup.
+   *
+   * @newin{2,10}
+   */
+  explicit SourceMarkup(const char* markup);
 
   ~SourceMarkup();
 
+  /** Creates SourceMarkup containing text from @a other SourceMarkup.
+   *
+   * @param other Other SourceMarkup.
+   *
+   * @return A new SourceMarkup.
+   *
+   * @newin{2,10}
+   */
   SourceMarkup(const SourceMarkup& other);
 
+  /** Assigns contents of @a other SourceMarkup to this one.
+   *
+   * @param other Other SourceMarkup.
+   *
+   * @return This SourceMarkup.
+   *
+   * @newin{2,10}
+   */
   SourceMarkup& operator=(const SourceMarkup& other);
 
+  /** Checks if SourceMarkup is not empty.
+   *
+   * @return @c true if SourceMarkup is not empty, otherwise @c false.
+   *
+   * @newin{2,10}
+   */
   operator bool() const;
 
-  bool equal(const SourceMarkup& rhs) const;
+  /** Checks if @a other SourceMarkup is the same as this one.
+   *
+   * @param other Other SourceMarkup.
+   *
+   * @return @c true if both this and @a other SourceMarkup are equal.
+   *
+   * @newin{2,10}
+   */
+  bool equal(const SourceMarkup& other) const;
 
+  /** Get the string representation of the SourceMarkup.
+   *
+   * @return A string holding markup.
+   *
+   * @newin{2,10}
+   */
   Glib::ustring get_string() const;
 
+  /** Get the C string representation of the SourceMarkup.
+   *
+   * @return A C string holding markup.
+   *
+   * @newin{2,10}
+   */
   const char* get_c_str()  const;
 
 protected:
   Glib::ustring markup_;
 };
 
+/** See SourceMarkup::equal()
+ *
+ * @relates gtksourceview::SourceMarkup
+ *
+ * @newin{2,10}
+ */
 inline bool operator==(const SourceMarkup& lhs, const SourceMarkup& rhs)
   { return lhs.equal(rhs); }
 
+/** See SourceMarkup::equal()
+ *
+ * @relates gtksourceview::SourceMarkup
+ *
+ * @newin{2,10}
+ */
 inline bool operator!=(const SourceMarkup& lhs, const SourceMarkup& rhs)
   { return !lhs.equal(rhs); }
 

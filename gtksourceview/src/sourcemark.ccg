@@ -1,6 +1,7 @@
 /* sourcemark.cc
  *
  * Copyright (C) 2008 Jonathon Jongsma
+ * Copyright (C) 2010 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -25,9 +26,8 @@ namespace gtksourceview
 //This is custom implemented because the C _new() function specifies an extra left-gravity property:
 SourceMark::SourceMark(const Glib::ustring& category, const Glib::ustring& name)
 :
-  _CONSTRUCT("name", (name.empty() ? NULL : name.c_str()), "category", category.c_str(), "left-gravity", TRUE)
+  _CONSTRUCT("name", (name.empty() ? 0 : name.c_str()), "category", category.c_str(), "left-gravity", TRUE)
 {}
-
 
 Glib::RefPtr<SourceMark> SourceMark::next()
 {

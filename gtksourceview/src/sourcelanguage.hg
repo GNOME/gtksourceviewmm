@@ -3,6 +3,7 @@
  * Copyright (C) 2004-2005 Jae Jang
  * Copyright (C) 2005-2006 Rob Page
  * Copyright (C) 2006 Dodji Seketeli
+ * Copyright (C) 2010 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -19,9 +20,6 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/// \file
-/// \brief the SourceLanguage class
-
 #include <glibmm/object.h>
 #include <gtksourceviewmm/sourcestylescheme.h>
 
@@ -37,10 +35,12 @@ class SourceLanguageManager ;
 _CC_INCLUDE(gtksourceview/gtksourcelanguage.h)
 _CC_INCLUDE(gtksourceview/gtksourceview-typebuiltins.h)
 
-/// \brief The abstraction of a language.
-///
-/// Languages are used in the syntax highlighting
-/// workflow.
+/** Object representing a syntax highlighted language.
+ *
+ * SourceLanguage encapsulates syntax and highlighting styles for a particular
+ * language. Use SourceLanguageManager to obtain a SourceLanguage instance, and
+ * SourceBuffer::set_language() to apply it to a SourceBuffer.
+ */
 class SourceLanguage : public Glib::Object
 {
   _CLASS_GOBJECT(SourceLanguage, GtkSourceLanguage, GTK_SOURCE_LANGUAGE, Glib::Object, GObject)
@@ -51,43 +51,80 @@ protected:
 public:
 
   // TODO: C API does not provide any constructor for GtkSourceLanguage, should we delete it on API/ABI break? krnowak
-  /// \brief create a language.
-  ///
-  /// \return the newly created language
   _WRAP_CREATE()
 
-  /// \brief get language ID
-  ///
-  /// a language ID is unique among language IDs.
-  /// \return the language ID.
+  /** Returns the ID of a language.
+   *
+   * The ID is not locale-dependent.
+   *
+   * @return The ID of a language.
+   */
   _WRAP_METHOD(Glib::ustring get_id() const, gtk_source_language_get_id)
 
-  /// \brief gets the localized name of the language.
-  ///
-  /// \return the localized name of the language
+  /** Returns the localized name of the language.
+   *
+   * @return The name of a language.
+   */
   _WRAP_METHOD(Glib::ustring get_name() const, gtk_source_language_get_name)
 
-  /// \brief the localized section of the language.
-  ///
-  /// Each language belong to a section (ex. HTML belogs to the Markup section).
-  /// \return the localized section of the language.
+  /** Returns the localized section of the language.
+   *
+   * Each language belong to a section (ex. HTML belogs to the Markup section).
+   *
+   * @return The section of a language.
+   */
   _WRAP_METHOD(Glib::ustring get_section() const, gtk_source_language_get_section)
 
-  /// \brief Whether the language should be hidden from the user.
-  ///
-  /// \return true if the language should be hidden, false otherwise.
+  /** Returns whether the language should be hidden from the user.
+   *
+   * @return @c true if the language should be hidden, @c false otherwise.
+   */
   _WRAP_METHOD(gboolean get_hidden() const, gtk_source_language_get_hidden)
 
 #m4 _CONVERSION(`gchar**',`Glib::StringArrayHandle',`Glib::StringArrayHandle($3, Glib::OWNERSHIP_DEEP)')
-  /// \brief gets the list of mime types for the given language.
-  ///
-  /// After usage you should free each element of the list as well as the list itself.
-  /// \return the list of  mime types for the given language.
+
+  /** Returns the mime types associated to this language.
+   *
+   * This is just a utility wrapper around get_metadata() to retrieve the
+   * "mimetypes" metadata property and split it into an array.
+   *
+   * @return An array containing the mime types.
+   */
   _WRAP_METHOD(Glib::StringArrayHandle get_mime_types() const, gtk_source_language_get_mime_types)
+
+  /** Returns the globs associated to this language.
+   *
+   * This is just a utility wrapper around get_metadata() to retrieve the
+   * "globs" metadata property and split it into an array.
+   *
+   * @return An array containing the globs.
+   */
   _WRAP_METHOD(Glib::StringArrayHandle get_globs() const, gtk_source_language_get_globs)
+
+  /** Returns the ids of the styles defined by this language.
+   *
+   * @return An array containing ids of the styles defined by this language.
+   */
   _WRAP_METHOD(Glib::StringArrayHandle get_style_ids() const, gtk_source_language_get_style_ids)
 
+  /** Returns the name of the style with ID @a style_id defined by this
+   *  language.
+   *
+   * @param style_id A style ID.
+   *
+   * @return The name of the style with ID @a style_id defined by this language
+   * or empty string if the style has no name or there is no style with ID
+   * @a style_id defined by this language.
+   */
   _WRAP_METHOD(Glib::ustring get_style_name(const Glib::ustring& style_id) const, gtk_source_language_get_style_name)
+
+  /** Returns metadata of a language.
+   *
+   * @param name Metadata property name.
+   *
+   * @return Value of property @a name stored in the metadata of language or
+   * empty string if language doesn't contain that metadata property.
+   */
   _WRAP_METHOD(Glib::ustring get_metadata(const Glib::ustring& name) const, gtk_source_language_get_metadata)
 };
 

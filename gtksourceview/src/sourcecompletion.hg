@@ -34,36 +34,166 @@ class SourceCompletionProvider;
 
 _WRAP_GERROR(SourceCompletionError, GtkSourceCompletionError, GTK_SOURCE_COMPLETION_ERROR)
 
+/** Main Completion Object
+ *
+ * @newin{2,10}
+ */
 class SourceCompletion : public Gtk::Object
 {
   _CLASS_GTKOBJECT(SourceCompletion, GtkSourceCompletion, GTK_SOURCE_COMPLETION, Gtk::Object, GtkObject)
 public:
+
+  /** Add a new SourceCompletionProvider to the completion object.
+   *
+   * This will add a reference provider.
+   *
+   * @param provider A SourceCompletionProvider.
+   *
+   * @return @c true if provider was successfully added, otherwise error is
+   * thrown.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(bool add_provider(const Glib::RefPtr<SourceCompletionProvider>& provider), gtk_source_completion_add_provider, errthrow)
 
+  /** Remove provider from the completion.
+   *
+   * @param provider A SourceCompletionProvider.
+   *
+   * @return @c true if provider was successfully removed, otherwise error is
+   * thrown.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(bool remove_provider(const Glib::RefPtr<SourceCompletionProvider>& provider), gtk_source_completion_remove_provider, errthrow)
 
 #m4 _CONVERSION(`GList*',`Glib::ListHandle<Glib::RefPtr<SourceCompletionProvider> >',`$2($3, Glib::OWNERSHIP_NONE)')
+  // TODO: is conversion all right? C docs states: "The returned list is owned by the completion and should not be freed."
+  /** Get list of providers registered on completion.
+   *
+   * @return List of SourceCompletionProvider.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(Glib::ListHandle<Glib::RefPtr<SourceCompletionProvider> > get_providers() const, gtk_source_completion_get_providers)
 
 #m4 _CONVERSION(`const Glib::ListHandle<Glib::RefPtr<SourceCompletionProvider> >&',`GList*',`($3).data()')
+  // TODO: what does passing NULL here does? If something specific, then maybe create separate method passing it.
+  /** Starts a new completion with the specified SourceCompletionContext and
+   *  a list of potential candidate providers for completion.
+   *
+   * @param providers A list of SourceCompletionProvider.
+   * @param context The SourceCompletionContext with which to start the
+   * completion.
+   *
+   * @return @c true if it was possible to the show completion window.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(bool show(const Glib::ListHandle<Glib::RefPtr<SourceCompletionProvider> >& providers, const Glib::RefPtr<SourceCompletionContext>& context), gtk_source_completion_show)
 
+  /** Hides the completion if it is active (visible).
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void hide(), gtk_source_completion_hide)
 
+  /** Gets the SourceCompletionInfo window.
+   *
+   * The info widget is the window where the completion displays optional extra information of the proposal.
+   *
+   * @return The SourceCompletionInfo window.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(SourceCompletionInfo* get_info_window() const, gtk_source_completion_get_info_window)
 
+  /** Gets the SourceView associated with completion.
+   *
+   * @return The SourceView associated with completion.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(SourceView* get_view() const, gtk_source_completion_get_view)
 
+  // TODO: Does "The reference being returned is a 'floating' reference, so if you invoke gtk_source_completion_show with this context you don't need to unref it." something mean for us?
+  /** Create a new SourceCompletionContext for completion.
+   *
+   * The position at which the completion using the new context will consider
+   * completion can be provided by @a position.
+   *
+   * @param position A Gtk::TextIter.
+   *
+   * @return A new SourceCompletionContext.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(Glib::RefPtr<SourceCompletionContext> create_context(const Gtk::TextIter& position), gtk_source_completion_create_context)
+
+  // TODO: better wording could be used here - it is too convoluted.
+  /** Create a new SourceCompletionContext for completion.
+   *
+   * The position at which the completion using the new context will consider
+   * completion is current cursor position.
+   *
+   * @return A new SourceCompletionContext.
+   *
+   * @newin{2,10}
+   */
   Glib::RefPtr<SourceCompletionContext> create_context();
 
-  _WRAP_METHOD(void move_window(const Gtk::TextIter& position), gtk_source_completion_move_window)
+  /** Move the completion window to a specific iter.
+   *
+   * @param iter A Gtk::TextIter.
+   *
+   * @newin{2,10}
+   */
+  _WRAP_METHOD(void move_window(const Gtk::TextIter& iter), gtk_source_completion_move_window)
 
+  /** Block interactive completion.
+   *
+   * This can be used to disable interactive completion when inserting or
+   * deleting text from the buffer associated with the completion. Use
+   * unblock_interactive() to enable interactive completion again.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void block_interactive(), gtk_source_completion_block_interactive)
+
+  /** Unblock interactive completion.
+   *
+   * This can be used after using block_interactive() to enable interactive
+   * completion again.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void unblock_interactive(), gtk_source_completion_unblock_interactive)
 
+  /** Emitted when the completion window is hidden.
+   *
+   * The default handler will actually hide the window.
+   *
+   * @newin{2,10}
+   */
   _WRAP_SIGNAL(void hide(), "hide")
+
+  /** Emitted just before starting to populate the completion with providers.
+   *
+   * You can use this signal to add additional attributes in the context.
+   *
+   * @par Handler parameters:
+   * context The context for current completion.
+   *
+   * @newin{2,10}
+   */
   _WRAP_SIGNAL(void populate_context(const Glib::RefPtr<SourceCompletionContext>& context), "populate-context")
+
+  /** Emitted when the completion window is shown.
+   *
+   * The default handler will actually show the window.
+   *
+   * @newin{2,10}
+   */
   _WRAP_SIGNAL(void show(), "show")
 // those are keybinding signals, so ignore them
   _IGNORE_SIGNAL(activate-proposal)

@@ -28,19 +28,97 @@ _PINCLUDE(gtkmm/private/window_p.h)
 namespace gtksourceview
 {
 
+/** Calltips object
+ *
+ * This object can be used to show a calltip or help for the current completion
+ * proposal.
+ *
+ * @newin{2,10}
+ */
 class SourceCompletionInfo : public Gtk::Window
 {
   _CLASS_GTKOBJECT(SourceCompletionInfo, GtkSourceCompletionInfo, GTK_SOURCE_COMPLETION_INFO, Gtk::Window, GtkWindow)
 
 public:
+  /** Creates new SourceCompletionInfo popup window.
+   *
+   * @return The new SourceCompletionInfo.
+   *
+   * @newin{2,10}
+   */
   SourceCompletionInfo();
 
+  /** Moves the SourceCompletionInfo to @a iter. Moving will respect the
+   * Gdk::Gravity setting of the info window and will ensure the line at @a iter
+   * is not occluded by the window.
+   *
+   * @param view A Gtk::TextView on which the info window should be positioned.
+   * @param iter A Gtk::TextIter.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void move_to_iter(const Gtk::TextView& view, const Gtk::TextIter& iter), gtk_source_completion_info_move_to_iter)
+
+  /** Moves the Gtk::SourceCompletionInfo to the cursor position. Moving will
+   * respect the Gdk::Gravity setting of the info window and will ensure the
+   * line at cursor position is not occluded by the window.
+   *
+   * @param view A Gtk::TextView on which the info window should be positioned.
+   *
+   * @newin{2,10}
+   */
   void move_to_iter(const Gtk::TextView& view);
+
+  /** Set sizing information for the info window.
+   *
+   * If @a shrink_width or @a shrink_height is @c true, the info window will try
+   * to resize to fit the window contents, with a maximum size given by @a width
+   * and @a height. Setting @a width or @a height to -1 removes the maximum size
+   * of respectively the width and height of the window.
+   *
+   * @param width The maximum/requested width of the window (-1 to default).
+   * @param height The maximum/requested height of the window (-1 to default).
+   * @param shrink_width Whether to shrink the width of the window to fit its
+   * contents.
+   * @param shrink_height Whether to shrink the height of the window to fit its
+   * contents.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void set_sizing(int width, int height, bool shrink_width, bool shrink_height), gtk_source_completion_info_set_sizing)
+
+  /** Sets the content widget of the info window.
+   *
+   * If @a widget does not fit within the size requirements of the window,
+   * a Gtk::ScrolledWindow will automatically be created and added to
+   * the window.
+   *
+   * @param widget A Gtk::Widget.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void set_widget(Gtk::Widget& widget), gtk_source_completion_info_set_widget)
+
+  /** Get the current content widget.
+   *
+   * @return The current content widget.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(Gtk::Widget* get_widget(), gtk_source_completion_info_get_widget)
+
+  /** Get the current content widget.
+   *
+   * @return The current content widget.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(const Gtk::Widget* get_widget() const, gtk_source_completion_info_get_widget, constversion)
+
+  /** Do a resize if possible.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void process_resize(), gtk_source_completion_info_process_resize)
 
   _WRAP_PROPERTY("max-height", int)
@@ -48,6 +126,13 @@ public:
   _WRAP_PROPERTY("shrink-height", bool)
   _WRAP_PROPERTY("shrink-width", bool)
 
+  /** Emited before any "show" management.
+   *
+   * You can connect to this signal if you want to change some properties or
+   * position before the real "show".
+   *
+   * @newin{2,10}
+   */
   _WRAP_SIGNAL(void before_show(), "before-show")
 };
 

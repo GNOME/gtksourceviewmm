@@ -2,11 +2,12 @@
 #ifndef _GTKSOURCEVIEWMM_WRAP_INIT_H
 #define _GTKSOURCEVIEWMM_WRAP_INIT_H
 
-#include <glibmm.h>
+#include <gtkmm/main.h>
 
 /* wrap_init.h
  *
  * Copyright (C) 2005-2006 The gtksourceviewmm development team
+ * Copyright (C) 2010 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -24,7 +25,9 @@
  */
 namespace gtksourceview
 {
-    void wrap_init () ;
+  /** Initializes wrapper types.
+   */
+  void wrap_init () ;
 }//end namespace gtksourceview
 
 #endif //_GTKSOURCEVIEWMM_WRAP_INIT_H

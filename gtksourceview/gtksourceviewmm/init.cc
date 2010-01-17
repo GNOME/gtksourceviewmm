@@ -1,6 +1,7 @@
 /* init.h
  *
  * Copyright (C) 2005-2006 The gtksourceviewmm development team
+ * Copyright (C) 2010 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -26,10 +27,10 @@ init ()
 {
     static bool s_init = false ;
     if (!s_init) {
-        Glib::init () ;
+        Gtk::Main::init_gtkmm_internals();
         gtksourceview::wrap_init () ;
         s_init = true ;
     }
 }
 
-}
+} // namespace gtksourceview

@@ -1,3 +1,12 @@
+2.9.1:
+* Documentation: Documented all stuff.
+  (Krzesimir Nowak)
+* SourceBuffer: Added default constructor and unset_style_scheme() method.
+  (Krzesimir Nowak)
+* SourceView: Added unset_mark_category_icon() and
+  unset_mark_category_background() methods.
+  (Krzesimir Nowak)
+
 2.9.0:
 * Transition to mm-common build infrastructure.
   (Krzesimir Nowak)

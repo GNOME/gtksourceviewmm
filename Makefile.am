@@ -18,6 +18,8 @@ SUBDIRS = $(src_subdirs) gtksourceview/gtksourceviewmm $(doc_subdirs) tests
 
 dist_noinst_SCRIPTS = autogen.sh
 
+dist_noinst_DATA = ChangeLog.pre-git
+
 gtksourceviewmm_includedir = $(includedir)/$(GTKSOURCEVIEWMM_MODULE_NAME)
 gtksourceviewmm_include_HEADERS = gtksourceview/gtksourceviewmm.h
 gtksourceviewmm_libincludedir = $(libdir)/$(GTKSOURCEVIEWMM_MODULE_NAME)/include

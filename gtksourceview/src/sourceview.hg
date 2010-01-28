@@ -537,8 +537,9 @@ public:
    */
   _WRAP_SIGNAL(void line_mark_activated(Gtk::TextIter& mark, GdkEvent* event), "line-mark-activated", no_default_handler)
 
-  // this is a keybinding signal, so we ignore it.
+  // these are keybinding signals, so we ignore them.
   _IGNORE_SIGNAL(show-completion)
+  _IGNORE_SIGNAL(move-lines)
 
   _WRAP_PROPERTY("show-line-numbers", bool)
 

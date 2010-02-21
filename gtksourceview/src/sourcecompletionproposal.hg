@@ -28,6 +28,8 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace gtksourceview
 {
 
+// XXX: that interface won't work - see bgo 610342
+// TODO: add vfuncs after above bug is fixed.
 /** Completion proposal object.
  *
  * The proposal interface represents a completion item in the completion window.

@@ -21,14 +21,6 @@
 #include "glibmm_generate_extra_defs/generate_extra_defs.h"
 
 #include <gtksourceview/gtksourcebuffer.h>
-#include <gtksourceview/gtksourcelanguage.h>
-#include <gtksourceview/gtksourcelanguagemanager.h>
-#include <gtksourceview/gtksourcemark.h>
-#include <gtksourceview/gtksourcestyle.h>
-#include <gtksourceview/gtksourcestylescheme.h>
-#include <gtksourceview/gtksourcestyleschememanager.h>
-#include <gtksourceview/gtksourceview.h>
-#include <gtksourceview/gtksourceview-typebuiltins.h>
 #include <gtksourceview/gtksourcecompletion.h>
 #include <gtksourceview/gtksourcecompletioncontext.h>
 #include <gtksourceview/gtksourcecompletioninfo.h>
@@ -36,7 +28,16 @@
 #include <gtksourceview/gtksourcecompletionproposal.h>
 #include <gtksourceview/gtksourcecompletionprovider.h>
 #include <gtksourceview/gtksourcegutter.h>
+#include <gtksourceview/gtksourcelanguage.h>
+#include <gtksourceview/gtksourcelanguagemanager.h>
+#include <gtksourceview/gtksourcemark.h>
 #include <gtksourceview/gtksourceprintcompositor.h>
+#include <gtksourceview/gtksourcestyle.h>
+#include <gtksourceview/gtksourcestylescheme.h>
+#include <gtksourceview/gtksourcestyleschememanager.h>
+#include <gtksourceview/gtksourceundomanager.h>
+#include <gtksourceview/gtksourceview.h>
+#include <gtksourceview/gtksourceview-typebuiltins.h>
 
 #include <gtksourceview/completion-providers/words/gtksourcecompletionwords.h>
 
@@ -45,13 +46,6 @@ int main (int argc, char *argv[])
   gtk_init(&argc, &argv);
 
   std::cout << get_defs ( GTK_TYPE_SOURCE_BUFFER )
-            << get_defs ( GTK_TYPE_SOURCE_LANGUAGE )
-            << get_defs ( GTK_TYPE_SOURCE_LANGUAGE_MANAGER )
-            << get_defs ( GTK_TYPE_SOURCE_MARK )
-            << get_defs ( GTK_TYPE_SOURCE_STYLE )
-            << get_defs ( GTK_TYPE_SOURCE_STYLE_SCHEME )
-            << get_defs ( GTK_TYPE_SOURCE_STYLE_SCHEME_MANAGER )
-            << get_defs ( GTK_TYPE_SOURCE_VIEW )
             << get_defs ( GTK_TYPE_SOURCE_COMPLETION )
             << get_defs ( GTK_TYPE_SOURCE_COMPLETION_CONTEXT )
             << get_defs ( GTK_TYPE_SOURCE_COMPLETION_INFO )
@@ -59,7 +53,16 @@ int main (int argc, char *argv[])
             << get_defs ( GTK_TYPE_SOURCE_COMPLETION_PROPOSAL )
             << get_defs ( GTK_TYPE_SOURCE_COMPLETION_PROVIDER )
             << get_defs ( GTK_TYPE_SOURCE_GUTTER )
+            << get_defs ( GTK_TYPE_SOURCE_LANGUAGE )
+            << get_defs ( GTK_TYPE_SOURCE_LANGUAGE_MANAGER )
+            << get_defs ( GTK_TYPE_SOURCE_MARK )
             << get_defs ( GTK_TYPE_SOURCE_PRINT_COMPOSITOR )
+            << get_defs ( GTK_TYPE_SOURCE_STYLE )
+            << get_defs ( GTK_TYPE_SOURCE_STYLE_SCHEME )
+            << get_defs ( GTK_TYPE_SOURCE_STYLE_SCHEME_MANAGER )
+            << get_defs ( GTK_TYPE_SOURCE_UNDO_MANAGER )
+            << get_defs ( GTK_TYPE_SOURCE_VIEW )
+
             << get_defs ( GTK_TYPE_SOURCE_COMPLETION_WORDS );
   return 0;
 }

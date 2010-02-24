@@ -96,6 +96,12 @@
   (gtype-id "GTK_TYPE_SOURCE_STYLE_SCHEME_MANAGER")
 )
 
+(define-object SourceUndoManager
+  (in-module "Gtk")
+  (c-name "GtkSourceUndoManager")
+  (gtype-id "GTK_TYPE_SOURCE_UNDO_MANAGER")
+)
+
 (define-object SourceView
   (in-module "Gtk")
   (parent "GtkTextView")
@@ -422,6 +428,21 @@
   )
 )
 
+(define-method get_undo_manager
+  (of-object "GtkSourceBuffer")
+  (c-name "gtk_source_buffer_get_undo_manager")
+  (return-type "GtkSourceUndoManager*")
+)
+
+(define-method set_undo_manager
+  (of-object "GtkSourceBuffer")
+  (c-name "gtk_source_buffer_set_undo_manager")
+  (return-type "none")
+  (parameters
+    '("GtkSourceUndoManager*" "manager")
+  )
+)
+
 
 
 ;; From gtksourcecompletioncontext.h
@@ -662,19 +683,19 @@
 (define-method get_label
   (of-object "GtkSourceCompletionProposal")
   (c-name "gtk_source_completion_proposal_get_label")
-  (return-type "const-gchar*")
+  (return-type "gchar*")
 )
 
 (define-method get_markup
   (of-object "GtkSourceCompletionProposal")
   (c-name "gtk_source_completion_proposal_get_markup")
-  (return-type "const-gchar*")
+  (return-type "gchar*")
 )
 
 (define-method get_text
   (of-object "GtkSourceCompletionProposal")
   (c-name "gtk_source_completion_proposal_get_text")
-  (return-type "const-gchar*")
+  (return-type "gchar*")
 )
 
 (define-method get_icon
@@ -686,7 +707,7 @@
 (define-method get_info
   (of-object "GtkSourceCompletionProposal")
   (c-name "gtk_source_completion_proposal_get_info")
-  (return-type "const-gchar*")
+  (return-type "gchar*")
 )
 
 (define-method changed
@@ -722,7 +743,7 @@
 (define-method get_name
   (of-object "GtkSourceCompletionProvider")
   (c-name "gtk_source_completion_provider_get_name")
-  (return-type "const-gchar*")
+  (return-type "gchar*")
 )
 
 (define-method get_icon
@@ -1531,6 +1552,63 @@
   (parameters
     '("const-gchar*" "scheme_id")
   )
+)
+
+
+
+;; From gtksourceundomanager.h
+
+(define-function gtk_source_undo_manager_get_type
+  (c-name "gtk_source_undo_manager_get_type")
+  (return-type "GType")
+)
+
+(define-method can_undo
+  (of-object "GtkSourceUndoManager")
+  (c-name "gtk_source_undo_manager_can_undo")
+  (return-type "gboolean")
+)
+
+(define-method can_redo
+  (of-object "GtkSourceUndoManager")
+  (c-name "gtk_source_undo_manager_can_redo")
+  (return-type "gboolean")
+)
+
+(define-method undo
+  (of-object "GtkSourceUndoManager")
+  (c-name "gtk_source_undo_manager_undo")
+  (return-type "none")
+)
+
+(define-method redo
+  (of-object "GtkSourceUndoManager")
+  (c-name "gtk_source_undo_manager_redo")
+  (return-type "none")
+)
+
+(define-method begin_not_undoable_action
+  (of-object "GtkSourceUndoManager")
+  (c-name "gtk_source_undo_manager_begin_not_undoable_action")
+  (return-type "none")
+)
+
+(define-method end_not_undoable_action
+  (of-object "GtkSourceUndoManager")
+  (c-name "gtk_source_undo_manager_end_not_undoable_action")
+  (return-type "none")
+)
+
+(define-method can_undo_changed
+  (of-object "GtkSourceUndoManager")
+  (c-name "gtk_source_undo_manager_can_undo_changed")
+  (return-type "none")
+)
+
+(define-method can_redo_changed
+  (of-object "GtkSourceUndoManager")
+  (c-name "gtk_source_undo_manager_can_redo_changed")
+  (return-type "none")
 )
 
 

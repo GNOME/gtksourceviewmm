@@ -1,14 +1,5 @@
 ;; h2def.py does not parse struct _MyStuff as return type properly.
 
-;; From gtksourcecompletioncontext.h
-
-; that got removed recently
-;(define-method get_view
-;  (of-object "GtkSourceCompletionContext")
-;  (c-name "gtk_source_completion_context_get_view")
-;  (return-type "GtkSourceView*")
-;)
-
 ;; From gtksourcecompletion.h
 
 (define-method get_view

@@ -96,6 +96,29 @@ Since: 2.2
 </return>
 </function>
 
+<function name="gtk_source_view_get_mark_category_priority">
+<description>
+Gets the priority which is associated with the given @category.
+
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="category">
+<parameter_description> a mark category.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the priority or if @category
+exists but no priority was set, it defaults to 0.
+
+Since: 2.2
+</return>
+</function>
+
 <function name="idle_worker">
 <description>
 @ce: #GtkSourceContextEngine.
@@ -187,7 +210,8 @@ See gtk_source_style_scheme_manager_set_search_path() for details.
 <function name="gtk_source_completion_provider_get_name">
 <description>
 Get the name of the provider. This should be a translatable name for
-display to the user. For example: _(&quot;Document word completion provider&quot;).
+display to the user. For example: _(&quot;Document word completion provider&quot;). The
+returned string must be freed with g_free().
 
 
 </description>
@@ -197,7 +221,7 @@ display to the user. For example: _(&quot;Document word completion provider&quot
 </parameter_description>
 </parameter>
 </parameters>
-<return> The name of the provider.
+<return> A new string containing the name of the provider.
 </return>
 </function>
 
@@ -511,6 +535,25 @@ Since: 2.2
 </return>
 </function>
 
+<function name="gtk_source_undo_manager_begin_not_undoable_action">
+<description>
+Begin a not undoable action on the buffer. All changes between this call
+and the call to #gtk_source_undo_manager_end_not_undoable_action cannot
+be undone. This function should be re-entrant.
+
+Since: 2.10
+
+
+</description>
+<parameters>
+<parameter name="manager">
+<parameter_description> A #GtkSourceUndoManager
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
 <function name="ancestor_context_ends_here">
 <description>
 @state: current context.
@@ -559,28 +602,6 @@ Hides the completion if it is active (visible).
 </parameter>
 </parameters>
 <return></return>
-</function>
-
-<function name="gtk_source_undo_manager_merge_action">
-<description>
-This function tries to merge the undo action at the top of
-the stack with a new undo action. So when we undo for example
-typing, we can undo the whole word and not each letter by itself.
-
-
-</description>
-<parameters>
-<parameter name="um">
-<parameter_description> a #GtkSourceUndoManager.
-</parameter_description>
-</parameter>
-<parameter name="undo_action">
-<parameter_description> a #GtkSourceUndoAction.
-</parameter_description>
-</parameter>
-</parameters>
-<return> %TRUE is merge was sucessful, %FALSE otherwise.
-</return>
 </function>
 
 <function name="GtkSourceView">
@@ -651,20 +672,43 @@ Since: 2.2
 <return></return>
 </function>
 
-<function name="gtk_source_style_scheme_manager_force_rescan">
+<function name="gtk_source_undo_manager_undo">
 <description>
-Mark any currently cached information about the available style scehems
-as invalid. All the available style schemes will be reloaded next time
-the @manager is accessed.
+Perform a single undo. Calling this function when there are no undo operations
+available is an error. Use #gtk_source_undo_manager_can_undo to find out
+if there are undo operations available.
+
+Since: 2.10
+
 
 </description>
 <parameters>
 <parameter name="manager">
-<parameter_description> a #GtkSourceStyleSchemeManager
+<parameter_description> A #GtkSourceUndoManager
 </parameter_description>
 </parameter>
 </parameters>
 <return></return>
+</function>
+
+<function name="ancestor_ends_here">
+<description>
+@state: current state.
+@line: the line to analyze.
+@line_pos: the position inside @line, bytes.
+@new_state: where to store the new state.
+
+Verifies if some ancestor context ends at given position. If
+state changed and @new_state is not %NULL, then the new state is stored
+in @new_state, and descendants of @new_state are closed, so the
+terminating segment becomes current state.
+
+
+</description>
+<parameters>
+</parameters>
+<return> %TRUE if an ancestor ends at the given position.
+</return>
 </function>
 
 <function name="_gtk_source_style_scheme_new">
@@ -790,26 +834,20 @@ text.
 </return>
 </function>
 
-<function name="gtk_source_view_get_mark_category_priority">
+<function name="gtk_source_buffer_get_undo_manager">
 <description>
-Gets the priority which is associated with the given @category.
+Get the undo manager associated with the buffer.
 
 
 </description>
 <parameters>
-<parameter name="view">
-<parameter_description> a #GtkSourceView.
-</parameter_description>
-</parameter>
-<parameter name="category">
-<parameter_description> a mark category.
+<parameter name="buffer">
+<parameter_description> A #GtkSourceBuffer
 </parameter_description>
 </parameter>
 </parameters>
-<return> the priority or if @category
-exists but no priority was set, it defaults to 0.
+<return> A #GtkSourceUndoManager
 
-Since: 2.2
 </return>
 </function>
 
@@ -1036,24 +1074,19 @@ subpatterns list.
 </return>
 </function>
 
-<function name="gtk_source_print_compositor_get_highlight_syntax">
+<function name="GtkSourceBuffer">
 <description>
-Determines whether the printed text will be highlighted according to the
-buffer rules.  Note that highlighting will happen
-only if the buffer to print has highlighting activated.
-
+The ::source_mark_updated signal is emitted each time
+a mark is added to, moved or removed from the @buffer.
 
 </description>
 <parameters>
-<parameter name="compositor">
-<parameter_description> a #GtkSourcePrintCompositor.
+<parameter name="buffer">
+<parameter_description> the buffer that received the signal
 </parameter_description>
 </parameter>
 </parameters>
-<return> %TRUE if the printed output will be highlighted.
-
-Since: 2.2
-</return>
+<return></return>
 </function>
 
 <function name="get_invalid_segment">
@@ -2394,23 +2427,25 @@ you have to call this function right after creating it.
 <return></return>
 </function>
 
-<function name="ancestor_ends_here">
+<function name="gtk_source_undo_manager_default_merge_action">
 <description>
-@state: current state.
-@line: the line to analyze.
-@line_pos: the position inside @line, bytes.
-@new_state: where to store the new state.
-
-Verifies if some ancestor context ends at given position. If
-state changed and @new_state is not %NULL, then the new state is stored
-in @new_state, and descendants of @new_state are closed, so the
-terminating segment becomes current state.
+This function tries to merge the undo action at the top of
+the stack with a new undo action. So when we undo for example
+typing, we can undo the whole word and not each letter by itself.
 
 
 </description>
 <parameters>
+<parameter name="um">
+<parameter_description> a #GtkSourceUndoManagerDefault.
+</parameter_description>
+</parameter>
+<parameter name="undo_action">
+<parameter_description> a #GtkSourceUndoAction.
+</parameter_description>
+</parameter>
 </parameters>
-<return> %TRUE if an ancestor ends at the given position.
+<return> %TRUE is merge was sucessful, %FALSE otherwise.
 </return>
 </function>
 
@@ -2738,6 +2773,25 @@ Returns: the section of @language.
 The returned string is owned by @language and should not be freed
 or modified.
 </return>
+</function>
+
+<function name="gtk_source_undo_manager_redo">
+<description>
+Perform a single redo. Calling this function when there are no redo operations
+available is an error. Use #gtk_source_undo_manager_can_redo to find out
+if there are redo operations available.
+
+Since: 2.10
+
+
+</description>
+<parameters>
+<parameter name="manager">
+<parameter_description> A #GtkSourceUndoManager
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
 </function>
 
 <function name="gtk_source_view_set_smart_home_end">
@@ -3387,6 +3441,23 @@ function only notifies the view).
 <return></return>
 </function>
 
+<function name="gtk_source_undo_manager_end_not_undoable_action">
+<description>
+Ends a not undoable action on the buffer.
+
+Since: 2.10
+
+
+</description>
+<parameters>
+<parameter name="manager">
+<parameter_description> A #GtkSourceUndoManager
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
 <function name="GtkSourceMark">
 <description>
 The category of the #GtkSourceMark, classifies the mark and controls
@@ -3960,6 +4031,22 @@ Sets current style scheme, updates tag styles and everything.
 <return></return>
 </function>
 
+<function name="gtk_source_style_scheme_manager_force_rescan">
+<description>
+Mark any currently cached information about the available style scehems
+as invalid. All the available style schemes will be reloaded next time
+the @manager is accessed.
+
+</description>
+<parameters>
+<parameter name="manager">
+<parameter_description> a #GtkSourceStyleSchemeManager
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
 <function name="gtk_source_buffer_get_source_marks_at_line">
 <description>
 Returns: a newly allocated #GSList.
@@ -4085,6 +4172,23 @@ Creates a new #GtkSourceView widget displaying the buffer
 </return>
 </function>
 
+<function name="gtk_source_undo_manager_can_redo_changed">
+<description>
+Emits the #GtkSourceUndoManager::can-redo-changed signal.
+
+Since: 2.10
+
+
+</description>
+<parameters>
+<parameter name="manager">
+<parameter_description> A #GtkSourceUndoManager
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
 <function name="_gtk_source_buffer_update_highlight">
 <description>
 Asks the buffer to analyze and highlight given area.
@@ -4146,7 +4250,7 @@ Since: 2.10
 Gets the text of @proposal. The text that is inserted into
 the text buffer when the proposal is activated by the default activation.
 You are free to implement a custom activation handler in the provider and
-not implement this function.
+not implement this function. The returned string must be freed with g_free().
 
 
 </description>
@@ -4156,36 +4260,61 @@ not implement this function.
 </parameter_description>
 </parameter>
 </parameters>
-<return> The text of @proposal.
+<return> A new string containing the text of @proposal.
 </return>
 </function>
 
-<function name="gtk_source_completion_item_new_from_stock">
+<function name="gtk_source_undo_manager_can_redo">
 <description>
-Creates a new #GtkSourceCompletionItem from a stock item. If @label is %NULL, 
-the stock label will be used.
+Get whether there are redo operations available.
+
+Since: 2.10
 
 
 </description>
 <parameters>
-<parameter name="label">
-<parameter_description> The item label
-</parameter_description>
-</parameter>
-<parameter name="text">
-<parameter_description> The item text
-</parameter_description>
-</parameter>
-<parameter name="stock">
-<parameter_description> The stock icon
-</parameter_description>
-</parameter>
-<parameter name="info">
-<parameter_description> The item extra information
+<parameter name="manager">
+<parameter_description> A #GtkSourceUndoManager
 </parameter_description>
 </parameter>
 </parameters>
-<return> the newly constructed #GtkSourceCompletionItem.
+<return> %TRUE if there are redo operations available, %FALSE otherwise
+
+</return>
+</function>
+
+<function name="gtk_source_undo_manager_can_undo_changed">
+<description>
+Emits the #GtkSourceUndoManager::can-undo-changed signal.
+
+Since: 2.10
+
+
+</description>
+<parameters>
+<parameter name="manager">
+<parameter_description> A #GtkSourceUndoManager
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_undo_manager_can_undo">
+<description>
+Get whether there are undo operations available.
+
+Since: 2.10
+
+
+</description>
+<parameters>
+<parameter name="manager">
+<parameter_description> A #GtkSourceUndoManager
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if there are undo operations available, %FALSE otherwise
 
 </return>
 </function>
@@ -4449,23 +4578,6 @@ There is no return value, it always succeeds (or crashes).
 <parameters>
 </parameters>
 <return></return>
-</function>
-
-<function name="gtk_source_completion_context_get_view">
-<description>
-Get the #GtkSourceView to which the context applies
-
-
-</description>
-<parameters>
-<parameter name="context">
-<parameter_description> A #GtkSourceCompletionContext
-</parameter_description>
-</parameter>
-</parameters>
-<return> A #GtkSourceView
-
-</return>
 </function>
 
 <function name="child_starts_here">
@@ -4756,6 +4868,26 @@ arguments.
 </return>
 </function>
 
+<function name="gtk_source_buffer_set_undo_manager">
+<description>
+Set the buffer undo manager. If @manager is %NULL the default undo manager
+will be set.
+
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> A #GtkSourceBuffer
+</parameter_description>
+</parameter>
+<parameter name="manager">
+<parameter_description> A #GtkSourceUndoManager
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
 <function name="highlight_region">
 <description>
 @ce: a #GtkSourceContextEngine.
@@ -5005,20 +5137,29 @@ Since: 2.2
 <return></return>
 </function>
 
-<function name="gtk_source_gutter_remove">
+<function name="gtk_source_buffer_set_max_undo_levels">
 <description>
-Removes @renderer from @gutter.
+Sets the number of undo levels for user actions the buffer will
+track.  If the number of user actions exceeds the limit set by this
+function, older actions will be discarded.
 
-Since: 2.8
+If @max_undo_levels is -1, no limit is set.
+
+A new action is started whenever the function
+gtk_text_buffer_begin_user_action() is called.  In general, this
+happens whenever the user presses any key which modifies the
+buffer, but the undo manager will try to merge similar consecutive
+actions, such as multiple character insertions into one action.
+But, inserting a newline does start a new action.
 
 </description>
 <parameters>
-<parameter name="gutter">
-<parameter_description> a #GtkSourceGutter
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
 </parameter_description>
 </parameter>
-<parameter name="renderer">
-<parameter_description> a #GtkCellRenderer
+<parameter name="max_undo_levels">
+<parameter_description> the desired maximum number of undo levels.
 </parameter_description>
 </parameter>
 </parameters>
@@ -5059,6 +5200,26 @@ Since: 2.2
 <return></return>
 </function>
 
+<function name="gtk_source_print_compositor_get_highlight_syntax">
+<description>
+Determines whether the printed text will be highlighted according to the
+buffer rules.  Note that highlighting will happen
+only if the buffer to print has highlighting activated.
+
+
+</description>
+<parameters>
+<parameter name="compositor">
+<parameter_description> a #GtkSourcePrintCompositor.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if the printed output will be highlighted.
+
+Since: 2.2
+</return>
+</function>
+
 <function name="gtk_source_view_set_tab_width">
 <description>
 Sets the width of tabulation in characters.
@@ -5096,7 +5257,8 @@ segments never become valid).
 <description>
 Gets the label of @proposal with markup. The label is shown in the list of 
 proposals and may contain markup. This will be used instead of
-#gtk_source_completion_proposal_get_label if implemented.
+#gtk_source_completion_proposal_get_label if implemented. The returned string
+must be freed with g_free().
 
 
 </description>
@@ -5106,7 +5268,7 @@ proposals and may contain markup. This will be used instead of
 </parameter_description>
 </parameter>
 </parameters>
-<return> The label of @proposal with markup.
+<return> A new string containing the label of @proposal with markup.
 </return>
 </function>
 
@@ -5193,7 +5355,7 @@ text editor).
 <description>
 Gets extra information associated to the proposal. This information will be
 used to present the user with extra, detailed information about the
-selected proposal.
+selected proposal. The returned string must be freed with g_free().
 
 
 </description>
@@ -5203,8 +5365,8 @@ selected proposal.
 </parameter_description>
 </parameter>
 </parameters>
-<return> The extra information of @proposal or %NULL if no extra information
-is associated to @proposal.
+<return> A new string containing extra information of @proposal or %NULL if
+no extra information is associated to @proposal.
 </return>
 </function>
 
@@ -5269,6 +5431,36 @@ again.
 </parameter>
 </parameters>
 <return></return>
+</function>
+
+<function name="gtk_source_completion_item_new_from_stock">
+<description>
+Creates a new #GtkSourceCompletionItem from a stock item. If @label is %NULL, 
+the stock label will be used.
+
+
+</description>
+<parameters>
+<parameter name="label">
+<parameter_description> The item label
+</parameter_description>
+</parameter>
+<parameter name="text">
+<parameter_description> The item text
+</parameter_description>
+</parameter>
+<parameter name="stock">
+<parameter_description> The stock icon
+</parameter_description>
+</parameter>
+<parameter name="info">
+<parameter_description> The item extra information
+</parameter_description>
+</parameter>
+</parameters>
+<return> the newly constructed #GtkSourceCompletionItem.
+
+</return>
 </function>
 
 <function name="gtk_source_completion_info_move_to_iter">
@@ -5673,6 +5865,23 @@ If @dirs is %NULL, the search path is reset to default.
 <return></return>
 </function>
 
+<function name="GtkSourceUndoManager">
+<description>
+Emitted when the ability to redo has changed.
+
+Since: 2.10
+
+
+</description>
+<parameters>
+<parameter name="manager">
+<parameter_description> The #GtkSourceUndoManager
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
 <function name="segment_add_subpattern">
 <description>
 @state: the segment.
@@ -5804,35 +6013,6 @@ Called from GtkTextBuffer::delete_range.
 <return></return>
 </function>
 
-<function name="gtk_source_buffer_set_max_undo_levels">
-<description>
-Sets the number of undo levels for user actions the buffer will
-track.  If the number of user actions exceeds the limit set by this
-function, older actions will be discarded.
-
-If @max_undo_levels is -1, no limit is set.
-
-A new action is started whenever the function
-gtk_text_buffer_begin_user_action() is called.  In general, this
-happens whenever the user presses any key which modifies the
-buffer, but the undo manager will try to merge similar consecutive
-actions, such as multiple character insertions into one action.
-But, inserting a newline does start a new action.
-
-</description>
-<parameters>
-<parameter name="buffer">
-<parameter_description> a #GtkSourceBuffer.
-</parameter_description>
-</parameter>
-<parameter name="max_undo_levels">
-<parameter_description> the desired maximum number of undo levels.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
 <function name="gtk_source_completion_utils_replace_current_word">
 <description>
 Replaces the current word in the #GtkSourceBuffer with the new word
@@ -5889,15 +6069,20 @@ The returned array must be freed with g_strfreev().
 </return>
 </function>
 
-<function name="GtkSourceBuffer">
+<function name="gtk_source_gutter_remove">
 <description>
-The ::source_mark_updated signal is emitted each time
-a mark is added to, moved or removed from the @buffer.
+Removes @renderer from @gutter.
+
+Since: 2.8
 
 </description>
 <parameters>
-<parameter name="buffer">
-<parameter_description> the buffer that received the signal
+<parameter name="gutter">
+<parameter_description> a #GtkSourceGutter
+</parameter_description>
+</parameter>
+<parameter name="renderer">
+<parameter_description> a #GtkCellRenderer
 </parameter_description>
 </parameter>
 </parameters>
@@ -6049,7 +6234,8 @@ references.
 <description>
 Gets the label of @proposal. The label is shown in the list of proposals as
 plain text. If you need any markup (such as bold or italic text), you have
-to implement #gtk_source_completion_proposal_get_markup.
+to implement #gtk_source_completion_proposal_get_markup. The returned string
+must be freed with g_free().
 
 
 </description>
@@ -6059,7 +6245,7 @@ to implement #gtk_source_completion_proposal_get_markup.
 </parameter_description>
 </parameter>
 </parameters>
-<return> The label of @proposal.
+<return> A new string containing the label of @proposal.
 </return>
 </function>
 

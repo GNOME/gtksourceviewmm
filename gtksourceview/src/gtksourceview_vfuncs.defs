@@ -1,0 +1,119 @@
+; GtkSourceCompletionProposal
+
+(define-vfunc get_label
+  (of-object "GtkSourceCompletionProposal")
+  (return-type "char*")
+)
+
+(define-vfunc get_markup
+  (of-object "GtkSourceCompletionProposal")
+  (return-type "char*")
+)
+
+(define-vfunc get_text
+  (of-object "GtkSourceCompletionProposal")
+  (return-type "char*")
+)
+
+(define-vfunc get_icon
+  (of-object "GtkSourceCompletionProposal")
+  (return-type "GdkPixbuf*")
+)
+
+(define-vfunc get_info
+  (of-object "GtkSourceCompletionProposal")
+  (return-type "char*")
+)
+
+(define-vfunc hash
+  (of-object "GtkSourceCompletionProposal")
+  (return-type "guint")
+)
+
+(define-vfunc equal
+  (of-object "GtkSourceCompletionProposal")
+  (return-type "gboolean")
+  (parameters
+    '("GtkSourceCompletionProposal*" "other")
+  )
+)
+
+; GtkSourceCompletionProvider
+
+(define-vfunc get_name
+  (of-object "GtkSourceCompletionProvider")
+  (return-type "char*")
+)
+
+(define-vfunc get_icon
+  (of-object "GtkSourceCompletionProvider")
+  (return-type "GdkPixbuf*")
+)
+
+(define-vfunc populate
+  (of-object "GtkSourceCompletionProvider")
+  (return-type "void")
+  (parameters
+    '("GtkSourceCompletionContext*" "context")
+  )
+)
+
+(define-vfunc match
+  (of-object "GtkSourceCompletionProvider")
+  (return-type "gboolean")
+  (parameters
+    '("GtkSourceCompletionContext*" "context")
+  )
+)
+
+(define-vfunc get_activation
+  (of-object "GtkSourceCompletionProvider")
+  (return-type "GtkSourceCompletionActivation")
+)
+
+(define-vfunc get_info_widget
+  (of-object "GtkSourceCompletionProvider")
+  (return-type "GtkWidget*")
+  (parameters
+    '("GtkSourceCompletionProposal*" "proposal")
+  )
+)
+
+(define-vfunc update_info
+  (of-object "GtkSourceCompletionProvider")
+  (return-type "void")
+  (parameters
+    '("GtkSourceCompletionProposal*" "proposal")
+    '("GtkSourceCompletionInfo*" "info")
+  )
+)
+
+(define-vfunc get_start_iter
+  (of-object "GtkSourceCompletionProvider")
+  (return-type "gboolean")
+  (parameters
+    '("GtkSourceCompletionContext*" "context"
+    '("GtkSourceCompletionProposal*" "proposal")
+    '("GtkTextIter*" "iter")
+  )
+)
+
+(define-vfunc activate_proposal
+  (of-object "GtkSourceCompletionProvider")
+  (return-type "gboolean")
+  (parameters
+    '("GtkSourceCompletionProposal*" "proposal")
+    '("GtkTextIter*" "iter")
+  )
+)
+
+(define-vfunc get_interactive_delay
+  (of-object "GtkSourceCompletionProvider")
+  (return-type "int")
+)
+
+(define-vfunc get_priority
+  (of-object "GtkSourceCompletionProvider")
+  (return-type "int")
+)
+

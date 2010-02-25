@@ -137,6 +137,14 @@ _CONVERSION(`const Glib::RefPtr<SourceStyleScheme>&',`GtkSourceStyleScheme*',`Gl
 _CONVERSION(`GtkSourceStyleSchemeManager*',`Glib::RefPtr<SourceStyleSchemeManager>',`Glib::wrap($3)')
 
 
+# GtkSourceUndoManager -> gtksourceview::SourceUndoManager
+_CONVERSION(`GtkSourceUndoManager*',`Glib::RefPtr<SourceUndoManager>',`Glib::wrap($3)')
+
+
+# gtksourceview::SourceUndoManager -> GtkSourceUndoManager
+_CONVERSION(`const Glib::RefPtr<const SourceUndoManager>&',`GtkSourceUndoManager*',`const_cast<GtkSourceUndoManager*>(Glib::unwrap($3))')
+
+
 # GtkSourceView -> Gtk::SourceView
 _CONVERSION(`GtkSourceView*',`SourceView*',`Glib::wrap($3)')
 

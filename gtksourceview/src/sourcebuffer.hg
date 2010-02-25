@@ -23,6 +23,7 @@
 #include <gtkmm/textbuffer.h>
 #include <gtksourceviewmm/sourcelanguage.h>
 #include <gtksourceviewmm/sourcemark.h>
+#include <gtksourceviewmm/sourceundomanager.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(gtkmm/private/textbuffer_p.h)
@@ -392,6 +393,14 @@ public:
    * @newin{2,10}
    */
   _WRAP_METHOD(Glib::StringArrayHandle get_context_classes_at_iter(const Gtk::TextIter& iter) const, gtk_source_buffer_get_context_classes_at_iter)
+
+  _WRAP_METHOD(Glib::RefPtr<SourceUndoManager> get_undo_manager(), gtk_source_buffer_get_undo_manager)
+
+  _WRAP_METHOD(Glib::RefPtr<const SourceUndoManager> get_undo_manager() const, gtk_source_buffer_get_undo_manager, constversion)
+
+  _WRAP_METHOD(void set_undo_manager(const Glib::RefPtr<const SourceUndoManager>& undo_manager), gtk_source_buffer_set_undo_manager)
+
+  void set_default_undo_manager();
 
   _WRAP_PROPERTY("highlight-syntax", bool)
   _WRAP_PROPERTY("highlight-matching-brackets", bool)

@@ -90,6 +90,12 @@ SourceBuffer::unset_style_scheme()
   gtk_source_buffer_set_style_scheme(gobj(), 0);
 }
 
+void
+SourceBuffer::set_default_undo_manager()
+{
+  gtk_source_buffer_set_undo_manager(gobj(), 0);
+}
+
 }//end namespace gtksourceview
 
 

@@ -1,0 +1,80 @@
+/* sourceundomanager.h
+ *
+ * Copyright (C) 2010 Krzesimir Nowak
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <glibmm/interface.h>
+#include <glibmm/ustring.h>
+#include <gdkmm/pixbuf.h>
+#include <gtksourceview/gtksourceundomanager.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(glibmm/private/interface_p.h)
+
+namespace gtksourceview
+{
+
+/** Completion proposal object.
+ *
+ * The proposal interface represents a completion item in the completion window.
+ * It provides information on how to display the completion item and what action
+ * should be taken when the completion item is activated.
+ *
+ * @newin{2,10}
+ */
+class SourceUndoManager : public Glib::Interface
+{
+  _CLASS_INTERFACE(SourceUndoManager, GtkSourceUndoManager, GTK_SOURCE_UNDO_MANAGER, GtkSourceUndoManagerIface)
+
+public:
+
+  _WRAP_METHOD(bool can_undo() const, gtk_source_undo_manager_can_undo)
+
+  _WRAP_METHOD(bool can_redo() const, gtk_source_undo_manager_can_redo)
+
+  _WRAP_METHOD(void undo(), gtk_source_undo_manager_undo)
+
+  _WRAP_METHOD(void redo(), gtk_source_undo_manager_redo)
+
+  _WRAP_METHOD(void begin_not_undoable_action(), gtk_source_undo_manager_begin_not_undoable_action)
+
+  _WRAP_METHOD(void end_not_undoable_action(), gtk_source_undo_manager_end_not_undoable_action)
+
+  _WRAP_METHOD(void can_undo_changed(), gtk_source_undo_manager_can_undo_changed)
+
+  _WRAP_METHOD(void can_redo_changed(), gtk_source_undo_manager_can_redo_changed)
+
+  _WRAP_SIGNAL(void can_undo_changed(), "can-undo-changed")
+
+  _WRAP_SIGNAL(void can_redo_changed(), "can-redo-changed")
+
+  _WRAP_VFUNC(bool can_undo() const, can_undo)
+
+  _WRAP_VFUNC(bool can_redo() const, can_redo)
+
+  _WRAP_VFUNC(void undo(), undo)
+
+  _WRAP_VFUNC(void redo(), redo)
+
+  _WRAP_VFUNC(void begin_not_undoable_action(), begin_not_undoable_action)
+
+  _WRAP_VFUNC(void end_not_undoable_action(), end_not_undoable_action)
+};
+
+} // namespace gtksourceview
+
+

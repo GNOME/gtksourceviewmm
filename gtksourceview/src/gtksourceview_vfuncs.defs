@@ -117,3 +117,34 @@
   (return-type "int")
 )
 
+; GtkSourceUndoManager
+
+(define-vfunc can_undo
+  (of-object "GtkSourceUndoManager")
+  (return-type "gboolean")
+)
+
+(define-vfunc can_redo
+  (of-object "GtkSourceUndoManager")
+  (return-type "gboolean")
+)
+
+(define-vfunc undo
+  (of-object "GtkSourceUndoManager")
+  (return-type "void")
+)
+
+(define-vfunc redo
+  (of-object "GtkSourceUndoManager")
+  (return-type "void")
+)
+
+(define-vfunc begin_not_undoable_action
+  (of-object "GtkSourceUndoManager")
+  (return-type "void")
+)
+
+(define-vfunc end_not_undoable_action
+  (of-object "GtkSourceUndoManager")
+  (return-type "void")
+)

@@ -9,23 +9,24 @@ files_defs =				\
 	gtksourceview_docs_override.xml
 
 files_hg =				\
-	sourcestyle.hg			\
-	sourcestylescheme.hg		\
+	sourcebuffer.hg			\
+	sourcecompletion.hg		\
+	sourcecompletionactivation.hg   \
+	sourcecompletioncontext.hg	\
+	sourcecompletioninfo.hg		\
+	sourcecompletionitem.hg		\
+	sourcecompletionproposal.hg	\
+	sourcecompletionprovider.hg	\
+	sourcegutter.hg			\
+	sourceiter.hg			\
 	sourcelanguage.hg		\
 	sourcelanguagemanager.hg	\
-	sourceview.hg			\
-	sourcebuffer.hg			\
-	sourceiter.hg			\
 	sourcemark.hg			\
-	sourcestyleschememanager.hg	\
-	sourcegutter.hg			\
-	sourcecompletioninfo.hg		\
-	sourcecompletionproposal.hg	\
-	sourcecompletionitem.hg		\
-	sourcecompletioncontext.hg	\
-	sourcecompletion.hg		\
-	sourcecompletionprovider.hg	\
 	sourceprintcompositor.hg	\
-	sourcecompletionactivation.hg
+	sourcestyle.hg			\
+	sourcestylescheme.hg		\
+	sourcestyleschememanager.hg	\
+	sourceundomanager.hg            \
+	sourceview.hg
 
 files_ccg = $(files_hg:.hg=.ccg)

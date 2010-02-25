@@ -73,9 +73,9 @@
 
 #include <gtksourceviewmm/init.h>
 #include <gtksourceviewmm/sourcebuffer.h>
+#include <gtksourceviewmm/sourcecompletion.h>
 #include <gtksourceviewmm/sourcecompletionactivation.h>
 #include <gtksourceviewmm/sourcecompletioncontext.h>
-#include <gtksourceviewmm/sourcecompletion.h>
 #include <gtksourceviewmm/sourcecompletioninfo.h>
 #include <gtksourceviewmm/sourcecompletionitem.h>
 #include <gtksourceviewmm/sourcecompletionproposal.h>
@@ -90,6 +90,7 @@
 #include <gtksourceviewmm/sourcestyle.h>
 #include <gtksourceviewmm/sourcestylescheme.h>
 #include <gtksourceviewmm/sourcestyleschememanager.h>
+#include <gtksourceviewmm/sourceundomanager.h>
 #include <gtksourceviewmm/sourceview.h>
 #include <gtksourceviewmm/wrap_init.h>
 

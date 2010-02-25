@@ -394,12 +394,32 @@ public:
    */
   _WRAP_METHOD(Glib::StringArrayHandle get_context_classes_at_iter(const Gtk::TextIter& iter) const, gtk_source_buffer_get_context_classes_at_iter)
 
+  /** Get the undo manager associated with the buffer.
+   * @return A SourceUndoManager.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(Glib::RefPtr<SourceUndoManager> get_undo_manager(), gtk_source_buffer_get_undo_manager)
 
+  /** Get the undo manager associated with the buffer.
+   * @return A SourceUndoManager.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(Glib::RefPtr<const SourceUndoManager> get_undo_manager() const, gtk_source_buffer_get_undo_manager, constversion)
 
+  /** Set the buffer undo manager.
+   *
+   * @param manager A SourceUndoManager.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void set_undo_manager(const Glib::RefPtr<const SourceUndoManager>& undo_manager), gtk_source_buffer_set_undo_manager)
 
+  /** Set the default buffer undo manager.
+   *
+   * @newin{2,10}
+   */
   void set_default_undo_manager();
 
   _WRAP_PROPERTY("highlight-syntax", bool)

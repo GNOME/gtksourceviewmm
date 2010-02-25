@@ -28,11 +28,16 @@ _PINCLUDE(glibmm/private/interface_p.h)
 namespace gtksourceview
 {
 
-/** Completion proposal object.
+/** Undo manager interface for SourceView.
  *
- * The proposal interface represents a completion item in the completion window.
- * It provides information on how to display the completion item and what action
- * should be taken when the completion item is activated.
+ * The SourceUndoManager interface can be implemented to provide custom
+ * undo management to a SourceBuffer. Use
+ * SourceBuffer::set_undo_manager() to install a custom undo manager for
+ * a particular source buffer.
+ *
+ * Use SourceUndoManager::can_undo_changed() and
+ * SourceUndoManager::can_redo_changed() when respectively the undo state
+ * or redo state of the undo stack has changed.
  *
  * @newin{2,10}
  */
@@ -42,24 +47,70 @@ class SourceUndoManager : public Glib::Interface
 
 public:
 
+  /** Get whether there are undo operations available.
+   *
+   * @return @c true if there are undo operations available, @c false otherwise.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(bool can_undo() const, gtk_source_undo_manager_can_undo)
 
+  /** Get whether there are redo operations available.
+   *
+   * @return @c true if there are redo operations available, @c false otherwise.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(bool can_redo() const, gtk_source_undo_manager_can_redo)
 
+  /** Perform a single undo. Calling this function when there are no undo
+   * operations available is an error. Use can_undo() to find out if there are
+   * undo operations available.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void undo(), gtk_source_undo_manager_undo)
 
+  /** Perform a single redo. Calling this function when there are no redo
+   * operations available is an error. Use can_redo() to find out if there are
+   * redo operations available.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void redo(), gtk_source_undo_manager_redo)
 
+  /** Begin a not undoable action on the buffer. All changes between this call
+   * and the call to end_not_undoable_action() cannot be undone. This function
+   * should be re-entrant.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void begin_not_undoable_action(), gtk_source_undo_manager_begin_not_undoable_action)
 
+  /** Ends a not undoable action on the buffer.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void end_not_undoable_action(), gtk_source_undo_manager_end_not_undoable_action)
 
+  /** Emits the 'can-undo-changed' signal.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void can_undo_changed(), gtk_source_undo_manager_can_undo_changed)
 
+  /** Emits the 'can-redo-changed' signal.
+   *
+   * @newin{2,10}
+   */
   _WRAP_METHOD(void can_redo_changed(), gtk_source_undo_manager_can_redo_changed)
 
+  /** Emitted when the ability to undo has changed.
+   */
   _WRAP_SIGNAL(void can_undo_changed(), "can-undo-changed")
 
+  /** Emitted when the ability to redo has changed.
+   */
   _WRAP_SIGNAL(void can_redo_changed(), "can-redo-changed")
 
   _WRAP_VFUNC(bool can_undo() const, can_undo)

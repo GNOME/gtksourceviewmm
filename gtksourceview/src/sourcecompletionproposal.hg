@@ -23,7 +23,7 @@
 #include <gtksourceview/gtksourcecompletionproposal.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
-_PINCLUDE(glibmm/private/object_p.h)
+_PINCLUDE(glibmm/private/interface_p.h)
 
 namespace gtksourceview
 {

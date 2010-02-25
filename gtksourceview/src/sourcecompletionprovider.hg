@@ -33,8 +33,6 @@ namespace gtksourceview
 
 class SourceCompletionContext;
 
-// XXX: that interface won't work - see bgo 610342
-// TODO: add vfuncs after above bug is fixed.
 /** Completion provider interface.
  *
  * You must implement this interface to provide proposals to SourceCompletion.

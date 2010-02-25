@@ -410,7 +410,7 @@ public:
 
   /** Set the buffer undo manager.
    *
-   * @param manager A SourceUndoManager.
+   * @param undo_manager A SourceUndoManager.
    *
    * @newin{2,10}
    */
@@ -429,6 +429,7 @@ public:
   _WRAP_PROPERTY("can-undo", bool)
   _WRAP_PROPERTY("can-redo", bool)
   _WRAP_PROPERTY("style-scheme", Glib::RefPtr<SourceStyleScheme>)
+  _WRAP_PROPERTY("undo-manager", Glib::RefPtr<SourceUndoManager>)
 
   /** Emitted whenever the syntax highlighting information has been updated,
    *  so that views can request a redraw if the region changed is visible.

@@ -92,7 +92,7 @@
   (of-object "GtkSourceCompletionProvider")
   (return-type "gboolean")
   (parameters
-    '("GtkSourceCompletionContext*" "context"
+    '("GtkSourceCompletionContext*" "context")
     '("GtkSourceCompletionProposal*" "proposal")
     '("GtkTextIter*" "iter")
   )

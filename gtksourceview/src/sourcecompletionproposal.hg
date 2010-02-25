@@ -28,8 +28,6 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace gtksourceview
 {
 
-// XXX: that interface won't work - see bgo 610342
-// TODO: add vfuncs after above bug is fixed.
 /** Completion proposal object.
  *
  * The proposal interface represents a completion item in the completion window.
@@ -143,6 +141,20 @@ public:
    * @newin{2,10}
    */
   _WRAP_SIGNAL(void changed(), "changed")
+
+  _WRAP_VFUNC(Glib::ustring get_label() const, get_label)
+
+  _WRAP_VFUNC(Glib::ustring get_markup() const, get_markup)
+
+  _WRAP_VFUNC(Glib::ustring get_text() const, get_text)
+
+  _WRAP_VFUNC(Glib::RefPtr<Gdk::Pixbuf> get_icon() const, get_icon, refreturn)
+
+  _WRAP_VFUNC(Glib::ustring get_info() const, get_info)
+
+  _WRAP_VFUNC(guint hash() const, hash)
+
+  _WRAP_VFUNC(bool equal(const Glib::RefPtr<const SourceCompletionProposal>& other) const, equal)
 };
 
 } // namespace gtksourceview

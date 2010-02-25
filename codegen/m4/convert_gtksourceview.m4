@@ -69,6 +69,7 @@ _CONVERSION(`GtkSourceCompletion*',`const SourceCompletion*',`Glib::wrap($3)')
 # GtkSourceCompletionContext -> gtksourceview::SourceCompletionContext
 _CONVERSION(`GtkSourceCompletionContext*',`Glib::RefPtr<SourceCompletionContext>',`Glib::wrap($3)')
 _CONVERSION(`GtkSourceCompletionContext*',`const Glib::RefPtr<SourceCompletionContext>&',`Glib::wrap($3)')
+_CONVERSION(`GtkSourceCompletionContext*',`const Glib::RefPtr<const SourceCompletionContext>&',`Glib::wrap($3)')
 
 
 # gtksourceview::SourceCompletionContext -> GtkSourceCompletionContext
@@ -78,10 +79,16 @@ _CONVERSION(`const Glib::RefPtr<const SourceCompletionContext>&',`GtkSourceCompl
 
 # GtkSourceCompletionInfo -> gtksourceview::SourceCompletionInfo
 _CONVERSION(`GtkSourceCompletionInfo*',`SourceCompletionInfo*',`Glib::wrap($3)')
+_CONVERSION(`GtkSourceCompletionInfo*',`const SourceCompletionInfo&',`(*(Glib::wrap($3)))')
 
 
 # gtksourceview::SourceCompletionInfo -> GtkSourceCompletionInfo
 _CONVERSION(`const SourceCompletionInfo&',`GtkSourceCompletionInfo*',`const_cast<GtkSourceCompletionInfo*>(($3).gobj())')
+
+
+# GtkSourceCompletionProposal -> gtksourceview::SourceCompletionProposal
+_CONVERSION(`GtkSourceCompletionProposal*',`const Glib::RefPtr<SourceCompletionProposal>&',`Glib::wrap($3)')
+_CONVERSION(`GtkSourceCompletionProposal*',`const Glib::RefPtr<const SourceCompletionProposal>&',`Glib::wrap($3)')
 
 
 # gtksourceview::SourceCompletionProposal -> GtkSourceCompletionProposal

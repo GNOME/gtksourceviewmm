@@ -49,7 +49,7 @@ class SourceStyleScheme : public Glib::Interface
 
   _CLASS_INTERFACE(SourceStyleScheme, GtkSourceStyleScheme, GTK_SOURCE_STYLE_SCHEME, GTypeInterface)
 
-// TODO: This is wrong. GtkSourceStyleScheme is not an interface. Changing this breaks API.
+// TODO: This is wrong. GtkSourceStyleScheme is not an interface. Changing this breaks API. krnowak
 /*
 class SourceStyleScheme : public Glib::Object
 {

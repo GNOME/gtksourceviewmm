@@ -524,7 +524,7 @@ public:
   /** Emitted when undo action is requested.
    */
   _WRAP_SIGNAL(void undo(), "undo")
-// TODO: remove no_default_handler when we will break API/ABI.
+// TODO: remove no_default_handler when we will break API/ABI. krnowak
 
   /** Emitted when a line mark has been activated (for instance when there
    * was a button press in the line marks gutter).

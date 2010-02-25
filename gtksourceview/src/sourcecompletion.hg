@@ -68,7 +68,7 @@ public:
   _WRAP_METHOD(bool remove_provider(const Glib::RefPtr<SourceCompletionProvider>& provider), gtk_source_completion_remove_provider, errthrow)
 
 #m4 _CONVERSION(`GList*',`Glib::ListHandle<Glib::RefPtr<SourceCompletionProvider> >',`$2($3, Glib::OWNERSHIP_NONE)')
-  // TODO: is conversion all right? C docs states: "The returned list is owned by the completion and should not be freed."
+  // TODO: is conversion all right? C docs states: "The returned list is owned by the completion and should not be freed." krnowak
   /** Get list of providers registered on completion.
    *
    * @return List of SourceCompletionProvider.
@@ -78,7 +78,7 @@ public:
   _WRAP_METHOD(Glib::ListHandle<Glib::RefPtr<SourceCompletionProvider> > get_providers() const, gtk_source_completion_get_providers)
 
 #m4 _CONVERSION(`const Glib::ListHandle<Glib::RefPtr<SourceCompletionProvider> >&',`GList*',`($3).data()')
-  // TODO: what does passing NULL here does? If something specific, then maybe create separate method passing it.
+  // TODO: what does passing NULL here does? If something specific, then maybe create separate method passing it. krnowak
   /** Starts a new completion with the specified SourceCompletionContext and
    *  a list of potential candidate providers for completion.
    *
@@ -116,7 +116,7 @@ public:
    */
   _WRAP_METHOD(SourceView* get_view() const, gtk_source_completion_get_view)
 
-  // TODO: Does "The reference being returned is a 'floating' reference, so if you invoke gtk_source_completion_show with this context you don't need to unref it." something mean for us?
+  // TODO: Does "The reference being returned is a 'floating' reference, so if you invoke gtk_source_completion_show with this context you don't need to unref it." something mean for us? krnowak
   /** Create a new SourceCompletionContext for completion.
    *
    * The position at which the completion using the new context will consider
@@ -130,7 +130,7 @@ public:
    */
   _WRAP_METHOD(Glib::RefPtr<SourceCompletionContext> create_context(const Gtk::TextIter& position), gtk_source_completion_create_context)
 
-  // TODO: better wording could be used here - it is too convoluted.
+  // TODO: better wording could be used here - it is too convoluted. krnowak
   /** Create a new SourceCompletionContext for completion.
    *
    * The position at which the completion using the new context will consider

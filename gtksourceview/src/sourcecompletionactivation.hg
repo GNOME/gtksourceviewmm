@@ -21,7 +21,7 @@ _DEFS(gtksourceviewmm,gtksourceview)
 
 namespace gtksourceview
 {
-// TODO: need docs.
+// TODO: need docs. krnowak
 /** An enum type specifying something bla bla bla, probably type of activation.
  *
  * @newin{2,10}

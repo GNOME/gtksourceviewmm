@@ -441,7 +441,7 @@ public:
    */
   _WRAP_SIGNAL(void highlight_updated(Gtk::TextIter& start, Gtk::TextIter& end), "highlight-updated", no_default_handler)
 
-// TODO: Use lower _CONVERSION/_WRAP_SIGNAL when we break API/ABI and remove upper ones.
+// TODO: Use lower _CONVERSION/_WRAP_SIGNAL when we break API/ABI and remove upper ones. krnowak
 #m4 _CONVERSION(`GtkTextMark*',`const Glib::RefPtr<SourceMark>&',`Glib::RefPtr<SourceMark>::cast_dynamic(Glib::wrap($3, true))')
 //#m4 _CONVERSION(`GtkTextMark*',`const Glib::RefPtr<Gtk::TextMark>&',`Glib::wrap($3, true)')
   /** Emitted whenever a marker of sourcebuffer has changed and needs to be redisplayed by the view.

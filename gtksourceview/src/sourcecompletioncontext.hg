@@ -38,7 +38,7 @@ class SourceCompletionProvider;
 class SourceCompletion;
 class SourceView;
 
-// TODO: need docs here.
+// TODO: need docs here. krnowak
 /** SourceCompletionContext
  *
  * @newin{2,10}

@@ -127,7 +127,7 @@ public:
    */
   _WRAP_METHOD(Glib::RefPtr<const SourceLanguage> get_language(const Glib::ustring& id) const, gtk_source_language_manager_get_language, constversion, refreturn)
   _IGNORE(gtk_source_language_manager_guess_language)
-// TODO: change filename parameter to std::string, when we break API/ABI.
+// TODO: change filename parameter to std::string, when we break API/ABI. krnowak
   /** Picks a SourceLanguage for given file name and content type,
    *  according to the information in lang files.
    *

@@ -38,9 +38,7 @@ protected:
   // TODO: C API does not provide default constructor for GtkSourceMark, should we delete it on API/ABI break? krnowak
    _CTOR_DEFAULT
 
-  /* TODO: When breaking API/ABI add a constructor getting only category parameter to allow explicit anonymous mark creation and empty string names.
-   *       Maybe also return to normal order of parameters. Does it have sense?
-   *       krnowak
+  /* TODO: When breaking API/ABI add a constructor getting only category parameter to allow explicit anonymous mark creation and empty string names. Maybe also return to normal order of parameters. Does it have sense? krnowak
    */
   // We reversed the parameter order, because name can be NULL:
   explicit SourceMark(const Glib::ustring& category, const Glib::ustring& name = Glib::ustring());

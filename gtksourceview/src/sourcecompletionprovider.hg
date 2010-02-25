@@ -177,6 +177,8 @@ public:
    */
   _WRAP_METHOD(int get_priority() const, gtk_source_completion_provider_get_priority)
 
+// TODO: should vfuncs be protected? krnowak
+
   _WRAP_VFUNC(Glib::ustring get_name() const, get_name)
 
   _WRAP_VFUNC(Glib::RefPtr<Gdk::Pixbuf> get_icon(), get_icon, refreturn)

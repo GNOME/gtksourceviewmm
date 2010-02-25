@@ -29,7 +29,7 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace gtksourceview
 {
 
-// TODO: need docs here.
+// TODO: need docs here. krnowak
 /** SourceCompletionItem
  *
  * @newin{2,10}
@@ -48,7 +48,7 @@ protected:
 public:
   /** Create a new SourceCompletionItem with label @a label, icon @a icon and
    *  extra information @a info.
-   *
+   *;
    * If @a icon is empty, then there will be no icon shown. If @a info is empty,
    * then no extra information will be available.
    *

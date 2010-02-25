@@ -34,7 +34,10 @@ namespace gtksourceview
  *
  * @newin{2,10}
  */
-class SourceCompletionItem : public Glib::Object
+class SourceCompletionItem
+:
+  public Glib::Object,
+  public SourceCompletionProposal
 {
   _CLASS_GOBJECT(SourceCompletionItem, GtkSourceCompletionItem, GTK_SOURCE_COMPLETION_ITEM, Glib::Object, GObject)
   _IMPLEMENTS_INTERFACE(SourceCompletionProposal)

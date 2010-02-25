@@ -22,6 +22,10 @@ _CONVERSION(`Gtk::CellRenderer*',`GtkCellRenderer*',`Glib::unwrap($3)')
 _CONVERSION(`const Glib::RefPtr<Gtk::PrintContext>&',`GtkPrintContext*',`Glib::unwrap($3)')
 
 
+# Gtk::TextBuffer -> GtkTextBuffer
+_CONVERSION(`const Glib::RefPtr<Gtk::TextBuffer>&',`GtkTextBuffer*',`Glib::unwrap($3)')
+
+
 # GtkTextIter -> Gtk::TextIter
 _CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap($3)')
 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap($3)')

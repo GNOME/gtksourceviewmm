@@ -1,0 +1,62 @@
+/* sourcecompletionwords.h
+ *
+ * Copyright (C) 2010 Krzesimir Nowak
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <glibmm/object.h>
+#include <gtksourceviewmm/sourcecompletionprovider.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace gtksourceview
+{
+
+class SourceCompletionWords
+:
+  public Glib::Object,
+  public SourceCompletionProvider
+{
+  _CLASS_GOBJECT(SourceCompletionWords, GtkSourceCompletionWords, GTK_SOURCE_COMPLETION_WORDS, Glib::Object, GObject)
+  _IMPLEMENTS_INTERFACE(SourceCompletionProvider)
+protected:
+  _WRAP_CTOR(SourceCompletionWords(const Glib::ustring& name, const Glib::RefPtr<Gdk::Pixbuf>& icon), gtk_source_completion_words_new)
+public:
+  _WRAP_CREATE(const Glib::ustring& name, const Glib::RefPtr<Gdk::Pixbuf>& icon)
+
+// TODO: think about a good method name - register is a C/C++ keyword.
+  _WRAP_METHOD(void register_provider(const Glib::RefPtr<Gtk::TextBuffer>& buffer), gtk_source_completion_words_register)
+
+  _WRAP_METHOD(void unregister_provider(const Glib::RefPtr<Gtk::TextBuffer>& buffer), gtk_source_completion_words_unregister)
+
+  _WRAP_PROPERTY("name", Glib::ustring)
+
+  _WRAP_PROPERTY("icon", Glib::RefPtr<Gdk::Pixbuf>)
+
+  _WRAP_PROPERTY("proposals-batch-size", guint)
+
+  _WRAP_PROPERTY("scan-batch-size", guint)
+
+  _WRAP_PROPERTY("minimum-word-size", guint)
+
+  _WRAP_PROPERTY("interactive-delay", int)
+
+  _WRAP_PROPERTY("priority", int)
+};
+
+} /* namespace gtksourceview */
+

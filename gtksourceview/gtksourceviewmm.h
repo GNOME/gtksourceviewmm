@@ -80,6 +80,7 @@
 #include <gtksourceviewmm/sourcecompletionitem.h>
 #include <gtksourceviewmm/sourcecompletionproposal.h>
 #include <gtksourceviewmm/sourcecompletionprovider.h>
+#include <gtksourceviewmm/sourcecompletionwords.h>
 #include <gtksourceviewmm/sourcegutter.h>
 #include <gtksourceviewmm/sourceiter.h>
 #include <gtksourceviewmm/sourcelanguage.h>

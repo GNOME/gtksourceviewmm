@@ -17,6 +17,7 @@ files_hg =				\
 	sourcecompletionitem.hg		\
 	sourcecompletionproposal.hg	\
 	sourcecompletionprovider.hg	\
+	sourcecompletionwords.hg        \
 	sourcegutter.hg			\
 	sourceiter.hg			\
 	sourcelanguage.hg		\

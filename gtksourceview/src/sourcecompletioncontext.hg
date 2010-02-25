@@ -87,7 +87,6 @@ public:
   _WRAP_PROPERTY("activation", SourceCompletionActivation)
   _WRAP_PROPERTY("completion", SourceCompletion*)
   _WRAP_PROPERTY("iter", SourceIter)
-  _WRAP_PROPERTY("view", SourceView*)
 
   /** Emitted when the current population of proposals has been cancelled.
    *

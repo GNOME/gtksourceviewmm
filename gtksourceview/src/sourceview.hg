@@ -83,9 +83,9 @@ class SourceView : public Gtk::TextView
   _CLASS_GTKOBJECT(SourceView, GtkSourceView, GTK_SOURCE_VIEW, Gtk::TextView, GtkTextView)
 
 public:
-  /// Position of a builtin line number renderer in gutter.
+  /// The gutter position of the lines renderer.
   static const int gutter_position_lines = -30;
-  /// Position of a builtin marks renderer in gutter.
+  /// The gutter position of the marks renderer.
   static const int gutter_position_marks = -20;
 
   /** Creates a new SourceView.

@@ -1,3 +1,12 @@
+2.9.2:
+* Added SourceUndoManager, SourceCompletionWords and updated SourceBuffer.
+  (Krzesimir Nowak)
+* Added vfuncs to SourceCompletionProposal and SourceCompletionProvider.
+  (Krzesimir Nowak)
+* Documentation: Documented SourceUndoManager, SourceCompletionWords and new
+  methods in SourceBuffer.
+  (Krzesimir Nowak)
+
 2.9.1:
 * Documentation: Documented all stuff.
   (Krzesimir Nowak)

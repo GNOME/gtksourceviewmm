@@ -1,3 +1,9 @@
+2.10.0:
+* Fixed reference counting in SourceLanguageManager and SourceBuffer.
+  (Murray Cumming)
+* Added const methods in SourceCompletion and SourceCompletionProvider.
+  (Krzesimir Nowak)
+
 2.9.2:
 * Added SourceUndoManager, SourceCompletionWords and updated SourceBuffer.
   (Krzesimir Nowak)

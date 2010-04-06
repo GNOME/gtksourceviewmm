@@ -399,14 +399,14 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(Glib::RefPtr<SourceUndoManager> get_undo_manager(), gtk_source_buffer_get_undo_manager)
+  _WRAP_METHOD(Glib::RefPtr<SourceUndoManager> get_undo_manager(), gtk_source_buffer_get_undo_manager, refreturn)
 
   /** Get the undo manager associated with the buffer.
    * @return A SourceUndoManager.
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(Glib::RefPtr<const SourceUndoManager> get_undo_manager() const, gtk_source_buffer_get_undo_manager, constversion)
+  _WRAP_METHOD(Glib::RefPtr<const SourceUndoManager> get_undo_manager() const, gtk_source_buffer_get_undo_manager, refreturn, constversion)
 
   /** Set the buffer undo manager.
    *

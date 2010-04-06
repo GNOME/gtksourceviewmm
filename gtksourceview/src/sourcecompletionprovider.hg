@@ -83,6 +83,7 @@ public:
    */
   _WRAP_METHOD(bool match(const Glib::RefPtr<const SourceCompletionContext>& context) const, gtk_source_completion_provider_match)
 
+  //TODO: This should not be const. There should be an extra const overload.
   /** Get a customized info widget to show extra information of a proposal.
    *
    * This allows for customized widgets on a proposal basis, although in general

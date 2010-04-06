@@ -166,7 +166,7 @@ public:
    * @return A SourceLanguage, or empty Glib::RefPtr if there is no suitable
    * language for given @a filename and/or @a content_type.
    */
-  _WRAP_METHOD(Glib::RefPtr<SourceLanguage> guess_language(const Glib::ustring& filename, const Glib::ustring& content_type), gtk_source_language_manager_guess_language)
+  _WRAP_METHOD(Glib::RefPtr<SourceLanguage> guess_language(const Glib::ustring& filename, const Glib::ustring& content_type), gtk_source_language_manager_guess_language, refreturn)
 
   /** Picks a SourceLanguage for given file name and content type,
    *  according to the information in lang files.
@@ -214,7 +214,7 @@ public:
    * @return A SourceLanguage, or empty Glib::RefPtr if there is no suitable
    * language for given @a filename and/or @a content_type.
    */
-  Glib::RefPtr<const SourceLanguage> guess_language(const Glib::ustring& filename, const Glib::ustring& content_type) const;
+  _WRAP_METHOD(Glib::RefPtr<const SourceLanguage> guess_language(const Glib::ustring& filename, const Glib::ustring& content_type) const, gtk_source_language_manager_guess_language, refreturn, constversion) 
 };
 
 } /* namespace gtksourceview */

@@ -98,6 +98,7 @@ public:
    */
   _WRAP_METHOD(void hide(), gtk_source_completion_hide)
 
+  //TODO: This should not be const. There should be an extra const overload.
   /** Gets the SourceCompletionInfo window.
    *
    * The info widget is the window where the completion displays optional extra information of the proposal.
@@ -108,6 +109,7 @@ public:
    */
   _WRAP_METHOD(SourceCompletionInfo* get_info_window() const, gtk_source_completion_get_info_window)
 
+  //TODO: This should not be const. There should be an extra const overload.
   /** Gets the SourceView associated with completion.
    *
    * @return The SourceView associated with completion.

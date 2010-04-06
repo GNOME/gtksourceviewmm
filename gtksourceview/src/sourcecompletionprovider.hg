@@ -83,7 +83,6 @@ public:
    */
   _WRAP_METHOD(bool match(const Glib::RefPtr<const SourceCompletionContext>& context) const, gtk_source_completion_provider_match)
 
-  //TODO: This should not be const. There should be an extra const overload.
   /** Get a customized info widget to show extra information of a proposal.
    *
    * This allows for customized widgets on a proposal basis, although in general
@@ -99,7 +98,24 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(Gtk::Widget* get_info_widget(const Glib::RefPtr<const SourceCompletionProposal>& proposal) const, gtk_source_completion_provider_get_info_widget)
+  _WRAP_METHOD(Gtk::Widget* get_info_widget(const Glib::RefPtr<const SourceCompletionProposal>& proposal), gtk_source_completion_provider_get_info_widget)
+
+  /** Get a customized info widget to show extra information of a proposal.
+   *
+   * This allows for customized widgets on a proposal basis, although in general
+   * providers will have the same custom widget for all their proposals and
+   * @a proposal can be ignored. The implementation of this function is
+   * optional. If implemented, update_info() @b must also be implemented. If not
+   * implemented, the default get_info() will be used to display extra
+   * information about a SourceCompletionProposal.
+   *
+   * @param proposal The currently selected SourceCompletionProposal.
+   *
+   * @return A custom Gtk::Widget to show extra information about @a proposal.
+   *
+   * @newin{2,10}
+   */
+  _WRAP_METHOD(const Gtk::Widget* get_info_widget(const Glib::RefPtr<const SourceCompletionProposal>& proposal) const, gtk_source_completion_provider_get_info_widget)
 
   /** Update extra information shown in @a info for @a proposal.
    *

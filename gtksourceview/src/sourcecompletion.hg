@@ -98,7 +98,6 @@ public:
    */
   _WRAP_METHOD(void hide(), gtk_source_completion_hide)
 
-  //TODO: This should not be const. There should be an extra const overload.
   /** Gets the SourceCompletionInfo window.
    *
    * The info widget is the window where the completion displays optional extra information of the proposal.
@@ -107,16 +106,33 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(SourceCompletionInfo* get_info_window() const, gtk_source_completion_get_info_window)
+  _WRAP_METHOD(SourceCompletionInfo* get_info_window(), gtk_source_completion_get_info_window)
 
-  //TODO: This should not be const. There should be an extra const overload.
+  /** Gets the SourceCompletionInfo window.
+   *
+   * The info widget is the window where the completion displays optional extra information of the proposal.
+   *
+   * @return The SourceCompletionInfo window.
+   *
+   * @newin{2,10}
+   */
+  _WRAP_METHOD(const SourceCompletionInfo* get_info_window() const, gtk_source_completion_get_info_window)
+
   /** Gets the SourceView associated with completion.
    *
    * @return The SourceView associated with completion.
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(SourceView* get_view() const, gtk_source_completion_get_view)
+  _WRAP_METHOD(SourceView* get_view(), gtk_source_completion_get_view)
+
+  /** Gets the SourceView associated with completion.
+   *
+   * @return The SourceView associated with completion.
+   *
+   * @newin{2,10}
+   */
+  _WRAP_METHOD(const SourceView* get_view() const, gtk_source_completion_get_view)
 
   // TODO: Does "The reference being returned is a 'floating' reference, so if you invoke gtk_source_completion_show with this context you don't need to unref it." something mean for us? krnowak
   /** Create a new SourceCompletionContext for completion.

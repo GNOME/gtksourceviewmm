@@ -83,6 +83,7 @@ _CONVERSION(`const Glib::RefPtr<const SourceCompletionContext>&',`GtkSourceCompl
 
 # GtkSourceCompletionInfo -> gtksourceview::SourceCompletionInfo
 _CONVERSION(`GtkSourceCompletionInfo*',`SourceCompletionInfo*',`Glib::wrap($3)')
+_CONVERSION(`GtkSourceCompletionInfo*',`const SourceCompletionInfo*',`Glib::wrap($3)')
 _CONVERSION(`GtkSourceCompletionInfo*',`const SourceCompletionInfo&',`(*(Glib::wrap($3)))')
 
 
@@ -151,6 +152,7 @@ _CONVERSION(`const Glib::RefPtr<const SourceUndoManager>&',`GtkSourceUndoManager
 
 # GtkSourceView -> Gtk::SourceView
 _CONVERSION(`GtkSourceView*',`SourceView*',`Glib::wrap($3)')
+_CONVERSION(`GtkSourceView*',`const SourceView*',`Glib::wrap($3)')
 
 #
 ## ENUMS

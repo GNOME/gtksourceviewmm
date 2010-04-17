@@ -19,11 +19,15 @@
       <foaf:mbox rdf:resource="mailto:dodji@gnome.org" />
       <gnome:userid>dodji</gnome:userid>
     </foaf:Person>
+  </maintainer>
+  <maintainer>
     <foaf:Person>
       <foaf:name>Murray Cumming</foaf:name>
       <foaf:mbox rdf:resource="mailto:murrayc@murrayc.com" />
       <gnome:userid>murrayc</gnome:userid>
     </foaf:Person>
+  </maintainer>
+  <maintainer>
     <foaf:Person>
       <foaf:name>Krzesimir Nowak</foaf:name>
       <foaf:mbox rdf:resource="mailto:qdlacz@gmail.com" />

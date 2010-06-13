@@ -107,10 +107,6 @@ public:
    **/
   explicit SourceView (const Glib::RefPtr<SourceBuffer> &buffer) ;
 
-// TODO: remove these when breaking API/ABI? SourceView is derived from GtkObject, so it does not need to be accessed by Glib::RefPtr. krnowak
-  _WRAP_CREATE()
-  _WRAP_CREATE(const Glib::RefPtr<SourceBuffer> &buffer)
-
   /** Returns the GtkTextBuffer being displayed by this text view.
    *
    * @return A SourceBuffer.
@@ -285,48 +281,7 @@ public:
    */
   _WRAP_METHOD(gint get_mark_category_priority(const Glib::ustring& category) const, gtk_source_view_get_mark_category_priority)
 
-#ifndef GTKSOURCEVIEWMM_DISABLE_DEPRECATED
-  _IGNORE(gtk_source_view_set_mark_category_pixbuf)
-
-  /** Associates a given @a pixbuf with a given mark @a category.
-   *
-   * If @a pixbuf is empty, the pixbuf is unset.
-   *
-   * @param category A mark category.
-   * @param pixbuf A Gdk::Pixbuf or empty Glib::RefPtr.
-   *
-   * @deprecated Use set_mark_category_icon() instead.
-   *
-   * @newin{2,2}
-   */
-  void set_mark_category_pixbuf(const Glib::ustring& category, const Glib::RefPtr<Gdk::Pixbuf>& pixbuf);
-
-  _IGNORE(gtk_source_view_get_mark_category_pixbuf)
-
-  /** Gets the pixbuf which is associated with the given mark @a category.
-   *
-   * @param category A mark category.
-   *
-   * @return Empty Glib::RefPtr.
-   *
-   * @deprecated Do not use it.
-   *
-   * @newin{2,2}
-   */
-  Glib::RefPtr<Gdk::Pixbuf> get_mark_category_pixbuf(const Glib::ustring& category);
-
-  /** Gets the pixbuf which is associated with the given mark @a category.
-   *
-   * @param category A mark category.
-   *
-   * @return Empty Glib::RefPtr.
-   *
-   * @deprecated Do not use it.
-   *
-   * @newin{2,2}
-   */
-  Glib::RefPtr<const Gdk::Pixbuf> get_mark_category_pixbuf(const Glib::ustring& category) const;
-#endif // GTKSOURCEVIEWMM_DISABLE_DEPRECATED
+  _IGNORE(gtk_source_view_set_mark_category_pixbuf, gtk_source_view_get_mark_category_pixbuf)
 
   /** Sets the icon to be used for @a category to @a pixbuf.
    *

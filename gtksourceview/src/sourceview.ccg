@@ -74,18 +74,15 @@ SourceView::SourceView(const Glib::RefPtr<SourceBuffer> &a_buffer) :
 Glib::RefPtr<const SourceBuffer>
 SourceView::get_source_buffer () const
 {
-    Glib::RefPtr<SourceBuffer> buffer ;
-    buffer = Glib::wrap (GTK_SOURCE_BUFFER (get_buffer ()->gobj ()), true);
-    return buffer ;
+    Glib::RefPtr<const Gtk::TextBuffer> buffer = get_buffer();
+    return Glib::RefPtr<const SourceBuffer>::cast_dynamic(buffer);
 }
 
 Glib::RefPtr<SourceBuffer>
 SourceView::get_source_buffer ()
 {
-    Glib::RefPtr<SourceBuffer> buffer ;
-    buffer = Glib::wrap (GTK_SOURCE_BUFFER (get_buffer ()->gobj ()), true) ;
-    return buffer ;
-
+    Glib::RefPtr<Gtk::TextBuffer> buffer = get_buffer();
+    return Glib::RefPtr<SourceBuffer>::cast_dynamic(buffer);
 }
 
 void
@@ -93,26 +90,6 @@ SourceView::set_source_buffer (const Glib::RefPtr<SourceBuffer> &source_buffer)
 {
     set_buffer (source_buffer) ;
 }
-
-#ifndef GTKSOURCEVIEWMM_DISABLE_DEPRECATED
-void
-SourceView::set_mark_category_pixbuf(const Glib::ustring& category, const Glib::RefPtr<Gdk::Pixbuf>& pixbuf)
-{
-  gtk_source_view_set_mark_category_icon_from_pixbuf(gobj(), category.c_str(), Glib::unwrap(pixbuf));
-}
-
-Glib::RefPtr<Gdk::Pixbuf>
-SourceView::get_mark_category_pixbuf(const Glib::ustring&)
-{
-  return Glib::RefPtr<Gdk::Pixbuf>();
-}
-
-Glib::RefPtr<const Gdk::Pixbuf>
-SourceView::get_mark_category_pixbuf(const Glib::ustring&) const
-{
-  return Glib::RefPtr<const Gdk::Pixbuf>();
-}
-#endif
 
 void
 SourceView::unset_mark_category_icon(const Glib::ustring& category)

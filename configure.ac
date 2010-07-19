@@ -1,4 +1,4 @@
-AC_INIT([gtksourceviewmm], [2.10.1],
+AC_INIT([gtksourceviewmm], [2.10.2],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gtksourceviewmm],
         [gtksourceviewmm], [http://projects.gnome.org/gtksourceviewmm/])
 AC_PREREQ([2.62])
@@ -14,9 +14,9 @@ AM_MAINTAINER_MODE
 AC_ARG_VAR([ACLOCAL_FLAGS], [aclocal flags, e.g. -I <macro dir>])
 
 MM_PREREQ([0.8])
-MM_INIT_MODULE([gtksourceviewmm-2.0])
+MM_INIT_MODULE([gtksourceviewmm-3.0])
 
-AC_SUBST([GTKSOURCEVIEWMM_SO_VERSION], [3:0:1])
+AC_SUBST([GTKSOURCEVIEWMM_SO_VERSION], [0:0:0])
 
 # AC_DISABLE_STATIC
 # AC_LIBTOOL_WIN32_DLL
@@ -24,7 +24,7 @@ AC_SUBST([GTKSOURCEVIEWMM_SO_VERSION], [3:0:1])
 LT_INIT([win32-dll disable-static])
 AC_PROG_CXX
 
-AC_SUBST([GTKSOURCEVIEWMM_MODULES], ['gtkmm-2.4 >= 2.12 gtksourceview-2.0 >= 2.9.7'])
+AC_SUBST([GTKSOURCEVIEWMM_MODULES], ['gtkmm-3.0 >= 2.90 gtksourceview-3.0 >= 2.9.7'])
 PKG_CHECK_MODULES([GTKSOURCEVIEWMM], [$GTKSOURCEVIEWMM_MODULES])
 
 MM_PKG_CONFIG_SUBST([GTHREAD_CFLAGS], [--cflags-only-other gthread-2.0])

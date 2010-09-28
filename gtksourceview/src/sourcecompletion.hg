@@ -17,14 +17,14 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <gtkmm/object.h>
+#include <glibmm/object.h>
 #include <gtksourceviewmm/sourcecompletioncontext.h>
 #include <gtksourceviewmm/sourcecompletionprovider.h>
 #include <gtksourceviewmm/sourceview.h>
 #include <gtksourceviewmm/sourcecompletioninfo.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
-_PINCLUDE(gtkmm/private/object_p.h)
+_PINCLUDE(glibmm/private/object_p.h)
 
 namespace gtksourceview
 {
@@ -38,9 +38,9 @@ _WRAP_GERROR(SourceCompletionError, GtkSourceCompletionError, GTK_SOURCE_COMPLET
  *
  * @newin{2,10}
  */
-class SourceCompletion : public Gtk::Object
+class SourceCompletion : public Glib::Object
 {
-  _CLASS_GTKOBJECT(SourceCompletion, GtkSourceCompletion, GTK_SOURCE_COMPLETION, Gtk::Object, GtkObject)
+  _CLASS_GOBJECT(SourceCompletion, GtkSourceCompletion, GTK_SOURCE_COMPLETION, Glib::Object, GObject)
 public:
 
   /** Add a new SourceCompletionProvider to the completion object.

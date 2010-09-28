@@ -462,7 +462,7 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(SourceCompletion* get_completion(), gtk_source_view_get_completion, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<SourceCompletion> get_completion(), gtk_source_view_get_completion, refreturn)
 
   /** Gets the SourceCompletion associated with this view.
    *
@@ -470,7 +470,7 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(const SourceCompletion* get_completion() const, gtk_source_view_get_completion, refreturn, constversion)
+  _WRAP_METHOD(Glib::RefPtr<const SourceCompletion> get_completion() const, gtk_source_view_get_completion, refreturn, constversion)
 
   /** Emitted when redo action is requested.
    */

@@ -66,8 +66,8 @@ _CONVERSION(`const Glib::RefPtr<SourceBuffer>&',`GtkSourceBuffer*',__CONVERT_REF
 
 
 # GtkSourceCompletion -> gtksourceview::SourceCompletion
-_CONVERSION(`GtkSourceCompletion*',`SourceCompletion*',`Glib::wrap($3)')
-_CONVERSION(`GtkSourceCompletion*',`const SourceCompletion*',`Glib::wrap($3)')
+_CONVERSION(`GtkSourceCompletion*',`Glib::RefPtr<SourceCompletion>',`Glib::wrap($3)')
+_CONVERSION(`GtkSourceCompletion*',`Glib::RefPtr<const SourceCompletion>',`Glib::wrap($3)')
 
 
 # GtkSourceCompletionContext -> gtksourceview::SourceCompletionContext

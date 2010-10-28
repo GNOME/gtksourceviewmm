@@ -7,6 +7,13 @@
   (gtype-id "GTK_TYPE_SOURCE_BUFFER")
 )
 
+(define-object SourceCompletion
+  (in-module "Gtk")
+  (parent "GObject")
+  (c-name "GtkSourceCompletion")
+  (gtype-id "GTK_TYPE_SOURCE_COMPLETION")
+)
+
 (define-object SourceCompletionContext
   (in-module "Gtk")
   (parent "GInitiallyUnowned")
@@ -110,6 +117,18 @@
 )
 
 ;; Enumerations and flags ...
+
+(define-enum SourceBracketMatchType
+  (in-module "Gtk")
+  (c-name "GtkSourceBracketMatchType")
+  (gtype-id "GTK_TYPE_SOURCE_BRACKET_MATCH_TYPE")
+  (values
+    '("none" "GTK_SOURCE_BRACKET_MATCH_NONE")
+    '("out-of-range" "GTK_SOURCE_BRACKET_MATCH_OUT_OF_RANGE")
+    '("not-found" "GTK_SOURCE_BRACKET_MATCH_NOT_FOUND")
+    '("found" "GTK_SOURCE_BRACKET_MATCH_FOUND")
+  )
+)
 
 (define-flags SourceCompletionActivation
   (in-module "Gtk")
@@ -1784,16 +1803,6 @@
   (return-type "gboolean")
 )
 
-(define-method set_mark_category_pixbuf
-  (of-object "GtkSourceView")
-  (c-name "gtk_source_view_set_mark_category_pixbuf")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "category")
-    '("GdkPixbuf*" "pixbuf")
-  )
-)
-
 (define-method set_mark_category_icon_from_pixbuf
   (of-object "GtkSourceView")
   (c-name "gtk_source_view_set_mark_category_icon_from_pixbuf")
@@ -1821,15 +1830,6 @@
   (parameters
     '("const-gchar*" "category")
     '("const-gchar*" "name")
-  )
-)
-
-(define-method get_mark_category_pixbuf
-  (of-object "GtkSourceView")
-  (c-name "gtk_source_view_get_mark_category_pixbuf")
-  (return-type "GdkPixbuf*")
-  (parameters
-    '("const-gchar*" "category")
   )
 )
 
@@ -1926,6 +1926,15 @@
   (return-type "GtkSourceDrawSpacesFlags")
 )
 
+(define-method get_visual_column
+  (of-object "GtkSourceView")
+  (c-name "gtk_source_view_get_visual_column")
+  (return-type "guint")
+  (parameters
+    '("const-GtkTextIter*" "iter")
+  )
+)
+
 (define-method get_completion
   (of-object "GtkSourceView")
   (c-name "gtk_source_view_get_completion")
@@ -1945,8 +1954,8 @@
 
 ;; From gtksourceview-typebuiltins.h
 
-(define-function gtk_source_search_flags_get_type
-  (c-name "gtk_source_search_flags_get_type")
+(define-function gtk_source_bracket_match_type_get_type
+  (c-name "gtk_source_bracket_match_type_get_type")
   (return-type "GType")
 )
 

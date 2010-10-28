@@ -1,3 +1,25 @@
+;; From gtksourcebuffer.h
+
+;; Original typedef:
+;; typedef enum
+;; {
+;; 	GTK_SOURCE_BRACKET_MATCH_NONE,
+;; 	GTK_SOURCE_BRACKET_MATCH_OUT_OF_RANGE,
+;; 	GTK_SOURCE_BRACKET_MATCH_NOT_FOUND,
+;; 	GTK_SOURCE_BRACKET_MATCH_FOUND
+;; } GtkSourceBracketMatchType;
+
+(define-enum-extended SourceBracketMatchType
+  (in-module "Gtk")
+  (c-name "GtkSourceBracketMatchType")
+  (values
+    '("none" "GTK_SOURCE_BRACKET_MATCH_NONE" "0")
+    '("out-of-range" "GTK_SOURCE_BRACKET_MATCH_OUT_OF_RANGE" "1")
+    '("not-found" "GTK_SOURCE_BRACKET_MATCH_NOT_FOUND" "2")
+    '("found" "GTK_SOURCE_BRACKET_MATCH_FOUND" "3")
+  )
+)
+
 ;; From gtksourcecompletioncontext.h
 
 ;; Original typedef:

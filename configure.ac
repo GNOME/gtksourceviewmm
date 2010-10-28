@@ -1,4 +1,4 @@
-AC_INIT([gtksourceviewmm], [2.10.1],
+AC_INIT([gtksourceviewmm], [2.91.0],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gtksourceviewmm],
         [gtksourceviewmm], [http://projects.gnome.org/gtksourceviewmm/])
 AC_PREREQ([2.62])
@@ -24,7 +24,7 @@ AC_SUBST([GTKSOURCEVIEWMM_SO_VERSION], [0:0:0])
 LT_INIT([win32-dll disable-static])
 AC_PROG_CXX
 
-AC_SUBST([GTKSOURCEVIEWMM_MODULES], ['gtkmm-3.0 >= 2.90 gtksourceview-3.0 >= 2.9.7'])
+AC_SUBST([GTKSOURCEVIEWMM_MODULES], ['gtkmm-3.0 >= 2.91.2 gtksourceview-3.0 >= 2.91.0'])
 PKG_CHECK_MODULES([GTKSOURCEVIEWMM], [$GTKSOURCEVIEWMM_MODULES])
 
 MM_PKG_CONFIG_SUBST([GTHREAD_CFLAGS], [--cflags-only-other gthread-2.0])
@@ -37,7 +37,7 @@ MM_ARG_WITH_TAGFILE_DOC([libstdc++.tag], [mm-common-libstdc++])
 MM_ARG_WITH_TAGFILE_DOC([libsigc++-2.0.tag], [sigc++-2.0])
 MM_ARG_WITH_TAGFILE_DOC([glibmm-2.4.tag], [glibmm-2.4])
 MM_ARG_WITH_TAGFILE_DOC([pangomm-1.4.tag], [pangomm-1.4])
-MM_ARG_WITH_TAGFILE_DOC([gtkmm-2.4.tag], [gtkmm-2.4])
+MM_ARG_WITH_TAGFILE_DOC([gtkmm-3.0.tag], [gtkmm-3.0])
 
 AC_LANG([C++])
 MM_ARG_ENABLE_WARNINGS([GTKSOURCEVIEWMM_WXXFLAGS],

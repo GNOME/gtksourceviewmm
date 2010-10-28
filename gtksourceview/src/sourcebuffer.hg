@@ -27,9 +27,28 @@
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(gtkmm/private/textbuffer_p.h)
+_PINCLUDE(gtksourceview/gtksourceview-typebuiltins.h)
 
 namespace gtksourceview
 {
+
+/** Describes result of matching brackets.
+ *
+ * @newin{3,0}
+ */
+_WRAP_ENUM(SourceBracketMatchType, GtkSourceBracketMatchType)
+/** @var SourceBracketMatchType SOURCE_BRACKET_MATCH_NONE
+ * There was no bracket to match.
+ */
+/** @var SourceBracketMatchType SOURCE_BRACKET_MATCH_OUT_OF_RANGE
+ * Matching a bracket failed because the maximum range was reached.
+ */
+/** @var SourceBracketMatchType SOURCE_BRACKET_MATCH_NOT_FOUND
+ * A matching bracket was not found.
+ */
+/** @var SourceBracketMatchType SOURCE_BRACKET_MATCH_FOUND
+ * A matching bracket was found.
+ */
 
 /** Buffer object for SourceView.
  *
@@ -471,7 +490,20 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_SIGNAL(void redo(), "redo", no_default_handler)
+  _WRAP_SIGNAL(void redo(), "redo")
+
+  // TODO: iter may be sent as NULL, so here we will have segfault when no bracket is matched. - krnowak
+  // TODO: also documentation is wrong - state is a pointer, not a value. - krnowak
+  // TODO: this is filed as bug #633400. - krnowak
+  /** Sets iter to a valid iterator pointing to the matching bracket if state is SourceBracketMatchType::SOURCE_BRACKET_MATCH_FOUND.
+   *
+   * @par Handler parameters:
+   * iter Iterator to initialize.
+   * state State of bracket matching.
+   *
+   * @newin{3,0}
+   */
+  //_WRAP_SIGNAL(void bracket_matched(Gtk::TextIter& iter, SourceBracketMatchType state), "bracket-matched")
 };
 
 } /* namespace gtksourceview */

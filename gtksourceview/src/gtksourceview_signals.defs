@@ -31,6 +31,16 @@
   )
 )
 
+(define-signal bracket-matched
+  (of-object "GtkSourceBuffer")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("GtkTextIter*" "p0")
+    '("GtkSourceBracketMatchType" "p1")
+  )
+)
+
 (define-property tag-table
   (of-object "GtkSourceBuffer")
   (prop-type "GParamObject")
@@ -206,15 +216,6 @@
   (when "last")
 )
 
-(define-property user-data
-  (of-object "GtkSourceCompletion")
-  (prop-type "GParamPointer")
-  (docs "Anonymous User Data Pointer")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
 (define-property view
   (of-object "GtkSourceCompletion")
   (prop-type "GParamObject")
@@ -337,15 +338,6 @@
   (of-object "GtkSourceCompletionInfo")
   (return-type "void")
   (when "last")
-)
-
-(define-property user-data
-  (of-object "GtkSourceCompletionInfo")
-  (prop-type "GParamPointer")
-  (docs "Anonymous User Data Pointer")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
 )
 
 (define-property name
@@ -549,7 +541,115 @@
 (define-property double-buffered
   (of-object "GtkSourceCompletionInfo")
   (prop-type "GParamBoolean")
-  (docs "Whether or not the widget is double buffered")
+  (docs "Whether the widget is double buffered")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property halign
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamEnum")
+  (docs "How to position in extra horizontal space")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property valign
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamEnum")
+  (docs "How to position in extra vertical space")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property margin-left
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamInt")
+  (docs "Pixels of extra space on the left side")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property margin-right
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamInt")
+  (docs "Pixels of extra space on the right side")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property margin-top
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamInt")
+  (docs "Pixels of extra space on the top side")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property margin-bottom
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamInt")
+  (docs "Pixels of extra space on the bottom side")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property margin
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamInt")
+  (docs "Pixels of extra space on all four sides")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property hexpand
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether widget wants more horizontal space")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property vexpand
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether widget wants more vertical space")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property hexpand-set
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether to use the hexpand property")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property vexpand-set
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether to use the vexpand property")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property expand
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Whether widget wants to expand in both directions")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -604,24 +704,6 @@
   (of-object "GtkSourceCompletionInfo")
   (prop-type "GParamString")
   (docs "Unique identifier for the window to be used when restoring a session")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property allow-shrink
-  (of-object "GtkSourceCompletionInfo")
-  (prop-type "GParamBoolean")
-  (docs "If TRUE, the window has no mimimum size. Setting this to TRUE is 99% of the time a bad idea")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property allow-grow
-  (of-object "GtkSourceCompletionInfo")
-  (prop-type "GParamBoolean")
-  (docs "If TRUE, users can expand the window beyond its minimum size")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -802,6 +884,33 @@
   (of-object "GtkSourceCompletionInfo")
   (prop-type "GParamDouble")
   (docs "The opacity of the window, from 0 to 1")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property has-resize-grip
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Specifies whether the window should have a resize grip")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property resize-grip-visible
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamBoolean")
+  (docs "Specifies whether the window's resize grip is visible.")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property application
+  (of-object "GtkSourceCompletionInfo")
+  (prop-type "GParamObject")
+  (docs "The GtkApplication for the window")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -1377,6 +1486,16 @@
 
 ;; From GtkSourceView
 
+(define-signal smart-home-end
+  (of-object "GtkSourceView")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("GtkTextIter*" "p0")
+    '("gint" "p1")
+  )
+)
+
 (define-signal undo
   (of-object "GtkSourceView")
   (return-type "void")
@@ -1415,10 +1534,46 @@
   )
 )
 
-(define-property user-data
+(define-signal move-words
   (of-object "GtkSourceView")
-  (prop-type "GParamPointer")
-  (docs "Anonymous User Data Pointer")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+  )
+)
+
+(define-property hadjustment
+  (of-object "GtkSourceView")
+  (prop-type "GParamObject")
+  (docs "Horizontal adjustment that is shared between scrollable widget and it's controller")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property hscroll-policy
+  (of-object "GtkSourceView")
+  (prop-type "GParamEnum")
+  (docs "How the size of the content should be determined")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property vadjustment
+  (of-object "GtkSourceView")
+  (prop-type "GParamObject")
+  (docs "Vertical adjustment that is shared between scrollable widget and it's controller")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property vscroll-policy
+  (of-object "GtkSourceView")
+  (prop-type "GParamEnum")
+  (docs "How the size of the content should be determined")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -1625,7 +1780,115 @@
 (define-property double-buffered
   (of-object "GtkSourceView")
   (prop-type "GParamBoolean")
-  (docs "Whether or not the widget is double buffered")
+  (docs "Whether the widget is double buffered")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property halign
+  (of-object "GtkSourceView")
+  (prop-type "GParamEnum")
+  (docs "How to position in extra horizontal space")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property valign
+  (of-object "GtkSourceView")
+  (prop-type "GParamEnum")
+  (docs "How to position in extra vertical space")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property margin-left
+  (of-object "GtkSourceView")
+  (prop-type "GParamInt")
+  (docs "Pixels of extra space on the left side")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property margin-right
+  (of-object "GtkSourceView")
+  (prop-type "GParamInt")
+  (docs "Pixels of extra space on the right side")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property margin-top
+  (of-object "GtkSourceView")
+  (prop-type "GParamInt")
+  (docs "Pixels of extra space on the top side")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property margin-bottom
+  (of-object "GtkSourceView")
+  (prop-type "GParamInt")
+  (docs "Pixels of extra space on the bottom side")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property margin
+  (of-object "GtkSourceView")
+  (prop-type "GParamInt")
+  (docs "Pixels of extra space on all four sides")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property hexpand
+  (of-object "GtkSourceView")
+  (prop-type "GParamBoolean")
+  (docs "Whether widget wants more horizontal space")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property vexpand
+  (of-object "GtkSourceView")
+  (prop-type "GParamBoolean")
+  (docs "Whether widget wants more vertical space")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property hexpand-set
+  (of-object "GtkSourceView")
+  (prop-type "GParamBoolean")
+  (docs "Whether to use the hexpand property")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property vexpand-set
+  (of-object "GtkSourceView")
+  (prop-type "GParamBoolean")
+  (docs "Whether to use the vexpand property")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property expand
+  (of-object "GtkSourceView")
+  (prop-type "GParamBoolean")
+  (docs "Whether widget wants to expand in both directions")
   (readable #t)
   (writable #t)
   (construct-only #f)

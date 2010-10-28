@@ -1,3 +1,9 @@
+2.91.0:
+* Bumped API version to 3.0, so now it also uses gtkmm-3.0. (Murray Cumming)
+* Some deprecated methods were removed. (Murray Cumming)
+* Wrapped some properties, enums, methods and signals in SourceView and
+  SourceBuffer. (Krzesimir Nowak)
+
 2.10.0:
 * Fixed reference counting in SourceLanguageManager and SourceBuffer.
   (Murray Cumming)

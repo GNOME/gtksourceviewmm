@@ -221,7 +221,7 @@ public:
         THROW_IF_FAIL (m_source_view) ;
         RefPtr<SourceBuffer> source_buffer = m_source_view->get_source_buffer () ;
 
-        SourceIter search_iter (source_buffer->begin ());
+        TextIter search_iter (source_buffer->begin ());
         TextIter start, end, limit ;
         if (!a_forward) {
             search_iter = source_buffer->end () ;
@@ -237,7 +237,7 @@ public:
             limit = source_buffer->end () ;
             found = search_iter.forward_search
                                     (a_text,
-                                     SOURCE_SEARCH_TEXT_ONLY | SOURCE_SEARCH_CASE_INSENSITIVE,
+                                     TEXT_SEARCH_TEXT_ONLY | TEXT_SEARCH_CASE_INSENSITIVE,
                                      start,
                                      end,
                                      limit) ;
@@ -248,7 +248,7 @@ public:
             limit = source_buffer->begin () ;
             found = search_iter.backward_search
                                     (a_text,
-                                     SOURCE_SEARCH_TEXT_ONLY | SOURCE_SEARCH_CASE_INSENSITIVE,
+                                     TEXT_SEARCH_TEXT_ONLY | TEXT_SEARCH_CASE_INSENSITIVE,
                                      start,
                                      end,
                                      limit) ;

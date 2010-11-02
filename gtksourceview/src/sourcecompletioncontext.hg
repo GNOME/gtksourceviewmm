@@ -20,7 +20,6 @@
 #include <glibmm/object.h>
 
 #include <gtksourceviewmm/sourcecompletionactivation.h>
-#include <gtksourceviewmm/sourceiter.h>
 #include <gtksourceviewmm/sourceview.h>
 #include <gtksourceviewmm/sourcecompletionprovider.h>
 #include <gtksourceviewmm/sourcecompletionproposal.h>
@@ -74,7 +73,7 @@ public:
    *
    * @newin{2,10}
    */
-  SourceIter get_iter() const;
+  Gtk::TextIter get_iter() const;
 
   /** Get the context activation
    *
@@ -86,7 +85,7 @@ public:
 
   _WRAP_PROPERTY("activation", SourceCompletionActivation)
   _WRAP_PROPERTY("completion", Glib::RefPtr<SourceCompletion>)
-  _WRAP_PROPERTY("iter", SourceIter)
+  _WRAP_PROPERTY("iter", Gtk::TextIter)
 
   /** Emitted when the current population of proposals has been cancelled.
    *

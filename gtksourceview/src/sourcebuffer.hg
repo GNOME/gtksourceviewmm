@@ -488,9 +488,6 @@ public:
    */
   _WRAP_SIGNAL(void redo(), "redo")
 
-  // TODO: iter may be sent as NULL, so here we will have segfault when no bracket is matched. - krnowak
-  // TODO: also documentation is wrong - state is a pointer, not a value. - krnowak
-  // TODO: this is filed as bug #633400. - krnowak
   /** Sets iter to a valid iterator pointing to the matching bracket if state is SourceBracketMatchType::SOURCE_BRACKET_MATCH_FOUND.
    *
    * @par Handler parameters:
@@ -499,7 +496,7 @@ public:
    *
    * @newin{3,0}
    */
-  //_WRAP_SIGNAL(void bracket_matched(Gtk::TextIter& iter, SourceBracketMatchType state), "bracket-matched")
+  _WRAP_SIGNAL(void bracket_matched(Gtk::TextIter& iter, SourceBracketMatchType state), "bracket-matched")
 };
 
 } /* namespace gtksourceview */

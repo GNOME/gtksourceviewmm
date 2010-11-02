@@ -1546,7 +1546,7 @@
 (define-property hadjustment
   (of-object "GtkSourceView")
   (prop-type "GParamObject")
-  (docs "Horizontal adjustment that is shared between scrollable widget and it's controller")
+  (docs "Horizontal adjustment that is shared between the scrollable widget and its controller")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -1564,7 +1564,7 @@
 (define-property vadjustment
   (of-object "GtkSourceView")
   (prop-type "GParamObject")
-  (docs "Vertical adjustment that is shared between scrollable widget and it's controller")
+  (docs "Vertical adjustment that is shared between the scrollable widget and its controller")
   (readable #t)
   (writable #t)
   (construct-only #f)

@@ -19,7 +19,6 @@ files_hg =				\
 	sourcecompletionprovider.hg	\
 	sourcecompletionwords.hg        \
 	sourcegutter.hg			\
-	sourceiter.hg			\
 	sourcelanguage.hg		\
 	sourcelanguagemanager.hg	\
 	sourcemark.hg			\
@@ -27,7 +26,7 @@ files_hg =				\
 	sourcestyle.hg			\
 	sourcestylescheme.hg		\
 	sourcestyleschememanager.hg	\
-	sourceundomanager.hg            \
+	sourceundomanager.hg		\
 	sourceview.hg
 
 files_ccg = $(files_hg:.hg=.ccg)

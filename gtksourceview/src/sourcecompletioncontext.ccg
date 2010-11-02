@@ -22,11 +22,11 @@
 namespace gtksourceview
 {
 
-SourceIter SourceCompletionContext::get_iter() const
+Gtk::TextIter SourceCompletionContext::get_iter() const
 {
-  GtkTextIter iter;
-  gtk_source_completion_context_get_iter(const_cast<GtkSourceCompletionContext*>(gobj()), &iter);
-  return SourceIter(&iter);
+  Gtk::TextIter iter;
+  gtk_source_completion_context_get_iter(const_cast<GtkSourceCompletionContext*>(gobj()), iter.gobj());
+  return iter;
 }
 
 } // namespace gtksourceview

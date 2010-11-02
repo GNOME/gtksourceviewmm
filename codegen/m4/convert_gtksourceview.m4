@@ -1,14 +1,24 @@
 #
+# When adding a new conversion please sort conversion first by module (GDK, GTK,
+# GTKSOURCE), then alphabetically with preference to first write conversions
+# from C type to C++, and then from C++ to C. Just see below how this is done.
+#
+
+
+#
 ## GDK
 #
+
 
 # Gdk::Color -> GdkColor
 _CONVERSION(`const Gdk::Color&',`const GdkColor*',`($3).gobj()')
 _CONVERSION(`Gdk::Color&',`GdkColor*',`($3).gobj()')
 
+
 #
 ## GTK
 #
+
 
 # GtkCellRenderer -> Gtk::CellRenderer
 _CONVERSION(`GtkCellRenderer*',`Gtk::CellRenderer*',`Glib::wrap($3)')
@@ -37,6 +47,10 @@ _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',`($3).gobj()')
 _CONVERSION(`const Gtk::TextIter&',`const GtkTextIter*',`($3).gobj()')
 
 
+# GtkTextMark -> Gtk::TextMark
+_CONVERSION(`GtkTextMark*',`const Glib::RefPtr<Gtk::TextMark>&',`Glib::wrap($3, true)')
+
+
 # Gtk::TextTagTable -> GtkTextTagTable
 _CONVERSION(`const Glib::RefPtr<Gtk::TextTagTable>&',`GtkTextTagTable*',`Glib::unwrap($3)')
 
@@ -56,6 +70,7 @@ _CONVERSION(`const Glib::RefPtr<Gtk::Tooltip>&',`GtkTooltip*',`const_cast<GtkToo
 #
 ## GTKSOURCE
 #
+
 
 # GtkSourceBuffer -> gtksourceview::SourceBuffer
 _CONVERSION(`GtkSourceBuffer*',`Glib::RefPtr<SourceBuffer>',`Glib::wrap($3)')
@@ -154,9 +169,11 @@ _CONVERSION(`const Glib::RefPtr<const SourceUndoManager>&',`GtkSourceUndoManager
 _CONVERSION(`GtkSourceView*',`SourceView*',`Glib::wrap($3)')
 _CONVERSION(`GtkSourceView*',`const SourceView*',`Glib::wrap($3)')
 
+
 #
 ## ENUMS
 #
+
 
 _CONV_ENUM(Gtk,SourceSmartHomeEndType)
 _CONV_ENUM(Gtk,SourceDrawSpacesFlags)

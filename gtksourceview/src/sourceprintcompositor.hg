@@ -216,7 +216,6 @@ public:
    */
   _WRAP_METHOD(void set_line_numbers_font_name(const Glib::ustring& font_name), gtk_source_print_compositor_set_line_numbers_font_name)
 
-  // TODO: set_default_line_numbers_font_name() or set_line_numbers_font_name()? krnowak
   /** Sets the default font for printing line numbers on the left margin.
    *
    * The font to be used will be the same used as used for the text.
@@ -254,7 +253,6 @@ public:
    */
   _WRAP_METHOD(void set_header_font_name(const Glib::ustring& font_name), gtk_source_print_compositor_set_header_font_name)
 
-  // TODO: set_default_header_font_name() or set_header_font_name()? krnowak
   /** Sets the default font for printing the page header.
    *
    * The font to be used will be the same used as used for the text.
@@ -291,7 +289,6 @@ public:
    */
   _WRAP_METHOD(void set_footer_font_name(const Glib::ustring& font_name), gtk_source_print_compositor_set_footer_font_name)
 
-  // TODO: set_default_footer_font_name() or set_footer_font_name()? krnowak
   /** Sets the default font for printing the page footer.
    *
    * The font to be used will be the same used as used for the text.

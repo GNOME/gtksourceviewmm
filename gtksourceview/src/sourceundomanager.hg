@@ -114,7 +114,7 @@ public:
    */
   _WRAP_SIGNAL(void can_redo_changed(), "can-redo-changed")
 
-// TODO: should vfuncs be protected? krnowak
+private:
 
   _WRAP_VFUNC(bool can_undo() const, can_undo)
 

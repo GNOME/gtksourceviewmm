@@ -45,13 +45,7 @@ class SourceLanguage : public Glib::Object
 {
   _CLASS_GOBJECT(SourceLanguage, GtkSourceLanguage, GTK_SOURCE_LANGUAGE, Glib::Object, GObject)
 
-protected:
-  _CTOR_DEFAULT()
-
 public:
-
-  // TODO: C API does not provide any constructor for GtkSourceLanguage, should we delete it on API/ABI break? krnowak
-  _WRAP_CREATE()
 
   /** Returns the ID of a language.
    *
@@ -75,12 +69,11 @@ public:
    */
   _WRAP_METHOD(Glib::ustring get_section() const, gtk_source_language_get_section)
 
-  //TODO: THis should return bool, not gboolean.
   /** Returns whether the language should be hidden from the user.
    *
    * @return @c true if the language should be hidden, @c false otherwise.
    */
-  _WRAP_METHOD(gboolean get_hidden() const, gtk_source_language_get_hidden)
+  _WRAP_METHOD(bool get_hidden() const, gtk_source_language_get_hidden)
 
 #m4 _CONVERSION(`gchar**',`Glib::StringArrayHandle',`Glib::StringArrayHandle($3, Glib::OWNERSHIP_DEEP)')
 

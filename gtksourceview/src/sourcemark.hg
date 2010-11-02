@@ -35,22 +35,34 @@ class SourceMark : public Gtk::TextMark
   _CLASS_GOBJECT(SourceMark, GtkSourceMark, GTK_SOURCE_MARK, Gtk::TextMark, GtkTextMark)
 
 protected:
-  // TODO: C API does not provide default constructor for GtkSourceMark, should we delete it on API/ABI break? krnowak
-   _CTOR_DEFAULT
 
-  /* TODO: When breaking API/ABI add a constructor getting only category parameter to allow explicit anonymous mark creation and empty string names. Maybe also return to normal order of parameters. Does it have sense? krnowak
-   */
-  // We reversed the parameter order, because name can be NULL:
-  explicit SourceMark(const Glib::ustring& category, const Glib::ustring& name = Glib::ustring());
+  explicit SourceMark(const Glib::ustring& category);
+  explicit SourceMark(const Glib::ustring& name, const Glib::ustring& category);
   _IGNORE(gtk_source_mark_new)
 
 public:
+  /** Creates an anonymous text mark.
+   *
+   * Add it to a buffer using Gtk::TextBuffer::add_mark(). Note that such marks
+   * cannot be retrieved by using Gtk::TextBuffer::get_mark(). Normally marks
+   * are created using the utility function
+   * gtksourceview::SourceBuffer::create_source_mark().
+   *
+   * @param category Is used to classify marks according to common
+   * characteristics (e.g. all the marks representing a bookmark could belong to
+   * the "bookmark" category, or all the marks representing a compilation error
+   * could belong to "error" category).
+   *
+   * @return A new anonymous SourceMark that can be added using
+   * GtkTextBuffer::add_mark().
+   */
+  _WRAP_CREATE(const Glib::ustring& category)
+
   /** Creates a text mark.
    *
-   * Add it to a buffer using Gtk::TextBuffer::add_mark(). If @a name is empty
-   * string, the mark is anonymous; otherwise, the mark can be retrieved by name
-   * using Gtk::TextBuffer::get_mark(). Normally marks are created using the
-   * utility function SourceBuffer::create_mark().
+   * Add it to a buffer using Gtk::TextBuffer::add_mark(). The mark can be
+   * retrieved by name by using Gtk::TextBuffer::get_mark(). Normally marks are
+   * created using the utility function SourceBuffer::create_source_mark().
    *
    * @param category Is used to classify marks according to common
    * characteristics (e.g. all the marks representing a bookmark could belong to
@@ -60,7 +72,7 @@ public:
    *
    * @return A new SourceMark that can be added using GtkTextBuffer::add_mark().
    */
-  _WRAP_CREATE(const Glib::ustring& category, const Glib::ustring& name = Glib::ustring())
+  _WRAP_CREATE(const Glib::ustring& name, const Glib::ustring& category)
 
   /** Returns the mark category.
    *

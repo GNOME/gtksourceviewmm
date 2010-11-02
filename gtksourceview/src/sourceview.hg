@@ -500,8 +500,6 @@ public:
    */
   _WRAP_SIGNAL(void line_mark_activated(Gtk::TextIter& mark, GdkEvent* event), "line-mark-activated")
 
-  // TODO: there is no function pointer to "smart-home-end" signal handler in C class struct. - krnowak
-  // TODO: bug #633407. - krnowak
   /** Emitted when a the cursor was moved according to the smart home end setting.
    *
    * The signal is emitted after the cursor is moved, but during the

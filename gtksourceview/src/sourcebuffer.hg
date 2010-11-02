@@ -461,9 +461,6 @@ public:
    */
   _WRAP_SIGNAL(void highlight_updated(Gtk::TextIter& start, Gtk::TextIter& end), "highlight-updated", no_default_handler)
 
-// TODO: Use lower _CONVERSION/_WRAP_SIGNAL when we break API/ABI and remove upper ones. krnowak
-#m4 _CONVERSION(`GtkTextMark*',`const Glib::RefPtr<SourceMark>&',`Glib::RefPtr<SourceMark>::cast_dynamic(Glib::wrap($3, true))')
-//#m4 _CONVERSION(`GtkTextMark*',`const Glib::RefPtr<Gtk::TextMark>&',`Glib::wrap($3, true)')
   /** Emitted whenever a marker of sourcebuffer has changed and needs to be redisplayed by the view.
    *
    * A change in a marker's type or location can trigger this signal.
@@ -472,8 +469,7 @@ public:
    * @par Handler parameters:
    * where An iterator at the location where the change occurred.
    */
-  _WRAP_SIGNAL(void source_mark_updated(const Glib::RefPtr<SourceMark>& where), "source-mark-updated", no_default_handler)
-//  _WRAP_SIGNAL(void source_mark_updated(const Glib::RefPtr<Gtk::TextMark>& where), "source-mark-updated")
+  _WRAP_SIGNAL(void source_mark_updated(const Glib::RefPtr<Gtk::TextMark>& where), "source-mark-updated", no_default_handler)
 
   /** Emitted whenever undo is requested.
    *
@@ -481,7 +477,7 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_SIGNAL(void undo(), "undo", no_default_handler)
+  _WRAP_SIGNAL(void undo(), "undo")
 
 
   /** Emitted whenever redo is requested.

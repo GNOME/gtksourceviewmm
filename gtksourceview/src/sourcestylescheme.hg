@@ -20,12 +20,12 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <glibmm/interface.h>
+#include <glibmm/object.h>
 #include <gtksourceviewmm/sourcestyle.h>
 #include <gtksourceview/gtksourcestylescheme.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
-_PINCLUDE(glibmm/private/interface_p.h)
+_PINCLUDE(glibmm/private/object_p.h)
 
 namespace gtksourceview
 {
@@ -44,18 +44,10 @@ namespace gtksourceview
  *
  * @newin{2,2}
  */
-class SourceStyleScheme : public Glib::Interface
-{
-
-  _CLASS_INTERFACE(SourceStyleScheme, GtkSourceStyleScheme, GTK_SOURCE_STYLE_SCHEME, GTypeInterface)
-
-// TODO: This is wrong. GtkSourceStyleScheme is not an interface. Changing this breaks API. krnowak
-/*
 class SourceStyleScheme : public Glib::Object
 {
-
   _CLASS_GOBJECT(SourceStyleScheme, GtkSourceStyleScheme, GTK_SOURCE_STYLE_SCHEME, Glib::Object, GObject)
-*/
+
 public:
 
   /** Gets scheme id.

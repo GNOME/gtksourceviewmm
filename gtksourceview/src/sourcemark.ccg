@@ -23,10 +23,16 @@
 namespace gtksourceview
 {
 
-//This is custom implemented because the C _new() function specifies an extra left-gravity property:
-SourceMark::SourceMark(const Glib::ustring& category, const Glib::ustring& name)
+// Both constructors are implemented by hand because the C _new() function
+// specifies an extra left-gravity property.
+SourceMark::SourceMark(const Glib::ustring& category)
 :
-  _CONSTRUCT("name", (name.empty() ? 0 : name.c_str()), "category", category.c_str(), "left-gravity", TRUE)
+  _CONSTRUCT("name", 0, "category", category.c_str(), "left-gravity", TRUE)
+{}
+
+SourceMark::SourceMark(const Glib::ustring& name, const Glib::ustring& category)
+:
+  _CONSTRUCT("name", name.c_str(), "category", category.c_str(), "left-gravity", TRUE)
 {}
 
 Glib::RefPtr<SourceMark> SourceMark::next()

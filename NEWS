@@ -1,3 +1,12 @@
+2.91.1:
+* Lots API/ABI breaks - a document about migrating from gtksourceviewmm-2.0
+  to gtksourceviewmm-3.0 is to be written, because some of ABI breaks are nasty.
+  (Krzesimir Nowak)
+* SourceBuffer: Wrapped "bracket-matched" signal.
+  (Krzesimir Nowak)
+* SourceIter: Gone.
+  (Krzesimir Nowak)
+
 2.91.0:
 * Bumped API version to 3.0, so now it also uses gtkmm-3.0. (Murray Cumming)
 * Some deprecated methods were removed. (Murray Cumming)

@@ -1,7 +1,6 @@
 ACLOCAL_AMFLAGS = -I build ${ACLOCAL_FLAGS}
 
-# .../usr/include/cairo/cairo.h:1976: error: comma at end of enumerator list
-#DISTCHECK_CONFIGURE_FLAGS = --enable-warnings=fatal
+DISTCHECK_CONFIGURE_FLAGS = --enable-warnings=fatal
 
 if MAINTAINER_MODE
 src_subdirs = codegen gtksourceview/src

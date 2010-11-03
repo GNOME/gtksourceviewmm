@@ -174,15 +174,15 @@ TestWindow::TestWindow()
 
   prov_words->register_provider(m_view->get_buffer());
   m_completion->add_provider(prov_words);
-  
+
   prov_words->property_priority().set_value( 10 );
-  
+
   Glib::RefPtr<TestProvider> tp (TestProvider::create());
 
   tp->set_priority(1);
   tp->set_name("Test Provider 1");
   m_completion->add_provider(Glib::RefPtr<Gsv::SourceCompletionProvider>::cast_dynamic(tp));
-  
+
   tp = TestProvider::create();
 
   tp->set_priority(5);
@@ -217,10 +217,10 @@ int
 main (int argc, char *argv[])
 {
   Gtk::Main kit(argc, argv);
- 	Gsv::init();
-	TestWindow window;
-	
-	window.show_all();
-	kit.run(window);
-	return 0;
+  Gsv::init();
+  TestWindow window;
+
+  window.show_all();
+  kit.run(window);
+  return 0;
 }

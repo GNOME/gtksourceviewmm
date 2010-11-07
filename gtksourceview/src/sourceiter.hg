@@ -21,6 +21,7 @@
  */
 
 #include <gtkmm/textiter.h>
+#include <gtksourceviewmmconfig.h>
 _DEFS(gtksourceviewmm,gtksourceview)
 _CC_INCLUDE(gtksourceview/gtksourceiter.h)
 

@@ -24,6 +24,7 @@
 #include <gtksourceviewmm/sourcebuffer.h>
 #include <gtksourceviewmm/sourcegutter.h>
 #include <gtksourceviewmm/sourcecompletion.h>
+#include <gtksourceviewmmconfig.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(gtkmm/private/textview_p.h)

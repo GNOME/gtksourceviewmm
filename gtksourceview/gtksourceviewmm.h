@@ -71,6 +71,7 @@
  * of this project.
  */
 
+#include <gtksourceviewmmconfig.h>
 #include <gtksourceviewmm/init.h>
 #include <gtksourceviewmm/sourcebuffer.h>
 #include <gtksourceviewmm/sourcecompletion.h>

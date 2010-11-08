@@ -202,7 +202,9 @@ public:
    *
    * @newin{2,10}
    */
+#m4 _CONVERSION(`GtkSourceCompletionContext*', `const Glib::RefPtr<SourceCompletionContext>&', `Glib::wrap($3, true)')
   _WRAP_SIGNAL(void populate_context(const Glib::RefPtr<SourceCompletionContext>& context), "populate-context")
+#m4 _CONVERSION(`GtkSourceCompletionContext*', `const Glib::RefPtr<SourceCompletionContext>&', `Glib::wrap($3)')
 
   /** Emitted when the completion window is shown.
    *

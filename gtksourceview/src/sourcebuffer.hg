@@ -469,7 +469,9 @@ public:
    * @par Handler parameters:
    * where An iterator at the location where the change occurred.
    */
+_CONVERSION(`GtkTextMark*',`const Glib::RefPtr<Gtk::TextMark>&',`Glib::wrap($3, true)')
   _WRAP_SIGNAL(void source_mark_updated(const Glib::RefPtr<Gtk::TextMark>& where), "source-mark-updated", no_default_handler)
+_CONVERSION(`GtkTextMark*',`const Glib::RefPtr<Gtk::TextMark>&',`Glib::wrap($3)')
 
   /** Emitted whenever undo is requested.
    *

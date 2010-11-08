@@ -48,7 +48,7 @@ _CONVERSION(`const Gtk::TextIter&',`const GtkTextIter*',`($3).gobj()')
 
 
 # GtkTextMark -> Gtk::TextMark
-_CONVERSION(`GtkTextMark*',`const Glib::RefPtr<Gtk::TextMark>&',`Glib::wrap($3, true)')
+_CONVERSION(`GtkTextMark*',`const Glib::RefPtr<Gtk::TextMark>&',`Glib::wrap($3)')
 
 
 # Gtk::TextTagTable -> GtkTextTagTable

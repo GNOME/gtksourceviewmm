@@ -1,70 +1,11 @@
 #
-# When adding a new conversion please sort conversion first by module (GDK, GTK,
-# GTKSOURCE), then alphabetically with preference to first write conversions
+# When adding a new conversion please put here conversions only for types
+# specific for GtkSourceView library and only for methods. Conversions from
+# other libraries (like Gtk+ or Gdk) are to be put inside source files. The same
+# with conversions specifically for wrapping vfuncs and signals. Also please
+# sort conversions alphabetically with preference to first write conversions
 # from C type to C++, and then from C++ to C. Just see below how this is done.
 #
-
-
-#
-## GDK
-#
-
-
-# Gdk::Color -> GdkColor
-_CONVERSION(`const Gdk::Color&',`const GdkColor*',`($3).gobj()')
-_CONVERSION(`Gdk::Color&',`GdkColor*',`($3).gobj()')
-
-
-#
-## GTK
-#
-
-
-# GtkCellRenderer -> Gtk::CellRenderer
-_CONVERSION(`GtkCellRenderer*',`Gtk::CellRenderer*',`Glib::wrap($3)')
-
-
-# Gtk::CellRenderer -> GtkCellRenderer
-_CONVERSION(`Gtk::CellRenderer*',`GtkCellRenderer*',`Glib::unwrap($3)')
-
-
-# Gtk::PrintContext -> GtkPrintContext
-_CONVERSION(`const Glib::RefPtr<Gtk::PrintContext>&',`GtkPrintContext*',`Glib::unwrap($3)')
-
-
-# Gtk::TextBuffer -> GtkTextBuffer
-_CONVERSION(`const Glib::RefPtr<Gtk::TextBuffer>&',`GtkTextBuffer*',`Glib::unwrap($3)')
-
-
-# GtkTextIter -> Gtk::TextIter
-_CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap($3)')
-_CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap($3)')
-
-
-# Gtk::TextIter -> GtkTextIter
-_CONVERSION(`const Gtk::TextIter&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
-_CONVERSION(`Gtk::TextIter&',`GtkTextIter*',`($3).gobj()')
-_CONVERSION(`const Gtk::TextIter&',`const GtkTextIter*',`($3).gobj()')
-
-
-# GtkTextMark -> Gtk::TextMark
-_CONVERSION(`GtkTextMark*',`const Glib::RefPtr<Gtk::TextMark>&',`Glib::wrap($3)')
-
-
-# Gtk::TextTagTable -> GtkTextTagTable
-_CONVERSION(`const Glib::RefPtr<Gtk::TextTagTable>&',`GtkTextTagTable*',`Glib::unwrap($3)')
-
-
-# Gtk::TextView -> GtkTextView
-_CONVERSION(`const Gtk::TextView&',`GtkTextView*',`const_cast<GtkTextView*>(($3).gobj())')
-
-
-# GtkTooltip -> Gtk::Tooltip
-_CONVERSION(`GtkTooltip*',`const Glib::RefPtr<Gtk::Tooltip>&',`Glib::wrap($3)')
-
-
-# Gtk::Tooltip -> GtkTooltip
-_CONVERSION(`const Glib::RefPtr<Gtk::Tooltip>&',`GtkTooltip*',`const_cast<GtkTooltip*>(Glib::unwrap($3))')
 
 
 #
@@ -82,13 +23,10 @@ _CONVERSION(`const Glib::RefPtr<SourceBuffer>&',`GtkSourceBuffer*',__CONVERT_REF
 
 # GtkSourceCompletion -> gtksourceview::SourceCompletion
 _CONVERSION(`GtkSourceCompletion*',`Glib::RefPtr<SourceCompletion>',`Glib::wrap($3)')
-_CONVERSION(`GtkSourceCompletion*',`Glib::RefPtr<const SourceCompletion>',`Glib::wrap($3)')
 
 
 # GtkSourceCompletionContext -> gtksourceview::SourceCompletionContext
 _CONVERSION(`GtkSourceCompletionContext*',`Glib::RefPtr<SourceCompletionContext>',`Glib::wrap($3)')
-_CONVERSION(`GtkSourceCompletionContext*',`const Glib::RefPtr<SourceCompletionContext>&',`Glib::wrap($3)')
-_CONVERSION(`GtkSourceCompletionContext*',`const Glib::RefPtr<const SourceCompletionContext>&',`Glib::wrap($3)')
 
 
 # gtksourceview::SourceCompletionContext -> GtkSourceCompletionContext
@@ -106,11 +44,6 @@ _CONVERSION(`GtkSourceCompletionInfo*',`const SourceCompletionInfo&',`(*(Glib::w
 _CONVERSION(`const SourceCompletionInfo&',`GtkSourceCompletionInfo*',`const_cast<GtkSourceCompletionInfo*>(($3).gobj())')
 
 
-# GtkSourceCompletionProposal -> gtksourceview::SourceCompletionProposal
-_CONVERSION(`GtkSourceCompletionProposal*',`const Glib::RefPtr<SourceCompletionProposal>&',`Glib::wrap($3)')
-_CONVERSION(`GtkSourceCompletionProposal*',`const Glib::RefPtr<const SourceCompletionProposal>&',`Glib::wrap($3)')
-
-
 # gtksourceview::SourceCompletionProposal -> GtkSourceCompletionProposal
 _CONVERSION(`const Glib::RefPtr<const SourceCompletionProposal>&',`GtkSourceCompletionProposal*',`const_cast<GtkSourceCompletionProposal*>(Glib::unwrap($3))')
 _CONVERSION(`const Glib::RefPtr<SourceCompletionProposal>&',`GtkSourceCompletionProposal*',`Glib::unwrap($3)')
@@ -122,7 +55,6 @@ _CONVERSION(`const Glib::RefPtr<SourceCompletionProvider>&',`GtkSourceCompletion
 
 # GtkSourceGutter -> gtksourceview::SourceGutter
 _CONVERSION(`GtkSourceGutter*',`Glib::RefPtr<SourceGutter>',`Glib::wrap($3)')
-_CONVERSION(`GtkSourceGutter*',`Glib::RefPtr<const SourceGutter>',`Glib::wrap($3)')
 
 
 # GtkSourceLanguage -> gtksourceview::SourceLanguage

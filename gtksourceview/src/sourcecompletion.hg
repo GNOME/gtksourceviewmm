@@ -144,6 +144,7 @@ public:
    *
    * @newin{2,10}
    */
+#m4 _CONVERSION(`const Gtk::TextIter&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
   _WRAP_METHOD(Glib::RefPtr<SourceCompletionContext> create_context(const Gtk::TextIter& position), gtk_source_completion_create_context)
 
   // TODO: better wording could be used here - it is too convoluted. krnowak

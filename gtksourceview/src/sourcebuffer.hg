@@ -193,6 +193,7 @@ public:
    *
    * @return @c true if iter was moved.
    */
+#m4 _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',`($3).gobj()')
   _WRAP_METHOD(bool backward_iter_to_source_mark(Gtk::TextIter& iter, const Glib::ustring& category), gtk_source_buffer_backward_iter_to_source_mark)
 
   /** Moves iter to the position of the previous SourceMark of any category.
@@ -231,6 +232,7 @@ public:
    * @param start Start of the area to highlight.
    * @param end End of the area to highlight.
    */
+#m4 _CONVERSION(`const Gtk::TextIter&',`const GtkTextIter*',`($3).gobj()')
   _WRAP_METHOD(void ensure_highlight(const Gtk::TextIter& start, const Gtk::TextIter& end), gtk_source_buffer_ensure_highlight)
 
   /** Returns the SourceStyleScheme currently used in buffer.
@@ -279,6 +281,8 @@ public:
    *
    * @return A new SourceMark, owned by the buffer.
    */
+   // TODO: check if this shouldn't be marked as refreturn - krnowak
+   // TODO: check parameter order to be consistent with SourceMark's constructor order. - krnowak
   _WRAP_METHOD(Glib::RefPtr<SourceMark> create_source_mark(const Glib::ustring& name, const Glib::ustring& category, const Gtk::TextIter& where), gtk_source_buffer_create_source_mark)
 
   /** Creates an anonymous source mark in the buffer of category category.
@@ -302,8 +306,10 @@ public:
    *
    * @newin{2,10}
    */
+   // TODO: check if this shouldn't be marked as refreturn - krnowak
   Glib::RefPtr<SourceMark> create_source_mark(const Glib::ustring& category, const Gtk::TextIter& where);
 
+   // TODO: check if this RefPtrs should be additionally reffed. - krnowak
 #m4 _CONVERSION(`GSList*',`Glib::SListHandle<Glib::RefPtr<SourceMark> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
 #m4 _CONVERSION(`GSList*',`Glib::SListHandle<Glib::RefPtr<const SourceMark> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
 
@@ -322,6 +328,7 @@ public:
    *
    * @return A list of source marks.
    */
+   // TODO: check if this RefPtrs should be additionally reffed. - krnowak
   Glib::SListHandle<Glib::RefPtr<SourceMark> > get_source_marks_at_line(int line) const;
 
   /** Returns the list of marks of the given @a category at @a iter.
@@ -331,6 +338,7 @@ public:
    *
    * @return A list of source marks.
    */
+   // TODO: check if this RefPtrs should be additionally reffed. - krnowak
   _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceMark> > get_source_marks_at_iter(Gtk::TextIter& iter, const Glib::ustring& category) const, gtk_source_buffer_get_source_marks_at_iter)
 
   /** Returns the list of marks of any category at @a iter.
@@ -339,6 +347,7 @@ public:
    *
    * @return A list of source marks.
    */
+   // TODO: check if this RefPtrs should be additionally reffed. - krnowak
   Glib::SListHandle<Glib::RefPtr<SourceMark> > get_source_marks_at_iter(Gtk::TextIter& iter) const;
 
   /** Remove all marks of @a category between start and end from the buffer.
@@ -459,6 +468,7 @@ public:
    * start An iterator at the start of the updated region.
    * end An iterator at the end of the updated region.
    */
+#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap($3)')
   _WRAP_SIGNAL(void highlight_updated(Gtk::TextIter& start, Gtk::TextIter& end), "highlight-updated", no_default_handler)
 
   /** Emitted whenever a marker of sourcebuffer has changed and needs to be redisplayed by the view.
@@ -469,9 +479,9 @@ public:
    * @par Handler parameters:
    * where An iterator at the location where the change occurred.
    */
-_CONVERSION(`GtkTextMark*',`const Glib::RefPtr<Gtk::TextMark>&',`Glib::wrap($3, true)')
+#m4 _CONVERSION(`GtkTextMark*',`const Glib::RefPtr<Gtk::TextMark>&',`Glib::wrap($3, true)')
   _WRAP_SIGNAL(void source_mark_updated(const Glib::RefPtr<Gtk::TextMark>& where), "source-mark-updated", no_default_handler)
-_CONVERSION(`GtkTextMark*',`const Glib::RefPtr<Gtk::TextMark>&',`Glib::wrap($3)')
+#m4 _CONVERSION(`GtkTextMark*',`const Glib::RefPtr<Gtk::TextMark>&',`Glib::wrap($3)')
 
   /** Emitted whenever undo is requested.
    *

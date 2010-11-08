@@ -56,6 +56,7 @@ public:
    *
    * @newin{2,10}
    */
+#m4 _CONVERSION(`const Glib::RefPtr<Gtk::TextBuffer>&',`GtkTextBuffer*',`Glib::unwrap($3)')
   _WRAP_METHOD(void register_provider(const Glib::RefPtr<Gtk::TextBuffer>& buffer), gtk_source_completion_words_register)
 
   /** Unregisters this provider from given buffer.

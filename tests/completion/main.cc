@@ -38,7 +38,7 @@ private:
   //virtual void update_info_vfunc(const Glib::RefPtr<const Gsv::SourceCompletionProposal>& proposal, const Gsv::SourceCompletionInfo& info);
   //virtual bool get_start_iter_vfunc(const Glib::RefPtr<const Gsv::SourceCompletionContext>& context, const Glib::RefPtr<const Gsv::SourceCompletionProposal>& proposal, Gtk::TextIter& iter);
   //virtual bool activate_proposal_vfunc(const Glib::RefPtr<Gsv::SourceCompletionProposal>& proposal, const Gtk::TextIter& iter);
-  //virtual Gsv::SourceCompletionActivation get_activation_vfunc() const;
+  virtual Gsv::SourceCompletionActivation get_activation_vfunc() const;
   //virtual int get_interactive_delay_vfunc() const;
   virtual int get_priority_vfunc() const;
 
@@ -67,6 +67,9 @@ void TestProvider::set_name(const Glib::ustring& name)
 }
 
 TestProvider::TestProvider()
+: Glib::ObjectBase(typeid(TestProvider)),
+  Glib::Object(),
+  Gsv::SourceCompletionProvider()
 {
   m_proposals.push_back( Gsv::SourceCompletionItem::create( "Proposal 1", "Proposal 1", get_icon_vfunc(), "" ) );
   m_proposals.push_back( Gsv::SourceCompletionItem::create( "Proposal 2", "Proposal 2", get_icon_vfunc(), "" ) );
@@ -90,12 +93,19 @@ Glib::RefPtr<const Gdk::Pixbuf> TestProvider::get_icon_vfunc() const
 
 void TestProvider::populate_vfunc(const Glib::RefPtr<Gsv::SourceCompletionContext>& context)
 {
-  context->add_proposals(Glib::RefPtr<TestProvider>(this), m_proposals, true);
+  Glib::RefPtr<TestProvider> reffed_this(this);
+  reffed_this->reference();
+  context->add_proposals(reffed_this, m_proposals, true);
 }
 
-bool TestProvider::match_vfunc(const Glib::RefPtr<const Gsv::SourceCompletionContext>& context) const
+bool TestProvider::match_vfunc(const Glib::RefPtr<const Gsv::SourceCompletionContext>& /* context */) const
 {
   return true;
+}
+
+Gsv::SourceCompletionActivation TestProvider::get_activation_vfunc() const
+{
+  return Gsv::SOURCE_COMPLETION_ACTIVATION_INTERACTIVE | Gsv::SOURCE_COMPLETION_ACTIVATION_USER_REQUESTED;
 }
 
 int TestProvider::get_priority_vfunc() const
@@ -181,13 +191,13 @@ TestWindow::TestWindow()
 
   tp->set_priority(1);
   tp->set_name("Test Provider 1");
-  m_completion->add_provider(Glib::RefPtr<Gsv::SourceCompletionProvider>::cast_dynamic(tp));
+  m_completion->add_provider(tp);
 
   tp = TestProvider::create();
 
   tp->set_priority(5);
   tp->set_name("Test Provider 5");
-  m_completion->add_provider(Glib::RefPtr<Gsv::SourceCompletionProvider>::cast_dynamic(tp));
+  m_completion->add_provider(tp);
 }
 
 TestWindow::~TestWindow()

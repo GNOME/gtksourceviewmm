@@ -105,7 +105,6 @@ public:
    */
   _WRAP_METHOD(void can_redo_changed(), gtk_source_undo_manager_can_redo_changed)
 
-  // TODO: should these signals be wrapped? They are marked as action ones. krnowak
   /** Emitted when the ability to undo has changed.
    */
   _WRAP_SIGNAL(void can_undo_changed(), "can-undo-changed")
@@ -114,7 +113,6 @@ public:
    */
   _WRAP_SIGNAL(void can_redo_changed(), "can-redo-changed")
 
-// TODO: should vfuncs be protected? krnowak
 
   _WRAP_VFUNC(bool can_undo() const, can_undo)
 

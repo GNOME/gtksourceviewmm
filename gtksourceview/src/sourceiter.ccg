@@ -80,25 +80,6 @@ SourceIter::forward_search (const Glib::ustring &str,
                             Gtk::TextIter &match_end,
                             const Gtk::TextIter &limit) const
 {
-// TODO: what is the use of these things? krnowak
-    /*
-    const GtkTextIter *gobject (gobj ()) ;
-    g_return_val_if_fail (gobject, FALSE) ; // that will never fail, since gobject is always not null.
-    g_return_val_if_fail (a_str.c_str (), FALSE) ; // ditto.
-
-    GtkTextIter match_start, match_end ;
-    gboolean res = gtk_source_iter_forward_search (gobject,
-                                                   a_str.c_str (),
-                                                   static_cast<GtkSourceSearchFlags>(a_flags),
-                                                   &match_start,
-                                                   &match_end,
-                                                   a_limit.gobj ()) ;
-    Gtk::TextIter res_match_start (&match_start) ;
-    Gtk::TextIter res_match_end (&match_end) ;
-    a_match_start = res_match_start ;
-    a_match_end = res_match_end ;
-    return res ;
-    */
   return gtk_source_iter_forward_search(const_cast<GtkTextIter*>(gobj()),
                                         str.c_str(),
                                         static_cast<GtkSourceSearchFlags>(flags),
@@ -114,25 +95,6 @@ SourceIter::backward_search (const Glib::ustring &str,
                               Gtk::TextIter &match_end,
                               const Gtk::TextIter &limit) const
 {
-// TODO: what is the use of these things? krnowak
-    /*
-    const GtkTextIter *gobject (gobj ()) ;
-    g_return_val_if_fail (gobject, FALSE) ; // that will never fail, since gobject is always not null.
-    g_return_val_if_fail (a_str.c_str (), FALSE) ; // ditto.
-
-    GtkTextIter match_start, match_end ;
-    gboolean res = gtk_source_iter_backward_search (gobject,
-                                                    a_str.c_str (),
-                                                    static_cast<GtkSourceSearchFlags>(a_flags),
-                                                    &match_start,
-                                                    &match_end,
-                                                    a_limit.gobj ()) ;
-    Gtk::TextIter res_match_start (&match_start) ;
-    Gtk::TextIter res_match_end (&match_end) ;
-    a_match_start = res_match_start ;
-    a_match_end = res_match_end ;
-    return res ;
-    */
   return gtk_source_iter_backward_search(const_cast<GtkTextIter*>(gobj()),
     str.c_str(), static_cast<GtkSourceSearchFlags>(flags), match_start.gobj(),
     match_end.gobj(), limit.gobj());

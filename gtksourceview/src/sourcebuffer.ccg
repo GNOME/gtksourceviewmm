@@ -33,24 +33,9 @@ SourceBuffer::SourceBuffer (const Glib::RefPtr<Gtk::TextTagTable>& tag_table) :
   _CONSTRUCT("tag-table", Glib::unwrap(tag_table))
 {}
 
-// TODO: check later how bug 606732 goes. krnowak
 SourceBuffer::SourceBuffer (const Glib::RefPtr<SourceLanguage> &language) :
-//    _CONSTRUCT("tag-table, 0")
     _CONSTRUCT("tag-table", 0, "language", Glib::unwrap(language))
-{
-    /*
-    if (language)
-    {
-        gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (gobject_),
-                                        Glib::unwrap(language)) ;
-    }
-    else
-    {
-        gtk_source_buffer_set_language (GTK_SOURCE_BUFFER (gobject_),
-                                        0) ;
-    }
-    */
-}
+{}
 
 bool SourceBuffer::backward_iter_to_source_mark(Gtk::TextIter& iter)
 {

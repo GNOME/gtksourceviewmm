@@ -67,9 +67,8 @@ public:
    */
   _WRAP_METHOD(static Glib::RefPtr<SourceLanguageManager> get_default(), gtk_source_language_manager_get_default, refreturn)
 
-#m4 _CONVERSION(`const gchar**',`Glib::StringArrayHandle',`$2($3)')
+#m4 _CONVERSION(`const gchar**',`Glib::StringArrayHandle',`$2($3, Glib::OWNERSHIP_NONE)')
 
-  // TODO: define own string array to use std::string, instead of Glib::ustring, when we break API/ABI. krnowak
   /** Gets the list directories where language manager looks for language files.
    *
    * @return An array containg a list of language files directories.
@@ -78,7 +77,6 @@ public:
 
 #m4 _CONVERSION(`const Glib::StringArrayHandle&',`gchar**',`const_cast<gchar**>(($3).data())')
 
-  // TODO: see previous one. Also this is probably buggy, because we need NULL termination in C array and Glib::StringArrayHandle does not provide it - fixing it will break ABI. krnowak
   /** Sets the list of directories where the language manager looks for language
    *  files.
    *
@@ -127,7 +125,6 @@ public:
    */
   _WRAP_METHOD(Glib::RefPtr<const SourceLanguage> get_language(const Glib::ustring& id) const, gtk_source_language_manager_get_language, constversion, refreturn)
   _IGNORE(gtk_source_language_manager_guess_language)
-// TODO: change filename parameter to std::string, when we break API/ABI. krnowak
   /** Picks a SourceLanguage for given file name and content type,
    *  according to the information in lang files.
    *

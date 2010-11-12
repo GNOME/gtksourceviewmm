@@ -50,7 +50,6 @@ protected:
 
 public:
 
-  // TODO: C API does not provide any constructor for GtkSourceLanguage, should we delete it on API/ABI break? krnowak
   _WRAP_CREATE()
 
   /** Returns the ID of a language.
@@ -75,7 +74,6 @@ public:
    */
   _WRAP_METHOD(Glib::ustring get_section() const, gtk_source_language_get_section)
 
-  //TODO: THis should return bool, not gboolean.
   /** Returns whether the language should be hidden from the user.
    *
    * @return @c true if the language should be hidden, @c false otherwise.

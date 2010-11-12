@@ -108,7 +108,6 @@ public:
    **/
   explicit SourceView (const Glib::RefPtr<SourceBuffer> &buffer) ;
 
-// TODO: remove these when breaking API/ABI? SourceView is derived from GtkObject, so it does not need to be accessed by Glib::RefPtr. krnowak
   _WRAP_CREATE()
   _WRAP_CREATE(const Glib::RefPtr<SourceBuffer> &buffer)
 
@@ -525,7 +524,6 @@ public:
   /** Emitted when undo action is requested.
    */
   _WRAP_SIGNAL(void undo(), "undo")
-// TODO: remove no_default_handler when we will break API/ABI. krnowak
 
   /** Emitted when a line mark has been activated (for instance when there
    * was a button press in the line marks gutter).

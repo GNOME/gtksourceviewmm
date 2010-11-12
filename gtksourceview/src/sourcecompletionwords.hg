@@ -49,7 +49,6 @@ public:
    */
   _WRAP_CREATE(const Glib::ustring& name, const Glib::RefPtr<Gdk::Pixbuf>& icon)
 
-// TODO: think about a good method name - register is a C/C++ keyword. krnowak
   /** Registers this provider in given buffer.
    *
    * @param buffer A buffer which will use this provider.

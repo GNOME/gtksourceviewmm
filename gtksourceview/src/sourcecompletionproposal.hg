@@ -142,8 +142,6 @@ public:
    */
   _WRAP_SIGNAL(void changed(), "changed")
 
-// TODO: should vfuncs be protected? krnowak
-
   _WRAP_VFUNC(Glib::ustring get_label() const, get_label)
 
   _WRAP_VFUNC(Glib::ustring get_markup() const, get_markup)

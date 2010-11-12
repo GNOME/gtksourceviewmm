@@ -25,7 +25,7 @@
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/interface_p.h)
 
-namespace gtksourceview
+namespace Gsv
 {
 
 /** Undo manager interface for SourceView.
@@ -129,6 +129,6 @@ private:
   _WRAP_VFUNC(void end_not_undoable_action(), end_not_undoable_action)
 };
 
-} // namespace gtksourceview
+} // namespace Gsv
 
 

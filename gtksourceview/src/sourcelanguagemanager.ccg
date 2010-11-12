@@ -22,7 +22,7 @@
 
 #include "gtksourceviewmm/sourcelanguagemanager.h"
 
-namespace gtksourceview
+namespace Gsv
 {
 
 void
@@ -31,5 +31,5 @@ SourceLanguageManager::reset_search_path()
   gtk_source_language_manager_set_search_path(gobj(), 0);
 }
 
-}//end namespace gtksourceview
+}//end namespace Gsv
 

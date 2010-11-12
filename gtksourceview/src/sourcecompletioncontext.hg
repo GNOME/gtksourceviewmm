@@ -30,7 +30,7 @@ _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
 
 
-namespace gtksourceview
+namespace Gsv
 {
 
 class SourceCompletionProvider;
@@ -97,5 +97,5 @@ public:
   _WRAP_SIGNAL(void cancelled(), "cancelled")
 };
 
-} /* namespace gtksourceview */
+} /* namespace Gsv */
 

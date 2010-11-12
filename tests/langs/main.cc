@@ -5,13 +5,13 @@
 #include<gtksourceviewmm/init.h>
 
 using namespace std ;
-using namespace gtksourceview ;
+using namespace Gsv ;
 
 int
 main (int argc, char **argv)
 {
     Gtk::Main loop (argc, argv) ;
-    gtksourceview::init () ;
+    Gsv::init () ;
 
     Glib::RefPtr<SourceLanguageManager> language_manager =
                                                 SourceLanguageManager::create();

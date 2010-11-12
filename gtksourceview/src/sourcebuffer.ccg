@@ -22,7 +22,7 @@
 #include <gtksourceviewmm/sourcebuffer.h>
 #include <gtksourceview/gtksourcebuffer.h>
 
-namespace gtksourceview
+namespace Gsv
 {
 
 SourceBuffer::SourceBuffer () :
@@ -82,6 +82,6 @@ SourceBuffer::set_default_undo_manager()
   gtk_source_buffer_set_undo_manager(gobj(), 0);
 }
 
-}//end namespace gtksourceview
+}//end namespace Gsv
 
 

@@ -20,7 +20,7 @@
 #include <gtksourceviewmm/sourcemarkup.h>
 
 
-namespace gtksourceview
+namespace Gsv
 {
 
 SourceMarkup::SourceMarkup()
@@ -72,5 +72,5 @@ const char* SourceMarkup::get_c_str() const
   return markup_.c_str();
 }
 
-} // namespace gtksourceview
+} // namespace Gsv
 

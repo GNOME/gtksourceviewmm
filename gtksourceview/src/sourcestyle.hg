@@ -23,7 +23,7 @@
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
 
-namespace gtksourceview
+namespace Gsv
 {
 
 /** Class representing a style.
@@ -58,6 +58,6 @@ public:
   _WRAP_PROPERTY("underline-set", bool)
 };
 
-}//end namespace gtksourceview
+}//end namespace Gsv
 
 

@@ -19,7 +19,7 @@
 
 #include <gtksourceview/gtksourcecompletion.h>
 
-namespace gtksourceview
+namespace Gsv
 {
 
 Glib::RefPtr<SourceCompletionContext>
@@ -28,4 +28,4 @@ SourceCompletion::create_context()
   return Glib::wrap(gtk_source_completion_create_context(gobj(), 0));
 }
 
-} // namespace gtksourceview
+} // namespace Gsv

@@ -1,7 +1,6 @@
 #include <iostream>
 #include <gtkmm.h>
 #include <gtksourceviewmm.h>
-namespace Gsv = gtksourceview ;
 
 int
 main (int argc, char* argv[])

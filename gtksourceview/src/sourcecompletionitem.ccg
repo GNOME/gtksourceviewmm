@@ -19,7 +19,7 @@
 
 #include <gtksourceview/gtksourcecompletionitem.h>
 
-namespace gtksourceview
+namespace Gsv
 {
 
 SourceCompletionItem::SourceCompletionItem(const Glib::ustring& label, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info) :
@@ -67,4 +67,4 @@ SourceCompletionItem::SourceCompletionItem(const Glib::ustring& label, const Gli
   }
 }
 
-} // namespace gtksourceview
+} // namespace Gsv

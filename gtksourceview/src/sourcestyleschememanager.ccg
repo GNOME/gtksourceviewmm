@@ -20,7 +20,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-namespace gtksourceview
+namespace Gsv
 {
 
 
@@ -29,6 +29,6 @@ void SourceStyleSchemeManager::reset_search_path()
   gtk_source_style_scheme_manager_set_search_path(gobj(), 0);
 }
 
-}
+} // namespace Gsv
 
 

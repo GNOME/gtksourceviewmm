@@ -19,7 +19,7 @@
 
 _DEFS(gtksourceviewmm,gtksourceview)
 
-namespace gtksourceview
+namespace Gsv
 {
 // TODO: need docs. krnowak
 /** An enum type specifying something bla bla bla, probably type of activation.
@@ -39,4 +39,4 @@ _WRAP_ENUM(SourceCompletionActivation, GtkSourceCompletionActivation)
   * For example through a keyboard accelerator from the view.
   */
 
-} // namespace gtksourceview
+} // namespace Gsv

@@ -11,7 +11,7 @@
 using namespace std ;
 using namespace Gtk;
 using namespace Glib;
-using namespace gtksourceview ;
+using namespace Gsv ;
 
 #define LOG(message) \
 std::cout << __PRETTY_FUNCTION__ << ":" << __FILE__<< ":" << __LINE__ << ":" \
@@ -366,7 +366,7 @@ main (int argc, char **argv)
     //init plumbing
     //***************
     Main kit (argc, argv) ;
-    gtksourceview::init () ;
+    Gsv::init () ;
 
     App app ;
     app.get_widget ().set_size_request (500, 400) ;

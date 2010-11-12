@@ -30,7 +30,7 @@
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
 
-namespace gtksourceview
+namespace Gsv
 {
 
 class SourceView;
@@ -222,6 +222,6 @@ public:
 #m4 _CONVERSION(`GtkTooltip*', `const Glib::RefPtr<Gtk::Tooltip>&', `Glib::wrap($3)')
 };
 
-} // namespace gtksourceview
+} // namespace Gsv
 
 

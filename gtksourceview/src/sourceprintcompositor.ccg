@@ -19,7 +19,7 @@
 
 #include <gtksourceview/gtksourceprintcompositor.h>
 
-namespace gtksourceview
+namespace Gsv
 {
 
 SourcePrintCompositor::SourcePrintCompositor(const SourceView& view) :
@@ -40,4 +40,4 @@ SourcePrintCompositor::set_footer_format(bool separator, const Glib::ustring& le
   gtk_source_print_compositor_set_footer_format(gobj(), static_cast<gboolean>(separator), (left.empty() ? 0 : left.c_str()), (center.empty() ? 0 : center.c_str()), (right.empty() ? 0 : right.c_str()));
 }
 
-} // namespace gtksourceview
+} // namespace Gsv

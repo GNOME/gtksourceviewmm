@@ -24,12 +24,12 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-namespace gtksourceview
+namespace Gsv
 {
   /** Initializes all type internals.
    */
   void init () ;
-}//end namespace gtksourceview
+}//end namespace Gsv
 
 #endif //_GTKSOURCEVIEWMM_INIT_H
 

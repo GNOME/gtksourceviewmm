@@ -24,7 +24,7 @@
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
 
-namespace gtksourceview
+namespace Gsv
 {
 
 /** Class providing access to SourceStyleSchemes.
@@ -113,6 +113,6 @@ public:
 
 };//end class SourceStyleSchemeManager
 
-}//end namespace gtksourceview
+}//end namespace Gsv
 
 

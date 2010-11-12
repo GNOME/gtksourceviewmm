@@ -25,7 +25,7 @@
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
 
-namespace gtksourceview
+namespace Gsv
 {
 
 /** Compose a SourceBuffer for printing.
@@ -523,7 +523,7 @@ public:
    * static bool
    * paginate (Glib::RefPtr<Gtk::PrintOperation> operation,
    *           Glib::RefPtr<Gtk::PrintContext> context,
-   *           Glib::RefPtr<gtksourceview::SourcePrintCompositor> compositor)
+   *           Glib::RefPtr<Gsv::SourcePrintCompositor> compositor)
    * {
    *   if (compositor->paginate(context))
    *   {
@@ -548,7 +548,7 @@ public:
    * static void
    * begin_print (Glib::RefPtr< Gtk::PrintOperation > operation,
    *              Glib::RefPtr< Gtk::PrintContext > context,
-   *              Glib::RefPtr< gtksourceview::SourcePrintCompositor > compositor)
+   *              Glib::RefPtr< Gsv::SourcePrintCompositor > compositor)
    * {
    *   while (!compositor->paginate(context));
    *
@@ -589,7 +589,7 @@ public:
    * draw_page (Glib::RefPtr< Gtk::PrintOperation > operation,
    *            Glib::RefPtr< GtkPrintContext > context,
    *            int page_nr,
-   *            Glib::RefPtr< gtksourceview::SourcePrintCompositor > compositor)
+   *            Glib::RefPtr< Gsv::SourcePrintCompositor > compositor)
    * {
    *   compositor->draw_page(context, page_nr);
    * }
@@ -618,5 +618,5 @@ public:
   _WRAP_PROPERTY("wrap-mode", Gtk::WrapMode)
 };
 
-} /* namespace gtksourceview */
+} /* namespace Gsv */
 

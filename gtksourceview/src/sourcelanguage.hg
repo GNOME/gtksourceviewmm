@@ -27,7 +27,7 @@ _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
 
 
-namespace gtksourceview
+namespace Gsv
 {
 
 class SourceLanguageManager ;
@@ -122,4 +122,4 @@ public:
   _WRAP_METHOD(Glib::ustring get_metadata(const Glib::ustring& name) const, gtk_source_language_get_metadata)
 };
 
-} /* namespace gtksourceview */
+} /* namespace Gsv */

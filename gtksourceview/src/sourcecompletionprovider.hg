@@ -28,7 +28,7 @@
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/interface_p.h)
 
-namespace gtksourceview
+namespace Gsv
 {
 
 class SourceCompletionContext;
@@ -237,6 +237,6 @@ private:
   _WRAP_VFUNC(int get_priority() const, get_priority)
 };
 
-} // namespace gtksourceview
+} // namespace Gsv
 
 

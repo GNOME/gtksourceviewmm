@@ -29,7 +29,7 @@ _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(gtkmm/private/textbuffer_p.h)
 _PINCLUDE(gtksourceview/gtksourceview-typebuiltins.h)
 
-namespace gtksourceview
+namespace Gsv
 {
 
 /** Describes result of matching brackets.
@@ -504,4 +504,4 @@ public:
   _WRAP_SIGNAL(void bracket_matched(Gtk::TextIter& iter, SourceBracketMatchType state), "bracket-matched")
 };
 
-} /* namespace gtksourceview */
+} /* namespace Gsv */

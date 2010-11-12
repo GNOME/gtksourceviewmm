@@ -19,18 +19,19 @@
  */
 
 #include "init.h"
-namespace gtksourceview
+namespace Gsv
 {
 
 void
 init ()
 {
-    static bool s_init = false ;
-    if (!s_init) {
-        Gtk::Main::init_gtkmm_internals();
-        gtksourceview::wrap_init () ;
-        s_init = true ;
-    }
+  static bool s_init = false ;
+  if (!s_init)
+  {
+    Gtk::Main::init_gtkmm_internals() ;
+    Gsv::wrap_init () ;
+    s_init = true ;
+  }
 }
 
-} // namespace gtksourceview
+} // namespace Gsv

@@ -19,7 +19,7 @@
 
 #include <gtksourceview/gtksourcecompletioncontext.h>
 
-namespace gtksourceview
+namespace Gsv
 {
 
 Gtk::TextIter SourceCompletionContext::get_iter() const
@@ -29,4 +29,4 @@ Gtk::TextIter SourceCompletionContext::get_iter() const
   return iter;
 }
 
-} // namespace gtksourceview
+} // namespace Gsv

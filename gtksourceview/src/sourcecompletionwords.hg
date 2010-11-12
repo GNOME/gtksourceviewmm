@@ -23,7 +23,7 @@
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
 
-namespace gtksourceview
+namespace Gsv
 {
 // TODO: docs needed. krnowak
 /** Words completion provider.
@@ -82,5 +82,5 @@ public:
   _WRAP_PROPERTY("priority", int)
 };
 
-} /* namespace gtksourceview */
+} /* namespace Gsv */
 

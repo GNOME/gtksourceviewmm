@@ -20,7 +20,7 @@
 
 #include <gtksourceview/gtksourcemark.h>
 
-namespace gtksourceview
+namespace Gsv
 {
 
 // Both constructors are implemented by hand because the C _new() function
@@ -76,5 +76,5 @@ Glib::RefPtr<const SourceMark> SourceMark::prev() const
 }
 
 
-} //namespace gtksourceview
+} //namespace Gsv
 

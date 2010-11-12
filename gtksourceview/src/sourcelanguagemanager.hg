@@ -29,7 +29,7 @@
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
 
-namespace gtksourceview
+namespace Gsv
 {
 _CC_INCLUDE(gtksourceview/gtksourcelanguagemanager.h)
 _CC_INCLUDE(gtksourceview/gtksourceview-typebuiltins.h)
@@ -214,5 +214,5 @@ public:
   _WRAP_METHOD(Glib::RefPtr<const SourceLanguage> guess_language(const std::string& filename, const std::string& content_type) const, gtk_source_language_manager_guess_language, refreturn, constversion)
 };
 
-} /* namespace gtksourceview */
+} /* namespace Gsv */
 

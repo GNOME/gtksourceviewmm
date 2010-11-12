@@ -27,7 +27,7 @@
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
 
-namespace gtksourceview
+namespace Gsv
 {
 
 
@@ -116,6 +116,6 @@ public:
   _WRAP_METHOD(Glib::RefPtr<const SourceStyle> get_style(const Glib::ustring& style_id) const, gtk_source_style_scheme_get_style, refreturn, constversion)
 };//end class SourceStyleScheme
 
-}//end namespace gtksourceview
+}//end namespace Gsv
 
 

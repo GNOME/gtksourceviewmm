@@ -25,7 +25,7 @@
 
 static gchar* SignalProxy_MarkTooltip_gtk_callback(GtkSourceMark* mark, gpointer user_data)
 {
-  gtksourceview::SourceView::SlotMarkTooltip* the_slot = static_cast<gtksourceview::SourceView::SlotMarkTooltip*>(user_data);
+  Gsv::SourceView::SlotMarkTooltip* the_slot = static_cast<Gsv::SourceView::SlotMarkTooltip*>(user_data);
 
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
@@ -45,10 +45,10 @@ static gchar* SignalProxy_MarkTooltip_gtk_callback(GtkSourceMark* mark, gpointer
 
 static void SignalProxy_MarkTooltip_gtk_callback_destroy(void* data)
 {
-  delete static_cast<gtksourceview::SourceView::SlotMarkTooltip*>(data);
+  delete static_cast<Gsv::SourceView::SlotMarkTooltip*>(data);
 }
 
-namespace gtksourceview
+namespace Gsv
 {
 
 SourceView::SourceView() :
@@ -131,5 +131,5 @@ SourceView::unset_mark_category_tooltip_func(const Glib::ustring& category)
   gtk_source_view_set_mark_category_tooltip_func(gobj(), category.c_str(), 0, 0, 0);
 }
 
-}//end namespace gtksourceview
+}//end namespace Gsv
 

@@ -25,7 +25,7 @@ static void SignalProxy_CellData_gtk_callback(GtkSourceGutter *gutter G_GNUC_UNU
                                               gboolean current_line,
                                               gpointer data)
 {
-  gtksourceview::SourceGutter::SlotData* the_slot = static_cast<gtksourceview::SourceGutter::SlotData*>(data);
+  Gsv::SourceGutter::SlotData* the_slot = static_cast<Gsv::SourceGutter::SlotData*>(data);
 
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
@@ -43,14 +43,14 @@ static void SignalProxy_CellData_gtk_callback(GtkSourceGutter *gutter G_GNUC_UNU
 
 static void SignalProxy_CellData_gtk_callback_destroy(void* data)
 {
-  delete static_cast<gtksourceview::SourceGutter::SlotData*>(data);
+  delete static_cast<Gsv::SourceGutter::SlotData*>(data);
 }
 
 static void SignalProxy_CellSize_gtk_callback(GtkSourceGutter *gutter G_GNUC_UNUSED,
                                               GtkCellRenderer *cell,
                                               gpointer data)
 {
-  gtksourceview::SourceGutter::SlotSize* the_slot = static_cast<gtksourceview::SourceGutter::SlotSize*>(data);
+  Gsv::SourceGutter::SlotSize* the_slot = static_cast<Gsv::SourceGutter::SlotSize*>(data);
 
   #ifdef GLIBMM_EXCEPTIONS_ENABLED
   try
@@ -68,10 +68,10 @@ static void SignalProxy_CellSize_gtk_callback(GtkSourceGutter *gutter G_GNUC_UNU
 
 static void SignalProxy_CellSize_gtk_callback_destroy(void* data)
 {
-  delete static_cast<gtksourceview::SourceGutter::SlotSize*>(data);
+  delete static_cast<Gsv::SourceGutter::SlotSize*>(data);
 }
 
-namespace gtksourceview
+namespace Gsv
 {
 
 void SourceGutter::set_cell_data_func(Gtk::CellRenderer* renderer, const SlotData& slot)
@@ -104,5 +104,5 @@ SourceGutter::reset_cell_size_func(Gtk::CellRenderer* renderer)
   gtk_source_gutter_set_cell_size_func(gobj(), Glib::unwrap(renderer), 0, 0, 0);
 }
 
-}//end namespace gtksourceview
+}//end namespace Gsv
 

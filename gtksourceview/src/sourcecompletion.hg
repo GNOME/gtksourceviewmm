@@ -26,7 +26,7 @@
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
 
-namespace gtksourceview
+namespace Gsv
 {
 
 class SourceCompletionContext;
@@ -230,5 +230,5 @@ public:
   _WRAP_PROPERTY("view", SourceView*)
 };
 
-} /* namespace gtksourceview */
+} /* namespace Gsv */
 

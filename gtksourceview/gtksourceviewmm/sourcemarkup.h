@@ -25,7 +25,7 @@
 #include <glibmm/ustring.h>
 #include <glibmm/containerhandle_shared.h>
 
-namespace gtksourceview
+namespace Gsv
 {
 /** It is just a class holding markup string.
  *
@@ -127,7 +127,7 @@ protected:
 
 /** See SourceMarkup::equal()
  *
- * @relates gtksourceview::SourceMarkup
+ * @relates Gsv::SourceMarkup
  *
  * @newin{2,10}
  */
@@ -136,7 +136,7 @@ inline bool operator==(const SourceMarkup& lhs, const SourceMarkup& rhs)
 
 /** See SourceMarkup::equal()
  *
- * @relates gtksourceview::SourceMarkup
+ * @relates Gsv::SourceMarkup
  *
  * @newin{2,10}
  */
@@ -148,7 +148,7 @@ inline bool operator!=(const SourceMarkup& lhs, const SourceMarkup& rhs)
 
 struct SourceMarkup_Traits : public Glib::Container_Helpers::TypeTraits<Glib::ustring>
 {
-  typedef gtksourceview::SourceMarkup CppType;
+  typedef Gsv::SourceMarkup CppType;
 
   static const char* to_c_type(const SourceMarkup& markup) { return markup.get_c_str(); }
   static SourceMarkup     to_cpp_type(const char* str)     { return SourceMarkup(str);   }
@@ -156,7 +156,7 @@ struct SourceMarkup_Traits : public Glib::Container_Helpers::TypeTraits<Glib::us
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
 
-} // namespace gtksourceview
+} // namespace Gsv
 
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -165,13 +165,13 @@ namespace Glib
 {
 
 template <>
-class Value<gtksourceview::SourceMarkup> : public Glib::ValueBase_String
+class Value<Gsv::SourceMarkup> : public Glib::ValueBase_String
 {
 public:
-  typedef gtksourceview::SourceMarkup CppType;
+  typedef Gsv::SourceMarkup CppType;
 
-  void set(const gtksourceview::SourceMarkup& data) { set_cstring(data.get_c_str());      }
-  gtksourceview::SourceMarkup get() const           { return gtksourceview::SourceMarkup(get_cstring()); }
+  void set(const Gsv::SourceMarkup& data) { set_cstring(data.get_c_str());      }
+  Gsv::SourceMarkup get() const           { return Gsv::SourceMarkup(get_cstring()); }
 };
 
 } // namespace Glib

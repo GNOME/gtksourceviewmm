@@ -1,46 +1,51 @@
+// standard
 #include <iostream>
+#include <string>
+#include <vector>
+// gtkmm
 #include <gtkmm.h>
+// gtksourceviewmm
 #include <gtksourceviewmm/sourcelanguagemanager.h>
 #include <gtksourceviewmm/init.h>
-#include <gtksourceview/gtksourcelanguagemanager.h>
-
-using namespace std ;
-using namespace gtksourceview ;
-
-const char * s_mime_types [] = {
-"text/xml",
-"text/html",
-"text/x-c",
-"text/x-c++",
-0
-};
 
 int
-main (int argc, char **argv)
+main (int /* argc */, char** /* argv */)
 {
-    if (argc || argv) {}
+  Gsv::init () ;
 
-    gtksourceview::init () ;
+  Glib::RefPtr<Gsv::SourceLanguageManager> lang_mgr = Gsv::SourceLanguageManager::create ();
+  if (!lang_mgr)
+  {
+    std::cerr << "Could not create the language manager.\n";
+    return -1;
+  }
 
-    Glib::RefPtr<SourceLanguageManager> lang_mgr =
-                                            SourceLanguageManager::create () ;
-    if (!lang_mgr) {
-        cerr << "Could not create the languages manager" << std::endl;
-        return -1 ;
+  std::vector<std::string> mime_types;
+  mime_types.push_back ("text/xml");
+  mime_types.push_back ("text/html");
+  mime_types.push_back ("text/x-c");
+  mime_types.push_back ("text/x-c++");
+
+  Glib::RefPtr<Gsv::SourceLanguage> lang;
+
+  unsigned int size (mime_types.size ());
+  for (unsigned int idx (0); idx < size ; ++idx)
+  {
+    const std::string mime_type (mime_types[idx]);
+
+    std::cout << "Looking for language that matches mime type '"
+              << mime_type
+              << "'.\n";
+    lang = lang_mgr->guess_language (std::string (), mime_type);
+    if (lang)
+    {
+      std::cout << "Found language '" << lang->get_name () << "'.\n";
     }
-
-    Glib::RefPtr<SourceLanguage> lang;
-    for (int i=0 ; s_mime_types[i] ; ++i) {
-        cout << "Looking for language that matches mime type '"
-             << s_mime_types[i]
-             << "'" << std::endl;
-        lang = lang_mgr->guess_language(std::string(), s_mime_types[i]);
-        if (lang) {
-            cout << "Found language '" << lang->get_name () << "'" << std::endl;
-        } else {
-            cout << "No language matching that mime type" << std::endl;
-        }
+    else
+    {
+      std::cout << "No language matching that mime type.\n";
     }
-    return 0 ;
+  }
+  return 0 ;
 }
 

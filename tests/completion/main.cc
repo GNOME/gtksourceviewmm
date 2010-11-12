@@ -9,8 +9,6 @@
 // gtksourceviewmm
 #include <gtksourceviewmm.h>
 
-namespace Gsv = gtksourceview;
-
 class TestProvider : public Glib::Object, public Gsv::SourceCompletionProvider
 {
 public:

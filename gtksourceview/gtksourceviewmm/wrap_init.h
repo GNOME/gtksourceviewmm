@@ -23,12 +23,12 @@
  * License along with this library; if not, write to the Free
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
-namespace gtksourceview
+namespace Gsv
 {
   /** Initializes wrapper types.
    */
   void wrap_init () ;
-}//end namespace gtksourceview
+}//end namespace Gsv
 
 #endif //_GTKSOURCEVIEWMM_WRAP_INIT_H
 

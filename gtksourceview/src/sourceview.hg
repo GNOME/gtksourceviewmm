@@ -28,7 +28,7 @@
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(gtkmm/private/textview_p.h)
 
-namespace gtksourceview
+namespace Gsv
 {
 
 class SourceGutter;
@@ -395,7 +395,7 @@ public:
    *
    * @code
    * static Glib::ustring
-   * tooltip_func (gtksourceview::SourceMark *mark)
+   * tooltip_func (Gsv::SourceMark *mark)
    * {
    *   return get_tooltip_for_mark(mark);
    * }
@@ -551,5 +551,5 @@ public:
   _WRAP_PROPERTY("completion", Glib::RefPtr<SourceCompletion>)
 };
 
-} /* namespace gtksourceview */
+} /* namespace Gsv */
 

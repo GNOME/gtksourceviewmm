@@ -1,5 +1,5 @@
 binding_name = gtksourceviewmm
-wrap_init_flags = --namespace=gtksourceview --parent_dir=gtksourceviewmm
+wrap_init_flags = --namespace=Gsv --parent_dir=gtksourceviewmm
 
 include $(srcdir)/filelist.am
 include $(top_srcdir)/codegen/m4/filelist.am

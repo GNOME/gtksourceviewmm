@@ -452,6 +452,7 @@ public:
    * where An iterator at the location where the change occurred.
    */
   _WRAP_SIGNAL(void source_mark_updated(const Glib::RefPtr<SourceMark>& where), "source-mark-updated", no_default_handler)
+#m4 _CONVERSION(`GtkTextMark*',`const Glib::RefPtr<SourceMark>&',`Glib::RefPtr<SourceMark>::cast_dynamic(Glib::wrap($3))')
 
   /** Emitted whenever undo is requested.
    *

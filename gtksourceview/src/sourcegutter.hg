@@ -212,7 +212,9 @@ public:
    *
    * @newin{2,10}
    */
+#m4 _CONVERSION(`GtkTooltip*', `const Glib::RefPtr<Gtk::Tooltip>&', `Glib::wrap($3, true)')
   _WRAP_SIGNAL(bool query_tooltip(Gtk::CellRenderer* renderer, const Gtk::TextIter& iter, const Glib::RefPtr<Gtk::Tooltip>& tooltip), "query-tooltip")
+#m4 _CONVERSION(`GtkTooltip*', `const Glib::RefPtr<Gtk::Tooltip>&', `Glib::wrap($3)')
 };
 
 } // namespace gtksourceview

@@ -198,19 +198,33 @@ public:
 
   _WRAP_VFUNC(Glib::RefPtr<Gdk::Pixbuf> get_icon(), get_icon, refreturn)
 
+#m4 _CONVERSION(`GtkSourceCompletionContext*', `const Glib::RefPtr<SourceCompletionContext>&', `Glib::wrap($3, true)')
   _WRAP_VFUNC(void populate(const Glib::RefPtr<SourceCompletionContext>& context), populate)
+#m4 _CONVERSION(`GtkSourceCompletionContext*', `const Glib::RefPtr<SourceCompletionContext>&', `Glib::wrap($3)')
 
+#m4 _CONVERSION(`GtkSourceCompletionContext*', `const Glib::RefPtr<const SourceCompletionContext>&', `Glib::wrap($3, true)')
   _WRAP_VFUNC(bool match(const Glib::RefPtr<const SourceCompletionContext>& context) const, match)
+#m4 _CONVERSION(`GtkSourceCompletionContext*', `const Glib::RefPtr<const SourceCompletionContext>&', `Glib::wrap($3)')
 
   _WRAP_VFUNC(SourceCompletionActivation get_activation() const, get_activation)
 
+#m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const SourceCompletionProposal>&', `Glib::wrap($3, true)')
   _WRAP_VFUNC(Gtk::Widget* get_info_widget(const Glib::RefPtr<const SourceCompletionProposal>& proposal) const, get_info_widget)
+#m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const SourceCompletionProposal>&', `Glib::wrap($3)')
 
+#m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const SourceCompletionProposal>&', `Glib::wrap($3, true)')
   _WRAP_VFUNC(void update_info(const Glib::RefPtr<const SourceCompletionProposal>& proposal, const SourceCompletionInfo& info), update_info)
+#m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const SourceCompletionProposal>&', `Glib::wrap($3)')
 
+#m4 _CONVERSION(`GtkSourceCompletionContext*', `const Glib::RefPtr<const SourceCompletionContext>&', `Glib::wrap($3, true)')
+#m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const SourceCompletionProposal>&', `Glib::wrap($3, true)')
   _WRAP_VFUNC(bool get_start_iter(const Glib::RefPtr<const SourceCompletionContext>& context, const Glib::RefPtr<const SourceCompletionProposal>& proposal, Gtk::TextIter& iter), get_start_iter)
+#m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const SourceCompletionProposal>&', `Glib::wrap($3)')
+#m4 _CONVERSION(`GtkSourceCompletionContext*', `const Glib::RefPtr<const SourceCompletionContext>&', `Glib::wrap($3)')
 
+#m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<SourceCompletionProposal>&', `Glib::wrap($3, true)')
   _WRAP_VFUNC(bool activate_proposal(const Glib::RefPtr<SourceCompletionProposal>& proposal, const Gtk::TextIter& iter), activate_proposal)
+#m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<SourceCompletionProposal>&', `Glib::wrap($3)')
 
   _WRAP_VFUNC(int get_interactive_delay() const, get_interactive_delay)
 

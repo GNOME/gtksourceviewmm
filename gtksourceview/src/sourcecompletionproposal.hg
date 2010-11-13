@@ -154,7 +154,9 @@ public:
 
   _WRAP_VFUNC(guint hash() const, hash)
 
+#m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const SourceCompletionProposal>&', `Glib::wrap($3, true)')
   _WRAP_VFUNC(bool equal(const Glib::RefPtr<const SourceCompletionProposal>& other) const, equal)
+#m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const SourceCompletionProposal>&', `Glib::wrap($3)')
 };
 
 } // namespace gtksourceview

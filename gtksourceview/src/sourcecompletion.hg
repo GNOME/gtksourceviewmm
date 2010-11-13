@@ -193,6 +193,7 @@ public:
    */
   _WRAP_SIGNAL(void hide(), "hide")
 
+#m4 _CONVERSION(`GtkSourceCompletionContext*', `const Glib::RefPtr<SourceCompletionContext>&', `Glib::wrap($3, true)')
   /** Emitted just before starting to populate the completion with providers.
    *
    * You can use this signal to add additional attributes in the context.
@@ -203,7 +204,7 @@ public:
    * @newin{2,10}
    */
   _WRAP_SIGNAL(void populate_context(const Glib::RefPtr<SourceCompletionContext>& context), "populate-context")
-
+#m4 _CONVERSION(`GtkSourceCompletionContext*', `const Glib::RefPtr<SourceCompletionContext>&', `Glib::wrap($3)')
   /** Emitted when the completion window is shown.
    *
    * The default handler will actually show the window.

@@ -1,19 +1,18 @@
 AUTOMAKE_OPTIONS = subdir-objects
 
-check_PROGRAMS =	\
-	basic/test	\
-	langs/test	\
-	search/test	\
-	get_buffer/test	\
-	mime_types/test
+check_PROGRAMS =        \
+	basic/test      \
+	langs/test      \
+	search/test     \
+	get_buffer/test \
+	mime_types/test \
+	completion/test
 
 basic_test_SOURCES      = basic/main.cc
 langs_test_SOURCES      = langs/main.cc
 search_test_SOURCES     = search/main.cc
 get_buffer_test_SOURCES = get_buffer/main.cc
-
-# commented for now, since it does not compile successfully.
-# when fixed, do not forget to add mime_types/test to check_PROGRAMS!
+completion_test_SOURCES = completion/main.cc
 mime_types_test_SOURCES = mime_types/main.cc
 
 gtksourceviewmm_includes = -I$(top_builddir)/gtksourceview $(if $(srcdir:.=),-I$(top_srcdir)/gtksourceview)

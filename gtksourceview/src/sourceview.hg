@@ -539,6 +539,7 @@ public:
   // these are keybinding signals, so we ignore them.
   _IGNORE_SIGNAL(show-completion)
   _IGNORE_SIGNAL(move-lines)
+  _IGNORE_SIGNAL(move-words)
 
   _WRAP_PROPERTY("show-line-numbers", bool)
 

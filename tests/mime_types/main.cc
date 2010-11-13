@@ -1,19 +1,12 @@
 #include <iostream>
+#include <string>
+#include <vector>
 #include <gtkmm.h>
 #include <gtksourceviewmm/sourcelanguagemanager.h>
 #include <gtksourceviewmm/init.h>
-#include <gtksourceview/gtksourcelanguagemanager.h>
 
 using namespace std ;
 using namespace gtksourceview ;
-
-const char * s_mime_types [] = {
-"text/xml",
-"text/html",
-"text/x-c",
-"text/x-c++",
-0
-};
 
 int
 main (int argc, char **argv)
@@ -29,12 +22,19 @@ main (int argc, char **argv)
         return -1 ;
     }
 
+    vector<string> mime_types;
+    mime_types.push_back ("text/xml");
+    mime_types.push_back ("text/html");
+    mime_types.push_back ("text/x-c");
+    mime_types.push_back ("text/x-c++");
+
     Glib::RefPtr<SourceLanguage> lang;
-    for (int i=0 ; s_mime_types[i] ; ++i) {
+    unsigned int size (mime_types.size ());
+    for (unsigned int i=0 ; i < size ; ++i) {
         cout << "Looking for language that matches mime type '"
-             << s_mime_types[i]
+             << mime_types[i]
              << "'" << std::endl;
-        lang = lang_mgr->guess_language(std::string(), s_mime_types[i]);
+        lang = lang_mgr->guess_language(std::string(), mime_types[i]);
         if (lang) {
             cout << "Found language '" << lang->get_name () << "'" << std::endl;
         } else {

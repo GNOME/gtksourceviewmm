@@ -50,7 +50,7 @@ bool SourceBuffer::forward_iter_to_source_mark(Gtk::TextIter& iter)
 Glib::RefPtr<SourceMark>
 SourceBuffer::create_source_mark(const Glib::ustring& category, const Gtk::TextIter& where)
 {
-  return Glib::wrap(gtk_source_buffer_create_source_mark(gobj(), 0, category.c_str(), where.gobj()));
+  return Glib::wrap(gtk_source_buffer_create_source_mark(gobj(), 0, category.c_str(), where.gobj()), true);
 }
 
 Glib::SListHandle<Glib::RefPtr<SourceMark> > SourceBuffer::get_source_marks_at_line(int line) const

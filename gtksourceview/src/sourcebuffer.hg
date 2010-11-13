@@ -260,7 +260,7 @@ public:
    *
    * @return A new SourceMark, owned by the buffer.
    */
-  _WRAP_METHOD(Glib::RefPtr<SourceMark> create_source_mark(const Glib::ustring& name, const Glib::ustring& category, const Gtk::TextIter& where), gtk_source_buffer_create_source_mark)
+  _WRAP_METHOD(Glib::RefPtr<SourceMark> create_source_mark(const Glib::ustring& name, const Glib::ustring& category, const Gtk::TextIter& where), gtk_source_buffer_create_source_mark, refreturn)
 
   /** Creates an anonymous source mark in the buffer of category category.
    *

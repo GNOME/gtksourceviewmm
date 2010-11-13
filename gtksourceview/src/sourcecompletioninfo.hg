@@ -48,6 +48,8 @@ public:
    */
   SourceCompletionInfo();
 
+#m4 _CONVERSION(`const Gtk::TextView&',`GtkTextView*',`const_cast<GtkTextView*>(($3).gobj())')
+#m4 _CONVERSION(`const Gtk::TextIter&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
   /** Moves the SourceCompletionInfo to @a iter. Moving will respect the
    * Gdk::Gravity setting of the info window and will ensure the line at @a iter
    * is not occluded by the window.

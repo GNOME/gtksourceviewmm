@@ -49,6 +49,7 @@ public:
    */
   _WRAP_CREATE(const Glib::ustring& name, const Glib::RefPtr<Gdk::Pixbuf>& icon)
 
+#m4 _CONVERSION(`const Glib::RefPtr<Gtk::TextBuffer>&',`GtkTextBuffer*',`Glib::unwrap($3)')
   /** Registers this provider in given buffer.
    *
    * @param buffer A buffer which will use this provider.

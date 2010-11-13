@@ -505,6 +505,7 @@ public:
    */
   _WRAP_METHOD(int get_n_pages() const, gtk_source_print_compositor_get_n_pages)
 
+#m4 _CONVERSION(`const Glib::RefPtr<Gtk::PrintContext>&',`GtkPrintContext*',`Glib::unwrap($3)')
   /** Paginate the document associated with the @a compositor.
    *
    * In order to support non-blocking pagination, document is paginated in small

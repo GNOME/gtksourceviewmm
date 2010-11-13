@@ -115,7 +115,7 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(const Gtk::Widget* get_info_widget(const Glib::RefPtr<const SourceCompletionProposal>& proposal) const, gtk_source_completion_provider_get_info_widget)
+  _WRAP_METHOD(const Gtk::Widget* get_info_widget(const Glib::RefPtr<const SourceCompletionProposal>& proposal) const, gtk_source_completion_provider_get_info_widget, constversion)
 
   /** Update extra information shown in @a info for @a proposal.
    *
@@ -130,6 +130,7 @@ public:
    */
   _WRAP_METHOD(void update_info(const Glib::RefPtr<const SourceCompletionProposal>& proposal, const SourceCompletionInfo& info), gtk_source_completion_provider_update_info)
 
+#m4 _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',`($3).gobj()')
   /** Get the Gtk::TextIter at which the completion for @a proposal starts.
    *
    * When implemented, the completion can use this information to position the
@@ -146,6 +147,7 @@ public:
    */
   _WRAP_METHOD(bool get_start_iter(const Glib::RefPtr<const SourceCompletionContext>& context, const Glib::RefPtr<const SourceCompletionProposal>& proposal, Gtk::TextIter& iter), gtk_source_completion_provider_get_start_iter)
 
+#m4 _CONVERSION(`const Gtk::TextIter&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
   /** Activate @a proposal at @a iter.
    *
    * When this functions returns <tt>false</tt>, the default activation of
@@ -218,11 +220,13 @@ public:
 
 #m4 _CONVERSION(`GtkSourceCompletionContext*', `const Glib::RefPtr<const SourceCompletionContext>&', `Glib::wrap($3, true)')
 #m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const SourceCompletionProposal>&', `Glib::wrap($3, true)')
+#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap($3)')
   _WRAP_VFUNC(bool get_start_iter(const Glib::RefPtr<const SourceCompletionContext>& context, const Glib::RefPtr<const SourceCompletionProposal>& proposal, Gtk::TextIter& iter), get_start_iter)
 #m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const SourceCompletionProposal>&', `Glib::wrap($3)')
 #m4 _CONVERSION(`GtkSourceCompletionContext*', `const Glib::RefPtr<const SourceCompletionContext>&', `Glib::wrap($3)')
 
 #m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<SourceCompletionProposal>&', `Glib::wrap($3, true)')
+#m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap($3)')
   _WRAP_VFUNC(bool activate_proposal(const Glib::RefPtr<SourceCompletionProposal>& proposal, const Gtk::TextIter& iter), activate_proposal)
 #m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<SourceCompletionProposal>&', `Glib::wrap($3)')
 

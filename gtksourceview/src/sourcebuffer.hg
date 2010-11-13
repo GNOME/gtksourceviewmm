@@ -166,6 +166,7 @@ public:
 
   _WRAP_METHOD(void end_not_undoable_action(), gtk_source_buffer_end_not_undoable_action)
 
+#m4 _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',`($3).gobj()')
   /** Moves iter to the position of the previous SourceMark of the given
    *  category.
    *
@@ -203,6 +204,7 @@ public:
    */
   bool forward_iter_to_source_mark(Gtk::TextIter& iter);
 
+#m4 _CONVERSION(`const Gtk::TextIter&',`const GtkTextIter*',`($3).gobj()')
   /** Forces buffer to analyze and highlight the given area synchronously.
    *
    * @note This is a potentially slow operation and should be used only when you
@@ -431,6 +433,7 @@ public:
   _WRAP_PROPERTY("style-scheme", Glib::RefPtr<SourceStyleScheme>)
   _WRAP_PROPERTY("undo-manager", Glib::RefPtr<SourceUndoManager>)
 
+#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap($3)')
   /** Emitted whenever the syntax highlighting information has been updated,
    *  so that views can request a redraw if the region changed is visible.
    *

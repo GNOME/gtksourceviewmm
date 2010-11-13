@@ -115,7 +115,7 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(const Gtk::Widget* get_info_widget(const Glib::RefPtr<const SourceCompletionProposal>& proposal) const, gtk_source_completion_provider_get_info_widget)
+  _WRAP_METHOD(const Gtk::Widget* get_info_widget(const Glib::RefPtr<const SourceCompletionProposal>& proposal) const, gtk_source_completion_provider_get_info_widget, constversion)
 
   /** Update extra information shown in @a info for @a proposal.
    *
@@ -217,6 +217,7 @@ private:
 #m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const SourceCompletionProposal>&', `Glib::wrap($3)')
 
 #m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const SourceCompletionProposal>&', `Glib::wrap($3, true)')
+#m4 _CONVERSION(`GtkSourceCompletionInfo*',`const SourceCompletionInfo&',`(*(Glib::wrap($3)))')
   _WRAP_VFUNC(void update_info(const Glib::RefPtr<const SourceCompletionProposal>& proposal, const SourceCompletionInfo& info), update_info)
 #m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const SourceCompletionProposal>&', `Glib::wrap($3)')
 

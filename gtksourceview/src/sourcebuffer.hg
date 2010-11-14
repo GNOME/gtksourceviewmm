@@ -88,6 +88,8 @@ public:
   /** Create a new source buffer.
    *
    * @param tag_table A Gtk::TextTagTable or empty Glib::RefPtr, to create new.
+   *
+   * @return A new SourceBuffer.
    */
   _WRAP_CREATE(const Glib::RefPtr<Gtk::TextTagTable>& tag_table)
 
@@ -185,6 +187,7 @@ public:
 
   _WRAP_METHOD(void end_not_undoable_action(), gtk_source_buffer_end_not_undoable_action)
 
+#m4 _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',`($3).gobj()')
   /** Moves iter to the position of the previous SourceMark of the given
    *  category.
    *
@@ -193,7 +196,6 @@ public:
    *
    * @return @c true if iter was moved.
    */
-#m4 _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',`($3).gobj()')
   _WRAP_METHOD(bool backward_iter_to_source_mark(Gtk::TextIter& iter, const Glib::ustring& category), gtk_source_buffer_backward_iter_to_source_mark)
 
   /** Moves iter to the position of the previous SourceMark of any category.
@@ -223,6 +225,7 @@ public:
    */
   bool forward_iter_to_source_mark(Gtk::TextIter& iter);
 
+#m4 _CONVERSION(`const Gtk::TextIter&',`const GtkTextIter*',`($3).gobj()')
   /** Forces buffer to analyze and highlight the given area synchronously.
    *
    * @note This is a potentially slow operation and should be used only when you
@@ -232,7 +235,6 @@ public:
    * @param start Start of the area to highlight.
    * @param end End of the area to highlight.
    */
-#m4 _CONVERSION(`const Gtk::TextIter&',`const GtkTextIter*',`($3).gobj()')
   _WRAP_METHOD(void ensure_highlight(const Gtk::TextIter& start, const Gtk::TextIter& end), gtk_source_buffer_ensure_highlight)
 
   /** Returns the SourceStyleScheme currently used in buffer.
@@ -452,6 +454,7 @@ public:
   _WRAP_PROPERTY("style-scheme", Glib::RefPtr<SourceStyleScheme>)
   _WRAP_PROPERTY("undo-manager", Glib::RefPtr<SourceUndoManager>)
 
+#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap($3)')
   /** Emitted whenever the syntax highlighting information has been updated,
    *  so that views can request a redraw if the region changed is visible.
    *
@@ -461,9 +464,9 @@ public:
    * start An iterator at the start of the updated region.
    * end An iterator at the end of the updated region.
    */
-#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap($3)')
   _WRAP_SIGNAL(void highlight_updated(Gtk::TextIter& start, Gtk::TextIter& end), "highlight-updated", no_default_handler)
 
+#m4 _CONVERSION(`GtkTextMark*',`const Glib::RefPtr<Gtk::TextMark>&',`Glib::wrap($3, true)')
   /** Emitted whenever a marker of sourcebuffer has changed and needs to be redisplayed by the view.
    *
    * A change in a marker's type or location can trigger this signal.
@@ -472,7 +475,6 @@ public:
    * @par Handler parameters:
    * where An iterator at the location where the change occurred.
    */
-#m4 _CONVERSION(`GtkTextMark*',`const Glib::RefPtr<Gtk::TextMark>&',`Glib::wrap($3, true)')
   _WRAP_SIGNAL(void source_mark_updated(const Glib::RefPtr<Gtk::TextMark>& where), "source-mark-updated", no_default_handler)
 #m4 _CONVERSION(`GtkTextMark*',`const Glib::RefPtr<Gtk::TextMark>&',`Glib::wrap($3)')
 

@@ -45,18 +45,20 @@ public:
    * @param name Provider's name
    * @param icon Provider's icon
    *
+   * @return A new SourceCompletionWords.
+   *
    * @newin{2,10}
    */
   _WRAP_CREATE(const Glib::ustring& name, const Glib::RefPtr<Gdk::Pixbuf>& icon)
 
 // TODO: think about a good method name - register is a C/C++ keyword. krnowak
+#m4 _CONVERSION(`const Glib::RefPtr<Gtk::TextBuffer>&',`GtkTextBuffer*',`Glib::unwrap($3)')
   /** Registers this provider in given buffer.
    *
    * @param buffer A buffer which will use this provider.
    *
    * @newin{2,10}
    */
-#m4 _CONVERSION(`const Glib::RefPtr<Gtk::TextBuffer>&',`GtkTextBuffer*',`Glib::unwrap($3)')
   _WRAP_METHOD(void register_provider(const Glib::RefPtr<Gtk::TextBuffer>& buffer), gtk_source_completion_words_register)
 
   /** Unregisters this provider from given buffer.

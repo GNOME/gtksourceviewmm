@@ -316,6 +316,7 @@ public:
    */
   void unset_mark_category_icon(const Glib::ustring& category);
 
+#m4 _CONVERSION(`const Gdk::Color&',`const GdkColor*',`($3).gobj()')
   /** Sets given background @a color for mark @a category.
    *
    * @param category A mark category.
@@ -323,7 +324,6 @@ public:
    *
    * @newin{2,10}
    */
-#m4 _CONVERSION(`const Gdk::Color&',`const GdkColor*',`($3).gobj()')
   _WRAP_METHOD(void set_mark_category_background(const Glib::ustring& category, const Gdk::Color& color), gtk_source_view_set_mark_category_background)
 
   /** Unsets background for mark @a category.
@@ -334,6 +334,7 @@ public:
    */
   void unset_mark_category_background(const Glib::ustring& category);
 
+#m4 _CONVERSION(`Gdk::Color&',`GdkColor*',`($3).gobj()')
   /** Gets the background color associated with given @a category.
    *
    * @param category A mark category.
@@ -344,7 +345,6 @@ public:
    *
    * @newin{2,10}
    */
-#m4 _CONVERSION(`Gdk::Color&',`GdkColor*',`($3).gobj()')
   _WRAP_METHOD(bool get_mark_category_background(const Glib::ustring& category, Gdk::Color& dest) const, gtk_source_view_get_mark_category_background)
 
   /** Set if and how the spaces should be visualized.
@@ -363,6 +363,7 @@ public:
    */
   _WRAP_METHOD(SourceDrawSpacesFlags get_draw_spaces() const, gtk_source_view_get_draw_spaces)
 
+#m4 _CONVERSION(`const Gtk::TextIter&',`const GtkTextIter*',`($3).gobj()')
   /** Determines the visual column at @a iter taking into consideration the indent
    *  width of @a view.
    *
@@ -372,7 +373,6 @@ public:
    *
    * @newin{3,0}
    */
-#m4 _CONVERSION(`const Gtk::TextIter&',`const GtkTextIter*',`($3).gobj()')
   _WRAP_METHOD(guint get_visual_column(const Gtk::TextIter& iter) const, gtk_source_view_get_visual_column)
 
   /** Slot holding a function.
@@ -492,6 +492,8 @@ public:
    */
   _WRAP_SIGNAL(void undo(), "undo")
 
+#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap($3)')
+#m4 _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',`($3).gobj()')
   /** Emitted when a line mark has been activated (for instance when there
    *  was a button press in the line marks gutter).
    *
@@ -501,8 +503,6 @@ public:
    * iter A Gtk::TextIter.
    * event The GdkEvent that activated the event.
    */
-#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap($3)')
-#m4 _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',`($3).gobj()')
   _WRAP_SIGNAL(void line_mark_activated(Gtk::TextIter& mark, GdkEvent* event), "line-mark-activated")
 
   /** Emitted when a the cursor was moved according to the smart home end setting.

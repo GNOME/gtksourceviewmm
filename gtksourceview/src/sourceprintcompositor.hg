@@ -44,7 +44,7 @@ public:
    *
    * @param buffer the SourceBuffer to print.
    *
-   * @return a new print compositor object.
+   * @return A new print compositor object.
    *
    * @newin{2,10}
    */
@@ -63,7 +63,7 @@ public:
    *
    * @param view A SourceView to get configuration from.
    *
-   * Return value: a new print compositor object.
+   * @return A new print compositor object.
    *
    * @newin{2,10}
    */
@@ -505,6 +505,7 @@ public:
    */
   _WRAP_METHOD(int get_n_pages() const, gtk_source_print_compositor_get_n_pages)
 
+#m4 _CONVERSION(`const Glib::RefPtr<Gtk::PrintContext>&',`GtkPrintContext*',`Glib::unwrap($3)')
   /** Paginate the document associated with the @a compositor.
    *
    * In order to support non-blocking pagination, document is paginated in small
@@ -566,7 +567,6 @@ public:
    *
    * @newin{2,10}
    */
-#m4 _CONVERSION(`const Glib::RefPtr<Gtk::PrintContext>&',`GtkPrintContext*',`Glib::unwrap($3)')
   _WRAP_METHOD(bool paginate(const Glib::RefPtr<Gtk::PrintContext>& context), gtk_source_print_compositor_paginate)
 
   /** Return value: a fraction from 0.0 to 1.0 inclusive

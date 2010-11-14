@@ -130,6 +130,7 @@ public:
    */
   _WRAP_METHOD(void update_info(const Glib::RefPtr<const SourceCompletionProposal>& proposal, const SourceCompletionInfo& info), gtk_source_completion_provider_update_info)
 
+#m4 _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',`($3).gobj()')
   /** Get the Gtk::TextIter at which the completion for @a proposal starts.
    *
    * When implemented, the completion can use this information to position the
@@ -144,9 +145,9 @@ public:
    *
    * @newin{2,10}
    */
-#m4 _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',`($3).gobj()')
   _WRAP_METHOD(bool get_start_iter(const Glib::RefPtr<const SourceCompletionContext>& context, const Glib::RefPtr<const SourceCompletionProposal>& proposal, Gtk::TextIter& iter), gtk_source_completion_provider_get_start_iter)
 
+#m4 _CONVERSION(`const Gtk::TextIter&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
   /** Activate @a proposal at @a iter.
    *
    * When this functions returns <tt>false</tt>, the default activation of
@@ -161,7 +162,6 @@ public:
    *
    * @newin{2,10}
    */
-#m4 _CONVERSION(`const Gtk::TextIter&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
   _WRAP_METHOD(bool activate_proposal(const Glib::RefPtr<SourceCompletionProposal>& proposal, const Gtk::TextIter& iter), gtk_source_completion_provider_activate_proposal)
 
   /** Get with what kind of activation the provider should be activated.

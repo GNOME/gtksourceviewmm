@@ -87,6 +87,7 @@ public:
    */
   _WRAP_METHOD(Glib::RefPtr<const Gdk::Window> get_window() const, gtk_source_gutter_get_window, constversion, refreturn)
 
+#m4 _CONVERSION(`Gtk::CellRenderer*',`GtkCellRenderer*',`Glib::unwrap($3)')
   /** Inserts @a renderer into a gutter at @a position.
    *
    * @param renderer A Gtk::CellRenderer.
@@ -94,7 +95,6 @@ public:
    *
    * @newin{2,10}
    */
-#m4 _CONVERSION(`Gtk::CellRenderer*',`GtkCellRenderer*',`Glib::unwrap($3)')
   _WRAP_METHOD(void insert(Gtk::CellRenderer* renderer, int position), gtk_source_gutter_insert)
 
   /** Reorders @a renderer in a gutter to new @a position.
@@ -185,6 +185,9 @@ public:
   _WRAP_PROPERTY("view", SourceView*)
   _WRAP_PROPERTY("window-type", Gtk::TextWindowType)
 
+#m4 _CONVERSION(`GtkCellRenderer*',`Gtk::CellRenderer*',`Glib::wrap($3)')
+#m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap($3)')
+#m4 _CONVERSION(`const Gtk::TextIter&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
   /** Emitted when a cell has been activated (for instance when there was
    *  a button press on the cell).
    *
@@ -198,11 +201,10 @@ public:
    *
    * @newin{2,10}
    */
-#m4 _CONVERSION(`GtkCellRenderer*',`Gtk::CellRenderer*',`Glib::wrap($3)')
-#m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap($3)')
-#m4 _CONVERSION(`const Gtk::TextIter&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
   _WRAP_SIGNAL(void cell_activated(Gtk::CellRenderer* renderer, const Gtk::TextIter& iter, GdkEvent* event), "cell-activated")
 
+#m4 _CONVERSION(`GtkTooltip*', `const Glib::RefPtr<Gtk::Tooltip>&', `Glib::wrap($3, true)')
+#m4 _CONVERSION(`const Glib::RefPtr<Gtk::Tooltip>&',`GtkTooltip*',`const_cast<GtkTooltip*>(Glib::unwrap($3))')
   /** Emitted when a tooltip is requested for a specific cell.
    *
    * Signal handlers can return @c true to notify the tooltip has been handled.
@@ -216,8 +218,6 @@ public:
    *
    * @newin{2,10}
    */
-#m4 _CONVERSION(`GtkTooltip*', `const Glib::RefPtr<Gtk::Tooltip>&', `Glib::wrap($3, true)')
-#m4 _CONVERSION(`const Glib::RefPtr<Gtk::Tooltip>&',`GtkTooltip*',`const_cast<GtkTooltip*>(Glib::unwrap($3))')
   _WRAP_SIGNAL(bool query_tooltip(Gtk::CellRenderer* renderer, const Gtk::TextIter& iter, const Glib::RefPtr<Gtk::Tooltip>& tooltip), "query-tooltip")
 #m4 _CONVERSION(`GtkTooltip*', `const Glib::RefPtr<Gtk::Tooltip>&', `Glib::wrap($3)')
 };

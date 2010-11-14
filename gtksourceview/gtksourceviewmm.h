@@ -71,6 +71,80 @@
  * of this project.
  */
 
+/** @page migration Migration from 2.0 to 3.0
+ *
+ * This page lists some notable API/ABI breaks. Probably not all were listed,
+ * but this is provided in hope that with help of this page migrating from
+ * gtksourceviewmm-2.0 to 3.0 won't be a cause of headaches.
+ *
+ * <ul>
+ * <li>Stuff marked as deprecated was removed of course.</li>
+ * <li>"source-mark-updated" signal in Gsv::SourceBuffer now takes Gtk::TextMark
+ * instead of SourceMark.</li>
+ * <li>Vfuncs in Gsv::SourceCompletionProposal, Gsv::SourceCompletionProvider
+ * and Gsv::SourceUndoManager are now private. They shouldn't be called directly
+ * anyway - there are respective methods for this.</li>
+ * <li>Some methods now takes std::string instead of Glib::ustring. These are:
+ * <ul>
+ * <li>Gsv::SourceLanguageManager::get_search_path()</li>
+ * <li>Gsv::SourceLanguageManager::set_search_path()</li>
+ * <li>Gsv::SourceLanguageManager::get_language_ids()</li>
+ * <li>Gsv::SourceLanguageManager::get_language()</li>
+ * <li>Gsv::SourceLanguageManager::guess_language()</li>
+ * <li>Gsv::SourceStyleSchemeManager::set_search_path()</li>
+ * <li>Gsv::SourceStyleSchemeManager::get_search_path()</li>
+ * <li>Gsv::SourceStyleSchemeManager::append_search_path()</li>
+ * <li>Gsv::SourceStyleSchemeManager::prepend_search_path()</li>
+ * <li>Gsv::SourceStyleSchemeManager::get_scheme()</li>
+ * <li>Gsv::SourceStyleSchemeManager::get_scheme_ids()</li>
+ * </ul></li>
+ * <li>Gsv::SourceMark's constructor with category and name has parameter order
+ * the same as C gtk_source_mark_new(). Previously parameter order was reversed,
+ * because name parameter could be omitted - it has a default value of empty
+ * string, which was interpreted as creating anonymous Gsv::SourceMark. Now
+ * there is separate constructor for creating anonymous SourceMarks. If there
+ * was:
+ * @code
+ * Glib::RefPtr<Gsv::SourceMark> sm (Gsv::SourceMark::create ("category", "name"));
+ * @endcode
+ * Now should be:
+ * @code
+ * Glib::RefPtr<Gsv::SourceMark> sm (Gsv::SourceMark::create ("name", "category"));
+ * @endcode
+ * If there was:
+ * @code
+ * Glib::RefPtr<Gsv::SourceMark> sm (Gsv::SourceMark::create ("category"));
+ * @endcode
+ * Nothing needs to be changed. If there was:
+ * @code
+ * Glib::RefPtr<Gsv::SourceMark> sm (Gsv::SourceMark::create ("category", ""));
+ * @endcode
+ * Now should be:
+ * @code
+ * Glib::RefPtr<Gsv::SourceMark> sm (Gsv::SourceMark::create ("category"));
+ * @endcode
+ * </li>
+ * <li>If there is a code that somehow depended on Gsv::SourceStyleScheme being
+ * a Glib::Interface, then this code is wrong, because it should always be
+ * a Glib::Object.</li>
+ * <li>SourceIter is gone - all its features are now supported by Gtk::TextIter.
+ * </li>
+ * <li>Gsv::SourceCompletion is now a Glib::Object, not Gtk::Object. So it
+ * should be used as Glib::RefPtr<Gsv::SourceCompletion> instead of plain
+ * Gsv::SourceCompletion.</li>
+ * <li>Namespace @b gtksourceview was renamed to @b Gsv. If there is a lot
+ * of code using  @b gtksourceview namespace then a workaround would be creating
+ * a backward compatibility header and including it a place included by affected
+ * sources. A header could contain a lines like that:
+ * @code
+ * #ifndef GTKSOURCEVIEWMM_COMPAT_H
+ * #define GTKSOURCEVIEWMM_COMPAT_H
+ * namespace gtksourceview = Gsv;
+ * #endif // GTKSOURCEVIEWMM_COMPAT_H
+ * @endcode</li>
+ * </ul>
+ */
+
 #include <gtksourceviewmmconfig.h>
 #include <gtksourceviewmm/init.h>
 #include <gtksourceviewmm/sourcebuffer.h>

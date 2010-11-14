@@ -127,6 +127,11 @@ protected:
 
 /** See SourceMarkup::equal()
  *
+ * @param lhs First SourceMarkup to compare.
+ * @param rhs Second SourceMarkup to compare.
+ *
+ * @return Whether @a lhs is different from @a rhs.
+ *
  * @relates Gsv::SourceMarkup
  *
  * @newin{2,10}
@@ -135,6 +140,11 @@ inline bool operator==(const SourceMarkup& lhs, const SourceMarkup& rhs)
   { return lhs.equal(rhs); }
 
 /** See SourceMarkup::equal()
+ *
+ * @param lhs First SourceMarkup to compare.
+ * @param rhs Second SourceMarkup to compare.
+ *
+ * @return Whether @a lhs is different from @a rhs.
  *
  * @relates Gsv::SourceMarkup
  *

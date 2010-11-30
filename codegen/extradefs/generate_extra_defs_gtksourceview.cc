@@ -28,9 +28,13 @@
 #include <gtksourceview/gtksourcecompletionproposal.h>
 #include <gtksourceview/gtksourcecompletionprovider.h>
 #include <gtksourceview/gtksourcegutter.h>
+#include <gtksourceview/gtksourcegutterrenderer.h>
+#include <gtksourceview/gtksourcegutterrendererpixbuf.h>
+#include <gtksourceview/gtksourcegutterrenderertext.h>
 #include <gtksourceview/gtksourcelanguage.h>
 #include <gtksourceview/gtksourcelanguagemanager.h>
 #include <gtksourceview/gtksourcemark.h>
+#include <gtksourceview/gtksourcemarkcategory.h>
 #include <gtksourceview/gtksourceprintcompositor.h>
 #include <gtksourceview/gtksourcestyle.h>
 #include <gtksourceview/gtksourcestylescheme.h>
@@ -45,24 +49,28 @@ int main (int argc, char *argv[])
 {
   gtk_init(&argc, &argv);
 
-  std::cout << get_defs ( GTK_TYPE_SOURCE_BUFFER )
-            << get_defs ( GTK_TYPE_SOURCE_COMPLETION )
-            << get_defs ( GTK_TYPE_SOURCE_COMPLETION_CONTEXT )
-            << get_defs ( GTK_TYPE_SOURCE_COMPLETION_INFO )
-            << get_defs ( GTK_TYPE_SOURCE_COMPLETION_ITEM )
-            << get_defs ( GTK_TYPE_SOURCE_COMPLETION_PROPOSAL )
-            << get_defs ( GTK_TYPE_SOURCE_COMPLETION_PROVIDER )
-            << get_defs ( GTK_TYPE_SOURCE_GUTTER )
-            << get_defs ( GTK_TYPE_SOURCE_LANGUAGE )
-            << get_defs ( GTK_TYPE_SOURCE_LANGUAGE_MANAGER )
-            << get_defs ( GTK_TYPE_SOURCE_MARK )
-            << get_defs ( GTK_TYPE_SOURCE_PRINT_COMPOSITOR )
-            << get_defs ( GTK_TYPE_SOURCE_STYLE )
-            << get_defs ( GTK_TYPE_SOURCE_STYLE_SCHEME )
-            << get_defs ( GTK_TYPE_SOURCE_STYLE_SCHEME_MANAGER )
-            << get_defs ( GTK_TYPE_SOURCE_UNDO_MANAGER )
-            << get_defs ( GTK_TYPE_SOURCE_VIEW )
+  std::cout << get_defs (GTK_TYPE_SOURCE_BUFFER)
+            << get_defs (GTK_TYPE_SOURCE_COMPLETION)
+            << get_defs (GTK_TYPE_SOURCE_COMPLETION_CONTEXT)
+            << get_defs (GTK_TYPE_SOURCE_COMPLETION_INFO)
+            << get_defs (GTK_TYPE_SOURCE_COMPLETION_ITEM)
+            << get_defs (GTK_TYPE_SOURCE_COMPLETION_PROPOSAL)
+            << get_defs (GTK_TYPE_SOURCE_COMPLETION_PROVIDER)
+            << get_defs (GTK_TYPE_SOURCE_GUTTER)
+            << get_defs (GTK_TYPE_SOURCE_GUTTER_RENDERER)
+            << get_defs (GTK_TYPE_SOURCE_GUTTER_RENDERER_PIXBUF)
+            << get_defs (GTK_TYPE_SOURCE_GUTTER_RENDERER_TEXT)
+            << get_defs (GTK_TYPE_SOURCE_LANGUAGE)
+            << get_defs (GTK_TYPE_SOURCE_LANGUAGE_MANAGER)
+            << get_defs (GTK_TYPE_SOURCE_MARK)
+            << get_defs (GTK_TYPE_SOURCE_MARK_CATEGORY)
+            << get_defs (GTK_TYPE_SOURCE_PRINT_COMPOSITOR)
+            << get_defs (GTK_TYPE_SOURCE_STYLE)
+            << get_defs (GTK_TYPE_SOURCE_STYLE_SCHEME)
+            << get_defs (GTK_TYPE_SOURCE_STYLE_SCHEME_MANAGER)
+            << get_defs (GTK_TYPE_SOURCE_UNDO_MANAGER)
+            << get_defs (GTK_TYPE_SOURCE_VIEW)
 
-            << get_defs ( GTK_TYPE_SOURCE_COMPLETION_WORDS );
+            << get_defs (GTK_TYPE_SOURCE_COMPLETION_WORDS);
   return 0;
 }

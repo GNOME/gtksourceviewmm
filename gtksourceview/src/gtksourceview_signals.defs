@@ -1047,28 +1047,6 @@
 
 ;; From GtkSourceGutter
 
-(define-signal query-tooltip
-  (of-object "GtkSourceGutter")
-  (return-type "gboolean")
-  (when "last")
-  (parameters
-    '("GtkCellRenderer*" "p0")
-    '("GtkTextIter*" "p1")
-    '("GtkTooltip*" "p2")
-  )
-)
-
-(define-signal cell-activated
-  (of-object "GtkSourceGutter")
-  (return-type "void")
-  (when "last")
-  (parameters
-    '("GtkCellRenderer*" "p0")
-    '("GtkTextIter*" "p1")
-    '("GdkEvent*" "p2")
-  )
-)
-
 (define-property view
   (of-object "GtkSourceGutter")
   (prop-type "GParamObject")
@@ -1085,6 +1063,442 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+)
+
+(define-property xpad
+  (of-object "GtkSourceGutter")
+  (prop-type "GParamInt")
+  (docs "The x-padding")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property ypad
+  (of-object "GtkSourceGutter")
+  (prop-type "GParamInt")
+  (docs "The y-padding")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GtkSourceGutterRenderer
+
+(define-signal query-tooltip
+  (of-object "GtkSourceGutterRenderer")
+  (return-type "gboolean")
+  (when "last")
+  (parameters
+    '("GtkTextIter*" "p0")
+    '("GdkRectangle*" "p1")
+    '("gint" "p2")
+    '("gint" "p3")
+    '("GtkTooltip*" "p4")
+  )
+)
+
+(define-signal activate
+  (of-object "GtkSourceGutterRenderer")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("GtkTextIter*" "p0")
+    '("GdkRectangle*" "p1")
+    '("GdkEvent*" "p2")
+  )
+)
+
+(define-signal queue-draw
+  (of-object "GtkSourceGutterRenderer")
+  (return-type "void")
+  (when "last")
+)
+
+(define-signal query-data
+  (of-object "GtkSourceGutterRenderer")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("GtkTextIter*" "p0")
+    '("GtkTextIter*" "p1")
+    '("GtkSourceGutterRendererState" "p2")
+  )
+)
+
+(define-signal query-activatable
+  (of-object "GtkSourceGutterRenderer")
+  (return-type "gboolean")
+  (when "last")
+  (parameters
+    '("GtkTextIter*" "p0")
+    '("GdkRectangle*" "p1")
+    '("GdkEvent*" "p2")
+  )
+)
+
+(define-property visible
+  (of-object "GtkSourceGutterRenderer")
+  (prop-type "GParamBoolean")
+  (docs "Visible")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property xpad
+  (of-object "GtkSourceGutterRenderer")
+  (prop-type "GParamInt")
+  (docs "The x-padding")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property ypad
+  (of-object "GtkSourceGutterRenderer")
+  (prop-type "GParamInt")
+  (docs "The y-padding")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property xalign
+  (of-object "GtkSourceGutterRenderer")
+  (prop-type "GParamFloat")
+  (docs "The x-alignment")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property yalign
+  (of-object "GtkSourceGutterRenderer")
+  (prop-type "GParamFloat")
+  (docs "The y-alignment")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property view
+  (of-object "GtkSourceGutterRenderer")
+  (prop-type "GParamObject")
+  (docs "The view")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property alignment-mode
+  (of-object "GtkSourceGutterRenderer")
+  (prop-type "GParamEnum")
+  (docs "The alignment mode")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property window-type
+  (of-object "GtkSourceGutterRenderer")
+  (prop-type "GParamEnum")
+  (docs "The window type")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property size
+  (of-object "GtkSourceGutterRenderer")
+  (prop-type "GParamInt")
+  (docs "The size")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property background-gdk
+  (of-object "GtkSourceGutterRenderer")
+  (prop-type "GParamBoxed")
+  (docs "The background color")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property background-set
+  (of-object "GtkSourceGutterRenderer")
+  (prop-type "GParamBoolean")
+  (docs "Whether the background color is set")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GtkSourceGutterRendererPixbuf
+
+(define-property visible
+  (of-object "GtkSourceGutterRendererPixbuf")
+  (prop-type "GParamBoolean")
+  (docs "Visible")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property xpad
+  (of-object "GtkSourceGutterRendererPixbuf")
+  (prop-type "GParamInt")
+  (docs "The x-padding")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property ypad
+  (of-object "GtkSourceGutterRendererPixbuf")
+  (prop-type "GParamInt")
+  (docs "The y-padding")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property xalign
+  (of-object "GtkSourceGutterRendererPixbuf")
+  (prop-type "GParamFloat")
+  (docs "The x-alignment")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property yalign
+  (of-object "GtkSourceGutterRendererPixbuf")
+  (prop-type "GParamFloat")
+  (docs "The y-alignment")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property view
+  (of-object "GtkSourceGutterRendererPixbuf")
+  (prop-type "GParamObject")
+  (docs "The view")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property alignment-mode
+  (of-object "GtkSourceGutterRendererPixbuf")
+  (prop-type "GParamEnum")
+  (docs "The alignment mode")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property window-type
+  (of-object "GtkSourceGutterRendererPixbuf")
+  (prop-type "GParamEnum")
+  (docs "The window type")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property size
+  (of-object "GtkSourceGutterRendererPixbuf")
+  (prop-type "GParamInt")
+  (docs "The size")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property background-gdk
+  (of-object "GtkSourceGutterRendererPixbuf")
+  (prop-type "GParamBoxed")
+  (docs "The background color")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property background-set
+  (of-object "GtkSourceGutterRendererPixbuf")
+  (prop-type "GParamBoolean")
+  (docs "Whether the background color is set")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property pixbuf
+  (of-object "GtkSourceGutterRendererPixbuf")
+  (prop-type "GParamObject")
+  (docs "The pixbuf")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property stock-id
+  (of-object "GtkSourceGutterRendererPixbuf")
+  (prop-type "GParamString")
+  (docs "The stock id")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property icon-name
+  (of-object "GtkSourceGutterRendererPixbuf")
+  (prop-type "GParamString")
+  (docs "The icon name")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property gicon
+  (of-object "GtkSourceGutterRendererPixbuf")
+  (prop-type "GParamObject")
+  (docs "The gicon")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property stock-detail
+  (of-object "GtkSourceGutterRendererPixbuf")
+  (prop-type "GParamString")
+  (docs "The stock detail")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+;; From GtkSourceGutterRendererText
+
+(define-property visible
+  (of-object "GtkSourceGutterRendererText")
+  (prop-type "GParamBoolean")
+  (docs "Visible")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property xpad
+  (of-object "GtkSourceGutterRendererText")
+  (prop-type "GParamInt")
+  (docs "The x-padding")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property ypad
+  (of-object "GtkSourceGutterRendererText")
+  (prop-type "GParamInt")
+  (docs "The y-padding")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property xalign
+  (of-object "GtkSourceGutterRendererText")
+  (prop-type "GParamFloat")
+  (docs "The x-alignment")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property yalign
+  (of-object "GtkSourceGutterRendererText")
+  (prop-type "GParamFloat")
+  (docs "The y-alignment")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property view
+  (of-object "GtkSourceGutterRendererText")
+  (prop-type "GParamObject")
+  (docs "The view")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property alignment-mode
+  (of-object "GtkSourceGutterRendererText")
+  (prop-type "GParamEnum")
+  (docs "The alignment mode")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property window-type
+  (of-object "GtkSourceGutterRendererText")
+  (prop-type "GParamEnum")
+  (docs "The window type")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property size
+  (of-object "GtkSourceGutterRendererText")
+  (prop-type "GParamInt")
+  (docs "The size")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property background-gdk
+  (of-object "GtkSourceGutterRendererText")
+  (prop-type "GParamBoxed")
+  (docs "The background color")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property background-set
+  (of-object "GtkSourceGutterRendererText")
+  (prop-type "GParamBoolean")
+  (docs "Whether the background color is set")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property markup
+  (of-object "GtkSourceGutterRendererText")
+  (prop-type "GParamString")
+  (docs "The markup")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property text
+  (of-object "GtkSourceGutterRendererText")
+  (prop-type "GParamString")
+  (docs "The text")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
 )
 
 ;; From GtkSourceLanguage
@@ -1172,6 +1586,98 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+)
+
+;; From GtkSourceMarkCategory
+
+(define-signal query-tooltip-text
+  (of-object "GtkSourceMarkCategory")
+  (return-type "const-gchar*")
+  (when "last")
+  (parameters
+    '("GtkSourceMark*" "p0")
+  )
+)
+
+(define-signal query-tooltip-markup
+  (of-object "GtkSourceMarkCategory")
+  (return-type "const-gchar*")
+  (when "last")
+  (parameters
+    '("GtkSourceMark*" "p0")
+  )
+)
+
+(define-property id
+  (of-object "GtkSourceMarkCategory")
+  (prop-type "GParamString")
+  (docs "The id")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property background
+  (of-object "GtkSourceMarkCategory")
+  (prop-type "GParamBoxed")
+  (docs "The background")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property priority
+  (of-object "GtkSourceMarkCategory")
+  (prop-type "GParamInt")
+  (docs "The priority")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property stock-id
+  (of-object "GtkSourceMarkCategory")
+  (prop-type "GParamString")
+  (docs "The stock id")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property stock-detail
+  (of-object "GtkSourceMarkCategory")
+  (prop-type "GParamString")
+  (docs "The stock detail")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property pixbuf
+  (of-object "GtkSourceMarkCategory")
+  (prop-type "GParamObject")
+  (docs "The pixbuf")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property icon-name
+  (of-object "GtkSourceMarkCategory")
+  (prop-type "GParamString")
+  (docs "The icon name")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property gicon
+  (of-object "GtkSourceMarkCategory")
+  (prop-type "GParamObject")
+  (docs "The GIcon")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
 )
 
 ;; From GtkSourcePrintCompositor

@@ -98,30 +98,60 @@ or modified.
 </return>
 </function>
 
-<function name="gtk_source_view_set_mark_category_priority">
+<function name="segment_destroy">
 <description>
-Set the @priority for the given mark @category. When there are
-multiple marks on the same line, marks of categories with
-higher priorities will be drawn on top.
-
-Since: 2.2
+Recursively frees given segment. It removes the segment
+from ce structure, but it doesn't update parent and
+siblings. segment_remove() is the function that takes
+care of everything.
 
 </description>
 <parameters>
-<parameter name="view">
-<parameter_description> a #GtkSourceView.
+<parameter name="ce">
+<parameter_description> the engine.
 </parameter_description>
 </parameter>
-<parameter name="category">
-<parameter_description> a mark category.
-</parameter_description>
-</parameter>
-<parameter name="priority">
-<parameter_description> the priority for the category
+<parameter name="context">
+<parameter_description> the segment to destroy.
 </parameter_description>
 </parameter>
 </parameters>
 <return></return>
+</function>
+
+<function name="gtk_source_gutter_renderer_get_window_type">
+<description>
+Get the #GtkTextWindowType associated with the gutter renderer.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+</parameters>
+<return> a #GtkTextWindowType
+
+</return>
+</function>
+
+<function name="gtk_source_gutter_renderer_get_alignment_mode">
+<description>
+Get the alignment mode. The alignment mode describes the manner in which the
+renderer is aligned (see :xalign and :yalign).
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+</parameters>
+<return> a #GtkSourceGutterRendererAlignmentMode
+
+</return>
 </function>
 
 <function name="gtk_source_undo_manager_undo">
@@ -206,19 +236,17 @@ Since: 2.2
 <return></return>
 </function>
 
-<function name="idle_worker">
+<function name="gtk_source_style_scheme_manager_new">
 <description>
-Analyzes a batch in idle. Stops when
-whole buffer is analyzed.
+Creates a new style manager. If you do not need more than one style
+manager then use gtk_source_style_scheme_manager_get_default() instead.
+
 
 </description>
 <parameters>
-<parameter name="ce">
-<parameter_description> #GtkSourceContextEngine.
-</parameter_description>
-</parameter>
 </parameters>
-<return></return>
+<return> a new #GtkSourceStyleSchemeManager.
+</return>
 </function>
 
 <function name="gtk_source_buffer_end_not_undoable_action">
@@ -293,6 +321,26 @@ Populate @context with proposals from @provider.
 </parameter>
 <parameter name="context">
 <parameter_description> a #GtkSourceCompletionContext.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_gutter_renderer_get_background">
+<description>
+Set the background color of the renderer. If @color is set to %NULL, the
+renderer will not have a background color.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+<parameter name="color">
+<parameter_description> a #GdkColor or %NULL
 </parameter_description>
 </parameter>
 </parameters>
@@ -386,39 +434,6 @@ it's not %NULL.
 </parameter>
 <parameter name="buffer">
 <parameter_description> buffer.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gtk_source_view_set_mark_category_tooltip_markup_func">
-<description>
-See gtk_source_view_set_mark_category_tooltip_func() for more information.
-
-Since: 2.8
-
-</description>
-<parameters>
-<parameter name="view">
-<parameter_description> a #GtkSourceView.
-</parameter_description>
-</parameter>
-<parameter name="category">
-<parameter_description> a mark category.
-</parameter_description>
-</parameter>
-<parameter name="markup_func">
-<parameter_description> a #GtkSourceViewMarkTooltipFunc or %NULL.
-</parameter_description>
-</parameter>
-<parameter name="user_data">
-<parameter_description> user data which will be passed to @func.
-</parameter_description>
-</parameter>
-<parameter name="user_data_notify">
-<parameter_description>a function to free the memory allocated
-for @user_data or %NULL if you do not want to supply such a function.
 </parameter_description>
 </parameter>
 </parameters>
@@ -547,27 +562,6 @@ category, or all the marks representing a compilation error could belong to
 </return>
 </function>
 
-<function name="segment_destroy">
-<description>
-Recursively frees given segment. It removes the segment
-from ce structure, but it doesn't update parent and
-siblings. segment_remove() is the function that takes
-care of everything.
-
-</description>
-<parameters>
-<parameter name="ce">
-<parameter_description> the engine.
-</parameter_description>
-</parameter>
-<parameter name="context">
-<parameter_description> the segment to destroy.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
 <function name="find_segment_position">
 <description>
 Finds siblings of a new segment to be created at interval
@@ -634,6 +628,37 @@ Modifies syntax tree according to data in invalid_region.
 </parameter>
 </parameters>
 <return></return>
+</function>
+
+<function name="gtk_source_gutter_renderer_query_activatable">
+<description>
+Get whether the renderer is activatable at the location in @event. This is
+called from #GtkSourceGutter to determine whether a renderer is activatable
+using the mouse pointer.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> a #GtkTextIter at the start of the line to be activated
+</parameter_description>
+</parameter>
+<parameter name="area">
+<parameter_description> a #GdkRectangle of the cell area to be activated
+</parameter_description>
+</parameter>
+<parameter name="event">
+<parameter_description> the event that triggered the query
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if the renderer can be activated, %FALSE otherwise
+
+</return>
 </function>
 
 <function name="gtk_source_buffer_new">
@@ -714,6 +739,23 @@ Destroys syntax tags cache.
 </parameter>
 </parameters>
 <return></return>
+</function>
+
+<function name="gtk_source_gutter_renderer_pixbuf_get_gicon">
+<description>
+Get the gicon of the renderer
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRendererPixbuf
+</parameter_description>
+</parameter>
+</parameters>
+<return> a #GIcon
+
+</return>
 </function>
 
 <function name="get_segment_at_offset">
@@ -1245,7 +1287,7 @@ equivalent to segment_erase_range_(ce-&gt;priv-&gt;root_segment, start, end)
 
 <function name="gtk_source_completion_info_move_to_iter">
 <description>
-Moves the #GtkSourceCompletionInfo to @iter. If @iter is %NULL @info is 
+Moves the #GtkSourceCompletionInfo to @iter. If @iter is %NULL @info is
 moved to the cursor position. Moving will respect the #GdkGravity setting
 of the info window and will ensure the line at @iter is not occluded by
 the window.
@@ -1346,6 +1388,26 @@ terminated array of context class names.
 Use g_strfreev() to free the array if it is no longer needed.
 
 </return>
+</function>
+
+<function name="gtk_source_gutter_renderer_set_alignment_mode">
+<description>
+Set the alignment mode. The alignment mode describes the manner in which the
+renderer is aligned (see :xalign and :yalign).
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+<parameter name="mode">
+<parameter_description> a #GtkSourceGutterRendererAlignmentMode
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
 </function>
 
 <function name="gtk_source_print_compositor_set_print_footer">
@@ -1511,6 +1573,31 @@ must be freed with g_free().
 </parameters>
 <return> a new string containing the label of @proposal.
 </return>
+</function>
+
+<function name="gtk_source_gutter_renderer_set_padding">
+<description>
+Set the padding of the gutter renderer. Both @xpad and @ypad can be
+-1, which means the values will not be changed (this allows changing only
+one of the values).
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+<parameter name="xpad">
+<parameter_description> the x-padding
+</parameter_description>
+</parameter>
+<parameter name="ypad">
+<parameter_description> the y-padding
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
 </function>
 
 <function name="gtk_source_completion_utils_get_word_iter">
@@ -1967,6 +2054,43 @@ See child_starts_here().
 <return></return>
 </function>
 
+<function name="gtk_source_gutter_renderer_set_size">
+<description>
+Sets the size of the renderer. A value of -1 specifies that the size
+is to be determined dynamically.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+<parameter name="size">
+<parameter_description> the size
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_gutter_renderer_get_view">
+<description>
+Get the view associated to the gutter renderer
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+</parameters>
+<return> a #GtkTextView
+
+</return>
+</function>
+
 <function name="gtk_source_view_get_smart_home_end">
 <description>
 Returns a #GtkSourceSmartHomeEndType end value specifying
@@ -2146,64 +2270,6 @@ Since: 2.2
 <return> a new print compositor object.
 
 </return>
-</function>
-
-<function name="gtk_source_view_set_mark_category_tooltip_func">
-<description>
-Set a #GtkSourceViewMarkTooltipFunc used to set tooltip on marks from the
-given mark @category.
-If you also specified a function with
-gtk_source_view_set_mark_category_tooltip_markup_func()  the markup
-variant takes precedence.
-
-&lt;informalexample&gt;&lt;programlisting&gt;&lt;![CDATA[
-static gchar *
-tooltip_func (GtkSourceMark *mark,
-gpointer       user_data)
-{
-gchar *text;
-
-text = get_tooltip_for_mark (mark, user_data);
-
-return text;
-}
-
-...
-
-GtkSourceView *view;
-
-gtk_source_view_set_mark_category_tooltip_func (view, &quot;other-mark&quot;,
-tooltip_func,
-NULL, NULL);
-]]&gt;&lt;/programlisting&gt;&lt;/informalexample&gt;
-
-Since: 2.8
-
-</description>
-<parameters>
-<parameter name="view">
-<parameter_description> a #GtkSourceView.
-</parameter_description>
-</parameter>
-<parameter name="category">
-<parameter_description> a mark category.
-</parameter_description>
-</parameter>
-<parameter name="func">
-<parameter_description> a #GtkSourceViewMarkTooltipFunc or %NULL.
-</parameter_description>
-</parameter>
-<parameter name="user_data">
-<parameter_description> user data which will be passed to @func.
-</parameter_description>
-</parameter>
-<parameter name="user_data_notify">
-<parameter_description>a function to free the memory allocated
-for @user_data or %NULL if you do not want to supply such a function.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
 </function>
 
 <function name="gtk_source_completion_get_view">
@@ -2413,31 +2479,41 @@ Gets the icon of @proposal.
 </return>
 </function>
 
-<function name="gtk_source_view_get_mark_category_background">
+<function name="gtk_source_gutter_renderer_begin">
 <description>
-Gets the background color associated with given @category.
+Called when drawing a region begins. The region to be drawn is indicated
+by @start and @end. The purpose is to allow the implementation to precompute
+some state before the ::draw method is called for each cell.
 
-Since: 2.4
 
 </description>
 <parameters>
-<parameter name="view">
-<parameter_description> a #GtkSourceView.
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
 </parameter_description>
 </parameter>
-<parameter name="category">
-<parameter_description> a mark category.
+<parameter name="cr">
+<parameter_description> a #cairo_t
 </parameter_description>
 </parameter>
-<parameter name="dest">
-<parameter_description> destination #GdkColor structure to fill in.
+<parameter name="background_area">
+<parameter_description> a #GdkRectangle
+</parameter_description>
+</parameter>
+<parameter name="cell_area">
+<parameter_description> a #GdkRectangle
+</parameter_description>
+</parameter>
+<parameter name="start">
+<parameter_description> a #GtkTextIter
+</parameter_description>
+</parameter>
+<parameter name="end">
+<parameter_description> a #GtkTextIter
 </parameter_description>
 </parameter>
 </parameters>
-<return> %TRUE if background color for @category was set
-and @dest is set to a valid color, or %FALSE otherwise.
-
-</return>
+<return></return>
 </function>
 
 <function name="gtk_source_completion_provider_get_name">
@@ -2589,31 +2665,6 @@ model. By default, it uses a direct hash (#g_direct_hash).
 </return>
 </function>
 
-<function name="gtk_source_view_set_mark_category_icon_from_stock">
-<description>
-Sets the icon to be used for @category to the stock item @stock_id.
-If @stock_id is %NULL, the icon is unset.
-
-Since: 2.8
-
-</description>
-<parameters>
-<parameter name="view">
-<parameter_description> a #GtkSourceView.
-</parameter_description>
-</parameter>
-<parameter name="category">
-<parameter_description> a mark category.
-</parameter_description>
-</parameter>
-<parameter name="stock_id">
-<parameter_description> the stock id, or %NULL.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
 <function name="gtk_source_mark_prev">
 <description>
 Returns the previous #GtkSourceMark in the buffer or %NULL if the mark
@@ -2745,39 +2796,6 @@ the stock label will be used.
 </return>
 </function>
 
-<function name="gtk_source_gutter_set_cell_data_func">
-<description>
-Sets the #GtkSourceGutterDataFunc to use for @renderer. This function is
-used to setup the cell renderer properties for rendering the current cell.
-
-Since: 2.8
-
-</description>
-<parameters>
-<parameter name="gutter">
-<parameter_description> a #GtkSourceGutter.
-</parameter_description>
-</parameter>
-<parameter name="renderer">
-<parameter_description> a #GtkCellRenderer.
-</parameter_description>
-</parameter>
-<parameter name="func">
-<parameter_description> the #GtkSourceGutterDataFunc to use.
-</parameter_description>
-</parameter>
-<parameter name="func_data">
-<parameter_description> the user data for @func.
-</parameter_description>
-</parameter>
-<parameter name="destroy">
-<parameter_description> the destroy notification for @func_data.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
 <function name="add_invalid">
 <description>
 Inserts segment into the list of invalid segments.
@@ -2839,6 +2857,19 @@ before lower priorities. The default priority is 0.
 </return>
 </function>
 
+<function name="gtk_source_gutter_renderer_text_new">
+<description>
+Create a new #GtkSourceGutterRendererText.
+
+
+</description>
+<parameters>
+</parameters>
+<return> A #GtkSourceGutterRenderer
+
+</return>
+</function>
+
 <function name="gtk_source_buffer_set_undo_manager">
 <description>
 Set the buffer undo manager. If @manager is %NULL the default undo manager
@@ -2852,40 +2883,6 @@ will be set.
 </parameter>
 <parameter name="manager">
 <parameter_description> A #GtkSourceUndoManager or %NULL.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gtk_source_gutter_set_cell_size_func">
-<description>
-Sets the #GtkSourceGutterSizeFunc to use for @renderer. This function is
-used to setup the cell renderer properties for measuring the maximum size
-of the cell.
-
-Since: 2.8
-
-</description>
-<parameters>
-<parameter name="gutter">
-<parameter_description> a #GtkSourceGutter.
-</parameter_description>
-</parameter>
-<parameter name="renderer">
-<parameter_description> a #GtkCellRenderer.
-</parameter_description>
-</parameter>
-<parameter name="func">
-<parameter_description> the #GtkSourceGutterSizeFunc to use.
-</parameter_description>
-</parameter>
-<parameter name="func_data">
-<parameter_description> the user data for @func.
-</parameter_description>
-</parameter>
-<parameter name="destroy">
-<parameter_description> the destroy notification for @func_data.
 </parameter_description>
 </parameter>
 </parameters>
@@ -2989,6 +2986,43 @@ subpattern contexts (e.g. \%{1@start} or \%{blah@start}).
 </parameter>
 </parameters>
 <return></return>
+</function>
+
+<function name="gtk_source_gutter_insertv">
+<description>
+Create and insert a new gutter renderer in the gutter. This function is
+mostly useful for bindings. Applications should normally use
+#gtk_source_gutter_renderer_insert
+
+Since: 3.0
+
+
+</description>
+<parameters>
+<parameter name="gutter">
+<parameter_description> a #GtkSourceGutter.
+</parameter_description>
+</parameter>
+<parameter name="gtype">
+<parameter_description> the type of the gutter renderer (must inherit from #GtkSourceGutterRenderer).
+</parameter_description>
+</parameter>
+<parameter name="position">
+<parameter_description> the renderer position.
+</parameter_description>
+</parameter>
+<parameter name="num_parameters">
+<parameter_description> the number of parameters.
+</parameter_description>
+</parameter>
+<parameter name="parameters">
+<parameter_description> the parameters.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a #GtkSourceGutterRenderer
+
+</return>
 </function>
 
 <function name="gtk_source_language_manager_get_language">
@@ -3276,17 +3310,19 @@ wildcard references (context_id:*).
 <return></return>
 </function>
 
-<function name="gtk_source_style_scheme_manager_new">
+<function name="idle_worker">
 <description>
-Creates a new style manager. If you do not need more than one style
-manager then use gtk_source_style_scheme_manager_get_default() instead.
-
+Analyzes a batch in idle. Stops when
+whole buffer is analyzed.
 
 </description>
 <parameters>
+<parameter name="ce">
+<parameter_description> #GtkSourceContextEngine.
+</parameter_description>
+</parameter>
 </parameters>
-<return> a new #GtkSourceStyleSchemeManager.
-</return>
+<return></return>
 </function>
 
 <function name="gtk_source_completion_proposal_changed">
@@ -3355,6 +3391,38 @@ Since: 2.2
 <return></return>
 </function>
 
+<function name="gtk_source_gutter_renderer_end">
+<description>
+Called when drawing a region of lines has ended.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_gutter_renderer_get_size">
+<description>
+Get the size of the renderer.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+</parameters>
+<return> the size of the renderer.
+
+</return>
+</function>
+
 <function name="gtk_source_print_compositor_get_tab_width">
 <description>
 Returns the width of tabulation in characters for printed text.
@@ -3389,6 +3457,29 @@ Since: 2.2
 </parameters>
 <return> a new #GtkSourceCompletionWords provider
 </return>
+</function>
+
+<function name="gtk_source_gutter_renderer_get_padding">
+<description>
+Get the x-padding and y-padding of the gutter renderer.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+<parameter name="xpad">
+<parameter_description> return location for the x-padding (can be %NULL)
+</parameter_description>
+</parameter>
+<parameter name="ypad">
+<parameter_description> return location for the y-padding (can be %NULL)
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
 </function>
 
 <function name="gtk_source_print_compositor_get_footer_font_name">
@@ -3456,6 +3547,45 @@ Since: 2.2
 </parameter>
 </parameters>
 <return> %TRUE if the printed output will be highlighted.
+
+</return>
+</function>
+
+<function name="gtk_source_gutter_renderer_query_tooltip">
+<description>
+Emits the ::query-tooltip signal. This function is called from
+#GtkSourceGutter. Implementations can override the default signal handler
+or can connect to the signal externally.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer.
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> a #GtkTextIter.
+</parameter_description>
+</parameter>
+<parameter name="area">
+<parameter_description> a #GdkRectangle.
+</parameter_description>
+</parameter>
+<parameter name="x">
+<parameter_description> The x position of the tooltip.
+</parameter_description>
+</parameter>
+<parameter name="y">
+<parameter_description> The y position of the tooltip.
+</parameter_description>
+</parameter>
+<parameter name="tooltip">
+<parameter_description> a #GtkTooltip.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if the tooltip has been set, %FALSE otherwise
 
 </return>
 </function>
@@ -3603,6 +3733,23 @@ be created and added to the window.
 </parameter>
 </parameters>
 <return></return>
+</function>
+
+<function name="gtk_source_mark_category_get_gicon">
+<description>
+Get the #GIcon associated with the mark category.
+
+
+</description>
+<parameters>
+<parameter name="category">
+<parameter_description> a #GtkSourceMarkCategory
+</parameter_description>
+</parameter>
+</parameters>
+<return> A #GIcon
+
+</return>
 </function>
 
 <function name="gtk_source_completion_provider_get_start_iter">
@@ -3833,6 +3980,23 @@ See gtk_source_style_scheme_manager_set_search_path() for details.
 <return> a %NULL-terminated array
 of string containing the search path.
 The array is owned by the @manager and must not be modified.
+</return>
+</function>
+
+<function name="gtk_source_gutter_renderer_get_visible">
+<description>
+Get whether the gutter renderer is visible.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if the renderer is visible, %FALSE otherwise
+
 </return>
 </function>
 
@@ -4112,6 +4276,35 @@ If @show is %TRUE the current line is highlighted.
 <return></return>
 </function>
 
+<function name="gtk_source_view_get_show_right_margin">
+<description>
+Returns whether a right margin is displayed.
+
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if the right margin is shown.
+</return>
+</function>
+
+<function name="gtk_source_gutter_renderer_pixbuf_new">
+<description>
+Create a new #GtkSourceGutterRendererPixbuf.
+
+
+</description>
+<parameters>
+</parameters>
+<return> A #GtkSourceGutterRenderer
+
+</return>
+</function>
+
 <function name="enable_highlight">
 <description>
 Whether to highlight (i.e. apply tags) analyzed area.
@@ -4271,7 +4464,8 @@ interactive completion again.
 <description>
 Inserts @renderer into @gutter at @position.
 
-Since: 2.8
+Since: 3.0
+
 
 </description>
 <parameters>
@@ -4279,8 +4473,8 @@ Since: 2.8
 <parameter_description> a #GtkSourceGutter.
 </parameter_description>
 </parameter>
-<parameter name="renderer">
-<parameter_description> a #GtkCellRenderer.
+<parameter name="gtype">
+<parameter_description> the type of the gutter renderer (must inherit from #GtkSourceGutterRenderer).
 </parameter_description>
 </parameter>
 <parameter name="position">
@@ -4288,7 +4482,8 @@ Since: 2.8
 </parameter_description>
 </parameter>
 </parameters>
-<return></return>
+<return> a #GtkSourceGutterRenderer
+</return>
 </function>
 
 <function name="gtk_source_completion_create_context">
@@ -4471,25 +4666,6 @@ should be displayed for this @view.
 </return>
 </function>
 
-<function name="gtk_source_buffer_get_style_scheme">
-<description>
-Returns the #GtkSourceStyleScheme associated with the buffer,
-see gtk_source_buffer_set_style_scheme().
-The returned object should not be unreferenced by the user.
-
-
-</description>
-<parameters>
-<parameter name="buffer">
-<parameter_description> a #GtkSourceBuffer.
-</parameter_description>
-</parameter>
-</parameters>
-<return> the #GtkSourceStyleScheme associated
-with the buffer, or %NULL.
-</return>
-</function>
-
 <function name="gtk_source_completion_utils_get_word">
 <description>
 
@@ -4574,31 +4750,6 @@ of this line if it's the last line in @buffer.
 </parameter>
 <parameter name="line">
 <parameter_description> #LineInfo structure to be filled.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gtk_source_view_set_mark_category_icon_from_pixbuf">
-<description>
-Sets the icon to be used for @category to @pixbuf.
-If @pixbuf is %NULL, the icon is unset.
-
-Since: 2.8
-
-</description>
-<parameters>
-<parameter name="view">
-<parameter_description> a #GtkSourceView.
-</parameter_description>
-</parameter>
-<parameter name="category">
-<parameter_description> a mark category.
-</parameter_description>
-</parameter>
-<parameter name="pixbuf">
-<parameter_description> a #GdkPixbuf, or %NULL.
 </parameter_description>
 </parameter>
 </parameters>
@@ -4811,54 +4962,6 @@ associated with @completion.
 </return>
 </function>
 
-<function name="gtk_source_view_get_mark_category_priority">
-<description>
-Gets the priority which is associated with the given @category.
-
-Since: 2.2
-
-</description>
-<parameters>
-<parameter name="view">
-<parameter_description> a #GtkSourceView.
-</parameter_description>
-</parameter>
-<parameter name="category">
-<parameter_description> a mark category.
-</parameter_description>
-</parameter>
-</parameters>
-<return> the priority or if @category
-exists but no priority was set, it defaults to 0.
-
-</return>
-</function>
-
-<function name="gtk_source_view_set_mark_category_background">
-<description>
-Sets given background @color for mark @category.
-If @color is %NULL, the background color is unset.
-
-Since: 2.4
-
-</description>
-<parameters>
-<parameter name="view">
-<parameter_description> a #GtkSourceView.
-</parameter_description>
-</parameter>
-<parameter name="category">
-<parameter_description> a mark category.
-</parameter_description>
-</parameter>
-<parameter name="color">
-<parameter_description> background color or %NULL to unset it.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
 <function name="find_single_byte_escape">
 <description>
 Checks whether pattern contains \C escape sequence,
@@ -4973,6 +5076,39 @@ Creates a new segment and inserts it into the tree.
 </return>
 </function>
 
+<function name="gtk_source_gutter_insert_valist">
+<description>
+Create and insert a new gutter renderer in the gutter. This function is
+mostly useful for bindings. Applications should normally use
+#gtk_source_gutter_renderer_insert
+
+Since: 3.0
+
+
+</description>
+<parameters>
+<parameter name="gutter">
+<parameter_description> a #GtkSourceGutter.
+</parameter_description>
+</parameter>
+<parameter name="gtype">
+<parameter_description> the type of the gutter renderer (must inherit from #GtkSourceGutterRenderer).
+</parameter_description>
+</parameter>
+<parameter name="position">
+<parameter_description> the renderer position.
+</parameter_description>
+</parameter>
+<parameter name="ap">
+<parameter_description> the parameters.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a #GtkSourceGutterRenderer
+
+</return>
+</function>
+
 <function name="gtk_source_print_compositor_draw_page">
 <description>
 Draw page @page_nr for printing on the the Cairo context encapsuled in @context.
@@ -5034,6 +5170,36 @@ or modified.
 </parameters>
 <return> the ID of @language.
 </return>
+</function>
+
+<function name="gtk_source_gutter_renderer_query_data">
+<description>
+Emit the ::query-data signal. This function is called to query for data
+just before rendering a cell. This is called from the #GtkSourceGutter.
+Implementations can override the default signal handler or can connect
+a signal handler externally to the ::query-data signal.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer.
+</parameter_description>
+</parameter>
+<parameter name="start">
+<parameter_description> a #GtkTextIter.
+</parameter_description>
+</parameter>
+<parameter name="end">
+<parameter_description> a #GtkTextIter.
+</parameter_description>
+</parameter>
+<parameter name="state">
+<parameter_description> a #GtkSourceGutterRendererState.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
 </function>
 
 <function name="gtk_source_buffer_set_highlight_syntax">
@@ -5228,6 +5394,29 @@ style scheme is available. The array is owned by the @manager and must not be mo
 </return>
 </function>
 
+<function name="gtk_source_gutter_renderer_get_alignment">
+<description>
+Get the x-alignment and y-alignment of the gutter renderer.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+<parameter name="xalign">
+<parameter_description> return location for the x-alignment (can be %NULL)
+</parameter_description>
+</parameter>
+<parameter name="yalign">
+<parameter_description> return location for the y-alignment (can be %NULL)
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
 <function name="gtk_source_language_manager_guess_language">
 <description>
 Picks a #GtkSourceLanguage for given file name and content type,
@@ -5314,6 +5503,52 @@ Returns the default #GtkSourceStyleSchemeManager instance.
 <return> a #GtkSourceStyleSchemeManager. Return value
 is owned by GtkSourceView library and must not be unref'ed.
 </return>
+</function>
+
+<function name="gtk_source_gutter_renderer_draw">
+<description>
+Main renderering method. Implementations should implement this method to
+draw onto the cairo context. The @background_area indicates total area of
+the cell (without padding or margin) to be drawn. The @cell_area indicates
+the area where content can be drawn (text, images, etc).
+
+The @state argument indicates the current state of the renderer and should
+be taken into account to properly draw the different possible states
+(cursor, prelit, selected) if appropriate.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+<parameter name="cr">
+<parameter_description> the cairo render context
+</parameter_description>
+</parameter>
+<parameter name="background_area">
+<parameter_description> a #GdkRectangle indicating the total area to be drawn
+</parameter_description>
+</parameter>
+<parameter name="cell_area">
+<parameter_description> a #GdkRectangle indicating the area to draw content
+</parameter_description>
+</parameter>
+<parameter name="start">
+<parameter_description> a #GtkTextIter
+</parameter_description>
+</parameter>
+<parameter name="end">
+<parameter_description> a #GtkTextIter
+</parameter_description>
+</parameter>
+<parameter name="state">
+<parameter_description> a #GtkSourceGutterRendererState
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
 </function>
 
 <function name="gtk_source_undo_manager_default_merge_action">
@@ -5559,6 +5794,29 @@ by the completion and should not be freed.
 </parameters>
 <return>
 list of #GtkSourceCompletionProvider.
+</return>
+</function>
+
+<function name="gtk_source_view_get_mark_category">
+<description>
+Get the source mark category object for @category. A
+#GtkSourceMarkCategory is automatically created for the given category
+if it does not exist yet.
+
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView
+</parameter_description>
+</parameter>
+<parameter name="category">
+<parameter_description> the category
+</parameter_description>
+</parameter>
+</parameters>
+<return> the #GtkSourceMarkCategory object
+
 </return>
 </function>
 
@@ -5865,7 +6123,7 @@ Since: 2.8
 </description>
 <parameters>
 <parameter name="gutter">
-<parameter_description> a #GtkSourceGutter.
+<parameter_description> a #GtkSourceGutterRenderer.
 </parameter_description>
 </parameter>
 <parameter name="renderer">
@@ -5904,6 +6162,23 @@ The buffer holds a reference to @language.
 <return></return>
 </function>
 
+<function name="gtk_source_gutter_renderer_pixbuf_get_pixbuf">
+<description>
+Get the pixbuf of the renderer.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRendererPixbuf
+</parameter_description>
+</parameter>
+</parameters>
+<return> a #GdkPixbuf
+
+</return>
+</function>
+
 <function name="child_starts_here">
 <description>
 Verifies if a context of the type in @curr_definition starts at
@@ -5940,6 +6215,51 @@ Verifies if a context of the type in @curr_definition starts at
 </parameters>
 <return> %TRUE if the context starts here.
 </return>
+</function>
+
+<function name="gtk_source_gutter_renderer_activate">
+<description>
+Emits the ::activate signal of the renderer. This is called from
+#GtkSourceGutter and should never have to be called manually.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> a #GtkTextIter at the start of the line where the renderer is activated
+</parameter_description>
+</parameter>
+<parameter name="area">
+<parameter_description> a #GdkRectangle of the cell area where the renderer is activated
+</parameter_description>
+</parameter>
+<parameter name="event">
+<parameter_description> the event that triggered the activation
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_gutter_renderer_queue_draw">
+<description>
+Emits the ::queue-draw signal of the renderer. Call this from an
+implementation to inform that the renderer has changed such that it needs
+to redraw.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
 </function>
 
 <function name="analyze_line">
@@ -5994,22 +6314,6 @@ Since: 2.2
 <return></return>
 </function>
 
-<function name="gtk_source_view_get_show_right_margin">
-<description>
-Returns whether a right margin is displayed.
-
-
-</description>
-<parameters>
-<parameter name="view">
-<parameter_description> a #GtkSourceView.
-</parameter_description>
-</parameter>
-</parameters>
-<return> %TRUE if the right margin is shown.
-</return>
-</function>
-
 <function name="gtk_source_print_compositor_get_top_margin">
 <description>
 Gets the top margin in units of @unit.
@@ -6032,29 +6336,23 @@ Since: 2.2
 </return>
 </function>
 
-<function name="gtk_source_view_set_mark_category_icon_from_icon_name">
+<function name="gtk_source_buffer_get_style_scheme">
 <description>
-Sets the icon to be used for @category to the named theme item @name.
-If @name is %NULL, the icon is unset.
+Returns the #GtkSourceStyleScheme associated with the buffer,
+see gtk_source_buffer_set_style_scheme().
+The returned object should not be unreferenced by the user.
 
-Since: 2.8
 
 </description>
 <parameters>
-<parameter name="view">
-<parameter_description> a #GtkSourceView.
-</parameter_description>
-</parameter>
-<parameter name="category">
-<parameter_description> a mark category.
-</parameter_description>
-</parameter>
-<parameter name="name">
-<parameter_description> the themed icon name, or %NULL.
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
 </parameter_description>
 </parameter>
 </parameters>
-<return></return>
+<return> the #GtkSourceStyleScheme associated
+with the buffer, or %NULL.
+</return>
 </function>
 
 <function name="resolve_reference">
@@ -6081,7 +6379,32 @@ Since: 2.8
 </parameter_description>
 </parameter>
 <parameter name="renderer">
-<parameter_description> a #GtkCellRenderer.
+<parameter_description> a #GtkSourceGutterRenderer.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_gutter_renderer_set_alignment">
+<description>
+Set the alignment of the gutter renderer. Both @xalign and @yalign can be
+-1, which means the values will not be changed (this allows changing only
+one of the values).
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+<parameter name="xalign">
+<parameter_description> the x-alignment
+</parameter_description>
+</parameter>
+<parameter name="yalign">
+<parameter_description> the y-alignment
 </parameter_description>
 </parameter>
 </parameters>
@@ -6142,6 +6465,25 @@ Since: 2.2
 </parameter>
 <parameter name="wrap_mode">
 <parameter_description> a #GtkWrapMode.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_gutter_renderer_set_visible">
+<description>
+Set whether the gutter renderer is visible.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+<parameter name="visible">
+<parameter_description> the visibility
 </parameter_description>
 </parameter>
 </parameters>

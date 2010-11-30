@@ -19,6 +19,7 @@ files_hg =				\
 	sourcecompletionprovider.hg	\
 	sourcecompletionwords.hg        \
 	sourcegutter.hg			\
+	sourcegutterrenderer.hg		\
 	sourcelanguage.hg		\
 	sourcelanguagemanager.hg	\
 	sourcemark.hg			\

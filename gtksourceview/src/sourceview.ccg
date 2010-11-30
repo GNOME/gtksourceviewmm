@@ -23,31 +23,6 @@
 #include <gtksourceview/gtksourceview.h>
 #include <gtksourceview/gtksourceview-typebuiltins.h>
 
-static gchar* SignalProxy_MarkTooltip_gtk_callback(GtkSourceMark* mark, gpointer user_data)
-{
-  Gsv::SourceView::SlotMarkTooltip* the_slot = static_cast<Gsv::SourceView::SlotMarkTooltip*>(user_data);
-
-  #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  try
-  {
-  #endif //GLIBMM_EXCEPTIONS_ENABLED
-    return g_strdup((*the_slot)(Glib::wrap(mark)).c_str());
-  #ifdef GLIBMM_EXCEPTIONS_ENABLED
-  }
-  catch(...)
-  {
-    Glib::exception_handlers_invoke();
-  }
-
-  return 0; //An arbitary default, just to avoid the compiler warning.
-  #endif //GLIBMM_EXCEPTIONS_ENABLED
-}
-
-static void SignalProxy_MarkTooltip_gtk_callback_destroy(void* data)
-{
-  delete static_cast<Gsv::SourceView::SlotMarkTooltip*>(data);
-}
-
 namespace Gsv
 {
 
@@ -89,46 +64,6 @@ void
 SourceView::set_source_buffer (const Glib::RefPtr<SourceBuffer> &source_buffer)
 {
     set_buffer (source_buffer) ;
-}
-
-void
-SourceView::unset_mark_category_icon(const Glib::ustring& category)
-{
-  gtk_source_view_set_mark_category_icon_from_icon_name(gobj(), category.c_str(), 0);
-  gtk_source_view_set_mark_category_icon_from_stock(gobj(), category.c_str(), 0);
-  gtk_source_view_set_mark_category_icon_from_pixbuf(gobj(), category.c_str(), 0);
-}
-
-void
-SourceView::unset_mark_category_background(const Glib::ustring& category)
-{
-  gtk_source_view_set_mark_category_background(gobj(), category.c_str(), 0);
-}
-
-void
-SourceView::set_mark_category_tooltip_func(const Glib::ustring& category, const SlotMarkTooltip& slot)
-{
-  SlotMarkTooltip* slot_copy = new SlotMarkTooltip(slot);
-
-  gtk_source_view_set_mark_category_tooltip_func(gobj(), category.c_str(),
-    &SignalProxy_MarkTooltip_gtk_callback, slot_copy,
-    &SignalProxy_MarkTooltip_gtk_callback_destroy);
-}
-
-void
-SourceView::set_mark_category_tooltip_markup_func(const Glib::ustring& category, const SlotMarkTooltip& slot)
-{
-  SlotMarkTooltip* slot_copy = new SlotMarkTooltip(slot);
-
-  gtk_source_view_set_mark_category_tooltip_markup_func(gobj(),
-    category.c_str(), &SignalProxy_MarkTooltip_gtk_callback, slot_copy,
-    &SignalProxy_MarkTooltip_gtk_callback_destroy);
-}
-
-void
-SourceView::unset_mark_category_tooltip_func(const Glib::ustring& category)
-{
-  gtk_source_view_set_mark_category_tooltip_func(gobj(), category.c_str(), 0, 0, 0);
 }
 
 }//end namespace Gsv

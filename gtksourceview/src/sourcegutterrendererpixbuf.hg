@@ -1,0 +1,168 @@
+/* sourcegutterrendererpixbuf.h
+ *
+ * Copyright (C) 2010 Krzesimir Nowak
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+/// \file
+/// \brief SourceGutterRendererPixbuf class
+
+#include <glibmm/refptr.h>
+#include <gdkmm/pixbuf.h>
+#include <gtksourceviewmm/sourcegutterrenderer.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(gtksourceviewmm/private/sourcegutterrenderer_p.h)
+
+namespace Gsv
+{
+
+// TODO: write docs.
+class SourceGutterRendererPixbuf : public SourceGutterRenderer
+{
+  _CLASS_GTKOBJECT(SourceGutterRendererPixbuf, GtkSourceGutterRendererPixbuf, GTK_SOURCE_GUTTER_RENDERER_PIXBUF, SourceGutterRenderer, GtkSourceGutterRenderer)
+public:
+  _CTOR_DEFAULT()
+
+  _WRAP_METHOD(Glib::RefPtr<Gdk::Pixbuf> get_pixbuf(), gtk_source_gutter_renderer_pixbuf_get_pixbuf, refreturn)
+
+  _WRAP_METHOD(Glib::RefPtr<const Gdk::Pixbuf> get_pixbuf() const, gtk_source_gutter_renderer_pixbuf_get_pixbuf, constversion)
+
+#m4 _CONVERSION(`const Glib::RefPtr<const Gdk::Pixbuf>&', `GdkPixbuf*', `const_cast<GdkPixbuf*>(Glib::unwrap($3))')
+  _WRAP_METHOD(void set_pixbuf(const Glib::RefPtr<const Gdk::Pixbuf>& pixbuf), gtk_source_gutter_renderer_pixbuf_set_pixbuf)
+
+  _WRAP_METHOD(std::string get_stock_id() const, gtk_source_gutter_renderer_pixbuf_get_stock_id)
+
+  _WRAP_METHOD(void set_stock_id(const std::string& stock_id), gtk_source_gutter_renderer_pixbuf_set_stock_id)
+
+  _WRAP_METHOD(Gtk::IconSize get_icon_size() const, gtk_source_gutter_renderer_pixbuf_get_icon_size)
+
+  _WRAP_METHOD(void set_icon_size(Gtk::IconSize size), gtk_source_gutter_renderer_pixbuf_set_icon_size)
+
+  _WRAP_METHOD(std::string get_stock_detail() const, gtk_source_gutter_renderer_pixbuf_get_stock_detail)
+
+  _WRAP_METHOD(void set_stock_detail(const std::string& stock_detail), gtk_source_gutter_renderer_pixbuf_set_stock_detail)
+
+#m4 _CONVERSION(`GIcon*', `Glib::RefPtr<Gio::Icon>', `Glib::wrap($3)')
+  _WRAP_METHOD(Glib::RefPtr<Gio::Icon> get_icon(), gtk_source_gutter_renderer_pixbuf_get_gicon, refreturn)
+
+  _WRAP_METHOD(Glib::RefPtr<const Gio::Icon> get_icon() const, gtk_source_gutter_renderer_pixbuf_get_gicon, constversion)
+
+#m4 _CONVERSION(`const Glib::RefPtr<Gio::Icon>&', `GIcon*', `Glib::unwrap($3)')
+  _WRAP_METHOD(void set_icon(const Glib::RefPtr<Gio::Icon>& icon), gtk_source_gutter_renderer_pixbuf_set_gicon)
+
+  _WRAP_METHOD(std::string get_icon_name() const, gtk_source_gutter_renderer_pixbuf_get_icon_name)
+
+  _WRAP_METHOD(void set_icon_name(const std::string& icon_name), gtk_source_gutter_renderer_pixbuf_set_icon_name)
+
+/*
+
+
+#m4 _CONVERSION(`const Cairo::RefPtr<Cairo::Context>&', `cairo_t*', `(($3) ? ($3)->cobj() : 0)')
+#m4 _CONVERSION(`const Gdk::Rectangle&',`const GdkRectangle*',($3).gobj())
+#m4 _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',($3).gobj())
+  _WRAP_METHOD(void begin(
+                  const Cairo::RefPtr<Cairo::Context>& cr,
+                  const Gdk::Rectangle& background_area,
+                  const Gdk::Rectangle& cell_area,
+                  Gtk::TextIter& start,
+                  Gtk::TextIter& end), gtk_source_gutter_renderer_begin)
+
+  _WRAP_METHOD(void draw(
+                  const Cairo::RefPtr<Cairo::Context>& cr,
+                  const Gdk::Rectangle& background_area,
+                  const Gdk::Rectangle& cell_area,
+                  Gtk::TextIter& start,
+                  Gtk::TextIter& end,
+                  SourceGutterRendererState), gtk_source_gutter_renderer_draw)
+
+  _WRAP_METHOD(void end(), gtk_source_gutter_renderer_end)
+
+  _WRAP_METHOD(int get_size() const, gtk_source_gutter_renderer_get_size)
+
+  _WRAP_METHOD(void set_size(int size), gtk_source_gutter_renderer_set_size)
+
+  _WRAP_METHOD(bool get_visible() const, gtk_source_gutter_renderer_get_visible)
+
+  _WRAP_METHOD(void set_visible(bool visible), gtk_source_gutter_renderer_set_visible)
+
+// TODO: write padding class. krnowak
+
+  _WRAP_METHOD(void get_padding(int& xpad, int& ypad) const, gtk_source_gutter_renderer_get_padding)
+
+  _WRAP_METHOD(void set_padding(int xpad, int ypad), gtk_source_gutter_renderer_set_padding)
+
+// TODO: write alignment class. krnowak
+
+  _WRAP_METHOD(void get_alignment(float& xalign, float& yalign) const, gtk_source_gutter_renderer_get_alignment)
+
+  _WRAP_METHOD(void set_alignment(float xalign, float yalign), gtk_source_gutter_renderer_set_alignment)
+
+  _WRAP_METHOD(SourceGutterRendererAlignmentMode get_alignment_mode() const, gtk_source_gutter_renderer_get_alignment_mode)
+
+  _WRAP_METHOD(void set_alignment_mode(SourceGutterRendererAlignmentMode mode), gtk_source_gutter_renderer_set_alignment_mode)
+
+  _WRAP_METHOD(Gtk::TextWindowType get_window_type() const, gtk_source_gutter_renderer_get_window_type)
+
+#m4 _CONVERSION(GtkTextView*, Gtk::TextView*, Glib::wrap($3))
+  _WRAP_METHOD(Gtk::TextView* get_view(), gtk_source_gutter_renderer_get_view)
+
+  _WRAP_METHOD(const Gtk::TextView* get_view() const, gtk_source_gutter_renderer_get_view, constversion)
+
+// TODO: use std::pair? krnowak
+
+#m4 _CONVERSION(`Gdk::Color&',`GdkColor*',`($3).gobj()')
+  _WRAP_METHOD(bool get_background(Gdk::Color& color) const, gtk_source_gutter_renderer_get_background)
+
+  bool is_background_set() const;
+
+#m4 _CONVERSION(`const Gdk::Color&',`const GdkColor*',`($3).gobj()')
+  _WRAP_METHOD(void set_background(const Gdk::Color& color), gtk_source_gutter_renderer_set_background)
+
+  _IGNORE(gtk_source_gutter_renderer_activate, gtk_source_gutter_renderer_query_activatable, gtk_source_gutter_renderer_query_tooltip, gtk_source_gutter_renderer_query_data)
+
+  _WRAP_METHOD(void queue_draw(), gtk_source_gutter_renderer_queue_draw)
+
+protected:
+
+
+#m4 _CONVERSION(`const GdkRectangle*',`const Gdk::Rectangle&',`Glib::wrap($3)')
+#m4 _CONVERSION(`GdkRectangle*',`const Gdk::Rectangle&',`Glib::wrap($3)')
+#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap($3)')
+
+  _WRAP_VFUNC(void begin(
+                  const Cairo::RefPtr<Cairo::Context>& cr,
+                  const Gdk::Rectangle& background_area,
+                  const Gdk::Rectangle& cell_area,
+                  Gtk::TextIter& start,
+                  Gtk::TextIter& end), begin)
+
+  _WRAP_VFUNC(void draw(
+                  const Cairo::RefPtr<Cairo::Context>& cr,
+                  const Gdk::Rectangle& background_area,
+                  const Gdk::Rectangle& cell_area,
+                  Gtk::TextIter& start,
+                  Gtk::TextIter& end,
+                  SourceGutterRendererState), draw)
+
+  _WRAP_VFUNC(void end(), end)
+
+public: */
+};
+
+} // namespace Gsv
+
+

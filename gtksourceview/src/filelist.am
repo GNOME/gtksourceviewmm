@@ -20,6 +20,8 @@ files_hg =				\
 	sourcecompletionwords.hg        \
 	sourcegutter.hg			\
 	sourcegutterrenderer.hg		\
+	sourcegutterrendererpixbuf.hg	\
+	sourcegutterrenderertext.hg	\
 	sourcelanguage.hg		\
 	sourcelanguagemanager.hg	\
 	sourcemark.hg			\

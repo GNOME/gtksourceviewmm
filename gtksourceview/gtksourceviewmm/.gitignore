@@ -9,6 +9,8 @@
 /sourcecompletionwords.*
 /sourcegutter.*
 /sourcegutterrenderer.*
+/sourcegutterrendererpixbuf.*
+/sourcegutterrenderertext.*
 /sourcelanguage.*
 /sourcelanguagemanager.*
 /sourcemark.*

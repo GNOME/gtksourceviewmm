@@ -329,8 +329,7 @@ Populate @context with proposals from @provider.
 
 <function name="gtk_source_gutter_renderer_get_background">
 <description>
-Set the background color of the renderer. If @color is set to %NULL, the
-renderer will not have a background color.
+Get the background color of the renderer.
 
 
 </description>
@@ -340,11 +339,13 @@ renderer will not have a background color.
 </parameter_description>
 </parameter>
 <parameter name="color">
-<parameter_description> a #GdkColor or %NULL
+<parameter_description> return value for a #GdkColor
 </parameter_description>
 </parameter>
 </parameters>
-<return></return>
+<return> %TRUE if the background color is set, %FALSE otherwise
+
+</return>
 </function>
 
 <function name="gtk_source_print_compositor_set_print_header">
@@ -1004,6 +1005,26 @@ Since: 2.2
 </parameter>
 <parameter name="font_name">
 <parameter_description> the name of the font for the footer text, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_gutter_renderer_set_background">
+<description>
+Set the background color of the renderer. If @color is set to %NULL, the
+renderer will not have a background color.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer
+</parameter_description>
+</parameter>
+<parameter name="color">
+<parameter_description> a #GdkColor or %NULL
 </parameter_description>
 </parameter>
 </parameters>

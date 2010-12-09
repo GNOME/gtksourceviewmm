@@ -71,24 +71,6 @@ public:
    */
   void move_to_iter(const Gtk::TextView& view);
 
-  /** Set sizing information for the info window.
-   *
-   * If @a shrink_width or @a shrink_height is @c true, the info window will try
-   * to resize to fit the window contents, with a maximum size given by @a width
-   * and @a height. Setting @a width or @a height to -1 removes the maximum size
-   * of respectively the width and height of the window.
-   *
-   * @param width The maximum/requested width of the window (-1 to default).
-   * @param height The maximum/requested height of the window (-1 to default).
-   * @param shrink_width Whether to shrink the width of the window to fit its
-   * contents.
-   * @param shrink_height Whether to shrink the height of the window to fit its
-   * contents.
-   *
-   * @newin{2,10}
-   */
-  _WRAP_METHOD(void set_sizing(int width, int height, bool shrink_width, bool shrink_height), gtk_source_completion_info_set_sizing)
-
   /** Sets the content widget of the info window.
    *
    * If @a widget does not fit within the size requirements of the window,
@@ -116,12 +98,6 @@ public:
    * @newin{2,10}
    */
   _WRAP_METHOD(const Gtk::Widget* get_widget() const, gtk_source_completion_info_get_widget, constversion)
-
-  /** Do a resize if possible.
-   *
-   * @newin{2,10}
-   */
-  _WRAP_METHOD(void process_resize(), gtk_source_completion_info_process_resize)
 
   _WRAP_PROPERTY("max-height", int)
   _WRAP_PROPERTY("max-width", int)

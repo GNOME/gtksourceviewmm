@@ -99,11 +99,6 @@ public:
    */
   _WRAP_METHOD(const Gtk::Widget* get_widget() const, gtk_source_completion_info_get_widget, constversion)
 
-  _WRAP_PROPERTY("max-height", int)
-  _WRAP_PROPERTY("max-width", int)
-  _WRAP_PROPERTY("shrink-height", bool)
-  _WRAP_PROPERTY("shrink-width", bool)
-
   /** Emited before any "show" management.
    *
    * You can connect to this signal if you want to change some properties or

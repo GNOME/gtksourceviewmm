@@ -156,8 +156,8 @@
   (return-type "void")
   (parameters
     '("cairo_t*" "cr")
-    '("const-GdkRectangle*" "background_area")
-    '("const-GdkRectangle*" "cell_area")
+    '("GdkRectangle*" "background_area")
+    '("GdkRectangle*" "cell_area")
     '("GtkTextIter*" "start")
     '("GtkTextIter*" "end")
   )
@@ -168,8 +168,8 @@
   (return-type "void")
   (parameters
     '("cairo_t*" "cr")
-    '("const-GdkRectangle*" "background_area")
-    '("const-GdkRectangle*" "cell_area")
+    '("GdkRectangle*" "background_area")
+    '("GdkRectangle*" "cell_area")
     '("GtkTextIter*" "start")
     '("GtkTextIter*" "end")
     '("GtkSourceGutterRendererState" "state")

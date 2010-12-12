@@ -21,6 +21,7 @@
 /// \brief SourceGutterRenderer class
 
 #include <gtkmm/object.h>
+#include <gtkmm/tooltip.h>
 #include <gtksourceviewmm/sourceview.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
@@ -39,7 +40,7 @@ class SourceGutterRenderer : public Gtk::Object
   _CLASS_GTKOBJECT(SourceGutterRenderer, GtkSourceGutterRenderer, GTK_SOURCE_GUTTER_RENDERER, Gtk::Object, GInitiallyUnowned)
 public:
 #m4 _CONVERSION(`const Cairo::RefPtr<Cairo::Context>&', `cairo_t*', `(($3) ? ($3)->cobj() : 0)')
-#m4 _CONVERSION(`const Gdk::Rectangle&',`const GdkRectangle*',($3).gobj())
+//#m4 _CONVERSION(`const Gdk::Rectangle&',`GdkRectangle*',($3).gobj())
 #m4 _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',($3).gobj())
   _WRAP_METHOD(void begin(
                   const Cairo::RefPtr<Cairo::Context>& cr,
@@ -91,17 +92,43 @@ public:
 
 // TODO: use std::pair? krnowak
 
-#m4 _CONVERSION(`Gdk::Color&',`GdkColor*',`($3).gobj()')
-  _WRAP_METHOD(bool get_background(Gdk::Color& color) const, gtk_source_gutter_renderer_get_background)
+#m4 _CONVERSION(`Gdk::RGBA&',`GdkRGBA*',`($3).gobj()')
+  _WRAP_METHOD(bool get_background(Gdk::RGBA& color) const, gtk_source_gutter_renderer_get_background)
 
   bool is_background_set() const;
 
-#m4 _CONVERSION(`const Gdk::Color&',`const GdkColor*',`($3).gobj()')
-  _WRAP_METHOD(void set_background(const Gdk::Color& color), gtk_source_gutter_renderer_set_background)
+#m4 _CONVERSION(`const Gdk::RGBA&',`const GdkRGBA*',`($3).gobj()')
+  _WRAP_METHOD(void set_background(const Gdk::RGBA& color), gtk_source_gutter_renderer_set_background)
 
   _IGNORE(gtk_source_gutter_renderer_activate, gtk_source_gutter_renderer_query_activatable, gtk_source_gutter_renderer_query_tooltip, gtk_source_gutter_renderer_query_data)
 
   _WRAP_METHOD(void queue_draw(), gtk_source_gutter_renderer_queue_draw)
+
+#m4 _CONVERSION(`GdkRectangle*',`const Gdk::Rectangle&',`Glib::wrap($3)')
+#m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap($3)')
+#m4 _CONVERSION(`const Gtk::TextIter&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
+#m4 _CONVERSION(`GtkTooltip*', `const Glib::RefPtr<Gtk::Tooltip>&', `Glib::wrap($3, true)')
+#m4 _CONVERSION(`const Glib::RefPtr<Gtk::Tooltip>&',`GtkTooltip*',`const_cast<GtkTooltip*>(Glib::unwrap($3))')
+
+  _WRAP_SIGNAL(bool query_tooltip(const Gtk::TextIter& iter,
+                                  const Gdk::Rectangle& area,
+                                  int x,
+                                  int y,
+                                  const Glib::RefPtr<Gtk::Tooltip>& tooltip), "query-tooltip")
+
+  _WRAP_SIGNAL(void activate(const Gtk::TextIter& iter,
+                             const Gdk::Rectangle& area,
+                             GdkEvent* event), "activate")
+
+  _WRAP_SIGNAL(void queue_draw(), "queue-draw");
+
+  _WRAP_SIGNAL(void query_data(const Gtk::TextIter& start,
+                               const Gtk::TextIter& end,
+                               SourceGutterRendererState state), "query-data");
+
+  _WRAP_SIGNAL(bool query_activatable(const Gtk::TextIter& iter,
+                                      const Gdk::Rectangle& area,
+                                      GdkEvent* event), "query-activatable")
 
 protected:
   _CTOR_DEFAULT()
@@ -110,9 +137,7 @@ protected:
 dnl This extra conversion does the extra reference, often needed by code for vfuncs and signal.
 _CONVERSION(`cairo_t*',`const Cairo::RefPtr<Cairo::Context>&',`Cairo::RefPtr<Cairo::Context>(new Cairo::Context($3, false /* has_reference */))')
 #m4end
-
-#m4 _CONVERSION(`const GdkRectangle*',`const Gdk::Rectangle&',`Glib::wrap($3)')
-#m4 _CONVERSION(`GdkRectangle*',`const Gdk::Rectangle&',`Glib::wrap($3)')
+//#m4 _CONVERSION(`GdkRectangle*',`const Gdk::Rectangle&',`Glib::wrap($3)')
 #m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap($3)')
 
   _WRAP_VFUNC(void begin(

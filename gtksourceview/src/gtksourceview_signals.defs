@@ -952,42 +952,6 @@
   (construct-only #f)
 )
 
-(define-property max-width
-  (of-object "GtkSourceCompletionInfo")
-  (prop-type "GParamInt")
-  (docs "The maximum allowed width")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property max-height
-  (of-object "GtkSourceCompletionInfo")
-  (prop-type "GParamInt")
-  (docs "The maximum allowed height")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property shrink-width
-  (of-object "GtkSourceCompletionInfo")
-  (prop-type "GParamBoolean")
-  (docs "Whether the window should shrink width to fit the contents")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property shrink-height
-  (of-object "GtkSourceCompletionInfo")
-  (prop-type "GParamBoolean")
-  (docs "Whether the window should shrink height to fit the contents")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
 ;; From GtkSourceCompletionItem
 
 (define-property label
@@ -1187,8 +1151,8 @@
   (prop-type "GParamObject")
   (docs "The view")
   (readable #t)
-  (writable #t)
-  (construct-only #t)
+  (writable #f)
+  (construct-only #f)
 )
 
 (define-property alignment-mode
@@ -1205,8 +1169,8 @@
   (prop-type "GParamEnum")
   (docs "The window type")
   (readable #t)
-  (writable #t)
-  (construct-only #t)
+  (writable #f)
+  (construct-only #f)
 )
 
 (define-property size
@@ -1218,7 +1182,7 @@
   (construct-only #f)
 )
 
-(define-property background-gdk
+(define-property background-rgba
   (of-object "GtkSourceGutterRenderer")
   (prop-type "GParamBoxed")
   (docs "The background color")
@@ -1288,8 +1252,8 @@
   (prop-type "GParamObject")
   (docs "The view")
   (readable #t)
-  (writable #t)
-  (construct-only #t)
+  (writable #f)
+  (construct-only #f)
 )
 
 (define-property alignment-mode
@@ -1306,8 +1270,8 @@
   (prop-type "GParamEnum")
   (docs "The window type")
   (readable #t)
-  (writable #t)
-  (construct-only #t)
+  (writable #f)
+  (construct-only #f)
 )
 
 (define-property size
@@ -1319,7 +1283,7 @@
   (construct-only #f)
 )
 
-(define-property background-gdk
+(define-property background-rgba
   (of-object "GtkSourceGutterRendererPixbuf")
   (prop-type "GParamBoxed")
   (docs "The background color")
@@ -1368,15 +1332,6 @@
   (of-object "GtkSourceGutterRendererPixbuf")
   (prop-type "GParamObject")
   (docs "The gicon")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property stock-detail
-  (of-object "GtkSourceGutterRendererPixbuf")
-  (prop-type "GParamString")
-  (docs "The stock detail")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -1434,8 +1389,8 @@
   (prop-type "GParamObject")
   (docs "The view")
   (readable #t)
-  (writable #t)
-  (construct-only #t)
+  (writable #f)
+  (construct-only #f)
 )
 
 (define-property alignment-mode
@@ -1452,8 +1407,8 @@
   (prop-type "GParamEnum")
   (docs "The window type")
   (readable #t)
-  (writable #t)
-  (construct-only #t)
+  (writable #f)
+  (construct-only #f)
 )
 
 (define-property size
@@ -1465,7 +1420,7 @@
   (construct-only #f)
 )
 
-(define-property background-gdk
+(define-property background-rgba
   (of-object "GtkSourceGutterRendererText")
   (prop-type "GParamBoxed")
   (docs "The background color")
@@ -1639,15 +1594,6 @@
   (of-object "GtkSourceMarkCategory")
   (prop-type "GParamString")
   (docs "The stock id")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property stock-detail
-  (of-object "GtkSourceMarkCategory")
-  (prop-type "GParamString")
-  (docs "The stock detail")
   (readable #t)
   (writable #t)
   (construct-only #f)

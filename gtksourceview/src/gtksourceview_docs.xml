@@ -172,41 +172,6 @@ Since: 2.10
 <return></return>
 </function>
 
-<function name="gtk_source_completion_info_set_sizing">
-<description>
-Set sizing information for the info window. If @shrink_width or
-@shrink_height is %TRUE, the info window will try to resize to fit the
-window contents, with a maximum size given by @width and @height. Setting
-@width or @height to -1 removes the maximum size of respectively the width
-and height of the window.
-
-</description>
-<parameters>
-<parameter name="info">
-<parameter_description> a #GtkSourceCompletionInfo.
-</parameter_description>
-</parameter>
-<parameter name="width">
-<parameter_description> The maximum/requested width of the window (-1 to default).
-</parameter_description>
-</parameter>
-<parameter name="height">
-<parameter_description> The maximum/requested height of the window (-1 to default).
-</parameter_description>
-</parameter>
-<parameter name="shrink_width">
-<parameter_description> Whether to shrink the width of the window to fit its contents.
-</parameter_description>
-</parameter>
-<parameter name="shrink_height">
-<parameter_description> Whether to shrink the height of the window to fit its
-contents.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
 <function name="gtk_source_buffer_remove_source_marks">
 <description>
 Remove all marks of @category between @start and @end from the buffer.
@@ -339,7 +304,7 @@ Get the background color of the renderer.
 </parameter_description>
 </parameter>
 <parameter name="color">
-<parameter_description> return value for a #GdkColor
+<parameter_description> return value for a #GdkRGBA
 </parameter_description>
 </parameter>
 </parameters>
@@ -1024,7 +989,7 @@ renderer will not have a background color.
 </parameter_description>
 </parameter>
 <parameter name="color">
-<parameter_description> a #GdkColor or %NULL
+<parameter_description> a #GdkRGBA or %NULL
 </parameter_description>
 </parameter>
 </parameters>
@@ -3009,41 +2974,34 @@ subpattern contexts (e.g. \%{1@start} or \%{blah@start}).
 <return></return>
 </function>
 
-<function name="gtk_source_gutter_insertv">
+<function name="gtk_source_gutter_renderer_query_data">
 <description>
-Create and insert a new gutter renderer in the gutter. This function is
-mostly useful for bindings. Applications should normally use
-#gtk_source_gutter_renderer_insert
-
-Since: 3.0
+Emit the ::query-data signal. This function is called to query for data
+just before rendering a cell. This is called from the #GtkSourceGutter.
+Implementations can override the default signal handler or can connect
+a signal handler externally to the ::query-data signal.
 
 
 </description>
 <parameters>
-<parameter name="gutter">
-<parameter_description> a #GtkSourceGutter.
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRenderer.
 </parameter_description>
 </parameter>
-<parameter name="gtype">
-<parameter_description> the type of the gutter renderer (must inherit from #GtkSourceGutterRenderer).
+<parameter name="start">
+<parameter_description> a #GtkTextIter.
 </parameter_description>
 </parameter>
-<parameter name="position">
-<parameter_description> the renderer position.
+<parameter name="end">
+<parameter_description> a #GtkTextIter.
 </parameter_description>
 </parameter>
-<parameter name="num_parameters">
-<parameter_description> the number of parameters.
-</parameter_description>
-</parameter>
-<parameter name="parameters">
-<parameter_description> the parameters.
+<parameter name="state">
+<parameter_description> a #GtkSourceGutterRendererState.
 </parameter_description>
 </parameter>
 </parameters>
-<return> a #GtkSourceGutterRenderer
-
-</return>
+<return></return>
 </function>
 
 <function name="gtk_source_language_manager_get_language">
@@ -4483,7 +4441,9 @@ interactive completion again.
 
 <function name="gtk_source_gutter_insert">
 <description>
-Inserts @renderer into @gutter at @position.
+Insert @renderer into the gutter. If @renderer is yet unowned then gutter
+claims its ownership. Otherwise just increases renderer's reference count.
+@renderer cannot be already inserted to another gutter.
 
 Since: 3.0
 
@@ -4494,16 +4454,17 @@ Since: 3.0
 <parameter_description> a #GtkSourceGutter.
 </parameter_description>
 </parameter>
-<parameter name="gtype">
-<parameter_description> the type of the gutter renderer (must inherit from #GtkSourceGutterRenderer).
+<parameter name="renderer">
+<parameter_description> a gutter renderer (must inherit from #GtkSourceGutterRenderer).
 </parameter_description>
 </parameter>
 <parameter name="position">
-<parameter_description> the renderers position.
+<parameter_description> the renderer position.
 </parameter_description>
 </parameter>
 </parameters>
-<return> a #GtkSourceGutterRenderer
+<return> %TRUE if operation succeeded. Otherwise %FALSE.
+
 </return>
 </function>
 
@@ -5097,39 +5058,6 @@ Creates a new segment and inserts it into the tree.
 </return>
 </function>
 
-<function name="gtk_source_gutter_insert_valist">
-<description>
-Create and insert a new gutter renderer in the gutter. This function is
-mostly useful for bindings. Applications should normally use
-#gtk_source_gutter_renderer_insert
-
-Since: 3.0
-
-
-</description>
-<parameters>
-<parameter name="gutter">
-<parameter_description> a #GtkSourceGutter.
-</parameter_description>
-</parameter>
-<parameter name="gtype">
-<parameter_description> the type of the gutter renderer (must inherit from #GtkSourceGutterRenderer).
-</parameter_description>
-</parameter>
-<parameter name="position">
-<parameter_description> the renderer position.
-</parameter_description>
-</parameter>
-<parameter name="ap">
-<parameter_description> the parameters.
-</parameter_description>
-</parameter>
-</parameters>
-<return> a #GtkSourceGutterRenderer
-
-</return>
-</function>
-
 <function name="gtk_source_print_compositor_draw_page">
 <description>
 Draw page @page_nr for printing on the the Cairo context encapsuled in @context.
@@ -5191,36 +5119,6 @@ or modified.
 </parameters>
 <return> the ID of @language.
 </return>
-</function>
-
-<function name="gtk_source_gutter_renderer_query_data">
-<description>
-Emit the ::query-data signal. This function is called to query for data
-just before rendering a cell. This is called from the #GtkSourceGutter.
-Implementations can override the default signal handler or can connect
-a signal handler externally to the ::query-data signal.
-
-
-</description>
-<parameters>
-<parameter name="renderer">
-<parameter_description> a #GtkSourceGutterRenderer.
-</parameter_description>
-</parameter>
-<parameter name="start">
-<parameter_description> a #GtkTextIter.
-</parameter_description>
-</parameter>
-<parameter name="end">
-<parameter_description> a #GtkTextIter.
-</parameter_description>
-</parameter>
-<parameter name="state">
-<parameter_description> a #GtkSourceGutterRendererState.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
 </function>
 
 <function name="gtk_source_buffer_set_highlight_syntax">

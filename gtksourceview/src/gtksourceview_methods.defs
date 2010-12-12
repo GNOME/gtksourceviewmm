@@ -654,18 +654,6 @@
   )
 )
 
-(define-method set_sizing
-  (of-object "GtkSourceCompletionInfo")
-  (c-name "gtk_source_completion_info_set_sizing")
-  (return-type "none")
-  (parameters
-    '("gint" "width")
-    '("gint" "height")
-    '("gboolean" "shrink_width")
-    '("gboolean" "shrink_height")
-  )
-)
-
 (define-method set_widget
   (of-object "GtkSourceCompletionInfo")
   (c-name "gtk_source_completion_info_set_widget")
@@ -679,12 +667,6 @@
   (of-object "GtkSourceCompletionInfo")
   (c-name "gtk_source_completion_info_get_widget")
   (return-type "GtkWidget*")
-)
-
-(define-method process_resize
-  (of-object "GtkSourceCompletionInfo")
-  (c-name "gtk_source_completion_info_process_resize")
-  (return-type "none")
 )
 
 
@@ -905,34 +887,10 @@
 (define-method insert
   (of-object "GtkSourceGutter")
   (c-name "gtk_source_gutter_insert")
-  (return-type "GtkSourceGutterRenderer*")
+  (return-type "gboolean")
   (parameters
-    '("GType" "gtype")
+    '("GtkSourceGutterRenderer*" "renderer")
     '("gint" "position")
-  )
-  (varargs #t)
-)
-
-(define-method insert_valist
-  (of-object "GtkSourceGutter")
-  (c-name "gtk_source_gutter_insert_valist")
-  (return-type "GtkSourceGutterRenderer*")
-  (parameters
-    '("GType" "gtype")
-    '("gint" "position")
-    '("va_list" "ap")
-  )
-)
-
-(define-method insertv
-  (of-object "GtkSourceGutter")
-  (c-name "gtk_source_gutter_insertv")
-  (return-type "GtkSourceGutterRenderer*")
-  (parameters
-    '("GType" "gtype")
-    '("gint" "position")
-    '("guint" "num_parameters")
-    '("GParameter*" "parameters")
   )
 )
 
@@ -996,8 +954,8 @@
   (return-type "none")
   (parameters
     '("cairo_t*" "cr")
-    '("const-GdkRectangle*" "background_area")
-    '("const-GdkRectangle*" "cell_area")
+    '("GdkRectangle*" "background_area")
+    '("GdkRectangle*" "cell_area")
     '("GtkTextIter*" "start")
     '("GtkTextIter*" "end")
   )
@@ -1009,8 +967,8 @@
   (return-type "none")
   (parameters
     '("cairo_t*" "cr")
-    '("const-GdkRectangle*" "background_area")
-    '("const-GdkRectangle*" "cell_area")
+    '("GdkRectangle*" "background_area")
+    '("GdkRectangle*" "cell_area")
     '("GtkTextIter*" "start")
     '("GtkTextIter*" "end")
     '("GtkSourceGutterRendererState" "state")
@@ -1125,7 +1083,7 @@
   (c-name "gtk_source_gutter_renderer_get_background")
   (return-type "gboolean")
   (parameters
-    '("GdkColor*" "color")
+    '("GdkRGBA*" "color")
   )
 )
 
@@ -1134,7 +1092,7 @@
   (c-name "gtk_source_gutter_renderer_set_background")
   (return-type "none")
   (parameters
-    '("const-GdkColor*" "color")
+    '("const-GdkRGBA*" "color")
   )
 )
 
@@ -1144,7 +1102,7 @@
   (return-type "none")
   (parameters
     '("GtkTextIter*" "iter")
-    '("const-GdkRectangle*" "area")
+    '("GdkRectangle*" "area")
     '("GdkEvent*" "event")
   )
 )
@@ -1155,7 +1113,7 @@
   (return-type "gboolean")
   (parameters
     '("GtkTextIter*" "iter")
-    '("const-GdkRectangle*" "area")
+    '("GdkRectangle*" "area")
     '("GdkEvent*" "event")
   )
 )
@@ -1172,7 +1130,7 @@
   (return-type "gboolean")
   (parameters
     '("GtkTextIter*" "iter")
-    '("const-GdkRectangle*" "area")
+    '("GdkRectangle*" "area")
     '("gint" "x")
     '("gint" "y")
     '("GtkTooltip*" "tooltip")
@@ -1232,36 +1190,6 @@
 (define-method get_stock_id
   (of-object "GtkSourceGutterRendererPixbuf")
   (c-name "gtk_source_gutter_renderer_pixbuf_get_stock_id")
-  (return-type "const-gchar*")
-)
-
-(define-method set_icon_size
-  (of-object "GtkSourceGutterRendererPixbuf")
-  (c-name "gtk_source_gutter_renderer_pixbuf_set_icon_size")
-  (return-type "none")
-  (parameters
-    '("GtkIconSize" "size")
-  )
-)
-
-(define-method get_icon_size
-  (of-object "GtkSourceGutterRendererPixbuf")
-  (c-name "gtk_source_gutter_renderer_pixbuf_get_icon_size")
-  (return-type "GtkIconSize")
-)
-
-(define-method set_stock_detail
-  (of-object "GtkSourceGutterRendererPixbuf")
-  (c-name "gtk_source_gutter_renderer_pixbuf_set_stock_detail")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "stock_detail")
-  )
-)
-
-(define-method get_stock_detail
-  (of-object "GtkSourceGutterRendererPixbuf")
-  (c-name "gtk_source_gutter_renderer_pixbuf_get_stock_detail")
   (return-type "const-gchar*")
 )
 
@@ -1510,7 +1438,7 @@
   (c-name "gtk_source_mark_category_set_background")
   (return-type "none")
   (parameters
-    '("const-GdkColor*" "background")
+    '("const-GdkRGBA*" "background")
   )
 )
 
@@ -1519,7 +1447,7 @@
   (c-name "gtk_source_mark_category_get_background")
   (return-type "gboolean")
   (parameters
-    '("GdkColor*" "background")
+    '("GdkRGBA*" "background")
   )
 )
 
@@ -1550,21 +1478,6 @@
 (define-method get_stock_id
   (of-object "GtkSourceMarkCategory")
   (c-name "gtk_source_mark_category_get_stock_id")
-  (return-type "const-gchar*")
-)
-
-(define-method set_stock_detail
-  (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_set_stock_detail")
-  (return-type "none")
-  (parameters
-    '("const-gchar*" "stock_detail")
-  )
-)
-
-(define-method get_stock_detail
-  (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_get_stock_detail")
   (return-type "const-gchar*")
 )
 

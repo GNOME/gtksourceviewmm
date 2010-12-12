@@ -55,6 +55,10 @@ _CONVERSION(`const Glib::RefPtr<SourceCompletionProvider>&',`GtkSourceCompletion
 _CONVERSION(`GtkSourceGutter*',`Glib::RefPtr<SourceGutter>',`Glib::wrap($3)')
 
 
+# Gsv::SourceGutterRenderer -> GtkSourceGutterRenderer
+_CONVERSION(`SourceGutterRenderer*',`GtkSourceGutterRenderer*',`($3)->gobj()')
+
+
 # GtkSourceLanguage -> Gsv::SourceLanguage
 _CONVERSION(`GtkSourceLanguage*',`Glib::RefPtr<SourceLanguage>',`Glib::wrap($3)')
 

@@ -120,11 +120,11 @@ public:
                              const Gdk::Rectangle& area,
                              GdkEvent* event), "activate")
 
-  _WRAP_SIGNAL(void queue_draw(), "queue-draw");
+  _WRAP_SIGNAL(void queue_draw(), "queue-draw")
 
   _WRAP_SIGNAL(void query_data(const Gtk::TextIter& start,
                                const Gtk::TextIter& end,
-                               SourceGutterRendererState state), "query-data");
+                               SourceGutterRendererState state), "query-data")
 
   _WRAP_SIGNAL(bool query_activatable(const Gtk::TextIter& iter,
                                       const Gdk::Rectangle& area,

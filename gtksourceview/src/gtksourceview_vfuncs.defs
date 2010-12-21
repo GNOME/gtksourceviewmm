@@ -180,3 +180,20 @@
   (of-object "GtkSourceGutterRenderer")
   (return-type "void")
 )
+
+(define-vfunc change_view
+  (of-object "GtkSourceGutterRenderer")
+  (return-type "void")
+  (parameters
+    '("GtkTextView*" "old_view")
+  )
+)
+
+(define-vfunc change_buffer
+  (of-object "GtkSourceGutterRenderer")
+  (return-type "void")
+  (parameters
+    '("GtkTextBuffer*" "old_buffer")
+  )
+)
+

@@ -40,7 +40,6 @@ class SourceGutterRenderer : public Gtk::Object
   _CLASS_GTKOBJECT(SourceGutterRenderer, GtkSourceGutterRenderer, GTK_SOURCE_GUTTER_RENDERER, Gtk::Object, GInitiallyUnowned)
 public:
 #m4 _CONVERSION(`const Cairo::RefPtr<Cairo::Context>&', `cairo_t*', `(($3) ? ($3)->cobj() : 0)')
-//#m4 _CONVERSION(`const Gdk::Rectangle&',`GdkRectangle*',($3).gobj())
 #m4 _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',($3).gobj())
   _WRAP_METHOD(void begin(
                   const Cairo::RefPtr<Cairo::Context>& cr,
@@ -104,6 +103,18 @@ public:
 
   _WRAP_METHOD(void queue_draw(), gtk_source_gutter_renderer_queue_draw)
 
+  _WRAP_PROPERTY("visible", bool);
+  _WRAP_PROPERTY("xpad", int);
+  _WRAP_PROPERTY("ypad", int);
+  _WRAP_PROPERTY("xalign", float);
+  _WRAP_PROPERTY("yalign", float);
+  _WRAP_PROPERTY("view", Gtk::TextView*);
+  _WRAP_PROPERTY("alignment-mode", SourceGutterRendererAlignmentMode);
+  _WRAP_PROPERTY("window-type", Gtk::TextWindowType);
+  _WRAP_PROPERTY("size", int);
+  _WRAP_PROPERTY("background-rgba", Gdk::RGBA);
+  _WRAP_PROPERTY("background-set", bool);
+
 #m4 _CONVERSION(`GdkRectangle*',`const Gdk::Rectangle&',`Glib::wrap($3)')
 #m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap($3)')
 #m4 _CONVERSION(`const Gtk::TextIter&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
@@ -133,31 +144,31 @@ public:
 protected:
   _CTOR_DEFAULT()
 
-#m4begin
-dnl This extra conversion does the extra reference, often needed by code for vfuncs and signal.
-_CONVERSION(`cairo_t*',`const Cairo::RefPtr<Cairo::Context>&',`Cairo::RefPtr<Cairo::Context>(new Cairo::Context($3, false /* has_reference */))')
-#m4end
-//#m4 _CONVERSION(`GdkRectangle*',`const Gdk::Rectangle&',`Glib::wrap($3)')
+#m4 _CONVERSION(`cairo_t*',`const Cairo::RefPtr<Cairo::Context>&',`Cairo::RefPtr<Cairo::Context>(new Cairo::Context($3, false))')
 #m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap($3)')
 
-  _WRAP_VFUNC(void begin(
-                  const Cairo::RefPtr<Cairo::Context>& cr,
-                  const Gdk::Rectangle& background_area,
-                  const Gdk::Rectangle& cell_area,
-                  Gtk::TextIter& start,
-                  Gtk::TextIter& end), begin)
+  _WRAP_VFUNC(void begin(const Cairo::RefPtr<Cairo::Context>& cr,
+                         const Gdk::Rectangle& background_area,
+                         const Gdk::Rectangle& cell_area,
+                         Gtk::TextIter& start,
+                         Gtk::TextIter& end), begin)
 
-  _WRAP_VFUNC(void draw(
-                  const Cairo::RefPtr<Cairo::Context>& cr,
-                  const Gdk::Rectangle& background_area,
-                  const Gdk::Rectangle& cell_area,
-                  Gtk::TextIter& start,
-                  Gtk::TextIter& end,
-                  SourceGutterRendererState), draw)
+  _WRAP_VFUNC(void draw(const Cairo::RefPtr<Cairo::Context>& cr,
+                        const Gdk::Rectangle& background_area,
+                        const Gdk::Rectangle& cell_area,
+                        Gtk::TextIter& start,
+                        Gtk::TextIter& end,
+                        SourceGutterRendererState), draw)
 
   _WRAP_VFUNC(void end(), end)
 
-public:
+#m4 _CONVERSION(`Gtk::TextView*',`GtkTextView*',`Glib::unwrap($3)')
+  _WRAP_VFUNC(void change_view(Gtk::TextView* old_view), change_view)
+
+#m4 _CONVERSION(`GtkTextBuffer*',`const Glib::RefPtr<Gtk::TextBuffer>&',`Glib::wrap($3, true)')
+#m4 _CONVERSION(`const Glib::RefPtr<Gtk::TextBuffer>&',`GtkTextBuffer*',`Glib::unwrap($3)')
+  _WRAP_VFUNC(void change_buffer(const Glib::RefPtr<Gtk::TextBuffer>& old_buffer), change_buffer)
+
 };
 
 } // namespace Gsv

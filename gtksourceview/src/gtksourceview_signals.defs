@@ -484,15 +484,6 @@
   (construct-only #f)
 )
 
-(define-property extension-events
-  (of-object "GtkSourceCompletionInfo")
-  (prop-type "GParamEnum")
-  (docs "The mask that decides what kind of extension events this widget gets")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
 (define-property no-show-all
   (of-object "GtkSourceCompletionInfo")
   (prop-type "GParamBoolean")
@@ -2170,15 +2161,6 @@
   (of-object "GtkSourceView")
   (prop-type "GParamFlags")
   (docs "The event mask that decides what kind of GdkEvents this widget gets")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
-(define-property extension-events
-  (of-object "GtkSourceView")
-  (prop-type "GParamEnum")
-  (docs "The mask that decides what kind of extension events this widget gets")
   (readable #t)
   (writable #t)
   (construct-only #f)

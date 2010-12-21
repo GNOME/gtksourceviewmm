@@ -133,6 +133,8 @@ public:
 
   _WRAP_PROPERTY("view", SourceView*)
   _WRAP_PROPERTY("window-type", Gtk::TextWindowType)
+  _WRAP_PROPERTY("xpad", int)
+  _WRAP_PROPERTY("ypad", int)
 };
 
 } // namespace Gsv

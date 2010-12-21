@@ -1,0 +1,129 @@
+/* sourcemarkcategory.h
+ *
+ * Copyright (C) 2010 Krzesimir Nowak
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+/// \file
+/// \brief SourceMarkCategory class
+
+#include <glibmm/object.h>
+#include <glibmm/refptr.h>
+//#include <gtksourceviewmm/sourceview.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace Gio
+{
+
+class Icon;
+
+} // namespace Gio
+
+namespace Gdk
+{
+
+class Pixbuf;
+class RGBA;
+
+} // namespace Gdk
+
+namespace Gtk
+{
+
+class Widget;
+
+} // namespace Gtk
+
+namespace Gsv
+{
+
+class SourceMark;
+
+// TODO: write docs.
+class SourceMarkCategory : public Glib::Object
+{
+  _CLASS_GOBJECT(SourceMarkCategory, GtkSourceMarkCategory, GTK_SOURCE_MARK_CATEGORY, Glib::Object, GObject)
+protected:
+  _WRAP_CTOR(SourceMarkCategory(const std::string& id), gtk_source_mark_category_new)
+public:
+  _WRAP_CREATE(const std::string& id)
+
+  _WRAP_METHOD(std::string get_id() const, gtk_source_mark_category_get_id)
+
+  _WRAP_METHOD(bool get_background(Gdk::RGBA& rgba) const, gtk_source_mark_category_get_background)
+
+  bool is_background_set() const;
+
+  _WRAP_METHOD(void set_background(const Gdk::RGBA& rgba), gtk_source_mark_category_set_background)
+
+  _WRAP_METHOD(int get_priority() const, gtk_source_mark_category_get_priority)
+
+  _WRAP_METHOD(void set_priority(int priority), gtk_source_mark_category_set_priority)
+
+  _WRAP_METHOD(std::string get_stock_id() const, gtk_source_mark_category_get_stock_id)
+
+  _WRAP_METHOD(void set_stock_id(const std::string& stock_id), gtk_source_mark_category_set_stock_id)
+
+  _WRAP_METHOD(void set_icon_name(const std::string& icon_name), gtk_source_mark_category_set_icon_name)
+
+  _WRAP_METHOD(std::string get_stock_icon_name() const, gtk_source_mark_category_get_stock_icon_name)
+
+#m4 _CONVERSION(`GIcon*', `Glib::RefPtr<Gio::Icon>', `Glib::wrap($3)')
+  _WRAP_METHOD(Glib::RefPtr<Gio::Icon> get_icon(), gtk_source_mark_category_get_gicon, refreturn)
+
+  _WRAP_METHOD(Glib::RefPtr<const Gio::Icon> get_icon() const, gtk_source_mark_category_get_gicon, constversion)
+
+#m4 _CONVERSION(`const Glib::RefPtr<Gio::Icon>&', `GIcon*', `Glib::unwrap($3)')
+  _WRAP_METHOD(void set_icon(const Glib::RefPtr<Gio::Icon>& icon), gtk_source_mark_category_set_gicon)
+
+#m4 _CONVERSION(`const GdkPixbuf*', `Glib::RefPtr<const Gdk::Pixbuf>', `Glib::wrap(const_cast<GdkPixbuf*>($3))')
+  _WRAP_METHOD(Glib::RefPtr<const Gdk::Pixbuf> get_pixbuf() const, gtk_source_mark_category_get_pixbuf, refreturn)
+
+#m4 _CONVERSION(`const Glib::RefPtr<const Gdk::Pixbuf>&', `const GdkPixbuf*', `Glib::unwrap($3)')
+  _WRAP_METHOD(void set_pixbuf(const Glib::RefPtr<const Gdk::Pixbuf>& pixbuf), gtk_source_mark_category_set_pixbuf)
+
+  _WRAP_METHOD(Glib::RefPtr<const Gdk::Pixbuf> render_icon(Gtk::Widget* widget, int size) const, gtk_source_mark_category_render_icon)
+
+  _WRAP_METHOD(Glib::ustring get_tooltip_text(const Glib::RefPtr<SourceMark>& mark) const, gtk_source_mark_category_get_tooltip_text)
+
+  _WRAP_METHOD(Glib::ustring get_tooltip_markup(const Glib::RefPtr<SourceMark>& mark) const, gtk_source_mark_category_get_tooltip_markup)
+
+  _WRAP_PROPERTY("id", std::string)
+
+  _WRAP_PROPERTY("background", Gdk::RGBA)
+
+  _WRAP_PROPERTY("priority", int)
+
+  _WRAP_PROPERTY("stock-id", std::string)
+
+  _WRAP_PROPERTY("pixbuf", Glib::RefPtr<Gdk::Pixbuf>)
+
+  _WRAP_PROPERTY("icon-name", std::string)
+
+  _WRAP_PROPERTY("gicon", Glib::RefPtr<Gio::Icon>)
+
+#m4 _CONVERSION(`GtkSourceMark*',`const Glib::RefPtr<SourceMark>&',`Glib::wrap($3, true)')
+#m4 _CONVERSION(`Glib::ustring',`const gchar*',`($3).c_str()')
+  _WRAP_SIGNAL(Glib::ustring query_tooltip_text(const Glib::RefPtr<SourceMark>& mark), "query-tooltip-text", no_default_handler)
+
+  _WRAP_SIGNAL(Glib::ustring query_tooltip_markup(const Glib::RefPtr<SourceMark>& mark), "query-tooltip-markup", no_default_handler)
+};
+
+} // namespace Gsv
+
+

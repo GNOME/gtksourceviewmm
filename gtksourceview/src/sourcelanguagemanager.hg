@@ -57,13 +57,13 @@ public:
    * If you do not need more than one language manager or a private language
    * manager instance then use get_default() instead.
    *
-   * Returns: A SourceLanguageManager.
+   * @return A SourceLanguageManager.
    */
   _WRAP_CREATE()
 
   /** Returns the default SourceLanguageManager instance.
    *
-   * Returns: A SourceLanguageManager.
+   * @return A SourceLanguageManager.
    */
   _WRAP_METHOD(static Glib::RefPtr<SourceLanguageManager> get_default(), gtk_source_language_manager_get_default, refreturn)
 

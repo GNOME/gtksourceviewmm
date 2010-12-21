@@ -103,17 +103,17 @@ public:
 
   _WRAP_METHOD(void queue_draw(), gtk_source_gutter_renderer_queue_draw)
 
-  _WRAP_PROPERTY("visible", bool);
-  _WRAP_PROPERTY("xpad", int);
-  _WRAP_PROPERTY("ypad", int);
-  _WRAP_PROPERTY("xalign", float);
-  _WRAP_PROPERTY("yalign", float);
-  _WRAP_PROPERTY("view", Gtk::TextView*);
-  _WRAP_PROPERTY("alignment-mode", SourceGutterRendererAlignmentMode);
-  _WRAP_PROPERTY("window-type", Gtk::TextWindowType);
-  _WRAP_PROPERTY("size", int);
-  _WRAP_PROPERTY("background-rgba", Gdk::RGBA);
-  _WRAP_PROPERTY("background-set", bool);
+  _WRAP_PROPERTY("visible", bool)
+  _WRAP_PROPERTY("xpad", int)
+  _WRAP_PROPERTY("ypad", int)
+  _WRAP_PROPERTY("xalign", float)
+  _WRAP_PROPERTY("yalign", float)
+  _WRAP_PROPERTY("view", Gtk::TextView*)
+  _WRAP_PROPERTY("alignment-mode", SourceGutterRendererAlignmentMode)
+  _WRAP_PROPERTY("window-type", Gtk::TextWindowType)
+  _WRAP_PROPERTY("size", int)
+  _WRAP_PROPERTY("background-rgba", Gdk::RGBA)
+  _WRAP_PROPERTY("background-set", bool)
 
 #m4 _CONVERSION(`GdkRectangle*',`const Gdk::Rectangle&',`Glib::wrap($3)')
 #m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap($3)')

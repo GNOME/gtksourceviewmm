@@ -89,33 +89,7 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(Glib::RefPtr<const Gdk::Window> get_window() const, gtk_source_gutter_get_window, constversion, refreturn)
-
-  /** Inserts @a renderer into a gutter at @a position.
-   *
-   * @param renderer A Gtk::CellRenderer.
-   * @param position The renderers position.
-   *
-   * @newin{2,10}
-   */
-//  _WRAP_METHOD(void insert(Gtk::CellRenderer* renderer, int position), gtk_source_gutter_insert)
-
-  /** Reorders @a renderer in a gutter to new @a position.
-   *
-   * @param renderer A Gtk::CellRenderer.
-   * @param position The new renderer position.
-   *
-   * @newin{2,10}
-   */
-//  _WRAP_METHOD(void reorder(Gtk::CellRenderer* renderer, int position), gtk_source_gutter_reorder)
-
-  /** Removes @a renderer from a gutter.
-   *
-   * @param renderer A Gtk::CellRenderer.
-   *
-   * @newin{2,10}
-   */
-//  _WRAP_METHOD(void remove(Gtk::CellRenderer* renderer), gtk_source_gutter_remove)
+  _WRAP_METHOD(Glib::RefPtr<const Gdk::Window> get_window() const, gtk_source_gutter_get_window, constversion)
 
   _WRAP_METHOD(void insert(SourceGutterRenderer* renderer, int position), gtk_source_gutter_insert)
 

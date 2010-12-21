@@ -78,6 +78,11 @@ _CONVERSION(`GtkSourceMark*',`Glib::RefPtr<SourceMark>',`Glib::wrap($3)')
 # Gsv::SourceMark -> GtkSourceMark
 _CONVERSION(`const Glib::RefPtr<SourceMark>&',`GtkSourceMark*',`Glib::unwrap($3)')
 
+
+# GtkSourceMarkCategory -> Gsv::SourceMarkCategory
+_CONVERSION(`'GtkSourceMarkCategory*,`Glib::RefPtr<SourceMarkCategory>',`Glib::wrap($3)')
+
+
 # GtkSourceStyle -> Gsv::SourceStyle
 _CONVERSION(`GtkSourceStyle*',`Glib::RefPtr<SourceStyle>',`Glib::wrap($3)')
 

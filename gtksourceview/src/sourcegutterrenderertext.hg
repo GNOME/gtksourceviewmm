@@ -36,6 +36,7 @@ class SourceGutterRendererText : public SourceGutterRenderer
 public:
   _CTOR_DEFAULT()
 
+  // TODO: probably just set_text and set_markup will be better instead of funny overloads.
   _IGNORE(gtk_source_gutter_renderer_text_set_markup)
   void set_text(const SourceMarkup& markup);
 

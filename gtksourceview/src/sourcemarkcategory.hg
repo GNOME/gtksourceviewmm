@@ -97,7 +97,7 @@ public:
 #m4 _CONVERSION(`const Glib::RefPtr<const Gdk::Pixbuf>&', `const GdkPixbuf*', `Glib::unwrap($3)')
   _WRAP_METHOD(void set_pixbuf(const Glib::RefPtr<const Gdk::Pixbuf>& pixbuf), gtk_source_mark_category_set_pixbuf)
 
-  _WRAP_METHOD(Glib::RefPtr<const Gdk::Pixbuf> render_icon(Gtk::Widget* widget, int size) const, gtk_source_mark_category_render_icon)
+  _WRAP_METHOD(Glib::RefPtr<const Gdk::Pixbuf> render_icon(Gtk::Widget* widget, int size) const, gtk_source_mark_category_render_icon, refreturn)
 
   _WRAP_METHOD(Glib::ustring get_tooltip_text(const Glib::RefPtr<SourceMark>& mark) const, gtk_source_mark_category_get_tooltip_text)
 

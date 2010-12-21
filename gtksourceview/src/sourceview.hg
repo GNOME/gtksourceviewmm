@@ -31,8 +31,9 @@ _PINCLUDE(gtkmm/private/textview_p.h)
 namespace Gsv
 {
 
-class SourceGutter;
 class SourceCompletion;
+class SourceGutter;
+class SourceMarkCategory;
 
 /** Defines a behaviour of smart Home/End keys.
  */
@@ -333,6 +334,10 @@ public:
    * @newin{2,10}
    */
   _WRAP_METHOD(Glib::RefPtr<const SourceCompletion> get_completion() const, gtk_source_view_get_completion, refreturn, constversion)
+
+  _WRAP_METHOD(Glib::RefPtr<SourceMarkCategory> get_mark_category(const Glib::ustring& category), gtk_source_view_get_mark_category, refreturn)
+
+  _WRAP_METHOD(Glib::RefPtr<const SourceMarkCategory> get_mark_category(const Glib::ustring& category) const, gtk_source_view_get_mark_category, constversion)
 
   /** Emitted when redo action is requested.
    */

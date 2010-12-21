@@ -1,3 +1,14 @@
+2.91.2:
+* Fixed reference counting in completion classes and added a completion test.
+  (Krzesimir Nowak)
+* Renamed gtksourceview namespace to Gsv.
+* Written documetation about migration from 2.0 to 3.0 - it describes most of
+  API breaks (like the one mentioned above). (Krzesimir Nowak)
+* Wrapped GtkSourceGutterRenderer, GtkSourceGutterRendererPixbuf,
+  GtkSourceGutterRendererText and GtkSourceMarkCategory. (Krzesimir Nowak)
+* Use the gtk conversions from gtkmm now that they are not in glibmm.
+  That bumps mm-common requirement to yet unreleased version. (Murray Cumming)
+
 2.91.1:
 * Lots API/ABI breaks - a document about migrating from gtksourceviewmm-2.0
   to gtksourceviewmm-3.0 is to be written, because some of ABI breaks are nasty.

@@ -1490,9 +1490,9 @@
   )
 )
 
-(define-method get_stock_icon_name
+(define-method get_icon_name
   (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_get_stock_icon_name")
+  (c-name "gtk_source_mark_category_get_icon_name")
   (return-type "const-gchar*")
 )
 

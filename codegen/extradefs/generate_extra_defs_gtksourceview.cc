@@ -34,7 +34,7 @@
 #include <gtksourceview/gtksourcelanguage.h>
 #include <gtksourceview/gtksourcelanguagemanager.h>
 #include <gtksourceview/gtksourcemark.h>
-#include <gtksourceview/gtksourcemarkcategory.h>
+#include <gtksourceview/gtksourcemarkattributes.h>
 #include <gtksourceview/gtksourceprintcompositor.h>
 #include <gtksourceview/gtksourcestyle.h>
 #include <gtksourceview/gtksourcestylescheme.h>
@@ -63,7 +63,7 @@ int main (int argc, char *argv[])
             << get_defs (GTK_TYPE_SOURCE_LANGUAGE)
             << get_defs (GTK_TYPE_SOURCE_LANGUAGE_MANAGER)
             << get_defs (GTK_TYPE_SOURCE_MARK)
-            << get_defs (GTK_TYPE_SOURCE_MARK_CATEGORY)
+            << get_defs (GTK_TYPE_SOURCE_MARK_ATTRIBUTES)
             << get_defs (GTK_TYPE_SOURCE_PRINT_COMPOSITOR)
             << get_defs (GTK_TYPE_SOURCE_STYLE)
             << get_defs (GTK_TYPE_SOURCE_STYLE_SCHEME)

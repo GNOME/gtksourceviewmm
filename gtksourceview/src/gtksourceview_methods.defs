@@ -103,11 +103,11 @@
   (gtype-id "GTK_TYPE_SOURCE_MARK")
 )
 
-(define-object SourceMarkCategory
+(define-object SourceMarkAttributes
   (in-module "Gtk")
   (parent "GObject")
-  (c-name "GtkSourceMarkCategory")
-  (gtype-id "GTK_TYPE_SOURCE_MARK_CATEGORY")
+  (c-name "GtkSourceMarkAttributes")
+  (gtype-id "GTK_TYPE_SOURCE_MARK_ATTRIBUTES")
 )
 
 (define-object SourcePrintCompositor
@@ -1411,31 +1411,22 @@
 
 
 
-;; From gtksourcemarkcategory.h
+;; From gtksourcemarkattributes.h
 
-(define-function gtk_source_mark_category_get_type
-  (c-name "gtk_source_mark_category_get_type")
+(define-function gtk_source_mark_attributes_get_type
+  (c-name "gtk_source_mark_attributes_get_type")
   (return-type "GType")
 )
 
-(define-function gtk_source_mark_category_new
-  (c-name "gtk_source_mark_category_new")
-  (is-constructor-of "GtkSourceMarkCategory")
-  (return-type "GtkSourceMarkCategory*")
-  (parameters
-    '("const-gchar*" "id")
-  )
-)
-
-(define-method get_id
-  (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_get_id")
-  (return-type "const-gchar*")
+(define-function gtk_source_mark_attributes_new
+  (c-name "gtk_source_mark_attributes_new")
+  (is-constructor-of "GtkSourceMarkAttributes")
+  (return-type "GtkSourceMarkAttributes*")
 )
 
 (define-method set_background
-  (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_set_background")
+  (of-object "GtkSourceMarkAttributes")
+  (c-name "gtk_source_mark_attributes_set_background")
   (return-type "none")
   (parameters
     '("const-GdkRGBA*" "background")
@@ -1443,32 +1434,17 @@
 )
 
 (define-method get_background
-  (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_get_background")
+  (of-object "GtkSourceMarkAttributes")
+  (c-name "gtk_source_mark_attributes_get_background")
   (return-type "gboolean")
   (parameters
     '("GdkRGBA*" "background")
   )
 )
 
-(define-method set_priority
-  (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_set_priority")
-  (return-type "none")
-  (parameters
-    '("gint" "priority")
-  )
-)
-
-(define-method get_priority
-  (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_get_priority")
-  (return-type "gint")
-)
-
 (define-method set_stock_id
-  (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_set_stock_id")
+  (of-object "GtkSourceMarkAttributes")
+  (c-name "gtk_source_mark_attributes_set_stock_id")
   (return-type "none")
   (parameters
     '("const-gchar*" "stock_id")
@@ -1476,14 +1452,14 @@
 )
 
 (define-method get_stock_id
-  (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_get_stock_id")
+  (of-object "GtkSourceMarkAttributes")
+  (c-name "gtk_source_mark_attributes_get_stock_id")
   (return-type "const-gchar*")
 )
 
 (define-method set_icon_name
-  (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_set_icon_name")
+  (of-object "GtkSourceMarkAttributes")
+  (c-name "gtk_source_mark_attributes_set_icon_name")
   (return-type "none")
   (parameters
     '("const-gchar*" "icon_name")
@@ -1491,14 +1467,14 @@
 )
 
 (define-method get_icon_name
-  (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_get_icon_name")
+  (of-object "GtkSourceMarkAttributes")
+  (c-name "gtk_source_mark_attributes_get_icon_name")
   (return-type "const-gchar*")
 )
 
 (define-method set_gicon
-  (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_set_gicon")
+  (of-object "GtkSourceMarkAttributes")
+  (c-name "gtk_source_mark_attributes_set_gicon")
   (return-type "none")
   (parameters
     '("GIcon*" "gicon")
@@ -1506,14 +1482,14 @@
 )
 
 (define-method get_gicon
-  (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_get_gicon")
+  (of-object "GtkSourceMarkAttributes")
+  (c-name "gtk_source_mark_attributes_get_gicon")
   (return-type "GIcon*")
 )
 
 (define-method set_pixbuf
-  (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_set_pixbuf")
+  (of-object "GtkSourceMarkAttributes")
+  (c-name "gtk_source_mark_attributes_set_pixbuf")
   (return-type "none")
   (parameters
     '("const-GdkPixbuf*" "pixbuf")
@@ -1521,14 +1497,14 @@
 )
 
 (define-method get_pixbuf
-  (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_get_pixbuf")
+  (of-object "GtkSourceMarkAttributes")
+  (c-name "gtk_source_mark_attributes_get_pixbuf")
   (return-type "const-GdkPixbuf*")
 )
 
 (define-method render_icon
-  (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_render_icon")
+  (of-object "GtkSourceMarkAttributes")
+  (c-name "gtk_source_mark_attributes_render_icon")
   (return-type "const-GdkPixbuf*")
   (parameters
     '("GtkWidget*" "widget")
@@ -1537,8 +1513,8 @@
 )
 
 (define-method get_tooltip_text
-  (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_get_tooltip_text")
+  (of-object "GtkSourceMarkAttributes")
+  (c-name "gtk_source_mark_attributes_get_tooltip_text")
   (return-type "gchar*")
   (parameters
     '("GtkSourceMark*" "mark")
@@ -1546,8 +1522,8 @@
 )
 
 (define-method get_tooltip_markup
-  (of-object "GtkSourceMarkCategory")
-  (c-name "gtk_source_mark_category_get_tooltip_markup")
+  (of-object "GtkSourceMarkAttributes")
+  (c-name "gtk_source_mark_attributes_get_tooltip_markup")
   (return-type "gchar*")
   (parameters
     '("GtkSourceMark*" "mark")
@@ -2222,7 +2198,7 @@
   (c-name "gtk_source_view_set_highlight_current_line")
   (return-type "none")
   (parameters
-    '("gboolean" "show")
+    '("gboolean" "hl")
   )
 )
 
@@ -2277,12 +2253,24 @@
   (return-type "gboolean")
 )
 
-(define-method get_mark_category
+(define-method set_mark_attributes
   (of-object "GtkSourceView")
-  (c-name "gtk_source_view_get_mark_category")
-  (return-type "GtkSourceMarkCategory*")
+  (c-name "gtk_source_view_set_mark_attributes")
+  (return-type "none")
   (parameters
     '("const-gchar*" "category")
+    '("GtkSourceMarkAttributes*" "attributes")
+    '("gint" "priority")
+  )
+)
+
+(define-method get_mark_attributes
+  (of-object "GtkSourceView")
+  (c-name "gtk_source_view_get_mark_attributes")
+  (return-type "GtkSourceMarkAttributes*")
+  (parameters
+    '("const-gchar*" "category")
+    '("gint*" "priority")
   )
 )
 

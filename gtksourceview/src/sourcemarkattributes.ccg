@@ -1,4 +1,4 @@
-/* sourcemarkcategory.cc
+/* sourcemarkattributes.cc
  *
  * Copyright (C) 2010 Krzesimir Nowak
  *
@@ -17,7 +17,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <gtksourceview/gtksourcemarkcategory.h>
+#include <gtksourceview/gtksourcemarkattributes.h>
 
 #include <giomm/icon.h>
 #include <gdkmm/pixbuf.h>
@@ -28,9 +28,9 @@
 namespace Gsv
 {
 
-bool SourceMarkCategory::is_background_set() const
+bool SourceMarkAttributes::is_background_set() const
 {
-  return gtk_source_mark_category_get_background(const_cast<SourceMarkCategory*>(this)->gobj(), 0);
+  return gtk_source_mark_attributes_get_background(const_cast<SourceMarkAttributes*>(this)->gobj(), 0);
 }
 
 } // namespace Gsv

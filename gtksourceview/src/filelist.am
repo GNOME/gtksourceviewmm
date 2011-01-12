@@ -25,7 +25,7 @@ files_hg =				\
 	sourcelanguage.hg		\
 	sourcelanguagemanager.hg	\
 	sourcemark.hg			\
-	sourcemarkcategory.hg		\
+	sourcemarkattributes.hg		\
 	sourceprintcompositor.hg	\
 	sourcestyle.hg			\
 	sourcestylescheme.hg		\

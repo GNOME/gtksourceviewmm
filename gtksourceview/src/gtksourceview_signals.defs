@@ -1534,10 +1534,10 @@
   (construct-only #t)
 )
 
-;; From GtkSourceMarkCategory
+;; From GtkSourceMarkAttributes
 
 (define-signal query-tooltip-text
-  (of-object "GtkSourceMarkCategory")
+  (of-object "GtkSourceMarkAttributes")
   (return-type "const-gchar*")
   (when "last")
   (parameters
@@ -1546,7 +1546,7 @@
 )
 
 (define-signal query-tooltip-markup
-  (of-object "GtkSourceMarkCategory")
+  (of-object "GtkSourceMarkAttributes")
   (return-type "const-gchar*")
   (when "last")
   (parameters
@@ -1554,17 +1554,8 @@
   )
 )
 
-(define-property id
-  (of-object "GtkSourceMarkCategory")
-  (prop-type "GParamString")
-  (docs "The id")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
-)
-
 (define-property background
-  (of-object "GtkSourceMarkCategory")
+  (of-object "GtkSourceMarkAttributes")
   (prop-type "GParamBoxed")
   (docs "The background")
   (readable #t)
@@ -1572,17 +1563,8 @@
   (construct-only #f)
 )
 
-(define-property priority
-  (of-object "GtkSourceMarkCategory")
-  (prop-type "GParamInt")
-  (docs "The priority")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-)
-
 (define-property stock-id
-  (of-object "GtkSourceMarkCategory")
+  (of-object "GtkSourceMarkAttributes")
   (prop-type "GParamString")
   (docs "The stock id")
   (readable #t)
@@ -1591,7 +1573,7 @@
 )
 
 (define-property pixbuf
-  (of-object "GtkSourceMarkCategory")
+  (of-object "GtkSourceMarkAttributes")
   (prop-type "GParamObject")
   (docs "The pixbuf")
   (readable #t)
@@ -1600,7 +1582,7 @@
 )
 
 (define-property icon-name
-  (of-object "GtkSourceMarkCategory")
+  (of-object "GtkSourceMarkAttributes")
   (prop-type "GParamString")
   (docs "The icon name")
   (readable #t)
@@ -1609,7 +1591,7 @@
 )
 
 (define-property gicon
-  (of-object "GtkSourceMarkCategory")
+  (of-object "GtkSourceMarkAttributes")
   (prop-type "GParamObject")
   (docs "The GIcon")
   (readable #t)

@@ -59,21 +59,15 @@ class SourceMarkAttributes : public Glib::Object
 {
   _CLASS_GOBJECT(SourceMarkAttributes, GtkSourceMarkAttributes, GTK_SOURCE_MARK_ATTRIBUTES, Glib::Object, GObject)
 protected:
-  _WRAP_CTOR(SourceMarkAttributes(const std::string& id), gtk_source_mark_attributes_new)
+  _CTOR_DEFAULT
 public:
-  _WRAP_CREATE(const std::string& id)
-
-  _WRAP_METHOD(std::string get_id() const, gtk_source_mark_attributes_get_id)
+  _WRAP_CREATE()
 
   _WRAP_METHOD(bool get_background(Gdk::RGBA& rgba) const, gtk_source_mark_attributes_get_background)
 
   bool is_background_set() const;
 
   _WRAP_METHOD(void set_background(const Gdk::RGBA& rgba), gtk_source_mark_attributes_set_background)
-
-  _WRAP_METHOD(int get_priority() const, gtk_source_mark_attributes_get_priority)
-
-  _WRAP_METHOD(void set_priority(int priority), gtk_source_mark_attributes_set_priority)
 
   _WRAP_METHOD(std::string get_stock_id() const, gtk_source_mark_attributes_get_stock_id)
 
@@ -103,11 +97,7 @@ public:
 
   _WRAP_METHOD(Glib::ustring get_tooltip_markup(const Glib::RefPtr<SourceMark>& mark) const, gtk_source_mark_attributes_get_tooltip_markup)
 
-  _WRAP_PROPERTY("id", std::string)
-
   _WRAP_PROPERTY("background", Gdk::RGBA)
-
-  _WRAP_PROPERTY("priority", int)
 
   _WRAP_PROPERTY("stock-id", std::string)
 

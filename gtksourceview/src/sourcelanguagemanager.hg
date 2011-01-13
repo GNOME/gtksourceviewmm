@@ -212,6 +212,9 @@ public:
    * language for given @a filename and/or @a content_type.
    */
   _WRAP_METHOD(Glib::RefPtr<const SourceLanguage> guess_language(const std::string& filename, const std::string& content_type) const, gtk_source_language_manager_guess_language, refreturn, constversion)
+
+  _WRAP_PROPERTY("search-path", std::vector<std::string>)
+  _WRAP_PROPERTY("language-ids", std::vector<std::string>)
 };
 
 } /* namespace Gsv */

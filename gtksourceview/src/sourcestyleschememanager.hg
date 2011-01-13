@@ -111,6 +111,8 @@ public:
    */
   _WRAP_METHOD(Glib::ArrayHandle<std::string> get_scheme_ids() const, gtk_source_style_scheme_manager_get_scheme_ids)
 
+  _WRAP_PROPERTY("search-path", std::vector<std::string>)
+  _WRAP_PROPERTY("scheme-ids", std::vector<std::string>)
 };//end class SourceStyleSchemeManager
 
 }//end namespace Gsv

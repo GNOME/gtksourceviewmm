@@ -47,6 +47,9 @@ public:
   _WRAP_METHOD(void measure(const SourceMarkup& markup, int& width, int& height), gtk_source_gutter_renderer_text_measure_markup)
 
   _WRAP_METHOD(void measure(const Glib::ustring& text, int& width, int& height), gtk_source_gutter_renderer_text_measure)
+
+  _WRAP_PROPERTY("text", Glib::ustring)
+  _WRAP_PROPERTY("markup", Glib::ustring)
 };
 
 } // namespace Gsv

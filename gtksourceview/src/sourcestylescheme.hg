@@ -114,6 +114,11 @@ public:
    * @newin{2,2}
    */
   _WRAP_METHOD(Glib::RefPtr<const SourceStyle> get_style(const Glib::ustring& style_id) const, gtk_source_style_scheme_get_style, refreturn, constversion)
+
+  _WRAP_PROPERTY("id", std::string)
+  _WRAP_PROPERTY("name", Glib::ustring)
+  _WRAP_PROPERTY("description", Glib::ustring)
+  _WRAP_PROPERTY("filename", std::string)
 };//end class SourceStyleScheme
 
 }//end namespace Gsv

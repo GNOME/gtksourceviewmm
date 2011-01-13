@@ -23,7 +23,8 @@
 #include <gtksourceview/gtksourceview-typebuiltins.h>
 
 #include <gtksourceviewmm/sourceview.h>
-#include <gtksourceviewmm/sourcemarkcategory.h>
+#include <gtksourceviewmm/sourcemarkattributes.h>
+
 namespace Gsv
 {
 

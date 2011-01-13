@@ -33,7 +33,7 @@ namespace Gsv
 
 class SourceCompletion;
 class SourceGutter;
-class SourceMarkCategory;
+class SourceMarkAttributes;
 
 /** Defines a behaviour of smart Home/End keys.
  */
@@ -335,9 +335,11 @@ public:
    */
   _WRAP_METHOD(Glib::RefPtr<const SourceCompletion> get_completion() const, gtk_source_view_get_completion, refreturn, constversion)
 
-  _WRAP_METHOD(Glib::RefPtr<SourceMarkCategory> get_mark_category(const Glib::ustring& category), gtk_source_view_get_mark_category, refreturn)
+  _WRAP_METHOD(void set_mark_attributes(const Glib::ustring& category, const Glib::RefPtr<SourceMarkAttributes>& attributes, int priority), gtk_source_view_set_mark_attributes)
 
-  _WRAP_METHOD(Glib::RefPtr<const SourceMarkCategory> get_mark_category(const Glib::ustring& category) const, gtk_source_view_get_mark_category, constversion)
+  _WRAP_METHOD(Glib::RefPtr<SourceMarkAttributes> get_mark_attributes(const Glib::ustring& category, int& priority), gtk_source_view_get_mark_attributes, refreturn)
+
+  _WRAP_METHOD(Glib::RefPtr<const SourceMarkAttributes> get_mark_attributes(const Glib::ustring& category, int& priority) const, gtk_source_view_get_mark_attributes, constversion)
 
   /** Emitted when redo action is requested.
    */

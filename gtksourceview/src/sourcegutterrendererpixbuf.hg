@@ -59,6 +59,11 @@ public:
   _WRAP_METHOD(std::string get_icon_name() const, gtk_source_gutter_renderer_pixbuf_get_icon_name)
 
   _WRAP_METHOD(void set_icon_name(const std::string& icon_name), gtk_source_gutter_renderer_pixbuf_set_icon_name)
+
+  _WRAP_PROPERTY("pixbuf", Glib::RefPtr<Gdk::Pixbuf>)
+  _WRAP_PROPERTY("stock-id", std::string)
+  _WRAP_PROPERTY("icon-name", std::string)
+  _WRAP_PROPERTY("gicon", Glib::RefPtr<Gio::Icon>)
 };
 
 } // namespace Gsv

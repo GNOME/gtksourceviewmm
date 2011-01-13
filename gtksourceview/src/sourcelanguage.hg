@@ -120,6 +120,11 @@ public:
    * empty string if language doesn't contain that metadata property.
    */
   _WRAP_METHOD(Glib::ustring get_metadata(const Glib::ustring& name) const, gtk_source_language_get_metadata)
+
+  _WRAP_PROPERTY("id", std::string)
+  _WRAP_PROPERTY("name", std::string)
+  _WRAP_PROPERTY("section", std::string)
+  _WRAP_PROPERTY("hidden", bool)
 };
 
 } /* namespace Gsv */

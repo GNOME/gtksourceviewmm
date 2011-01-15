@@ -1,8 +1,17 @@
+2.91.4:
+* Fixed build with recent GtkSourceView. (Krzesimir Nowak, Murray Cumming)
+* Wrapped missing properties in SourceGutterRendererPixbuf,
+  SourceGutterRendererText, SourceLanguage, SourceLanguageManager,
+  SourceStyleScheme, SourceStyleSchemeManager. (Krzesimir Nowak)
+
+2.91.3:
+* There was no 2.91.3. Sorry.
+
 2.91.2:
 * Fixed reference counting in completion classes and added a completion test.
   (Krzesimir Nowak)
 * Renamed gtksourceview namespace to Gsv.
-* Written documetation about migration from 2.0 to 3.0 - it describes most of
+* Written documentation about migration from 2.0 to 3.0 - it describes most of
   API breaks (like the one mentioned above). (Krzesimir Nowak)
 * Wrapped GtkSourceGutterRenderer, GtkSourceGutterRendererPixbuf,
   GtkSourceGutterRendererText and GtkSourceMarkCategory. (Krzesimir Nowak)

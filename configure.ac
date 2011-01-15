@@ -1,4 +1,4 @@
-AC_INIT([gtksourceviewmm], [2.91.3],
+AC_INIT([gtksourceviewmm], [2.91.4],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gtksourceviewmm],
         [gtksourceviewmm], [http://projects.gnome.org/gtksourceviewmm/])
 AC_PREREQ([2.62])
@@ -18,17 +18,14 @@ MM_INIT_MODULE([gtksourceviewmm-3.0])
 
 AC_SUBST([GTKSOURCEVIEWMM_SO_VERSION], [0:0:0])
 
-# AC_DISABLE_STATIC
-# AC_LIBTOOL_WIN32_DLL
-# AC_PROG_LIBTOOL
 LT_INIT([win32-dll disable-static])
 AC_PROG_CXX
 
-AC_SUBST([GTKSOURCEVIEWMM_MODULES], ['gtkmm-3.0 >= 2.91.2 gtksourceview-3.0 >= 2.91.2'])
+AC_SUBST([GTKSOURCEVIEWMM_MODULES], ['gtkmm-3.0 >= 2.91.2 gtksourceview-3.0 >= 2.91.4'])
 PKG_CHECK_MODULES([GTKSOURCEVIEWMM], [$GTKSOURCEVIEWMM_MODULES])
 
 MM_PKG_CONFIG_SUBST([GTHREAD_CFLAGS], [--cflags-only-other gthread-2.0])
-MM_PKG_CONFIG_SUBST([GMMPROC_DIR], [--variable=gmmprocdir glibmm-2.4 ])
+MM_PKG_CONFIG_SUBST([GMMPROC_DIR], [--variable=gmmprocdir glibmm-2.4])
 MM_PKG_CONFIG_SUBST([GMMPROC_EXTRA_M4_DIR], [--variable=gmmprocm4dir cairomm-1.0 pangomm-1.4 atkmm-1.6 gtkmm-3.0])
 
 MM_ARG_DISABLE_DEPRECATED_API([GTKSOURCEVIEWMM])

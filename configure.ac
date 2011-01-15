@@ -29,7 +29,7 @@ PKG_CHECK_MODULES([GTKSOURCEVIEWMM], [$GTKSOURCEVIEWMM_MODULES])
 
 MM_PKG_CONFIG_SUBST([GTHREAD_CFLAGS], [--cflags-only-other gthread-2.0])
 MM_PKG_CONFIG_SUBST([GMMPROC_DIR], [--variable=gmmprocdir glibmm-2.4 ])
-MM_PKG_CONFIG_SUBST([GMMPROC_EXTRA_M4_DIR], [--variable=gmmprocm4dir pangomm-1.4 atkmm-1.6 gtkmm-3.0])
+MM_PKG_CONFIG_SUBST([GMMPROC_EXTRA_M4_DIR], [--variable=gmmprocm4dir cairomm-1.0 pangomm-1.4 atkmm-1.6 gtkmm-3.0])
 
 MM_ARG_DISABLE_DEPRECATED_API([GTKSOURCEVIEWMM])
 
@@ -37,6 +37,7 @@ MM_ARG_ENABLE_DOCUMENTATION
 MM_ARG_WITH_TAGFILE_DOC([libstdc++.tag], [mm-common-libstdc++])
 MM_ARG_WITH_TAGFILE_DOC([libsigc++-2.0.tag], [sigc++-2.0])
 MM_ARG_WITH_TAGFILE_DOC([glibmm-2.4.tag], [glibmm-2.4])
+MM_ARG_WITH_TAGFILE_DOC([cairomm-1.0.tag], [cairomm-1.0])
 MM_ARG_WITH_TAGFILE_DOC([pangomm-1.4.tag], [pangomm-1.4])
 MM_ARG_WITH_TAGFILE_DOC([gtkmm-3.0.tag], [gtkmm-3.0])
 
@@ -44,7 +45,7 @@ AC_LANG([C++])
 MM_ARG_ENABLE_WARNINGS([GTKSOURCEVIEWMM_WXXFLAGS],
                        [-Wall],
                        [-pedantic -Wall -Wextra],
-                       [G PANGO ATK GDK GDK_PIXBUF GTK GTKSOURCEVIEW])
+                       [G PANGO ATK GDK GDK_PIXBUF GTK GTKSOURCEVIEW GLIBMM PANGOMM ATKMM GDKMM GTKMM])
 
 AC_CONFIG_FILES([Makefile
                  codegen/Makefile

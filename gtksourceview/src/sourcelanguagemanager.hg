@@ -3,7 +3,7 @@
  * Copyright (C) 2004-2005 Jae Jang
  * Copyright (C) 2005-2006 Rob Page
  * Copyright (C) 2006 Dodji Seketeli
- * Copyright (C) 2009, 2010 Krzesimir Nowak
+ * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -22,6 +22,8 @@
 
 /// \file
 /// \brief SourceLanguageManager class
+
+#include <vector>
 
 #include <glibmm/object.h>
 #include <gtksourceviewmm/sourcelanguage.h>
@@ -67,15 +69,15 @@ public:
    */
   _WRAP_METHOD(static Glib::RefPtr<SourceLanguageManager> get_default(), gtk_source_language_manager_get_default, refreturn)
 
-#m4 _CONVERSION(`const gchar**',`Glib::ArrayHandle<std::string>',`$2($3, Glib::OWNERSHIP_NONE)')
+#m4 _CONVERSION(`const gchar**',`std::vector<std::string>',`Glib::ArrayHandler<std::string>::array_to_vector($3, Glib::OWNERSHIP_NONE)')
 
   /** Gets the list directories where language manager looks for language files.
    *
    * @return An array containg a list of language files directories.
    */
-  _WRAP_METHOD(Glib::ArrayHandle<std::string> get_search_path() const, gtk_source_language_manager_get_search_path)
+  _WRAP_METHOD(std::vector<std::string> get_search_path() const, gtk_source_language_manager_get_search_path)
 
-#m4 _CONVERSION(`const Glib::ArrayHandle<std::string>&',`gchar**',`const_cast<gchar**>(($3).data())')
+#m4 _CONVERSION(`const std::vector<std::string>&',`gchar**',`const_cast<gchar**>(Glib::ArrayHandler<std::string>::vector_to_array($3).data())')
 
   /** Sets the list of directories where the language manager looks for language
    *  files.
@@ -87,7 +89,7 @@ public:
    *
    * @param dirs An empty string terminated array of strings.
    */
-  _WRAP_METHOD(void set_search_path(const Glib::ArrayHandle<std::string>& dirs), gtk_source_language_manager_set_search_path)
+  _WRAP_METHOD(void set_search_path(const std::vector<std::string>& dirs), gtk_source_language_manager_set_search_path)
 
   /** Resets the list of directories where the language manager looks for
    *  language files to default.
@@ -103,7 +105,7 @@ public:
    *
    * @return An array of string containing the ids of the available languages.
    */
-  _WRAP_METHOD(Glib::ArrayHandle<std::string> get_language_ids() const, gtk_source_language_manager_get_language_ids)
+  _WRAP_METHOD(std::vector<std::string> get_language_ids() const, gtk_source_language_manager_get_language_ids)
 
   /** Gets the SourceLanguage identified by the given @a id in the language
    *  manager.

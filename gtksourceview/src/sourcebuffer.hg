@@ -3,7 +3,7 @@
  * Copyright (C) 2004-2005 Jae Jang
  * Copyright (C) 2005-2006 Rob Page
  * Copyright (C) 2006 Dodji Seketeli
- * Copyright (C) 2009, 2010 Krzesimir Nowak
+ * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -19,6 +19,8 @@
  * License along with this library; if not, write to the Free
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
+
+#include <vector>
 
 #include <gtkmm/textbuffer.h>
 #include <gtksourceviewmm/sourcelanguage.h>
@@ -308,8 +310,8 @@ public:
    */
   Glib::RefPtr<SourceMark> create_source_mark(const Glib::ustring& category, const Gtk::TextIter& where);
 
-#m4 _CONVERSION(`GSList*',`Glib::SListHandle<Glib::RefPtr<SourceMark> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
-#m4 _CONVERSION(`GSList*',`Glib::SListHandle<Glib::RefPtr<const SourceMark> >', `$2($3, Glib::OWNERSHIP_SHALLOW)')
+#m4 _CONVERSION(`GSList*',`std::vector<Glib::RefPtr<SourceMark> >', `Glib::SListHandler<Glib::RefPtr<SourceMark> >::slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')
+#m4 _CONVERSION(`GSList*',`std::vector<Glib::RefPtr<const SourceMark> >', `Glib::SListHandler<Glib::RefPtr<const SourceMark> >slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')
 
   /** Returns the list of marks of the given @a category at @a line.
    *
@@ -318,7 +320,7 @@ public:
    *
    * @return A list of source marks.
    */
-  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceMark> > get_source_marks_at_line(int line, const Glib::ustring& category) const, gtk_source_buffer_get_source_marks_at_line)
+  _WRAP_METHOD(std::vector<Glib::RefPtr<SourceMark> > get_source_marks_at_line(int line, const Glib::ustring& category) const, gtk_source_buffer_get_source_marks_at_line)
 
   /** Returns the list of marks of any category at @a line.
    *
@@ -326,7 +328,7 @@ public:
    *
    * @return A list of source marks.
    */
-  Glib::SListHandle<Glib::RefPtr<SourceMark> > get_source_marks_at_line(int line) const;
+  std::vector<Glib::RefPtr<SourceMark> > get_source_marks_at_line(int line) const;
 
   /** Returns the list of marks of the given @a category at @a iter.
    *
@@ -335,7 +337,7 @@ public:
    *
    * @return A list of source marks.
    */
-  _WRAP_METHOD(Glib::SListHandle<Glib::RefPtr<SourceMark> > get_source_marks_at_iter(Gtk::TextIter& iter, const Glib::ustring& category) const, gtk_source_buffer_get_source_marks_at_iter)
+  _WRAP_METHOD(std::vector<Glib::RefPtr<SourceMark> > get_source_marks_at_iter(Gtk::TextIter& iter, const Glib::ustring& category) const, gtk_source_buffer_get_source_marks_at_iter)
 
   /** Returns the list of marks of any category at @a iter.
    *
@@ -343,7 +345,7 @@ public:
    *
    * @return A list of source marks.
    */
-  Glib::SListHandle<Glib::RefPtr<SourceMark> > get_source_marks_at_iter(Gtk::TextIter& iter) const;
+  std::vector<Glib::RefPtr<SourceMark> > get_source_marks_at_iter(Gtk::TextIter& iter) const;
 
   /** Remove all marks of @a category between start and end from the buffer.
    *
@@ -405,7 +407,7 @@ public:
    */
   _WRAP_METHOD(bool iter_forward_to_context_class_toggle(Gtk::TextIter& iter, const Glib::ustring& context_class) const, gtk_source_buffer_iter_forward_to_context_class_toggle)
 
-#m4 _CONVERSION(`gchar**',`Glib::StringArrayHandle',`$2($3, Glib::OWNERSHIP_DEEP)')
+#m4 _CONVERSION(`gchar**',`std::vector<Glib::ustring>',`Glib::ArrayHandler<Glib::ustring>::array_to_vector($3, Glib::OWNERSHIP_DEEP)')
 
   /** Get all defined context classes at iter.
    *
@@ -415,7 +417,7 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(Glib::StringArrayHandle get_context_classes_at_iter(const Gtk::TextIter& iter) const, gtk_source_buffer_get_context_classes_at_iter)
+  _WRAP_METHOD(std::vector<Glib::ustring> get_context_classes_at_iter(const Gtk::TextIter& iter) const, gtk_source_buffer_get_context_classes_at_iter)
 
   /** Get the undo manager associated with the buffer.
    * @return A SourceUndoManager.

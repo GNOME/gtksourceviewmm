@@ -1,6 +1,6 @@
 /* sourcecompletioncontext.h
  *
- * Copyright (C) 2009, 2010 Krzesimir Nowak
+ * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -17,6 +17,10 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <vector>
+
+#include <gtksourceview/gtksourceview-typebuiltins.h>
+
 #include <glibmm/object.h>
 
 #include <gtksourceviewmm/sourcecompletionactivation.h>
@@ -24,7 +28,6 @@
 #include <gtksourceviewmm/sourcecompletionprovider.h>
 #include <gtksourceviewmm/sourcecompletionproposal.h>
 #include <gtksourceviewmm/sourcecompletion.h>
-#include <gtksourceview/gtksourceview-typebuiltins.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -47,7 +50,7 @@ class SourceCompletionContext : public Glib::Object
   _CLASS_GOBJECT(SourceCompletionContext, GtkSourceCompletionContext, GTK_SOURCE_COMPLETION_CONTEXT, Glib::Object, GObject)
 public:
 #m4 _CONVERSION(`const Glib::RefPtr<SourceCompletionProvider>&',`struct _GtkSourceCompletionProvider*',`Glib::unwrap($3)')
-#m4 _CONVERSION(`const Glib::ListHandle<Glib::RefPtr<SourceCompletionProposal> >&',`GList*',`($3).data()')
+#m4 _CONVERSION(`const std::vector<Glib::RefPtr<SourceCompletionProposal> >&',`GList*',`Glib::ListHandler<Glib::RefPtr<SourceCompletionProposal> >::vector_to_list($3).data()')
 
   /** Providers can use this function to add proposals to the completion.
    *
@@ -62,7 +65,7 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(void add_proposals(const Glib::RefPtr<SourceCompletionProvider>& provider, const Glib::ListHandle<Glib::RefPtr<SourceCompletionProposal> >& proposals, bool finished), gtk_source_completion_context_add_proposals)
+  _WRAP_METHOD(void add_proposals(const Glib::RefPtr<SourceCompletionProvider>& provider, const std::vector<Glib::RefPtr<SourceCompletionProposal> >& proposals, bool finished), gtk_source_completion_context_add_proposals)
 
   _IGNORE(gtk_source_completion_context_get_iter)
   /** Get the iter at which the completion was invoked.

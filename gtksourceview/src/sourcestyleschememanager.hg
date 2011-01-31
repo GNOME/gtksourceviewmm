@@ -1,7 +1,7 @@
 /* sourcestyleschememanager.h
  *
  * Copyright (C) 2008 Jonathon Jongsma
- * Copyright (C) 2009, 2010 Krzesimir Nowak
+ * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -18,8 +18,11 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <gtksourceviewmm/sourcestylescheme.h>
+#include <vector>
+
 #include <gtksourceview/gtksourcestyleschememanager.h>
+
+#include <gtksourceviewmm/sourcestylescheme.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -52,7 +55,7 @@ public:
    */
   _WRAP_METHOD(static Glib::RefPtr<SourceStyleSchemeManager> get_default(), gtk_source_style_scheme_manager_get_default, refreturn)
 
-#m4 _CONVERSION(`const gchar**',`Glib::ArrayHandle<std::string>',`$2($3, Glib::OWNERSHIP_NONE)')
+#m4 _CONVERSION(`const gchar**',`std::vector<std::string>',`Glib::ArrayHandler<std::string>::array_to_vector($3, Glib::OWNERSHIP_NONE)')
 
   /** Returns the current search path for the manager.
    *
@@ -60,16 +63,16 @@ public:
    *
    * @return An array of string containing the search path.
    */
-  _WRAP_METHOD(Glib::ArrayHandle<std::string> get_search_path() const, gtk_source_style_scheme_manager_get_search_path)
+  _WRAP_METHOD(std::vector<std::string> get_search_path() const, gtk_source_style_scheme_manager_get_search_path)
 
-#m4 _CONVERSION(`const Glib::ArrayHandle<std::string>&',`gchar**',`const_cast<gchar**>(($3).data())')
+#m4 _CONVERSION(`const std::vector<std::string>&',`gchar**',`const_cast<gchar**>(Glib::ArrayHandler<std::string>::vector_to_array($3).data())')
 
   /** Sets the list of directories where the manager looks for style scheme
    *  files.
    *
    * @param path An empty string terminated array of strings.
    */
-  _WRAP_METHOD(void set_search_path(const Glib::ArrayHandle<std::string>& path), gtk_source_style_scheme_manager_set_search_path)
+  _WRAP_METHOD(void set_search_path(const std::vector<std::string>& path), gtk_source_style_scheme_manager_set_search_path)
 
   /** Resets the list of directories where the manager looks for style scheme
    *  files to default.
@@ -109,7 +112,7 @@ public:
    * @return An array of string containing the ids of the available style
    * schemes.
    */
-  _WRAP_METHOD(Glib::ArrayHandle<std::string> get_scheme_ids() const, gtk_source_style_scheme_manager_get_scheme_ids)
+  _WRAP_METHOD(std::vector<std::string> get_scheme_ids() const, gtk_source_style_scheme_manager_get_scheme_ids)
 
   _WRAP_PROPERTY("search-path", std::vector<std::string>)
   _WRAP_PROPERTY("scheme-ids", std::vector<std::string>)

@@ -3,7 +3,7 @@
  * Copyright (C) 2004-2005 Jae Jang
  * Copyright (C) 2005-2006 Rob Page
  * Copyright (C) 2006 Dodji Seketeli
- * Copyright (C) 2009, 2010 Krzesimir Nowak
+ * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -20,9 +20,13 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <glibmm/object.h>
-#include <gtksourceviewmm/sourcestyle.h>
+#include <vector>
+
 #include <gtksourceview/gtksourcestylescheme.h>
+
+#include <glibmm/object.h>
+
+#include <gtksourceviewmm/sourcestyle.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -32,7 +36,7 @@ namespace Gsv
 
 
 
-/** Object controlling apperance of SourceView.
+/** Object controlling appearance of SourceView.
  *
  * SourceStyleScheme contains all the text styles to be used in SourceView and
  * SourceBuffer. For instance, it contains text styles for syntax highlighting,
@@ -74,7 +78,7 @@ public:
    */
   _WRAP_METHOD(Glib::ustring get_description() const, gtk_source_style_scheme_get_description)
 
-#m4 _CONVERSION(`const gchar**',`Glib::StringArrayHandle',`$2($3)')
+#m4 _CONVERSION(`const gchar**',`std::vector<Glib::ustring>',`Glib::ArrayHandler<Glib::ustring>::array_to_vector($3, Glib::OWNERSHIP_NONE)')
 
   /** Gets scheme authors.
    *
@@ -82,7 +86,7 @@ public:
    *
    * @newin{2,2}
    */
-  _WRAP_METHOD(Glib::StringArrayHandle get_authors() const, gtk_source_style_scheme_get_authors)
+  _WRAP_METHOD(std::vector<Glib::ustring> get_authors() const, gtk_source_style_scheme_get_authors)
 
   /** Gets scheme filename.
    *

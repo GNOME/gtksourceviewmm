@@ -3,7 +3,7 @@
  * Copyright (C) 2004-2005 Jae Jang
  * Copyright (C) 2005-2006 Rob Page
  * Copyright (C) 2006 Dodji Seketeli
- * Copyright (C) 2010 Krzesimir Nowak
+ * Copyright (C) 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -20,7 +20,10 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <vector>
+
 #include <glibmm/object.h>
+
 #include <gtksourceviewmm/sourcestylescheme.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
@@ -75,7 +78,7 @@ public:
    */
   _WRAP_METHOD(bool get_hidden() const, gtk_source_language_get_hidden)
 
-#m4 _CONVERSION(`gchar**',`Glib::StringArrayHandle',`Glib::StringArrayHandle($3, Glib::OWNERSHIP_DEEP)')
+#m4 _CONVERSION(`gchar**',`std::vector<Glib::ustring>',`Glib::ArrayHandler<Glib::ustring>::array_to_vector($3, Glib::OWNERSHIP_DEEP)')
 
   /** Returns the mime types associated to this language.
    *
@@ -84,7 +87,7 @@ public:
    *
    * @return An array containing the mime types.
    */
-  _WRAP_METHOD(Glib::StringArrayHandle get_mime_types() const, gtk_source_language_get_mime_types)
+  _WRAP_METHOD(std::vector<Glib::ustring> get_mime_types() const, gtk_source_language_get_mime_types)
 
   /** Returns the globs associated to this language.
    *
@@ -93,13 +96,13 @@ public:
    *
    * @return An array containing the globs.
    */
-  _WRAP_METHOD(Glib::StringArrayHandle get_globs() const, gtk_source_language_get_globs)
+  _WRAP_METHOD(std::vector<Glib::ustring> get_globs() const, gtk_source_language_get_globs)
 
   /** Returns the ids of the styles defined by this language.
    *
    * @return An array containing ids of the styles defined by this language.
    */
-  _WRAP_METHOD(Glib::StringArrayHandle get_style_ids() const, gtk_source_language_get_style_ids)
+  _WRAP_METHOD(std::vector<Glib::ustring> get_style_ids() const, gtk_source_language_get_style_ids)
 
   /** Returns the name of the style with ID @a style_id defined by this
    *  language.

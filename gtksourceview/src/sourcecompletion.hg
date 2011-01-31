@@ -1,6 +1,6 @@
 /* sourcecompletion.h
  *
- * Copyright (C) 2009, 2010 Krzesimir Nowak
+ * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -17,7 +17,10 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#include <vector>
+
 #include <glibmm/object.h>
+
 #include <gtksourceviewmm/sourcecompletioncontext.h>
 #include <gtksourceviewmm/sourcecompletionprovider.h>
 #include <gtksourceviewmm/sourceview.h>
@@ -67,16 +70,16 @@ public:
    */
   _WRAP_METHOD(bool remove_provider(const Glib::RefPtr<SourceCompletionProvider>& provider), gtk_source_completion_remove_provider, errthrow)
 
-#m4 _CONVERSION(`GList*',`Glib::ListHandle<Glib::RefPtr<SourceCompletionProvider> >',`$2($3, Glib::OWNERSHIP_NONE)')
+#m4 _CONVERSION(`GList*',`std::vector<Glib::RefPtr<SourceCompletionProvider> >',`Glib::ListHandler<Glib::RefPtr<SourceCompletionProvider> >::list_to_vector($3, Glib::OWNERSHIP_NONE)')
   /** Get list of providers registered on completion.
    *
    * @return List of SourceCompletionProvider.
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(Glib::ListHandle<Glib::RefPtr<SourceCompletionProvider> > get_providers() const, gtk_source_completion_get_providers)
+  _WRAP_METHOD(std::vector<Glib::RefPtr<SourceCompletionProvider> > get_providers() const, gtk_source_completion_get_providers)
 
-#m4 _CONVERSION(`const Glib::ListHandle<Glib::RefPtr<SourceCompletionProvider> >&',`GList*',`($3).data()')
+#m4 _CONVERSION(`const std::vector<Glib::RefPtr<SourceCompletionProvider> >&',`GList*',`Glib::ListHandler<Glib::RefPtr<SourceCompletionProvider> >::vector_to_list($3).data()')
   /** Starts a new completion with the specified SourceCompletionContext and
    *  a list of potential candidate providers for completion.
    *
@@ -88,7 +91,7 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(bool show(const Glib::ListHandle<Glib::RefPtr<SourceCompletionProvider> >& providers, const Glib::RefPtr<SourceCompletionContext>& context), gtk_source_completion_show)
+  _WRAP_METHOD(bool show(const std::vector<Glib::RefPtr<SourceCompletionProvider> >& providers, const Glib::RefPtr<SourceCompletionContext>& context), gtk_source_completion_show)
 
   /** Hides the completion if it is active (visible).
    *

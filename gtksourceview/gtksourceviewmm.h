@@ -142,6 +142,26 @@
  * namespace gtksourceview = Gsv;
  * #endif // GTKSOURCEVIEWMM_COMPAT_H
  * @endcode</li>
+ * <li>Replaced Glib::*Handle<> with std::vector<> - that means that passing
+ * std::list<> or std::deque<> is now not supported. Affected methods are:
+ * <ul>
+ * <li>Gsv::SourceBuffer::get_source_marks_at_line()</li>
+ * <li>Gsv::SourceBuffer::get_source_marks_at_iter()</li>
+ * <li>Gsv::SourceBuffer::get_context_classes_at_iter()</li>
+ * <li>Gsv::SourceCompletion::get_providers()</li>
+ * <li>Gsv::SourceCompletion::show()</li>
+ * <li>Gsv::SourceCompletionContext::add_proposals()</li>
+ * <li>Gsv::SourceLanguage::get_mime_types()</li>
+ * <li>Gsv::SourceLanguage::get_globs()</li>
+ * <li>Gsv::SourceLanguage::get_style_ids()</li>
+ * <li>Gsv::SourceLanguageManager::get_search_path()</li>
+ * <li>Gsv::SourceLanguageManager::set_search_path()</li>
+ * <li>Gsv::SourceLanguageManager::get_language_ids()</li>
+ * <li>Gsv::SourceStyleScheme::get_authors()</li>
+ * <li>Gsv::SourceStyleSchemeManager::get_search_path()</li>
+ * <li>Gsv::SourceStyleSchemeManager::set_search_path()</li>
+ * <li>Gsv::SourceStyleSchemeManager::get_scheme_ids()</li>
+ * </ul></li>
  * </ul>
  */
 

@@ -1,5 +1,5 @@
 // standard
-#include <list>
+#include <vector>
 // glibmm
 #include <glibmm.h>
 // gdkmm
@@ -40,7 +40,7 @@ private:
   //virtual int get_interactive_delay_vfunc() const;
   virtual int get_priority_vfunc() const;
 
-  std::list<Glib::RefPtr<Gsv::SourceCompletionItem> > m_proposals;
+  std::vector<Glib::RefPtr<Gsv::SourceCompletionProposal> > m_proposals;
   int m_priority;
   Glib::ustring m_name;
   Glib::RefPtr<Gdk::Pixbuf> m_pixbuf;
@@ -69,6 +69,7 @@ TestProvider::TestProvider()
   Glib::Object(),
   Gsv::SourceCompletionProvider()
 {
+  m_proposals.reserve(3);
   m_proposals.push_back( Gsv::SourceCompletionItem::create( "Proposal 1", "Proposal 1", get_icon_vfunc(), "" ) );
   m_proposals.push_back( Gsv::SourceCompletionItem::create( "Proposal 2", "Proposal 2", get_icon_vfunc(), "" ) );
   m_proposals.push_back( Gsv::SourceCompletionItem::create( "Proposal 3", "Proposal 3", get_icon_vfunc(), "" ) );

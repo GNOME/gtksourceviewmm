@@ -1,3 +1,6 @@
+2.91.5:
+* Replaced Glib::*Handles with std::vector. (Krzesimir Nowak)
+
 2.91.4:
 * Fixed build with recent GtkSourceView. (Krzesimir Nowak, Murray Cumming)
 * Wrapped missing properties in SourceGutterRendererPixbuf,

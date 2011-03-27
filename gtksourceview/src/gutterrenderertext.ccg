@@ -1,6 +1,6 @@
-/* sourcegutterrenderertext.cc
+/* gutterrenderertext.cc
  *
- * Copyright (C) 2009, 2010 Krzesimir Nowak
+ * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -22,14 +22,14 @@
 namespace Gsv
 {
 
-void SourceGutterRendererText::set_text(const SourceMarkup& markup)
+void GutterRendererText::set_text(const Markup& markup)
 {
   const Glib::ustring str(markup.get_string());
 
   gtk_source_gutter_renderer_text_set_markup(gobj(), str.c_str(), str.bytes());
 }
 
-void SourceGutterRendererText::set_text(const Glib::ustring& text)
+void GutterRendererText::set_text(const Glib::ustring& text)
 {
   gtk_source_gutter_renderer_text_set_text(gobj(), text.c_str(), text.bytes());
 }

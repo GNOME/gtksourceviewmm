@@ -1,6 +1,6 @@
-/* sourcegutterrenderertext.h
+/* gutterrenderertext.h
  *
- * Copyright (C) 2010 Krzesimir Nowak
+ * Copyright (C) 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -18,33 +18,33 @@
  */
 
 /// \file
-/// \brief SourceGutterRendererText class
+/// \brief GutterRendererText class
 
-#include <gtksourceviewmm/sourcegutterrenderer.h>
-#include <gtksourceviewmm/sourcemarkup.h>
+#include <gtksourceviewmm/gutterrenderer.h>
+#include <gtksourceviewmm/markup.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
-_PINCLUDE(gtksourceviewmm/private/sourcegutterrenderer_p.h)
+_PINCLUDE(gtksourceviewmm/private/gutterrenderer_p.h)
 
 namespace Gsv
 {
 
 // TODO: write docs.
-class SourceGutterRendererText : public SourceGutterRenderer
+class GutterRendererText : public GutterRenderer
 {
-  _CLASS_GTKOBJECT(SourceGutterRendererText, GtkSourceGutterRendererText, GTK_SOURCE_GUTTER_RENDERER_TEXT, SourceGutterRenderer, GtkSourceGutterRenderer)
+  _CLASS_GTKOBJECT(GutterRendererText, GtkSourceGutterRendererText, GTK_SOURCE_GUTTER_RENDERER_TEXT, GutterRenderer, GtkSourceGutterRenderer)
 public:
   _CTOR_DEFAULT()
 
   // TODO: probably just set_text and set_markup will be better instead of funny overloads.
   _IGNORE(gtk_source_gutter_renderer_text_set_markup)
-  void set_text(const SourceMarkup& markup);
+  void set_text(const Markup& markup);
 
   _IGNORE(gtk_source_gutter_renderer_text_set_text)
   void set_text(const Glib::ustring& text);
 
-#m4 _CONVERSION(`const SourceMarkup&', `const gchar*', `($3).get_c_str()')
-  _WRAP_METHOD(void measure(const SourceMarkup& markup, int& width, int& height), gtk_source_gutter_renderer_text_measure_markup)
+#m4 _CONVERSION(`const Markup&', `const gchar*', `($3).get_c_str()')
+  _WRAP_METHOD(void measure(const Markup& markup, int& width, int& height), gtk_source_gutter_renderer_text_measure_markup)
 
   _WRAP_METHOD(void measure(const Glib::ustring& text, int& width, int& height), gtk_source_gutter_renderer_text_measure)
 

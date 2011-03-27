@@ -1,6 +1,6 @@
-/* sourcemarkattributes.h
+/* markattributes.h
  *
- * Copyright (C) 2010 Krzesimir Nowak
+ * Copyright (C) 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -18,11 +18,11 @@
  */
 
 /// \file
-/// \brief SourceMarkAttributes class
+/// \brief MarkAttributes class
 
 #include <glibmm/object.h>
 #include <glibmm/refptr.h>
-//#include <gtksourceviewmm/sourceview.h>
+//#include <gtksourceviewmm/view.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -52,12 +52,12 @@ class Widget;
 namespace Gsv
 {
 
-class SourceMark;
+class Mark;
 
 // TODO: write docs.
-class SourceMarkAttributes : public Glib::Object
+class MarkAttributes : public Glib::Object
 {
-  _CLASS_GOBJECT(SourceMarkAttributes, GtkSourceMarkAttributes, GTK_SOURCE_MARK_ATTRIBUTES, Glib::Object, GObject)
+  _CLASS_GOBJECT(MarkAttributes, GtkSourceMarkAttributes, GTK_SOURCE_MARK_ATTRIBUTES, Glib::Object, GObject)
 protected:
   _CTOR_DEFAULT
 public:
@@ -93,9 +93,9 @@ public:
 
   _WRAP_METHOD(Glib::RefPtr<const Gdk::Pixbuf> render_icon(Gtk::Widget* widget, int size) const, gtk_source_mark_attributes_render_icon, refreturn)
 
-  _WRAP_METHOD(Glib::ustring get_tooltip_text(const Glib::RefPtr<SourceMark>& mark) const, gtk_source_mark_attributes_get_tooltip_text)
+  _WRAP_METHOD(Glib::ustring get_tooltip_text(const Glib::RefPtr<Mark>& mark) const, gtk_source_mark_attributes_get_tooltip_text)
 
-  _WRAP_METHOD(Glib::ustring get_tooltip_markup(const Glib::RefPtr<SourceMark>& mark) const, gtk_source_mark_attributes_get_tooltip_markup)
+  _WRAP_METHOD(Glib::ustring get_tooltip_markup(const Glib::RefPtr<Mark>& mark) const, gtk_source_mark_attributes_get_tooltip_markup)
 
   _WRAP_PROPERTY("background", Gdk::RGBA)
 
@@ -107,11 +107,11 @@ public:
 
   _WRAP_PROPERTY("gicon", Glib::RefPtr<Gio::Icon>)
 
-#m4 _CONVERSION(`GtkSourceMark*',`const Glib::RefPtr<SourceMark>&',`Glib::wrap($3, true)')
+#m4 _CONVERSION(`GtkSourceMark*',`const Glib::RefPtr<Mark>&',`Glib::wrap($3, true)')
 #m4 _CONVERSION(`Glib::ustring',`const gchar*',`($3).c_str()')
-  _WRAP_SIGNAL(Glib::ustring query_tooltip_text(const Glib::RefPtr<SourceMark>& mark), "query-tooltip-text", no_default_handler)
+  _WRAP_SIGNAL(Glib::ustring query_tooltip_text(const Glib::RefPtr<Mark>& mark), "query-tooltip-text", no_default_handler)
 
-  _WRAP_SIGNAL(Glib::ustring query_tooltip_markup(const Glib::RefPtr<SourceMark>& mark), "query-tooltip-markup", no_default_handler)
+  _WRAP_SIGNAL(Glib::ustring query_tooltip_markup(const Glib::RefPtr<Mark>& mark), "query-tooltip-markup", no_default_handler)
 };
 
 } // namespace Gsv

@@ -1,6 +1,6 @@
-/* sourcemarkattributes.cc
+/* markattributes.cc
  *
- * Copyright (C) 2010 Krzesimir Nowak
+ * Copyright (C) 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -23,14 +23,14 @@
 #include <gdkmm/pixbuf.h>
 #include <gdkmm/rgba.h>
 #include <gtkmm/widget.h>
-#include <gtksourceviewmm/sourcemark.h>
+#include <gtksourceviewmm/mark.h>
 
 namespace Gsv
 {
 
-bool SourceMarkAttributes::is_background_set() const
+bool MarkAttributes::is_background_set() const
 {
-  return gtk_source_mark_attributes_get_background(const_cast<SourceMarkAttributes*>(this)->gobj(), 0);
+  return gtk_source_mark_attributes_get_background(const_cast<MarkAttributes*>(this)->gobj(), 0);
 }
 
 } // namespace Gsv

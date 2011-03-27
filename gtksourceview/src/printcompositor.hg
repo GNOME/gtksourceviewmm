@@ -1,6 +1,6 @@
-/* sourceprintcompositor.h
+/* printcompositor.h
  *
- * Copyright (C) 2009, 2010 Krzesimir Nowak
+ * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -19,8 +19,8 @@
 
 #include <gtkmm/printcontext.h>
 
-#include <gtksourceviewmm/sourceview.h>
-#include <gtksourceviewmm/sourcebuffer.h>
+#include <gtksourceviewmm/view.h>
+#include <gtksourceviewmm/buffer.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -28,62 +28,62 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace Gsv
 {
 
-/** Compose a SourceBuffer for printing.
+/** Compose a Buffer for printing.
  *
  * @newin{2,10}
  */
-class SourcePrintCompositor : public Glib::Object
+class PrintCompositor : public Glib::Object
 {
-  _CLASS_GOBJECT(SourcePrintCompositor, GtkSourcePrintCompositor, GTK_SOURCE_PRINT_COMPOSITOR, Glib::Object, GObject)
+  _CLASS_GOBJECT(PrintCompositor, GtkSourcePrintCompositor, GTK_SOURCE_PRINT_COMPOSITOR, Glib::Object, GObject)
 
 protected:
-  _WRAP_CTOR(SourcePrintCompositor(const Glib::RefPtr<SourceBuffer>& buffer), gtk_source_print_compositor_new)
-  explicit SourcePrintCompositor(const SourceView& view);
+  _WRAP_CTOR(PrintCompositor(const Glib::RefPtr<Buffer>& buffer), gtk_source_print_compositor_new)
+  explicit PrintCompositor(const View& view);
 public:
   /** Creates a new print compositor that can be used to print @a buffer.
    *
-   * @param buffer the SourceBuffer to print.
+   * @param buffer the Buffer to print.
    *
    * @return A new print compositor object.
    *
    * @newin{2,10}
    */
-  _WRAP_CREATE(const Glib::RefPtr<SourceBuffer>& buffer)
+  _WRAP_CREATE(const Glib::RefPtr<Buffer>& buffer)
 
   /** Creates a new print compositor that can be used to print the buffer
    *  associated with @a view.
    *
    * This constructor sets some configuration properties to make the
    * printed output match @a view as much as possible.  The properties set are
-   * SourcePrintCompositor::property_tab_width(),
-   * SourcePrintCompositor::property_highlight_syntax(),
-   * SourcePrintCompositor::property_wrap_mode(),
-   * SourcePrintCompositor::property_body_font_name() and
-   * SourcePrintCompositor::property_print_line_numbers().
+   * PrintCompositor::property_tab_width(),
+   * PrintCompositor::property_highlight_syntax(),
+   * PrintCompositor::property_wrap_mode(),
+   * PrintCompositor::property_body_font_name() and
+   * PrintCompositor::property_print_line_numbers().
    *
-   * @param view A SourceView to get configuration from.
+   * @param view A View to get configuration from.
    *
    * @return A new print compositor object.
    *
    * @newin{2,10}
    */
-  _WRAP_CREATE(const SourceView& view)
+  _WRAP_CREATE(const View& view)
 
-  /** Gets the SourceBuffer associated with the compositor.
+  /** Gets the Buffer associated with the compositor.
    *
-   * @return The SourceBuffer associated with the compositor.
+   * @return The Buffer associated with the compositor.
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(Glib::RefPtr<SourceBuffer> get_buffer(), gtk_source_print_compositor_get_buffer, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<Buffer> get_buffer(), gtk_source_print_compositor_get_buffer, refreturn)
 
-  /** Gets the SourceBuffer associated with the compositor.
+  /** Gets the Buffer associated with the compositor.
    *
-   * @return The SourceBuffer associated with the compositor.
+   * @return The Buffer associated with the compositor.
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(Glib::RefPtr<const SourceBuffer> get_buffer() const, gtk_source_print_compositor_get_buffer, refreturn, constversion)
+  _WRAP_METHOD(Glib::RefPtr<const Buffer> get_buffer() const, gtk_source_print_compositor_get_buffer, refreturn, constversion)
 
   /** Sets the width of tabulation in characters for printed text.
    *
@@ -524,7 +524,7 @@ public:
    * static bool
    * paginate (Glib::RefPtr<Gtk::PrintOperation> operation,
    *           Glib::RefPtr<Gtk::PrintContext> context,
-   *           Glib::RefPtr<Gsv::SourcePrintCompositor> compositor)
+   *           Glib::RefPtr<Gsv::PrintCompositor> compositor)
    * {
    *   if (compositor->paginate(context))
    *   {
@@ -549,7 +549,7 @@ public:
    * static void
    * begin_print (Glib::RefPtr< Gtk::PrintOperation > operation,
    *              Glib::RefPtr< Gtk::PrintContext > context,
-   *              Glib::RefPtr< Gsv::SourcePrintCompositor > compositor)
+   *              Glib::RefPtr< Gsv::PrintCompositor > compositor)
    * {
    *   while (!compositor->paginate(context));
    *
@@ -589,7 +589,7 @@ public:
    * draw_page (Glib::RefPtr< Gtk::PrintOperation > operation,
    *            Glib::RefPtr< GtkPrintContext > context,
    *            int page_nr,
-   *            Glib::RefPtr< Gsv::SourcePrintCompositor > compositor)
+   *            Glib::RefPtr< Gsv::PrintCompositor > compositor)
    * {
    *   compositor->draw_page(context, page_nr);
    * }
@@ -605,7 +605,7 @@ public:
 
 
   _WRAP_PROPERTY("body-font-name", Glib::ustring)
-  _WRAP_PROPERTY("buffer", Glib::RefPtr<SourceBuffer>)
+  _WRAP_PROPERTY("buffer", Glib::RefPtr<Buffer>)
   _WRAP_PROPERTY("footer-font-name", Glib::ustring)
   _WRAP_PROPERTY("header-font-name", Glib::ustring)
   _WRAP_PROPERTY("highlight-syntax", bool)

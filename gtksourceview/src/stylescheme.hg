@@ -1,4 +1,4 @@
-/* sourcestylescheme.h
+/* stylescheme.h
  *
  * Copyright (C) 2004-2005 Jae Jang
  * Copyright (C) 2005-2006 Rob Page
@@ -26,7 +26,7 @@
 
 #include <glibmm/object.h>
 
-#include <gtksourceviewmm/sourcestyle.h>
+#include <gtksourceviewmm/style.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -36,10 +36,10 @@ namespace Gsv
 
 
 
-/** Object controlling appearance of SourceView.
+/** Object controlling appearance of View.
  *
- * SourceStyleScheme contains all the text styles to be used in SourceView and
- * SourceBuffer. For instance, it contains text styles for syntax highlighting,
+ * StyleScheme contains all the text styles to be used in View and
+ * Buffer. For instance, it contains text styles for syntax highlighting,
  * it may contain foreground and background color for non-highlighted text,
  * color for the line numbers, etc.
  *
@@ -48,9 +48,9 @@ namespace Gsv
  *
  * @newin{2,2}
  */
-class SourceStyleScheme : public Glib::Object
+class StyleScheme : public Glib::Object
 {
-  _CLASS_GOBJECT(SourceStyleScheme, GtkSourceStyleScheme, GTK_SOURCE_STYLE_SCHEME, Glib::Object, GObject)
+  _CLASS_GOBJECT(StyleScheme, GtkSourceStyleScheme, GTK_SOURCE_STYLE_SCHEME, Glib::Object, GObject)
 
 public:
 
@@ -106,7 +106,7 @@ public:
    *
    * @newin{2,2}
    */
-  _WRAP_METHOD(Glib::RefPtr<SourceStyle> get_style(const Glib::ustring& style_id), gtk_source_style_scheme_get_style, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<Style> get_style(const Glib::ustring& style_id), gtk_source_style_scheme_get_style, refreturn)
 
   /** Gets style corresponding to @a style_id in scheme.
    *
@@ -117,13 +117,13 @@ public:
    *
    * @newin{2,2}
    */
-  _WRAP_METHOD(Glib::RefPtr<const SourceStyle> get_style(const Glib::ustring& style_id) const, gtk_source_style_scheme_get_style, refreturn, constversion)
+  _WRAP_METHOD(Glib::RefPtr<const Style> get_style(const Glib::ustring& style_id) const, gtk_source_style_scheme_get_style, refreturn, constversion)
 
   _WRAP_PROPERTY("id", std::string)
   _WRAP_PROPERTY("name", Glib::ustring)
   _WRAP_PROPERTY("description", Glib::ustring)
   _WRAP_PROPERTY("filename", std::string)
-};//end class SourceStyleScheme
+};//end class StyleScheme
 
 }//end namespace Gsv
 

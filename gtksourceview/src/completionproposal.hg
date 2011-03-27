@@ -1,6 +1,6 @@
-/* sourcecompletionproposal.h
+/* completionproposal.h
  *
- * Copyright (C) 2009, 2010 Krzesimir Nowak
+ * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -36,9 +36,9 @@ namespace Gsv
  *
  * @newin{2,10}
  */
-class SourceCompletionProposal : public Glib::Interface
+class CompletionProposal : public Glib::Interface
 {
-  _CLASS_INTERFACE(SourceCompletionProposal, GtkSourceCompletionProposal, GTK_SOURCE_COMPLETION_PROPOSAL, GtkSourceCompletionProposalIface)
+  _CLASS_INTERFACE(CompletionProposal, GtkSourceCompletionProposal, GTK_SOURCE_COMPLETION_PROPOSAL, GtkSourceCompletionProposalIface)
 
 public:
   /** Gets the label of a proposal.
@@ -127,12 +127,12 @@ public:
    * This is used to (together with hash()) to match proposals in the
    * completion model. By default, it uses direct equality.
    *
-   * @param other A SourceCompletionProposal.
+   * @param other A CompletionProposal.
    * @return @c true if a proposal and @a other are the same proposal.
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(bool equal(const Glib::RefPtr<const SourceCompletionProposal>& other) const, gtk_source_completion_proposal_equal)
+  _WRAP_METHOD(bool equal(const Glib::RefPtr<const CompletionProposal>& other) const, gtk_source_completion_proposal_equal)
 
   /** Emitted when the proposal has changed.
    *
@@ -156,9 +156,9 @@ private:
 
   _WRAP_VFUNC(guint hash() const, hash)
 
-#m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const SourceCompletionProposal>&', `Glib::wrap($3, true)')
-  _WRAP_VFUNC(bool equal(const Glib::RefPtr<const SourceCompletionProposal>& other) const, equal)
-#m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const SourceCompletionProposal>&', `Glib::wrap($3)')
+#m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const CompletionProposal>&', `Glib::wrap($3, true)')
+  _WRAP_VFUNC(bool equal(const Glib::RefPtr<const CompletionProposal>& other) const, equal)
+#m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const CompletionProposal>&', `Glib::wrap($3)')
 };
 
 } // namespace Gsv

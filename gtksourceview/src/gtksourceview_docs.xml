@@ -3799,21 +3799,273 @@ a %NULL-terminated array of strings or %NULL.
 <return></return>
 </function>
 
-<function name="gtk_source_mark_category_get_gicon">
+<function name="gtk_source_mark_attributes_get_background">
 <description>
-Get the #GIcon associated with the mark category.
+Stores background color in @background.
 
 
 </description>
 <parameters>
-<parameter name="category">
-<parameter_description> a #GtkSourceMarkCategory
+<parameter name="attributes">
+<parameter_description> a #GtkSourceMarkAttributes.
+</parameter_description>
+</parameter>
+<parameter name="background">
+<parameter_description> a #GdkRGBA.
 </parameter_description>
 </parameter>
 </parameters>
-<return> A #GIcon
-
+<return> whether background color for @attributes was set.
 </return>
+</function>
+
+<function name="gtk_source_mark_attributes_get_gicon">
+<description>
+Gets a #GIcon to be used as a base for rendered icon. Note that the icon can
+be %NULL if it wasn't set earlier.
+
+
+</description>
+<parameters>
+<parameter name="attributes">
+<parameter_description> a #GtkSourceMarkAttributes.
+</parameter_description>
+</parameter>
+</parameters>
+<return> An icon. The icon belongs to @attributes and should
+not be unreffed.
+</return>
+</function>
+
+<function name="gtk_source_mark_attributes_get_icon_name">
+<description>
+Gets a name of an icon to be used as a base for rendered icon. Note that the
+icon name can be %NULL if it wasn't set earlier.
+
+
+</description>
+<parameters>
+<parameter name="attributes">
+<parameter_description> a #GtkSourceMarkAttributes.
+</parameter_description>
+</parameter>
+</parameters>
+<return> An icon name. The string belongs to @attributes and
+should not be freed.
+</return>
+</function>
+
+<function name="gtk_source_mark_attributes_get_pixbuf">
+<description>
+Gets a #GdkPixbuf to be used as a base for rendered icon. Note that the
+pixbuf can be %NULL if it wasn't set earlier.
+
+
+</description>
+<parameters>
+<parameter name="attributes">
+<parameter_description> a #GtkSourceMarkAttributes.
+</parameter_description>
+</parameter>
+</parameters>
+<return> A pixbuf. The pixbuf belongs to @attributes and
+should not be unreffed.
+</return>
+</function>
+
+<function name="gtk_source_mark_attributes_get_stock_id">
+<description>
+Gets a stock id of an icon used by this attributes. Note that the stock id can
+be %NULL if it wasn't set earlier.
+
+
+</description>
+<parameters>
+<parameter name="attributes">
+<parameter_description> a #GtkSourceMarkAttributes.
+</parameter_description>
+</parameter>
+</parameters>
+<return> Stock id. Returned string is owned by @attributes and
+shouldn't be freed.
+</return>
+</function>
+
+<function name="gtk_source_mark_attributes_get_tooltip_markup">
+<description>
+Queries for a tooltip by emitting
+a GtkSourceMarkAttributes::query-tooltip-markup signal. The tooltip may contain
+a markup.
+
+
+</description>
+<parameters>
+<parameter name="attributes">
+<parameter_description> a #GtkSourceMarkAttributes.
+</parameter_description>
+</parameter>
+<parameter name="mark">
+<parameter_description> a #GtkSourceMark.
+</parameter_description>
+</parameter>
+</parameters>
+<return> A tooltip. The returned string should be freed by
+using g_free() when done with it.
+</return>
+</function>
+
+<function name="gtk_source_mark_attributes_get_tooltip_text">
+<description>
+Queries for a tooltip by emitting
+a GtkSourceMarkAttributes::query-tooltip-text signal. The tooltip is a plain
+text.
+
+
+</description>
+<parameters>
+<parameter name="attributes">
+<parameter_description> a #GtkSourceMarkAttributes.
+</parameter_description>
+</parameter>
+<parameter name="mark">
+<parameter_description> a #GtkSourceMark.
+</parameter_description>
+</parameter>
+</parameters>
+<return> A tooltip. The returned string should be freed by
+using g_free() when done with it.
+</return>
+</function>
+
+<function name="gtk_source_mark_attributes_new">
+<description>
+Creates a new source mark attributes.
+
+
+</description>
+<parameters>
+</parameters>
+<return> a new source mark attributes.
+</return>
+</function>
+
+<function name="gtk_source_mark_attributes_render_icon">
+<description>
+Renders an icon of given size. The base of the icon is set by the last call
+to one of: gtk_source_mark_attributes_set_pixbuf(),
+gtk_source_mark_attributes_set_gicon(),
+gtk_source_mark_attributes_set_icon_name() or
+gtk_source_mark_attributes_set_stock_id(). @size cannot be lower than 1.
+
+
+</description>
+<parameters>
+<parameter name="attributes">
+<parameter_description> a #GtkSourceMarkAttributes.
+</parameter_description>
+</parameter>
+<parameter name="widget">
+<parameter_description> widget of which style settings may be used.
+</parameter_description>
+</parameter>
+<parameter name="size">
+<parameter_description> size of the rendered icon.
+</parameter_description>
+</parameter>
+</parameters>
+<return> A rendered pixbuf. The pixbuf belongs to @attributes
+and should not be unreffed.
+</return>
+</function>
+
+<function name="gtk_source_mark_attributes_set_background">
+<description>
+Sets background color to the one given in @background.
+
+</description>
+<parameters>
+<parameter name="attributes">
+<parameter_description> a #GtkSourceMarkAttributes.
+</parameter_description>
+</parameter>
+<parameter name="background">
+<parameter_description> a #GdkRGBA.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_mark_attributes_set_gicon">
+<description>
+Sets an icon to be used as a base for rendered icon.
+
+</description>
+<parameters>
+<parameter name="attributes">
+<parameter_description> a #GtkSourceMarkAttributes.
+</parameter_description>
+</parameter>
+<parameter name="gicon">
+<parameter_description> a #GIcon to be used.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_mark_attributes_set_icon_name">
+<description>
+Sets a name of an icon to be used as a base for rendered icon.
+
+</description>
+<parameters>
+<parameter name="attributes">
+<parameter_description> a #GtkSourceMarkAttributes.
+</parameter_description>
+</parameter>
+<parameter name="icon_name">
+<parameter_description> name of an icon to be used.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_mark_attributes_set_pixbuf">
+<description>
+Sets a pixbuf to be used as a base for rendered icon.
+
+</description>
+<parameters>
+<parameter name="attributes">
+<parameter_description> a #GtkSourceMarkAttributes.
+</parameter_description>
+</parameter>
+<parameter name="pixbuf">
+<parameter_description> a #GdkPixbuf to be used.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_mark_attributes_set_stock_id">
+<description>
+Sets stock id to be used as a base for rendered icon.
+
+</description>
+<parameters>
+<parameter name="attributes">
+<parameter_description> a #GtkSourceMarkAttributes.
+</parameter_description>
+</parameter>
+<parameter name="stock_id">
+<parameter_description> a stock id.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
 </function>
 
 <function name="gtk_source_mark_get_category">
@@ -5506,26 +5758,28 @@ be replaced by a group of space characters.
 </return>
 </function>
 
-<function name="gtk_source_view_get_mark_category">
+<function name="gtk_source_view_get_mark_attributes">
 <description>
-Get the source mark category object for @category. A
-#GtkSourceMarkCategory is automatically created for the given category
-if it does not exist yet.
+Gets attributes and priority for the @category.
 
 
 </description>
 <parameters>
 <parameter name="view">
-<parameter_description> a #GtkSourceView
+<parameter_description> a #GtkSourceView.
 </parameter_description>
 </parameter>
 <parameter name="category">
-<parameter_description> the category
+<parameter_description> the category.
+</parameter_description>
+</parameter>
+<parameter name="priority">
+<parameter_description> place where priority of the category will be stored.
 </parameter_description>
 </parameter>
 </parameters>
-<return> the #GtkSourceMarkCategory object
-
+<return> #GtkSourceMarkAttributes for the @category.
+The object belongs to @view, so it must not be unreffed.
 </return>
 </function>
 
@@ -5720,7 +5974,7 @@ be displayed
 
 <function name="gtk_source_view_set_highlight_current_line">
 <description>
-If @show is %TRUE the current line is highlighted.
+If @hl is %TRUE the current line is highlighted.
 
 </description>
 <parameters>
@@ -5728,7 +5982,7 @@ If @show is %TRUE the current line is highlighted.
 <parameter_description> a #GtkSourceView.
 </parameter_description>
 </parameter>
-<parameter name="show">
+<parameter name="hl">
 <parameter_description> whether to highlight the current line.
 </parameter_description>
 </parameter>
@@ -5791,6 +6045,32 @@ of space characters.
 </parameter>
 <parameter name="enable">
 <parameter_description> whether to insert spaces instead of tabs.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_view_set_mark_attributes">
+<description>
+Sets attributes and priority for the @category.
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="category">
+<parameter_description> the category.
+</parameter_description>
+</parameter>
+<parameter name="attributes">
+<parameter_description> mark attributes.
+</parameter_description>
+</parameter>
+<parameter name="priority">
+<parameter_description> priority of the category.
 </parameter_description>
 </parameter>
 </parameters>

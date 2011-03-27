@@ -7,3 +7,35 @@
   (c-name "gtk_source_completion_get_view")
   (return-type "GtkSourceView*")
 )
+
+;; h2def.py seems to choke on `const gchar * const *' or something...
+
+(define-method get_search_path
+  (of-object "GtkSourceLanguageManager")
+  (c-name "gtk_source_language_manager_get_search_path")
+  (return-type "const-gchar**")
+)
+
+(define-method get_language_ids
+  (of-object "GtkSourceLanguageManager")
+  (c-name "gtk_source_language_manager_get_language_ids")
+  (return-type "const-gchar**")
+)
+
+(define-method get_authors
+  (of-object "GtkSourceStyleScheme")
+  (c-name "gtk_source_style_scheme_get_authors")
+  (return-type "const-gchar**")
+)
+
+(define-method get_search_path
+  (of-object "GtkSourceStyleSchemeManager")
+  (c-name "gtk_source_style_scheme_manager_get_search_path")
+  (return-type "const-gchar**")
+)
+
+(define-method get_scheme_ids
+  (of-object "GtkSourceStyleSchemeManager")
+  (c-name "gtk_source_style_scheme_manager_get_scheme_ids")
+  (return-type "const-gchar**")
+)

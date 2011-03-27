@@ -1369,12 +1369,6 @@
   (return-type "GtkSourceLanguageManager*")
 )
 
-(define-method get_search_path
-  (of-object "GtkSourceLanguageManager")
-  (c-name "gtk_source_language_manager_get_search_path")
-  (return-type "const-gchar**")
-)
-
 (define-method set_search_path
   (of-object "GtkSourceLanguageManager")
   (c-name "gtk_source_language_manager_set_search_path")
@@ -1382,12 +1376,6 @@
   (parameters
     '("gchar**" "dirs")
   )
-)
-
-(define-method get_language_ids
-  (of-object "GtkSourceLanguageManager")
-  (c-name "gtk_source_language_manager_get_language_ids")
-  (return-type "const-gchar**")
 )
 
 (define-method get_language
@@ -1928,12 +1916,6 @@
   (return-type "const-gchar*")
 )
 
-(define-method get_authors
-  (of-object "GtkSourceStyleScheme")
-  (c-name "gtk_source_style_scheme_get_authors")
-  (return-type "const-gchar**")
-)
-
 (define-method get_filename
   (of-object "GtkSourceStyleScheme")
   (c-name "gtk_source_style_scheme_get_filename")
@@ -1996,22 +1978,10 @@
   )
 )
 
-(define-method get_search_path
-  (of-object "GtkSourceStyleSchemeManager")
-  (c-name "gtk_source_style_scheme_manager_get_search_path")
-  (return-type "const-gchar**")
-)
-
 (define-method force_rescan
   (of-object "GtkSourceStyleSchemeManager")
   (c-name "gtk_source_style_scheme_manager_force_rescan")
   (return-type "none")
-)
-
-(define-method get_scheme_ids
-  (of-object "GtkSourceStyleSchemeManager")
-  (c-name "gtk_source_style_scheme_manager_get_scheme_ids")
-  (return-type "const-gchar**")
 )
 
 (define-method get_scheme

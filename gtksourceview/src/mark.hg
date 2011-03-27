@@ -1,7 +1,7 @@
-/* sourcemark.h
+/* mark.h
  *
  * Copyright (C) 2008 Jonathon Jongsma
- * Copyright (C) 2010 Krzesimir Nowak
+ * Copyright (C) 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -26,18 +26,18 @@ _PINCLUDE(gtkmm/private/textmark_p.h)
 namespace Gsv
 {
 
-/** Mark class for SourceBuffer.
+/** Mark class for Buffer.
  *
  * @newin{2,2}
  */
-class SourceMark : public Gtk::TextMark
+class Mark : public Gtk::TextMark
 {
-  _CLASS_GOBJECT(SourceMark, GtkSourceMark, GTK_SOURCE_MARK, Gtk::TextMark, GtkTextMark)
+  _CLASS_GOBJECT(Mark, GtkSourceMark, GTK_SOURCE_MARK, Gtk::TextMark, GtkTextMark)
 
 protected:
 
-  explicit SourceMark(const Glib::ustring& category);
-  explicit SourceMark(const Glib::ustring& name, const Glib::ustring& category);
+  explicit Mark(const Glib::ustring& category);
+  explicit Mark(const Glib::ustring& name, const Glib::ustring& category);
   _IGNORE(gtk_source_mark_new)
 
 public:
@@ -46,14 +46,14 @@ public:
    * Add it to a buffer using Gtk::TextBuffer::add_mark(). Note that such marks
    * cannot be retrieved by using Gtk::TextBuffer::get_mark(). Normally marks
    * are created using the utility function
-   * Gsv::SourceBuffer::create_source_mark().
+   * Gsv::Buffer::create_source_mark().
    *
    * @param category Is used to classify marks according to common
    * characteristics (e.g. all the marks representing a bookmark could belong to
    * the "bookmark" category, or all the marks representing a compilation error
    * could belong to "error" category).
    *
-   * @return A new anonymous SourceMark that can be added using
+   * @return A new anonymous Mark that can be added using
    * GtkTextBuffer::add_mark().
    */
   _WRAP_CREATE(const Glib::ustring& category)
@@ -62,117 +62,117 @@ public:
    *
    * Add it to a buffer using Gtk::TextBuffer::add_mark(). The mark can be
    * retrieved by name by using Gtk::TextBuffer::get_mark(). Normally marks are
-   * created using the utility function SourceBuffer::create_source_mark().
+   * created using the utility function Buffer::create_source_mark().
    *
    * @param category Is used to classify marks according to common
    * characteristics (e.g. all the marks representing a bookmark could belong to
    * the "bookmark" category, or all the marks representing a compilation error
    * could belong to "error" category).
-   * @param name Name of the SourceMark.
+   * @param name Name of the Mark.
    *
-   * @return A new SourceMark that can be added using GtkTextBuffer::add_mark().
+   * @return A new Mark that can be added using GtkTextBuffer::add_mark().
    */
   _WRAP_CREATE(const Glib::ustring& name, const Glib::ustring& category)
 
   /** Returns the mark category.
    *
-   * @return The category of the SourceMark.
+   * @return The category of the Mark.
    *
    * @newin{2,2}
    */
   _WRAP_METHOD(Glib::ustring get_category() const, gtk_source_mark_get_category)
 
-  /** Returns the next SourceMark in the buffer.
+  /** Returns the next Mark in the buffer.
    *
    * If there is no next mark, empty refptr will be returned.
    *
    * @param category A string specifying the mark category.
    *
-   * @return The next SourceMark or empty Glib::RefPtr.
+   * @return The next Mark or empty Glib::RefPtr.
    *
    * @newin{2,2}
    */
-  _WRAP_METHOD(Glib::RefPtr<SourceMark> next(const Glib::ustring& category), gtk_source_mark_next, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<Gsv::Mark> next(const Glib::ustring& category), gtk_source_mark_next, refreturn)
 
-  /** Returns the next SourceMark in the buffer.
+  /** Returns the next Mark in the buffer.
    *
    * If there is no next mark, empty refptr will be returned.
    *
    * @param category A string specifying the mark category.
    *
-   * @return The next SourceMark or empty Glib::RefPtr.
+   * @return The next Mark or empty Glib::RefPtr.
    *
    * @newin{2,2}
    */
-  _WRAP_METHOD(Glib::RefPtr<const SourceMark> next(const Glib::ustring& category) const, gtk_source_mark_next, refreturn, constversion)
+  _WRAP_METHOD(Glib::RefPtr<const Gsv::Mark> next(const Glib::ustring& category) const, gtk_source_mark_next, refreturn, constversion)
 
-  /** Returns the next SourceMark of any category in the buffer.
+  /** Returns the next Mark of any category in the buffer.
    *
    * If there is no next mark, empty refptr will be returned.
    *
-   * @return The next SourceMark or empty Glib::RefPtr.
+   * @return The next Mark or empty Glib::RefPtr.
    *
    * @newin{2,2}
    */
-  Glib::RefPtr<SourceMark> next();
+  Glib::RefPtr<Gsv::Mark> next();
 
-  /** Returns the next SourceMark of any category in the buffer.
+  /** Returns the next Mark of any category in the buffer.
    *
    * If there is no next mark, empty refptr will be returned.
    *
-   * @return The next SourceMark or empty Glib::RefPtr.
+   * @return The next Mark or empty Glib::RefPtr.
    *
    * @newin{2,2}
    */
-  Glib::RefPtr<const SourceMark> next() const;
+  Glib::RefPtr<const Gsv::Mark> next() const;
 
-  /** Returns the previous SourceMark in the buffer.
+  /** Returns the previous Mark in the buffer.
    *
    * If there is no previous mark, empty refptr will be returned.
    *
    * @param category A string specifying the mark category.
    *
-   * @return The previous SourceMark or empty Glib::RefPtr.
+   * @return The previous Mark or empty Glib::RefPtr.
    *
    * @newin{2,2}
    */
-  _WRAP_METHOD(Glib::RefPtr<SourceMark> prev(const Glib::ustring& category), gtk_source_mark_prev, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<Gsv::Mark> prev(const Glib::ustring& category), gtk_source_mark_prev, refreturn)
 
-  /** Returns the previous SourceMark in the buffer.
+  /** Returns the previous Mark in the buffer.
    *
    * If there is no previous mark, empty refptr will be returned.
    *
    * @param category A string specifying the mark category.
    *
-   * @return The previous SourceMark or empty Glib::RefPtr.
+   * @return The previous Mark or empty Glib::RefPtr.
    *
    * @newin{2,2}
    */
-  _WRAP_METHOD(Glib::RefPtr<const SourceMark> prev(const Glib::ustring& category) const, gtk_source_mark_prev, refreturn, constversion)
+  _WRAP_METHOD(Glib::RefPtr<const Gsv::Mark> prev(const Glib::ustring& category) const, gtk_source_mark_prev, refreturn, constversion)
 
-  /** Returns the previous SourceMark of any category in the buffer.
+  /** Returns the previous Mark of any category in the buffer.
    *
    * If there is no previous mark, empty refptr will be returned.
    *
-   * @return The previous SourceMark or empty Glib::RefPtr.
+   * @return The previous Mark or empty Glib::RefPtr.
    *
    * @newin{2,2}
    */
-  Glib::RefPtr<SourceMark> prev();
+  Glib::RefPtr<Gsv::Mark> prev();
 
-  /** Returns the previous SourceMark of any category in the buffer.
+  /** Returns the previous Mark of any category in the buffer.
    *
    * If there is no previous mark, empty refptr will be returned.
    *
-   * @return The previous SourceMark or empty Glib::RefPtr.
+   * @return The previous Mark or empty Glib::RefPtr.
    *
    * @newin{2,2}
    */
-  Glib::RefPtr<const SourceMark> prev() const;
+  Glib::RefPtr<const Gsv::Mark> prev() const;
 
   _WRAP_PROPERTY("category", Glib::ustring)
 
-};//end class SourceMark
+};//end class Mark
 
 }//end namespace Gsv
 

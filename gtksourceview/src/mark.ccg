@@ -1,7 +1,7 @@
-/* sourcemark.cc
+/* mark.cc
  *
  * Copyright (C) 2008 Jonathon Jongsma
- * Copyright (C) 2010 Krzesimir Nowak
+ * Copyright (C) 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -25,19 +25,19 @@ namespace Gsv
 
 // Both constructors are implemented by hand because the C _new() function
 // specifies an extra left-gravity property.
-SourceMark::SourceMark(const Glib::ustring& category)
+Mark::Mark(const Glib::ustring& category)
 :
   _CONSTRUCT("name", 0, "category", category.c_str(), "left-gravity", TRUE)
 {}
 
-SourceMark::SourceMark(const Glib::ustring& name, const Glib::ustring& category)
+Mark::Mark(const Glib::ustring& name, const Glib::ustring& category)
 :
   _CONSTRUCT("name", name.c_str(), "category", category.c_str(), "left-gravity", TRUE)
 {}
 
-Glib::RefPtr<SourceMark> SourceMark::next()
+Glib::RefPtr<Mark> Mark::next()
 {
-  Glib::RefPtr<SourceMark> result = Glib::wrap (gtk_source_mark_next(const_cast<GtkSourceMark*>(gobj()), 0));
+  Glib::RefPtr<Mark> result = Glib::wrap (gtk_source_mark_next(const_cast<GtkSourceMark*>(gobj()), 0));
   if (result)
   {
     result->reference();
@@ -45,9 +45,9 @@ Glib::RefPtr<SourceMark> SourceMark::next()
   return result;
 }
 
-Glib::RefPtr<const SourceMark> SourceMark::next() const
+Glib::RefPtr<const Mark> Mark::next() const
 {
-  Glib::RefPtr<const SourceMark> result = Glib::wrap (gtk_source_mark_next(const_cast<GtkSourceMark*>(gobj()), 0));
+  Glib::RefPtr<const Mark> result = Glib::wrap (gtk_source_mark_next(const_cast<GtkSourceMark*>(gobj()), 0));
   if (result)
   {
     result->reference();
@@ -55,9 +55,9 @@ Glib::RefPtr<const SourceMark> SourceMark::next() const
   return result;
 }
 
-Glib::RefPtr<SourceMark> SourceMark::prev()
+Glib::RefPtr<Mark> Mark::prev()
 {
-  Glib::RefPtr<SourceMark> result =  Glib::wrap (gtk_source_mark_prev(const_cast<GtkSourceMark*>(gobj()), 0));
+  Glib::RefPtr<Mark> result =  Glib::wrap (gtk_source_mark_prev(const_cast<GtkSourceMark*>(gobj()), 0));
   if (result)
   {
     result->reference();
@@ -65,9 +65,9 @@ Glib::RefPtr<SourceMark> SourceMark::prev()
   return result;
 }
 
-Glib::RefPtr<const SourceMark> SourceMark::prev() const
+Glib::RefPtr<const Mark> Mark::prev() const
 {
-  Glib::RefPtr<const SourceMark> result =  Glib::wrap (gtk_source_mark_prev(const_cast<GtkSourceMark*>(gobj()), 0));
+  Glib::RefPtr<const Mark> result =  Glib::wrap (gtk_source_mark_prev(const_cast<GtkSourceMark*>(gobj()), 0));
   if (result)
   {
     result->reference();

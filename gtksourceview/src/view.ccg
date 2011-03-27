@@ -1,9 +1,9 @@
-/* sourceview.cc
+/* view.cc
  *
  * Copyright (C) 2004-2005 Jae Jang
  * Copyright (C) 2005-2006 Rob Page
  * Copyright (C) 2006 Dodji Seketeli
- * Copyright (C) 2009, 2010 Krzesimir Nowak
+ * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -22,13 +22,13 @@
 #include <gtksourceview/gtksourceview.h>
 #include <gtksourceview/gtksourceview-typebuiltins.h>
 
-#include <gtksourceviewmm/sourceview.h>
-#include <gtksourceviewmm/sourcemarkattributes.h>
+#include <gtksourceviewmm/view.h>
+#include <gtksourceviewmm/markattributes.h>
 
 namespace Gsv
 {
 
-SourceView::SourceView() :
+View::View() :
     _CONSTRUCT
 {
     GtkSourceBuffer *buffer = gtk_source_buffer_new (0) ;
@@ -36,7 +36,7 @@ SourceView::SourceView() :
     g_object_unref(buffer);
 }
 
-SourceView::SourceView(const Glib::RefPtr<SourceBuffer> &a_buffer) :
+View::View(const Glib::RefPtr<Buffer> &a_buffer) :
     _CONSTRUCT
 {
     if (a_buffer) {
@@ -48,22 +48,22 @@ SourceView::SourceView(const Glib::RefPtr<SourceBuffer> &a_buffer) :
     }
 }
 
-Glib::RefPtr<const SourceBuffer>
-SourceView::get_source_buffer () const
+Glib::RefPtr<const Buffer>
+View::get_source_buffer () const
 {
     Glib::RefPtr<const Gtk::TextBuffer> buffer = get_buffer();
-    return Glib::RefPtr<const SourceBuffer>::cast_dynamic(buffer);
+    return Glib::RefPtr<const Buffer>::cast_dynamic(buffer);
 }
 
-Glib::RefPtr<SourceBuffer>
-SourceView::get_source_buffer ()
+Glib::RefPtr<Buffer>
+View::get_source_buffer ()
 {
     Glib::RefPtr<Gtk::TextBuffer> buffer = get_buffer();
-    return Glib::RefPtr<SourceBuffer>::cast_dynamic(buffer);
+    return Glib::RefPtr<Buffer>::cast_dynamic(buffer);
 }
 
 void
-SourceView::set_source_buffer (const Glib::RefPtr<SourceBuffer> &source_buffer)
+View::set_source_buffer (const Glib::RefPtr<Buffer> &source_buffer)
 {
     set_buffer (source_buffer) ;
 }

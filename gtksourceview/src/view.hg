@@ -1,9 +1,9 @@
-/* sourceview.h
+/* view.h
  *
  * Copyright (C) 2004-2005 Jae Jang
  * Copyright (C) 2005-2006 Rob Page
  * Copyright (C) 2005-2006 Dodji Seketeli
- * Copyright (C) 2009, 2010 Krzesimir Nowak
+ * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -21,9 +21,9 @@
  */
 
 #include <gtkmm/textview.h>
-#include <gtksourceviewmm/sourcebuffer.h>
-#include <gtksourceviewmm/sourcegutter.h>
-#include <gtksourceviewmm/sourcecompletion.h>
+#include <gtksourceviewmm/buffer.h>
+#include <gtksourceviewmm/gutter.h>
+#include <gtksourceviewmm/completion.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(gtkmm/private/textview_p.h)
@@ -31,57 +31,57 @@ _PINCLUDE(gtkmm/private/textview_p.h)
 namespace Gsv
 {
 
-class SourceCompletion;
-class SourceGutter;
-class SourceMarkAttributes;
+class Completion;
+class Gutter;
+class MarkAttributes;
 
 /** Defines a behaviour of smart Home/End keys.
  */
-_WRAP_ENUM(SourceSmartHomeEndType, GtkSourceSmartHomeEndType)
-/** @var SourceSmartHomeEndType SOURCE_SMART_HOME_END_DISABLED
+_WRAP_ENUM(SmartHomeEndType, GtkSourceSmartHomeEndType, s#^SOURCE_##)
+/** @var SmartHomeEndType SMART_HOME_END_DISABLED
  * Smart-home-end disabled.
  */
-/** @var SourceSmartHomeEndType SOURCE_SMART_HOME_END_BEFORE
+/** @var SmartHomeEndType SMART_HOME_END_BEFORE
  * Move to the first/last non-whitespace character on the first press of the
  * HOME/END keys and to the beginning/end of the line on the second press.
  */
-/** @var SourceSmartHomeEndType SOURCE_SMART_HOME_END_AFTER
+/** @var SmartHomeEndType SMART_HOME_END_AFTER
  * Move to the beginning/end of the line on the first press of the HOME/END keys
  * and to the first/last non-whitespace character on the second press.
  */
-/** @var SourceSmartHomeEndType SOURCE_SMART_HOME_END_ALWAYS
+/** @var SmartHomeEndType SMART_HOME_END_ALWAYS
  * Always move to the first/last non-whitespace character when the HOME/END keys
  * are pressed.
  */
 
 /** Determines what kind of whitespaces whould be drawn.
  */
-_WRAP_ENUM(SourceDrawSpacesFlags, GtkSourceDrawSpacesFlags)
-/** @var SourceDrawSpacesFlags SOURCE_DRAW_SPACES_SPACE
+_WRAP_ENUM(DrawSpacesFlags, GtkSourceDrawSpacesFlags, s#^SOURCE_##)
+/** @var DrawSpacesFlags DRAW_SPACES_SPACE
  * Whether the space character should be drawn.
  */
-/** @var SourceDrawSpacesFlags SOURCE_DRAW_SPACES_TAB
+/** @var DrawSpacesFlags DRAW_SPACES_TAB
  * Whether the tab character should be drawn.
  */
-/** @var SourceDrawSpacesFlags SOURCE_DRAW_SPACES_NEWLINE
+/** @var DrawSpacesFlags DRAW_SPACES_NEWLINE
  * Whether the line breaks should be drawn.
  */
-/** @var SourceDrawSpacesFlags SOURCE_DRAW_SPACES_NBSP
+/** @var DrawSpacesFlags DRAW_SPACES_NBSP
  * Whether the non-breaking whitespaces should be drawn.
  */
-/** @var SourceDrawSpacesFlags SOURCE_DRAW_SPACES_ALL
+/** @var DrawSpacesFlags DRAW_SPACES_ALL
  * Whether all kind of whitespaces should be drawn.
  */
 
 /** The view object.
  *
- * SourceView is the main object of the gtksourceviewmm library. It provides
+ * View is the main object of the gtksourceviewmm library. It provides
  * a text view which has syntax highlighting, undo/redo and text marks. Use a
- * SourceBuffer to display text with a GtkSourceView.
+ * Buffer to display text with a GtkSourceView.
  */
-class SourceView : public Gtk::TextView
+class View : public Gtk::TextView
 {
-  _CLASS_GTKOBJECT(SourceView, GtkSourceView, GTK_SOURCE_VIEW, Gtk::TextView, GtkTextView)
+  _CLASS_GTKOBJECT(View, GtkSourceView, GTK_SOURCE_VIEW, Gtk::TextView, GtkTextView)
 
 public:
   /// The gutter position of the lines renderer.
@@ -89,45 +89,45 @@ public:
   /// The gutter position of the marks renderer.
   static const int gutter_position_marks = -20;
 
-  /** Creates a new SourceView.
+  /** Creates a new View.
    *
    * An empty default buffer will be created for you. If you want to specify
    * your own buffer, consider the other constructor.
    *
-   * @return A new SourceView.
+   * @return A new View.
    */
-  explicit SourceView () ;
+  explicit View () ;
 
-  /** Creates a new SourceView widget displaying the buffer @a buffer.
+  /** Creates a new View widget displaying the buffer @a buffer.
    *
    * One buffer can be shared among many widgets.
    *
-   * @param buffer A SourceBuffer.
+   * @param buffer A Buffer.
    *
-   * @return: A new SourceView.
+   * @return: A new View.
    **/
-  explicit SourceView (const Glib::RefPtr<SourceBuffer> &buffer) ;
+  explicit View (const Glib::RefPtr<Buffer> &buffer) ;
 
   /** Returns the GtkTextBuffer being displayed by this text view.
    *
-   * @return A SourceBuffer.
+   * @return A Buffer.
    */
-  Glib::RefPtr<const SourceBuffer> get_source_buffer () const ;
+  Glib::RefPtr<const Buffer> get_source_buffer () const ;
 
   /** Returns the GtkTextBuffer being displayed by this text view.
    *
-   * @return A SourceBuffer.
+   * @return A Buffer.
    */
-  Glib::RefPtr<SourceBuffer> get_source_buffer () ;
+  Glib::RefPtr<Buffer> get_source_buffer () ;
 
   /** Sets a source_buffer as the buffer being displayed by source view.
    *
    * The previous buffer displayed by the text view is unreferenced, and a
    * reference is added to buffer.
    *
-   * @param source_buffer A SourceBuffer.
+   * @param source_buffer A Buffer.
    */
-  void set_source_buffer (const Glib::RefPtr<SourceBuffer> &source_buffer) ;
+  void set_source_buffer (const Glib::RefPtr<Buffer> &source_buffer) ;
 
   _WRAP_METHOD(void set_show_line_numbers(bool show=true), gtk_source_view_set_show_line_numbers)
 
@@ -196,16 +196,16 @@ public:
 
   /** Set the desired movement of the cursor when HOME and END keys are pressed.
    *
-   * @param smart_he The desired behavior among SourceSmartHomeEndType.
+   * @param smart_he The desired behavior among SmartHomeEndType.
    */
-  _WRAP_METHOD(void set_smart_home_end(SourceSmartHomeEndType smart_he), gtk_source_view_set_smart_home_end)
+  _WRAP_METHOD(void set_smart_home_end(SmartHomeEndType smart_he), gtk_source_view_set_smart_home_end)
 
-  /** Returns a SourceSmartHomeEndType end value specifying how the cursor will
+  /** Returns a SmartHomeEndType end value specifying how the cursor will
    *  move when HOME and END keys are pressed.
    *
-   * @return A SourceSmartHomeEndType value.
+   * @return A SmartHomeEndType value.
    */
-  _WRAP_METHOD(SourceSmartHomeEndType get_smart_home_end() const, gtk_source_view_get_smart_home_end)
+  _WRAP_METHOD(SmartHomeEndType get_smart_home_end() const, gtk_source_view_get_smart_home_end)
 
   /** If @c true line marks will be displayed beside the text.
    *
@@ -244,7 +244,7 @@ public:
 
   /** Sets the number of spaces to use for each step of indent.
    *
-   * If @a width is -1, the value of the SourceView::property_tab_width property
+   * If @a width is -1, the value of the View::property_tab_width property
    * will be used.
    *
    * @param width Indent width in characters.
@@ -263,17 +263,17 @@ public:
    *
    * Specifying @a flags as 0 will disable display of spaces.
    *
-   * @param flags SourceDrawSpacesFlags specifing how white spaces should be
+   * @param flags DrawSpacesFlags specifing how white spaces should be
    * displayed.
    */
-  _WRAP_METHOD(void set_draw_spaces(SourceDrawSpacesFlags flags = SOURCE_DRAW_SPACES_ALL), gtk_source_view_set_draw_spaces)
+  _WRAP_METHOD(void set_draw_spaces(DrawSpacesFlags flags = DRAW_SPACES_ALL), gtk_source_view_set_draw_spaces)
 
-  /** Returns the SourceDrawSpacesFlags specifying if and how spaces should be
+  /** Returns the DrawSpacesFlags specifying if and how spaces should be
    *  displayed.
    *
-   * @return The SourceDrawSpacesFlags, 0 if no spaces should be drawn.
+   * @return The DrawSpacesFlags, 0 if no spaces should be drawn.
    */
-  _WRAP_METHOD(SourceDrawSpacesFlags get_draw_spaces() const, gtk_source_view_get_draw_spaces)
+  _WRAP_METHOD(DrawSpacesFlags get_draw_spaces() const, gtk_source_view_get_draw_spaces)
 
 #m4 _CONVERSION(`const Gtk::TextIter&',`const GtkTextIter*',`($3).gobj()')
   /** Determines the visual column at @a iter taking into consideration the indent
@@ -287,7 +287,7 @@ public:
    */
   _WRAP_METHOD(guint get_visual_column(const Gtk::TextIter& iter) const, gtk_source_view_get_visual_column)
 
-  /** Returns the SourceGutter object associated with @a window_type for this
+  /** Returns the Gutter object associated with @a window_type for this
    *  view.
    *
    * Only Gtk::TEXT_WINDOW_LEFT and Gtk::TEXT_WINDOW_RIGHT are supported,
@@ -297,13 +297,13 @@ public:
    *
    * @param window_type The gutter window type
    *
-   * @return The SourceGutter.
+   * @return The Gutter.
    *
    * @newin{2,10}
    **/
-  _WRAP_METHOD(Glib::RefPtr<SourceGutter> get_gutter(Gtk::TextWindowType window_type), gtk_source_view_get_gutter, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<Gutter> get_gutter(Gtk::TextWindowType window_type), gtk_source_view_get_gutter, refreturn)
 
-  /** Returns the SourceGutter object associated with @a window_type for this
+  /** Returns the Gutter object associated with @a window_type for this
    *  view.
    *
    * Only Gtk::TEXT_WINDOW_LEFT and Gtk::TEXT_WINDOW_RIGHT are supported,
@@ -313,33 +313,33 @@ public:
    *
    * @param window_type The gutter window type
    *
-   * @return The SourceGutter.
+   * @return The Gutter.
    *
    * @newin{2,10}
    **/
-  _WRAP_METHOD(Glib::RefPtr<const SourceGutter> get_gutter(Gtk::TextWindowType window_type) const, gtk_source_view_get_gutter, refreturn, constversion)
+  _WRAP_METHOD(Glib::RefPtr<const Gutter> get_gutter(Gtk::TextWindowType window_type) const, gtk_source_view_get_gutter, refreturn, constversion)
 
-  /** Gets the SourceCompletion associated with this view.
+  /** Gets the Completion associated with this view.
    *
-   * @return The SourceCompletion associated with this view.
-   *
-   * @newin{2,10}
-   */
-  _WRAP_METHOD(Glib::RefPtr<SourceCompletion> get_completion(), gtk_source_view_get_completion, refreturn)
-
-  /** Gets the SourceCompletion associated with this view.
-   *
-   * @return The SourceCompletion associated with this view.
+   * @return The Completion associated with this view.
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(Glib::RefPtr<const SourceCompletion> get_completion() const, gtk_source_view_get_completion, refreturn, constversion)
+  _WRAP_METHOD(Glib::RefPtr<Completion> get_completion(), gtk_source_view_get_completion, refreturn)
 
-  _WRAP_METHOD(void set_mark_attributes(const Glib::ustring& category, const Glib::RefPtr<SourceMarkAttributes>& attributes, int priority), gtk_source_view_set_mark_attributes)
+  /** Gets the Completion associated with this view.
+   *
+   * @return The Completion associated with this view.
+   *
+   * @newin{2,10}
+   */
+  _WRAP_METHOD(Glib::RefPtr<const Completion> get_completion() const, gtk_source_view_get_completion, refreturn, constversion)
 
-  _WRAP_METHOD(Glib::RefPtr<SourceMarkAttributes> get_mark_attributes(const Glib::ustring& category, int& priority), gtk_source_view_get_mark_attributes, refreturn)
+  _WRAP_METHOD(void set_mark_attributes(const Glib::ustring& category, const Glib::RefPtr<MarkAttributes>& attributes, int priority), gtk_source_view_set_mark_attributes)
 
-  _WRAP_METHOD(Glib::RefPtr<const SourceMarkAttributes> get_mark_attributes(const Glib::ustring& category, int& priority) const, gtk_source_view_get_mark_attributes, constversion)
+  _WRAP_METHOD(Glib::RefPtr<MarkAttributes> get_mark_attributes(const Glib::ustring& category, int& priority), gtk_source_view_get_mark_attributes, refreturn)
+
+  _WRAP_METHOD(Glib::RefPtr<const MarkAttributes> get_mark_attributes(const Glib::ustring& category, int& priority) const, gtk_source_view_get_mark_attributes, constversion)
 
   /** Emitted when redo action is requested.
    */
@@ -397,15 +397,15 @@ public:
 
   _WRAP_PROPERTY("right-margin-position", guint)
 
-  _WRAP_PROPERTY("smart-home-end", SourceSmartHomeEndType)
+  _WRAP_PROPERTY("smart-home-end", SmartHomeEndType)
 
   _WRAP_PROPERTY("highlight-current-line", bool)
 
   _WRAP_PROPERTY("indent-on-tab", bool)
 
-  _WRAP_PROPERTY("draw-spaces", SourceDrawSpacesFlags)
+  _WRAP_PROPERTY("draw-spaces", DrawSpacesFlags)
 
-  _WRAP_PROPERTY("completion", Glib::RefPtr<SourceCompletion>)
+  _WRAP_PROPERTY("completion", Glib::RefPtr<Completion>)
 };
 
 } /* namespace Gsv */

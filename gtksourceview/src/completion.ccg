@@ -1,4 +1,4 @@
-/* sourcecompletion.cc
+/* completion.cc
  *
  * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
@@ -24,8 +24,8 @@
 namespace Gsv
 {
 
-Glib::RefPtr<SourceCompletionContext>
-SourceCompletion::create_context()
+Glib::RefPtr<CompletionContext>
+Completion::create_context()
 {
   return Glib::wrap(gtk_source_completion_create_context(gobj(), 0));
 }

@@ -1,7 +1,7 @@
-/* sourcestyle.h
+/* style.h
  *
  * Copyright (C) 2007 The gtksourceviewmm team.
- * Copyright (C) 2009, 2010 Krzesimir Nowak
+ * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -28,19 +28,19 @@ namespace Gsv
 
 /** Class representing a style.
  */
-class SourceStyle : public Glib::Object
+class Style : public Glib::Object
 {
-  _CLASS_GOBJECT(SourceStyle, GtkSourceStyle, GTK_SOURCE_STYLE, Glib::Object, GObject)
+  _CLASS_GOBJECT(Style, GtkSourceStyle, GTK_SOURCE_STYLE, Glib::Object, GObject)
 
 public:
-  /** Creates a copy of a style, that is a new SourceStyle instance which has
+  /** Creates a copy of a style, that is a new Style instance which has
    *  the same attributes set.
    *
    * @return Copy of a style.
    *
    * @newin{2,2}
    */
-  _WRAP_METHOD(Glib::RefPtr<SourceStyle> copy() const, gtk_source_style_copy)
+  _WRAP_METHOD(Glib::RefPtr<Style> copy() const, gtk_source_style_copy)
 
   _WRAP_PROPERTY("background", Glib::ustring)
   _WRAP_PROPERTY("background-set", bool)

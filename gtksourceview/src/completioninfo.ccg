@@ -1,6 +1,6 @@
-/* sourcecompletioninfo.cc
+/* completioninfo.cc
  *
- * Copyright (C) 2009, 2010 Krzesimir Nowak
+ * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -22,12 +22,12 @@
 namespace Gsv
 {
 
-SourceCompletionInfo::SourceCompletionInfo() :
+CompletionInfo::CompletionInfo() :
   _CONSTRUCT("type", GTK_WINDOW_POPUP)
 {}
 
 void
-SourceCompletionInfo::move_to_iter(const Gtk::TextView& view)
+CompletionInfo::move_to_iter(const Gtk::TextView& view)
 {
   gtk_source_completion_info_move_to_iter(gobj(), const_cast<GtkTextView*>(view.gobj()), 0);
 }

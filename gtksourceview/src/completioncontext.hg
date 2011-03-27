@@ -1,4 +1,4 @@
-/* sourcecompletioncontext.h
+/* completioncontext.h
  *
  * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
@@ -23,11 +23,11 @@
 
 #include <glibmm/object.h>
 
-#include <gtksourceviewmm/sourcecompletionactivation.h>
-#include <gtksourceviewmm/sourceview.h>
-#include <gtksourceviewmm/sourcecompletionprovider.h>
-#include <gtksourceviewmm/sourcecompletionproposal.h>
-#include <gtksourceviewmm/sourcecompletion.h>
+#include <gtksourceviewmm/completionactivation.h>
+#include <gtksourceviewmm/view.h>
+#include <gtksourceviewmm/completionprovider.h>
+#include <gtksourceviewmm/completionproposal.h>
+#include <gtksourceviewmm/completion.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -36,21 +36,21 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace Gsv
 {
 
-class SourceCompletionProvider;
-class SourceCompletion;
-class SourceView;
+class CompletionProvider;
+class Completion;
+class View;
 
 // TODO: need docs here. krnowak
-/** SourceCompletionContext
+/** CompletionContext
  *
  * @newin{2,10}
  */
-class SourceCompletionContext : public Glib::Object
+class CompletionContext : public Glib::Object
 {
-  _CLASS_GOBJECT(SourceCompletionContext, GtkSourceCompletionContext, GTK_SOURCE_COMPLETION_CONTEXT, Glib::Object, GObject)
+  _CLASS_GOBJECT(CompletionContext, GtkSourceCompletionContext, GTK_SOURCE_COMPLETION_CONTEXT, Glib::Object, GObject)
 public:
-#m4 _CONVERSION(`const Glib::RefPtr<SourceCompletionProvider>&',`struct _GtkSourceCompletionProvider*',`Glib::unwrap($3)')
-#m4 _CONVERSION(`const std::vector<Glib::RefPtr<SourceCompletionProposal> >&',`GList*',`Glib::ListHandler<Glib::RefPtr<SourceCompletionProposal> >::vector_to_list($3).data()')
+#m4 _CONVERSION(`const Glib::RefPtr<CompletionProvider>&',`struct _GtkSourceCompletionProvider*',`Glib::unwrap($3)')
+#m4 _CONVERSION(`const std::vector<Glib::RefPtr<CompletionProposal> >&',`GList*',`Glib::ListHandler<Glib::RefPtr<CompletionProposal> >::vector_to_list($3).data()')
 
   /** Providers can use this function to add proposals to the completion.
    *
@@ -59,13 +59,13 @@ public:
    * set to @c true once each population (even if no proposals need to be
    * added).
    *
-   * @param provider A SourceCompletionProvider.
+   * @param provider A CompletionProvider.
    * @param proposals The list of proposals to add.
    * @param finished Whether the provider is finished adding proposals.
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(void add_proposals(const Glib::RefPtr<SourceCompletionProvider>& provider, const std::vector<Glib::RefPtr<SourceCompletionProposal> >& proposals, bool finished), gtk_source_completion_context_add_proposals)
+  _WRAP_METHOD(void add_proposals(const Glib::RefPtr<CompletionProvider>& provider, const std::vector<Glib::RefPtr<CompletionProposal> >& proposals, bool finished), gtk_source_completion_context_add_proposals)
 
   _IGNORE(gtk_source_completion_context_get_iter)
   /** Get the iter at which the completion was invoked.
@@ -84,10 +84,10 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(SourceCompletionActivation get_activation() const, gtk_source_completion_context_get_activation)
+  _WRAP_METHOD(CompletionActivation get_activation() const, gtk_source_completion_context_get_activation)
 
-  _WRAP_PROPERTY("activation", SourceCompletionActivation)
-  _WRAP_PROPERTY("completion", Glib::RefPtr<SourceCompletion>)
+  _WRAP_PROPERTY("activation", CompletionActivation)
+  _WRAP_PROPERTY("completion", Glib::RefPtr<Completion>)
   _WRAP_PROPERTY("iter", Gtk::TextIter)
 
   /** Emitted when the current population of proposals has been cancelled.

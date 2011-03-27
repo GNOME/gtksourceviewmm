@@ -1,4 +1,4 @@
-/* sourcecompletioncontext.cc
+/* completioncontext.cc
  *
  * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
@@ -24,7 +24,7 @@
 namespace Gsv
 {
 
-Gtk::TextIter SourceCompletionContext::get_iter() const
+Gtk::TextIter CompletionContext::get_iter() const
 {
   Gtk::TextIter iter;
   gtk_source_completion_context_get_iter(const_cast<GtkSourceCompletionContext*>(gobj()), iter.gobj());

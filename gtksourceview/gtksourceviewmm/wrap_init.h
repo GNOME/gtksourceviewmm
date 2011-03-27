@@ -1,13 +1,8 @@
 // -*- c++ -*-
-#ifndef _GTKSOURCEVIEWMM_WRAP_INIT_H
-#define _GTKSOURCEVIEWMM_WRAP_INIT_H
-
-#include <gtkmm/main.h>
-
 /* wrap_init.h
  *
  * Copyright (C) 2005-2006 The gtksourceviewmm development team
- * Copyright (C) 2010 Krzesimir Nowak
+ * Copyright (C) 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -23,12 +18,16 @@
  * License along with this library; if not, write to the Free
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
+
+#ifndef _GTKSOURCEVIEWMM_WRAP_INIT_H
+#define _GTKSOURCEVIEWMM_WRAP_INIT_H
+
 namespace Gsv
 {
   /** Initializes wrapper types.
    */
   void wrap_init () ;
-}//end namespace Gsv
+} // namespace Gsv
 
 #endif //_GTKSOURCEVIEWMM_WRAP_INIT_H
 

@@ -1,13 +1,8 @@
 // -*- c++ -*-
-#ifndef _GTKSOURCEVIEWMM_INIT_H
-#define _GTKSOURCEVIEWMM_INIT_H
-
-#include "wrap_init.h"
-
 /* init.h
  *
  * Copyright (C) 2005-2006 The gtksourceviewmm development team
- * Copyright (C) 2010 Krzesimir Nowak
+ * Copyright (C) 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -24,12 +19,15 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+#ifndef _GTKSOURCEVIEWMM_INIT_H
+#define _GTKSOURCEVIEWMM_INIT_H
+
 namespace Gsv
 {
   /** Initializes all type internals.
    */
   void init () ;
-}//end namespace Gsv
+} // namespace Gsv
 
 #endif //_GTKSOURCEVIEWMM_INIT_H
 

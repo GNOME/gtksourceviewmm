@@ -34,78 +34,78 @@ namespace Gsv
  *
  * @newin{2,10}
  */
-class SourceMarkup
+class Markup
 {
 public:
-  /** Creates empty SourceMarkup.
+  /** Creates empty Markup.
    *
-   * @return A new SourceMarkup.
+   * @return A new Markup.
    *
    * @newin{2,10}
    */
-  SourceMarkup();
+  Markup();
 
-  /** Creates SourceMarkup containing text from @a markup.
+  /** Creates Markup containing text from @a markup.
    *
    * @param markup A markup string.
    *
-   * @return A new SourceMarkup.
+   * @return A new Markup.
    *
    * @newin{2,10}
    */
-  explicit SourceMarkup(const Glib::ustring& markup);
+  explicit Markup(const Glib::ustring& markup);
 
-  /** Creates SourceMarkup containing text from @a markup.
+  /** Creates Markup containing text from @a markup.
    *
    * @param markup A markup C string.
    *
-   * @return A new SourceMarkup.
+   * @return A new Markup.
    *
    * @newin{2,10}
    */
-  explicit SourceMarkup(const char* markup);
+  explicit Markup(const char* markup);
 
-  ~SourceMarkup();
+  ~Markup();
 
-  /** Creates SourceMarkup containing text from @a other SourceMarkup.
+  /** Creates Markup containing text from @a other Markup.
    *
-   * @param other Other SourceMarkup.
+   * @param other Other Markup.
    *
-   * @return A new SourceMarkup.
+   * @return A new Markup.
    *
    * @newin{2,10}
    */
-  SourceMarkup(const SourceMarkup& other);
+  Markup(const Markup& other);
 
-  /** Assigns contents of @a other SourceMarkup to this one.
+  /** Assigns contents of @a other Markup to this one.
    *
-   * @param other Other SourceMarkup.
+   * @param other Other Markup.
    *
-   * @return This SourceMarkup.
+   * @return This Markup.
    *
    * @newin{2,10}
    */
-  SourceMarkup& operator=(const SourceMarkup& other);
+  Markup& operator=(const Markup& other);
 
-  /** Checks if SourceMarkup is not empty.
+  /** Checks if Markup is not empty.
    *
-   * @return @c true if SourceMarkup is not empty, otherwise @c false.
+   * @return @c true if Markup is not empty, otherwise @c false.
    *
    * @newin{2,10}
    */
   operator bool() const;
 
-  /** Checks if @a other SourceMarkup is the same as this one.
+  /** Checks if @a other Markup is the same as this one.
    *
-   * @param other Other SourceMarkup.
+   * @param other Other Markup.
    *
-   * @return @c true if both this and @a other SourceMarkup are equal.
+   * @return @c true if both this and @a other Markup are equal.
    *
    * @newin{2,10}
    */
-  bool equal(const SourceMarkup& other) const;
+  bool equal(const Markup& other) const;
 
-  /** Get the string representation of the SourceMarkup.
+  /** Get the string representation of the Markup.
    *
    * @return A string holding markup.
    *
@@ -113,7 +113,7 @@ public:
    */
   Glib::ustring get_string() const;
 
-  /** Get the C string representation of the SourceMarkup.
+  /** Get the C string representation of the Markup.
    *
    * @return A C string holding markup.
    *
@@ -125,32 +125,32 @@ protected:
   Glib::ustring markup_;
 };
 
-/** See SourceMarkup::equal()
+/** See Markup::equal()
  *
- * @param lhs First SourceMarkup to compare.
- * @param rhs Second SourceMarkup to compare.
+ * @param lhs First Markup to compare.
+ * @param rhs Second Markup to compare.
  *
  * @return Whether @a lhs is different from @a rhs.
  *
- * @relates Gsv::SourceMarkup
+ * @relates Gsv::Markup
  *
  * @newin{2,10}
  */
-inline bool operator==(const SourceMarkup& lhs, const SourceMarkup& rhs)
+inline bool operator==(const Markup& lhs, const Markup& rhs)
   { return lhs.equal(rhs); }
 
-/** See SourceMarkup::equal()
+/** See Markup::equal()
  *
- * @param lhs First SourceMarkup to compare.
- * @param rhs Second SourceMarkup to compare.
+ * @param lhs First Markup to compare.
+ * @param rhs Second Markup to compare.
  *
  * @return Whether @a lhs is different from @a rhs.
  *
- * @relates Gsv::SourceMarkup
+ * @relates Gsv::Markup
  *
  * @newin{2,10}
  */
-inline bool operator!=(const SourceMarkup& lhs, const SourceMarkup& rhs)
+inline bool operator!=(const Markup& lhs, const Markup& rhs)
   { return !lhs.equal(rhs); }
 
 
@@ -158,10 +158,10 @@ inline bool operator!=(const SourceMarkup& lhs, const SourceMarkup& rhs)
 
 struct SourceMarkup_Traits : public Glib::Container_Helpers::TypeTraits<Glib::ustring>
 {
-  typedef Gsv::SourceMarkup CppType;
+  typedef Gsv::Markup CppType;
 
-  static const char* to_c_type(const SourceMarkup& markup) { return markup.get_c_str(); }
-  static SourceMarkup     to_cpp_type(const char* str)     { return SourceMarkup(str);   }
+  static const char* to_c_type(const Markup& markup) { return markup.get_c_str(); }
+  static Markup     to_cpp_type(const char* str)     { return Markup(str);   }
 };
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
@@ -175,13 +175,13 @@ namespace Glib
 {
 
 template <>
-class Value<Gsv::SourceMarkup> : public Glib::ValueBase_String
+class Value<Gsv::Markup> : public Glib::ValueBase_String
 {
 public:
-  typedef Gsv::SourceMarkup CppType;
+  typedef Gsv::Markup CppType;
 
-  void set(const Gsv::SourceMarkup& data) { set_cstring(data.get_c_str());      }
-  Gsv::SourceMarkup get() const           { return Gsv::SourceMarkup(get_cstring()); }
+  void set(const Gsv::Markup& data) { set_cstring(data.get_c_str());      }
+  Gsv::Markup get() const           { return Gsv::Markup(get_cstring()); }
 };
 
 } // namespace Glib

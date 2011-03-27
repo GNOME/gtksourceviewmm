@@ -17,57 +17,57 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <gtksourceviewmm/sourcemarkup.h>
+#include <gtksourceviewmm/markup.h>
 
 
 namespace Gsv
 {
 
-SourceMarkup::SourceMarkup()
+Markup::Markup()
 :
   markup_ ("")
 {}
 
-SourceMarkup::SourceMarkup(const Glib::ustring& markup)
+Markup::Markup(const Glib::ustring& markup)
 :
   markup_ (markup)
 {}
 
-SourceMarkup::SourceMarkup(const char* markup)
+Markup::Markup(const char* markup)
 :
   markup_ ((markup) ? markup : "")
 {}
 
-SourceMarkup::~SourceMarkup()
+Markup::~Markup()
 {}
 
-SourceMarkup::SourceMarkup(const SourceMarkup& other)
+Markup::Markup(const Markup& other)
 :
   markup_ (other.markup_)
 {}
 
-SourceMarkup& SourceMarkup::operator=(const SourceMarkup& other)
+Markup& Markup::operator=(const Markup& other)
 {
   markup_ = other.markup_;
   return *this;
 }
 
-SourceMarkup::operator bool() const
+Markup::operator bool() const
 {
   return !(markup_.empty());
 }
 
-bool SourceMarkup::equal(const SourceMarkup& rhs) const
+bool Markup::equal(const Markup& rhs) const
 {
   return (markup_.raw() == rhs.markup_.raw());
 }
 
-Glib::ustring SourceMarkup::get_string() const
+Glib::ustring Markup::get_string() const
 {
   return markup_;
 }
 
-const char* SourceMarkup::get_c_str() const
+const char* Markup::get_c_str() const
 {
   return markup_.c_str();
 }

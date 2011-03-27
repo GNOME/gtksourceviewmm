@@ -8,8 +8,8 @@ main (int argc, char* argv[])
     Gtk::Main kit (argc, argv) ;
     Gsv::init () ;
 
-    Gsv::SourceView view ;
-    Glib::RefPtr<Gsv::SourceBuffer> buf = view.get_source_buffer () ;
+    Gsv::View view ;
+    Glib::RefPtr<Gsv::Buffer> buf = view.get_source_buffer () ;
     if (buf) {
         std::cout << "PASSED" << std::endl;
     } else {

@@ -5,7 +5,7 @@
 // gtkmm
 #include <gtkmm.h>
 // gtksourceviewmm
-#include <gtksourceviewmm/sourcelanguagemanager.h>
+#include <gtksourceviewmm/languagemanager.h>
 #include <gtksourceviewmm/init.h>
 
 int
@@ -13,7 +13,7 @@ main (int /* argc */, char** /* argv */)
 {
   Gsv::init () ;
 
-  Glib::RefPtr<Gsv::SourceLanguageManager> lang_mgr = Gsv::SourceLanguageManager::create ();
+  Glib::RefPtr<Gsv::LanguageManager> lang_mgr = Gsv::LanguageManager::create ();
   if (!lang_mgr)
   {
     std::cerr << "Could not create the language manager.\n";
@@ -26,7 +26,7 @@ main (int /* argc */, char** /* argv */)
   mime_types.push_back ("text/x-c");
   mime_types.push_back ("text/x-c++");
 
-  Glib::RefPtr<Gsv::SourceLanguage> lang;
+  Glib::RefPtr<Gsv::Language> lang;
 
   unsigned int size (mime_types.size ());
   for (unsigned int idx (0); idx < size ; ++idx)

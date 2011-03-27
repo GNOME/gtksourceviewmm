@@ -9,7 +9,7 @@
 // gtksourceviewmm
 #include <gtksourceviewmm.h>
 
-class TestProvider : public Glib::Object, public Gsv::SourceCompletionProvider
+class TestProvider : public Glib::Object, public Gsv::CompletionProvider
 {
 public:
   static Glib::RefPtr<TestProvider> create();
@@ -29,18 +29,18 @@ private:
   virtual Glib::ustring get_name_vfunc() const;
   virtual Glib::RefPtr<Gdk::Pixbuf> get_icon_vfunc();
   virtual Glib::RefPtr<const Gdk::Pixbuf> get_icon_vfunc() const;
-  virtual void populate_vfunc(const Glib::RefPtr<Gsv::SourceCompletionContext>& context);
-  virtual bool match_vfunc(const Glib::RefPtr<const Gsv::SourceCompletionContext>& context) const;
-  //virtual Gtk::Widget* get_info_widget_vfunc(const Glib::RefPtr<const Gsv::SourceCompletionProposal>& proposal);
-  //virtual const Gtk::Widget* get_info_widget_vfunc(const Glib::RefPtr<const Gsv::SourceCompletionProposal>& proposal) const;
-  //virtual void update_info_vfunc(const Glib::RefPtr<const Gsv::SourceCompletionProposal>& proposal, const Gsv::SourceCompletionInfo& info);
-  //virtual bool get_start_iter_vfunc(const Glib::RefPtr<const Gsv::SourceCompletionContext>& context, const Glib::RefPtr<const Gsv::SourceCompletionProposal>& proposal, Gtk::TextIter& iter);
-  //virtual bool activate_proposal_vfunc(const Glib::RefPtr<Gsv::SourceCompletionProposal>& proposal, const Gtk::TextIter& iter);
-  virtual Gsv::SourceCompletionActivation get_activation_vfunc() const;
+  virtual void populate_vfunc(const Glib::RefPtr<Gsv::CompletionContext>& context);
+  virtual bool match_vfunc(const Glib::RefPtr<const Gsv::CompletionContext>& context) const;
+  //virtual Gtk::Widget* get_info_widget_vfunc(const Glib::RefPtr<const Gsv::CompletionProposal>& proposal);
+  //virtual const Gtk::Widget* get_info_widget_vfunc(const Glib::RefPtr<const Gsv::CompletionProposal>& proposal) const;
+  //virtual void update_info_vfunc(const Glib::RefPtr<const Gsv::CompletionProposal>& proposal, const Gsv::CompletionInfo& info);
+  //virtual bool get_start_iter_vfunc(const Glib::RefPtr<const Gsv::CompletionContext>& context, const Glib::RefPtr<const Gsv::CompletionProposal>& proposal, Gtk::TextIter& iter);
+  //virtual bool activate_proposal_vfunc(const Glib::RefPtr<Gsv::CompletionProposal>& proposal, const Gtk::TextIter& iter);
+  virtual Gsv::CompletionActivation get_activation_vfunc() const;
   //virtual int get_interactive_delay_vfunc() const;
   virtual int get_priority_vfunc() const;
 
-  std::vector<Glib::RefPtr<Gsv::SourceCompletionProposal> > m_proposals;
+  std::vector<Glib::RefPtr<Gsv::CompletionProposal> > m_proposals;
   int m_priority;
   Glib::ustring m_name;
   Glib::RefPtr<Gdk::Pixbuf> m_pixbuf;
@@ -67,12 +67,12 @@ void TestProvider::set_name(const Glib::ustring& name)
 TestProvider::TestProvider()
 : Glib::ObjectBase(typeid(TestProvider)),
   Glib::Object(),
-  Gsv::SourceCompletionProvider()
+  Gsv::CompletionProvider()
 {
   m_proposals.reserve(3);
-  m_proposals.push_back( Gsv::SourceCompletionItem::create( "Proposal 1", "Proposal 1", get_icon_vfunc(), "" ) );
-  m_proposals.push_back( Gsv::SourceCompletionItem::create( "Proposal 2", "Proposal 2", get_icon_vfunc(), "" ) );
-  m_proposals.push_back( Gsv::SourceCompletionItem::create( "Proposal 3", "Proposal 3", get_icon_vfunc(), "" ) );
+  m_proposals.push_back( Gsv::CompletionItem::create( "Proposal 1", "Proposal 1", get_icon_vfunc(), "" ) );
+  m_proposals.push_back( Gsv::CompletionItem::create( "Proposal 2", "Proposal 2", get_icon_vfunc(), "" ) );
+  m_proposals.push_back( Gsv::CompletionItem::create( "Proposal 3", "Proposal 3", get_icon_vfunc(), "" ) );
 }
 
 Glib::ustring TestProvider::get_name_vfunc() const
@@ -90,21 +90,21 @@ Glib::RefPtr<const Gdk::Pixbuf> TestProvider::get_icon_vfunc() const
   return const_cast<TestProvider*>(this)->get_icon_vfunc();
 }
 
-void TestProvider::populate_vfunc(const Glib::RefPtr<Gsv::SourceCompletionContext>& context)
+void TestProvider::populate_vfunc(const Glib::RefPtr<Gsv::CompletionContext>& context)
 {
   Glib::RefPtr<TestProvider> reffed_this(this);
   reffed_this->reference();
   context->add_proposals(reffed_this, m_proposals, true);
 }
 
-bool TestProvider::match_vfunc(const Glib::RefPtr<const Gsv::SourceCompletionContext>& /* context */) const
+bool TestProvider::match_vfunc(const Glib::RefPtr<const Gsv::CompletionContext>& /* context */) const
 {
   return true;
 }
 
-Gsv::SourceCompletionActivation TestProvider::get_activation_vfunc() const
+Gsv::CompletionActivation TestProvider::get_activation_vfunc() const
 {
-  return Gsv::SOURCE_COMPLETION_ACTIVATION_INTERACTIVE | Gsv::SOURCE_COMPLETION_ACTIVATION_USER_REQUESTED;
+  return Gsv::COMPLETION_ACTIVATION_INTERACTIVE | Gsv::COMPLETION_ACTIVATION_USER_REQUESTED;
 }
 
 int TestProvider::get_priority_vfunc() const
@@ -125,8 +125,8 @@ protected:
   void show_icons_toggled();
 
 private:
-  Glib::RefPtr<Gsv::SourceCompletion> m_completion;
-  Gsv::SourceView* m_view;
+  Glib::RefPtr<Gsv::Completion> m_completion;
+  Gsv::View* m_view;
   Gtk::CheckButton* m_remember;
   Gtk::CheckButton* m_select_on_show;
   Gtk::CheckButton* m_show_headers;
@@ -153,7 +153,7 @@ TestWindow::TestWindow()
   resize(600, 400);
 
   Gtk::ScrolledWindow* scrolledwindow (Gtk::manage(new Gtk::ScrolledWindow()));
-  m_view = Gtk::manage(new Gsv::SourceView());
+  m_view = Gtk::manage(new Gsv::View());
 
   scrolledwindow->add(*m_view);
 
@@ -179,7 +179,7 @@ TestWindow::TestWindow()
 
   add(*vbox);
 //completion
-  Glib::RefPtr<Gsv::SourceCompletionWords> prov_words ( Gsv::SourceCompletionWords::create("", Glib::RefPtr<Gdk::Pixbuf>()) );
+  Glib::RefPtr<Gsv::CompletionWords> prov_words ( Gsv::CompletionWords::create("", Glib::RefPtr<Gdk::Pixbuf>()) );
 
   prov_words->register_provider(m_view->get_buffer());
   m_completion->add_provider(prov_words);

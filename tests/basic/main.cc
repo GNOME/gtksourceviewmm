@@ -12,10 +12,10 @@ main (int a_argc, char *a_argv[])
     Gtk::Main main_loop (a_argc, a_argv) ;
     Gsv::init () ;
 
-    SourceView source_view ;
-    RefPtr<SourceBuffer> buffer = source_view.get_source_buffer () ;
+    View source_view ;
+    RefPtr<Buffer> buffer = source_view.get_source_buffer () ;
     if (!buffer) {
-        cerr << "Gsv::SourceView::get_source_buffer () failed" << std::endl ;
+        cerr << "Gsv::View::get_source_buffer () failed" << std::endl ;
         return -1;
     }
     buffer->set_text ("coin") ;

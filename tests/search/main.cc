@@ -126,7 +126,7 @@ class App {
     MenuItem *m_edit_menu_item ;
     MenuItem *m_search_menu_item ;
     VBox *m_main_vbox ;
-    SourceView *m_source_view;
+    View *m_source_view;
 
 public:
 
@@ -219,7 +219,7 @@ public:
                     bool a_forward)
     {
         THROW_IF_FAIL (m_source_view) ;
-        RefPtr<SourceBuffer> source_buffer = m_source_view->get_source_buffer () ;
+        RefPtr<Buffer> source_buffer = m_source_view->get_source_buffer () ;
 
         TextIter search_iter (source_buffer->begin ());
         TextIter start, end, limit ;
@@ -320,7 +320,7 @@ public:
         m_main_vbox = manage (new VBox) ;
         g_return_if_fail (m_menu_bar) ;
         m_main_vbox->pack_start (*m_menu_bar, PACK_SHRINK) ;
-        m_source_view = manage (new SourceView) ;
+        m_source_view = manage (new View) ;
         m_main_vbox->pack_start (*m_source_view) ;
         get_widget ().add (*m_main_vbox) ;
     }
@@ -345,7 +345,7 @@ public:
 
         static char buffer[BUFFER_SIZE + 1] ;
         memset (buffer, 0, BUFFER_SIZE + 1) ;
-        RefPtr<SourceBuffer> source_buffer = m_source_view->get_source_buffer () ;
+        RefPtr<Buffer> source_buffer = m_source_view->get_source_buffer () ;
         for (;;) {
             file.read (buffer, BUFFER_SIZE) ;
             THROW_IF_FAIL (file.good () || file.eof ()) ;

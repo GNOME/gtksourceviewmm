@@ -21,3 +21,9 @@ stamp-*
 *.pc
 *~
 .dirstamp
+
+# docs directory, files copied by mm-common
+/docs/doc-install.pl
+/docs/doc-postprocess.pl
+/docs/doxygen.css
+/docs/tagfile-to-devhelp2.xsl

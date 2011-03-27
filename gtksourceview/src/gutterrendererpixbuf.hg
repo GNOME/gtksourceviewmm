@@ -1,6 +1,6 @@
-/* sourcegutterrendererpixbuf.h
+/* gutterrendererpixbuf.h
  *
- * Copyright (C) 2010 Krzesimir Nowak
+ * Copyright (C) 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -18,22 +18,22 @@
  */
 
 /// \file
-/// \brief SourceGutterRendererPixbuf class
+/// \brief GutterRendererPixbuf class
 
 #include <glibmm/refptr.h>
 #include <gdkmm/pixbuf.h>
-#include <gtksourceviewmm/sourcegutterrenderer.h>
+#include <gtksourceviewmm/gutterrenderer.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
-_PINCLUDE(gtksourceviewmm/private/sourcegutterrenderer_p.h)
+_PINCLUDE(gtksourceviewmm/private/gutterrenderer_p.h)
 
 namespace Gsv
 {
 
 // TODO: write docs.
-class SourceGutterRendererPixbuf : public SourceGutterRenderer
+class GutterRendererPixbuf : public GutterRenderer
 {
-  _CLASS_GTKOBJECT(SourceGutterRendererPixbuf, GtkSourceGutterRendererPixbuf, GTK_SOURCE_GUTTER_RENDERER_PIXBUF, SourceGutterRenderer, GtkSourceGutterRenderer)
+  _CLASS_GTKOBJECT(GutterRendererPixbuf, GtkSourceGutterRendererPixbuf, GTK_SOURCE_GUTTER_RENDERER_PIXBUF, GutterRenderer, GtkSourceGutterRenderer)
 public:
   _CTOR_DEFAULT()
 

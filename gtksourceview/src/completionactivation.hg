@@ -1,6 +1,6 @@
-/* sourcecompletionactivation.cc
+/* completionactivation.h
  *
- * Copyright (C) 2010 Krzesimir Nowak
+ * Copyright (C) 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -17,5 +17,26 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <gtksourceview/gtksourceview-typebuiltins.h>
+_DEFS(gtksourceviewmm,gtksourceview)
 
+namespace Gsv
+{
+// TODO: need docs. krnowak
+/** An enum type specifying something bla bla bla, probably type of activation.
+ *
+ * @newin{2,10}
+ */
+_WRAP_ENUM(CompletionActivation, GtkSourceCompletionActivation, s#^SOURCE_##)
+ /** @var CompletionActivation COMPLETION_ACTIVATION_NONE
+  * None.
+  */
+ /** @var CompletionActivation COMPLETION_ACTIVATION_INTERACTIVE
+  * Interactive activation.
+  */
+ /** @var CompletionActivation COMPLETION_ACTIVATION_USER_REQUESTED
+  * User requested activation.
+  *
+  * For example through a keyboard accelerator from the view.
+  */
+
+} // namespace Gsv

@@ -1,6 +1,6 @@
-/* sourcecompletionitem.cc
+/* completionitem.cc
  *
- * Copyright (C) 2009, 2010 Krzesimir Nowak
+ * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -22,15 +22,15 @@
 namespace Gsv
 {
 
-SourceCompletionItem::SourceCompletionItem(const Glib::ustring& label, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info) :
+CompletionItem::CompletionItem(const Glib::ustring& label, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info) :
   _CONSTRUCT("label", label.c_str(), "text", text.c_str(), "icon", Glib::unwrap(icon), "info", (info.empty() ? 0 : info.c_str()))
 {}
 
-SourceCompletionItem::SourceCompletionItem(const SourceMarkup& markup, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info) :
+CompletionItem::CompletionItem(const Markup& markup, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info) :
   _CONSTRUCT("markup", markup.get_c_str(), "text", text.c_str(), "icon", Glib::unwrap(icon), "info", (info.empty() ? 0 : info.c_str()))
 {}
 
-SourceCompletionItem::SourceCompletionItem(const Glib::ustring& label, const Glib::ustring& text, const Gtk::StockID& stock, const Glib::ustring& info) :
+CompletionItem::CompletionItem(const Glib::ustring& label, const Glib::ustring& text, const Gtk::StockID& stock, const Glib::ustring& info) :
   _CONSTRUCT("text", text.c_str(), "info", (info.empty() ? 0 : info.c_str()))
 {
   GdkPixbuf* icon;

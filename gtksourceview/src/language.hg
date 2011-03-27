@@ -1,4 +1,4 @@
-/* sourcelanguage.h
+/* language.h
  *
  * Copyright (C) 2004-2005 Jae Jang
  * Copyright (C) 2005-2006 Rob Page
@@ -24,7 +24,7 @@
 
 #include <glibmm/object.h>
 
-#include <gtksourceviewmm/sourcestylescheme.h>
+#include <gtksourceviewmm/stylescheme.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -33,20 +33,20 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace Gsv
 {
 
-class SourceLanguageManager ;
+class LanguageManager ;
 
 _CC_INCLUDE(gtksourceview/gtksourcelanguage.h)
 _CC_INCLUDE(gtksourceview/gtksourceview-typebuiltins.h)
 
 /** Object representing a syntax highlighted language.
  *
- * SourceLanguage encapsulates syntax and highlighting styles for a particular
- * language. Use SourceLanguageManager to obtain a SourceLanguage instance, and
- * SourceBuffer::set_language() to apply it to a SourceBuffer.
+ * Language encapsulates syntax and highlighting styles for a particular
+ * language. Use LanguageManager to obtain a Language instance, and
+ * Buffer::set_language() to apply it to a Buffer.
  */
-class SourceLanguage : public Glib::Object
+class Language : public Glib::Object
 {
-  _CLASS_GOBJECT(SourceLanguage, GtkSourceLanguage, GTK_SOURCE_LANGUAGE, Glib::Object, GObject)
+  _CLASS_GOBJECT(Language, GtkSourceLanguage, GTK_SOURCE_LANGUAGE, Glib::Object, GObject)
 
 public:
 

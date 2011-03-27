@@ -1,4 +1,4 @@
-/* sourcelanguagemanager.cc
+/* languagemanager.cc
  *
  * Copyright (C) 2004-2005 Jae Jang
  * Copyright (C) 2005-2006 Rob Page
@@ -22,13 +22,13 @@
 
 #include <glibmm/vectorutils.h>
 
-#include "gtksourceviewmm/sourcelanguagemanager.h"
+#include "gtksourceviewmm/languagemanager.h"
 
 namespace Gsv
 {
 
 void
-SourceLanguageManager::reset_search_path()
+LanguageManager::reset_search_path()
 {
   gtk_source_language_manager_set_search_path(gobj(), 0);
 }

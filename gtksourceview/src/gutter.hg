@@ -1,6 +1,6 @@
-/* sourcegutter.h
+/* gutter.h
  *
- * Copyright (C) 2009, 2010 Krzesimir Nowak
+ * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -18,13 +18,13 @@
  */
 
 /// \file
-/// \brief SourceGutter class
+/// \brief Gutter class
 
 #include <gdkmm/window.h>
 #include <glibmm/object.h>
 #include <glibmm/refptr.h>
-#include <gtksourceviewmm/sourcegutterrenderer.h>
-#include <gtksourceviewmm/sourceview.h>
+#include <gtksourceviewmm/gutterrenderer.h>
+#include <gtksourceviewmm/view.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -32,14 +32,14 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace Gsv
 {
 
-class SourceGutterRenderer;
-class SourceView;
+class GutterRenderer;
+class View;
 
 // TODO: update docs.
-/** Gutter object for SourceView
+/** Gutter object for View
  *
- * The SourceGutter object represents the left and right gutters of the text
- * view. It is used by SourceView to draw the line numbers and category marks
+ * The Gutter object represents the left and right gutters of the text
+ * view. It is used by View to draw the line numbers and category marks
  * that might be present on a line. By packing additional CellRenderer objects
  * in the gutter, you can extend the gutter with your own custom drawings.
  *
@@ -49,8 +49,8 @@ class SourceView;
  * set a callback to fill in any of the cell renderers properties, given the
  * line for which the cell is to be rendered. Renderers are inserted into the
  * gutter at a certain position. The builtin line number renderer is at position
- * SourceView::gutter_position_lines (-30) and the marks renderer is at
- * SourceView::gutter_position_marks (-20). You can use these values to
+ * View::gutter_position_lines (-30) and the marks renderer is at
+ * View::gutter_position_marks (-20). You can use these values to
  * position custom renderers accordingly. The width of a cell renderer can be
  * specified as either fixed (using Gtk::CellRenderer::set_fixed_size()) or
  * dynamic, in which case you @e must set set_cell_size_func(). This callback is
@@ -59,9 +59,9 @@ class SourceView;
  *
  * @newin{2,10}
  */
-class SourceGutter : public Glib::Object
+class Gutter : public Glib::Object
 {
-  _CLASS_GOBJECT(SourceGutter, GtkSourceGutter, GTK_SOURCE_GUTTER, Glib::Object, GObject)
+  _CLASS_GOBJECT(Gutter, GtkSourceGutter, GTK_SOURCE_GUTTER, Glib::Object, GObject)
 
 public:
 // TODO: remove it later - it should take a conversion definition from gtkmm,
@@ -91,11 +91,11 @@ public:
    */
   _WRAP_METHOD(Glib::RefPtr<const Gdk::Window> get_window() const, gtk_source_gutter_get_window, constversion)
 
-  _WRAP_METHOD(void insert(SourceGutterRenderer* renderer, int position), gtk_source_gutter_insert)
+  _WRAP_METHOD(void insert(GutterRenderer* renderer, int position), gtk_source_gutter_insert)
 
-  _WRAP_METHOD(void remove(SourceGutterRenderer* renderer), gtk_source_gutter_remove)
+  _WRAP_METHOD(void remove(GutterRenderer* renderer), gtk_source_gutter_remove)
 
-  _WRAP_METHOD(void reorder(SourceGutterRenderer* renderer, int position), gtk_source_gutter_reorder)
+  _WRAP_METHOD(void reorder(GutterRenderer* renderer, int position), gtk_source_gutter_reorder)
 
   _WRAP_METHOD(void queue_draw(), gtk_source_gutter_queue_draw)
 
@@ -105,7 +105,7 @@ public:
 
   _WRAP_METHOD(void get_padding(int& xpad, int& ypad) const, gtk_source_gutter_get_padding)
 
-  _WRAP_PROPERTY("view", SourceView*)
+  _WRAP_PROPERTY("view", View*)
   _WRAP_PROPERTY("window-type", Gtk::TextWindowType)
   _WRAP_PROPERTY("xpad", int)
   _WRAP_PROPERTY("ypad", int)

@@ -1,6 +1,6 @@
-/* sourcecompletionwords.h
+/* completionwords.h
  *
- * Copyright (C) 2010 Krzesimir Nowak
+ * Copyright (C) 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -18,7 +18,7 @@
  */
 
 #include <glibmm/object.h>
-#include <gtksourceviewmm/sourcecompletionprovider.h>
+#include <gtksourceviewmm/completionprovider.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -30,22 +30,22 @@ namespace Gsv
  *
  * @newin{2,10}
  */
-class SourceCompletionWords
+class CompletionWords
 :
   public Glib::Object,
-  public SourceCompletionProvider
+  public CompletionProvider
 {
-  _CLASS_GOBJECT(SourceCompletionWords, GtkSourceCompletionWords, GTK_SOURCE_COMPLETION_WORDS, Glib::Object, GObject)
-  _IMPLEMENTS_INTERFACE(SourceCompletionProvider)
+  _CLASS_GOBJECT(CompletionWords, GtkSourceCompletionWords, GTK_SOURCE_COMPLETION_WORDS, Glib::Object, GObject)
+  _IMPLEMENTS_INTERFACE(CompletionProvider)
 protected:
-  _WRAP_CTOR(SourceCompletionWords(const Glib::ustring& name, const Glib::RefPtr<Gdk::Pixbuf>& icon), gtk_source_completion_words_new)
+  _WRAP_CTOR(CompletionWords(const Glib::ustring& name, const Glib::RefPtr<Gdk::Pixbuf>& icon), gtk_source_completion_words_new)
 public:
   /** Creates words provider with given name and icon.
    *
    * @param name Provider's name
    * @param icon Provider's icon
    *
-   * @return A new SourceCompletionWords.
+   * @return A new CompletionWords.
    *
    * @newin{2,10}
    */

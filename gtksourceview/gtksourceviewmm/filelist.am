@@ -1,6 +1,6 @@
 files_built_cc = $(files_hg:.hg=.cc) wrap_init.cc
 files_built_h  = $(files_hg:.hg=.h)
 files_built_ph = $(patsubst %.hg,private/%_p.h,$(files_hg))
-files_extra_cc = init.cc sourcemarkup.cc
-files_extra_h  = init.h wrap_init.h sourcemarkup.h
+files_extra_cc = init.cc markup.cc
+files_extra_h  = init.h wrap_init.h markup.h
 files_extra_ph =

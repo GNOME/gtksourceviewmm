@@ -9,28 +9,28 @@ files_defs =				\
 	gtksourceview_docs_override.xml
 
 files_hg =				\
-	sourcebuffer.hg			\
-	sourcecompletion.hg		\
-	sourcecompletionactivation.hg   \
-	sourcecompletioncontext.hg	\
-	sourcecompletioninfo.hg		\
-	sourcecompletionitem.hg		\
-	sourcecompletionproposal.hg	\
-	sourcecompletionprovider.hg	\
-	sourcecompletionwords.hg        \
-	sourcegutter.hg			\
-	sourcegutterrenderer.hg		\
-	sourcegutterrendererpixbuf.hg	\
-	sourcegutterrenderertext.hg	\
-	sourcelanguage.hg		\
-	sourcelanguagemanager.hg	\
-	sourcemark.hg			\
-	sourcemarkattributes.hg		\
-	sourceprintcompositor.hg	\
-	sourcestyle.hg			\
-	sourcestylescheme.hg		\
-	sourcestyleschememanager.hg	\
-	sourceundomanager.hg		\
-	sourceview.hg
+	buffer.hg			\
+	completion.hg			\
+	completionactivation.hg		\
+	completioncontext.hg		\
+	completioninfo.hg		\
+	completionitem.hg		\
+	completionproposal.hg		\
+	completionprovider.hg		\
+	completionwords.hg		\
+	gutter.hg			\
+	gutterrenderer.hg		\
+	gutterrendererpixbuf.hg		\
+	gutterrenderertext.hg		\
+	language.hg			\
+	languagemanager.hg		\
+	mark.hg				\
+	markattributes.hg		\
+	printcompositor.hg		\
+	style.hg			\
+	stylescheme.hg			\
+	styleschememanager.hg		\
+	undomanager.hg			\
+	view.hg
 
 files_ccg = $(files_hg:.hg=.ccg)

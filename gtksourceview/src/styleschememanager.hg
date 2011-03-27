@@ -1,4 +1,4 @@
-/* sourcestyleschememanager.h
+/* styleschememanager.h
  *
  * Copyright (C) 2008 Jonathon Jongsma
  * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
@@ -22,7 +22,7 @@
 
 #include <gtksourceview/gtksourcestyleschememanager.h>
 
-#include <gtksourceviewmm/sourcestylescheme.h>
+#include <gtksourceviewmm/stylescheme.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
@@ -32,9 +32,9 @@ namespace Gsv
 
 /** Class providing access to SourceStyleSchemes.
  */
-class SourceStyleSchemeManager : public Glib::Object
+class StyleSchemeManager : public Glib::Object
 {
-  _CLASS_GOBJECT(SourceStyleSchemeManager, GtkSourceStyleSchemeManager, GTK_SOURCE_STYLE_SCHEME_MANAGER, Glib::Object, GObject)
+  _CLASS_GOBJECT(StyleSchemeManager, GtkSourceStyleSchemeManager, GTK_SOURCE_STYLE_SCHEME_MANAGER, Glib::Object, GObject)
 
 protected:
   _CTOR_DEFAULT
@@ -45,15 +45,15 @@ public:
    * If you do not need more than one style manager then use get_default()
    * instead.
    *
-   * @return A SourceStyleSchemeManager.
+   * @return A StyleSchemeManager.
    */
   _WRAP_CREATE()
 
-  /** Returns the default SourceStyleSchemeManager instance.
+  /** Returns the default StyleSchemeManager instance.
    *
-   * @return A SourceStyleSchemeManager.
+   * @return A StyleSchemeManager.
    */
-  _WRAP_METHOD(static Glib::RefPtr<SourceStyleSchemeManager> get_default(), gtk_source_style_scheme_manager_get_default, refreturn)
+  _WRAP_METHOD(static Glib::RefPtr<StyleSchemeManager> get_default(), gtk_source_style_scheme_manager_get_default, refreturn)
 
 #m4 _CONVERSION(`const gchar**',`std::vector<std::string>',`Glib::ArrayHandler<std::string>::array_to_vector($3, Glib::OWNERSHIP_NONE)')
 
@@ -87,17 +87,17 @@ public:
    *
    * @param scheme_id Style scheme id to find.
    *
-   * @return A SourceStyleScheme object.
+   * @return A StyleScheme object.
    */
-  _WRAP_METHOD(Glib::RefPtr<SourceStyleScheme> get_scheme(const std::string& scheme_id), gtk_source_style_scheme_manager_get_scheme, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<StyleScheme> get_scheme(const std::string& scheme_id), gtk_source_style_scheme_manager_get_scheme, refreturn)
 
   /** Looks up style scheme by id.
    *
    * @param scheme_id Style scheme id to find.
    *
-   * @return A SourceStyleScheme object.
+   * @return A StyleScheme object.
    */
-  _WRAP_METHOD(Glib::RefPtr<const SourceStyleScheme> get_scheme(const std::string& scheme_id) const, gtk_source_style_scheme_manager_get_scheme, refreturn, constversion)
+  _WRAP_METHOD(Glib::RefPtr<const StyleScheme> get_scheme(const std::string& scheme_id) const, gtk_source_style_scheme_manager_get_scheme, refreturn, constversion)
 
   /** Mark any currently cached information about the available style schemes
    *  as invalid.
@@ -116,7 +116,7 @@ public:
 
   _WRAP_PROPERTY("search-path", std::vector<std::string>)
   _WRAP_PROPERTY("scheme-ids", std::vector<std::string>)
-};//end class SourceStyleSchemeManager
+};//end class StyleSchemeManager
 
 }//end namespace Gsv
 

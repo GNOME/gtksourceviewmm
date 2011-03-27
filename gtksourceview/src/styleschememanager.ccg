@@ -1,4 +1,4 @@
-/* sourcestyleschememanager.cc
+/* styleschememanager.cc
  *
  * Copyright (C) 2004-2005 Jae Jang
  * Copyright (C) 2005-2006 Rob Page
@@ -26,7 +26,7 @@ namespace Gsv
 {
 
 
-void SourceStyleSchemeManager::reset_search_path()
+void StyleSchemeManager::reset_search_path()
 {
   gtk_source_style_scheme_manager_set_search_path(gobj(), 0);
 }

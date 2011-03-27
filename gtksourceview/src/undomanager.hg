@@ -1,6 +1,6 @@
-/* sourceundomanager.h
+/* undomanager.h
  *
- * Copyright (C) 2010 Krzesimir Nowak
+ * Copyright (C) 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -28,22 +28,22 @@ _PINCLUDE(glibmm/private/interface_p.h)
 namespace Gsv
 {
 
-/** Undo manager interface for SourceView.
+/** Undo manager interface for View.
  *
- * The SourceUndoManager interface can be implemented to provide custom
- * undo management to a SourceBuffer. Use
- * SourceBuffer::set_undo_manager() to install a custom undo manager for
+ * The UndoManager interface can be implemented to provide custom
+ * undo management to a Buffer. Use
+ * Buffer::set_undo_manager() to install a custom undo manager for
  * a particular source buffer.
  *
- * Use SourceUndoManager::can_undo_changed() and
- * SourceUndoManager::can_redo_changed() when respectively the undo state
+ * Use UndoManager::can_undo_changed() and
+ * UndoManager::can_redo_changed() when respectively the undo state
  * or redo state of the undo stack has changed.
  *
  * @newin{2,10}
  */
-class SourceUndoManager : public Glib::Interface
+class UndoManager : public Glib::Interface
 {
-  _CLASS_INTERFACE(SourceUndoManager, GtkSourceUndoManager, GTK_SOURCE_UNDO_MANAGER, GtkSourceUndoManagerIface)
+  _CLASS_INTERFACE(UndoManager, GtkSourceUndoManager, GTK_SOURCE_UNDO_MANAGER, GtkSourceUndoManagerIface)
 
 public:
 

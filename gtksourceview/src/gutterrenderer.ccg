@@ -1,6 +1,6 @@
-/* sourcegutterrenderer.cc
+/* gutterrenderer.cc
  *
- * Copyright (C) 2009, 2010 Krzesimir Nowak
+ * Copyright (C) 2009, 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -22,7 +22,7 @@
 namespace Gsv
 {
 
-bool SourceGutterRenderer::is_background_set() const
+bool GutterRenderer::is_background_set() const
 {
   return gtk_source_gutter_renderer_get_background(const_cast<GtkSourceGutterRenderer*>(gobj()), 0);
 }

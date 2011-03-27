@@ -1,6 +1,6 @@
-/* sourcegutterrenderer.h
+/* gutterrenderer.h
  *
- * Copyright (C) 2010 Krzesimir Nowak
+ * Copyright (C) 2010, 2011 Krzesimir Nowak
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -18,11 +18,11 @@
  */
 
 /// \file
-/// \brief SourceGutterRenderer class
+/// \brief GutterRenderer class
 
 #include <gtkmm/object.h>
 #include <gtkmm/tooltip.h>
-#include <gtksourceviewmm/sourceview.h>
+#include <gtksourceviewmm/view.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(gtkmm/private/object_p.h)
@@ -30,14 +30,14 @@ _PINCLUDE(gtkmm/private/object_p.h)
 namespace Gsv
 {
 
-_WRAP_ENUM(SourceGutterRendererState, GtkSourceGutterRendererState)
+_WRAP_ENUM(GutterRendererState, GtkSourceGutterRendererState, s#^SOURCE_##)
 
-_WRAP_ENUM(SourceGutterRendererAlignmentMode, GtkSourceGutterRendererAlignmentMode)
+_WRAP_ENUM(GutterRendererAlignmentMode, GtkSourceGutterRendererAlignmentMode, s#^SOURCE_##)
 
 // TODO: write docs.
-class SourceGutterRenderer : public Gtk::Object
+class GutterRenderer : public Gtk::Object
 {
-  _CLASS_GTKOBJECT(SourceGutterRenderer, GtkSourceGutterRenderer, GTK_SOURCE_GUTTER_RENDERER, Gtk::Object, GInitiallyUnowned)
+  _CLASS_GTKOBJECT(GutterRenderer, GtkSourceGutterRenderer, GTK_SOURCE_GUTTER_RENDERER, Gtk::Object, GInitiallyUnowned)
 public:
 #m4 _CONVERSION(`const Cairo::RefPtr<Cairo::Context>&', `cairo_t*', `(($3) ? ($3)->cobj() : 0)')
 #m4 _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',($3).gobj())
@@ -54,7 +54,7 @@ public:
                   const Gdk::Rectangle& cell_area,
                   Gtk::TextIter& start,
                   Gtk::TextIter& end,
-                  SourceGutterRendererState), gtk_source_gutter_renderer_draw)
+                  GutterRendererState), gtk_source_gutter_renderer_draw)
 
   _WRAP_METHOD(void end(), gtk_source_gutter_renderer_end)
 
@@ -78,9 +78,9 @@ public:
 
   _WRAP_METHOD(void set_alignment(float xalign, float yalign), gtk_source_gutter_renderer_set_alignment)
 
-  _WRAP_METHOD(SourceGutterRendererAlignmentMode get_alignment_mode() const, gtk_source_gutter_renderer_get_alignment_mode)
+  _WRAP_METHOD(GutterRendererAlignmentMode get_alignment_mode() const, gtk_source_gutter_renderer_get_alignment_mode)
 
-  _WRAP_METHOD(void set_alignment_mode(SourceGutterRendererAlignmentMode mode), gtk_source_gutter_renderer_set_alignment_mode)
+  _WRAP_METHOD(void set_alignment_mode(GutterRendererAlignmentMode mode), gtk_source_gutter_renderer_set_alignment_mode)
 
   _WRAP_METHOD(Gtk::TextWindowType get_window_type() const, gtk_source_gutter_renderer_get_window_type)
 
@@ -109,7 +109,7 @@ public:
   _WRAP_PROPERTY("xalign", float)
   _WRAP_PROPERTY("yalign", float)
   _WRAP_PROPERTY("view", Gtk::TextView*)
-  _WRAP_PROPERTY("alignment-mode", SourceGutterRendererAlignmentMode)
+  _WRAP_PROPERTY("alignment-mode", GutterRendererAlignmentMode)
   _WRAP_PROPERTY("window-type", Gtk::TextWindowType)
   _WRAP_PROPERTY("size", int)
   _WRAP_PROPERTY("background-rgba", Gdk::RGBA)
@@ -135,7 +135,7 @@ public:
 
   _WRAP_SIGNAL(void query_data(const Gtk::TextIter& start,
                                const Gtk::TextIter& end,
-                               SourceGutterRendererState state), "query-data")
+                               GutterRendererState state), "query-data")
 
   _WRAP_SIGNAL(bool query_activatable(const Gtk::TextIter& iter,
                                       const Gdk::Rectangle& area,
@@ -158,7 +158,7 @@ protected:
                         const Gdk::Rectangle& cell_area,
                         Gtk::TextIter& start,
                         Gtk::TextIter& end,
-                        SourceGutterRendererState), draw)
+                        GutterRendererState), draw)
 
   _WRAP_VFUNC(void end(), end)
 

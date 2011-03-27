@@ -1,4 +1,4 @@
-/* sourcebuffer.h
+/* buffer.h
  *
  * Copyright (C) 2004-2005 Jae Jang
  * Copyright (C) 2005-2006 Rob Page
@@ -23,9 +23,9 @@
 #include <vector>
 
 #include <gtkmm/textbuffer.h>
-#include <gtksourceviewmm/sourcelanguage.h>
-#include <gtksourceviewmm/sourcemark.h>
-#include <gtksourceviewmm/sourceundomanager.h>
+#include <gtksourceviewmm/language.h>
+#include <gtksourceviewmm/mark.h>
+#include <gtksourceviewmm/undomanager.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(gtkmm/private/textbuffer_p.h)
@@ -38,42 +38,42 @@ namespace Gsv
  *
  * @newin{3,0}
  */
-_WRAP_ENUM(SourceBracketMatchType, GtkSourceBracketMatchType)
-/** @var SourceBracketMatchType SOURCE_BRACKET_MATCH_NONE
+_WRAP_ENUM(BracketMatchType, GtkSourceBracketMatchType, s#^SOURCE_##)
+/** @var BracketMatchType BRACKET_MATCH_NONE
  * There was no bracket to match.
  */
-/** @var SourceBracketMatchType SOURCE_BRACKET_MATCH_OUT_OF_RANGE
+/** @var BracketMatchType BRACKET_MATCH_OUT_OF_RANGE
  * Matching a bracket failed because the maximum range was reached.
  */
-/** @var SourceBracketMatchType SOURCE_BRACKET_MATCH_NOT_FOUND
+/** @var BracketMatchType BRACKET_MATCH_NOT_FOUND
  * A matching bracket was not found.
  */
-/** @var SourceBracketMatchType SOURCE_BRACKET_MATCH_FOUND
+/** @var BracketMatchType BRACKET_MATCH_FOUND
  * A matching bracket was found.
  */
 
-/** Buffer object for SourceView.
+/** Buffer object for View.
  *
- * The SourceBuffer class is the model for SourceView widgets. It extends the
+ * The Buffer class is the model for View widgets. It extends the
  * Gtk::TextBuffer class by adding features useful to display and edit source
  * code as syntax highlighting and bracket matching. It also implements support
  * for undo/redo operations.
  *
- * To create a SourceBuffer use SourceBuffer::create(). A convenience overload
- * for initial setting a SourceLanguage is also provided.
+ * To create a Buffer use Buffer::create(). A convenience overload
+ * for initial setting a Language is also provided.
  *
  * By default highlighting is enabled, but you can disable it with
- * SourceBuffer::set_highlight_syntax().
+ * Buffer::set_highlight_syntax().
  */
-class SourceBuffer : public Gtk::TextBuffer
+class Buffer : public Gtk::TextBuffer
 {
-  _CLASS_GOBJECT(SourceBuffer, GtkSourceBuffer, GTK_SOURCE_BUFFER, Gtk::TextBuffer, GtkTextBuffer)
+  _CLASS_GOBJECT(Buffer, GtkSourceBuffer, GTK_SOURCE_BUFFER, Gtk::TextBuffer, GtkTextBuffer)
 
 protected:
 
-  explicit SourceBuffer () ;
-  explicit SourceBuffer (const Glib::RefPtr<Gtk::TextTagTable>& tag_table) ;
-  explicit SourceBuffer (const Glib::RefPtr<SourceLanguage> &language) ;
+  explicit Buffer () ;
+  explicit Buffer (const Glib::RefPtr<Gtk::TextTagTable>& tag_table) ;
+  explicit Buffer (const Glib::RefPtr<Language> &language) ;
 
 public:
 
@@ -81,7 +81,7 @@ public:
    *
    * Internally it will create a new Gtk::TextTagTable also.
    *
-   * @return A new SourceBuffer.
+   * @return A new Buffer.
    *
    * @newin{2,10}
    */
@@ -91,18 +91,18 @@ public:
    *
    * @param tag_table A Gtk::TextTagTable or empty Glib::RefPtr, to create new.
    *
-   * @return A new SourceBuffer.
+   * @return A new Buffer.
    */
   _WRAP_CREATE(const Glib::RefPtr<Gtk::TextTagTable>& tag_table)
 
   /** Creates a new source buffer using the highlighting patterns
    *  in @a language.
    *
-   * @param language A SourceLanguage.
+   * @param language A Language.
    *
-   * @return A new SourceBuffer
+   * @return A new Buffer
    */
-  _WRAP_CREATE(const Glib::RefPtr<SourceLanguage>& language)
+  _WRAP_CREATE(const Glib::RefPtr<Language>& language)
 
   _WRAP_METHOD(bool get_highlight_matching_brackets() const, gtk_source_buffer_get_highlight_matching_brackets)
 
@@ -143,19 +143,19 @@ public:
    */
   _WRAP_METHOD(void set_max_undo_levels(int max_undo_levels), gtk_source_buffer_set_max_undo_levels)
 
-  /** Returns the SourceLanguage associated with the buffer.
+  /** Returns the Language associated with the buffer.
    *
-   * @return A SourceLanguage associated with the buffer, or empty Glib::RefPtr.
+   * @return A Language associated with the buffer, or empty Glib::RefPtr.
    */
-  _WRAP_METHOD(Glib::RefPtr<SourceLanguage> get_language(), gtk_source_buffer_get_language, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<Language> get_language(), gtk_source_buffer_get_language, refreturn)
 
-  /** Returns the SourceLanguage associated with the buffer.
+  /** Returns the Language associated with the buffer.
    *
-   * @return A SourceLanguage associated with the buffer, or empty Glib::RefPtr.
+   * @return A Language associated with the buffer, or empty Glib::RefPtr.
    */
-  _WRAP_METHOD(Glib::RefPtr<const SourceLanguage> get_language() const, gtk_source_buffer_get_language, refreturn, constversion)
+  _WRAP_METHOD(Glib::RefPtr<const Language> get_language() const, gtk_source_buffer_get_language, refreturn, constversion)
 
-  /** Associate a SourceLanguage with the source buffer.
+  /** Associate a Language with the source buffer.
    *
    * If language is not empty and syntax highlighting is enabled, the syntax
    * patterns defined in language will be used to highlight the text contained
@@ -164,9 +164,9 @@ public:
    *
    * The buffer holds a reference to language.
    *
-   * @param language A SourceLanguage to set, or empty Glib::RefPtr.
+   * @param language A Language to set, or empty Glib::RefPtr.
    */
-  _WRAP_METHOD(void set_language(const Glib::RefPtr<SourceLanguage>& language), gtk_source_buffer_set_language)
+  _WRAP_METHOD(void set_language(const Glib::RefPtr<Language>& language), gtk_source_buffer_set_language)
 
   _WRAP_METHOD(bool can_undo() const, gtk_source_buffer_can_undo)
 
@@ -190,7 +190,7 @@ public:
   _WRAP_METHOD(void end_not_undoable_action(), gtk_source_buffer_end_not_undoable_action)
 
 #m4 _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',`($3).gobj()')
-  /** Moves iter to the position of the previous SourceMark of the given
+  /** Moves iter to the position of the previous Mark of the given
    *  category.
    *
    * @param iter An iterator.
@@ -200,7 +200,7 @@ public:
    */
   _WRAP_METHOD(bool backward_iter_to_source_mark(Gtk::TextIter& iter, const Glib::ustring& category), gtk_source_buffer_backward_iter_to_source_mark)
 
-  /** Moves iter to the position of the previous SourceMark of any category.
+  /** Moves iter to the position of the previous Mark of any category.
    *
    * @param iter An iterator.
    *
@@ -208,7 +208,7 @@ public:
    */
   bool backward_iter_to_source_mark(Gtk::TextIter& iter);
 
-  /** Moves iter to the position of the next SourceMark of the given
+  /** Moves iter to the position of the next Mark of the given
    *  category.
    *
    * @param iter An iterator.
@@ -218,7 +218,7 @@ public:
    */
   _WRAP_METHOD(bool forward_iter_to_source_mark(Gtk::TextIter& iter, const Glib::ustring& category), gtk_source_buffer_forward_iter_to_source_mark)
 
-  /** Moves iter to the position of the next SourceMark of the given
+  /** Moves iter to the position of the next Mark of the given
    *  category.
    *
    * @param iter An iterator.
@@ -239,19 +239,19 @@ public:
    */
   _WRAP_METHOD(void ensure_highlight(const Gtk::TextIter& start, const Gtk::TextIter& end), gtk_source_buffer_ensure_highlight)
 
-  /** Returns the SourceStyleScheme currently used in buffer.
+  /** Returns the StyleScheme currently used in buffer.
    *
-   * @return The SourceStyleScheme set by set_style_scheme(), or empty
+   * @return The StyleScheme set by set_style_scheme(), or empty
    * Glib::RefPtr.
    */
-  _WRAP_METHOD(Glib::RefPtr<SourceStyleScheme> get_style_scheme(), gtk_source_buffer_get_style_scheme, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<StyleScheme> get_style_scheme(), gtk_source_buffer_get_style_scheme, refreturn)
 
-  /** Returns the SourceStyleScheme currently used in buffer.
+  /** Returns the StyleScheme currently used in buffer.
    *
-   * @return The SourceStyleScheme set by set_style_scheme(), or empty
+   * @return The StyleScheme set by set_style_scheme(), or empty
    * Glib::RefPtr.
    */
-  _WRAP_METHOD(Glib::RefPtr<const SourceStyleScheme> get_style_scheme() const, gtk_source_buffer_get_style_scheme, constversion, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const StyleScheme> get_style_scheme() const, gtk_source_buffer_get_style_scheme, constversion, refreturn)
 
   /** Sets style scheme used by the buffer.
    *
@@ -259,7 +259,7 @@ public:
    *
    * @param scheme Style scheme.
    */
-  _WRAP_METHOD(void set_style_scheme(const Glib::RefPtr<SourceStyleScheme>& scheme), gtk_source_buffer_set_style_scheme)
+  _WRAP_METHOD(void set_style_scheme(const Glib::RefPtr<StyleScheme>& scheme), gtk_source_buffer_set_style_scheme)
 
   /** Unsets style scheme used by the buffer.
    *
@@ -283,9 +283,9 @@ public:
    * @param category A string defining the mark category.
    * @param where Location to place the mark.
    *
-   * @return A new SourceMark.
+   * @return A new Mark.
    */
-  _WRAP_METHOD(Glib::RefPtr<SourceMark> create_source_mark(const Glib::ustring& name, const Glib::ustring& category, const Gtk::TextIter& where), gtk_source_buffer_create_source_mark, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<Gsv::Mark> create_source_mark(const Glib::ustring& name, const Glib::ustring& category, const Gtk::TextIter& where), gtk_source_buffer_create_source_mark, refreturn)
 
   /** Creates an anonymous source mark in the buffer of category category.
    *
@@ -293,7 +293,7 @@ public:
    * on the category a pixbuf can be specified that will be displayed along the
    * line of the mark.
    *
-   * Like a Gtk::TextMark, a SourceMark can be anonymous.
+   * Like a Gtk::TextMark, a Mark can be anonymous.
    *
    * Marks always have left gravity and are moved to the beginning of the line
    * when the user deletes the line they were in.
@@ -304,14 +304,14 @@ public:
    * @param category A string defining the mark category.
    * @param where Location to place the mark.
    *
-   * @return A new SourceMark.
+   * @return A new Mark.
    *
    * @newin{2,10}
    */
-  Glib::RefPtr<SourceMark> create_source_mark(const Glib::ustring& category, const Gtk::TextIter& where);
+  Glib::RefPtr<Gsv::Mark> create_source_mark(const Glib::ustring& category, const Gtk::TextIter& where);
 
-#m4 _CONVERSION(`GSList*',`std::vector<Glib::RefPtr<SourceMark> >', `Glib::SListHandler<Glib::RefPtr<SourceMark> >::slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')
-#m4 _CONVERSION(`GSList*',`std::vector<Glib::RefPtr<const SourceMark> >', `Glib::SListHandler<Glib::RefPtr<const SourceMark> >slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')
+#m4 _CONVERSION(`GSList*',`std::vector<Glib::RefPtr<Gsv::Mark> >', `Glib::SListHandler<Glib::RefPtr<Gsv::Mark> >::slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')
+#m4 _CONVERSION(`GSList*',`std::vector<Glib::RefPtr<const Gsv::Mark> >', `Glib::SListHandler<Glib::RefPtr<const Gsv::Mark> >slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')
 
   /** Returns the list of marks of the given @a category at @a line.
    *
@@ -320,7 +320,7 @@ public:
    *
    * @return A list of source marks.
    */
-  _WRAP_METHOD(std::vector<Glib::RefPtr<SourceMark> > get_source_marks_at_line(int line, const Glib::ustring& category) const, gtk_source_buffer_get_source_marks_at_line)
+  _WRAP_METHOD(std::vector<Glib::RefPtr<Gsv::Mark> > get_source_marks_at_line(int line, const Glib::ustring& category) const, gtk_source_buffer_get_source_marks_at_line)
 
   /** Returns the list of marks of any category at @a line.
    *
@@ -328,7 +328,7 @@ public:
    *
    * @return A list of source marks.
    */
-  std::vector<Glib::RefPtr<SourceMark> > get_source_marks_at_line(int line) const;
+  std::vector<Glib::RefPtr<Gsv::Mark> > get_source_marks_at_line(int line) const;
 
   /** Returns the list of marks of the given @a category at @a iter.
    *
@@ -337,7 +337,7 @@ public:
    *
    * @return A list of source marks.
    */
-  _WRAP_METHOD(std::vector<Glib::RefPtr<SourceMark> > get_source_marks_at_iter(Gtk::TextIter& iter, const Glib::ustring& category) const, gtk_source_buffer_get_source_marks_at_iter)
+  _WRAP_METHOD(std::vector<Glib::RefPtr<Gsv::Mark> > get_source_marks_at_iter(Gtk::TextIter& iter, const Glib::ustring& category) const, gtk_source_buffer_get_source_marks_at_iter)
 
   /** Returns the list of marks of any category at @a iter.
    *
@@ -345,7 +345,7 @@ public:
    *
    * @return A list of source marks.
    */
-  std::vector<Glib::RefPtr<SourceMark> > get_source_marks_at_iter(Gtk::TextIter& iter) const;
+  std::vector<Glib::RefPtr<Gsv::Mark> > get_source_marks_at_iter(Gtk::TextIter& iter) const;
 
   /** Remove all marks of @a category between start and end from the buffer.
    *
@@ -420,26 +420,26 @@ public:
   _WRAP_METHOD(std::vector<Glib::ustring> get_context_classes_at_iter(const Gtk::TextIter& iter) const, gtk_source_buffer_get_context_classes_at_iter)
 
   /** Get the undo manager associated with the buffer.
-   * @return A SourceUndoManager.
+   * @return A UndoManager.
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(Glib::RefPtr<SourceUndoManager> get_undo_manager(), gtk_source_buffer_get_undo_manager, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<UndoManager> get_undo_manager(), gtk_source_buffer_get_undo_manager, refreturn)
 
   /** Get the undo manager associated with the buffer.
-   * @return A SourceUndoManager.
+   * @return A UndoManager.
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(Glib::RefPtr<const SourceUndoManager> get_undo_manager() const, gtk_source_buffer_get_undo_manager, refreturn, constversion)
+  _WRAP_METHOD(Glib::RefPtr<const UndoManager> get_undo_manager() const, gtk_source_buffer_get_undo_manager, refreturn, constversion)
 
   /** Set the buffer undo manager.
    *
-   * @param undo_manager A SourceUndoManager.
+   * @param undo_manager A UndoManager.
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(void set_undo_manager(const Glib::RefPtr<const SourceUndoManager>& undo_manager), gtk_source_buffer_set_undo_manager)
+  _WRAP_METHOD(void set_undo_manager(const Glib::RefPtr<const UndoManager>& undo_manager), gtk_source_buffer_set_undo_manager)
 
   /** Set the default buffer undo manager.
    *
@@ -450,11 +450,11 @@ public:
   _WRAP_PROPERTY("highlight-syntax", bool)
   _WRAP_PROPERTY("highlight-matching-brackets", bool)
   _WRAP_PROPERTY("max-undo-levels", int)
-  _WRAP_PROPERTY("language", Glib::RefPtr<SourceLanguage>)
+  _WRAP_PROPERTY("language", Glib::RefPtr<Language>)
   _WRAP_PROPERTY("can-undo", bool)
   _WRAP_PROPERTY("can-redo", bool)
-  _WRAP_PROPERTY("style-scheme", Glib::RefPtr<SourceStyleScheme>)
-  _WRAP_PROPERTY("undo-manager", Glib::RefPtr<SourceUndoManager>)
+  _WRAP_PROPERTY("style-scheme", Glib::RefPtr<StyleScheme>)
+  _WRAP_PROPERTY("undo-manager", Glib::RefPtr<UndoManager>)
 
 #m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap($3)')
   /** Emitted whenever the syntax highlighting information has been updated,
@@ -497,7 +497,7 @@ public:
    */
   _WRAP_SIGNAL(void redo(), "redo")
 
-  /** Sets iter to a valid iterator pointing to the matching bracket if state is SourceBracketMatchType::SOURCE_BRACKET_MATCH_FOUND.
+  /** Sets iter to a valid iterator pointing to the matching bracket if state is BracketMatchType::BRACKET_MATCH_FOUND.
    *
    * @par Handler parameters:
    * iter Iterator to initialize.
@@ -505,7 +505,7 @@ public:
    *
    * @newin{3,0}
    */
-  _WRAP_SIGNAL(void bracket_matched(Gtk::TextIter& iter, SourceBracketMatchType state), "bracket-matched")
+  _WRAP_SIGNAL(void bracket_matched(Gtk::TextIter& iter, BracketMatchType state), "bracket-matched")
 };
 
 } /* namespace Gsv */

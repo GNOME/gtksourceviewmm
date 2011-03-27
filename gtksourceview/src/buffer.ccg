@@ -1,4 +1,4 @@
-/* sourcebuffer.cc
+/* buffer.cc
  *
  * Copyright (C) 2004-2005 Jae Jang
  * Copyright (C) 2005-2006 Rob Page
@@ -27,59 +27,59 @@
 namespace Gsv
 {
 
-SourceBuffer::SourceBuffer () :
+Buffer::Buffer () :
   _CONSTRUCT("tag-table", 0)
 {}
 
-SourceBuffer::SourceBuffer (const Glib::RefPtr<Gtk::TextTagTable>& tag_table) :
+Buffer::Buffer (const Glib::RefPtr<Gtk::TextTagTable>& tag_table) :
   _CONSTRUCT("tag-table", Glib::unwrap(tag_table))
 {}
 
-SourceBuffer::SourceBuffer (const Glib::RefPtr<SourceLanguage> &language) :
+Buffer::Buffer (const Glib::RefPtr<Language> &language) :
     _CONSTRUCT("tag-table", 0, "language", Glib::unwrap(language))
 {
 }
 
-bool SourceBuffer::backward_iter_to_source_mark(Gtk::TextIter& iter)
+bool Buffer::backward_iter_to_source_mark(Gtk::TextIter& iter)
 {
     return gtk_source_buffer_backward_iter_to_source_mark(gobj(), iter.gobj(), 0);
 }
 
-bool SourceBuffer::forward_iter_to_source_mark(Gtk::TextIter& iter)
+bool Buffer::forward_iter_to_source_mark(Gtk::TextIter& iter)
 {
     return gtk_source_buffer_forward_iter_to_source_mark(gobj(), iter.gobj(), 0);
 }
 
-Glib::RefPtr<SourceMark>
-SourceBuffer::create_source_mark(const Glib::ustring& category, const Gtk::TextIter& where)
+Glib::RefPtr<Gsv::Mark>
+Buffer::create_source_mark(const Glib::ustring& category, const Gtk::TextIter& where)
 {
   return Glib::wrap(gtk_source_buffer_create_source_mark(gobj(), 0, category.c_str(), where.gobj()));
 }
 
-std::vector<Glib::RefPtr<SourceMark> > SourceBuffer::get_source_marks_at_line(int line) const
+std::vector<Glib::RefPtr<Gsv::Mark> > Buffer::get_source_marks_at_line(int line) const
 {
-    return Glib::SListHandler<Glib::RefPtr<SourceMark> >::slist_to_vector(gtk_source_buffer_get_source_marks_at_line(const_cast<GtkSourceBuffer*>(gobj()), line, 0), Glib::OWNERSHIP_SHALLOW);
+    return Glib::SListHandler<Glib::RefPtr<Gsv::Mark> >::slist_to_vector(gtk_source_buffer_get_source_marks_at_line(const_cast<GtkSourceBuffer*>(gobj()), line, 0), Glib::OWNERSHIP_SHALLOW);
 }
 
-std::vector<Glib::RefPtr<SourceMark> > SourceBuffer::get_source_marks_at_iter(Gtk::TextIter& iter) const
+std::vector<Glib::RefPtr<Gsv::Mark> > Buffer::get_source_marks_at_iter(Gtk::TextIter& iter) const
 {
-    return Glib::SListHandler<Glib::RefPtr<SourceMark> >::slist_to_vector(gtk_source_buffer_get_source_marks_at_iter(const_cast<GtkSourceBuffer*>(gobj()), iter.gobj(), 0), Glib::OWNERSHIP_SHALLOW);
+    return Glib::SListHandler<Glib::RefPtr<Gsv::Mark> >::slist_to_vector(gtk_source_buffer_get_source_marks_at_iter(const_cast<GtkSourceBuffer*>(gobj()), iter.gobj(), 0), Glib::OWNERSHIP_SHALLOW);
 }
 
 void
-SourceBuffer::remove_source_marks(const Gtk::TextIter& start, const Gtk::TextIter& end)
+Buffer::remove_source_marks(const Gtk::TextIter& start, const Gtk::TextIter& end)
 {
   gtk_source_buffer_remove_source_marks(gobj(), start.gobj(), end.gobj(), 0);
 }
 
 void
-SourceBuffer::unset_style_scheme()
+Buffer::unset_style_scheme()
 {
   gtk_source_buffer_set_style_scheme(gobj(), 0);
 }
 
 void
-SourceBuffer::set_default_undo_manager()
+Buffer::set_default_undo_manager()
 {
   gtk_source_buffer_set_undo_manager(gobj(), 0);
 }

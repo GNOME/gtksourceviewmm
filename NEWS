@@ -1,3 +1,14 @@
+2.91.9:
+* Large API break - removed Source prefix from type names, SOURCE_ from
+enum value names and source from headers. (Krzesimir Nowak)
+* Avoid tarball dependency on mm-common. That bumps mm-common requirement
+to yet unreleased version. (Krzesimir Nowak)
+
+2.91.8:
+2.91.7:
+2.91.6:
+* There were no releases.
+
 2.91.5:
 * Replaced Glib::*Handles with std::vector. (Krzesimir Nowak)
 

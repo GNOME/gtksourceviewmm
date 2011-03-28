@@ -6,6 +6,12 @@
 
   <name xml:lang="en">gtksourceviewmm</name>
   <shortdesc xml:lang="en">C++ bindings for GtkSourceView</shortdesc>
+  <description>gtksourceviewmm provides C++ bindings for gtksourceview library.
+It allows C++ programmers to use GtkSourceView widget with C++ builtin features
+like inheritance, virtual functions and so on.
+
+gtksourceview provides a text widget with syntax highlighting, bracket matching,
+autocompletion and other mostly programming-oriented features.</description>
 
   <homepage rdf:resource="http://www.gtkmm.org/" />
   <mailing-list rdf:resource="mailto:gtkmm-list@gnome.org" />

@@ -14,5 +14,5 @@ Current dependencies:
 - to build in maintainer mode:
   * same as above and tools used by maintainer:
     - git (to generate a ChangeLog)
-    - mm-common >= 0.9.4 (actually a version from git is needed)
+    - mm-common >= 0.9.5
     - recent autotools because no deprecated macros are used.

@@ -87,13 +87,23 @@ public:
    */
   Markup& operator=(const Markup& other);
 
+  /** This typedef is just to make it more obvious that 
+   * our operator const void*() should be used like operator bool().
+   */ 
+  typedef const void* BoolExpr;
+
   /** Checks if Markup is not empty.
+   * For instance,
+   * @code
+   * if(markup)
+   *   do_something()
+   * @endcode
    *
    * @return @c true if Markup is not empty, otherwise @c false.
    *
    * @newin{2,10}
    */
-  operator bool() const;
+  operator BoolExpr() const;
 
   /** Checks if @a other Markup is the same as this one.
    *

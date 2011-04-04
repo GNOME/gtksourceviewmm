@@ -52,9 +52,9 @@ Markup& Markup::operator=(const Markup& other)
   return *this;
 }
 
-Markup::operator bool() const
+Markup::operator const void*() const
 {
-  return !(markup_.empty());
+  return (const void*)!(markup_.empty());
 }
 
 bool Markup::equal(const Markup& rhs) const

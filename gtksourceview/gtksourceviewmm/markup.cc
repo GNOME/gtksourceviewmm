@@ -54,7 +54,7 @@ Markup& Markup::operator=(const Markup& other)
 
 Markup::operator const void*() const
 {
-  return (const void*)!(markup_.empty());
+  return !(markup_.empty()) ? GINT_TO_POINTER(1) : 0;
 }
 
 bool Markup::equal(const Markup& rhs) const
@@ -73,4 +73,3 @@ const char* Markup::get_c_str() const
 }
 
 } // namespace Gsv
-

@@ -1,3 +1,7 @@
+3.0.0:
+* Markup: changed operator bool() to operator const void*() to avoid
+implicit cast to int. (Murray Cumming)
+
 2.91.9:
 * Large API break - removed Source prefix from type names, SOURCE_ from
 enum value names and source from headers. (Krzesimir Nowak)

@@ -163,6 +163,8 @@
  * <li>Gsv::StyleSchemeManager::set_search_path()</li>
  * <li>Gsv::StyleSchemeManager::get_scheme_ids()</li>
  * </ul></li>
+ * <li>Gsv::Markup now has operator const void* instead of operator bool, so
+ * implicit casts to int are avoided.</li>
  * </ul>
  */
 

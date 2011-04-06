@@ -1,10 +1,10 @@
-C++ wrapper for gtksourceview, version 2.91.9.
+C++ wrapper for gtksourceview, version 3.0.0.
 
 Current dependencies:
 - to build a library from tarball:
-  * gtksourceview >= 2.91.9
-  * glibmm >= 2.27.93
-  * gtkmm >= 2.91.2
+  * gtksourceview >= 3.0.0
+  * glibmm >= 2.28.0
+  * gtkmm >= 3.0.0
 - to build a documentation:
   * same as above and tools required by mm-common, that are:
     - perl

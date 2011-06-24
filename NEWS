@@ -1,3 +1,11 @@
+2.10.2:
+* Fixed plenty of reference counting problems, mainly in completion stuff.
+  (Krzesimir Nowak)
+* Added completion test.
+  (Krzesimir Nowak)
+* Fixed building with newer glibmm.
+  (Krzesimir Nowak)
+
 2.10.1:
 * Fixed passing empty strings to SourceLanguageManager::guess_language().
   (Krzesimir Nowak)

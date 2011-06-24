@@ -1,4 +1,4 @@
-C++ wrapper for gtksourceview, version 2.10.1.
+C++ wrapper for gtksourceview, version 2.10.2.
 
 Current dependencies:
 - to build a library from tarball:

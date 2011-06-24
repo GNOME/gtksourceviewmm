@@ -2,6 +2,7 @@
 #ifndef _GTKSOURCEVIEWMM_WRAP_INIT_H
 #define _GTKSOURCEVIEWMM_WRAP_INIT_H
 
+#include <gdkmm/region.h> // workaround for bgo640654
 #include <gtkmm/main.h>
 
 /* wrap_init.h

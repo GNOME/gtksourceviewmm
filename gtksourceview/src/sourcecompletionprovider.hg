@@ -18,6 +18,9 @@
  */
 
 #include <glibmm/interface.h>
+
+#include <gdkmm/region.h> // workaround for bgo640654
+
 #include <gtksourceview/gtksourcecompletionprovider.h>
 
 #include <gtksourceviewmm/sourcecompletionactivation.h>

@@ -20,3 +20,8 @@ stamp-*
 *.pc
 *~
 .dirstamp
+
+/docs/doc-install.pl
+/docs/doc-postprocess.pl
+/docs/doxygen.css
+/docs/tagfile-to-devhelp2.xsl

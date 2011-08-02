@@ -105,6 +105,10 @@ public:
 
   _WRAP_METHOD(void get_padding(int& xpad, int& ypad) const, gtk_source_gutter_get_padding)
 
+  _WRAP_METHOD(GutterRenderer* get_renderer_at_pos(int x, int y), gtk_source_gutter_get_renderer_at_pos, refreturn)
+
+  _WRAP_METHOD(const GutterRenderer* get_renderer_at_pos(int x, int y) const, gtk_source_gutter_get_renderer_at_pos, constversion, refreturn)
+
   _WRAP_PROPERTY("view", View*)
   _WRAP_PROPERTY("window-type", Gtk::TextWindowType)
   _WRAP_PROPERTY("xpad", int)

@@ -2751,6 +2751,30 @@ is analyzed/highlighted.
 <return></return>
 </function>
 
+<function name="gtk_source_gutter_get_renderer_at_pos">
+<description>
+Finds the #GtkSourceGutterRenderer at (x, y).
+
+
+</description>
+<parameters>
+<parameter name="gutter">
+<parameter_description> A #GtkSourceGutter.
+</parameter_description>
+</parameter>
+<parameter name="x">
+<parameter_description> The x position to get identified.
+</parameter_description>
+</parameter>
+<parameter name="y">
+<parameter_description> The y position to get identified.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the renderer at (x, y) or %NULL.
+</return>
+</function>
+
 <function name="gtk_source_gutter_get_window">
 <description>
 Get the #GdkWindow of the gutter. The window will only be available when the

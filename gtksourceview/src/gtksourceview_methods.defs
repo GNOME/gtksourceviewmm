@@ -939,6 +939,16 @@
   )
 )
 
+(define-method get_renderer_at_pos
+  (of-object "GtkSourceGutter")
+  (c-name "gtk_source_gutter_get_renderer_at_pos")
+  (return-type "GtkSourceGutterRenderer*")
+  (parameters
+    '("gint" "x")
+    '("gint" "y")
+  )
+)
+
 
 
 ;; From gtksourcegutterrenderer.h
@@ -1279,6 +1289,10 @@
     '("gint*" "height")
   )
 )
+
+
+
+;; From gtksource.h
 
 
 

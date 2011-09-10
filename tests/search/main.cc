@@ -50,7 +50,7 @@ class SearchDialog : public Dialog {
         add_button (Stock::CLOSE, RESPONSE_ACCEPT) ;
 
         m_hbox = manage (new HBox) ;
-        get_vbox ()->pack_start (*m_hbox) ;
+        get_content_area ()->pack_start (*m_hbox) ;
 
         Label *label = manage (new Label ("Search: ")) ;
         m_hbox->pack_start (*label) ;

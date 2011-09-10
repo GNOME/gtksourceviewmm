@@ -1,15 +1,4 @@
-/aclocal.m4
-/autom4te.cache/
-/config.log
-/config.status
-/configure
-/libtool
-/gtksourceviewmm-*
-/INSTALL
-/gtksourceview/gtksourceviewmmconfig.h
-/tests/*/test
-/*.patch
-
+# wildcard matches
 Makefile
 Makefile.in
 stamp-*
@@ -22,8 +11,78 @@ stamp-*
 *~
 .dirstamp
 
-# docs directory, files copied by mm-common
+# /
+/aclocal.m4
+/autom4te.cache/
+/config.log
+/config.status
+/configure
+/libtool
+/gtksourceviewmm-*
+/INSTALL
+/gtksourceview/gtksourceviewmmconfig.h
+/tests/*/test
+/*.patch
+
+# /codegen
+codegen/extradefs/generate_extra_defs
+
+# /docs
 /docs/doc-install.pl
 /docs/doc-postprocess.pl
 /docs/doxygen.css
 /docs/tagfile-to-devhelp2.xsl
+/docs/reference/Doxyfile
+/docs/reference/doxygen.log
+/docs/reference/html/
+/docs/reference/gtksourceviewmm-*.tag
+/docs/reference/gtksourceviewmm-*.devhelp2
+
+# gtksourceview
+/gtksourceview/gtksourceviewmm/buffer.cc
+/gtksourceview/gtksourceviewmm/buffer.h
+/gtksourceview/gtksourceviewmm/completion.cc
+/gtksourceview/gtksourceviewmm/completion.h
+/gtksourceview/gtksourceviewmm/completionactivation.cc
+/gtksourceview/gtksourceviewmm/completionactivation.h
+/gtksourceview/gtksourceviewmm/completioncontext.cc
+/gtksourceview/gtksourceviewmm/completioncontext.h
+/gtksourceview/gtksourceviewmm/completioninfo.cc
+/gtksourceview/gtksourceviewmm/completioninfo.h
+/gtksourceview/gtksourceviewmm/completionitem.cc
+/gtksourceview/gtksourceviewmm/completionitem.h
+/gtksourceview/gtksourceviewmm/completionproposal.cc
+/gtksourceview/gtksourceviewmm/completionproposal.h
+/gtksourceview/gtksourceviewmm/completionprovider.cc
+/gtksourceview/gtksourceviewmm/completionprovider.h
+/gtksourceview/gtksourceviewmm/completionwords.cc
+/gtksourceview/gtksourceviewmm/completionwords.h
+/gtksourceview/gtksourceviewmm/gutter.cc
+/gtksourceview/gtksourceviewmm/gutter.h
+/gtksourceview/gtksourceviewmm/gutterrenderer.cc
+/gtksourceview/gtksourceviewmm/gutterrenderer.h
+/gtksourceview/gtksourceviewmm/gutterrendererpixbuf.cc
+/gtksourceview/gtksourceviewmm/gutterrendererpixbuf.h
+/gtksourceview/gtksourceviewmm/gutterrenderertext.cc
+/gtksourceview/gtksourceviewmm/gutterrenderertext.h
+/gtksourceview/gtksourceviewmm/language.cc
+/gtksourceview/gtksourceviewmm/language.h
+/gtksourceview/gtksourceviewmm/languagemanager.cc
+/gtksourceview/gtksourceviewmm/languagemanager.h
+/gtksourceview/gtksourceviewmm/mark.cc
+/gtksourceview/gtksourceviewmm/mark.h
+/gtksourceview/gtksourceviewmm/markattributes.cc
+/gtksourceview/gtksourceviewmm/markattributes.h
+/gtksourceview/gtksourceviewmm/printcompositor.cc
+/gtksourceview/gtksourceviewmm/printcompositor.h
+/gtksourceview/gtksourceviewmm/style.cc
+/gtksourceview/gtksourceviewmm/style.h
+/gtksourceview/gtksourceviewmm/stylescheme.cc
+/gtksourceview/gtksourceviewmm/stylescheme.h
+/gtksourceview/gtksourceviewmm/styleschememanager.cc
+/gtksourceview/gtksourceviewmm/styleschememanager.h
+/gtksourceview/gtksourceviewmm/undomanager.cc
+/gtksourceview/gtksourceviewmm/undomanager.h
+/gtksourceview/gtksourceviewmm/view.cc
+/gtksourceview/gtksourceviewmm/view.h
+/gtksourceview/gtksourceviewmm/wrap_init.cc

@@ -87,9 +87,9 @@ public:
    */
   Markup& operator=(const Markup& other);
 
-  /** This typedef is just to make it more obvious that 
+  /** This typedef is just to make it more obvious that
    * our operator const void*() should be used like operator bool().
-   */ 
+   */
   typedef const void* BoolExpr;
 
   /** Checks if Markup is not empty.

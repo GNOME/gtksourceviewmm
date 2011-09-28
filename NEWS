@@ -1,3 +1,10 @@
+3.2.0:
+* Wrapped gtk_source_gutter_get_renderer_at_pos()
+  as Gsv::Gutter::get_renderer_at_pos().
+  (Krzesimir Nowak)
+* Search test does not use deprecated methods.
+  (Krzesimir Nowak)
+
 3.0.0:
 * Markup: changed operator bool() to operator const void*() to avoid
 implicit cast to int. (Murray Cumming)

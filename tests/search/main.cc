@@ -6,7 +6,7 @@
 #include <cstring>
 #include <gtkmm.h>
 #include <gtksourceviewmm.h>
-#include <glib/gmessages.h>
+#include <glib.h> //For <gmessages.h>
 
 using namespace std ;
 using namespace Gtk;

@@ -19,14 +19,18 @@
 
 _DEFS(gtksourceviewmm,gtksourceview)
 
+#include <glibmm/value.h>
+
 namespace Gsv
 {
+
 // TODO: need docs. krnowak
 /** An enum type specifying something bla bla bla, probably type of activation.
  *
  * @newin{2,10}
  */
 _WRAP_ENUM(CompletionActivation, GtkSourceCompletionActivation, s#^SOURCE_##)
+
  /** @var CompletionActivation COMPLETION_ACTIVATION_NONE
   * None.
   */

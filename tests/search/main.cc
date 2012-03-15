@@ -362,19 +362,20 @@ public:
 int
 main (int argc, char **argv)
 {
-    //***************
-    //init plumbing
-    //***************
-    Main kit (argc, argv) ;
+    Glib::RefPtr<Gtk::Application> gtkmmapp =
+        Gtk::Application::create(argc, argv,
+            "org.gtksourceviewmm.test");
+
     Gsv::init () ;
 
-    App app ;
+    App app ; //TODO: Derive from Gtk::Application?
     app.get_widget ().set_size_request (500, 400) ;
     app.get_widget ().show_all () ;
     if (argc == 2) {
         app.open_file (filename_to_utf8 (argv[1])) ;
     }
-    kit.run (app.get_widget ()) ;
+
+    gtkmmapp->run (app.get_widget ()) ;
 
     return 0 ;
 }

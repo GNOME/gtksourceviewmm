@@ -9,7 +9,10 @@ using namespace Gsv;
 int
 main (int a_argc, char *a_argv[])
 {
-    Gtk::Main main_loop (a_argc, a_argv) ;
+    Glib::RefPtr<Gtk::Application> app =
+        Gtk::Application::create(a_argc, a_argv,
+            "org.gtksourceviewmm.test");
+
     Gsv::init () ;
 
     View source_view ;
@@ -25,7 +28,7 @@ main (int a_argc, char *a_argv[])
 
     window.show_all () ;
 
-    main_loop.run (window) ;
+    app->run (window) ;
 
     return 0 ;
 }

@@ -1,13 +1,3 @@
-2012-03-15  Murray Cumming  <murrayc@murrayc-desktop>
-
-	reviewed by: <delete if not using a buddy>
-
-	* tests/basic/main.cc:
-	* tests/completion/main.cc:
-	* tests/get_buffer/main.cc:
-	* tests/langs/main.cc:
-	* tests/search/main.cc:
-
 2010-01-13  Krzesimir Nowak  <qdlacz@gmail.com>
 
 	* ChangeLog: Auto-generated when releasing. If you are seeing this,

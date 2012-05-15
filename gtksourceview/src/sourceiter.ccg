@@ -21,7 +21,6 @@
  */
 
 #include "sourceiter.h"
-#include <glib/gmessages.h>
 #include <gtksourceview/gtksourceview-typebuiltins.h>
 namespace gtksourceview
 {

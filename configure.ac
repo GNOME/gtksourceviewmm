@@ -48,8 +48,8 @@ MM_ARG_WITH_TAGFILE_DOC([gtkmm-2.4.tag], [gtkmm-2.4])
 
 AC_LANG([C++])
 MM_ARG_ENABLE_WARNINGS([GTKSOURCEVIEWMM_WXXFLAGS],
-                       [-Wall],
-                       [-pedantic -Wall -Wextra],
+                       [-Wall -Wno-long-long],
+                       [-pedantic -Wall -Wextra, -Wno-long-long],
                        [G PANGO ATK GDK GDK_PIXBUF GTK GTKSOURCEVIEW])
 
 AC_CONFIG_FILES([Makefile

@@ -1,4 +1,11 @@
-3.12.0:
+3.12.0 (stable):
+
+* Deprecated some API because some of the C API was deprecated.
+  (Murray Cumming)
+* Fix the examples build with recent gtkmm versions.
+  (Murray Cumming)
+
+3.2.0 (stable):
 * Wrapped gtk_source_gutter_get_renderer_at_pos()
   as Gsv::Gutter::get_renderer_at_pos().
   (Krzesimir Nowak)

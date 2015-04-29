@@ -27,6 +27,14 @@
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
 
+#m4 _PUSH(SECTION_CC_PRE_INCLUDES)
+//Avoid warnings when we use deprecated gtksourceview API in our deprecated wrappers:
+#include <glibmm.h>
+#undef G_DEPRECATED
+#define G_DEPRECATED
+#include <gtksourceview/gtksourcemarkattributes.h>
+#m4 _POP()
+
 namespace Gio
 {
 
@@ -69,9 +77,9 @@ public:
 
   _WRAP_METHOD(void set_background(const Gdk::RGBA& rgba), gtk_source_mark_attributes_set_background)
 
-  _WRAP_METHOD(std::string get_stock_id() const, gtk_source_mark_attributes_get_stock_id)
+  _WRAP_METHOD(std::string get_stock_id() const, gtk_source_mark_attributes_get_stock_id, deprecated "This should not be used in newly-written code.")
 
-  _WRAP_METHOD(void set_stock_id(const std::string& stock_id), gtk_source_mark_attributes_set_stock_id)
+  _WRAP_METHOD(void set_stock_id(const std::string& stock_id), gtk_source_mark_attributes_set_stock_id, deprecated "This should not be used in newly-written code.")
 
   _WRAP_METHOD(void set_icon_name(const std::string& icon_name), gtk_source_mark_attributes_set_icon_name)
 

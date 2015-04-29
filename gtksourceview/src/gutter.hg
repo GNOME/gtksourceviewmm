@@ -77,7 +77,7 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(Glib::RefPtr<Gdk::Window> get_window(), gtk_source_gutter_get_window, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<Gdk::Window> get_window(), gtk_source_gutter_get_window, refreturn, deprecated "Use Gtk::TextView::get_window() instead.")
 
   /** Get the Gdk::Window of the gutter.
    *
@@ -89,7 +89,7 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(Glib::RefPtr<const Gdk::Window> get_window() const, gtk_source_gutter_get_window, constversion)
+  _WRAP_METHOD(Glib::RefPtr<const Gdk::Window> get_window() const, gtk_source_gutter_get_window, constversion, deprecated "Use Gtk::TextView::get_window() instead.")
 
   _WRAP_METHOD(void insert(GutterRenderer* renderer, int position), gtk_source_gutter_insert)
 
@@ -99,11 +99,11 @@ public:
 
   _WRAP_METHOD(void queue_draw(), gtk_source_gutter_queue_draw)
 
-  _WRAP_METHOD(void set_padding(int xpad, int ypad), gtk_source_gutter_set_padding)
+  _WRAP_METHOD(void set_padding(int xpad, int ypad), gtk_source_gutter_set_padding, deprecated "Use GutterRenderer::set_padding() instead.")
 
   // TODO: create a Padding class.
 
-  _WRAP_METHOD(void get_padding(int& xpad, int& ypad) const, gtk_source_gutter_get_padding)
+  _WRAP_METHOD(void get_padding(int& xpad, int& ypad) const, gtk_source_gutter_get_padding, deprecated "Use GutterRenderer::get_padding() instead.")
 
   _WRAP_METHOD(GutterRenderer* get_renderer_at_pos(int x, int y), gtk_source_gutter_get_renderer_at_pos, refreturn)
 

@@ -111,8 +111,8 @@ public:
 
   _WRAP_PROPERTY("view", View*)
   _WRAP_PROPERTY("window-type", Gtk::TextWindowType)
-  _WRAP_PROPERTY("xpad", int)
-  _WRAP_PROPERTY("ypad", int)
+  _WRAP_PROPERTY("xpad", int, deprecated "Use GutterRenderer's xpad property instead.")
+  _WRAP_PROPERTY("ypad", int, deprecated "Use GutterRenderer's ypad property instead.")
 };
 
 } // namespace Gsv

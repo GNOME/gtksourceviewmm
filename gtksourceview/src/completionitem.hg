@@ -44,7 +44,14 @@ class CompletionItem
 protected:
   explicit CompletionItem(const Glib::ustring& label, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info);
   explicit CompletionItem(const Markup& markup, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info);
+
+#ifndef GTKSOURCEVIEWMM_DISABLE_DEPRECATED
+  /**
+   * @deprecated Use a constructor without a stock ID instead.
+   */
   explicit CompletionItem(const Glib::ustring& label, const Glib::ustring& text, const Gtk::StockID& stock, const Glib::ustring& info);
+#endif //GTKSOURCEVIEWMM_DISABLE_DEPRECATED
+
 public:
   /** Create a new CompletionItem with label @a label, icon @a icon and
    *  extra information @a info.
@@ -80,6 +87,7 @@ public:
    */
   _WRAP_CREATE(const Markup& markup, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info)
 
+#ifndef GTKSOURCEVIEWMM_DISABLE_DEPRECATED
   /** Creates a new CompletionItem from a stock item.
    *
    * If @a label is empty, then stock label will be used.
@@ -92,8 +100,11 @@ public:
    * @return New CompletionInfo.
    *
    * @newin{2,10}
+   *
+   * @deprecated Use a create() method without a stock ID instead.
    */
   _WRAP_CREATE(const Glib::ustring& label, const Glib::ustring& text, const Gtk::StockID& stock, const Glib::ustring& info)
+#endif //GTKSOURCEVIEWMM_DISABLE_DEPRECATED
 
   _WRAP_PROPERTY("icon", Glib::RefPtr<Gdk::Pixbuf>)
   _WRAP_PROPERTY("info", Glib::ustring)

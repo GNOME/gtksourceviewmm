@@ -107,7 +107,7 @@ public:
 
   _WRAP_PROPERTY("background", Gdk::RGBA)
 
-  _WRAP_PROPERTY("stock-id", std::string)
+  _WRAP_PROPERTY("stock-id", std::string, deprecated "This should not be used in newly-written code.")
 
   _WRAP_PROPERTY("pixbuf", Glib::RefPtr<Gdk::Pixbuf>)
 

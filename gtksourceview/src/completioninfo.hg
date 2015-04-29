@@ -71,6 +71,7 @@ public:
    */
   void move_to_iter(const Gtk::TextView& view);
 
+#ifndef GTKSOURCEVIEWMM_DISABLE_DEPRECATED
   /** Sets the content widget of the info window.
    *
    * If @a widget does not fit within the size requirements of the window,
@@ -80,6 +81,8 @@ public:
    * @param widget A Gtk::Widget.
    *
    * @newin{2,10}
+   *
+   * @deprecated Use Gtk::Container:add() instead. If there is already a child widget, remove it with Gtk::Container::remove().
    */
   _WRAP_METHOD(void set_widget(Gtk::Widget& widget), gtk_source_completion_info_set_widget)
 
@@ -88,8 +91,12 @@ public:
    * @return The current content widget.
    *
    * @newin{2,10}
+   *
+   * @deprecated Use Gtk::Bin:get_child() instead.
    */
   _WRAP_METHOD(Gtk::Widget* get_widget(), gtk_source_completion_info_get_widget)
+
+#endif //GTKSOURCEVIEWMM_DISABLE_DEPRECATED
 
   /** Get the current content widget.
    *
@@ -106,7 +113,7 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_SIGNAL(void before_show(), "before-show")
+  _WRAP_SIGNAL(void before_show(), "before-show", deprecated "This should not be used in newly-written code.")
 };
 
 } /* namespace Gsv */

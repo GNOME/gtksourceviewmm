@@ -36,6 +36,8 @@
 #include <gtksourceview/gtksourcemark.h>
 #include <gtksourceview/gtksourcemarkattributes.h>
 #include <gtksourceview/gtksourceprintcompositor.h>
+#include <gtksourceview/gtksourcesearchcontext.h>
+#include <gtksourceview/gtksourcesearchsettings.h>
 #include <gtksourceview/gtksourcestyle.h>
 #include <gtksourceview/gtksourcestylescheme.h>
 #include <gtksourceview/gtksourcestyleschememanager.h>
@@ -65,6 +67,8 @@ int main (int argc, char *argv[])
             << get_defs (GTK_SOURCE_TYPE_MARK)
             << get_defs (GTK_SOURCE_TYPE_MARK_ATTRIBUTES)
             << get_defs (GTK_SOURCE_TYPE_PRINT_COMPOSITOR)
+            << get_defs (GTK_SOURCE_TYPE_SEARCH_CONTEXT)
+            << get_defs (GTK_SOURCE_TYPE_SEARCH_SETTINGS)
             << get_defs (GTK_SOURCE_TYPE_STYLE)
             << get_defs (GTK_SOURCE_TYPE_STYLE_SCHEME)
             << get_defs (GTK_SOURCE_TYPE_STYLE_SCHEME_MANAGER)

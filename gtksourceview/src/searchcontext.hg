@@ -1,0 +1,255 @@
+/* searchcontext.h
+ *
+ * Copyright (C) 2015 Christoph Brill
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <gtksourceview/gtksourcesearchcontext.h>
+
+#include <gtksourceviewmm/buffer.h>
+#include <gtksourceviewmm/searchsettings.h>
+#include <gtksourceviewmm/style.h>
+
+#include <gtkmm/textbuffer.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(glibmm/private/object_p.h)
+
+namespace Gsv
+{
+
+  using namespace Gtk;
+
+/** Compose a Buffer for printing.
+ *
+ * @newin{3,10}
+ */
+class SearchContext : public Glib::Object
+{
+  _CLASS_GOBJECT(SearchContext, GtkSourceSearchContext, GTK_SOURCE_SEARCH_CONTEXT, Glib::Object, GObject)
+
+public:
+
+  /** Creates a new search context, associated with buffer , and customized with settings . If settings is NULL, a new GtkSourceSearchSettings object will be
+   * created, that you can retrieve with gtk_source_search_context_get_settings().
+   *
+   * @param buffer a GtkSourceBuffer.
+   * @param settings a GtkSourceSearchSettings, or NULL.
+   *
+   * @newin{3,10}
+   */
+  _WRAP_CTOR(SearchContext(const Glib::RefPtr<Buffer>& buffer, const Glib::RefPtr<SearchSettings>& settings), gtk_source_search_context_new)
+
+  /**
+   * @return the associated buffer.
+   *
+   * @newin{3,10}
+   */
+  _WRAP_METHOD(Glib::RefPtr<Buffer> get_buffer(), gtk_source_search_context_get_buffer, refreturn)
+
+  /**
+   * @return the search settings.
+   *
+   * @newin{3,10}
+   */
+  _WRAP_METHOD(Glib::RefPtr<SearchSettings> get_settings(), gtk_source_search_context_get_settings, refreturn)
+
+  /** Associate a GtkSourceSearchSettings with the search context. If settings is NULL, a new one will be created.
+   * The search context holds a reference to settings.
+   *
+   * @param settings the new GtkSourceSearchSettings, or NULL.
+   *
+   * @newin{3,10}
+   */
+  _WRAP_METHOD(void set_settings(const Glib::RefPtr<SearchSettings>& settings), gtk_source_search_context_set_settings)
+
+  /**
+   * @return whether to highlight the search occurrences.
+   *
+   * @newin{3,10}
+   */
+  _WRAP_METHOD(bool get_highlight(), gtk_source_search_context_get_highlight)
+
+  /** Enables or disables the search occurrences highlighting.
+   *
+   * @param highlight the setting.
+   *
+   * @newin{3,10}
+   */
+  _WRAP_METHOD(void set_highlight(bool highlight), gtk_source_search_context_set_highlight)
+
+  /**
+   * @return the GtkSourceStyle to apply on search matches.
+   *
+   * @newin{3,16}
+   */
+  _WRAP_METHOD(Glib::RefPtr<Style> get_match_style(), gtk_source_search_context_get_match_style, refreturn)
+
+  /** Set the style to apply on search matches. If match_style is NULL, default theme's scheme 'match-style' will be used. To enable or disable
+   * the search highlighting, use gtk_source_search_context_set_highlight().
+   *
+   * @param match_style a GtkSourceStyle.
+   *
+   * @newin{3,16}
+   */
+  _WRAP_METHOD(void set_match_style(const Glib::RefPtr<Style>& match_style), gtk_source_search_context_set_match_style);
+
+  /** Regular expression patterns must follow certain rules. If “search-text” breaks a rule, the error can be retrieved with this function. The
+   * error domain is G_REGEX_ERROR.
+   *
+   * Free the return value with g_error_free().
+   *
+   * @return the GError, or NULL if the pattern is valid.
+   *
+   * @newin{3,10}
+   */
+  _WRAP_METHOD(GError* get_regex_error(), gtk_source_search_context_get_regex_error)
+
+  /** Gets the total number of search occurrences. If the buffer is not already fully scanned, the total number of occurrences is unknown, and -1 is returned.
+   *
+   * @return the total number of search occurrences, or -1 if unknown.
+   *
+   * @newin{3,10}
+   */
+  _WRAP_METHOD(int get_occurrences_count(), gtk_source_search_context_get_occurrences_count)
+
+  /** Gets the position of a search occurrence. If the buffer is not already fully scanned, the position may be unknown, and -1 is returned. If 0 is returned,
+   * it means that this part of the buffer has already been scanned, and that match_start and match_end don't delimit an occurrence.
+   * 
+   * @param match_start the start of the occurrence.
+   * @param match_end the end of the occurrence.
+   * @return the position of the search occurrence. The first occurrence has the position 1 (not 0). Returns 0 if match_start and match_end don't delimit an
+   *         occurrence. Returns -1 if the position is not yet known.
+   *
+   * @newin{3,10}
+   */
+  _WRAP_METHOD(int get_occurrence_position(const TextBuffer::iterator& match_start, const TextBuffer::iterator& match_end), gtk_source_search_context_get_occurrence_position)
+
+  /** Synchronous forward search. It is recommended to use the asynchronous functions instead, to not block the user interface. However, if you are sure that
+   * the buffer is small, this function is more convenient to use.
+   *
+   * @param iter start of search.
+   * @param match_start return location for start of match, or NULL.
+   * @param match_end return location for end of match, or NULL.
+   * @return whether a match was found.
+   *
+   * @newin{3,10}
+   */
+  _WRAP_METHOD(bool forward(const TextBuffer::iterator& iter, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end), gtk_source_search_context_forward)
+
+  /** Asynchronous forward search. See the GAsyncResult documentation to know how to use this function.
+   * If the operation is cancelled, the callback will only be called if cancellable was not NULL. gtk_source_search_context_forward_async() takes ownership of
+   * cancellable, so you can unref it after calling this function.
+   *
+   * @param iter start of search.
+   * @param cancellable a GCancellable, or NULL.
+   * @param callback a GAsyncReadyCallback to call when the operation is finished.
+   * @param user_data the data to pass to the callback function.
+   *
+   * @newin{3,10}
+   */
+  _WRAP_METHOD(void forward_async(const TextBuffer::iterator& iter, const Glib::RefPtr<Gio::Cancellable>& cancellable, GAsyncReadyCallback callback, gpointer user_data), gtk_source_search_context_forward_async)
+
+  /** Finishes a forward search started with gtk_source_search_context_forward_async().
+   *
+   * @param result a GAsyncResult.
+   * @param match_start return location for start of match, or NULL.
+   * @param match_end return location for end of match, or NULL.
+   * @param error a GError, or NULL.
+   *
+   * @newin{3,10}
+   */
+  _WRAP_METHOD(bool forward_finish(const Glib::RefPtr<Gio::AsyncResult>& result, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end), gtk_source_search_context_forward_finish, errthrow)
+
+  /** Synchronous backward search. It is recommended to use the asynchronous functions instead, to not block the user interface. However, if you are sure that the buffer
+   * is small, this function is more convenient to use.
+   *
+   * @param iter start of search.
+   * @param match_start return location for start of match, or NULL.
+   * @param match_end return location for end of match, or NULL.
+   * @return whether a match was found.
+   *
+   * @newin{3,10}
+   */
+  _WRAP_METHOD(bool backward(const TextBuffer::iterator& iter, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end), gtk_source_search_context_backward)
+
+  /** Asynchronous backward search. See the GAsyncResult documentation to know how to use this function.
+   * If the operation is cancelled, the callback will only be called if cancellable was not NULL. gtk_source_search_context_backward_async() takes ownership of
+   * cancellable , so you can unref it after calling this function.
+   *
+   * @param iter start of search.
+   * @param cancellable a GCancellable, or NULL.
+   * @param callback a GAsyncReadyCallback to call when the operation is finished.
+   * @param user_data the data to pass to the callback function.
+   *
+   * @newin{3,10}
+   */
+  _WRAP_METHOD(void backward_async(const TextBuffer::iterator& iter, const Glib::RefPtr<Gio::Cancellable>& cancellable, GAsyncReadyCallback callback, gpointer user_data), gtk_source_search_context_backward_async)
+
+  /** Finishes a backward search started with gtk_source_search_context_backward_async().
+   *
+   * @param result a GAsyncResult.
+   * @param match_start return location for start of match, or NULL.
+   * @param match_end return location for end of match, or NULL.
+   * @param error a GError, or NULL.
+   * @return whether a match was found.
+   *
+   * @newin{3,10}
+   */
+  _WRAP_METHOD(bool backward_finish(const Glib::RefPtr<Gio::AsyncResult>& result, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end), gtk_source_search_context_backward_finish, errthrow)
+
+  /** Replaces a search match by another text. If match_start and match_end doesn't correspond to a search match, FALSE is returned.
+   * For a regular expression replacement, you can check if replace is valid by calling g_regex_check_replacement(). The replace text can contain backreferences; read
+   * the g_regex_replace() documentation for more details.
+   *
+   * @param match_start the start of the match to replace.
+   * @param match_end the end of the match to replace.
+   * @param replace the replacement text.
+   * @param replace_length the length of replace in bytes, or -1.
+   * @param error location to a GError, or NULL to ignore errors.
+   * @return whether the match has been replaced.
+   *
+   * @newin{3,10}
+   */
+  _WRAP_METHOD(bool replace(const TextBuffer::iterator& match_start, const TextBuffer::iterator& match_end, const Glib::ustring& replace, int replace_length), gtk_source_search_context_replace, errthrow)
+
+  /** Replaces all search matches by another text. It is a synchronous function, so it can block the user interface.
+   * For a regular expression replacement, you can check if replace is valid by calling g_regex_check_replacement(). The replace text can contain backreferences; read
+   * the g_regex_replace() documentation for more details.
+   *
+   * @param replace the replacement text.
+   * @param replace_length the length of replace in bytes, or -1.
+   * @param error location to a GError, or NULL to ignore errors.
+   * @return the number of replaced matches.
+   *
+   * @newin{3,10}
+   */
+  _WRAP_METHOD(unsigned int replace_all(const Glib::ustring& replace, int replace_length), gtk_source_search_context_replace_all, errthrow)
+
+private:
+  _WRAP_METHOD(void update_highlight(const TextBuffer::iterator& start, const TextBuffer::iterator& end, bool synchronous), _gtk_source_search_context_update_highlight)
+
+public:
+  _WRAP_PROPERTY("buffer", Glib::RefPtr<Buffer>)
+  _WRAP_PROPERTY("highlight", bool)
+  _WRAP_PROPERTY("match-style", Glib::RefPtr<Style>)
+  _WRAP_PROPERTY("occurrences-count", int)
+  _WRAP_PROPERTY("regex-error", GError*)
+  _WRAP_PROPERTY("settings", Glib::RefPtr<SearchSettings>)
+
+};
+
+} /* namespace Gsv */

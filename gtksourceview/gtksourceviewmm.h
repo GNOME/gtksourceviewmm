@@ -192,6 +192,8 @@
 #include <gtksourceviewmm/markattributes.h>
 #include <gtksourceviewmm/markup.h>
 #include <gtksourceviewmm/printcompositor.h>
+#include <gtksourceviewmm/searchcontext.h>
+#include <gtksourceviewmm/searchsettings.h>
 #include <gtksourceviewmm/style.h>
 #include <gtksourceviewmm/stylescheme.h>
 #include <gtksourceviewmm/styleschememanager.h>

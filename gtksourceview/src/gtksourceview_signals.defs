@@ -113,6 +113,15 @@
   (construct-only #f)
 )
 
+(define-property implicit-trailing-newline
+  (of-object "GtkSourceBuffer")
+  (prop-type "GParamBoolean")
+  (docs "")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
 ;; From GtkSourceCompletion
 
 (define-signal show
@@ -357,7 +366,7 @@
 (define-property window-type
   (of-object "GtkSourceGutter")
   (prop-type "GParamEnum")
-  (docs "The gutters text window type")
+  (docs "The gutters' text window type")
   (readable #t)
   (writable #t)
   (construct-only #t)
@@ -836,6 +845,109 @@
   (construct-only #f)
 )
 
+;; From GtkSourceSearchContext
+
+(define-property buffer
+  (of-object "GtkSourceSearchContext")
+  (prop-type "GParamObject")
+  (docs "The associated GtkSourceBuffer")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property settings
+  (of-object "GtkSourceSearchContext")
+  (prop-type "GParamObject")
+  (docs "The associated GtkSourceSearchSettings")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property highlight
+  (of-object "GtkSourceSearchContext")
+  (prop-type "GParamBoolean")
+  (docs "Highlight search occurrences")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property match-style
+  (of-object "GtkSourceSearchContext")
+  (prop-type "GParamObject")
+  (docs "The text style for matches")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property occurrences-count
+  (of-object "GtkSourceSearchContext")
+  (prop-type "GParamInt")
+  (docs "Total number of search occurrences")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+(define-property regex-error
+  (of-object "GtkSourceSearchContext")
+  (prop-type "GParamPointer")
+  (docs "Regular expression error")
+  (readable #t)
+  (writable #f)
+  (construct-only #f)
+)
+
+;; From GtkSourceSearchSettings
+
+(define-property search-text
+  (of-object "GtkSourceSearchSettings")
+  (prop-type "GParamString")
+  (docs "The text to search")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property case-sensitive
+  (of-object "GtkSourceSearchSettings")
+  (prop-type "GParamBoolean")
+  (docs "Case sensitive")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property at-word-boundaries
+  (of-object "GtkSourceSearchSettings")
+  (prop-type "GParamBoolean")
+  (docs "Search at word boundaries")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property wrap-around
+  (of-object "GtkSourceSearchSettings")
+  (prop-type "GParamBoolean")
+  (docs "Wrap around")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property regex-enabled
+  (of-object "GtkSourceSearchSettings")
+  (prop-type "GParamBoolean")
+  (docs "Whether to search by regular expression")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
 ;; From GtkSourceStyle
 
 (define-property line-background
@@ -959,6 +1071,24 @@
   (of-object "GtkSourceStyle")
   (prop-type "GParamBoolean")
   (docs "Whether strikethrough attribute is set")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property scale
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamString")
+  (docs "Text scale factor")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property scale-set
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamBoolean")
+  (docs "Whether scale attribute is set")
   (readable #t)
   (writable #t)
   (construct-only #t)
@@ -1095,6 +1225,39 @@
   )
 )
 
+(define-signal move-to-matching-bracket
+  (of-object "GtkSourceView")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("gboolean" "p0")
+  )
+)
+
+(define-signal change-number
+  (of-object "GtkSourceView")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("gint" "p0")
+  )
+)
+
+(define-signal change-case
+  (of-object "GtkSourceView")
+  (return-type "void")
+  (when "last")
+  (parameters
+    '("GtkSourceChangeCaseType" "p0")
+  )
+)
+
+(define-signal join-lines
+  (of-object "GtkSourceView")
+  (return-type "void")
+  (when "last")
+)
+
 (define-property completion
   (of-object "GtkSourceView")
   (prop-type "GParamObject")
@@ -1212,6 +1375,15 @@
   (construct-only #f)
 )
 
+(define-property background-pattern
+  (of-object "GtkSourceView")
+  (prop-type "GParamEnum")
+  (docs "Draw a specific background pattern on the view")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
 ;; From GtkSourceCompletionWords
 
 (define-property name
@@ -1272,6 +1444,15 @@
   (of-object "GtkSourceCompletionWords")
   (prop-type "GParamInt")
   (docs "Provider priority")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property activation
+  (of-object "GtkSourceCompletionWords")
+  (prop-type "GParamFlags")
+  (docs "The type of activation")
   (readable #t)
   (writable #t)
   (construct-only #f)

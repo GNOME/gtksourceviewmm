@@ -73,6 +73,14 @@ _WRAP_ENUM(DrawSpacesFlags, GtkSourceDrawSpacesFlags, s#^SOURCE_##)
  * Whether all kind of whitespaces should be drawn.
  */
 
+_WRAP_ENUM(BackgroundPatternType, GtkSourceBackgroundPatternType, s#^SOURCE_##)
+/** @var BackgroundPatternType BACKGROUND_PATTERN_TYPE_NONE
+ * no pattern
+ */
+/** @var BackgroundPatternType BACKGROUND_PATTERN_TYPE_GRID
+ * grid pattern
+ */
+
 /** The view object.
  *
  * View is the main object of the gtksourceviewmm library. It provides
@@ -341,6 +349,22 @@ public:
 
   _WRAP_METHOD(Glib::RefPtr<const MarkAttributes> get_mark_attributes(const Glib::ustring& category, int& priority) const, gtk_source_view_get_mark_attributes, constversion)
 
+  /** Set if and how the background pattern should be displayed.
+   *
+   * @param background_pattern the GtkSourceBackgroundPatternType.
+   *
+   * @newin {3,16}
+   */
+  _WRAP_METHOD(void set_background_pattern(BackgroundPatternType background_pattern), gtk_source_view_set_background_pattern)
+
+  /** Returns the GtkSourceBackgroundPatternType specifying if and how the background pattern should be displayed for this view .
+   *
+   * @return the GtkSourceBackgroundPatternType.
+   *
+   * @newin {3,16}
+   */
+  _WRAP_METHOD(BackgroundPatternType get_background_pattern(), gtk_source_view_get_background_pattern)
+
   /** Emitted when redo action is requested.
    */
   _WRAP_SIGNAL(void redo(), "redo")
@@ -406,6 +430,8 @@ public:
   _WRAP_PROPERTY("draw-spaces", DrawSpacesFlags)
 
   _WRAP_PROPERTY("completion", Glib::RefPtr<Completion>)
+
+  _WRAP_PROPERTY("background-pattern", BackgroundPatternType)
 };
 
 } /* namespace Gsv */

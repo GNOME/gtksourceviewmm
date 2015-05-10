@@ -138,6 +138,7 @@ _CONVERSION(`GtkSourceView*',`View*',`Glib::wrap($3)')
 
 _CONV_ENUM(GtkSource,SmartHomeEndType)
 _CONV_ENUM(GtkSource,DrawSpacesFlags)
+_CONV_ENUM(GtkSource,BackgroundPatternType)
 _CONV_ENUM(GtkSource,CompletionActivation)
 _CONV_ENUM(GtkSource,BracketMatchType)
 _CONV_ENUM(GtkSource,GutterRendererState)

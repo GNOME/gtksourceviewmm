@@ -1132,6 +1132,17 @@
   (construct-only #f)
 )
 
+;; From GtkSourceStyleSchemeChooser
+
+(define-property style-scheme
+  (of-object "GtkSourceStyleSchemeChooser")
+  (prop-type "GParamObject")
+  (docs "Current style scheme")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
 ;; From GtkSourceStyleSchemeManager
 
 (define-property search-path

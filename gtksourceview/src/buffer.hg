@@ -506,6 +506,31 @@ public:
    * @newin{3,0}
    */
   _WRAP_SIGNAL(void bracket_matched(Gtk::TextIter& iter, BracketMatchType state), "bracket-matched")
+
+  /** Sets whether the buffer has an implicit trailing newline.
+   *
+   * If an explicit trailing newline is present in a GtkTextBuffer, GtkTextView shows it as an empty line. This is generally
+   * not what the user expects. If implicit_trailing_newline is TRUE (the default value):
+   * - when a GtkSourceFileLoader loads the content of a file into the buffer , the trailing newline (if present in the file)
+   *   is not inserted into the buffer .
+   * - when a GtkSourceFileSaver saves the content of the buffer into a file, a trailing newline is added to the file.
+   * On the other hand, if implicit_trailing_newline is FALSE, the file's content is not modified when loaded into the buffer,
+   * and the buffer 's content is not modified when saved into a file.
+   *
+   * @param implicit_trailing_newline the new value.
+   *
+   * @newin{3,14}
+   */
+  _WRAP_METHOD(void set_implicit_trailing_newline(bool implicit_trailing_newline), gtk_source_buffer_set_implicit_trailing_newline)
+
+  /**
+   * @return whether the buffer has an implicit trailing newline.
+   *
+   * @newin{3,14}
+   */
+  _WRAP_METHOD(bool get_implicit_trailing_newline(), gtk_source_buffer_get_implicit_trailing_newline)
+
+  _WRAP_PROPERTY("implicit-trailing-newline", bool)
 };
 
 } /* namespace Gsv */

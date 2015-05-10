@@ -114,6 +114,16 @@ public:
    */
   _WRAP_METHOD(Glib::ustring get_style_name(const Glib::ustring& style_id) const, gtk_source_language_get_style_name)
 
+  /** Returns the ID of the style to use if the specified @a style_id is not present in the current style scheme.
+   *
+   * @param style_id a style ID.
+   *
+   * @return the ID of the style to use if the specified @a style_id is not present in the current style scheme or NULL
+   *         if the style has no fallback defined. The returned string is owned by the language and must not be modified.
+   * @newin {3,4}
+   */
+  _WRAP_METHOD(Glib::ustring get_style_fallback(const Glib::ustring& style_id) const, gtk_source_language_get_style_fallback)
+
   /** Returns metadata of a language.
    *
    * @param name Metadata property name.

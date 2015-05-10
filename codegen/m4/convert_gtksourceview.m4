@@ -91,6 +91,14 @@ _CONVERSION(`'GtkSourceMarkAttributes*,`Glib::RefPtr<MarkAttributes>',`Glib::wra
 _CONVERSION(`const Glib::RefPtr<MarkAttributes>&',`GtkSourceMarkAttributes*',`Glib::unwrap($3)')
 
 
+# GtkSourceSearchSettings -> Gsv::SearchSettings
+_CONVERSION(`GtkSourceSearchSettings*',`Glib::RefPtr<SearchSettings>',`Glib::wrap($3)')
+
+
+# Gsv::SearchSettings -> GtkSourceSearchSettings
+_CONVERSION(`const Glib::RefPtr<SearchSettings>&',`GtkSourceSearchSettings*',`Glib::unwrap($3)')
+
+
 # GtkSourceStyle -> Gsv::Style
 _CONVERSION(`GtkSourceStyle*',`Glib::RefPtr<Style>',`Glib::wrap($3)')
 

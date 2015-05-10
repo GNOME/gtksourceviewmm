@@ -27,6 +27,7 @@ files_hg =				\
 	mark.hg				\
 	markattributes.hg		\
 	printcompositor.hg		\
+	searchsettings.hg		\
 	style.hg			\
 	stylescheme.hg			\
 	styleschememanager.hg		\

@@ -14,6 +14,13 @@
   (gtype-id "GTK_TYPE_SOURCE_COMPLETION")
 )
 
+(define-object SourceCompletionContainer
+  (in-module "Gtk")
+  (parent "GtkBin")
+  (c-name "GtkSourceCompletionContainer")
+  (gtype-id "GTK_TYPE_SOURCE_COMPLETION_CONTAINER")
+)
+
 (define-object SourceCompletionContext
   (in-module "Gtk")
   (parent "GInitiallyUnowned")
@@ -35,6 +42,13 @@
   (gtype-id "GTK_TYPE_SOURCE_COMPLETION_ITEM")
 )
 
+(define-object SourceCompletionModel
+  (in-module "Gtk")
+  (parent "GObject")
+  (c-name "GtkSourceCompletionModel")
+  (gtype-id "GTK_TYPE_SOURCE_COMPLETION_MODEL")
+)
+
 (define-object SourceCompletionProposal
   (in-module "Gtk")
   (c-name "GtkSourceCompletionProposal")
@@ -52,6 +66,13 @@
   (parent "GObject")
   (c-name "GtkSourceCompletionWords")
   (gtype-id "GTK_TYPE_SOURCE_COMPLETION_WORDS")
+)
+
+(define-object SourceContextEngine
+  (in-module "Gtk")
+  (parent "GObject")
+  (c-name "GtkSourceContextEngine")
+  (gtype-id "GTK_TYPE_SOURCE_CONTEXT_ENGINE")
 )
 
 (define-object SourceGutter
@@ -75,11 +96,25 @@
   (gtype-id "GTK_TYPE_SOURCE_GUTTER_RENDERER_PIXBUF")
 )
 
+(define-object SourceGutterRendererMarks
+  (in-module "Gtk")
+  (parent "GtkSourceGutterRendererPixbuf")
+  (c-name "GtkSourceGutterRendererMarks")
+  (gtype-id "GTK_TYPE_SOURCE_GUTTER_RENDERER_MARKS")
+)
+
 (define-object SourceGutterRendererText
   (in-module "Gtk")
   (parent "GtkSourceGutterRenderer")
   (c-name "GtkSourceGutterRendererText")
   (gtype-id "GTK_TYPE_SOURCE_GUTTER_RENDERER_TEXT")
+)
+
+(define-object SourceGutterRendererLines
+  (in-module "Gtk")
+  (parent "GtkSourceGutterRendererText")
+  (c-name "GtkSourceGutterRendererLines")
+  (gtype-id "GTK_TYPE_SOURCE_GUTTER_RENDERER_LINES")
 )
 
 (define-object SourceLanguage
@@ -110,11 +145,32 @@
   (gtype-id "GTK_TYPE_SOURCE_MARK_ATTRIBUTES")
 )
 
+(define-object SourceMarksSequence
+  (in-module "Gtk")
+  (parent "GObject")
+  (c-name "GtkSourceMarksSequence")
+  (gtype-id "GTK_TYPE_SOURCE_MARKS_SEQUENCE")
+)
+
 (define-object SourcePrintCompositor
   (in-module "Gtk")
   (parent "GObject")
   (c-name "GtkSourcePrintCompositor")
   (gtype-id "GTK_TYPE_SOURCE_PRINT_COMPOSITOR")
+)
+
+(define-object SourceSearchContext
+  (in-module "Gtk")
+  (parent "GObject")
+  (c-name "GtkSourceSearchContext")
+  (gtype-id "GTK_TYPE_SOURCE_SEARCH_CONTEXT")
+)
+
+(define-object SourceSearchSettings
+  (in-module "Gtk")
+  (parent "GObject")
+  (c-name "GtkSourceSearchSettings")
+  (gtype-id "GTK_TYPE_SOURCE_SEARCH_SETTINGS")
 )
 
 (define-object SourceStyleScheme
@@ -135,6 +191,13 @@
   (in-module "Gtk")
   (c-name "GtkSourceUndoManager")
   (gtype-id "GTK_TYPE_SOURCE_UNDO_MANAGER")
+)
+
+(define-object SourceUndoManagerDefault
+  (in-module "Gtk")
+  (parent "GObject")
+  (c-name "GtkSourceUndoManagerDefault")
+  (gtype-id "GTK_TYPE_SOURCE_UNDO_MANAGER_DEFAULT")
 )
 
 (define-object SourceView
@@ -158,6 +221,18 @@
   )
 )
 
+(define-enum SourceChangeCaseType
+  (in-module "Gtk")
+  (c-name "GtkSourceChangeCaseType")
+  (gtype-id "GTK_TYPE_SOURCE_CHANGE_CASE_TYPE")
+  (values
+    '("lower" "GTK_SOURCE_CHANGE_CASE_LOWER")
+    '("upper" "GTK_SOURCE_CHANGE_CASE_UPPER")
+    '("toggle" "GTK_SOURCE_CHANGE_CASE_TOGGLE")
+    '("title" "GTK_SOURCE_CHANGE_CASE_TITLE")
+  )
+)
+
 (define-flags SourceCompletionActivation
   (in-module "Gtk")
   (c-name "GtkSourceCompletionActivation")
@@ -176,6 +251,31 @@
   (values
     '("already-bound" "GTK_SOURCE_COMPLETION_ERROR_ALREADY_BOUND")
     '("not-bound" "GTK_SOURCE_COMPLETION_ERROR_NOT_BOUND")
+  )
+)
+
+(define-flags SourceContextFlags
+  (in-module "Gtk")
+  (c-name "GtkSourceContextFlags")
+  (gtype-id "GTK_TYPE_SOURCE_CONTEXT_FLAGS")
+  (values
+    '("extend-parent" "GTK_SOURCE_CONTEXT_EXTEND_PARENT")
+    '("end-parent" "GTK_SOURCE_CONTEXT_END_PARENT")
+    '("end-at-line-end" "GTK_SOURCE_CONTEXT_END_AT_LINE_END")
+    '("first-line-only" "GTK_SOURCE_CONTEXT_FIRST_LINE_ONLY")
+    '("once-only" "GTK_SOURCE_CONTEXT_ONCE_ONLY")
+    '("style-inside" "GTK_SOURCE_CONTEXT_STYLE_INSIDE")
+  )
+)
+
+(define-flags SourceContextRefOptions
+  (in-module "Gtk")
+  (c-name "GtkSourceContextRefOptions")
+  (gtype-id "GTK_TYPE_SOURCE_CONTEXT_REF_OPTIONS")
+  (values
+    '("ignore-style" "GTK_SOURCE_CONTEXT_IGNORE_STYLE")
+    '("override-style" "GTK_SOURCE_CONTEXT_OVERRIDE_STYLE")
+    '("ref-original" "GTK_SOURCE_CONTEXT_REF_ORIGINAL")
   )
 )
 
@@ -487,6 +587,17 @@
   )
 )
 
+(define-method change_case
+  (of-object "GtkSourceBuffer")
+  (c-name "gtk_source_buffer_change_case")
+  (return-type "none")
+  (parameters
+    '("GtkSourceChangeCaseType" "case_type")
+    '("GtkTextIter*" "start")
+    '("GtkTextIter*" "end")
+  )
+)
+
 (define-method get_undo_manager
   (of-object "GtkSourceBuffer")
   (c-name "gtk_source_buffer_get_undo_manager")
@@ -501,6 +612,14 @@
     '("GtkSourceUndoManager*" "manager")
   )
 )
+
+
+
+;; From gtksourcebuffer-private.h
+
+
+
+;; From gtksourcecompletioncontainer.h
 
 
 
@@ -597,6 +716,12 @@
   (of-object "GtkSourceCompletion")
   (c-name "gtk_source_completion_get_info_window")
   (return-type "GtkSourceCompletionInfo*")
+)
+
+(define-method get_view
+  (of-object "GtkSourceCompletion")
+  (c-name "gtk_source_completion_get_view")
+  (return-type "GtkSourceView*")
 )
 
 (define-method create_context
@@ -711,6 +836,13 @@
     '("const-gchar*" "info")
   )
 )
+
+
+;; From gtksourcecompletionmodel.h
+
+
+
+;; From gtksourcecompletion-private.h
 
 
 
@@ -871,6 +1003,14 @@
 
 
 
+;; From gtksourcecontextengine.h
+
+
+
+;; From gtksourceengine.h
+
+
+
 ;; From gtksourcegutter.h
 
 (define-function gtk_source_gutter_get_type
@@ -948,6 +1088,10 @@
     '("gint" "y")
   )
 )
+
+
+
+;; From gtksourcegutter-private.h
 
 
 
@@ -1160,6 +1304,14 @@
 
 
 
+;; From gtksourcegutterrendererlines.h
+
+
+
+;; From gtksourcegutterrenderermarks.h
+
+
+
 ;; From gtksourcegutterrendererpixbuf.h
 
 (define-function gtk_source_gutter_renderer_pixbuf_get_type
@@ -1232,6 +1384,10 @@
   (c-name "gtk_source_gutter_renderer_pixbuf_get_icon_name")
   (return-type "const-gchar*")
 )
+
+
+
+;; From gtksourcegutterrenderer-private.h
 
 
 
@@ -1363,6 +1519,15 @@
   )
 )
 
+(define-method get_style_fallback
+  (of-object "GtkSourceLanguage")
+  (c-name "gtk_source_language_get_style_fallback")
+  (return-type "const-gchar*")
+  (parameters
+    '("const-gchar*" "style_id")
+  )
+)
+
 
 
 ;; From gtksourcelanguagemanager.h
@@ -1383,6 +1548,12 @@
   (return-type "GtkSourceLanguageManager*")
 )
 
+(define-method get_search_path
+  (of-object "GtkSourceLanguageManager")
+  (c-name "gtk_source_language_manager_get_search_path")
+  (return-type "const-gchar*-const*")
+)
+
 (define-method set_search_path
   (of-object "GtkSourceLanguageManager")
   (c-name "gtk_source_language_manager_set_search_path")
@@ -1390,6 +1561,12 @@
   (parameters
     '("gchar**" "dirs")
   )
+)
+
+(define-method get_language_ids
+  (of-object "GtkSourceLanguageManager")
+  (c-name "gtk_source_language_manager_get_language_ids")
+  (return-type "const-gchar*-const*")
 )
 
 (define-method get_language
@@ -1410,6 +1587,10 @@
     '("const-gchar*" "content_type")
   )
 )
+
+
+
+;; From gtksourcelanguage-private.h
 
 
 
@@ -1574,6 +1755,14 @@
     '("const-gchar*" "category")
   )
 )
+
+
+
+;; From gtksourcemarkssequence.h
+
+
+
+;; From gtksourcepixbufhelper.h
 
 
 
@@ -1890,6 +2079,271 @@
 
 
 
+;; From gtksourceregex.h
+
+
+
+;; From gtksourcesearchcontext.h
+
+(define-function gtk_source_search_context_get_type
+  (c-name "gtk_source_search_context_get_type")
+  (return-type "GType")
+)
+
+(define-function gtk_source_search_context_new
+  (c-name "gtk_source_search_context_new")
+  (is-constructor-of "GtkSourceSearchContext")
+  (return-type "GtkSourceSearchContext*")
+  (parameters
+    '("GtkSourceBuffer*" "buffer")
+    '("GtkSourceSearchSettings*" "settings")
+  )
+)
+
+(define-method get_buffer
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_get_buffer")
+  (return-type "GtkSourceBuffer*")
+)
+
+(define-method get_settings
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_get_settings")
+  (return-type "GtkSourceSearchSettings*")
+)
+
+(define-method set_settings
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_set_settings")
+  (return-type "none")
+  (parameters
+    '("GtkSourceSearchSettings*" "settings")
+  )
+)
+
+(define-method get_highlight
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_get_highlight")
+  (return-type "gboolean")
+)
+
+(define-method set_highlight
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_set_highlight")
+  (return-type "none")
+  (parameters
+    '("gboolean" "highlight")
+  )
+)
+
+(define-method get_regex_error
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_get_regex_error")
+  (return-type "GError*")
+)
+
+(define-method get_occurrences_count
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_get_occurrences_count")
+  (return-type "gint")
+)
+
+(define-method get_occurrence_position
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_get_occurrence_position")
+  (return-type "gint")
+  (parameters
+    '("const-GtkTextIter*" "match_start")
+    '("const-GtkTextIter*" "match_end")
+  )
+)
+
+(define-method forward
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_forward")
+  (return-type "gboolean")
+  (parameters
+    '("const-GtkTextIter*" "iter")
+    '("GtkTextIter*" "match_start")
+    '("GtkTextIter*" "match_end")
+  )
+)
+
+(define-method forward_async
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_forward_async")
+  (return-type "none")
+  (parameters
+    '("const-GtkTextIter*" "iter")
+    '("GCancellable*" "cancellable")
+    '("GAsyncReadyCallback" "callback")
+    '("gpointer" "user_data")
+  )
+)
+
+(define-method forward_finish
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_forward_finish")
+  (return-type "gboolean")
+  (parameters
+    '("GAsyncResult*" "result")
+    '("GtkTextIter*" "match_start")
+    '("GtkTextIter*" "match_end")
+    '("GError**" "error")
+  )
+)
+
+(define-method backward
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_backward")
+  (return-type "gboolean")
+  (parameters
+    '("const-GtkTextIter*" "iter")
+    '("GtkTextIter*" "match_start")
+    '("GtkTextIter*" "match_end")
+  )
+)
+
+(define-method backward_async
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_backward_async")
+  (return-type "none")
+  (parameters
+    '("const-GtkTextIter*" "iter")
+    '("GCancellable*" "cancellable")
+    '("GAsyncReadyCallback" "callback")
+    '("gpointer" "user_data")
+  )
+)
+
+(define-method backward_finish
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_backward_finish")
+  (return-type "gboolean")
+  (parameters
+    '("GAsyncResult*" "result")
+    '("GtkTextIter*" "match_start")
+    '("GtkTextIter*" "match_end")
+    '("GError**" "error")
+  )
+)
+
+(define-method replace
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_replace")
+  (return-type "gboolean")
+  (parameters
+    '("const-GtkTextIter*" "match_start")
+    '("const-GtkTextIter*" "match_end")
+    '("const-gchar*" "replace")
+    '("gint" "replace_length")
+    '("GError**" "error")
+  )
+)
+
+(define-method replace_all
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_replace_all")
+  (return-type "guint")
+  (parameters
+    '("const-gchar*" "replace")
+    '("gint" "replace_length")
+    '("GError**" "error")
+  )
+)
+
+
+
+;; From gtksourcesearchsettings.h
+
+(define-function gtk_source_search_settings_get_type
+  (c-name "gtk_source_search_settings_get_type")
+  (return-type "GType")
+)
+
+(define-function gtk_source_search_settings_new
+  (c-name "gtk_source_search_settings_new")
+  (is-constructor-of "GtkSourceSearchSettings")
+  (return-type "GtkSourceSearchSettings*")
+)
+
+(define-method set_search_text
+  (of-object "GtkSourceSearchSettings")
+  (c-name "gtk_source_search_settings_set_search_text")
+  (return-type "none")
+  (parameters
+    '("const-gchar*" "search_text")
+  )
+)
+
+(define-method get_search_text
+  (of-object "GtkSourceSearchSettings")
+  (c-name "gtk_source_search_settings_get_search_text")
+  (return-type "const-gchar*")
+)
+
+(define-method set_case_sensitive
+  (of-object "GtkSourceSearchSettings")
+  (c-name "gtk_source_search_settings_set_case_sensitive")
+  (return-type "none")
+  (parameters
+    '("gboolean" "case_sensitive")
+  )
+)
+
+(define-method get_case_sensitive
+  (of-object "GtkSourceSearchSettings")
+  (c-name "gtk_source_search_settings_get_case_sensitive")
+  (return-type "gboolean")
+)
+
+(define-method set_at_word_boundaries
+  (of-object "GtkSourceSearchSettings")
+  (c-name "gtk_source_search_settings_set_at_word_boundaries")
+  (return-type "none")
+  (parameters
+    '("gboolean" "at_word_boundaries")
+  )
+)
+
+(define-method get_at_word_boundaries
+  (of-object "GtkSourceSearchSettings")
+  (c-name "gtk_source_search_settings_get_at_word_boundaries")
+  (return-type "gboolean")
+)
+
+(define-method set_wrap_around
+  (of-object "GtkSourceSearchSettings")
+  (c-name "gtk_source_search_settings_set_wrap_around")
+  (return-type "none")
+  (parameters
+    '("gboolean" "wrap_around")
+  )
+)
+
+(define-method get_wrap_around
+  (of-object "GtkSourceSearchSettings")
+  (c-name "gtk_source_search_settings_get_wrap_around")
+  (return-type "gboolean")
+)
+
+(define-method set_regex_enabled
+  (of-object "GtkSourceSearchSettings")
+  (c-name "gtk_source_search_settings_set_regex_enabled")
+  (return-type "none")
+  (parameters
+    '("gboolean" "regex_enabled")
+  )
+)
+
+(define-method get_regex_enabled
+  (of-object "GtkSourceSearchSettings")
+  (c-name "gtk_source_search_settings_get_regex_enabled")
+  (return-type "gboolean")
+)
+
+
+
 ;; From gtksourcestyle.h
 
 (define-function gtk_source_style_get_type
@@ -1902,6 +2356,10 @@
   (c-name "gtk_source_style_copy")
   (return-type "GtkSourceStyle*")
 )
+
+
+
+;; From gtksourcestyle-private.h
 
 
 
@@ -1928,6 +2386,12 @@
   (of-object "GtkSourceStyleScheme")
   (c-name "gtk_source_style_scheme_get_description")
   (return-type "const-gchar*")
+)
+
+(define-method get_authors
+  (of-object "GtkSourceStyleScheme")
+  (c-name "gtk_source_style_scheme_get_authors")
+  (return-type "const-gchar*-const*")
 )
 
 (define-method get_filename
@@ -1992,10 +2456,22 @@
   )
 )
 
+(define-method get_search_path
+  (of-object "GtkSourceStyleSchemeManager")
+  (c-name "gtk_source_style_scheme_manager_get_search_path")
+  (return-type "const-gchar*-const*")
+)
+
 (define-method force_rescan
   (of-object "GtkSourceStyleSchemeManager")
   (c-name "gtk_source_style_scheme_manager_force_rescan")
   (return-type "none")
+)
+
+(define-method get_scheme_ids
+  (of-object "GtkSourceStyleSchemeManager")
+  (c-name "gtk_source_style_scheme_manager_get_scheme_ids")
+  (return-type "const-gchar*-const*")
 )
 
 (define-method get_scheme
@@ -2006,6 +2482,18 @@
     '("const-gchar*" "scheme_id")
   )
 )
+
+
+
+;; From gtksourcetypes.h
+
+
+
+;; From gtksourcetypes-private.h
+
+
+
+;; From gtksourceundomanagerdefault.h
 
 
 
@@ -2062,6 +2550,26 @@
   (of-object "GtkSourceUndoManager")
   (c-name "gtk_source_undo_manager_can_redo_changed")
   (return-type "none")
+)
+
+
+
+;; From gtksourceutils.h
+
+(define-function gtk_source_utils_unescape_search_text
+  (c-name "gtk_source_utils_unescape_search_text")
+  (return-type "gchar*")
+  (parameters
+    '("const-gchar*" "text")
+  )
+)
+
+(define-function gtk_source_utils_escape_search_text
+  (c-name "gtk_source_utils_escape_search_text")
+  (return-type "gchar*")
+  (parameters
+    '("const-gchar*" "text")
+  )
 )
 
 
@@ -2314,6 +2822,14 @@
 
 
 
+;; From gtksourceview-i18n.h
+
+
+
+;; From gtksourceview-marshal.h
+
+
+
 ;; From gtksourceview-typebuiltins.h
 
 (define-function gtk_source_bracket_match_type_get_type
@@ -2357,5 +2873,16 @@
     '("GtkTextBuffer*" "buffer")
   )
 )
+
+
+;; From gtksourceview-utils.h
+
+
+
+;; From gtktextregion.h
+
+
+
+;; From stamp-gtksourceview-typebuiltins.h
 
 

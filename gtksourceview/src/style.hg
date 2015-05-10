@@ -56,6 +56,8 @@ public:
   _WRAP_PROPERTY("strikethrough-set", bool)
   _WRAP_PROPERTY("underline", bool)
   _WRAP_PROPERTY("underline-set", bool)
+  _WRAP_PROPERTY("scale", Glib::ustring)
+  _WRAP_PROPERTY("scale-set", bool)
 };
 
 }//end namespace Gsv

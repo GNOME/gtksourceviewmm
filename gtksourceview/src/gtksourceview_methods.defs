@@ -7,6 +7,20 @@
   (gtype-id "GTK_TYPE_SOURCE_BUFFER")
 )
 
+(define-object SourceBufferInputStream
+  (in-module "Gtk")
+  (parent "GInputStream")
+  (c-name "GtkSourceBufferInputStream")
+  (gtype-id "GTK_TYPE_SOURCE_BUFFER_INPUT_STREAM")
+)
+
+(define-object SourceBufferOutputStream
+  (in-module "Gtk")
+  (parent "GOutputStream")
+  (c-name "GtkSourceBufferOutputStream")
+  (gtype-id "GTK_TYPE_SOURCE_BUFFER_OUTPUT_STREAM")
+)
+
 (define-object SourceCompletion
   (in-module "Gtk")
   (parent "GObject")
@@ -16,7 +30,7 @@
 
 (define-object SourceCompletionContainer
   (in-module "Gtk")
-  (parent "GtkBin")
+  (parent "GtkScrolledWindow")
   (c-name "GtkSourceCompletionContainer")
   (gtype-id "GTK_TYPE_SOURCE_COMPLETION_CONTAINER")
 )
@@ -73,6 +87,27 @@
   (parent "GObject")
   (c-name "GtkSourceContextEngine")
   (gtype-id "GTK_TYPE_SOURCE_CONTEXT_ENGINE")
+)
+
+(define-object SourceFile
+  (in-module "Gtk")
+  (parent "GObject")
+  (c-name "GtkSourceFile")
+  (gtype-id "GTK_TYPE_SOURCE_FILE")
+)
+
+(define-object SourceFileLoader
+  (in-module "Gtk")
+  (parent "GObject")
+  (c-name "GtkSourceFileLoader")
+  (gtype-id "GTK_TYPE_SOURCE_FILE_LOADER")
+)
+
+(define-object SourceFileSaver
+  (in-module "Gtk")
+  (parent "GObject")
+  (c-name "GtkSourceFileSaver")
+  (gtype-id "GTK_TYPE_SOURCE_FILE_SAVER")
 )
 
 (define-object SourceGutter
@@ -180,6 +215,20 @@
   (gtype-id "GTK_TYPE_SOURCE_STYLE_SCHEME")
 )
 
+(define-object SourceStyleSchemeChooserButton
+  (in-module "Gtk")
+  (parent "GtkButton")
+  (c-name "GtkSourceStyleSchemeChooserButton")
+  (gtype-id "GTK_TYPE_SOURCE_STYLE_SCHEME_CHOOSER_BUTTON")
+)
+
+(define-object SourceStyleSchemeChooserWidget
+  (in-module "Gtk")
+  (parent "GtkBin")
+  (c-name "GtkSourceStyleSchemeChooserWidget")
+  (gtype-id "GTK_TYPE_SOURCE_STYLE_SCHEME_CHOOSER_WIDGET")
+)
+
 (define-object SourceStyleSchemeManager
   (in-module "Gtk")
   (parent "GObject")
@@ -279,6 +328,39 @@
   )
 )
 
+(define-enum SourceFileLoaderError
+  (in-module "Gtk")
+  (c-name "GtkSourceFileLoaderError")
+  (gtype-id "GTK_TYPE_SOURCE_FILE_LOADER_ERROR")
+  (values
+    '("too-big" "GTK_SOURCE_FILE_LOADER_ERROR_TOO_BIG")
+    '("encoding-auto-detection-failed" "GTK_SOURCE_FILE_LOADER_ERROR_ENCODING_AUTO_DETECTION_FAILED")
+    '("conversion-fallback" "GTK_SOURCE_FILE_LOADER_ERROR_CONVERSION_FALLBACK")
+  )
+)
+
+(define-enum SourceFileSaverError
+  (in-module "Gtk")
+  (c-name "GtkSourceFileSaverError")
+  (gtype-id "GTK_TYPE_SOURCE_FILE_SAVER_ERROR")
+  (values
+    '("invalid-chars" "GTK_SOURCE_FILE_SAVER_ERROR_INVALID_CHARS")
+    '("externally-modified" "GTK_SOURCE_FILE_SAVER_ERROR_EXTERNALLY_MODIFIED")
+  )
+)
+
+(define-flags SourceFileSaverFlags
+  (in-module "Gtk")
+  (c-name "GtkSourceFileSaverFlags")
+  (gtype-id "GTK_TYPE_SOURCE_FILE_SAVER_FLAGS")
+  (values
+    '("none" "GTK_SOURCE_FILE_SAVER_FLAGS_NONE")
+    '("ignore-invalid-chars" "GTK_SOURCE_FILE_SAVER_FLAGS_IGNORE_INVALID_CHARS")
+    '("ignore-modification-time" "GTK_SOURCE_FILE_SAVER_FLAGS_IGNORE_MODIFICATION_TIME")
+    '("create-backup" "GTK_SOURCE_FILE_SAVER_FLAGS_CREATE_BACKUP")
+  )
+)
+
 (define-flags SourceGutterRendererState
   (in-module "Gtk")
   (c-name "GtkSourceGutterRendererState")
@@ -299,6 +381,37 @@
     '("cell" "GTK_SOURCE_GUTTER_RENDERER_ALIGNMENT_MODE_CELL")
     '("first" "GTK_SOURCE_GUTTER_RENDERER_ALIGNMENT_MODE_FIRST")
     '("last" "GTK_SOURCE_GUTTER_RENDERER_ALIGNMENT_MODE_LAST")
+  )
+)
+
+(define-enum SourceNewlineType
+  (in-module "Gtk")
+  (c-name "GtkSourceNewlineType")
+  (gtype-id "GTK_TYPE_SOURCE_NEWLINE_TYPE")
+  (values
+    '("lf" "GTK_SOURCE_NEWLINE_TYPE_LF")
+    '("cr" "GTK_SOURCE_NEWLINE_TYPE_CR")
+    '("cr-lf" "GTK_SOURCE_NEWLINE_TYPE_CR_LF")
+  )
+)
+
+(define-enum SourceCompressionType
+  (in-module "Gtk")
+  (c-name "GtkSourceCompressionType")
+  (gtype-id "GTK_TYPE_SOURCE_COMPRESSION_TYPE")
+  (values
+    '("none" "GTK_SOURCE_COMPRESSION_TYPE_NONE")
+    '("gzip" "GTK_SOURCE_COMPRESSION_TYPE_GZIP")
+  )
+)
+
+(define-enum SourceBackgroundPatternType
+  (in-module "Gtk")
+  (c-name "GtkSourceBackgroundPatternType")
+  (gtype-id "GTK_TYPE_SOURCE_BACKGROUND_PATTERN_TYPE")
+  (values
+    '("none" "GTK_SOURCE_BACKGROUND_PATTERN_TYPE_NONE")
+    '("grid" "GTK_SOURCE_BACKGROUND_PATTERN_TYPE_GRID")
   )
 )
 
@@ -598,6 +711,16 @@
   )
 )
 
+(define-method join_lines
+  (of-object "GtkSourceBuffer")
+  (c-name "gtk_source_buffer_join_lines")
+  (return-type "none")
+  (parameters
+    '("GtkTextIter*" "start")
+    '("GtkTextIter*" "end")
+  )
+)
+
 (define-method get_undo_manager
   (of-object "GtkSourceBuffer")
   (c-name "gtk_source_buffer_get_undo_manager")
@@ -612,6 +735,29 @@
     '("GtkSourceUndoManager*" "manager")
   )
 )
+
+(define-method set_implicit_trailing_newline
+  (of-object "GtkSourceBuffer")
+  (c-name "gtk_source_buffer_set_implicit_trailing_newline")
+  (return-type "none")
+  (parameters
+    '("gboolean" "implicit_trailing_newline")
+  )
+)
+
+(define-method get_implicit_trailing_newline
+  (of-object "GtkSourceBuffer")
+  (c-name "gtk_source_buffer_get_implicit_trailing_newline")
+  (return-type "gboolean")
+)
+
+
+
+;; From gtksourcebufferinputstream.h
+
+
+
+;; From gtksourcebufferoutputstream.h
 
 
 
@@ -644,7 +790,7 @@
 (define-method get_iter
   (of-object "GtkSourceCompletionContext")
   (c-name "gtk_source_completion_context_get_iter")
-  (return-type "none")
+  (return-type "gboolean")
   (parameters
     '("GtkTextIter*" "iter")
   )
@@ -1007,7 +1153,379 @@
 
 
 
+;; From gtksourceencoding.h
+
+(define-function gtk_source_encoding_get_type
+  (c-name "gtk_source_encoding_get_type")
+  (return-type "GType")
+)
+
+(define-function gtk_source_encoding_get_from_charset
+  (c-name "gtk_source_encoding_get_from_charset")
+  (return-type "const-GtkSourceEncoding*")
+  (parameters
+    '("const-gchar*" "charset")
+  )
+)
+
+(define-method to_string
+  (of-object "GtkSourceEncoding")
+  (c-name "gtk_source_encoding_to_string")
+  (return-type "gchar*")
+)
+
+(define-method get_name
+  (of-object "GtkSourceEncoding")
+  (c-name "gtk_source_encoding_get_name")
+  (return-type "const-gchar*")
+)
+
+(define-method get_charset
+  (of-object "GtkSourceEncoding")
+  (c-name "gtk_source_encoding_get_charset")
+  (return-type "const-gchar*")
+)
+
+(define-function gtk_source_encoding_get_utf8
+  (c-name "gtk_source_encoding_get_utf8")
+  (return-type "const-GtkSourceEncoding*")
+)
+
+(define-function gtk_source_encoding_get_current
+  (c-name "gtk_source_encoding_get_current")
+  (return-type "const-GtkSourceEncoding*")
+)
+
+(define-function gtk_source_encoding_get_all
+  (c-name "gtk_source_encoding_get_all")
+  (return-type "GSList*")
+)
+
+(define-method copy
+  (of-object "GtkSourceEncoding")
+  (c-name "gtk_source_encoding_copy")
+  (return-type "GtkSourceEncoding*")
+)
+
+(define-method free
+  (of-object "GtkSourceEncoding")
+  (c-name "gtk_source_encoding_free")
+  (return-type "none")
+)
+
+
+
+;; From gtksourceencoding-private.h
+
+
+
 ;; From gtksourceengine.h
+
+
+
+;; From gtksourcefile.h
+
+(define-function gtk_source_file_get_type
+  (c-name "gtk_source_file_get_type")
+  (return-type "GType")
+)
+
+(define-function gtk_source_file_new
+  (c-name "gtk_source_file_new")
+  (is-constructor-of "GtkSourceFile")
+  (return-type "GtkSourceFile*")
+)
+
+(define-method get_location
+  (of-object "GtkSourceFile")
+  (c-name "gtk_source_file_get_location")
+  (return-type "GFile*")
+)
+
+(define-method set_location
+  (of-object "GtkSourceFile")
+  (c-name "gtk_source_file_set_location")
+  (return-type "none")
+  (parameters
+    '("GFile*" "location")
+  )
+)
+
+(define-method get_encoding
+  (of-object "GtkSourceFile")
+  (c-name "gtk_source_file_get_encoding")
+  (return-type "const-GtkSourceEncoding*")
+)
+
+(define-method get_newline_type
+  (of-object "GtkSourceFile")
+  (c-name "gtk_source_file_get_newline_type")
+  (return-type "GtkSourceNewlineType")
+)
+
+(define-method get_compression_type
+  (of-object "GtkSourceFile")
+  (c-name "gtk_source_file_get_compression_type")
+  (return-type "GtkSourceCompressionType")
+)
+
+(define-method set_mount_operation_factory
+  (of-object "GtkSourceFile")
+  (c-name "gtk_source_file_set_mount_operation_factory")
+  (return-type "none")
+  (parameters
+    '("GtkSourceMountOperationFactory" "callback")
+    '("gpointer" "user_data")
+    '("GDestroyNotify" "notify")
+  )
+)
+
+
+
+;; From gtksourcefileloader.h
+
+(define-function gtk_source_file_loader_get_type
+  (c-name "gtk_source_file_loader_get_type")
+  (return-type "GType")
+)
+
+(define-function gtk_source_file_loader_error_quark
+  (c-name "gtk_source_file_loader_error_quark")
+  (return-type "GQuark")
+)
+
+(define-function gtk_source_file_loader_new
+  (c-name "gtk_source_file_loader_new")
+  (is-constructor-of "GtkSourceFileLoader")
+  (return-type "GtkSourceFileLoader*")
+  (parameters
+    '("GtkSourceBuffer*" "buffer")
+    '("GtkSourceFile*" "file")
+  )
+)
+
+(define-function gtk_source_file_loader_new_from_stream
+  (c-name "gtk_source_file_loader_new_from_stream")
+  (return-type "GtkSourceFileLoader*")
+  (parameters
+    '("GtkSourceBuffer*" "buffer")
+    '("GtkSourceFile*" "file")
+    '("GInputStream*" "stream")
+  )
+)
+
+(define-method set_candidate_encodings
+  (of-object "GtkSourceFileLoader")
+  (c-name "gtk_source_file_loader_set_candidate_encodings")
+  (return-type "none")
+  (parameters
+    '("GSList*" "candidate_encodings")
+  )
+)
+
+(define-method get_buffer
+  (of-object "GtkSourceFileLoader")
+  (c-name "gtk_source_file_loader_get_buffer")
+  (return-type "GtkSourceBuffer*")
+)
+
+(define-method get_file
+  (of-object "GtkSourceFileLoader")
+  (c-name "gtk_source_file_loader_get_file")
+  (return-type "GtkSourceFile*")
+)
+
+(define-method get_location
+  (of-object "GtkSourceFileLoader")
+  (c-name "gtk_source_file_loader_get_location")
+  (return-type "GFile*")
+)
+
+(define-method get_input_stream
+  (of-object "GtkSourceFileLoader")
+  (c-name "gtk_source_file_loader_get_input_stream")
+  (return-type "GInputStream*")
+)
+
+(define-method load_async
+  (of-object "GtkSourceFileLoader")
+  (c-name "gtk_source_file_loader_load_async")
+  (return-type "none")
+  (parameters
+    '("gint" "io_priority")
+    '("GCancellable*" "cancellable")
+    '("GFileProgressCallback" "progress_callback")
+    '("gpointer" "progress_callback_data")
+    '("GDestroyNotify" "progress_callback_notify")
+    '("GAsyncReadyCallback" "callback")
+    '("gpointer" "user_data")
+  )
+)
+
+(define-method load_finish
+  (of-object "GtkSourceFileLoader")
+  (c-name "gtk_source_file_loader_load_finish")
+  (return-type "gboolean")
+  (parameters
+    '("GAsyncResult*" "result")
+    '("GError**" "error")
+  )
+)
+
+(define-method get_encoding
+  (of-object "GtkSourceFileLoader")
+  (c-name "gtk_source_file_loader_get_encoding")
+  (return-type "const-GtkSourceEncoding*")
+)
+
+(define-method get_newline_type
+  (of-object "GtkSourceFileLoader")
+  (c-name "gtk_source_file_loader_get_newline_type")
+  (return-type "GtkSourceNewlineType")
+)
+
+(define-method get_compression_type
+  (of-object "GtkSourceFileLoader")
+  (c-name "gtk_source_file_loader_get_compression_type")
+  (return-type "GtkSourceCompressionType")
+)
+
+
+
+;; From gtksourcefilesaver.h
+
+(define-function gtk_source_file_saver_get_type
+  (c-name "gtk_source_file_saver_get_type")
+  (return-type "GType")
+)
+
+(define-function gtk_source_file_saver_error_quark
+  (c-name "gtk_source_file_saver_error_quark")
+  (return-type "GQuark")
+)
+
+(define-function gtk_source_file_saver_new
+  (c-name "gtk_source_file_saver_new")
+  (is-constructor-of "GtkSourceFileSaver")
+  (return-type "GtkSourceFileSaver*")
+  (parameters
+    '("GtkSourceBuffer*" "buffer")
+    '("GtkSourceFile*" "file")
+  )
+)
+
+(define-function gtk_source_file_saver_new_with_target
+  (c-name "gtk_source_file_saver_new_with_target")
+  (return-type "GtkSourceFileSaver*")
+  (parameters
+    '("GtkSourceBuffer*" "buffer")
+    '("GtkSourceFile*" "file")
+    '("GFile*" "target_location")
+  )
+)
+
+(define-method get_buffer
+  (of-object "GtkSourceFileSaver")
+  (c-name "gtk_source_file_saver_get_buffer")
+  (return-type "GtkSourceBuffer*")
+)
+
+(define-method get_file
+  (of-object "GtkSourceFileSaver")
+  (c-name "gtk_source_file_saver_get_file")
+  (return-type "GtkSourceFile*")
+)
+
+(define-method get_location
+  (of-object "GtkSourceFileSaver")
+  (c-name "gtk_source_file_saver_get_location")
+  (return-type "GFile*")
+)
+
+(define-method set_encoding
+  (of-object "GtkSourceFileSaver")
+  (c-name "gtk_source_file_saver_set_encoding")
+  (return-type "none")
+  (parameters
+    '("const-GtkSourceEncoding*" "encoding")
+  )
+)
+
+(define-method get_encoding
+  (of-object "GtkSourceFileSaver")
+  (c-name "gtk_source_file_saver_get_encoding")
+  (return-type "const-GtkSourceEncoding*")
+)
+
+(define-method set_newline_type
+  (of-object "GtkSourceFileSaver")
+  (c-name "gtk_source_file_saver_set_newline_type")
+  (return-type "none")
+  (parameters
+    '("GtkSourceNewlineType" "newline_type")
+  )
+)
+
+(define-method get_newline_type
+  (of-object "GtkSourceFileSaver")
+  (c-name "gtk_source_file_saver_get_newline_type")
+  (return-type "GtkSourceNewlineType")
+)
+
+(define-method set_compression_type
+  (of-object "GtkSourceFileSaver")
+  (c-name "gtk_source_file_saver_set_compression_type")
+  (return-type "none")
+  (parameters
+    '("GtkSourceCompressionType" "compression_type")
+  )
+)
+
+(define-method get_compression_type
+  (of-object "GtkSourceFileSaver")
+  (c-name "gtk_source_file_saver_get_compression_type")
+  (return-type "GtkSourceCompressionType")
+)
+
+(define-method set_flags
+  (of-object "GtkSourceFileSaver")
+  (c-name "gtk_source_file_saver_set_flags")
+  (return-type "none")
+  (parameters
+    '("GtkSourceFileSaverFlags" "flags")
+  )
+)
+
+(define-method get_flags
+  (of-object "GtkSourceFileSaver")
+  (c-name "gtk_source_file_saver_get_flags")
+  (return-type "GtkSourceFileSaverFlags")
+)
+
+(define-method save_async
+  (of-object "GtkSourceFileSaver")
+  (c-name "gtk_source_file_saver_save_async")
+  (return-type "none")
+  (parameters
+    '("gint" "io_priority")
+    '("GCancellable*" "cancellable")
+    '("GFileProgressCallback" "progress_callback")
+    '("gpointer" "progress_callback_data")
+    '("GDestroyNotify" "progress_callback_notify")
+    '("GAsyncReadyCallback" "callback")
+    '("gpointer" "user_data")
+  )
+)
+
+(define-method save_finish
+  (of-object "GtkSourceFileSaver")
+  (c-name "gtk_source_file_saver_save_finish")
+  (return-type "gboolean")
+  (parameters
+    '("GAsyncResult*" "result")
+    '("GError**" "error")
+  )
+)
 
 
 
@@ -1449,6 +1967,10 @@
 
 
 ;; From gtksource.h
+
+
+
+;; From gtksourceiter.h
 
 
 
@@ -2136,6 +2658,21 @@
   )
 )
 
+(define-method get_match_style
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_get_match_style")
+  (return-type "GtkSourceStyle*")
+)
+
+(define-method set_match_style
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_set_match_style")
+  (return-type "none")
+  (parameters
+    '("GtkSourceStyle*" "match_style")
+  )
+)
+
 (define-method get_regex_error
   (of-object "GtkSourceSearchContext")
   (c-name "gtk_source_search_context_get_regex_error")
@@ -2360,6 +2897,60 @@
 
 
 ;; From gtksourcestyle-private.h
+
+
+
+;; From gtksourcestyleschemechooserbutton.h
+
+(define-function gtk_source_style_scheme_chooser_button_get_type
+  (c-name "gtk_source_style_scheme_chooser_button_get_type")
+  (return-type "GType")
+)
+
+(define-function gtk_source_style_scheme_chooser_button_new
+  (c-name "gtk_source_style_scheme_chooser_button_new")
+  (is-constructor-of "GtkSourceStyleSchemeChooserButton")
+  (return-type "GtkWidget*")
+)
+
+
+
+;; From gtksourcestyleschemechooser.h
+
+(define-function gtk_source_style_scheme_chooser_get_type
+  (c-name "gtk_source_style_scheme_chooser_get_type")
+  (return-type "GType")
+)
+
+(define-method get_style_scheme
+  (of-object "GtkSourceStyleSchemeChooser")
+  (c-name "gtk_source_style_scheme_chooser_get_style_scheme")
+  (return-type "GtkSourceStyleScheme*")
+)
+
+(define-method set_style_scheme
+  (of-object "GtkSourceStyleSchemeChooser")
+  (c-name "gtk_source_style_scheme_chooser_set_style_scheme")
+  (return-type "none")
+  (parameters
+    '("GtkSourceStyleScheme*" "scheme")
+  )
+)
+
+
+
+;; From gtksourcestyleschemechooserwidget.h
+
+(define-function gtk_source_style_scheme_chooser_widget_get_type
+  (c-name "gtk_source_style_scheme_chooser_widget_get_type")
+  (return-type "GType")
+)
+
+(define-function gtk_source_style_scheme_chooser_widget_new
+  (c-name "gtk_source_style_scheme_chooser_widget_new")
+  (is-constructor-of "GtkSourceStyleSchemeChooserWidget")
+  (return-type "GtkWidget*")
+)
 
 
 
@@ -2685,12 +3276,32 @@
   (return-type "gboolean")
 )
 
+(define-method indent_lines
+  (of-object "GtkSourceView")
+  (c-name "gtk_source_view_indent_lines")
+  (return-type "none")
+  (parameters
+    '("GtkTextIter*" "start")
+    '("GtkTextIter*" "end")
+  )
+)
+
+(define-method unindent_lines
+  (of-object "GtkSourceView")
+  (c-name "gtk_source_view_unindent_lines")
+  (return-type "none")
+  (parameters
+    '("GtkTextIter*" "start")
+    '("GtkTextIter*" "end")
+  )
+)
+
 (define-method set_highlight_current_line
   (of-object "GtkSourceView")
   (c-name "gtk_source_view_set_highlight_current_line")
   (return-type "none")
   (parameters
-    '("gboolean" "hl")
+    '("gboolean" "highlight")
   )
 )
 
@@ -2771,7 +3382,7 @@
   (c-name "gtk_source_view_set_smart_home_end")
   (return-type "none")
   (parameters
-    '("GtkSourceSmartHomeEndType" "smart_he")
+    '("GtkSourceSmartHomeEndType" "smart_home_end")
   )
 )
 
@@ -2818,6 +3429,21 @@
   (parameters
     '("GtkTextWindowType" "window_type")
   )
+)
+
+(define-method set_background_pattern
+  (of-object "GtkSourceView")
+  (c-name "gtk_source_view_set_background_pattern")
+  (return-type "none")
+  (parameters
+    '("GtkSourceBackgroundPatternType" "background_pattern")
+  )
+)
+
+(define-method get_background_pattern
+  (of-object "GtkSourceView")
+  (c-name "gtk_source_view_get_background_pattern")
+  (return-type "GtkSourceBackgroundPatternType")
 )
 
 

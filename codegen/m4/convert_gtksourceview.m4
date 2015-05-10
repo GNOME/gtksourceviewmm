@@ -103,6 +103,10 @@ _CONVERSION(`const Glib::RefPtr<SearchSettings>&',`GtkSourceSearchSettings*',`Gl
 _CONVERSION(`GtkSourceStyle*',`Glib::RefPtr<Style>',`Glib::wrap($3)')
 
 
+# Gsv::Style -> GtkSourceStyle
+_CONVERSION(`const Glib::RefPtr<Style>&',`GtkSourceStyle*',`Glib::unwrap($3)')
+
+
 # GtkSourceStyleScheme -> Gsv::StyleScheme
 _CONVERSION(`GtkSourceStyleScheme*',`Glib::RefPtr<StyleScheme>',`Glib::wrap($3)')
 

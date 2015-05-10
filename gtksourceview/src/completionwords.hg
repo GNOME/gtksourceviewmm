@@ -82,6 +82,8 @@ public:
   _WRAP_PROPERTY("interactive-delay", int)
 
   _WRAP_PROPERTY("priority", int)
+
+  _WRAP_PROPERTY("activation", CompletionActivation)
 };
 
 } /* namespace Gsv */

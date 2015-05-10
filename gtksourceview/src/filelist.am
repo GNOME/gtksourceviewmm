@@ -33,6 +33,8 @@ files_hg =				\
 	stylescheme.hg			\
 	styleschememanager.hg		\
 	styleschemechooser.hg		\
+	styleschemechooserbutton.hg	\
+	styleschemechooserwidget.hg	\
 	undomanager.hg			\
 	view.hg
 

@@ -1143,6 +1143,10 @@
   (construct-only #f)
 )
 
+;; From GtkSourceStyleSchemeChooserButton
+
+;; From GtkSourceStyleSchemeChooserWidget
+
 ;; From GtkSourceStyleSchemeManager
 
 (define-property search-path

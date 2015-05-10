@@ -1,0 +1,48 @@
+/* styleschemechooserwidget.h
+ *
+ * Copyright (C) 2015 Christoph Brill
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Library General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Library General Public License for more details.
+ *
+ * You should have received a copy of the GNU Library General Public
+ * License along with this library; if not, write to the Free
+ * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+
+#include <gtksourceview/gtksourcestyleschemechooserwidget.h>
+
+#include <gtkmm/bin.h>
+
+_DEFS(gtksourceviewmm,gtksourceview)
+_PINCLUDE(gtkmm/private/bin_p.h)
+
+namespace Gsv
+{
+
+/** The GtkSourceStyleSchemeChooserWidget widget lets the user select a style scheme. By default, the chooser
+ * presents a predefined list of style schemes.
+ *
+ * To change the initially selected style scheme, use gtk_source_style_scheme_chooser_set_style_scheme(). To get
+ * the selected style scheme use gtk_source_style_scheme_chooser_get_style_scheme().
+ *
+ * @newin{3,16}
+ */
+class StyleSchemeChooserWidget : public Gtk::Bin
+{
+  _CLASS_GTKOBJECT(StyleSchemeChooserWidget, GtkSourceStyleStyleSchemeChooserWidget, GTK_SOURCE_STYLE_SCHEME_CHOOSER_WIDGET, Gtk::Bin, GtkBin)
+
+public:
+
+  _CTOR_DEFAULT()
+
+};
+
+} /* namespace Gsv */

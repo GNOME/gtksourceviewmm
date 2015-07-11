@@ -47,7 +47,7 @@ class SearchDialog : public Dialog {
 
     void build_widget ()
     {
-        add_button (Stock::CLOSE, RESPONSE_ACCEPT) ;
+        add_button ("Close", RESPONSE_ACCEPT) ;
 
         m_hbox = manage (new HBox) ;
         get_content_area ()->pack_start (*m_hbox) ;
@@ -167,8 +167,8 @@ public:
             FileChooserDialog fc_dialog ("open a file",
                                          FILE_CHOOSER_ACTION_OPEN);
             fc_dialog.set_select_multiple (false) ;
-            fc_dialog.add_button (Stock::CANCEL, RESPONSE_CANCEL) ;
-            fc_dialog.add_button (Stock::OK, RESPONSE_ACCEPT) ;
+            fc_dialog.add_button ("Cancel", RESPONSE_CANCEL) ;
+            fc_dialog.add_button ("OK", RESPONSE_ACCEPT) ;
             int res = fc_dialog.run () ;
             if (res != RESPONSE_ACCEPT) {return;}
             ustring filename = fc_dialog.get_filename () ;

@@ -18,6 +18,8 @@
  */
 
 #include <gtksourceview/gtksourcecompletionitem.h>
+#include <gtkmm/stock.h>
+#include <gtk/gtk.h>
 
 namespace Gsv
 {
@@ -30,6 +32,7 @@ CompletionItem::CompletionItem(const Markup& markup, const Glib::ustring& text, 
   _CONSTRUCT("markup", markup.get_c_str(), "text", text.c_str(), "icon", Glib::unwrap(icon), "info", (info.empty() ? 0 : info.c_str()))
 {}
 
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 CompletionItem::CompletionItem(const Glib::ustring& label, const Glib::ustring& text, const Gtk::StockID& stock, const Glib::ustring& info) :
   _CONSTRUCT("text", text.c_str(), "info", (info.empty() ? 0 : info.c_str()))
 {
@@ -66,5 +69,6 @@ CompletionItem::CompletionItem(const Glib::ustring& label, const Glib::ustring& 
     g_object_unref(icon);
   }
 }
+G_GNUC_END_IGNORE_DEPRECATIONS
 
 } // namespace Gsv

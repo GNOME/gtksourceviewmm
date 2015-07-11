@@ -25,6 +25,20 @@
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
 
+#m4 _PUSH(SECTION_CC_PRE_INCLUDES)
+//Avoid warnings when we use deprecated gtkmm API in our deprecated wrappers:
+#include <glibmm.h>
+#undef GTKMM_DISABLE_DEPRECATED
+#undef GTK_DISABLE_DEPRECATED
+#define GTK_DISABLE_DEPRECATION_WARNINGS 1
+#m4 _POP()
+
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+namespace Gtk {
+  //deprecated
+  class StockID;
+} //namespace Gtk
+#endif //#ifndef DOXYGEN_SHOULD_SKIP_THIS
 
 namespace Gsv
 {

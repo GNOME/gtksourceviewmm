@@ -13,7 +13,7 @@ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 AM_MAINTAINER_MODE
 AC_ARG_VAR([ACLOCAL_FLAGS], [aclocal flags, e.g. -I <macro dir>])
 
-MM_PREREQ([0.9.5])
+MM_PREREQ([0.9.8])
 MM_INIT_MODULE([gtksourceviewmm-3.0])
 
 # Copy the mm-common .pl scripts into docs/,
@@ -25,7 +25,7 @@ AC_SUBST([GTKSOURCEVIEWMM_SO_VERSION], [0:0:0])
 
 LT_INIT([win32-dll disable-static])
 AC_PROG_CXX
-AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
+MM_AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
 
 AC_SUBST([GTKSOURCEVIEWMM_MODULES], ['glibmm-2.4 >= 2.28.0 gtkmm-3.0 >= 3.2.0 gtksourceview-3.0 >= 3.12.0'])
 PKG_CHECK_MODULES([GTKSOURCEVIEWMM], [$GTKSOURCEVIEWMM_MODULES])

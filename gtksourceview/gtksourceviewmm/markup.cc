@@ -52,9 +52,16 @@ Markup& Markup::operator=(const Markup& other)
   return *this;
 }
 
+#ifndef GTKMM_DISABLE_DEPRECATED
 Markup::operator const void*() const
 {
   return !(markup_.empty()) ? GINT_TO_POINTER(1) : 0;
+}
+#endif // GTKMM_DISABLE_DEPRECATED
+
+Markup::operator bool() const
+{
+  return !(markup_.empty());
 }
 
 bool Markup::equal(const Markup& rhs) const

@@ -87,8 +87,11 @@ public:
    */
   Markup& operator=(const Markup& other);
 
+#ifndef GTKMM_DISABLE_DEPRECATED
   /** This typedef is just to make it more obvious that
    * our operator const void*() should be used like operator bool().
+   *
+   * @deprecated Use the explicit operator bool() instead.
    */
   typedef const void* BoolExpr;
 
@@ -102,8 +105,24 @@ public:
    * @return @c true if Markup is not empty, otherwise @c false.
    *
    * @newin{2,10}
+   *
+   * @deprecated Use the explicit operator bool() instead.
    */
   operator BoolExpr() const;
+#endif // GTKMM_DISABLE_DEPRECATED
+
+  /** Checks if Markup is not empty.
+   * For instance,
+   * @code
+   * if(markup)
+   *   do_something()
+   * @endcode
+   *
+   * @return @c true if Markup is not empty, otherwise @c false.
+   *
+   * @newin{3,20}
+   */
+  explicit operator bool() const;
 
   /** Checks if @a other Markup is the same as this one.
    *

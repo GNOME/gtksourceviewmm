@@ -33,8 +33,7 @@ _PINCLUDE(glibmm/private/object_p.h)
 
 namespace Gsv
 {
-_CC_INCLUDE(gtksourceview/gtksourcelanguagemanager.h)
-_CC_INCLUDE(gtksourceview/gtksourceview-typebuiltins.h)
+_CC_INCLUDE(gtksourceview/gtksource.h)
 
 /** Class which provides access to SourceLanguages.
  *

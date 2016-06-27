@@ -29,7 +29,7 @@
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(gtkmm/private/textbuffer_p.h)
-_PINCLUDE(gtksourceview/gtksourceview-typebuiltins.h)
+_PINCLUDE(gtksourceview/gtksource.h)
 
 namespace Gsv
 {

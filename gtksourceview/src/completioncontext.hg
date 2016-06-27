@@ -19,7 +19,7 @@
 
 #include <vector>
 
-#include <gtksourceview/gtksourceview-typebuiltins.h>
+#include <gtksourceview/gtksource.h>
 
 #include <glibmm/object.h>
 

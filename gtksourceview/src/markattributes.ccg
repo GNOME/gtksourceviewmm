@@ -17,7 +17,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <gtksourceview/gtksourcemarkattributes.h>
+#include <gtksourceview/gtksource.h>
 
 #include <giomm/icon.h>
 #include <gdkmm/pixbuf.h>

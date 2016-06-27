@@ -32,7 +32,7 @@ _PINCLUDE(glibmm/private/object_p.h)
 #include <glibmm.h>
 #undef G_DEPRECATED
 #define G_DEPRECATED
-#include <gtksourceview/gtksourcemarkattributes.h>
+#include <gtksourceview/gtksource.h>
 #m4 _POP()
 
 namespace Gio

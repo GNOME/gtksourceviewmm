@@ -18,7 +18,7 @@
  */
 
 #include <glibmm/interface.h>
-#include <gtksourceview/gtksourcecompletionprovider.h>
+#include <gtksourceview/gtksource.h>
 
 #include <gtksourceviewmm/completionactivation.h>
 #include <gtksourceviewmm/completioncontext.h>

@@ -17,4 +17,6 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+// TODO: Include only gtksource.h when we want to depend on a newer gtksourceview:
+// https://git.gnome.org/browse/gtksourceview/commit/?id=94322d442698026dfee0f33eb83d06f2647701ab
 #include <gtksourceview/completion-providers/words/gtksourcecompletionwords.h>

@@ -20,29 +20,7 @@
 
 #include "glibmm_generate_extra_defs/generate_extra_defs.h"
 
-#include <gtksourceview/gtksourcebuffer.h>
-#include <gtksourceview/gtksourcecompletion.h>
-#include <gtksourceview/gtksourcecompletioncontext.h>
-#include <gtksourceview/gtksourcecompletioninfo.h>
-#include <gtksourceview/gtksourcecompletionitem.h>
-#include <gtksourceview/gtksourcecompletionproposal.h>
-#include <gtksourceview/gtksourcecompletionprovider.h>
-#include <gtksourceview/gtksourcegutter.h>
-#include <gtksourceview/gtksourcegutterrenderer.h>
-#include <gtksourceview/gtksourcegutterrendererpixbuf.h>
-#include <gtksourceview/gtksourcegutterrenderertext.h>
-#include <gtksourceview/gtksourcelanguage.h>
-#include <gtksourceview/gtksourcelanguagemanager.h>
-#include <gtksourceview/gtksourcemark.h>
-#include <gtksourceview/gtksourcemarkattributes.h>
-#include <gtksourceview/gtksourceprintcompositor.h>
-#include <gtksourceview/gtksourcestyle.h>
-#include <gtksourceview/gtksourcestylescheme.h>
-#include <gtksourceview/gtksourcestyleschememanager.h>
-#include <gtksourceview/gtksourceundomanager.h>
-#include <gtksourceview/gtksourceview.h>
-#include <gtksourceview/gtksourceview-typebuiltins.h>
-
+#include <gtksourceview/gtksource.h>
 #include <gtksourceview/completion-providers/words/gtksourcecompletionwords.h>
 
 int main (int argc, char *argv[])

@@ -22,7 +22,7 @@
 
 #include <vector>
 
-#include <gtksourceview/gtksourcestylescheme.h>
+#include <gtksourceview/gtksource.h>
 
 #include <glibmm/object.h>
 

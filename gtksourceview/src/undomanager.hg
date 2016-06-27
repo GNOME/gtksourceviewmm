@@ -20,7 +20,7 @@
 #include <glibmm/interface.h>
 #include <glibmm/ustring.h>
 #include <gdkmm/pixbuf.h>
-#include <gtksourceview/gtksourceundomanager.h>
+#include <gtksourceview/gtksource.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/interface_p.h)

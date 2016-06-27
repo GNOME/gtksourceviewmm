@@ -17,7 +17,7 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <gtksourceview/gtksourcecompletioninfo.h>
+#include <gtksourceview/gtksource.h>
 
 namespace Gsv
 {

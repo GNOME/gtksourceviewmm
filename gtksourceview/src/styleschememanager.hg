@@ -20,7 +20,7 @@
 
 #include <vector>
 
-#include <gtksourceview/gtksourcestyleschememanager.h>
+#include <gtksourceview/gtksource.h>
 
 #include <gtksourceviewmm/stylescheme.h>
 

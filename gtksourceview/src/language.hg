@@ -35,8 +35,7 @@ namespace Gsv
 
 class LanguageManager ;
 
-_CC_INCLUDE(gtksourceview/gtksourcelanguage.h)
-_CC_INCLUDE(gtksourceview/gtksourceview-typebuiltins.h)
+_CC_INCLUDE(gtksourceview/gtksource.h)
 
 /** Object representing a syntax highlighted language.
  *

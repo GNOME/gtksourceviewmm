@@ -1,4 +1,4 @@
-AC_INIT([gtksourceviewmm], [3.18.0],
+AC_INIT([gtksourceviewmm], [3.21.2],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gtksourceviewmm],
         [gtksourceviewmm], [http://projects.gnome.org/gtksourceviewmm/])
 AC_PREREQ([2.62])

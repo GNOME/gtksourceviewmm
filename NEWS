@@ -1,4 +1,12 @@
-3.18.0 (unstable):
+3.21.2 (unstable);
+
+* C++11: Markup: Deprecated operator const void*(), adding explicit operator bool().
+  (Murray Cumming)
+* Include only gtksource.h where possible.
+  This is demanded by newer versions of gtksourceview.
+  (Murray Cumming)
+
+3.18.0 (stable):
 
 * Regenerate with the latest glibmm.
 

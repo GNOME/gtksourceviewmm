@@ -57,6 +57,7 @@ public:
    * @newin{3,10}
    */
   _WRAP_METHOD(Glib::RefPtr<Buffer> get_buffer(), gtk_source_search_context_get_buffer, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Buffer> get_buffer() const, gtk_source_search_context_get_buffer, refreturn, constversion)
 
   /**
    * @return the search settings.
@@ -64,6 +65,7 @@ public:
    * @newin{3,10}
    */
   _WRAP_METHOD(Glib::RefPtr<SearchSettings> get_settings(), gtk_source_search_context_get_settings, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const SearchSettings> get_settings() const, gtk_source_search_context_get_settings, refreturn, constversion)
 
   /** Associate a GtkSourceSearchSettings with the search context. If settings is NULL, a new one will be created.
    * The search context holds a reference to settings.
@@ -79,7 +81,7 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(bool get_highlight(), gtk_source_search_context_get_highlight)
+  _WRAP_METHOD(bool get_highlight() const, gtk_source_search_context_get_highlight)
 
   /** Enables or disables the search occurrences highlighting.
    *
@@ -87,7 +89,7 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(void set_highlight(bool highlight), gtk_source_search_context_set_highlight)
+  _WRAP_METHOD(void set_highlight(bool highlight = true), gtk_source_search_context_set_highlight)
 
   /**
    * @return the GtkSourceStyle to apply on search matches.
@@ -95,6 +97,7 @@ public:
    * @newin{3,16}
    */
   _WRAP_METHOD(Glib::RefPtr<Style> get_match_style(), gtk_source_search_context_get_match_style, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const Style> get_match_style() const, gtk_source_search_context_get_match_style, refreturn, constversion)
 
   /** Set the style to apply on search matches. If match_style is NULL, default theme's scheme 'match-style' will be used. To enable or disable
    * the search highlighting, use gtk_source_search_context_set_highlight().
@@ -122,7 +125,7 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(int get_occurrences_count(), gtk_source_search_context_get_occurrences_count)
+  _WRAP_METHOD(int get_occurrences_count() const, gtk_source_search_context_get_occurrences_count)
 
   /** Gets the position of a search occurrence. If the buffer is not already fully scanned, the position may be unknown, and -1 is returned. If 0 is returned,
    * it means that this part of the buffer has already been scanned, and that match_start and match_end don't delimit an occurrence.
@@ -134,7 +137,7 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(int get_occurrence_position(const TextBuffer::iterator& match_start, const TextBuffer::iterator& match_end), gtk_source_search_context_get_occurrence_position)
+  _WRAP_METHOD(int get_occurrence_position(const TextBuffer::iterator& match_start, const TextBuffer::iterator& match_end) const, gtk_source_search_context_get_occurrence_position)
 
   /** Synchronous forward search. It is recommended to use the asynchronous functions instead, to not block the user interface. However, if you are sure that
    * the buffer is small, this function is more convenient to use.

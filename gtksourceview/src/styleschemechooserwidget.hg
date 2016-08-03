@@ -17,8 +17,6 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <gtksourceview/gtksourcestyleschemechooserwidget.h>
-
 #include <gtkmm/bin.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)

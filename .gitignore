@@ -81,6 +81,16 @@ codegen/extradefs/generate_extra_defs
 /gtksourceview/gtksourceviewmm/stylescheme.h
 /gtksourceview/gtksourceviewmm/styleschememanager.cc
 /gtksourceview/gtksourceviewmm/styleschememanager.h
+/gtksourceview/gtksourceviewmm/searchcontext.cc
+/gtksourceview/gtksourceviewmm/searchcontext.h
+/gtksourceview/gtksourceviewmm/searchsettings.cc
+/gtksourceview/gtksourceviewmm/searchsettings.h
+/gtksourceview/gtksourceviewmm/styleschemechooser.cc
+/gtksourceview/gtksourceviewmm/styleschemechooser.h
+/gtksourceview/gtksourceviewmm/styleschemechooserbutton.cc
+/gtksourceview/gtksourceviewmm/styleschemechooserbutton.h
+/gtksourceview/gtksourceviewmm/styleschemechooserwidget.cc
+/gtksourceview/gtksourceviewmm/styleschemechooserwidget.h
 /gtksourceview/gtksourceviewmm/undomanager.cc
 /gtksourceview/gtksourceviewmm/undomanager.h
 /gtksourceview/gtksourceviewmm/view.cc

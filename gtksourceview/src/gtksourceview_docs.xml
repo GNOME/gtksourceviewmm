@@ -1,4 +1,1105 @@
 <root>
+<enum name="GtkSourceBackgroundPatternType">
+<description>
+Since: 3.16
+
+</description>
+<parameters>
+<parameter name="GTK_SOURCE_BACKGROUND_PATTERN_TYPE_NONE">
+<parameter_description> no pattern
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_BACKGROUND_PATTERN_TYPE_GRID">
+<parameter_description> grid pattern
+</parameter_description>
+</parameter>
+</parameters>
+</enum>
+
+<enum name="GtkSourceBracketMatchType">
+<description>
+
+</description>
+<parameters>
+<parameter name="GTK_SOURCE_BRACKET_MATCH_NONE">
+<parameter_description> there is no bracket to match.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_BRACKET_MATCH_OUT_OF_RANGE">
+<parameter_description> matching a bracket
+failed because the maximum range was reached.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_BRACKET_MATCH_NOT_FOUND">
+<parameter_description> a matching bracket was not found.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_BRACKET_MATCH_FOUND">
+<parameter_description> a matching bracket was found.
+</parameter_description>
+</parameter>
+</parameters>
+</enum>
+
+<signal name="GtkSourceBuffer::bracket-matched">
+<description>
+@iter is set to a valid iterator pointing to the matching bracket
+if @state is %GTK_SOURCE_BRACKET_MATCH_FOUND. Otherwise @iter is
+meaningless.
+
+The signal is emitted only when the @state changes, typically when
+the cursor moves.
+
+A use-case for this signal is to show messages in a #GtkStatusbar.
+
+Since: 2.12
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> if found, the location of the matching bracket.
+</parameter_description>
+</parameter>
+<parameter name="state">
+<parameter_description> state of bracket matching.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceBuffer::highlight-updated">
+<description>
+The ::highlight-updated signal is emitted when the syntax
+highlighting is updated in a certain region of the @buffer. This
+signal is useful to be notified when a context class region is
+updated (e.g. the no-spell-check context class).
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> the buffer that received the signal
+</parameter_description>
+</parameter>
+<parameter name="start">
+<parameter_description> the start of the updated region
+</parameter_description>
+</parameter>
+<parameter name="end">
+<parameter_description> the end of the updated region
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceBuffer::redo">
+<description>
+The ::redo signal is emitted to redo the last undo operation.
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> the buffer that received the signal
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceBuffer::source-mark-updated">
+<description>
+The ::source-mark-updated signal is emitted each time
+a mark is added to, moved or removed from the @buffer.
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> the buffer that received the signal
+</parameter_description>
+</parameter>
+<parameter name="mark">
+<parameter_description> the #GtkSourceMark
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceBuffer::undo">
+<description>
+The ::undo signal is emitted to undo the last user action which
+modified the buffer.
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> the buffer that received the signal
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<enum name="GtkSourceChangeCaseType">
+<description>
+Since: 3.12
+
+</description>
+<parameters>
+<parameter name="GTK_SOURCE_CHANGE_CASE_LOWER">
+<parameter_description> change case to lowercase.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_CHANGE_CASE_UPPER">
+<parameter_description> change case to uppercase.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_CHANGE_CASE_TOGGLE">
+<parameter_description> toggle case of each character.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_CHANGE_CASE_TITLE">
+<parameter_description> capitalize each word.
+</parameter_description>
+</parameter>
+</parameters>
+</enum>
+
+<signal name="GtkSourceCompletion::activate-proposal">
+<description>
+The #GtkSourceCompletion::activate-proposal signal is a
+keybinding signal which gets emitted when the user initiates
+a proposal activation.
+
+Applications should not connect to it, but may emit it with
+g_signal_emit_by_name() if they need to control the proposal
+activation programmatically.
+
+</description>
+<parameters>
+<parameter name="completion">
+<parameter_description> The #GtkSourceCompletion who emits the signal
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceCompletion::hide">
+<description>
+Emitted when the completion window is hidden. The default handler
+will actually hide the window.
+
+</description>
+<parameters>
+<parameter name="completion">
+<parameter_description> The #GtkSourceCompletion who emits the signal
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceCompletion::move-cursor">
+<description>
+The #GtkSourceCompletion::move-cursor signal is a keybinding
+signal which gets emitted when the user initiates a cursor
+movement.
+
+The &lt;keycap&gt;Up&lt;/keycap&gt;, &lt;keycap&gt;Down&lt;/keycap&gt;,
+&lt;keycap&gt;PageUp&lt;/keycap&gt;, &lt;keycap&gt;PageDown&lt;/keycap&gt;,
+&lt;keycap&gt;Home&lt;/keycap&gt; and &lt;keycap&gt;End&lt;/keycap&gt; keys are bound to the
+normal behavior expected by those keys.
+
+When @step is equal to %GTK_SCROLL_PAGES, the page size is defined by
+the #GtkSourceCompletion:proposal-page-size property. It is used for
+the &lt;keycap&gt;PageDown&lt;/keycap&gt; and &lt;keycap&gt;PageUp&lt;/keycap&gt; keys.
+
+Applications should not connect to it, but may emit it with
+g_signal_emit_by_name() if they need to control the cursor
+programmatically.
+
+</description>
+<parameters>
+<parameter name="completion">
+<parameter_description> The #GtkSourceCompletion who emits the signal
+</parameter_description>
+</parameter>
+<parameter name="step">
+<parameter_description> The #GtkScrollStep by which to move the cursor
+</parameter_description>
+</parameter>
+<parameter name="num">
+<parameter_description> The amount of steps to move the cursor
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceCompletion::move-page">
+<description>
+The #GtkSourceCompletion::move-page signal is a keybinding
+signal which gets emitted when the user initiates a page
+movement (i.e. switches between provider pages).
+
+&lt;keycombo&gt;&lt;keycap&gt;Control&lt;/keycap&gt;&lt;keycap&gt;Left&lt;/keycap&gt;&lt;/keycombo&gt;
+is for going to the previous provider.
+&lt;keycombo&gt;&lt;keycap&gt;Control&lt;/keycap&gt;&lt;keycap&gt;Right&lt;/keycap&gt;&lt;/keycombo&gt;
+is for going to the next provider.
+&lt;keycombo&gt;&lt;keycap&gt;Control&lt;/keycap&gt;&lt;keycap&gt;Home&lt;/keycap&gt;&lt;/keycombo&gt;
+is for displaying all the providers.
+&lt;keycombo&gt;&lt;keycap&gt;Control&lt;/keycap&gt;&lt;keycap&gt;End&lt;/keycap&gt;&lt;/keycombo&gt;
+is for going to the last provider.
+
+When @step is equal to #GTK_SCROLL_PAGES, the page size is defined by
+the #GtkSourceCompletion:provider-page-size property.
+
+Applications should not connect to it, but may emit it with
+g_signal_emit_by_name() if they need to control the page selection
+programmatically.
+
+</description>
+<parameters>
+<parameter name="completion">
+<parameter_description> The #GtkSourceCompletion who emits the signal
+</parameter_description>
+</parameter>
+<parameter name="step">
+<parameter_description> The #GtkScrollStep by which to move the page
+</parameter_description>
+</parameter>
+<parameter name="num">
+<parameter_description> The amount of steps to move the page
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceCompletion::populate-context">
+<description>
+Emitted just before starting to populate the completion with providers.
+You can use this signal to add additional attributes in the context.
+
+</description>
+<parameters>
+<parameter name="completion">
+<parameter_description> The #GtkSourceCompletion who emits the signal
+</parameter_description>
+</parameter>
+<parameter name="context">
+<parameter_description> The #GtkSourceCompletionContext for the current completion
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceCompletion::show">
+<description>
+Emitted when the completion window is shown. The default handler
+will actually show the window.
+
+</description>
+<parameters>
+<parameter name="completion">
+<parameter_description> The #GtkSourceCompletion who emits the signal
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<enum name="GtkSourceCompletionActivation">
+<description>
+
+</description>
+<parameters>
+<parameter name="GTK_SOURCE_COMPLETION_ACTIVATION_NONE">
+<parameter_description> None.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_COMPLETION_ACTIVATION_INTERACTIVE">
+<parameter_description> Interactive activation. By
+default, it occurs on each insertion in the #GtkTextBuffer. This can be
+blocked temporarily with gtk_source_completion_block_interactive().
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_COMPLETION_ACTIVATION_USER_REQUESTED">
+<parameter_description> User requested activation.
+By default, it occurs when the user presses
+&lt;keycombo&gt;&lt;keycap&gt;Control&lt;/keycap&gt;&lt;keycap&gt;space&lt;/keycap&gt;&lt;/keycombo&gt;.
+</parameter_description>
+</parameter>
+</parameters>
+</enum>
+
+<signal name="GtkSourceCompletionContext::cancelled">
+<description>
+Emitted when the current population of proposals has been cancelled.
+Providers adding proposals asynchronously should connect to this signal
+to know when to cancel running proposal queries.
+
+</description>
+<parameters>
+</parameters>
+<return></return>
+</signal>
+
+<enum name="GtkSourceCompletionError">
+<description>
+An error code used with %GTK_SOURCE_COMPLETION_ERROR in a #GError returned
+from a completion-related function.
+
+</description>
+<parameters>
+<parameter name="GTK_SOURCE_COMPLETION_ERROR_ALREADY_BOUND">
+<parameter_description> The #GtkSourceCompletionProvider
+is already bound to the #GtkSourceCompletion object.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_COMPLETION_ERROR_NOT_BOUND">
+<parameter_description> The #GtkSourceCompletionProvider is
+not bound to the #GtkSourceCompletion object.
+</parameter_description>
+</parameter>
+</parameters>
+</enum>
+
+<signal name="GtkSourceCompletionInfo::before-show">
+<description>
+This signal is emitted before any &quot;show&quot; management. You can connect
+to this signal if you want to change some properties or position
+before the real &quot;show&quot;.
+
+Deprecated: 3.10: This signal should not be used.
+
+</description>
+<parameters>
+<parameter name="info">
+<parameter_description> The #GtkSourceCompletionInfo who emits the signal
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceCompletionProposal::changed">
+<description>
+Emitted when the proposal has changed. The completion popup
+will react to this by updating the shown information.
+
+
+</description>
+<parameters>
+<parameter name="proposal">
+<parameter_description> The #GtkSourceCompletionProposal
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<enum name="GtkSourceCompressionType">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="GTK_SOURCE_COMPRESSION_TYPE_NONE">
+<parameter_description> plain text.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_COMPRESSION_TYPE_GZIP">
+<parameter_description> gzip compression.
+</parameter_description>
+</parameter>
+</parameters>
+</enum>
+
+<enum name="GtkSourceDrawSpacesFlags">
+<description>
+GtkSourceDrawSpacesFlags determine what kind of spaces whould be drawn. If none
+of GTK_SOURCE_DRAW_SPACES_LEADING, GTK_SOURCE_DRAW_SPACES_TEXT or
+GTK_SOURCE_DRAW_SPACES_TRAILING is specified, whitespaces at any position in
+the line will be drawn (i.e. it has the same effect as specifying all of them).
+
+</description>
+<parameters>
+<parameter name="GTK_SOURCE_DRAW_SPACES_SPACE">
+<parameter_description> whether the space character should be drawn.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_DRAW_SPACES_TAB">
+<parameter_description> whether the tab character should be drawn.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_DRAW_SPACES_NEWLINE">
+<parameter_description> whether the line breaks should be drawn.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_DRAW_SPACES_NBSP">
+<parameter_description> whether the non-breaking whitespaces should be drawn.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_DRAW_SPACES_LEADING">
+<parameter_description> whether leading whitespaces should be drawn.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_DRAW_SPACES_TEXT">
+<parameter_description> whether whitespaces inside text should be drawn.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_DRAW_SPACES_TRAILING">
+<parameter_description> whether trailing whitespaces should be drawn.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_DRAW_SPACES_ALL">
+<parameter_description> wheter all kind of spaces should be drawn.
+</parameter_description>
+</parameter>
+</parameters>
+</enum>
+
+<enum name="GtkSourceFileLoaderError">
+<description>
+An error code used with the %GTK_SOURCE_FILE_LOADER_ERROR domain.
+
+</description>
+<parameters>
+<parameter name="GTK_SOURCE_FILE_LOADER_ERROR_TOO_BIG">
+<parameter_description> The file is too big.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_FILE_LOADER_ERROR_ENCODING_AUTO_DETECTION_FAILED">
+<parameter_description> It is not
+possible to detect the encoding automatically.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_FILE_LOADER_ERROR_CONVERSION_FALLBACK">
+<parameter_description> There was an encoding
+conversion error and it was needed to use a fallback character.
+</parameter_description>
+</parameter>
+</parameters>
+</enum>
+
+<enum name="GtkSourceFileSaverError">
+<description>
+An error code used with the %GTK_SOURCE_FILE_SAVER_ERROR domain.
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="GTK_SOURCE_FILE_SAVER_ERROR_INVALID_CHARS">
+<parameter_description> The buffer contains invalid
+characters.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_FILE_SAVER_ERROR_EXTERNALLY_MODIFIED">
+<parameter_description> The file is externally
+modified.
+</parameter_description>
+</parameter>
+</parameters>
+</enum>
+
+<enum name="GtkSourceFileSaverFlags">
+<description>
+Flags to define the behavior of a #GtkSourceFileSaver.
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="GTK_SOURCE_FILE_SAVER_FLAGS_NONE">
+<parameter_description> No flags.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_FILE_SAVER_FLAGS_IGNORE_INVALID_CHARS">
+<parameter_description> Ignore invalid characters.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_FILE_SAVER_FLAGS_IGNORE_MODIFICATION_TIME">
+<parameter_description> Save file despite external modifications.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_FILE_SAVER_FLAGS_CREATE_BACKUP">
+<parameter_description> Create a backup before saving the file.
+</parameter_description>
+</parameter>
+</parameters>
+</enum>
+
+<signal name="GtkSourceGutterRenderer::activate">
+<description>
+The ::activate signal is emitted when the renderer is
+activated.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> the #GtkSourceGutterRenderer who emits the signal
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> a #GtkTextIter
+</parameter_description>
+</parameter>
+<parameter name="area">
+<parameter_description> a #GdkRectangle
+</parameter_description>
+</parameter>
+<parameter name="event">
+<parameter_description> the event that caused the activation
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceGutterRenderer::query-activatable">
+<description>
+The ::query-activatable signal is emitted when the renderer
+can possibly be activated.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> the #GtkSourceGutterRenderer who emits the signal
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> a #GtkTextIter
+</parameter_description>
+</parameter>
+<parameter name="area">
+<parameter_description> a #GdkRectangle
+</parameter_description>
+</parameter>
+<parameter name="event">
+<parameter_description> the #GdkEvent that is causing the activatable query
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceGutterRenderer::query-data">
+<description>
+The ::query-data signal is emitted when the renderer needs
+to be filled with data just before a cell is drawn. This can
+be used by general renderer implementations to allow render
+data to be filled in externally.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> the #GtkSourceGutterRenderer who emits the signal
+</parameter_description>
+</parameter>
+<parameter name="start">
+<parameter_description> a #GtkTextIter
+</parameter_description>
+</parameter>
+<parameter name="end">
+<parameter_description> a #GtkTextIter
+</parameter_description>
+</parameter>
+<parameter name="state">
+<parameter_description> the renderer state
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceGutterRenderer::query-tooltip">
+<description>
+The ::query-tooltip signal is emitted when the renderer can
+show a tooltip.
+
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> the #GtkSourceGutterRenderer who emits the signal
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> a #GtkTextIter
+</parameter_description>
+</parameter>
+<parameter name="area">
+<parameter_description> a #GdkRectangle
+</parameter_description>
+</parameter>
+<parameter name="x">
+<parameter_description> the x position (in window coordinates)
+</parameter_description>
+</parameter>
+<parameter name="y">
+<parameter_description> the y position (in window coordinates)
+</parameter_description>
+</parameter>
+<parameter name="tooltip">
+<parameter_description> a #GtkTooltip
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceGutterRenderer::queue-draw">
+<description>
+The ::queue-draw signal is emitted when the renderer needs
+to be redrawn. Use gtk_source_gutter_renderer_queue_draw()
+to emit this signal from an implementation of the
+#GtkSourceGutterRenderer interface.
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> the #GtkSourceGutterRenderer who emits the signal
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<enum name="GtkSourceGutterRendererAlignmentMode">
+<description>
+The alignment mode of the renderer, when a cell spans multiple lines (due to
+text wrapping).
+
+</description>
+<parameters>
+<parameter name="GTK_SOURCE_GUTTER_RENDERER_ALIGNMENT_MODE_CELL">
+<parameter_description> The full cell.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_GUTTER_RENDERER_ALIGNMENT_MODE_FIRST">
+<parameter_description> The first line.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_GUTTER_RENDERER_ALIGNMENT_MODE_LAST">
+<parameter_description> The last line.
+</parameter_description>
+</parameter>
+</parameters>
+</enum>
+
+<enum name="GtkSourceGutterRendererState">
+<description>
+
+</description>
+<parameters>
+<parameter name="GTK_SOURCE_GUTTER_RENDERER_STATE_NORMAL">
+<parameter_description> normal state
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_GUTTER_RENDERER_STATE_CURSOR">
+<parameter_description> area in the renderer represents the
+line on which the insert cursor is currently positioned
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_GUTTER_RENDERER_STATE_PRELIT">
+<parameter_description> the mouse pointer is currently
+over the activatable area of the renderer
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_GUTTER_RENDERER_STATE_SELECTED">
+<parameter_description> area in the renderer represents
+a line in the buffer which contains part of the selection
+</parameter_description>
+</parameter>
+</parameters>
+</enum>
+
+<signal name="GtkSourceMarkAttributes::query-tooltip-markup">
+<description>
+The code should connect to this signal to provide a tooltip for given
+@mark. The tooltip can contain a markup.
+
+
+</description>
+<parameters>
+<parameter name="attributes">
+<parameter_description> The #GtkSourceMarkAttributes which emits the signal.
+</parameter_description>
+</parameter>
+<parameter name="mark">
+<parameter_description> The #GtkSourceMark.
+</parameter_description>
+</parameter>
+</parameters>
+<return> A tooltip. The string should be freed with
+g_free() when done with it.
+</return>
+</signal>
+
+<signal name="GtkSourceMarkAttributes::query-tooltip-text">
+<description>
+The code should connect to this signal to provide a tooltip for given
+@mark. The tooltip should be just a plain text.
+
+
+</description>
+<parameters>
+<parameter name="attributes">
+<parameter_description> The #GtkSourceMarkAttributes which emits the signal.
+</parameter_description>
+</parameter>
+<parameter name="mark">
+<parameter_description> The #GtkSourceMark.
+</parameter_description>
+</parameter>
+</parameters>
+<return> A tooltip. The string should be freed with
+g_free() when done with it.
+</return>
+</signal>
+
+<enum name="GtkSourceNewlineType">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="GTK_SOURCE_NEWLINE_TYPE_LF">
+<parameter_description> line feed, used on UNIX.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_NEWLINE_TYPE_CR">
+<parameter_description> carriage return, used on Mac.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_NEWLINE_TYPE_CR_LF">
+<parameter_description> carriage return followed by a line feed, used
+on Windows.
+</parameter_description>
+</parameter>
+</parameters>
+</enum>
+
+<enum name="GtkSourceSmartHomeEndType">
+<description>
+
+</description>
+<parameters>
+<parameter name="GTK_SOURCE_SMART_HOME_END_DISABLED">
+<parameter_description> smart-home-end disabled.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_SMART_HOME_END_BEFORE">
+<parameter_description> move to the first/last
+non-whitespace character on the first press of the HOME/END keys and
+to the beginning/end of the line on the second press.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_SMART_HOME_END_AFTER">
+<parameter_description> move to the beginning/end of the
+line on the first press of the HOME/END keys and to the first/last
+non-whitespace character on the second press.
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_SMART_HOME_END_ALWAYS">
+<parameter_description> always move to the first/last
+non-whitespace character when the HOME/END keys are pressed.
+</parameter_description>
+</parameter>
+</parameters>
+</enum>
+
+<enum name="GtkSourceSortFlags">
+<description>
+Since: 3.18
+
+</description>
+<parameters>
+<parameter name="GTK_SOURCE_SORT_FLAGS_NONE">
+<parameter_description> no flags specified
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_SORT_FLAGS_CASE_SENSITIVE">
+<parameter_description> case sensitive sort
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_SORT_FLAGS_REVERSE_ORDER">
+<parameter_description> sort in reverse order
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_SORT_FLAGS_REMOVE_DUPLICATES">
+<parameter_description> remove duplicates
+</parameter_description>
+</parameter>
+</parameters>
+</enum>
+
+<signal name="GtkSourceUndoManager::can-redo-changed">
+<description>
+Emitted when the ability to redo has changed.
+
+Since: 2.10
+
+
+</description>
+<parameters>
+<parameter name="manager">
+<parameter_description> The #GtkSourceUndoManager
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceUndoManager::can-undo-changed">
+<description>
+Emitted when the ability to undo has changed.
+
+Since: 2.10
+
+
+</description>
+<parameters>
+<parameter name="manager">
+<parameter_description> The #GtkSourceUndoManager
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceView::change-case">
+<description>
+Keybinding signal to change case of the text at the current cursor position.
+
+Since: 3.16
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> the #GtkSourceView
+</parameter_description>
+</parameter>
+<parameter name="case_type">
+<parameter_description> the case to use
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceView::change-number">
+<description>
+Keybinding signal to edit a number at the current cursor position.
+
+Since: 3.16
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> the #GtkSourceView
+</parameter_description>
+</parameter>
+<parameter name="count">
+<parameter_description> the number to add to the number at the current position
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceView::join-lines">
+<description>
+Keybinding signal to join the lines currently selected.
+
+Since: 3.16
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> the #GtkSourceView
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceView::line-mark-activated">
+<description>
+Emitted when a line mark has been activated (for instance when there
+was a button press in the line marks gutter). You can use @iter to
+determine on which line the activation took place.
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> the #GtkSourceView
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> a #GtkTextIter
+</parameter_description>
+</parameter>
+<parameter name="event">
+<parameter_description> the #GdkEvent that activated the event
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceView::move-lines">
+<description>
+The ::move-lines signal is a keybinding which gets emitted
+when the user initiates moving a line. The default binding key
+is Alt+Up/Down arrow. And moves the currently selected lines,
+or the current line by @count. For the moment, only
+@count of -1 or 1 is valid.
+
+Since: 2.10
+
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> the #GtkSourceView which received the signal
+</parameter_description>
+</parameter>
+<parameter name="copy">
+<parameter_description> %TRUE if the line should be copied,
+%FALSE if it should be moved
+</parameter_description>
+</parameter>
+<parameter name="count">
+<parameter_description> the number of lines to move over.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceView::move-to-matching-bracket">
+<description>
+Keybinding signal to move the cursor to the matching bracket.
+
+Since: 3.16
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> the #GtkSourceView
+</parameter_description>
+</parameter>
+<parameter name="extend_selection">
+<parameter_description> %TRUE if the move should extend the selection
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceView::move-words">
+<description>
+The ::move-words signal is a keybinding which gets emitted
+when the user initiates moving a word. The default binding key
+is Alt+Left/Right Arrow and moves the current selection, or the current
+word by one word.
+
+Since: 3.0
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> the #GtkSourceView which received the signal
+</parameter_description>
+</parameter>
+<parameter name="count">
+<parameter_description> the number of words to move over
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceView::show-completion">
+<description>
+The ::show-completion signal is a key binding signal which gets
+emitted when the user requests a completion, by pressing
+&lt;keycombo&gt;&lt;keycap&gt;Control&lt;/keycap&gt;&lt;keycap&gt;space&lt;/keycap&gt;&lt;/keycombo&gt;.
+
+This will create a #GtkSourceCompletionContext with the activation
+type as %GTK_SOURCE_COMPLETION_ACTIVATION_USER_REQUESTED.
+
+Applications should not connect to it, but may emit it with
+g_signal_emit_by_name() if they need to activate the completion by
+another means, for example with another key binding or a menu entry.
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> The #GtkSourceView who emits the signal
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<signal name="GtkSourceView::smart-home-end">
+<description>
+Emitted when a the cursor was moved according to the smart home
+end setting. The signal is emitted after the cursor is moved, but
+during the GtkTextView::move-cursor action. This can be used to find
+out whether the cursor was moved by a normal home/end or by a smart
+home/end.
+
+Since: 3.0
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> the #GtkSourceView
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> a #GtkTextIter
+</parameter_description>
+</parameter>
+<parameter name="count">
+<parameter_description> the count
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</signal>
+
+<enum name="GtkSourceViewGutterPosition">
+<description>
+
+</description>
+<parameters>
+<parameter name="GTK_SOURCE_VIEW_GUTTER_POSITION_LINES">
+<parameter_description> the gutter position of the lines
+renderer
+</parameter_description>
+</parameter>
+<parameter name="GTK_SOURCE_VIEW_GUTTER_POSITION_MARKS">
+<parameter_description> the gutter position of the marks
+renderer
+</parameter_description>
+</parameter>
+</parameters>
+</enum>
+
 <function name="add_invalid">
 <description>
 Inserts segment into the list of invalid segments.
@@ -476,7 +1577,7 @@ Destroys syntax tags cache.
 <return></return>
 </function>
 
-<function name="disable_highlighting">
+<function name="disable_syntax_analysis">
 <description>
 Dsiables highlighting in case of errors (currently if highlighting
 a single line took too long, so that highlighting doesn't freeze
@@ -579,7 +1680,7 @@ There is no return value, it always succeeds (or crashes).
 </description>
 <parameters>
 <parameter name="segment">
-<parameter_description> (grand)parent segment the new one should be inserted into.
+<parameter_description> the (grand)parent segment the new one should be inserted into.
 </parameter_description>
 </parameter>
 <parameter name="offset">
@@ -614,7 +1715,7 @@ Auxiliary function used in find_insertion_place().
 </description>
 <parameters>
 <parameter name="segment">
-<parameter_description> (grand)parent segment the new one should be inserted into.
+<parameter_description> the (grand)parent segment the new one should be inserted into.
 </parameter_description>
 </parameter>
 <parameter name="offset">
@@ -649,7 +1750,7 @@ Auxiliary function used in find_insertion_place().
 </description>
 <parameters>
 <parameter name="segment">
-<parameter_description> (grand)parent segment the new one should be inserted into.
+<parameter_description> the (grand)parent segment the new one should be inserted into.
 </parameter_description>
 </parameter>
 <parameter name="offset">
@@ -707,22 +1808,6 @@ parent-&gt;children list.
 </parameter>
 <parameter name="next">
 <parameter_description> location to return next sibling.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="find_single_byte_escape">
-<description>
-Checks whether pattern contains \C escape sequence,
-which means &quot;single byte&quot; in pcre and naturally leads
-to crash if used for highlighting.
-
-</description>
-<parameters>
-<parameter name="string">
-<parameter_description> the pattern.
 </parameter_description>
 </parameter>
 </parameters>
@@ -1003,6 +2088,34 @@ Determines whether a source buffer can undo the last action.
 </return>
 </function>
 
+<function name="gtk_source_buffer_change_case">
+<description>
+Changes the case of the text between the specified iterators.
+
+Since: 3.12
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="case_type">
+<parameter_description> how to change the case.
+</parameter_description>
+</parameter>
+<parameter name="start">
+<parameter_description> a #GtkTextIter.
+</parameter_description>
+</parameter>
+<parameter name="end">
+<parameter_description> a #GtkTextIter.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
 <function name="gtk_source_buffer_create_source_mark">
 <description>
 Creates a source mark in the @buffer of category @category.  A source mark is
@@ -1042,6 +2155,49 @@ Since: 2.2
 </parameters>
 <return> a new #GtkSourceMark, owned by the buffer.
 
+</return>
+</function>
+
+<function name="gtk_source_buffer_create_source_tag">
+<description>
+In short, this is the same function as gtk_text_buffer_create_tag(), but
+instead of creating a #GtkTextTag, this function creates a #GtkSourceTag.
+
+This function creates a #GtkSourceTag and adds it to the tag table for
+@buffer.  Equivalent to calling gtk_text_tag_new() and then adding the tag to
+the buffer’s tag table. The returned tag is owned by the buffer’s tag table,
+so the ref count will be equal to one.
+
+If @tag_name is %NULL, the tag is anonymous.
+
+If @tag_name is non-%NULL, a tag called @tag_name must not already
+exist in the tag table for this buffer.
+
+The @first_property_name argument and subsequent arguments are a list
+of properties to set on the tag, as with g_object_set().
+
+Since: 3.20
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer
+</parameter_description>
+</parameter>
+<parameter name="tag_name">
+<parameter_description> name of the new tag, or %NULL
+</parameter_description>
+</parameter>
+<parameter name="first_property_name">
+<parameter_description> name of first property to set, or %NULL
+</parameter_description>
+</parameter>
+<parameter name="Varargs">
+<parameter_description> %NULL-terminated list of property names and values
+</parameter_description>
+</parameter>
+</parameters>
+<return> a new #GtkSourceTag.
 </return>
 </function>
 
@@ -1124,6 +2280,8 @@ Since: 2.2
 <description>
 Get all defined context classes at @iter.
 
+See the #GtkSourceBuffer description for the list of default context classes.
+
 Since: 2.10
 
 </description>
@@ -1179,6 +2337,21 @@ buffer.
 </return>
 </function>
 
+<function name="gtk_source_buffer_get_implicit_trailing_newline">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether the @buffer has an implicit trailing newline.
+</return>
+</function>
+
 <function name="gtk_source_buffer_get_language">
 <description>
 Returns the #GtkSourceLanguage associated with the buffer,
@@ -1193,14 +2366,14 @@ unreferenced by the user.
 </parameter_description>
 </parameter>
 </parameters>
-<return> the #GtkSourceLanguage associated with the buffer, or %NULL.
+<return> the #GtkSourceLanguage associated
+with the buffer, or %NULL.
 </return>
 </function>
 
 <function name="gtk_source_buffer_get_max_undo_levels">
 <description>
-Determines the number of undo levels the buffer will track for
-buffer edits.
+Determines the number of undo levels the buffer will track for buffer edits.
 
 
 </description>
@@ -1210,8 +2383,7 @@ buffer edits.
 </parameter_description>
 </parameter>
 </parameters>
-<return> the maximum number of possible undo levels or
--1 if no limit is set.
+<return> the maximum number of possible undo levels or -1 if no limit is set.
 </return>
 </function>
 
@@ -1246,7 +2418,7 @@ a newly allocated #GSList.
 <function name="gtk_source_buffer_get_source_marks_at_line">
 <description>
 Returns the list of marks of the given category at @line.
-If @category is NULL, all marks at @line are returned.
+If @category is %NULL, all marks at @line are returned.
 
 Since: 2.2
 
@@ -1285,8 +2457,8 @@ The returned object should not be unreferenced by the user.
 </parameter_description>
 </parameter>
 </parameters>
-<return> the #GtkSourceStyleScheme associated
-with the buffer, or %NULL.
+<return> the #GtkSourceStyleScheme
+associated with the buffer, or %NULL.
 </return>
 </function>
 
@@ -1304,7 +2476,8 @@ unreferenced by the user.
 </parameter_description>
 </parameter>
 </parameters>
-<return> the #GtkSourceUndoManager associated with the buffer, or %NULL.
+<return> the #GtkSourceUndoManager associated
+with the buffer, or %NULL.
 </return>
 </function>
 
@@ -1315,6 +2488,8 @@ matching context class toggles are found, returns %FALSE, otherwise %TRUE.
 Does not return toggles located at @iter, only toggles after @iter. Sets
 @iter to the location of the toggle, or to the end of the buffer if no
 toggle is found.
+
+See the #GtkSourceBuffer description for the list of default context classes.
 
 Since: 2.10
 
@@ -1346,6 +2521,8 @@ Does not return toggles located at @iter, only toggles after @iter. Sets
 @iter to the location of the toggle, or to the end of the buffer if no
 toggle is found.
 
+See the #GtkSourceBuffer description for the list of default context classes.
+
 Since: 2.10
 
 </description>
@@ -1370,7 +2547,9 @@ Since: 2.10
 
 <function name="gtk_source_buffer_iter_has_context_class">
 <description>
-Check if the class @context_klass is set on @iter.
+Check if the class @context_class is set on @iter.
+
+See the #GtkSourceBuffer description for the list of default context classes.
 
 Since: 2.10
 
@@ -1386,6 +2565,31 @@ Since: 2.10
 </parameter>
 <parameter name="context_class">
 <parameter_description> class to search for.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether @iter has the context class.
+</return>
+</function>
+
+<function name="gtk_source_buffer_join_lines">
+<description>
+Joins the lines of text between the specified iterators.
+
+Since: 3.16
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="start">
+<parameter_description> a #GtkTextIter.
+</parameter_description>
+</parameter>
+<parameter name="end">
+<parameter_description> a #GtkTextIter.
 </parameter_description>
 </parameter>
 </parameters>
@@ -1432,6 +2636,8 @@ according to the highlighting patterns in @language.
 Redoes the last undo operation.  Use gtk_source_buffer_can_redo()
 to check whether a call to this function will have any effect.
 
+This function emits the #GtkSourceBuffer::redo signal.
+
 </description>
 <parameters>
 <parameter name="buffer">
@@ -1476,9 +2682,7 @@ Since: 2.2
 Controls the bracket match highlighting function in the buffer.  If
 activated, when you position your cursor over a bracket character
 (a parenthesis, a square bracket, etc.) the matching opening or
-closing bracket character will be highlighted.  You can specify the
-style with the gtk_source_buffer_set_bracket_match_style()
-function.
+closing bracket character will be highlighted.
 
 </description>
 <parameters>
@@ -1496,12 +2700,15 @@ function.
 
 <function name="gtk_source_buffer_set_highlight_syntax">
 <description>
-Controls whether syntax is highlighted in the buffer. If @highlight
-is %TRUE, the text will be highlighted according to the syntax
-patterns specified in the language set with
-gtk_source_buffer_set_language(). If @highlight is %FALSE, syntax highlighting
-is disabled and all the GtkTextTag objects that have been added by the
-syntax highlighting engine are removed from the buffer.
+Controls whether syntax is highlighted in the buffer.
+
+If @highlight is %TRUE, the text will be highlighted according to the syntax
+patterns specified in the #GtkSourceLanguage set with
+gtk_source_buffer_set_language().
+
+If @highlight is %FALSE, syntax highlighting is disabled and all the
+#GtkTextTag objects that have been added by the syntax highlighting engine
+are removed from the buffer.
 
 </description>
 <parameters>
@@ -1517,13 +2724,47 @@ syntax highlighting engine are removed from the buffer.
 <return></return>
 </function>
 
+<function name="gtk_source_buffer_set_implicit_trailing_newline">
+<description>
+Sets whether the @buffer has an implicit trailing newline.
+
+If an explicit trailing newline is present in a #GtkTextBuffer, #GtkTextView
+shows it as an empty line. This is generally not what the user expects.
+
+If @implicit_trailing_newline is %TRUE (the default value):
+- when a #GtkSourceFileLoader loads the content of a file into the @buffer,
+the trailing newline (if present in the file) is not inserted into the
+@buffer.
+- when a #GtkSourceFileSaver saves the content of the @buffer into a file, a
+trailing newline is added to the file.
+
+On the other hand, if @implicit_trailing_newline is %FALSE, the file's
+content is not modified when loaded into the @buffer, and the @buffer's
+content is not modified when saved into a file.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="implicit_trailing_newline">
+<parameter_description> the new value.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
 <function name="gtk_source_buffer_set_language">
 <description>
-Associate a #GtkSourceLanguage with the buffer. If @language is
-not-%NULL and syntax highlighting is enabled (see gtk_source_buffer_set_highlight_syntax()),
-the syntax patterns defined in @language will be used to highlight the text
-contained in the buffer. If @language is %NULL, the text contained in the
-buffer is not highlighted.
+Associates a #GtkSourceLanguage with the buffer.
+
+Note that a #GtkSourceLanguage affects not only the syntax highlighting, but
+also the [context classes][context-classes]. If you want to disable just the
+syntax highlighting, see gtk_source_buffer_set_highlight_syntax().
 
 The buffer holds a reference to @language.
 
@@ -1547,14 +2788,9 @@ Sets the number of undo levels for user actions the buffer will
 track.  If the number of user actions exceeds the limit set by this
 function, older actions will be discarded.
 
-If @max_undo_levels is -1, no limit is set.
+If @max_undo_levels is -1, the undo/redo is unlimited.
 
-A new action is started whenever the function
-gtk_text_buffer_begin_user_action() is called.  In general, this
-happens whenever the user presses any key which modifies the
-buffer, but the undo manager will try to merge similar consecutive
-actions, such as multiple character insertions into one action.
-But, inserting a newline does start a new action.
+If @max_undo_levels is 0, the undo/redo is disabled.
 
 </description>
 <parameters>
@@ -1572,8 +2808,19 @@ But, inserting a newline does start a new action.
 
 <function name="gtk_source_buffer_set_style_scheme">
 <description>
-Sets style scheme used by the buffer. If @scheme is %NULL no
-style scheme is used.
+Sets a #GtkSourceStyleScheme to be used by the buffer and the view.
+
+Note that a #GtkSourceStyleScheme affects not only the syntax highlighting,
+but also other #GtkSourceView features such as highlighting the current line,
+matching brackets, the line numbers, etc.
+
+Instead of setting a %NULL @scheme, it is better to disable syntax
+highlighting with gtk_source_buffer_set_highlight_syntax(), and setting the
+#GtkSourceStyleScheme with the &quot;classic&quot; or &quot;tango&quot; ID, because those two
+style schemes follow more closely the GTK+ theme (for example for the
+background color).
+
+The buffer holds a reference to @scheme.
 
 </description>
 <parameters>
@@ -1608,16 +2855,45 @@ will be set.
 <return></return>
 </function>
 
+<function name="gtk_source_buffer_sort_lines">
+<description>
+Sort the lines of text between the specified iterators.
+
+Since: 3.18
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="start">
+<parameter_description> a #GtkTextIter.
+</parameter_description>
+</parameter>
+<parameter name="end">
+<parameter_description> a #GtkTextIter.
+</parameter_description>
+</parameter>
+<parameter name="flags">
+<parameter_description> #GtkSourceSortFlags specifying how the sort should behave
+</parameter_description>
+</parameter>
+<parameter name="column">
+<parameter_description> sort considering the text starting at the given column
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
 <function name="gtk_source_buffer_undo">
 <description>
 Undoes the last user action which modified the buffer.  Use
 gtk_source_buffer_can_undo() to check whether a call to this
 function will have any effect.
 
-Actions are defined as groups of operations between a call to
-gtk_text_buffer_begin_user_action() and
-gtk_text_buffer_end_user_action(), or sequences of similar edits
-(inserts or deletes) on the same line.
+This function emits the #GtkSourceBuffer::undo signal.
 
 </description>
 <parameters>
@@ -1627,6 +2903,36 @@ gtk_text_buffer_end_user_action(), or sequences of similar edits
 </parameter>
 </parameters>
 <return></return>
+</function>
+
+<function name="gtk_source_check_version">
+<description>
+Like GTK_SOURCE_CHECK_VERSION, but the check for gtk_source_check_version is
+at runtime instead of compile time. This is useful for compiling
+against older versions of GtkSourceView, but using features from newer
+versions.
+
+Since: 3.20
+
+</description>
+<parameters>
+<parameter name="major">
+<parameter_description> the major version to check
+</parameter_description>
+</parameter>
+<parameter name="minor">
+<parameter_description> the minor version to check
+</parameter_description>
+</parameter>
+<parameter name="micro">
+<parameter_description> the micro version to check
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if the version of the GtkSourceView currently loaded
+is the same as or newer than the passed-in version.
+
+</return>
 </function>
 
 <function name="gtk_source_completion_add_provider">
@@ -1660,8 +2966,12 @@ is provided, it will be set with the error and %FALSE is returned.
 <description>
 Block interactive completion. This can be used to disable interactive
 completion when inserting or deleting text from the buffer associated with
-the completion. Use #gtk_source_completion_unblock_interactive to enable
+the completion. Use gtk_source_completion_unblock_interactive() to enable
 interactive completion again.
+
+This function may be called multiple times. It will continue to block
+interactive completion until gtk_source_completion_unblock_interactive()
+has been called the same number of times.
 
 </description>
 <parameters>
@@ -1679,6 +2989,8 @@ Providers can use this function to add proposals to the completion. They
 can do so asynchronously by means of the @finished argument. Providers must
 ensure that they always call this function with @finished set to %TRUE
 once each population (even if no proposals need to be added).
+Population occurs when the gtk_source_completion_provider_populate()
+function is called.
 
 </description>
 <parameters>
@@ -1723,6 +3035,7 @@ Get the context activation.
 Get the iter at which the completion was invoked. Providers can use this
 to determine how and if to match proposals.
 
+
 </description>
 <parameters>
 <parameter name="context">
@@ -1734,15 +3047,15 @@ to determine how and if to match proposals.
 </parameter_description>
 </parameter>
 </parameters>
-<return></return>
+<return> %TRUE if @iter is correctly set, %FALSE otherwise.
+</return>
 </function>
 
 <function name="gtk_source_completion_create_context">
 <description>
-Create a new #GtkSourceCompletionContext for @completion. The position at
-which the completion using the new context will consider completion can
-be provider by @position. If @position is %NULL, the current cursor
-position will be used.
+Create a new #GtkSourceCompletionContext for @completion. The position where
+the completion occurs can be specified by @position. If @position is %NULL,
+the current cursor position will be used.
 
 
 </description>
@@ -1758,7 +3071,7 @@ position will be used.
 </parameters>
 <return> a new #GtkSourceCompletionContext.
 The reference being returned is a 'floating' reference,
-so if you invoke #gtk_source_completion_show with this context
+so if you invoke gtk_source_completion_show() with this context
 you don't need to unref it.
 </return>
 </function>
@@ -1801,7 +3114,8 @@ list of #GtkSourceCompletionProvider.
 
 <function name="gtk_source_completion_get_view">
 <description>
-The #GtkSourceView associated with @completion.
+The #GtkSourceView associated with @completion, or %NULL if the view has been
+destroyed.
 
 
 </description>
@@ -1812,7 +3126,7 @@ The #GtkSourceView associated with @completion.
 </parameter>
 </parameters>
 <return>
-The #GtkSourceView associated with @completion.
+The #GtkSourceView associated with @completion, or %NULL.
 </return>
 </function>
 
@@ -1834,6 +3148,7 @@ Hides the completion if it is active (visible).
 <description>
 Get the current content widget.
 
+Deprecated: 3.8: Use gtk_bin_get_child() instead.
 
 </description>
 <parameters>
@@ -1843,6 +3158,7 @@ Get the current content widget.
 </parameter>
 </parameters>
 <return> The current content widget.
+
 </return>
 </function>
 
@@ -1883,9 +3199,12 @@ the window.
 
 <function name="gtk_source_completion_info_set_widget">
 <description>
-Sets the content widget of the info window. If @widget does not fit within
-the size requirements of the window, a #GtkScrolledWindow will automatically
-be created and added to the window.
+Sets the content widget of the info window. See that the previous widget will
+lose a reference and it can be destroyed, so if you do not want this to
+happen you must use g_object_ref() before calling this method.
+
+Deprecated: 3.8: Use gtk_container_add() instead. If there is already a child
+widget, remove it with gtk_container_remove().
 
 </description>
 <parameters>
@@ -1903,8 +3222,8 @@ be created and added to the window.
 
 <function name="gtk_source_completion_item_new">
 <description>
-Create a new #GtkSourceCompletionItem with label @label, icon @icon and 
-extra information @info. Both @icon and @info can be %NULL in which case 
+Create a new #GtkSourceCompletionItem with label @label, icon @icon and
+extra information @info. Both @icon and @info can be %NULL in which case
 there will be no icon shown and no extra information available.
 
 
@@ -1933,9 +3252,10 @@ there will be no icon shown and no extra information available.
 
 <function name="gtk_source_completion_item_new_from_stock">
 <description>
-Creates a new #GtkSourceCompletionItem from a stock item. If @label is %NULL, 
+Creates a new #GtkSourceCompletionItem from a stock item. If @label is %NULL,
 the stock label will be used.
 
+Deprecated: 3.10: Use gtk_source_completion_item_new() instead.
 
 </description>
 <parameters>
@@ -1962,8 +3282,8 @@ the stock label will be used.
 
 <function name="gtk_source_completion_item_new_with_markup">
 <description>
-Create a new #GtkSourceCompletionItem with markup label @markup, icon 
-@icon and extra information @info. Both @icon and @info can be %NULL in 
+Create a new #GtkSourceCompletionItem with markup label @markup, icon
+@icon and extra information @info. Both @icon and @info can be %NULL in
 which case there will be no icon shown and no extra information available.
 
 
@@ -1993,6 +3313,8 @@ which case there will be no icon shown and no extra information available.
 <function name="gtk_source_completion_move_window">
 <description>
 Move the completion window to a specific iter.
+
+Deprecated: 3.8: Use gtk_source_completion_provider_get_start_iter() instead.
 
 </description>
 <parameters>
@@ -2042,9 +3364,9 @@ changed.
 
 <function name="gtk_source_completion_proposal_equal">
 <description>
-Get whether two proposal objects are the same.  This is used to (together 
-with #gtk_source_completion_proposal_hash) to match proposals in the 
-completion model. By default, it uses direct equality (#g_direct_equal).
+Get whether two proposal objects are the same.  This is used to (together
+with gtk_source_completion_proposal_hash()) to match proposals in the
+completion model. By default, it uses direct equality (g_direct_equal()).
 
 
 </description>
@@ -2062,9 +3384,27 @@ completion model. By default, it uses direct equality (#g_direct_equal).
 </return>
 </function>
 
+<function name="gtk_source_completion_proposal_get_gicon">
+<description>
+Gets the #GIcon for the icon of @proposal.
+
+Since: 3.18
+
+</description>
+<parameters>
+<parameter name="proposal">
+<parameter_description> a #GtkSourceCompletionProposal.
+</parameter_description>
+</parameter>
+</parameters>
+<return> A #GIcon with the icon of @proposal.
+
+</return>
+</function>
+
 <function name="gtk_source_completion_proposal_get_icon">
 <description>
-Gets the icon of @proposal.
+Gets the #GdkPixbuf for the icon of @proposal.
 
 
 </description>
@@ -2074,7 +3414,25 @@ Gets the icon of @proposal.
 </parameter_description>
 </parameter>
 </parameters>
-<return> The icon of @proposal.
+<return> A #GdkPixbuf with the icon of @proposal.
+</return>
+</function>
+
+<function name="gtk_source_completion_proposal_get_icon_name">
+<description>
+Gets the icon name of @proposal.
+
+Since: 3.18
+
+</description>
+<parameters>
+<parameter name="proposal">
+<parameter_description> a #GtkSourceCompletionProposal.
+</parameter_description>
+</parameter>
+</parameters>
+<return> The icon name of @proposal.
+
 </return>
 </function>
 
@@ -2092,8 +3450,9 @@ selected proposal. The returned string must be freed with g_free().
 </parameter_description>
 </parameter>
 </parameters>
-<return> a new string containing extra information of @proposal or %NULL if
-no extra information is associated to @proposal.
+<return> a newly-allocated string containing
+extra information of @proposal or %NULL if no extra information is associated
+to @proposal.
 </return>
 </function>
 
@@ -2101,7 +3460,7 @@ no extra information is associated to @proposal.
 <description>
 Gets the label of @proposal. The label is shown in the list of proposals as
 plain text. If you need any markup (such as bold or italic text), you have
-to implement #gtk_source_completion_proposal_get_markup. The returned string
+to implement gtk_source_completion_proposal_get_markup(). The returned string
 must be freed with g_free().
 
 
@@ -2118,9 +3477,9 @@ must be freed with g_free().
 
 <function name="gtk_source_completion_proposal_get_markup">
 <description>
-Gets the label of @proposal with markup. The label is shown in the list of 
+Gets the label of @proposal with markup. The label is shown in the list of
 proposals and may contain markup. This will be used instead of
-#gtk_source_completion_proposal_get_label if implemented. The returned string
+gtk_source_completion_proposal_get_label() if implemented. The returned string
 must be freed with g_free().
 
 
@@ -2140,7 +3499,9 @@ must be freed with g_free().
 Gets the text of @proposal. The text that is inserted into
 the text buffer when the proposal is activated by the default activation.
 You are free to implement a custom activation handler in the provider and
-not implement this function. The returned string must be freed with g_free().
+not implement this function. For more information, see
+gtk_source_completion_provider_activate_proposal(). The returned string must
+be freed with g_free().
 
 
 </description>
@@ -2157,8 +3518,8 @@ not implement this function. The returned string must be freed with g_free().
 <function name="gtk_source_completion_proposal_hash">
 <description>
 Get the hash value of @proposal. This is used to (together with
-#gtk_source_completion_proposal_equal) to match proposals in the completion
-model. By default, it uses a direct hash (#g_direct_hash).
+gtk_source_completion_proposal_equal()) to match proposals in the completion
+model. By default, it uses a direct hash (g_direct_hash()).
 
 
 </description>
@@ -2176,7 +3537,14 @@ model. By default, it uses a direct hash (#g_direct_hash).
 <description>
 Activate @proposal at @iter. When this functions returns %FALSE, the default
 activation of @proposal will take place which replaces the word at @iter
-with the label of @proposal.
+with the text of @proposal (see gtk_source_completion_proposal_get_text()).
+
+Here is how the default activation selects the boundaries of the word to
+replace. The end of the word is @iter. For the start of the word, it depends
+on whether a start iter is defined for @proposal (see
+gtk_source_completion_provider_get_start_iter()). If a start iter is defined,
+the start of the word is the start iter. Else, the word (as long as possible)
+will contain only alphanumerical and the &quot;_&quot; characters.
 
 
 </description>
@@ -2215,9 +3583,28 @@ Get with what kind of activation the provider should be activated.
 </return>
 </function>
 
+<function name="gtk_source_completion_provider_get_gicon">
+<description>
+Gets the #GIcon for the icon of @provider.
+
+Since: 3.18
+
+</description>
+<parameters>
+<parameter name="provider">
+<parameter_description> The #GtkSourceCompletionProvider
+</parameter_description>
+</parameter>
+</parameters>
+<return> The icon to be used for the provider,
+or %NULL if the provider does not have a special icon.
+
+</return>
+</function>
+
 <function name="gtk_source_completion_provider_get_icon">
 <description>
-Get the icon of the provider.
+Get the #GdkPixbuf for the icon of the @provider.
 
 
 </description>
@@ -2232,16 +3619,42 @@ or %NULL if the provider does not have a special icon.
 </return>
 </function>
 
+<function name="gtk_source_completion_provider_get_icon_name">
+<description>
+Gets the icon name of @provider.
+
+Since: 3.18
+
+</description>
+<parameters>
+<parameter name="provider">
+<parameter_description> The #GtkSourceCompletionProvider
+</parameter_description>
+</parameter>
+</parameters>
+<return> The icon name to be used for the provider,
+or %NULL if the provider does not have a special icon.
+
+</return>
+</function>
+
 <function name="gtk_source_completion_provider_get_info_widget">
 <description>
 Get a customized info widget to show extra information of a proposal.
 This allows for customized widgets on a proposal basis, although in general
 providers will have the same custom widget for all their proposals and
-@proposal can be ignored. The implementation of this function is optional. 
-If implemented, #gtk_source_completion_provider_update_info MUST also be
-implemented. If not implemented, the default 
-#gtk_source_completion_proposal_get_info will be used to display extra
-information about a #GtkSourceCompletionProposal.
+@proposal can be ignored. The implementation of this function is optional.
+
+If this function is not implemented, the default widget is a #GtkLabel. The
+return value of gtk_source_completion_proposal_get_info() is used as the
+content of the #GtkLabel.
+
+&lt;note&gt;
+&lt;para&gt;
+If implemented, gtk_source_completion_provider_update_info()
+&lt;emphasis&gt;must&lt;/emphasis&gt; also be implemented.
+&lt;/para&gt;
+&lt;/note&gt;
 
 
 </description>
@@ -2256,7 +3669,8 @@ information about a #GtkSourceCompletionProposal.
 </parameter>
 </parameters>
 <return> a custom #GtkWidget to show extra
-information about @proposal.
+information about @proposal, or %NULL if the provider does not have a special
+info widget.
 </return>
 </function>
 
@@ -2264,7 +3678,7 @@ information about @proposal.
 <description>
 Get the delay in milliseconds before starting interactive completion for
 this provider. A value of -1 indicates to use the default value as set
-by #GtkSourceCompletion::auto-complete-delay.
+by the #GtkSourceCompletion:auto-complete-delay property.
 
 
 </description>
@@ -2317,9 +3731,17 @@ before lower priorities. The default priority is 0.
 <function name="gtk_source_completion_provider_get_start_iter">
 <description>
 Get the #GtkTextIter at which the completion for @proposal starts. When
-implemented, the completion can use this information to position the
-completion window accordingly when a proposal is selected in the completion
-window.
+implemented, this information is used to position the completion window
+accordingly when a proposal is selected in the completion window. The
+@proposal text inside the completion window is aligned on @iter.
+
+If this function is not implemented, the word boundary is taken to position
+the completion window. See gtk_source_completion_provider_activate_proposal()
+for an explanation on the word boundaries.
+
+When the @proposal is activated, the default handler uses @iter as the start
+of the word to replace. See
+gtk_source_completion_provider_activate_proposal() for more information.
 
 
 </description>
@@ -2368,7 +3790,8 @@ Get whether the provider match the context of completion detailed in
 
 <function name="gtk_source_completion_provider_populate">
 <description>
-Populate @context with proposals from @provider.
+Populate @context with proposals from @provider added with the
+gtk_source_completion_context_add_proposals() function.
 
 </description>
 <parameters>
@@ -2386,10 +3809,14 @@ Populate @context with proposals from @provider.
 
 <function name="gtk_source_completion_provider_update_info">
 <description>
-Update extra information shown in @info for @proposal. This should be
-implemented if your provider sets a custom info widget for @proposal.
-This function MUST be implemented when 
-#gtk_source_completion_provider_get_info_widget is implemented.
+Update extra information shown in @info for @proposal.
+
+&lt;note&gt;
+&lt;para&gt;
+This function &lt;emphasis&gt;must&lt;/emphasis&gt; be implemented when
+gtk_source_completion_provider_get_info_widget() is implemented.
+&lt;/para&gt;
+&lt;/note&gt;
 
 </description>
 <parameters>
@@ -2439,6 +3866,13 @@ is provided, it will be set with the error and %FALSE is returned.
 Starts a new completion with the specified #GtkSourceCompletionContext and
 a list of potential candidate providers for completion.
 
+It can be convenient for showing a completion on-the-fly, without the need to
+add or remove providers to the #GtkSourceCompletion.
+
+Another solution is to add providers with
+gtk_source_completion_add_provider(), and implement
+gtk_source_completion_provider_match() for each provider.
+
 
 </description>
 <parameters>
@@ -2464,7 +3898,7 @@ with which to start the completion.
 <function name="gtk_source_completion_unblock_interactive">
 <description>
 Unblock interactive completion. This can be used after using
-#gtk_source_completion_block_interactive to enable interactive completion
+gtk_source_completion_block_interactive() to enable interactive completion
 again.
 
 </description>
@@ -2477,125 +3911,17 @@ again.
 <return></return>
 </function>
 
-<function name="gtk_source_completion_utils_get_pos_at_cursor">
-<description>
-
-</description>
-<parameters>
-<parameter name="window">
-<parameter_description> the #GtkWindow to move.
-</parameter_description>
-</parameter>
-<parameter name="view">
-<parameter_description> the #GtkSoureView.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gtk_source_completion_utils_get_word">
-<description>
-
-</description>
-<parameters>
-<parameter name="source_buffer">
-<parameter_description> a #GtkSourceBuffer.
-</parameter_description>
-</parameter>
-</parameters>
-<return> the current word.
-</return>
-</function>
-
-<function name="gtk_source_completion_utils_get_word_iter">
-<description>
-
-</description>
-<parameters>
-<parameter name="source_buffer">
-<parameter_description> a #GtkSourceBuffer.
-</parameter_description>
-</parameter>
-<parameter name="start_word">
-<parameter_description> if != NULL then assign it the start position of the word
-</parameter_description>
-</parameter>
-<parameter name="end_word">
-<parameter_description> if != NULL then assing it the end position of the word
-</parameter_description>
-</parameter>
-</parameters>
-<return> the current word.
-</return>
-</function>
-
-<function name="gtk_source_completion_utils_is_separator">
-<description>
-A separator is a character like (, an space etc. An _ is not a separator
-
-
-</description>
-<parameters>
-<parameter name="ch">
-<parameter_description> the character to check.
-</parameter_description>
-</parameter>
-</parameters>
-<return> %TRUE if @ch is a separator.
-</return>
-</function>
-
-<function name="gtk_source_completion_utils_move_to_iter">
-<description>
-
-</description>
-<parameters>
-<parameter name="window">
-<parameter_description> the #GtkWindow to move.
-</parameter_description>
-</parameter>
-<parameter name="view">
-<parameter_description> the #GtkSourceView.
-</parameter_description>
-</parameter>
-<parameter name="iter">
-<parameter_description> the iter to move @window to.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
-<function name="gtk_source_completion_utils_replace_current_word">
-<description>
-Replaces the current word in the #GtkSourceBuffer with the new word.
-
-</description>
-<parameters>
-<parameter name="source_buffer">
-<parameter_description> a #GtkSourceBuffer.
-</parameter_description>
-</parameter>
-<parameter name="text">
-<parameter_description> The text to be inserted instead of the current word.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
-</function>
-
 <function name="gtk_source_completion_words_new">
 <description>
 
 </description>
 <parameters>
 <parameter name="name">
-<parameter_description> The name for the provider
+<parameter_description> The name for the provider, or %NULL.
 </parameter_description>
 </parameter>
 <parameter name="icon">
-<parameter_description> A specific icon for the provider
+<parameter_description> A specific icon for the provider, or %NULL.
 </parameter_description>
 </parameter>
 </parameters>
@@ -2623,7 +3949,7 @@ Registers @buffer in the @words provider.
 
 <function name="gtk_source_completion_words_unregister">
 <description>
-Unregisters @buffer from teh @words provider.
+Unregisters @buffer from the @words provider.
 
 </description>
 <parameters>
@@ -2751,6 +4077,1073 @@ is analyzed/highlighted.
 <return></return>
 </function>
 
+<function name="gtk_source_encoding_copy">
+<description>
+Used by language bindings.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="enc">
+<parameter_description> a #GtkSourceEncoding.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a copy of @enc.
+</return>
+</function>
+
+<function name="gtk_source_encoding_free">
+<description>
+Used by language bindings.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="enc">
+<parameter_description> a #GtkSourceEncoding.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_encoding_get_all">
+<description>
+Gets all encodings.
+
+Since: 3.14
+
+</description>
+<parameters>
+</parameters>
+<return> a list of
+all #GtkSourceEncoding's. Free with g_slist_free().
+</return>
+</function>
+
+<function name="gtk_source_encoding_get_charset">
+<description>
+Gets the character set of the #GtkSourceEncoding, such as &quot;UTF-8&quot; or
+&quot;ISO-8859-1&quot;.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="enc">
+<parameter_description> a #GtkSourceEncoding.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the character set of the #GtkSourceEncoding.
+</return>
+</function>
+
+<function name="gtk_source_encoding_get_current">
+<description>
+Gets the #GtkSourceEncoding for the current locale. See also g_get_charset().
+
+Since: 3.14
+
+</description>
+<parameters>
+</parameters>
+<return> the current locale encoding.
+</return>
+</function>
+
+<function name="gtk_source_encoding_get_default_candidates">
+<description>
+Gets the list of default candidate encodings to try when loading a file. See
+gtk_source_file_loader_set_candidate_encodings().
+
+This function returns a different list depending on the current locale (i.e.
+language, country and default encoding). The UTF-8 encoding and the current
+locale encoding are guaranteed to be present in the returned list.
+
+Since: 3.18
+
+</description>
+<parameters>
+</parameters>
+<return> the list of
+default candidate encodings. Free with g_slist_free().
+</return>
+</function>
+
+<function name="gtk_source_encoding_get_from_charset">
+<description>
+Gets a #GtkSourceEncoding from a character set such as &quot;UTF-8&quot; or
+&quot;ISO-8859-1&quot;.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="charset">
+<parameter_description> a character set.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the corresponding #GtkSourceEncoding, or %NULL
+if not found.
+</return>
+</function>
+
+<function name="gtk_source_encoding_get_name">
+<description>
+Gets the name of the #GtkSourceEncoding such as &quot;Unicode&quot; or &quot;Western&quot;.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="enc">
+<parameter_description> a #GtkSourceEncoding.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the name of the #GtkSourceEncoding.
+</return>
+</function>
+
+<function name="gtk_source_encoding_get_utf8">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+</parameters>
+<return> the UTF-8 encoding.
+</return>
+</function>
+
+<function name="gtk_source_encoding_to_string">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="enc">
+<parameter_description> a #GtkSourceEncoding.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a string representation. Free with g_free() when no longer needed.
+</return>
+</function>
+
+<function name="gtk_source_file_check_file_on_disk">
+<description>
+Checks synchronously the file on disk, to know whether the file is externally
+modified, or has been deleted, and whether the file is read-only.
+
+#GtkSourceFile doesn't create a #GFileMonitor to track those properties, so
+this function needs to be called instead. Creating lots of #GFileMonitor's
+would take lots of resources.
+
+Since this function is synchronous, it is advised to call it only on local
+files. See gtk_source_file_is_local().
+
+Since: 3.18
+
+</description>
+<parameters>
+<parameter name="file">
+<parameter_description> a #GtkSourceFile.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_file_get_compression_type">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="file">
+<parameter_description> a #GtkSourceFile.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the compression type.
+</return>
+</function>
+
+<function name="gtk_source_file_get_encoding">
+<description>
+The encoding is initially %NULL. After a successful file loading or saving
+operation, the encoding is non-%NULL.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="file">
+<parameter_description> a #GtkSourceFile.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the character encoding.
+</return>
+</function>
+
+<function name="gtk_source_file_get_location">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="file">
+<parameter_description> a #GtkSourceFile.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the #GFile.
+</return>
+</function>
+
+<function name="gtk_source_file_get_newline_type">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="file">
+<parameter_description> a #GtkSourceFile.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the newline type.
+</return>
+</function>
+
+<function name="gtk_source_file_is_deleted">
+<description>
+Returns whether the file has been deleted. If the
+#GtkSourceFile:location is %NULL, returns %FALSE.
+
+To have an up-to-date value, you must first call
+gtk_source_file_check_file_on_disk().
+
+Since: 3.18
+
+</description>
+<parameters>
+<parameter name="file">
+<parameter_description> a #GtkSourceFile.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether the file has been deleted.
+</return>
+</function>
+
+<function name="gtk_source_file_is_externally_modified">
+<description>
+Returns whether the file is externally modified. If the
+#GtkSourceFile:location is %NULL, returns %FALSE.
+
+To have an up-to-date value, you must first call
+gtk_source_file_check_file_on_disk().
+
+Since: 3.18
+
+</description>
+<parameters>
+<parameter name="file">
+<parameter_description> a #GtkSourceFile.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether the file is externally modified.
+</return>
+</function>
+
+<function name="gtk_source_file_is_local">
+<description>
+Returns whether the file is local. If the #GtkSourceFile:location is %NULL,
+returns %FALSE.
+
+Since: 3.18
+
+</description>
+<parameters>
+<parameter name="file">
+<parameter_description> a #GtkSourceFile.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether the file is local.
+</return>
+</function>
+
+<function name="gtk_source_file_is_readonly">
+<description>
+Returns whether the file is read-only. If the
+#GtkSourceFile:location is %NULL, returns %FALSE.
+
+To have an up-to-date value, you must first call
+gtk_source_file_check_file_on_disk().
+
+Since: 3.18
+
+</description>
+<parameters>
+<parameter name="file">
+<parameter_description> a #GtkSourceFile.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether the file is read-only.
+</return>
+</function>
+
+<function name="gtk_source_file_loader_get_buffer">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="loader">
+<parameter_description> a #GtkSourceFileLoader.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the #GtkSourceBuffer to load the contents into.
+</return>
+</function>
+
+<function name="gtk_source_file_loader_get_compression_type">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="loader">
+<parameter_description> a #GtkSourceFileLoader.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the detected compression type.
+</return>
+</function>
+
+<function name="gtk_source_file_loader_get_encoding">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="loader">
+<parameter_description> a #GtkSourceFileLoader.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the detected file encoding.
+</return>
+</function>
+
+<function name="gtk_source_file_loader_get_file">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="loader">
+<parameter_description> a #GtkSourceFileLoader.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the #GtkSourceFile.
+</return>
+</function>
+
+<function name="gtk_source_file_loader_get_input_stream">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="loader">
+<parameter_description> a #GtkSourceFileLoader.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the #GInputStream to load, or %NULL
+if a #GFile is used.
+</return>
+</function>
+
+<function name="gtk_source_file_loader_get_location">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="loader">
+<parameter_description> a #GtkSourceFileLoader.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the #GFile to load, or %NULL
+if an input stream is used.
+</return>
+</function>
+
+<function name="gtk_source_file_loader_get_newline_type">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="loader">
+<parameter_description> a #GtkSourceFileLoader.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the detected newline type.
+</return>
+</function>
+
+<function name="gtk_source_file_loader_load_async">
+<description>
+Loads asynchronously the file or input stream contents into the
+#GtkSourceBuffer. See the #GAsyncResult documentation to know how to use this
+function.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="loader">
+<parameter_description> a #GtkSourceFileLoader.
+</parameter_description>
+</parameter>
+<parameter name="io_priority">
+<parameter_description> the I/O priority of the request. E.g. %G_PRIORITY_LOW,
+%G_PRIORITY_DEFAULT or %G_PRIORITY_HIGH.
+</parameter_description>
+</parameter>
+<parameter name="cancellable">
+<parameter_description> optional #GCancellable object, %NULL to ignore.
+</parameter_description>
+</parameter>
+<parameter name="progress_callback">
+<parameter_description> function to call back with
+progress information, or %NULL if progress information is not needed.
+</parameter_description>
+</parameter>
+<parameter name="progress_callback_data">
+<parameter_description> user data to pass to @progress_callback.
+</parameter_description>
+</parameter>
+<parameter name="progress_callback_notify">
+<parameter_description> function to call on
+@progress_callback_data when the @progress_callback is no longer needed, or
+%NULL.
+</parameter_description>
+</parameter>
+<parameter name="callback">
+<parameter_description> a #GAsyncReadyCallback to call when the request is
+satisfied.
+</parameter_description>
+</parameter>
+<parameter name="user_data">
+<parameter_description> user data to pass to @callback.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_file_loader_load_finish">
+<description>
+Finishes a file loading started with gtk_source_file_loader_load_async().
+
+If the contents has been loaded, the following #GtkSourceFile properties will
+be updated: the location, the encoding, the newline type and the compression
+type.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="loader">
+<parameter_description> a #GtkSourceFileLoader.
+</parameter_description>
+</parameter>
+<parameter name="result">
+<parameter_description> a #GAsyncResult.
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> a #GError, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether the contents has been loaded successfully.
+</return>
+</function>
+
+<function name="gtk_source_file_loader_new">
+<description>
+Creates a new #GtkSourceFileLoader object. The contents is read from the
+#GtkSourceFile's location. If not already done, call
+gtk_source_file_set_location() before calling this constructor. The previous
+location is anyway not needed, because as soon as the file loading begins,
+the @buffer is emptied.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> the #GtkSourceBuffer to load the contents into.
+</parameter_description>
+</parameter>
+<parameter name="file">
+<parameter_description> the #GtkSourceFile.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a new #GtkSourceFileLoader object.
+</return>
+</function>
+
+<function name="gtk_source_file_loader_new_from_stream">
+<description>
+Creates a new #GtkSourceFileLoader object. The contents is read from @stream.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> the #GtkSourceBuffer to load the contents into.
+</parameter_description>
+</parameter>
+<parameter name="file">
+<parameter_description> the #GtkSourceFile.
+</parameter_description>
+</parameter>
+<parameter name="stream">
+<parameter_description> the #GInputStream to load, e.g. stdin.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a new #GtkSourceFileLoader object.
+</return>
+</function>
+
+<function name="gtk_source_file_loader_set_candidate_encodings">
+<description>
+Sets the candidate encodings for the file loading. The encodings are tried in
+the same order as the list.
+
+For convenience, @candidate_encodings can contain duplicates. Only the first
+occurrence of a duplicated encoding is kept in the list.
+
+By default the candidate encodings are (in that order in the list):
+1. If set, the #GtkSourceFile's encoding as returned by
+gtk_source_file_get_encoding().
+2. The default candidates as returned by
+gtk_source_encoding_get_default_candidates().
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="loader">
+<parameter_description> a #GtkSourceFileLoader.
+</parameter_description>
+</parameter>
+<parameter name="candidate_encodings">
+<parameter_description> a list of
+#GtkSourceEncoding&lt;!-- --&gt;s.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_file_new">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+</parameters>
+<return> a new #GtkSourceFile object.
+</return>
+</function>
+
+<function name="gtk_source_file_saver_get_buffer">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="saver">
+<parameter_description> a #GtkSourceFileSaver.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the #GtkSourceBuffer to save.
+</return>
+</function>
+
+<function name="gtk_source_file_saver_get_compression_type">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="saver">
+<parameter_description> a #GtkSourceFileSaver.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the compression type.
+</return>
+</function>
+
+<function name="gtk_source_file_saver_get_encoding">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="saver">
+<parameter_description> a #GtkSourceFileSaver.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the encoding.
+</return>
+</function>
+
+<function name="gtk_source_file_saver_get_file">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="saver">
+<parameter_description> a #GtkSourceFileSaver.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the #GtkSourceFile.
+</return>
+</function>
+
+<function name="gtk_source_file_saver_get_flags">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="saver">
+<parameter_description> a #GtkSourceFileSaver.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the flags.
+</return>
+</function>
+
+<function name="gtk_source_file_saver_get_location">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="saver">
+<parameter_description> a #GtkSourceFileSaver.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the #GFile where to save the buffer to.
+</return>
+</function>
+
+<function name="gtk_source_file_saver_get_newline_type">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="saver">
+<parameter_description> a #GtkSourceFileSaver.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the newline type.
+</return>
+</function>
+
+<function name="gtk_source_file_saver_new">
+<description>
+Creates a new #GtkSourceFileSaver object. The @buffer will be saved to the
+#GtkSourceFile's location.
+
+This constructor is suitable for a simple &quot;save&quot; operation, when the @file
+already contains a non-%NULL #GtkSourceFile:location.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> the #GtkSourceBuffer to save.
+</parameter_description>
+</parameter>
+<parameter name="file">
+<parameter_description> the #GtkSourceFile.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a new #GtkSourceFileSaver object.
+</return>
+</function>
+
+<function name="gtk_source_file_saver_new_with_target">
+<description>
+Creates a new #GtkSourceFileSaver object with a target location. When the
+file saving is finished successfully, @target_location is set to the @file's
+#GtkSourceFile:location property. If an error occurs, the previous valid
+location is still available in #GtkSourceFile.
+
+This constructor is suitable for a &quot;save as&quot; operation, or for saving a new
+buffer for the first time.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> the #GtkSourceBuffer to save.
+</parameter_description>
+</parameter>
+<parameter name="file">
+<parameter_description> the #GtkSourceFile.
+</parameter_description>
+</parameter>
+<parameter name="target_location">
+<parameter_description> the #GFile where to save the buffer to.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a new #GtkSourceFileSaver object.
+</return>
+</function>
+
+<function name="gtk_source_file_saver_save_async">
+<description>
+Saves asynchronously the buffer into the file. See the #GAsyncResult
+documentation to know how to use this function.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="saver">
+<parameter_description> a #GtkSourceFileSaver.
+</parameter_description>
+</parameter>
+<parameter name="io_priority">
+<parameter_description> the I/O priority of the request. E.g. %G_PRIORITY_LOW,
+%G_PRIORITY_DEFAULT or %G_PRIORITY_HIGH.
+</parameter_description>
+</parameter>
+<parameter name="cancellable">
+<parameter_description> optional #GCancellable object, %NULL to ignore.
+</parameter_description>
+</parameter>
+<parameter name="progress_callback">
+<parameter_description> function to call back with
+progress information, or %NULL if progress information is not needed.
+</parameter_description>
+</parameter>
+<parameter name="progress_callback_data">
+<parameter_description> user data to pass to @progress_callback.
+</parameter_description>
+</parameter>
+<parameter name="progress_callback_notify">
+<parameter_description> function to call on
+@progress_callback_data when the @progress_callback is no longer needed, or
+%NULL.
+</parameter_description>
+</parameter>
+<parameter name="callback">
+<parameter_description> a #GAsyncReadyCallback to call when the request is
+satisfied.
+</parameter_description>
+</parameter>
+<parameter name="user_data">
+<parameter_description> user data to pass to @callback.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_file_saver_save_finish">
+<description>
+Finishes a file saving started with gtk_source_file_saver_save_async().
+
+If the file has been saved successfully, the following #GtkSourceFile
+properties will be updated: the location, the encoding, the newline type and
+the compression type.
+
+Since the 3.20 version, gtk_text_buffer_set_modified() is called with %FALSE
+if the file has been saved successfully.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="saver">
+<parameter_description> a #GtkSourceFileSaver.
+</parameter_description>
+</parameter>
+<parameter name="result">
+<parameter_description> a #GAsyncResult.
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> a #GError, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether the file was saved successfully.
+</return>
+</function>
+
+<function name="gtk_source_file_saver_set_compression_type">
+<description>
+Sets the compression type. By default the compression type is taken from the
+#GtkSourceFile.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="saver">
+<parameter_description> a #GtkSourceFileSaver.
+</parameter_description>
+</parameter>
+<parameter name="compression_type">
+<parameter_description> the new compression type.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_file_saver_set_encoding">
+<description>
+Sets the encoding. If @encoding is %NULL, the UTF-8 encoding will be set.
+By default the encoding is taken from the #GtkSourceFile.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="saver">
+<parameter_description> a #GtkSourceFileSaver.
+</parameter_description>
+</parameter>
+<parameter name="encoding">
+<parameter_description> the new encoding, or %NULL for UTF-8.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_file_saver_set_flags">
+<description>
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="saver">
+<parameter_description> a #GtkSourceFileSaver.
+</parameter_description>
+</parameter>
+<parameter name="flags">
+<parameter_description> the new flags.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_file_saver_set_newline_type">
+<description>
+Sets the newline type. By default the newline type is taken from the
+#GtkSourceFile.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="saver">
+<parameter_description> a #GtkSourceFileSaver.
+</parameter_description>
+</parameter>
+<parameter name="newline_type">
+<parameter_description> the new newline type.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_file_set_location">
+<description>
+Sets the location.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="file">
+<parameter_description> a #GtkSourceFile.
+</parameter_description>
+</parameter>
+<parameter name="location">
+<parameter_description> the new #GFile, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_file_set_mount_operation_factory">
+<description>
+Sets a #GtkSourceMountOperationFactory function that will be called when a
+#GMountOperation must be created. This is useful for creating a
+#GtkMountOperation with the parent #GtkWindow.
+
+If a mount operation factory isn't set, g_mount_operation_new() will be
+called.
+
+Since: 3.14
+
+</description>
+<parameters>
+<parameter name="file">
+<parameter_description> a #GtkSourceFile.
+</parameter_description>
+</parameter>
+<parameter name="callback">
+<parameter_description> a #GtkSourceMountOperationFactory to call when a
+#GMountOperation is needed.
+</parameter_description>
+</parameter>
+<parameter name="user_data">
+<parameter_description> the data to pass to the @callback function.
+</parameter_description>
+</parameter>
+<parameter name="notify">
+<parameter_description> function to call on @user_data when the @callback is no
+longer needed, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_get_major_version">
+<description>
+Returns the major version number of the GtkSourceView library.
+(e.g. in GtkSourceView version 3.20.0 this is 3.)
+
+This function is in the library, so it represents the GtkSourceView library
+your code is running against. Contrast with the #GTK_SOURCE_MAJOR_VERSION
+macro, which represents the major version of the GtkSourceView headers you
+have included when compiling your code.
+
+Since: 3.20
+
+</description>
+<parameters>
+</parameters>
+<return> the major version number of the GtkSourceView library
+
+</return>
+</function>
+
+<function name="gtk_source_get_micro_version">
+<description>
+Returns the micro version number of the GtkSourceView library.
+(e.g. in GtkSourceView version 3.20.0 this is 0.)
+
+This function is in the library, so it represents the GtkSourceView library
+your code is running against. Contrast with the #GTK_SOURCE_MICRO_VERSION
+macro, which represents the micro version of the GtkSourceView headers you
+have included when compiling your code.
+
+Since: 3.20
+
+</description>
+<parameters>
+</parameters>
+<return> the micro version number of the GtkSourceView library
+
+</return>
+</function>
+
+<function name="gtk_source_get_minor_version">
+<description>
+Returns the minor version number of the GtkSourceView library.
+(e.g. in GtkSourceView version 3.20.0 this is 20.)
+
+This function is in the library, so it represents the GtkSourceView library
+your code is running against. Contrast with the #GTK_SOURCE_MINOR_VERSION
+macro, which represents the minor version of the GtkSourceView headers you
+have included when compiling your code.
+
+Since: 3.20
+
+</description>
+<parameters>
+</parameters>
+<return> the minor version number of the GtkSourceView library
+
+</return>
+</function>
+
+<function name="gtk_source_gutter_get_padding">
+<description>
+Deprecated: 3.12: Use gtk_source_gutter_renderer_get_padding() instead.
+
+</description>
+<parameters>
+<parameter name="gutter">
+<parameter_description>
+</parameter_description>
+</parameter>
+<parameter name="xpad">
+<parameter_description>
+</parameter_description>
+</parameter>
+<parameter name="ypad">
+<parameter_description>
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
 <function name="gtk_source_gutter_get_renderer_at_pos">
 <description>
 Finds the #GtkSourceGutterRenderer at (x, y).
@@ -2781,6 +5174,7 @@ Get the #GdkWindow of the gutter. The window will only be available when the
 gutter has at least one, non-zero width, cell renderer packed.
 
 Since: 2.8
+Deprecated: 3.12: Use gtk_text_view_get_window() instead.
 
 </description>
 <parameters>
@@ -2863,9 +5257,8 @@ Since: 2.8
 
 <function name="gtk_source_gutter_renderer_activate">
 <description>
-Emits the ::activate signal of the renderer. This is called from
-#GtkSourceGutter and should never have to be called manually.
-
+Emits the #GtkSourceGutterRenderer::activate signal of the renderer. This is
+called from #GtkSourceGutter and should never have to be called manually.
 
 </description>
 <parameters>
@@ -2893,8 +5286,7 @@ Emits the ::activate signal of the renderer. This is called from
 <description>
 Called when drawing a region begins. The region to be drawn is indicated
 by @start and @end. The purpose is to allow the implementation to precompute
-some state before the ::draw method is called for each cell.
-
+some state before the draw method is called for each cell.
 
 </description>
 <parameters>
@@ -2928,15 +5320,19 @@ some state before the ::draw method is called for each cell.
 
 <function name="gtk_source_gutter_renderer_draw">
 <description>
-Main renderering method. Implementations should implement this method to
-draw onto the cairo context. The @background_area indicates total area of
-the cell (without padding or margin) to be drawn. The @cell_area indicates
-the area where content can be drawn (text, images, etc).
+Main renderering method. Implementations should implement this method to draw
+onto the cairo context. The @background_area indicates the total area of the
+cell to be drawn. The @cell_area indicates the area where content can be
+drawn (text, images, etc).
+
+The @background_area is the @cell_area plus the padding on each side (two
+times the #GtkSourceGutterRenderer:xpad horizontally and two times the
+#GtkSourceGutterRenderer:ypad vertically, so that the @cell_area is centered
+inside @background_area).
 
 The @state argument indicates the current state of the renderer and should
 be taken into account to properly draw the different possible states
 (cursor, prelit, selected) if appropriate.
-
 
 </description>
 <parameters>
@@ -2991,7 +5387,6 @@ Called when drawing a region of lines has ended.
 <description>
 Get the x-alignment and y-alignment of the gutter renderer.
 
-
 </description>
 <parameters>
 <parameter name="renderer">
@@ -2999,11 +5394,13 @@ Get the x-alignment and y-alignment of the gutter renderer.
 </parameter_description>
 </parameter>
 <parameter name="xalign">
-<parameter_description> return location for the x-alignment (can be %NULL)
+<parameter_description> return location for the x-alignment,
+or %NULL to ignore.
 </parameter_description>
 </parameter>
 <parameter name="yalign">
-<parameter_description> return location for the y-alignment (can be %NULL)
+<parameter_description> return location for the y-alignment,
+or %NULL to ignore.
 </parameter_description>
 </parameter>
 </parameters>
@@ -3053,7 +5450,6 @@ Get the background color of the renderer.
 <description>
 Get the x-padding and y-padding of the gutter renderer.
 
-
 </description>
 <parameters>
 <parameter name="renderer">
@@ -3061,11 +5457,13 @@ Get the x-padding and y-padding of the gutter renderer.
 </parameter_description>
 </parameter>
 <parameter name="xpad">
-<parameter_description> return location for the x-padding (can be %NULL)
+<parameter_description> return location for the x-padding,
+or %NULL to ignore.
 </parameter_description>
 </parameter>
 <parameter name="ypad">
-<parameter_description> return location for the y-padding (can be %NULL)
+<parameter_description> return location for the y-padding,
+or %NULL to ignore.
 </parameter_description>
 </parameter>
 </parameters>
@@ -3174,6 +5572,21 @@ Get the pixbuf of the renderer.
 </return>
 </function>
 
+<function name="gtk_source_gutter_renderer_pixbuf_get_stock_id">
+<description>
+Deprecated: 3.10: Don't use this function.
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRendererPixbuf
+</parameter_description>
+</parameter>
+</parameters>
+<return> the stock id.
+</return>
+</function>
+
 <function name="gtk_source_gutter_renderer_pixbuf_new">
 <description>
 Create a new #GtkSourceGutterRendererPixbuf.
@@ -3185,6 +5598,75 @@ Create a new #GtkSourceGutterRendererPixbuf.
 <return> A #GtkSourceGutterRenderer
 
 </return>
+</function>
+
+<function name="gtk_source_gutter_renderer_pixbuf_set_gicon">
+<description>
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRendererPixbuf
+</parameter_description>
+</parameter>
+<parameter name="icon">
+<parameter_description> the icon, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_gutter_renderer_pixbuf_set_icon_name">
+<description>
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRendererPixbuf
+</parameter_description>
+</parameter>
+<parameter name="icon_name">
+<parameter_description> the icon name, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_gutter_renderer_pixbuf_set_pixbuf">
+<description>
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRendererPixbuf
+</parameter_description>
+</parameter>
+<parameter name="pixbuf">
+<parameter_description> the pixbuf, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_gutter_renderer_pixbuf_set_stock_id">
+<description>
+Deprecated: 3.10: Don't use this function.
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRendererPixbuf
+</parameter_description>
+</parameter>
+<parameter name="stock_id">
+<parameter_description> the stock id
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
 </function>
 
 <function name="gtk_source_gutter_renderer_query_activatable">
@@ -3220,11 +5702,11 @@ using the mouse pointer.
 
 <function name="gtk_source_gutter_renderer_query_data">
 <description>
-Emit the ::query-data signal. This function is called to query for data
-just before rendering a cell. This is called from the #GtkSourceGutter.
-Implementations can override the default signal handler or can connect
-a signal handler externally to the ::query-data signal.
-
+Emit the #GtkSourceGutterRenderer::query-data signal. This function is called
+to query for data just before rendering a cell. This is called from the
+#GtkSourceGutter.  Implementations can override the default signal handler or
+can connect a signal handler externally to the
+#GtkSourceGutterRenderer::query-data signal.
 
 </description>
 <parameters>
@@ -3250,9 +5732,9 @@ a signal handler externally to the ::query-data signal.
 
 <function name="gtk_source_gutter_renderer_query_tooltip">
 <description>
-Emits the ::query-tooltip signal. This function is called from
-#GtkSourceGutter. Implementations can override the default signal handler
-or can connect to the signal externally.
+Emits the #GtkSourceGutterRenderer::query-tooltip signal. This function is
+called from #GtkSourceGutter. Implementations can override the default signal
+handler or can connect to the signal externally.
 
 
 </description>
@@ -3283,16 +5765,14 @@ or can connect to the signal externally.
 </parameter>
 </parameters>
 <return> %TRUE if the tooltip has been set, %FALSE otherwise
-
 </return>
 </function>
 
 <function name="gtk_source_gutter_renderer_queue_draw">
 <description>
-Emits the ::queue-draw signal of the renderer. Call this from an
-implementation to inform that the renderer has changed such that it needs
-to redraw.
-
+Emits the #GtkSourceGutterRenderer::queue-draw signal of the renderer. Call
+this from an implementation to inform that the renderer has changed such that
+it needs to redraw.
 
 </description>
 <parameters>
@@ -3310,6 +5790,9 @@ Set the alignment of the gutter renderer. Both @xalign and @yalign can be
 -1, which means the values will not be changed (this allows changing only
 one of the values).
 
+@xalign is the horizontal alignment. Set to 0 for a left alignment. 1 for a
+right alignment. And 0.5 for centering the cells. @yalign is the vertical
+alignment. Set to 0 for a top alignment. 1 for a bottom alignment.
 
 </description>
 <parameters>
@@ -3375,6 +5858,7 @@ Set the padding of the gutter renderer. Both @xpad and @ypad can be
 -1, which means the values will not be changed (this allows changing only
 one of the values).
 
+@xpad is the left and right padding. @ypad is the top and bottom padding.
 
 </description>
 <parameters>
@@ -3433,6 +5917,64 @@ Set whether the gutter renderer is visible.
 <return></return>
 </function>
 
+<function name="gtk_source_gutter_renderer_text_measure">
+<description>
+Measures the text provided using the pango layout used by the
+#GtkSourceGutterRendererText.
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRendererText.
+</parameter_description>
+</parameter>
+<parameter name="text">
+<parameter_description> the text to measure.
+</parameter_description>
+</parameter>
+<parameter name="width">
+<parameter_description> location to store the width of the text in pixels,
+or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="height">
+<parameter_description> location to store the height of the text in
+pixels, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_gutter_renderer_text_measure_markup">
+<description>
+Measures the pango markup provided using the pango layout used by the
+#GtkSourceGutterRendererText.
+
+</description>
+<parameters>
+<parameter name="renderer">
+<parameter_description> a #GtkSourceGutterRendererText.
+</parameter_description>
+</parameter>
+<parameter name="markup">
+<parameter_description> the pango markup to measure.
+</parameter_description>
+</parameter>
+<parameter name="width">
+<parameter_description> location to store the width of the text in pixels,
+or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="height">
+<parameter_description> location to store the height of the text in
+pixels, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
 <function name="gtk_source_gutter_renderer_text_new">
 <description>
 Create a new #GtkSourceGutterRendererText.
@@ -3470,6 +6012,28 @@ Since: 2.8
 <return></return>
 </function>
 
+<function name="gtk_source_gutter_set_padding">
+<description>
+Deprecated: 3.12: Use gtk_source_gutter_renderer_set_padding() instead.
+
+</description>
+<parameters>
+<parameter name="gutter">
+<parameter_description>
+</parameter_description>
+</parameter>
+<parameter name="xpad">
+<parameter_description>
+</parameter_description>
+</parameter>
+<parameter name="ypad">
+<parameter_description>
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
 <function name="gtk_source_language_get_globs">
 <description>
 Returns the globs associated to this language. This is just
@@ -3484,8 +6048,9 @@ retrieve the &quot;globs&quot; metadata property and split it into an array.
 </parameter_description>
 </parameter>
 </parameters>
-<return> a newly-allocated
-%NULL terminated array containing the globs or %NULL if no globs are found.
+<return>
+a newly-allocated %NULL terminated array containing the globs or %NULL
+if no globs are found.
 The returned array must be freed with g_strfreev().
 </return>
 </function>
@@ -3538,8 +6103,9 @@ or modified.
 </parameter_description>
 </parameter>
 </parameters>
-<return> value of property @name stored in the metadata of @language
-or %NULL if language doesn't contain that metadata property.
+<return> value of property @name stored in
+the metadata of @language or %NULL if language does not contain the
+specified metadata property.
 The returned string is owned by @language and should not be freed
 or modified.
 </return>
@@ -3560,9 +6126,9 @@ array.
 </parameter_description>
 </parameter>
 </parameters>
-<return> a newly-allocated
-%NULL terminated array containing the mime types or %NULL if no 
-mime types are found.
+<return>
+a newly-allocated %NULL terminated array containing the mime types
+or %NULL if no mime types are found.
 The returned array must be freed with g_strfreev().
 </return>
 </function>
@@ -3605,6 +6171,32 @@ or modified.
 </return>
 </function>
 
+<function name="gtk_source_language_get_style_fallback">
+<description>
+Returns the ID of the style to use if the specified @style_id
+is not present in the current style scheme.
+
+Since: 3.4
+
+</description>
+<parameters>
+<parameter name="language">
+<parameter_description> a #GtkSourceLanguage.
+</parameter_description>
+</parameter>
+<parameter name="style_id">
+<parameter_description> a style ID.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the ID of the style to use if the
+specified @style_id is not present in the current style scheme or %NULL
+if the style has no fallback defined.
+The returned string is owned by the @language and must not be modified.
+
+</return>
+</function>
+
 <function name="gtk_source_language_get_style_ids">
 <description>
 Returns the ids of the styles defined by this @language.
@@ -3617,9 +6209,9 @@ Returns the ids of the styles defined by this @language.
 </parameter_description>
 </parameter>
 </parameters>
-<return> a  %NULL terminated
-array containing ids of the styles defined by this @language or
-%NULL if no style is defined.
+<return>
+a newly-allocated %NULL terminated array containing ids of the
+styles defined by this @language or %NULL if no style is defined.
 The returned array must be freed with g_strfreev().
 </return>
 </function>
@@ -3640,10 +6232,10 @@ Returns the name of the style with ID @style_id defined by this @language.
 </parameter_description>
 </parameter>
 </parameters>
-<return> the name of the style with ID @style_id defined by this @language or
-%NULL if the style has no name or there is no style with ID @style_id defined
-by this @language. The returned string is owned by the @language and must
-not be modified.
+<return> the name of the style with ID @style_id
+defined by this @language or %NULL if the style has no name or there is no
+style with ID @style_id defined by this @language.
+The returned string is owned by the @language and must not be modified.
 </return>
 </function>
 
@@ -3677,9 +6269,9 @@ manager.
 </parameter_description>
 </parameter>
 </parameters>
-<return> a #GtkSourceLanguage, or %NULL if there is no language
-identified by the given @id. Return value is owned by @lm and should not
-be freed.
+<return> a #GtkSourceLanguage, or %NULL
+if there is no language identified by the given @id. Return value is
+owned by @lm and should not be freed.
 </return>
 </function>
 
@@ -3695,9 +6287,10 @@ Returns the ids of the available languages.
 </parameter_description>
 </parameter>
 </parameters>
-<return> a %NULL-terminated array of string
-containing the ids of the available languages or %NULL if
-no language is available.
+<return>
+a %NULL-terminated array of strings containing the ids of the available
+languages or %NULL if no language is available.
+The array is sorted alphabetically according to the language name.
 The array is owned by @lm and must not be modified.
 </return>
 </function>
@@ -3772,9 +6365,9 @@ Since: 2.4
 </parameter_description>
 </parameter>
 </parameters>
-<return> a #GtkSourceLanguage, or %NULL if there is no suitable language
-for given @filename and/or @content_type. Return value is owned by @lm
-and should not be freed.
+<return> a #GtkSourceLanguage, or %NULL if there
+is no suitable language for given @filename and/or @content_type. Return
+value is owned by @lm and should not be freed.
 
 </return>
 </function>
@@ -3817,6 +6410,58 @@ you have to call this function right after creating it.
 <parameter name="dirs">
 <parameter_description>
 a %NULL-terminated array of strings or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_map_get_view">
+<description>
+Gets the #GtkSourceMap:view property, which is the view this widget is mapping.
+
+Since: 3.18
+
+</description>
+<parameters>
+<parameter name="map">
+<parameter_description> a #GtkSourceMap.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a #GtkSourceView or %NULL.
+
+</return>
+</function>
+
+<function name="gtk_source_map_new">
+<description>
+Creates a new #GtkSourceMap.
+
+Since: 3.18
+
+</description>
+<parameters>
+</parameters>
+<return> a new #GtkSourceMap.
+
+</return>
+</function>
+
+<function name="gtk_source_map_set_view">
+<description>
+Sets the view that @map will be doing the mapping to.
+
+Since: 3.18
+
+</description>
+<parameters>
+<parameter name="map">
+<parameter_description> a #GtkSourceMap
+</parameter_description>
+</parameter>
+<parameter name="view">
+<parameter_description> a #GtkSourceView
 </parameter_description>
 </parameter>
 </parameters>
@@ -3902,6 +6547,7 @@ should not be unreffed.
 Gets a stock id of an icon used by this attributes. Note that the stock id can
 be %NULL if it wasn't set earlier.
 
+Deprecated: 3.10: Don't use this function.
 
 </description>
 <parameters>
@@ -3912,13 +6558,14 @@ be %NULL if it wasn't set earlier.
 </parameters>
 <return> Stock id. Returned string is owned by @attributes and
 shouldn't be freed.
+
 </return>
 </function>
 
 <function name="gtk_source_mark_attributes_get_tooltip_markup">
 <description>
 Queries for a tooltip by emitting
-a GtkSourceMarkAttributes::query-tooltip-markup signal. The tooltip may contain
+a #GtkSourceMarkAttributes::query-tooltip-markup signal. The tooltip may contain
 a markup.
 
 
@@ -3941,7 +6588,7 @@ using g_free() when done with it.
 <function name="gtk_source_mark_attributes_get_tooltip_text">
 <description>
 Queries for a tooltip by emitting
-a GtkSourceMarkAttributes::query-tooltip-text signal. The tooltip is a plain
+a #GtkSourceMarkAttributes::query-tooltip-text signal. The tooltip is a plain
 text.
 
 
@@ -4078,6 +6725,8 @@ Sets a pixbuf to be used as a base for rendered icon.
 <description>
 Sets stock id to be used as a base for rendered icon.
 
+Deprecated: 3.10: Don't use this function.
+
 </description>
 <parameters>
 <parameter name="attributes">
@@ -4112,11 +6761,11 @@ Since: 2.2
 
 <function name="gtk_source_mark_new">
 <description>
-Creates a text mark. Add it to a buffer using gtk_text_buffer_add_mark(). 
+Creates a text mark. Add it to a buffer using gtk_text_buffer_add_mark().
 If name is NULL, the mark is anonymous; otherwise, the mark can be retrieved
 by name using gtk_text_buffer_get_mark().
-Normally marks are created using the utility function 
-gtk_source_buffer_create_mark().
+Normally marks are created using the utility function
+gtk_source_buffer_create_source_mark().
 
 Since: 2.2
 
@@ -4128,8 +6777,8 @@ Since: 2.2
 </parameter>
 <parameter name="category">
 <parameter_description> is used to classify marks according to common characteristics
-(e.g. all the marks representing a bookmark could belong to the &quot;bookmark&quot; 
-category, or all the marks representing a compilation error could belong to 
+(e.g. all the marks representing a bookmark could belong to the &quot;bookmark&quot;
+category, or all the marks representing a compilation error could belong to
 &quot;error&quot; category).
 </parameter_description>
 </parameter>
@@ -4209,7 +6858,7 @@ GtkSourcePrintCompositor *compositor;
 
 compositor = GTK_SOURCE_PRINT_COMPOSITOR (user_data);
 
-gtk_source_print_compositor_draw_page (compositor, 
+gtk_source_print_compositor_draw_page (compositor,
 context,
 page_nr);
 }
@@ -4222,7 +6871,7 @@ page_nr);
 </parameter_description>
 </parameter>
 <parameter name="context">
-<parameter_description> the #GtkPrintContext encapsulating the context information that is required when 
+<parameter_description> the #GtkPrintContext encapsulating the context information that is required when
 drawing the page for printing.
 </parameter_description>
 </parameter>
@@ -4248,7 +6897,7 @@ Since: 2.2
 </parameter_description>
 </parameter>
 </parameters>
-<return> a new string containing the name of the font used to print the 
+<return> a new string containing the name of the font used to print the
 text body.
 
 </return>
@@ -4298,7 +6947,7 @@ Since: 2.2
 
 <function name="gtk_source_print_compositor_get_footer_font_name">
 <description>
-Returns the name of the font used to print the page footer. 
+Returns the name of the font used to print the page footer.
 The returned string must be freed with g_free().
 
 Since: 2.2
@@ -4310,7 +6959,7 @@ Since: 2.2
 </parameter_description>
 </parameter>
 </parameters>
-<return> a new string containing the name of the font used to print 
+<return> a new string containing the name of the font used to print
 the page footer.
 
 </return>
@@ -4318,7 +6967,7 @@ the page footer.
 
 <function name="gtk_source_print_compositor_get_header_font_name">
 <description>
-Returns the name of the font used to print the page header. 
+Returns the name of the font used to print the page header.
 The returned string must be freed with g_free().
 
 Since: 2.2
@@ -4330,7 +6979,7 @@ Since: 2.2
 </parameter_description>
 </parameter>
 </parameters>
-<return> a new string containing the name of the font used to print 
+<return> a new string containing the name of the font used to print
 the page header.
 
 </return>
@@ -4380,7 +7029,7 @@ Since: 2.2
 
 <function name="gtk_source_print_compositor_get_line_numbers_font_name">
 <description>
-Returns the name of the font used to print line numbers on the left margin. 
+Returns the name of the font used to print line numbers on the left margin.
 The returned string must be freed with g_free().
 
 Since: 2.2
@@ -4392,7 +7041,7 @@ Since: 2.2
 </parameter_description>
 </parameter>
 </parameters>
-<return> a new string containing the name of the font used to print 
+<return> a new string containing the name of the font used to print
 line numbers on the left margin.
 
 </return>
@@ -4400,7 +7049,7 @@ line numbers on the left margin.
 
 <function name="gtk_source_print_compositor_get_n_pages">
 <description>
-Returns the number of pages in the document or &lt;code&gt;-1&lt;/code&gt; if the 
+Returns the number of pages in the document or &lt;code&gt;-1&lt;/code&gt; if the
 document has not been completely paginated.
 
 Since: 2.2
@@ -4412,7 +7061,7 @@ Since: 2.2
 </parameter_description>
 </parameter>
 </parameters>
-<return> the number of pages in the document or &lt;code&gt;-1&lt;/code&gt; if the 
+<return> the number of pages in the document or &lt;code&gt;-1&lt;/code&gt; if the
 document has not been completely paginated.
 
 </return>
@@ -4600,9 +7249,9 @@ Since: 2.2
 <description>
 Creates a new print compositor that can be used to print the buffer
 associated with @view.
-This constructor sets some configuration properties to make the 
+This constructor sets some configuration properties to make the
 printed output match @view as much as possible.  The properties set are
-#GtkSourcePrintCompositor:tab-width, #GtkSourcePrintCompositor:highlight-syntax, 
+#GtkSourcePrintCompositor:tab-width, #GtkSourcePrintCompositor:highlight-syntax,
 #GtkSourcePrintCompositor:wrap-mode, #GtkSourcePrintCompositor:body-font-name and
 #GtkSourcePrintCompositor:print-line-numbers.
 
@@ -4625,8 +7274,8 @@ Since: 2.2
 Paginate the document associated with the @compositor.
 
 In order to support non-blocking pagination, document is paginated in small chunks.
-Each time gtk_source_print_compositor_paginate() is invoked, a chunk of the document 
-is paginated. To paginate the entire document, gtk_source_print_compositor_paginate() 
+Each time gtk_source_print_compositor_paginate() is invoked, a chunk of the document
+is paginated. To paginate the entire document, gtk_source_print_compositor_paginate()
 must be invoked multiple times.
 It returns %TRUE if the document has been completely paginated, otherwise it returns %FALSE.
 
@@ -4659,7 +7308,7 @@ return FALSE;
 }
 &lt;/programlisting&gt;&lt;/informalexample&gt;
 
-If you don't need to do pagination in chunks, you can simply do it all in the 
+If you don't need to do pagination in chunks, you can simply do it all in the
 #GtkPrintOperation::begin-print handler, and set the number of pages from there, like
 in the following example:
 
@@ -4692,7 +7341,7 @@ Since: 2.2
 </parameter_description>
 </parameter>
 <parameter name="context">
-<parameter_description> the #GtkPrintContext whose parameters (e.g. paper size, print margins, etc.) 
+<parameter_description> the #GtkPrintContext whose parameters (e.g. paper size, print margins, etc.)
 are used by the the @compositor to paginate the document.
 </parameter_description>
 </parameter>
@@ -4704,15 +7353,15 @@ are used by the the @compositor to paginate the document.
 
 <function name="gtk_source_print_compositor_set_body_font_name">
 <description>
-Sets the default font for the printed text. 
+Sets the default font for the printed text.
 
 @font_name should be a
 string representation of a font description Pango can understand.
 (e.g. &quot;Monospace 10&quot;). See pango_font_description_from_string()
-for a description of the format of the string representation. 
+for a description of the format of the string representation.
 
-This function cannot be called anymore after the first call to the 
-gtk_source_print_compositor_paginate() function.   
+This function cannot be called anymore after the first call to the
+gtk_source_print_compositor_paginate() function.
 
 Since: 2.2
 
@@ -4758,15 +7407,15 @@ Since: 2.2
 <description>
 Sets the font for printing the page footer. If
 %NULL is supplied, the default font (i.e. the one being used for the
-text) will be used instead.  
+text) will be used instead.
 
 @font_name should be a
 string representation of a font description Pango can understand.
 (e.g. &quot;Monospace 10&quot;). See pango_font_description_from_string()
-for a description of the format of the string representation. 
+for a description of the format of the string representation.
 
-This function cannot be called anymore after the first call to the 
-gtk_source_print_compositor_paginate() function.    
+This function cannot be called anymore after the first call to the
+gtk_source_print_compositor_paginate() function.
 
 Since: 2.2
 
@@ -4786,24 +7435,8 @@ Since: 2.2
 
 <function name="gtk_source_print_compositor_set_footer_format">
 <description>
-Sets strftime like header format strings, to be printed on the
-left, center and right of the bottom of each page. The strings may
-include strftime(3) codes which will be expanded at print time.
-All strftime() codes are accepted, with the addition of %N for the
-page number and %Q for the page count.
-
-@separator specifies if a solid line should be drawn to separate
-the footer from the document text.
-
-If %NULL is given for any of the three arguments, that particular
-string will not be printed.
-
-For the footer to be printed, in
-addition to specifying format strings, you need to enable footer
-printing with gtk_source_print_compositor_set_print_footer().
-
-This function cannot be called anymore after the first call to the 
-gtk_source_print_compositor_paginate() function.    
+See gtk_source_print_compositor_set_header_format() for more information
+about the parameters.
 
 Since: 2.2
 
@@ -4837,15 +7470,15 @@ Since: 2.2
 <description>
 Sets the font for printing the page header. If
 %NULL is supplied, the default font (i.e. the one being used for the
-text) will be used instead.  
+text) will be used instead.
 
 @font_name should be a
 string representation of a font description Pango can understand.
 (e.g. &quot;Monospace 10&quot;). See pango_font_description_from_string()
-for a description of the format of the string representation. 
+for a description of the format of the string representation.
 
-This function cannot be called anymore after the first call to the 
-gtk_source_print_compositor_paginate() function.    
+This function cannot be called anymore after the first call to the
+gtk_source_print_compositor_paginate() function.
 
 Since: 2.2
 
@@ -4868,8 +7501,11 @@ Since: 2.2
 Sets strftime like header format strings, to be printed on the
 left, center and right of the top of each page.  The strings may
 include strftime(3) codes which will be expanded at print time.
-All strftime() codes are accepted, with the addition of %N for the
-page number and %Q for the page count.
+A subset of strftime() codes are accepted, see g_date_time_format()
+for more details on the accepted format specifiers.
+Additionally the following format specifiers are accepted:
+- #N: the page number
+- #Q: the page count.
 
 @separator specifies if a solid line should be drawn to separate
 the header from the document text.
@@ -4881,8 +7517,8 @@ For the header to be printed, in
 addition to specifying format strings, you need to enable header
 printing with gtk_source_print_compositor_set_print_header().
 
-This function cannot be called anymore after the first call to the 
-gtk_source_print_compositor_paginate() function.    
+This function cannot be called anymore after the first call to the
+gtk_source_print_compositor_paginate() function.
 
 Since: 2.2
 
@@ -4917,8 +7553,8 @@ Since: 2.2
 Sets whether the printed text will be highlighted according to the
 buffer rules.  Both color and font style are applied.
 
-This function cannot be called anymore after the first call to the 
-gtk_source_print_compositor_paginate() function.   
+This function cannot be called anymore after the first call to the
+gtk_source_print_compositor_paginate() function.
 
 Since: 2.2
 
@@ -4964,15 +7600,15 @@ Since: 2.2
 <description>
 Sets the font for printing line numbers on the left margin.  If
 %NULL is supplied, the default font (i.e. the one being used for the
-text) will be used instead.  
+text) will be used instead.
 
 @font_name should be a
 string representation of a font description Pango can understand.
 (e.g. &quot;Monospace 10&quot;). See pango_font_description_from_string()
-for a description of the format of the string representation. 
+for a description of the format of the string representation.
 
-This function cannot be called anymore after the first call to the 
-gtk_source_print_compositor_paginate() function.    
+This function cannot be called anymore after the first call to the
+gtk_source_print_compositor_paginate() function.
 
 Since: 2.2
 
@@ -4992,7 +7628,7 @@ Since: 2.2
 
 <function name="gtk_source_print_compositor_set_print_footer">
 <description>
-Sets whether you want to print a footer in each page.  The 
+Sets whether you want to print a footer in each page.  The
 footer consists of three pieces of text and an optional line
 separator, configurable with
 gtk_source_print_compositor_set_footer_format().
@@ -5000,8 +7636,8 @@ gtk_source_print_compositor_set_footer_format().
 Note that by default the footer format is unspecified, and if it's
 empty it will not be printed, regardless of this setting.
 
-This function cannot be called anymore after the first call to the 
-gtk_source_print_compositor_paginate() function.    
+This function cannot be called anymore after the first call to the
+gtk_source_print_compositor_paginate() function.
 
 Since: 2.2
 
@@ -5021,7 +7657,7 @@ Since: 2.2
 
 <function name="gtk_source_print_compositor_set_print_header">
 <description>
-Sets whether you want to print a header in each page.  The 
+Sets whether you want to print a header in each page.  The
 header consists of three pieces of text and an optional line
 separator, configurable with
 gtk_source_print_compositor_set_header_format().
@@ -5029,8 +7665,8 @@ gtk_source_print_compositor_set_header_format().
 Note that by default the header format is unspecified, and if it's
 empty it will not be printed, regardless of this setting.
 
-This function cannot be called anymore after the first call to the 
-gtk_source_print_compositor_paginate() function.    
+This function cannot be called anymore after the first call to the
+gtk_source_print_compositor_paginate() function.
 
 Since: 2.2
 
@@ -5056,8 +7692,8 @@ printed every @interval lines (i.e. 1 will print all line numbers).
 
 Maximum accepted value for @interval is 100.
 
-This function cannot be called anymore after the first call to the 
-gtk_source_print_compositor_paginate() function.   
+This function cannot be called anymore after the first call to the
+gtk_source_print_compositor_paginate() function.
 
 Since: 2.2
 
@@ -5101,9 +7737,9 @@ Since: 2.2
 
 <function name="gtk_source_print_compositor_set_tab_width">
 <description>
-Sets the width of tabulation in characters for printed text. 
+Sets the width of tabulation in characters for printed text.
 
-This function cannot be called anymore after the first call to the 
+This function cannot be called anymore after the first call to the
 gtk_source_print_compositor_paginate() function.
 
 Since: 2.2
@@ -5150,8 +7786,8 @@ Since: 2.2
 <description>
 Sets the line wrapping mode for the printed text.
 
-This function cannot be called anymore after the first call to the 
-gtk_source_print_compositor_paginate() function.  
+This function cannot be called anymore after the first call to the
+gtk_source_print_compositor_paginate() function.
 
 Since: 2.2
 
@@ -5163,6 +7799,1253 @@ Since: 2.2
 </parameter>
 <parameter name="wrap_mode">
 <parameter_description> a #GtkWrapMode.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_regex_new">
+<description>
+Creates a new regex.
+
+
+</description>
+<parameters>
+<parameter name="pattern">
+<parameter_description> the regular expression.
+</parameter_description>
+</parameter>
+<parameter name="flags">
+<parameter_description> compile options for @pattern.
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> location to store the error occuring, or %NULL to ignore errors.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a newly-allocated #GtkSourceRegex.
+</return>
+</function>
+
+<function name="gtk_source_region_add">
+<description>
+Adds the subregion delimited by @_start and @_end to @region.
+
+Since: 3.22
+
+</description>
+<parameters>
+<parameter name="region">
+<parameter_description> a #GtkSourceRegion.
+</parameter_description>
+</parameter>
+<parameter name="_start">
+<parameter_description> the start of the subregion.
+</parameter_description>
+</parameter>
+<parameter name="_end">
+<parameter_description> the end of the subregion.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_region_get_bounds">
+<description>
+Gets the @start and @end bounds of the @region.
+
+Since: 3.22
+
+</description>
+<parameters>
+<parameter name="region">
+<parameter_description> a #GtkSourceRegion.
+</parameter_description>
+</parameter>
+<parameter name="start">
+<parameter_description> iterator to initialize with the start of @region,
+or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="end">
+<parameter_description> iterator to initialize with the end of @region,
+or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if @start and @end have been set successfully (if non-%NULL),
+or %FALSE if the @region is empty.
+</return>
+</function>
+
+<function name="gtk_source_region_get_buffer">
+<description>
+Since: 3.22
+
+</description>
+<parameters>
+<parameter name="region">
+<parameter_description> a #GtkSourceRegion.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the #GtkTextBuffer.
+</return>
+</function>
+
+<function name="gtk_source_region_get_start_region_iter">
+<description>
+Initializes a #GtkSourceRegionIter to the first subregion of @region. If
+@region is empty, @iter will be initialized to the end iterator.
+
+Since: 3.22
+
+</description>
+<parameters>
+<parameter name="region">
+<parameter_description> a #GtkSourceRegion.
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> iterator to initialize to the first subregion.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_region_intersect">
+<description>
+Computes the intersection between @region and the subregion delimited by
+@_start and @_end.
+
+Since: 3.22
+
+</description>
+<parameters>
+<parameter name="region">
+<parameter_description> a #GtkSourceRegion.
+</parameter_description>
+</parameter>
+<parameter name="_start">
+<parameter_description> the start of the subregion.
+</parameter_description>
+</parameter>
+<parameter name="_end">
+<parameter_description> the end of the subregion.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the intersection as a new
+#GtkSourceRegion.
+</return>
+</function>
+
+<function name="gtk_source_region_is_empty">
+<description>
+Returns whether the @region is empty. A %NULL @region is considered empty.
+
+Since: 3.22
+
+</description>
+<parameters>
+<parameter name="region">
+<parameter_description> a #GtkSourceRegion, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether the @region is empty.
+</return>
+</function>
+
+<function name="gtk_source_region_iter_get_subregion">
+<description>
+Gets the subregion at this iterator.
+
+Since: 3.22
+
+</description>
+<parameters>
+<parameter name="iter">
+<parameter_description> a #GtkSourceRegionIter.
+</parameter_description>
+</parameter>
+<parameter name="start">
+<parameter_description> iterator to initialize with the subregion start, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="end">
+<parameter_description> iterator to initialize with the subregion end, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if @start and @end have been set successfully (if non-%NULL),
+or %FALSE if @iter is the end iterator or if the region is empty.
+</return>
+</function>
+
+<function name="gtk_source_region_iter_is_end">
+<description>
+Since: 3.22
+
+</description>
+<parameters>
+<parameter name="iter">
+<parameter_description> a #GtkSourceRegionIter.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether @iter is the end iterator.
+</return>
+</function>
+
+<function name="gtk_source_region_iter_next">
+<description>
+Moves @iter to the next subregion.
+
+Since: 3.22
+
+</description>
+<parameters>
+<parameter name="iter">
+<parameter_description> a #GtkSourceRegionIter.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if @iter moved and is dereferenceable, or %FALSE if @iter has
+been set to the end iterator.
+</return>
+</function>
+
+<function name="gtk_source_region_new">
+<description>
+Since: 3.22
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkTextBuffer.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a new #GtkSourceRegion object for @buffer.
+</return>
+</function>
+
+<function name="gtk_source_region_subtract">
+<description>
+Subtracts the subregion delimited by @_start and @_end from @region.
+
+Since: 3.22
+
+</description>
+<parameters>
+<parameter name="region">
+<parameter_description> a #GtkSourceRegion.
+</parameter_description>
+</parameter>
+<parameter name="_start">
+<parameter_description> the start of the subregion.
+</parameter_description>
+</parameter>
+<parameter name="_end">
+<parameter_description> the end of the subregion.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_region_to_string">
+<description>
+Gets a string represention of @region, for debugging purposes.
+
+The returned string contains the character offsets of the subregions. It
+doesn't include a newline character at the end of the string.
+
+Since: 3.22
+
+</description>
+<parameters>
+<parameter name="region">
+<parameter_description> a #GtkSourceRegion.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a string represention of @region. Free
+with g_free() when no longer needed.
+</return>
+</function>
+
+<function name="gtk_source_search_context_backward">
+<description>
+Synchronous backward search. It is recommended to use the asynchronous
+functions instead, to not block the user interface. However, if you are sure
+that the @buffer is small, this function is more convenient to use.
+
+Since: 3.10
+Deprecated: 3.22: Use gtk_source_search_context_backward2() instead.
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> start of search.
+</parameter_description>
+</parameter>
+<parameter name="match_start">
+<parameter_description> return location for start of match, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="match_end">
+<parameter_description> return location for end of match, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether a match was found.
+</return>
+</function>
+
+<function name="gtk_source_search_context_backward2">
+<description>
+Synchronous backward search. It is recommended to use the asynchronous
+functions instead, to not block the user interface. However, if you are sure
+that the @buffer is small, this function is more convenient to use.
+
+The difference with gtk_source_search_context_backward() is that the
+@has_wrapped_around out parameter has been added for convenience.
+
+If the #GtkSourceSearchSettings:wrap-around property is %FALSE, this function
+doesn't try to wrap around.
+
+The @has_wrapped_around out parameter is set independently of whether a match
+is found. So if this function returns %FALSE, @has_wrapped_around will have
+the same value as the #GtkSourceSearchSettings:wrap-around property.
+
+Since: 3.22
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> start of search.
+</parameter_description>
+</parameter>
+<parameter name="match_start">
+<parameter_description> return location for start of match, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="match_end">
+<parameter_description> return location for end of match, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="has_wrapped_around">
+<parameter_description> return location to know whether the
+search has wrapped around, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether a match was found.
+</return>
+</function>
+
+<function name="gtk_source_search_context_backward_async">
+<description>
+The asynchronous version of gtk_source_search_context_backward2().
+
+See the documentation of gtk_source_search_context_backward2() for more
+details.
+
+See the #GAsyncResult documentation to know how to use this function.
+
+If the operation is cancelled, the @callback will only be called if
+@cancellable was not %NULL. gtk_source_search_context_backward_async() takes
+ownership of @cancellable, so you can unref it after calling this function.
+
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> start of search.
+</parameter_description>
+</parameter>
+<parameter name="cancellable">
+<parameter_description> a #GCancellable, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="callback">
+<parameter_description> a #GAsyncReadyCallback to call when the operation is finished.
+</parameter_description>
+</parameter>
+<parameter name="user_data">
+<parameter_description> the data to pass to the @callback function.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_search_context_backward_finish">
+<description>
+Finishes a backward search started with
+gtk_source_search_context_backward_async().
+
+Since: 3.10
+Deprecated: 3.22: Use gtk_source_search_context_backward_finish2() instead.
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+<parameter name="result">
+<parameter_description> a #GAsyncResult.
+</parameter_description>
+</parameter>
+<parameter name="match_start">
+<parameter_description> return location for start of match, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="match_end">
+<parameter_description> return location for end of match, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> a #GError, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether a match was found.
+</return>
+</function>
+
+<function name="gtk_source_search_context_backward_finish2">
+<description>
+Finishes a backward search started with
+gtk_source_search_context_backward_async().
+
+See the documentation of gtk_source_search_context_backward2() for more
+details.
+
+Since: 3.22
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+<parameter name="result">
+<parameter_description> a #GAsyncResult.
+</parameter_description>
+</parameter>
+<parameter name="match_start">
+<parameter_description> return location for start of match, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="match_end">
+<parameter_description> return location for end of match, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="has_wrapped_around">
+<parameter_description> return location to know whether the
+search has wrapped around, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> a #GError, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether a match was found.
+</return>
+</function>
+
+<function name="gtk_source_search_context_forward">
+<description>
+Synchronous forward search. It is recommended to use the asynchronous
+functions instead, to not block the user interface. However, if you are sure
+that the @buffer is small, this function is more convenient to use.
+
+Since: 3.10
+Deprecated: 3.22: Use gtk_source_search_context_forward2() instead.
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> start of search.
+</parameter_description>
+</parameter>
+<parameter name="match_start">
+<parameter_description> return location for start of match, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="match_end">
+<parameter_description> return location for end of match, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether a match was found.
+</return>
+</function>
+
+<function name="gtk_source_search_context_forward2">
+<description>
+Synchronous forward search. It is recommended to use the asynchronous
+functions instead, to not block the user interface. However, if you are sure
+that the @buffer is small, this function is more convenient to use.
+
+The difference with gtk_source_search_context_forward() is that the
+@has_wrapped_around out parameter has been added for convenience.
+
+If the #GtkSourceSearchSettings:wrap-around property is %FALSE, this function
+doesn't try to wrap around.
+
+The @has_wrapped_around out parameter is set independently of whether a match
+is found. So if this function returns %FALSE, @has_wrapped_around will have
+the same value as the #GtkSourceSearchSettings:wrap-around property.
+
+Since: 3.22
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> start of search.
+</parameter_description>
+</parameter>
+<parameter name="match_start">
+<parameter_description> return location for start of match, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="match_end">
+<parameter_description> return location for end of match, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="has_wrapped_around">
+<parameter_description> return location to know whether the
+search has wrapped around, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether a match was found.
+</return>
+</function>
+
+<function name="gtk_source_search_context_forward_async">
+<description>
+The asynchronous version of gtk_source_search_context_forward2().
+
+See the documentation of gtk_source_search_context_forward2() for more
+details.
+
+See the #GAsyncResult documentation to know how to use this function.
+
+If the operation is cancelled, the @callback will only be called if
+@cancellable was not %NULL. gtk_source_search_context_forward_async() takes
+ownership of @cancellable, so you can unref it after calling this function.
+
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+<parameter name="iter">
+<parameter_description> start of search.
+</parameter_description>
+</parameter>
+<parameter name="cancellable">
+<parameter_description> a #GCancellable, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="callback">
+<parameter_description> a #GAsyncReadyCallback to call when the operation is finished.
+</parameter_description>
+</parameter>
+<parameter name="user_data">
+<parameter_description> the data to pass to the @callback function.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_search_context_forward_finish">
+<description>
+Finishes a forward search started with
+gtk_source_search_context_forward_async().
+
+Since: 3.10
+Deprecated: 3.22: Use gtk_source_search_context_forward_finish2() instead.
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+<parameter name="result">
+<parameter_description> a #GAsyncResult.
+</parameter_description>
+</parameter>
+<parameter name="match_start">
+<parameter_description> return location for start of match, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="match_end">
+<parameter_description> return location for end of match, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> a #GError, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether a match was found.
+</return>
+</function>
+
+<function name="gtk_source_search_context_forward_finish2">
+<description>
+Finishes a forward search started with
+gtk_source_search_context_forward_async().
+
+See the documentation of gtk_source_search_context_forward2() for more
+details.
+
+Since: 3.22
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+<parameter name="result">
+<parameter_description> a #GAsyncResult.
+</parameter_description>
+</parameter>
+<parameter name="match_start">
+<parameter_description> return location for start of match, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="match_end">
+<parameter_description> return location for end of match, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="has_wrapped_around">
+<parameter_description> return location to know whether the
+search has wrapped around, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> a #GError, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether a match was found.
+</return>
+</function>
+
+<function name="gtk_source_search_context_get_buffer">
+<description>
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the associated buffer.
+</return>
+</function>
+
+<function name="gtk_source_search_context_get_highlight">
+<description>
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether to highlight the search occurrences.
+</return>
+</function>
+
+<function name="gtk_source_search_context_get_match_style">
+<description>
+Since: 3.16
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the #GtkSourceStyle to apply on search matches.
+
+</return>
+</function>
+
+<function name="gtk_source_search_context_get_occurrence_position">
+<description>
+Gets the position of a search occurrence. If the buffer is not already fully
+scanned, the position may be unknown, and -1 is returned. If 0 is returned,
+it means that this part of the buffer has already been scanned, and that
+@match_start and @match_end don't delimit an occurrence.
+
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+<parameter name="match_start">
+<parameter_description> the start of the occurrence.
+</parameter_description>
+</parameter>
+<parameter name="match_end">
+<parameter_description> the end of the occurrence.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the position of the search occurrence. The first occurrence has the
+position 1 (not 0). Returns 0 if @match_start and @match_end don't delimit
+an occurrence. Returns -1 if the position is not yet known.
+
+</return>
+</function>
+
+<function name="gtk_source_search_context_get_occurrences_count">
+<description>
+Gets the total number of search occurrences. If the buffer is not already
+fully scanned, the total number of occurrences is unknown, and -1 is
+returned.
+
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the total number of search occurrences, or -1 if unknown.
+</return>
+</function>
+
+<function name="gtk_source_search_context_get_regex_error">
+<description>
+Regular expression patterns must follow certain rules. If
+#GtkSourceSearchSettings:search-text breaks a rule, the error can be retrieved
+with this function. The error domain is #G_REGEX_ERROR.
+
+Free the return value with g_error_free().
+
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the #GError, or %NULL if the pattern is valid.
+</return>
+</function>
+
+<function name="gtk_source_search_context_get_settings">
+<description>
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the search settings.
+</return>
+</function>
+
+<function name="gtk_source_search_context_new">
+<description>
+Creates a new search context, associated with @buffer, and customized with
+@settings. If @settings is %NULL, a new #GtkSourceSearchSettings object will
+be created, that you can retrieve with
+gtk_source_search_context_get_settings().
+
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="buffer">
+<parameter_description> a #GtkSourceBuffer.
+</parameter_description>
+</parameter>
+<parameter name="settings">
+<parameter_description> a #GtkSourceSearchSettings, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return> a new search context.
+</return>
+</function>
+
+<function name="gtk_source_search_context_replace">
+<description>
+Replaces a search match by another text. If @match_start and @match_end
+doesn't correspond to a search match, %FALSE is returned.
+
+For a regular expression replacement, you can check if @replace is valid by
+calling g_regex_check_replacement(). The @replace text can contain
+backreferences; read the g_regex_replace() documentation for more details.
+
+Since: 3.10
+Deprecated: 3.22: Use gtk_source_search_context_replace2() instead.
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+<parameter name="match_start">
+<parameter_description> the start of the match to replace.
+</parameter_description>
+</parameter>
+<parameter name="match_end">
+<parameter_description> the end of the match to replace.
+</parameter_description>
+</parameter>
+<parameter name="replace">
+<parameter_description> the replacement text.
+</parameter_description>
+</parameter>
+<parameter name="replace_length">
+<parameter_description> the length of @replace in bytes, or -1.
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> location to a #GError, or %NULL to ignore errors.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether the match has been replaced.
+</return>
+</function>
+
+<function name="gtk_source_search_context_replace2">
+<description>
+Replaces a search match by another text. If @match_start and @match_end
+doesn't correspond to a search match, %FALSE is returned.
+
+Unlike with gtk_source_search_context_replace(), the @match_start and
+@match_end iters are revalidated to point to the replacement text boundaries.
+
+For a regular expression replacement, you can check if @replace is valid by
+calling g_regex_check_replacement(). The @replace text can contain
+backreferences; read the g_regex_replace() documentation for more details.
+
+Since: 3.22
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+<parameter name="match_start">
+<parameter_description> the start of the match to replace.
+</parameter_description>
+</parameter>
+<parameter name="match_end">
+<parameter_description> the end of the match to replace.
+</parameter_description>
+</parameter>
+<parameter name="replace">
+<parameter_description> the replacement text.
+</parameter_description>
+</parameter>
+<parameter name="replace_length">
+<parameter_description> the length of @replace in bytes, or -1.
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> location to a #GError, or %NULL to ignore errors.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether the match has been replaced.
+</return>
+</function>
+
+<function name="gtk_source_search_context_replace_all">
+<description>
+Replaces all search matches by another text. It is a synchronous function, so
+it can block the user interface.
+
+For a regular expression replacement, you can check if @replace is valid by
+calling g_regex_check_replacement(). The @replace text can contain
+backreferences; read the g_regex_replace() documentation for more details.
+
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+<parameter name="replace">
+<parameter_description> the replacement text.
+</parameter_description>
+</parameter>
+<parameter name="replace_length">
+<parameter_description> the length of @replace in bytes, or -1.
+</parameter_description>
+</parameter>
+<parameter name="error">
+<parameter_description> location to a #GError, or %NULL to ignore errors.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the number of replaced matches.
+</return>
+</function>
+
+<function name="gtk_source_search_context_set_highlight">
+<description>
+Enables or disables the search occurrences highlighting.
+
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+<parameter name="highlight">
+<parameter_description> the setting.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_search_context_set_match_style">
+<description>
+Set the style to apply on search matches. If @match_style is %NULL, default
+theme's scheme 'match-style' will be used.
+To enable or disable the search highlighting, use
+gtk_source_search_context_set_highlight().
+
+Since: 3.16
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+<parameter name="match_style">
+<parameter_description> a #GtkSourceStyle, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_search_context_set_settings">
+<description>
+Associate a #GtkSourceSearchSettings with the search context. If @settings is
+%NULL, a new one will be created.
+
+The search context holds a reference to @settings.
+
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="search">
+<parameter_description> a #GtkSourceSearchContext.
+</parameter_description>
+</parameter>
+<parameter name="settings">
+<parameter_description> the new #GtkSourceSearchSettings, or %NULL.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_search_settings_get_at_word_boundaries">
+<description>
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="settings">
+<parameter_description> a #GtkSourceSearchSettings.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether to search at word boundaries.
+</return>
+</function>
+
+<function name="gtk_source_search_settings_get_case_sensitive">
+<description>
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="settings">
+<parameter_description> a #GtkSourceSearchSettings.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether the search is case sensitive.
+</return>
+</function>
+
+<function name="gtk_source_search_settings_get_regex_enabled">
+<description>
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="settings">
+<parameter_description> a #GtkSourceSearchSettings.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether to search by regular expressions.
+</return>
+</function>
+
+<function name="gtk_source_search_settings_get_search_text">
+<description>
+Gets the text to search. The return value must not be freed.
+
+You may be interested to call gtk_source_utils_escape_search_text() after
+this function.
+
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="settings">
+<parameter_description> a #GtkSourceSearchSettings.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the text to search, or %NULL if the search is disabled.
+</return>
+</function>
+
+<function name="gtk_source_search_settings_get_wrap_around">
+<description>
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="settings">
+<parameter_description> a #GtkSourceSearchSettings.
+</parameter_description>
+</parameter>
+</parameters>
+<return> whether to wrap around the search.
+</return>
+</function>
+
+<function name="gtk_source_search_settings_new">
+<description>
+Creates a new search settings object.
+
+Since: 3.10
+
+</description>
+<parameters>
+</parameters>
+<return> a new search settings object.
+</return>
+</function>
+
+<function name="gtk_source_search_settings_set_at_word_boundaries">
+<description>
+Change whether the search is done at word boundaries. If @at_word_boundaries
+is %TRUE, a search match must start and end a word. The match can span
+multiple words. See also gtk_text_iter_starts_word() and
+gtk_text_iter_ends_word().
+
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="settings">
+<parameter_description> a #GtkSourceSearchSettings.
+</parameter_description>
+</parameter>
+<parameter name="at_word_boundaries">
+<parameter_description> the setting.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_search_settings_set_case_sensitive">
+<description>
+Enables or disables the case sensitivity for the search.
+
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="settings">
+<parameter_description> a #GtkSourceSearchSettings.
+</parameter_description>
+</parameter>
+<parameter name="case_sensitive">
+<parameter_description> the setting.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_search_settings_set_regex_enabled">
+<description>
+Enables or disables whether to search by regular expressions.
+If enabled, the #GtkSourceSearchSettings:search-text property contains the
+pattern of the regular expression.
+
+#GtkSourceSearchContext uses #GRegex when regex search is enabled. See the
+[Regular expression syntax](https://developer.gnome.org/glib/stable/glib-regex-syntax.html)
+page in the GLib reference manual.
+
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="settings">
+<parameter_description> a #GtkSourceSearchSettings.
+</parameter_description>
+</parameter>
+<parameter name="regex_enabled">
+<parameter_description> the setting.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_search_settings_set_search_text">
+<description>
+Sets the text to search. If @text is %NULL or is empty, the search will be
+disabled. A copy of @text will be made, so you can safely free @text after
+a call to this function.
+
+You may be interested to call gtk_source_utils_unescape_search_text() before
+this function.
+
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="settings">
+<parameter_description> a #GtkSourceSearchSettings.
+</parameter_description>
+</parameter>
+<parameter name="search_text">
+<parameter_description> the nul-terminated text to search, or %NULL to disable the search.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_search_settings_set_wrap_around">
+<description>
+Enables or disables the wrap around search. If @wrap_around is %TRUE, the
+forward search continues at the beginning of the buffer if no search
+occurrences are found. Similarly, the backward search continues to search at
+the end of the buffer.
+
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="settings">
+<parameter_description> a #GtkSourceSearchSettings.
+</parameter_description>
+</parameter>
+<parameter name="wrap_around">
+<parameter_description> the setting.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_style_apply">
+<description>
+This function modifies the #GtkTextTag properties that are related to the
+#GtkSourceStyle properties. Other #GtkTextTag properties are left untouched.
+
+If @style is non-%NULL, applies @style to @tag.
+
+If @style is %NULL, the related *-set properties of #GtkTextTag are set to
+%FALSE.
+
+Since: 3.22
+
+</description>
+<parameters>
+<parameter name="style">
+<parameter_description> a #GtkSourceStyle to apply, or %NULL.
+</parameter_description>
+</parameter>
+<parameter name="tag">
+<parameter_description> a #GtkTextTag to apply styles to.
 </parameter_description>
 </parameter>
 </parameters>
@@ -5189,6 +9072,72 @@ when you are done with it.
 </return>
 </function>
 
+<function name="gtk_source_style_scheme_chooser_button_new">
+<description>
+Creates a new #GtkSourceStyleSchemeChooserButton.
+
+Since: 3.16
+
+</description>
+<parameters>
+</parameters>
+<return> a new #GtkSourceStyleSchemeChooserButton.
+
+</return>
+</function>
+
+<function name="gtk_source_style_scheme_chooser_get_style_scheme">
+<description>
+Gets the currently-selected scheme.
+
+Since: 3.16
+
+</description>
+<parameters>
+<parameter name="chooser">
+<parameter_description> a #GtkSourceStyleSchemeChooser
+</parameter_description>
+</parameter>
+</parameters>
+<return> the currently-selected scheme.
+
+</return>
+</function>
+
+<function name="gtk_source_style_scheme_chooser_set_style_scheme">
+<description>
+Sets the scheme.
+
+Since: 3.16
+
+</description>
+<parameters>
+<parameter name="chooser">
+<parameter_description> a #GtkSourceStyleSchemeChooser
+</parameter_description>
+</parameter>
+<parameter name="scheme">
+<parameter_description> a #GtkSourceStyleScheme
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
+<function name="gtk_source_style_scheme_chooser_widget_new">
+<description>
+Creates a new #GtkSourceStyleSchemeChooserWidget.
+
+Since: 3.16
+
+</description>
+<parameters>
+</parameters>
+<return> a new  #GtkSourceStyleSchemeChooserWidget.
+
+</return>
+</function>
+
 <function name="gtk_source_style_scheme_get_authors">
 <description>
 Since: 2.0
@@ -5200,9 +9149,9 @@ Since: 2.0
 </parameter_description>
 </parameter>
 </parameters>
-<return> a %NULL-terminated
-array containing the @scheme authors or %NULL if no author
-is specified by the style scheme.
+<return> a
+%NULL-terminated array containing the @scheme authors or %NULL if
+no author is specified by the style scheme.
 
 </return>
 </function>
@@ -5234,8 +9183,8 @@ Since: 2.0
 </parameter_description>
 </parameter>
 </parameters>
-<return> @scheme file name if the scheme was created parsing a
-style scheme file or %NULL in the other cases.
+<return> @scheme file name if the scheme was created
+parsing a style scheme file or %NULL in the other cases.
 
 </return>
 </function>
@@ -5287,9 +9236,9 @@ Since: 2.0
 </parameter_description>
 </parameter>
 </parameters>
-<return> style which corresponds to @style_id
-in the @scheme, or %NULL when no style with this name found.
-It is owned by @scheme and may not be unref'ed.
+<return> style which corresponds to @style_id in
+the @scheme, or %NULL when no style with this name found.  It is owned by
+@scheme and may not be unref'ed.
 
 </return>
 </function>
@@ -5376,9 +9325,11 @@ Returns the ids of the available style schemes.
 </parameter_description>
 </parameter>
 </parameters>
-<return> a %NULL-terminated array
-of string containing the ids of the available style schemes or %NULL if no
-style scheme is available. The array is owned by the @manager and must not be modified.
+<return>
+a %NULL-terminated array of strings containing the ids of the available
+style schemes or %NULL if no style scheme is available.
+The array is sorted alphabetically according to the scheme name.
+The array is owned by the @manager and must not be modified.
 </return>
 </function>
 
@@ -5455,32 +9406,31 @@ a %NULL-terminated array of strings or %NULL.
 <return></return>
 </function>
 
-<function name="gtk_source_style_scheme_set_style">
+<function name="gtk_source_tag_new">
 <description>
-Since: 2.0
+Creates a #GtkSourceTag. Configure the tag using object arguments,
+i.e. using g_object_set().
+
+For usual cases, gtk_source_buffer_create_source_tag() is more convenient to
+use.
+
+Since: 3.20
 
 </description>
 <parameters>
-<parameter name="scheme">
-<parameter_description> a #GtkSourceStyleScheme.
-</parameter_description>
-</parameter>
 <parameter name="name">
-<parameter_description> style name.
-</parameter_description>
-</parameter>
-<parameter name="style">
-<parameter_description> style to set or %NULL.
+<parameter_description> tag name, or %NULL.
 </parameter_description>
 </parameter>
 </parameters>
-<return></return>
+<return> a new #GtkSourceTag.
+</return>
 </function>
 
 <function name="gtk_source_undo_manager_begin_not_undoable_action">
 <description>
 Begin a not undoable action on the buffer. All changes between this call
-and the call to #gtk_source_undo_manager_end_not_undoable_action cannot
+and the call to gtk_source_undo_manager_end_not_undoable_action() cannot
 be undone. This function should be re-entrant.
 
 Since: 2.10
@@ -5563,28 +9513,6 @@ Since: 2.10
 <return></return>
 </function>
 
-<function name="gtk_source_undo_manager_default_merge_action">
-<description>
-This function tries to merge the undo action at the top of
-the stack with a new undo action. So when we undo for example
-typing, we can undo the whole word and not each letter by itself.
-
-
-</description>
-<parameters>
-<parameter name="um">
-<parameter_description> a #GtkSourceUndoManagerDefault.
-</parameter_description>
-</parameter>
-<parameter name="undo_action">
-<parameter_description> a #GtkSourceUndoAction.
-</parameter_description>
-</parameter>
-</parameters>
-<return> %TRUE is merge was sucessful, %FALSE otherwise.
-</return>
-</function>
-
 <function name="gtk_source_undo_manager_end_not_undoable_action">
 <description>
 Ends a not undoable action on the buffer.
@@ -5604,7 +9532,7 @@ Since: 2.10
 <function name="gtk_source_undo_manager_redo">
 <description>
 Perform a single redo. Calling this function when there are no redo operations
-available is an error. Use #gtk_source_undo_manager_can_redo to find out
+available is an error. Use gtk_source_undo_manager_can_redo() to find out
 if there are redo operations available.
 
 Since: 2.10
@@ -5622,7 +9550,7 @@ Since: 2.10
 <function name="gtk_source_undo_manager_undo">
 <description>
 Perform a single undo. Calling this function when there are no undo operations
-available is an error. Use #gtk_source_undo_manager_can_undo to find out
+available is an error. Use gtk_source_undo_manager_can_undo() to find out
 if there are undo operations available.
 
 Since: 2.10
@@ -5637,9 +9565,65 @@ Since: 2.10
 <return></return>
 </function>
 
+<function name="gtk_source_utils_escape_search_text">
+<description>
+Use this function to escape the following characters: `\n`, `\r`, `\t` and `\`.
+
+For a regular expression search, use g_regex_escape_string() instead.
+
+One possible use case is to take the #GtkTextBuffer's selection and put it in a
+search entry. The selection can contain tabulations, newlines, etc. So it's
+better to escape those special characters to better fit in the search entry.
+
+See also: gtk_source_utils_unescape_search_text().
+
+&lt;warning&gt;
+Warning: the escape and unescape functions are not reciprocal! For example,
+escape (unescape (\)) = \\. So avoid cycles such as: search entry -&gt; unescape
+-&gt; search settings -&gt; escape -&gt; search entry. The original search entry text
+may be modified.
+&lt;/warning&gt;
+
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="text">
+<parameter_description> the text to escape.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the escaped @text.
+</return>
+</function>
+
+<function name="gtk_source_utils_unescape_search_text">
+<description>
+Use this function before gtk_source_search_settings_set_search_text(), to
+unescape the following sequences of characters: `\n`, `\r`, `\t` and `\\`.
+The purpose is to easily write those characters in a search entry.
+
+Note that unescaping the search text is not needed for regular expression
+searches.
+
+See also: gtk_source_utils_escape_search_text().
+
+Since: 3.10
+
+</description>
+<parameters>
+<parameter name="text">
+<parameter_description> the text to unescape.
+</parameter_description>
+</parameter>
+</parameters>
+<return> the unescaped @text.
+</return>
+</function>
+
 <function name="gtk_source_view_get_auto_indent">
 <description>
-Returns whether auto indentation of text is enabled.
+Returns whether auto-indentation of text is enabled.
 
 
 </description>
@@ -5650,6 +9634,24 @@ Returns whether auto indentation of text is enabled.
 </parameter>
 </parameters>
 <return> %TRUE if auto indentation is enabled.
+</return>
+</function>
+
+<function name="gtk_source_view_get_background_pattern">
+<description>
+Returns the #GtkSourceBackgroundPatternType specifying if and how
+the background pattern should be displayed for this @view.
+
+Since: 3.16
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView
+</parameter_description>
+</parameter>
+</parameters>
+<return> the #GtkSourceBackgroundPatternType.
 </return>
 </function>
 
@@ -5692,8 +9694,7 @@ should be displayed for this @view.
 Returns the #GtkSourceGutter object associated with @window_type for @view.
 Only GTK_TEXT_WINDOW_LEFT and GTK_TEXT_WINDOW_RIGHT are supported,
 respectively corresponding to the left and right gutter. The line numbers
-and mark category icons are rendered in the gutter corresponding to
-GTK_TEXT_WINDOW_LEFT.
+and mark category icons are rendered in the left gutter.
 
 Since: 2.8
 
@@ -5734,7 +9735,6 @@ Returns whether the current line is highlighted.
 Returns whether when the tab key is pressed the current selection
 should get indented instead of replaced with the \t character.
 
-Since: 1.8
 
 </description>
 <parameters>
@@ -5744,7 +9744,6 @@ Since: 1.8
 </parameter>
 </parameters>
 <return> %TRUE if the selection is indented when tab is pressed.
-
 </return>
 </function>
 
@@ -5873,6 +9872,25 @@ Returns whether a right margin is displayed.
 </return>
 </function>
 
+<function name="gtk_source_view_get_smart_backspace">
+<description>
+Returns %TRUE if pressing the Backspace key will try to delete spaces
+up to the previous tab stop.
+
+Since: 3.18
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+</parameters>
+<return> %TRUE if smart Backspace handling is enabled.
+
+</return>
+</function>
+
 <function name="gtk_source_view_get_smart_home_end">
 <description>
 Returns a #GtkSourceSmartHomeEndType end value specifying
@@ -5886,7 +9904,7 @@ how the cursor will move when HOME and END keys are pressed.
 </parameter_description>
 </parameter>
 </parameters>
-<return> a #GtkSourceSmartHomeEndTypeend value.
+<return> a #GtkSourceSmartHomeEndType value.
 </return>
 </function>
 
@@ -5908,8 +9926,8 @@ Returns the width of tabulation in characters.
 
 <function name="gtk_source_view_get_visual_column">
 <description>
-Determines the visual column at @iter taking into
-consideration the indent width of @view.
+Determines the visual column at @iter taking into consideration the
+#GtkSourceView:tab-width of @view.
 
 
 </description>
@@ -5927,10 +9945,40 @@ consideration the indent width of @view.
 </return>
 </function>
 
+<function name="gtk_source_view_indent_lines">
+<description>
+Insert one indentation level at the beginning of the
+specified lines.
+
+Since: 3.16
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="start">
+<parameter_description> #GtkTextIter of the first line to indent
+</parameter_description>
+</parameter>
+<parameter name="end">
+<parameter_description> #GtkTextIter of the last line to indent
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
 <function name="gtk_source_view_new">
 <description>
-Creates a new #GtkSourceView. An empty default buffer will be
-created for you. If you want to specify your own buffer, consider
+Creates a new #GtkSourceView.
+
+By default, an empty #GtkSourceBuffer will be lazily created and can be
+retrieved with gtk_text_view_get_buffer().
+
+If you want to specify your own buffer, either override the
+#GtkTextViewClass create_buffer factory method, or use
 gtk_source_view_new_with_buffer().
 
 
@@ -5960,7 +10008,12 @@ Creates a new #GtkSourceView widget displaying the buffer
 
 <function name="gtk_source_view_set_auto_indent">
 <description>
-If %TRUE auto indentation of text is enabled.
+If %TRUE auto-indentation of text is enabled.
+
+When Enter is pressed to create a new line, the auto-indentation inserts the
+same indentation as the previous line. This is &lt;emphasis&gt;not&lt;/emphasis&gt; a
+&quot;smart indentation&quot; where an indentation level is added or removed depending
+on the context.
 
 </description>
 <parameters>
@@ -5976,10 +10029,33 @@ If %TRUE auto indentation of text is enabled.
 <return></return>
 </function>
 
+<function name="gtk_source_view_set_background_pattern">
+<description>
+Set if and how the background pattern should be displayed.
+
+Since: 3.16
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="background_pattern">
+<parameter_description> the #GtkSourceBackgroundPatternType.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
 <function name="gtk_source_view_set_draw_spaces">
 <description>
 Set if and how the spaces should be visualized. Specifying @flags as 0 will
 disable display of spaces.
+
+For a finer-grained method, there is also the GtkSourceTag's
+#GtkSourceTag:draw-spaces property.
 
 </description>
 <parameters>
@@ -5998,7 +10074,7 @@ be displayed
 
 <function name="gtk_source_view_set_highlight_current_line">
 <description>
-If @hl is %TRUE the current line is highlighted.
+If @highlight is %TRUE the current line will be highlighted.
 
 </description>
 <parameters>
@@ -6006,7 +10082,7 @@ If @hl is %TRUE the current line is highlighted.
 <parameter_description> a #GtkSourceView.
 </parameter_description>
 </parameter>
-<parameter name="hl">
+<parameter name="highlight">
 <parameter_description> whether to highlight the current line.
 </parameter_description>
 </parameter>
@@ -6016,11 +10092,15 @@ If @hl is %TRUE the current line is highlighted.
 
 <function name="gtk_source_view_set_indent_on_tab">
 <description>
-If %TRUE, when the tab key is pressed and there is a selection, the
-selected text is indented of one level instead of being replaced with
-the \t characters. Shift+Tab unindents the selection.
+If %TRUE, when the tab key is pressed when several lines are selected, the
+selected lines are indented of one level instead of being replaced with a \t
+character. Shift+Tab unindents the selection.
 
-Since: 1.8
+If the first or last line is not selected completely, it is also indented or
+unindented.
+
+When the selection doesn't span several lines, the tab key always replaces
+the selection with a normal \t character.
 
 </description>
 <parameters>
@@ -6038,9 +10118,26 @@ Since: 1.8
 
 <function name="gtk_source_view_set_indent_width">
 <description>
-Sets the number of spaces to use for each step of indent.
-If @width is -1, the value of the GtkSourceView::tab-width property
+Sets the number of spaces to use for each step of indent when the tab key is
+pressed. If @width is -1, the value of the #GtkSourceView:tab-width property
 will be used.
+
+The #GtkSourceView:indent-width interacts with the
+#GtkSourceView:insert-spaces-instead-of-tabs property and
+#GtkSourceView:tab-width. An example will be clearer: if the
+#GtkSourceView:indent-width is 4 and
+#GtkSourceView:tab-width is 8 and
+#GtkSourceView:insert-spaces-instead-of-tabs is %FALSE, then pressing the tab
+key at the beginning of a line will insert 4 spaces. So far so good. Pressing
+the tab key a second time will remove the 4 spaces and insert a \t character
+instead (since #GtkSourceView:tab-width is 8). On the other hand, if
+#GtkSourceView:insert-spaces-instead-of-tabs is %TRUE, the second tab key
+pressed will insert 4 more spaces for a total of 8 spaces in the
+#GtkTextBuffer.
+
+The test-widget program (available in the GtkSourceView repository) may be
+useful to better understand the indentation settings (enable the space
+drawing!).
 
 </description>
 <parameters>
@@ -6058,8 +10155,9 @@ will be used.
 
 <function name="gtk_source_view_set_insert_spaces_instead_of_tabs">
 <description>
-If %TRUE any tabulator character inserted is replaced by a group
-of space characters.
+If %TRUE a tab key pressed is replaced by a group of space characters. Of
+course it is still possible to insert a real \t programmatically with the
+#GtkTextBuffer API.
 
 </description>
 <parameters>
@@ -6175,6 +10273,27 @@ If %TRUE a right margin is displayed.
 <return></return>
 </function>
 
+<function name="gtk_source_view_set_smart_backspace">
+<description>
+When set to %TRUE, pressing the Backspace key will try to delete spaces
+up to the previous tab stop.
+
+Since: 3.18
+
+</description>
+<parameters>
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
+</parameter_description>
+</parameter>
+<parameter name="smart_backspace">
+<parameter_description> whether to enable smart Backspace handling.
+</parameter_description>
+</parameter>
+</parameters>
+<return></return>
+</function>
+
 <function name="gtk_source_view_set_smart_home_end">
 <description>
 Set the desired movement of the cursor when HOME and END keys
@@ -6186,7 +10305,7 @@ are pressed.
 <parameter_description> a #GtkSourceView.
 </parameter_description>
 </parameter>
-<parameter name="smart_he">
+<parameter name="smart_home_end">
 <parameter_description> the desired behavior among #GtkSourceSmartHomeEndType.
 </parameter_description>
 </parameter>
@@ -6196,7 +10315,9 @@ are pressed.
 
 <function name="gtk_source_view_set_tab_width">
 <description>
-Sets the width of tabulation in characters.
+Sets the width of tabulation in characters. The #GtkTextBuffer still contains
+\t characters, but they can take a different visual width in a #GtkSourceView
+widget.
 
 </description>
 <parameters>
@@ -6212,22 +10333,25 @@ Sets the width of tabulation in characters.
 <return></return>
 </function>
 
-<function name="highlight_region">
+<function name="gtk_source_view_unindent_lines">
 <description>
-Highlights the specified region.
+Removes one indentation level at the beginning of the
+specified lines.
+
+Since: 3.16
 
 </description>
 <parameters>
-<parameter name="ce">
-<parameter_description> a #GtkSourceContextEngine.
+<parameter name="view">
+<parameter_description> a #GtkSourceView.
 </parameter_description>
 </parameter>
 <parameter name="start">
-<parameter_description> the beginning of the region to highlight.
+<parameter_description> #GtkTextIter of the first line to indent
 </parameter_description>
 </parameter>
 <parameter name="end">
-<parameter_description> the end of the region to highlight.
+<parameter_description> #GtkTextIter of the last line to indent
 </parameter_description>
 </parameter>
 </parameters>
@@ -6380,61 +10504,6 @@ If the contexts starts or ends here @new_state and @line_pos are updated.
 </parameter>
 </parameters>
 <return> %FALSE is there are no more contexts in @line.
-</return>
-</function>
-
-<function name="regex_new">
-<description>
-Creates a new regex.
-
-
-</description>
-<parameters>
-<parameter name="pattern">
-<parameter_description> the regular expression.
-</parameter_description>
-</parameter>
-<parameter name="flags">
-<parameter_description> compile options for @pattern.
-</parameter_description>
-</parameter>
-<parameter name="error">
-<parameter_description> location to store the error occuring, or %NULL to ignore errors.
-</parameter_description>
-</parameter>
-</parameters>
-<return> a newly-allocated #Regex.
-</return>
-</function>
-
-<function name="regex_resolve">
-<description>
-If the regular expression does not contain references to the start
-regular expression, the functions increases the reference count
-of @regex and returns it.
-
-If the regular expression contains references to the start regular
-expression in the form &quot;\%{start_sub_pattern@start}&quot;, it replaces
-them (they are extracted from @start_regex and @matched_text) and
-returns the new regular expression.
-
-
-</description>
-<parameters>
-<parameter name="regex">
-<parameter_description> a #Regex.
-</parameter_description>
-</parameter>
-<parameter name="start_regex">
-<parameter_description> a #Regex.
-</parameter_description>
-</parameter>
-<parameter name="matched_text">
-<parameter_description> the text matched against @start_regex.
-</parameter_description>
-</parameter>
-</parameters>
-<return> a #Regex.
 </return>
 </function>
 
@@ -6795,22 +10864,6 @@ subpatterns list.
 </parameters>
 <return> new subpattern.
 </return>
-</function>
-
-<function name="sub_pattern_to_int">
-<description>
-Tries to convert @name to a number and assumes
-it's a name if that fails. Used for references in
-subpattern contexts (e.g. \%{1@start} or \%{blah@start}).
-
-</description>
-<parameters>
-<parameter name="name">
-<parameter_description> the string from lang file.
-</parameter_description>
-</parameter>
-</parameters>
-<return></return>
 </function>
 
 <function name="update_syntax">

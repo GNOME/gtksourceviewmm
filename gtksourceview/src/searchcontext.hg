@@ -39,7 +39,7 @@ class SearchContext : public Glib::Object
 {
   _CLASS_GOBJECT(SearchContext, GtkSourceSearchContext, GTK_SOURCE_SEARCH_CONTEXT, Glib::Object, GObject)
 
-public:
+protected:
 
   /** Creates a new search context, associated with buffer , and customized with settings . If settings is NULL, a new GtkSourceSearchSettings object will be
    * created, that you can retrieve with gtk_source_search_context_get_settings().
@@ -51,6 +51,10 @@ public:
    */
   _WRAP_CTOR(SearchContext(const Glib::RefPtr<Buffer>& buffer, const Glib::RefPtr<SearchSettings>& settings), gtk_source_search_context_new)
 
+public:
+
+  _WRAP_CREATE(const Glib::RefPtr<Buffer>& buffer, const Glib::RefPtr<SearchSettings>& settings)
+ 
   /**
    * @return the associated buffer.
    *

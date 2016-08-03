@@ -31,8 +31,12 @@ namespace Gsv
 class SearchSettings : public Glib::Object
 {
   _CLASS_GOBJECT(SearchSettings, GtkSourceSearchSettings, GTK_SOURCE_SEARCH_SETTINGS, Glib::Object, GObject)
-public:
+
+protected:
   _CTOR_DEFAULT()
+
+public:
+  _WRAP_CREATE()
 
   /** Sets the text to search. If text is NULL or is empty, the search will be disabled. A copy of text will be made, so
    * you can safely free text after a call to this function.

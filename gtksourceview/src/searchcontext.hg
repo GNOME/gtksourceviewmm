@@ -103,7 +103,7 @@ public:
    *
    * @newin{3,16}
    */
-  _WRAP_METHOD(void set_match_style(const Glib::RefPtr<Style>& match_style), gtk_source_search_context_set_match_style);
+  _WRAP_METHOD(void set_match_style(const Glib::RefPtr<Style>& match_style), gtk_source_search_context_set_match_style)
 
   /** Regular expression patterns must follow certain rules. If “search-text” breaks a rule, the error can be retrieved with this function. The
    * error domain is G_REGEX_ERROR.

@@ -44,7 +44,8 @@ public:
    *
    * @newin{3,16}
    */
-  _WRAP_METHOD(Glib::RefPtr<StyleScheme> get_style_scheme(), gtk_source_style_scheme_chooser_get_style_scheme)
+  _WRAP_METHOD(Glib::RefPtr<StyleScheme> get_style_scheme(), gtk_source_style_scheme_chooser_get_style_scheme, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<const StyleScheme> get_style_scheme() const, gtk_source_style_scheme_chooser_get_style_scheme, refreturn, constversion)
 
   /** Sets the scheme.
    *

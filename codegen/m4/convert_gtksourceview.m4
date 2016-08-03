@@ -109,6 +109,7 @@ _CONVERSION(`const Glib::RefPtr<Style>&',`GtkSourceStyle*',`Glib::unwrap($3)')
 
 # GtkSourceStyleScheme -> Gsv::StyleScheme
 _CONVERSION(`GtkSourceStyleScheme*',`Glib::RefPtr<StyleScheme>',`Glib::wrap($3)')
+_CONVERSION(`GtkSourceStyleScheme*',`Glib::RefPtr<const StyleScheme>',`Glib::wrap($3)')
 
 
 # Gsv::StyleScheme -> GtkSourceStyleScheme

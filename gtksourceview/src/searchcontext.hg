@@ -112,17 +112,6 @@ public:
    */
   _WRAP_METHOD(void set_match_style(const Glib::RefPtr<Style>& match_style), gtk_source_search_context_set_match_style)
 
-  /** Regular expression patterns must follow certain rules. If “search-text” breaks a rule, the error can be retrieved with this function. The
-   * error domain is G_REGEX_ERROR.
-   *
-   * Free the return value with g_error_free().
-   *
-   * @return the GError, or NULL if the pattern is valid.
-   *
-   * @newin{3,10}
-   */
-  _WRAP_METHOD(GError* get_regex_error(), gtk_source_search_context_get_regex_error)
-
   /** Gets the total number of search occurrences. If the buffer is not already fully scanned, the total number of occurrences is unknown, and -1 is returned.
    *
    * @return the total number of search occurrences, or -1 if unknown.
@@ -174,7 +163,6 @@ public:
    * @param result a GAsyncResult.
    * @param match_start return location for start of match, or NULL.
    * @param match_end return location for end of match, or NULL.
-   * @param error a GError, or NULL.
    *
    * @newin{3,10}
    */
@@ -212,7 +200,6 @@ public:
    * @param result a GAsyncResult.
    * @param match_start return location for start of match, or NULL.
    * @param match_end return location for end of match, or NULL.
-   * @param error a GError, or NULL.
    * @return whether a match was found.
    *
    * @newin{3,10}
@@ -231,7 +218,6 @@ public:
    * @param match_end the end of the match to replace.
    * @param replace the replacement text.
    * @param replace_length the length of replace in bytes, or -1.
-   * @param error location to a GError, or NULL to ignore errors.
    * @return whether the match has been replaced.
    *
    * @newin{3,10}
@@ -245,7 +231,6 @@ public:
    *
    * @param replace the replacement text.
    * @param replace_length the length of replace in bytes, or -1.
-   * @param error location to a GError, or NULL to ignore errors.
    * @return the number of replaced matches.
    *
    * @newin{3,10}
@@ -260,7 +245,6 @@ public:
   _WRAP_PROPERTY("highlight", bool)
   _WRAP_PROPERTY("match-style", Glib::RefPtr<Style>)
   _WRAP_PROPERTY("occurrences-count", int)
-  _WRAP_PROPERTY("regex-error", GError*)
   _WRAP_PROPERTY("settings", Glib::RefPtr<SearchSettings>)
 
 };

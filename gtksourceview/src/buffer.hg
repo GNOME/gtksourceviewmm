@@ -313,6 +313,7 @@ public:
 #m4 _CONVERSION(`GSList*',`std::vector<Glib::RefPtr<Gsv::Mark> >', `Glib::SListHandler<Glib::RefPtr<Gsv::Mark> >::slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')
 #m4 _CONVERSION(`GSList*',`std::vector<Glib::RefPtr<const Gsv::Mark> >', `Glib::SListHandler<Glib::RefPtr<const Gsv::Mark> >slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')
 
+  //TODO: const and non-const version?
   /** Returns the list of marks of the given @a category at @a line.
    *
    * @param line A line number.
@@ -528,7 +529,7 @@ public:
    *
    * @newin{3,14}
    */
-  _WRAP_METHOD(bool get_implicit_trailing_newline(), gtk_source_buffer_get_implicit_trailing_newline)
+  _WRAP_METHOD(bool get_implicit_trailing_newline() const, gtk_source_buffer_get_implicit_trailing_newline)
 
   _WRAP_PROPERTY("implicit-trailing-newline", bool)
 };

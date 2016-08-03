@@ -57,7 +57,7 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(Glib::ustring get_search_text(), gtk_source_search_settings_get_search_text)
+  _WRAP_METHOD(Glib::ustring get_search_text() const, gtk_source_search_settings_get_search_text)
 
   /** Enables or disables the case sensitivity for the search.
    *
@@ -65,14 +65,14 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(void set_case_sensitive(bool case_sensitive), gtk_source_search_settings_set_case_sensitive)
+  _WRAP_METHOD(void set_case_sensitive(bool case_sensitive = true), gtk_source_search_settings_set_case_sensitive)
 
   /**
    * @return whether the search is case sensitive.
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(bool get_case_sensitive(), gtk_source_search_settings_get_case_sensitive)
+  _WRAP_METHOD(bool get_case_sensitive() const, gtk_source_search_settings_get_case_sensitive)
 
   /** Change whether the search is done at word boundaries. If at_word_boundaries is TRUE, a search match must start and end
    * a word. The match can span multiple words. See also gtk_text_iter_starts_word() and gtk_text_iter_ends_word().
@@ -81,14 +81,14 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(void set_at_word_boundaries(bool at_word_boundaries), gtk_source_search_settings_set_at_word_boundaries)
+  _WRAP_METHOD(void set_at_word_boundaries(bool at_word_boundaries = true), gtk_source_search_settings_set_at_word_boundaries)
 
   /**
    * @return whether to search at word boundaries.
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(bool get_at_word_boundaries(), gtk_source_search_settings_get_at_word_boundaries)
+  _WRAP_METHOD(bool get_at_word_boundaries() const, gtk_source_search_settings_get_at_word_boundaries)
 
   /** Enables or disables the wrap around search. If wrap_around is TRUE, the forward search continues at the beginning of the
    * buffer if no search occurrences are found. Similarly, the backward search continues to search at the end of the buffer.
@@ -97,14 +97,14 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(void set_wrap_around(bool wrap_around), gtk_source_search_settings_set_wrap_around)
+  _WRAP_METHOD(void set_wrap_around(bool wrap_around = true), gtk_source_search_settings_set_wrap_around)
 
   /**
    * @return whether to wrap around the search.
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(bool get_wrap_around(), gtk_source_search_settings_get_wrap_around)
+  _WRAP_METHOD(bool get_wrap_around() const, gtk_source_search_settings_get_wrap_around)
 
   /** Enables or disables whether to search by regular expressions. If enabled, the "search-text" property contains the pattern of
    * the regular expression.
@@ -113,20 +113,20 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(void set_regex_enabled(bool regex_enabled), gtk_source_search_settings_set_regex_enabled)
+  _WRAP_METHOD(void set_regex_enabled(bool regex_enabled = true), gtk_source_search_settings_set_regex_enabled)
 
   /**
    * @param whether to search by regular expressions.
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(bool get_regex_enabled(), gtk_source_search_settings_get_regex_enabled)
+  _WRAP_METHOD(bool get_regex_enabled() const, gtk_source_search_settings_get_regex_enabled)
+
   _WRAP_PROPERTY("at-word-boundaries", bool)
   _WRAP_PROPERTY("case-sensitive", bool)
   _WRAP_PROPERTY("regex-enabled", bool)
   _WRAP_PROPERTY("search-text", Glib::ustring)
   _WRAP_PROPERTY("wrap-around", bool)
-
 };
 
 } /* namespace Gsv */

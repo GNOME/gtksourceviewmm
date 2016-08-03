@@ -82,6 +82,27 @@
   (gtype-id "GTK_TYPE_SOURCE_COMPLETION_WORDS")
 )
 
+(define-object SourceCompletionWordsBuffer
+  (in-module "Gtk")
+  (parent "GObject")
+  (c-name "GtkSourceCompletionWordsBuffer")
+  (gtype-id "GTK_TYPE_SOURCE_COMPLETION_WORDS_BUFFER")
+)
+
+(define-object SourceCompletionWordsLibrary
+  (in-module "Gtk")
+  (parent "GObject")
+  (c-name "GtkSourceCompletionWordsLibrary")
+  (gtype-id "GTK_TYPE_SOURCE_COMPLETION_WORDS_LIBRARY")
+)
+
+(define-object SourceCompletionWordsProposal
+  (in-module "Gtk")
+  (parent "GObject")
+  (c-name "GtkSourceCompletionWordsProposal")
+  (gtype-id "GTK_TYPE_SOURCE_COMPLETION_WORDS_PROPOSAL")
+)
+
 (define-object SourceContextEngine
   (in-module "Gtk")
   (parent "GObject")
@@ -256,6 +277,13 @@
   (gtype-id "GTK_TYPE_SOURCE_VIEW")
 )
 
+(define-object SourceMap
+  (in-module "Gtk")
+  (parent "GtkSourceView")
+  (c-name "GtkSourceMap")
+  (gtype-id "GTK_TYPE_SOURCE_MAP")
+)
+
 ;; Enumerations and flags ...
 
 (define-enum SourceBracketMatchType
@@ -279,6 +307,18 @@
     '("upper" "GTK_SOURCE_CHANGE_CASE_UPPER")
     '("toggle" "GTK_SOURCE_CHANGE_CASE_TOGGLE")
     '("title" "GTK_SOURCE_CHANGE_CASE_TITLE")
+  )
+)
+
+(define-flags SourceSortFlags
+  (in-module "Gtk")
+  (c-name "GtkSourceSortFlags")
+  (gtype-id "GTK_TYPE_SOURCE_SORT_FLAGS")
+  (values
+    '("none" "GTK_SOURCE_SORT_FLAGS_NONE")
+    '("case-sensitive" "GTK_SOURCE_SORT_FLAGS_CASE_SENSITIVE")
+    '("reverse-order" "GTK_SOURCE_SORT_FLAGS_REVERSE_ORDER")
+    '("remove-duplicates" "GTK_SOURCE_SORT_FLAGS_REMOVE_DUPLICATES")
   )
 )
 
@@ -452,6 +492,10 @@
     '("all" "GTK_SOURCE_DRAW_SPACES_ALL")
   )
 )
+
+
+;; From gtksourceautocleanups.h
+
 
 
 ;; From gtksourcebuffer.h
@@ -721,6 +765,18 @@
   )
 )
 
+(define-method sort_lines
+  (of-object "GtkSourceBuffer")
+  (c-name "gtk_source_buffer_sort_lines")
+  (return-type "none")
+  (parameters
+    '("GtkTextIter*" "start")
+    '("GtkTextIter*" "end")
+    '("GtkSourceSortFlags" "flags")
+    '("gint" "column")
+  )
+)
+
 (define-method get_undo_manager
   (of-object "GtkSourceBuffer")
   (c-name "gtk_source_buffer_get_undo_manager")
@@ -749,6 +805,17 @@
   (of-object "GtkSourceBuffer")
   (c-name "gtk_source_buffer_get_implicit_trailing_newline")
   (return-type "gboolean")
+)
+
+(define-method create_source_tag
+  (of-object "GtkSourceBuffer")
+  (c-name "gtk_source_buffer_create_source_tag")
+  (return-type "GtkTextTag*")
+  (parameters
+    '("const-gchar*" "tag_name")
+    '("const-gchar*" "first_property_name")
+  )
+  (varargs #t)
 )
 
 
@@ -781,7 +848,7 @@
   (c-name "gtk_source_completion_context_add_proposals")
   (return-type "none")
   (parameters
-    '("struct-_GtkSourceCompletionProvider*" "provider")
+    '("GtkSourceCompletionProvider*" "provider")
     '("GList*" "proposals")
     '("gboolean" "finished")
   )
@@ -984,6 +1051,7 @@
 )
 
 
+
 ;; From gtksourcecompletionmodel.h
 
 
@@ -1021,6 +1089,18 @@
   (of-object "GtkSourceCompletionProposal")
   (c-name "gtk_source_completion_proposal_get_icon")
   (return-type "GdkPixbuf*")
+)
+
+(define-method get_icon_name
+  (of-object "GtkSourceCompletionProposal")
+  (c-name "gtk_source_completion_proposal_get_icon_name")
+  (return-type "const-gchar*")
+)
+
+(define-method get_gicon
+  (of-object "GtkSourceCompletionProposal")
+  (c-name "gtk_source_completion_proposal_get_gicon")
+  (return-type "GIcon*")
 )
 
 (define-method get_info
@@ -1069,6 +1149,18 @@
   (of-object "GtkSourceCompletionProvider")
   (c-name "gtk_source_completion_provider_get_icon")
   (return-type "GdkPixbuf*")
+)
+
+(define-method get_icon_name
+  (of-object "GtkSourceCompletionProvider")
+  (c-name "gtk_source_completion_provider_get_icon_name")
+  (return-type "const-gchar*")
+)
+
+(define-method get_gicon
+  (of-object "GtkSourceCompletionProvider")
+  (c-name "gtk_source_completion_provider_get_gicon")
+  (return-type "GIcon*")
 )
 
 (define-method populate
@@ -1201,6 +1293,11 @@
   (return-type "GSList*")
 )
 
+(define-function gtk_source_encoding_get_default_candidates
+  (c-name "gtk_source_encoding_get_default_candidates")
+  (return-type "GSList*")
+)
+
 (define-method copy
   (of-object "GtkSourceEncoding")
   (c-name "gtk_source_encoding_copy")
@@ -1278,6 +1375,36 @@
     '("gpointer" "user_data")
     '("GDestroyNotify" "notify")
   )
+)
+
+(define-method check_file_on_disk
+  (of-object "GtkSourceFile")
+  (c-name "gtk_source_file_check_file_on_disk")
+  (return-type "none")
+)
+
+(define-method is_local
+  (of-object "GtkSourceFile")
+  (c-name "gtk_source_file_is_local")
+  (return-type "gboolean")
+)
+
+(define-method is_externally_modified
+  (of-object "GtkSourceFile")
+  (c-name "gtk_source_file_is_externally_modified")
+  (return-type "gboolean")
+)
+
+(define-method is_deleted
+  (of-object "GtkSourceFile")
+  (c-name "gtk_source_file_is_deleted")
+  (return-type "gboolean")
+)
+
+(define-method is_readonly
+  (of-object "GtkSourceFile")
+  (c-name "gtk_source_file_is_readonly")
+  (return-type "gboolean")
 )
 
 
@@ -2116,6 +2243,36 @@
 
 
 
+;; From gtksourcemap.h
+
+(define-function gtk_source_map_get_type
+  (c-name "gtk_source_map_get_type")
+  (return-type "GType")
+)
+
+(define-function gtk_source_map_new
+  (c-name "gtk_source_map_new")
+  (is-constructor-of "GtkSourceMap")
+  (return-type "GtkWidget*")
+)
+
+(define-method set_view
+  (of-object "GtkSourceMap")
+  (c-name "gtk_source_map_set_view")
+  (return-type "none")
+  (parameters
+    '("GtkSourceView*" "view")
+  )
+)
+
+(define-method get_view
+  (of-object "GtkSourceMap")
+  (c-name "gtk_source_map_get_view")
+  (return-type "GtkSourceView*")
+)
+
+
+
 ;; From gtksourcemarkattributes.h
 
 (define-function gtk_source_mark_attributes_get_type
@@ -2605,6 +2762,108 @@
 
 
 
+;; From gtksourceregion.h
+
+(define-function gtk_source_region_new
+  (c-name "gtk_source_region_new")
+  (is-constructor-of "GtkSourceRegion")
+  (return-type "GtkSourceRegion*")
+  (parameters
+    '("GtkTextBuffer*" "buffer")
+  )
+)
+
+(define-method get_buffer
+  (of-object "GtkSourceRegion")
+  (c-name "gtk_source_region_get_buffer")
+  (return-type "GtkTextBuffer*")
+)
+
+(define-method add
+  (of-object "GtkSourceRegion")
+  (c-name "gtk_source_region_add")
+  (return-type "none")
+  (parameters
+    '("const-GtkTextIter*" "_start")
+    '("const-GtkTextIter*" "_end")
+  )
+)
+
+(define-method subtract
+  (of-object "GtkSourceRegion")
+  (c-name "gtk_source_region_subtract")
+  (return-type "none")
+  (parameters
+    '("const-GtkTextIter*" "_start")
+    '("const-GtkTextIter*" "_end")
+  )
+)
+
+(define-method intersect
+  (of-object "GtkSourceRegion")
+  (c-name "gtk_source_region_intersect")
+  (return-type "GtkSourceRegion*")
+  (parameters
+    '("const-GtkTextIter*" "_start")
+    '("const-GtkTextIter*" "_end")
+  )
+)
+
+(define-method is_empty
+  (of-object "GtkSourceRegion")
+  (c-name "gtk_source_region_is_empty")
+  (return-type "gboolean")
+)
+
+(define-method get_bounds
+  (of-object "GtkSourceRegion")
+  (c-name "gtk_source_region_get_bounds")
+  (return-type "gboolean")
+  (parameters
+    '("GtkTextIter*" "start")
+    '("GtkTextIter*" "end")
+  )
+)
+
+(define-method get_start_region_iter
+  (of-object "GtkSourceRegion")
+  (c-name "gtk_source_region_get_start_region_iter")
+  (return-type "none")
+  (parameters
+    '("GtkSourceRegionIter*" "iter")
+  )
+)
+
+(define-method is_end
+  (of-object "GtkSourceRegionIter")
+  (c-name "gtk_source_region_iter_is_end")
+  (return-type "gboolean")
+)
+
+(define-method next
+  (of-object "GtkSourceRegionIter")
+  (c-name "gtk_source_region_iter_next")
+  (return-type "gboolean")
+)
+
+(define-method get_subregion
+  (of-object "GtkSourceRegionIter")
+  (c-name "gtk_source_region_iter_get_subregion")
+  (return-type "gboolean")
+  (parameters
+    '("GtkTextIter*" "start")
+    '("GtkTextIter*" "end")
+  )
+)
+
+(define-method to_string
+  (of-object "GtkSourceRegion")
+  (c-name "gtk_source_region_to_string")
+  (return-type "gchar*")
+)
+
+
+
 ;; From gtksourcesearchcontext.h
 
 (define-function gtk_source_search_context_get_type
@@ -2706,6 +2965,18 @@
   )
 )
 
+(define-method forward2
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_forward2")
+  (return-type "gboolean")
+  (parameters
+    '("const-GtkTextIter*" "iter")
+    '("GtkTextIter*" "match_start")
+    '("GtkTextIter*" "match_end")
+    '("gboolean*" "has_wrapped_around")
+  )
+)
+
 (define-method forward_async
   (of-object "GtkSourceSearchContext")
   (c-name "gtk_source_search_context_forward_async")
@@ -2730,6 +3001,19 @@
   )
 )
 
+(define-method forward_finish2
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_forward_finish2")
+  (return-type "gboolean")
+  (parameters
+    '("GAsyncResult*" "result")
+    '("GtkTextIter*" "match_start")
+    '("GtkTextIter*" "match_end")
+    '("gboolean*" "has_wrapped_around")
+    '("GError**" "error")
+  )
+)
+
 (define-method backward
   (of-object "GtkSourceSearchContext")
   (c-name "gtk_source_search_context_backward")
@@ -2738,6 +3022,18 @@
     '("const-GtkTextIter*" "iter")
     '("GtkTextIter*" "match_start")
     '("GtkTextIter*" "match_end")
+  )
+)
+
+(define-method backward2
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_backward2")
+  (return-type "gboolean")
+  (parameters
+    '("const-GtkTextIter*" "iter")
+    '("GtkTextIter*" "match_start")
+    '("GtkTextIter*" "match_end")
+    '("gboolean*" "has_wrapped_around")
   )
 )
 
@@ -2765,6 +3061,19 @@
   )
 )
 
+(define-method backward_finish2
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_backward_finish2")
+  (return-type "gboolean")
+  (parameters
+    '("GAsyncResult*" "result")
+    '("GtkTextIter*" "match_start")
+    '("GtkTextIter*" "match_end")
+    '("gboolean*" "has_wrapped_around")
+    '("GError**" "error")
+  )
+)
+
 (define-method replace
   (of-object "GtkSourceSearchContext")
   (c-name "gtk_source_search_context_replace")
@@ -2772,6 +3081,19 @@
   (parameters
     '("const-GtkTextIter*" "match_start")
     '("const-GtkTextIter*" "match_end")
+    '("const-gchar*" "replace")
+    '("gint" "replace_length")
+    '("GError**" "error")
+  )
+)
+
+(define-method replace2
+  (of-object "GtkSourceSearchContext")
+  (c-name "gtk_source_search_context_replace2")
+  (return-type "gboolean")
+  (parameters
+    '("GtkTextIter*" "match_start")
+    '("GtkTextIter*" "match_end")
     '("const-gchar*" "replace")
     '("gint" "replace_length")
     '("GError**" "error")
@@ -2892,6 +3214,15 @@
   (of-object "GtkSourceStyle")
   (c-name "gtk_source_style_copy")
   (return-type "GtkSourceStyle*")
+)
+
+(define-method apply
+  (of-object "GtkSourceStyle")
+  (c-name "gtk_source_style_apply")
+  (return-type "none")
+  (parameters
+    '("GtkTextTag*" "tag")
+  )
 )
 
 
@@ -3076,6 +3407,19 @@
 
 
 
+;; From gtksourcetag.h
+
+(define-function gtk_source_tag_new
+  (c-name "gtk_source_tag_new")
+  (is-constructor-of "GtkSourceTag")
+  (return-type "GtkTextTag*")
+  (parameters
+    '("const-gchar*" "name")
+  )
+)
+
+
+
 ;; From gtksourcetypes.h
 
 
@@ -3162,6 +3506,39 @@
     '("const-gchar*" "text")
   )
 )
+
+
+
+;; From gtksourceversion.h
+
+(define-function gtk_source_get_major_version
+  (c-name "gtk_source_get_major_version")
+  (return-type "guint")
+)
+
+(define-function gtk_source_get_minor_version
+  (c-name "gtk_source_get_minor_version")
+  (return-type "guint")
+)
+
+(define-function gtk_source_get_micro_version
+  (c-name "gtk_source_get_micro_version")
+  (return-type "guint")
+)
+
+(define-function gtk_source_check_version
+  (c-name "gtk_source_check_version")
+  (return-type "gboolean")
+  (parameters
+    '("guint" "major")
+    '("guint" "minor")
+    '("guint" "micro")
+  )
+)
+
+
+
+;; From gtksourceview-enumtypes.h
 
 
 
@@ -3377,6 +3754,21 @@
   )
 )
 
+(define-method set_smart_backspace
+  (of-object "GtkSourceView")
+  (c-name "gtk_source_view_set_smart_backspace")
+  (return-type "none")
+  (parameters
+    '("gboolean" "smart_backspace")
+  )
+)
+
+(define-method get_smart_backspace
+  (of-object "GtkSourceView")
+  (c-name "gtk_source_view_get_smart_backspace")
+  (return-type "gboolean")
+)
+
 (define-method set_smart_home_end
   (of-object "GtkSourceView")
   (c-name "gtk_source_view_set_smart_home_end")
@@ -3452,16 +3844,23 @@
 
 
 
-;; From gtksourceview-marshal.h
-
-
-
 ;; From gtksourceview-typebuiltins.h
 
-(define-function gtk_source_bracket_match_type_get_type
-  (c-name "gtk_source_bracket_match_type_get_type")
-  (return-type "GType")
-)
+
+
+;; From gtksourceview-utils.h
+
+
+
+;; From stamp-gtksourceview-enumtypes.h
+
+
+
+;; From stamp-gtksourceview-typebuiltins.h
+
+
+
+;; From gtksourcecompletionwordsbuffer.h
 
 
 
@@ -3501,14 +3900,15 @@
 )
 
 
-;; From gtksourceview-utils.h
+
+;; From gtksourcecompletionwordslibrary.h
 
 
 
-;; From gtktextregion.h
+;; From gtksourcecompletionwordsproposal.h
 
 
 
-;; From stamp-gtksourceview-typebuiltins.h
+;; From gtksourcecompletionwordsutils.h
 
 

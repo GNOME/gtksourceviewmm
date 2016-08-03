@@ -40,6 +40,26 @@
   )
 )
 
+;; Original typedef:
+;; typedef enum
+;; {
+;; 	GTK_SOURCE_SORT_FLAGS_NONE              = 0,
+;; 	GTK_SOURCE_SORT_FLAGS_CASE_SENSITIVE    = 1 << 0,
+;; 	GTK_SOURCE_SORT_FLAGS_REVERSE_ORDER     = 1 << 1,
+;; 	GTK_SOURCE_SORT_FLAGS_REMOVE_DUPLICATES = 1 << 2,
+;; } GtkSourceSortFlags;
+
+(define-flags-extended SourceSortFlags
+  (in-module "Gtk")
+  (c-name "GtkSourceSortFlags")
+  (values
+    '("none" "GTK_SOURCE_SORT_FLAGS_NONE" "0x0")
+    '("case-sensitive" "GTK_SOURCE_SORT_FLAGS_CASE_SENSITIVE" "1 << 0")
+    '("reverse-order" "GTK_SOURCE_SORT_FLAGS_REVERSE_ORDER" "1 << 1")
+    '("remove-duplicates" "GTK_SOURCE_SORT_FLAGS_REMOVE_DUPLICATES" "1 << 2")
+  )
+)
+
 ;; From gtksourcecompletioncontext.h
 
 ;; Original typedef:

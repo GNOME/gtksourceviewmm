@@ -363,7 +363,7 @@ public:
    *
    * @newin {3,16}
    */
-  _WRAP_METHOD(BackgroundPatternType get_background_pattern(), gtk_source_view_get_background_pattern)
+  _WRAP_METHOD(BackgroundPatternType get_background_pattern() const, gtk_source_view_get_background_pattern)
 
   /** Emitted when redo action is requested.
    */

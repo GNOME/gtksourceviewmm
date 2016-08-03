@@ -293,6 +293,7 @@
   (of-object "GtkSourceCompletionInfo")
   (return-type "void")
   (when "last")
+  (deprecated #t)
 )
 
 ;; From GtkSourceCompletionItem
@@ -327,7 +328,25 @@
 (define-property icon
   (of-object "GtkSourceCompletionItem")
   (prop-type "GParamObject")
-  (docs "Icon to be shown for this item")
+  (docs "Pixbuf of the icon to be shown for this item")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property icon-name
+  (of-object "GtkSourceCompletionItem")
+  (prop-type "GParamString")
+  (docs "Icon name of the icon to be shown for this item")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property gicon
+  (of-object "GtkSourceCompletionItem")
+  (prop-type "GParamObject")
+  (docs "GIcon of the icon to be shown for this item")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -357,7 +376,7 @@
 (define-property view
   (of-object "GtkSourceGutter")
   (prop-type "GParamObject")
-  (docs "The gutters' GtkSourceView")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #t)
@@ -379,6 +398,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (deprecated #t)
 )
 
 (define-property ypad
@@ -388,6 +408,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (deprecated #t)
 )
 
 ;; From GtkSourceGutterRenderer
@@ -561,6 +582,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (deprecated #t)
 )
 
 (define-property icon-name
@@ -706,6 +728,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (deprecated #t)
 )
 
 (define-property pixbuf
@@ -758,7 +781,7 @@
 (define-property wrap-mode
   (of-object "GtkSourcePrintCompositor")
   (prop-type "GParamEnum")
-  (docs "Whether to wrap lines never, at word boundaries, or at character boundaries.")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -767,7 +790,7 @@
 (define-property highlight-syntax
   (of-object "GtkSourcePrintCompositor")
   (prop-type "GParamBoolean")
-  (docs "Whether to print the document with highlighted syntax")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -776,7 +799,7 @@
 (define-property print-line-numbers
   (of-object "GtkSourcePrintCompositor")
   (prop-type "GParamUInt")
-  (docs "Interval of printed line numbers (0 means no numbers)")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -785,7 +808,7 @@
 (define-property print-header
   (of-object "GtkSourcePrintCompositor")
   (prop-type "GParamBoolean")
-  (docs "Whether to print a header in each page")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -794,7 +817,7 @@
 (define-property print-footer
   (of-object "GtkSourcePrintCompositor")
   (prop-type "GParamBoolean")
-  (docs "Whether to print a footer in each page")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -803,7 +826,7 @@
 (define-property body-font-name
   (of-object "GtkSourcePrintCompositor")
   (prop-type "GParamString")
-  (docs "Name of the font to use for the text body (e.g. 'Monospace 10')")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -812,7 +835,7 @@
 (define-property line-numbers-font-name
   (of-object "GtkSourcePrintCompositor")
   (prop-type "GParamString")
-  (docs "Name of the font to use for the line numbers (e.g. 'Monospace 10')")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -821,7 +844,7 @@
 (define-property header-font-name
   (of-object "GtkSourcePrintCompositor")
   (prop-type "GParamString")
-  (docs "Name of the font to use for the page header (e.g. 'Monospace 10')")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -830,7 +853,7 @@
 (define-property footer-font-name
   (of-object "GtkSourcePrintCompositor")
   (prop-type "GParamString")
-  (docs "Name of the font to use for the page footer (e.g. 'Monospace 10')")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -839,7 +862,7 @@
 (define-property n-pages
   (of-object "GtkSourcePrintCompositor")
   (prop-type "GParamInt")
-  (docs "The number of pages in the document (-1 means the document has not been completely paginated).")
+  (docs "")
   (readable #t)
   (writable #f)
   (construct-only #f)
@@ -1049,6 +1072,15 @@
   (construct-only #t)
 )
 
+(define-property pango-underline
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamEnum")
+  (docs "Pango Underline")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
 (define-property underline-set
   (of-object "GtkSourceStyle")
   (prop-type "GParamBoolean")
@@ -1089,6 +1121,24 @@
   (of-object "GtkSourceStyle")
   (prop-type "GParamBoolean")
   (docs "Whether scale attribute is set")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property underline-color
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamString")
+  (docs "Underline color")
+  (readable #t)
+  (writable #t)
+  (construct-only #t)
+)
+
+(define-property underline-color-set
+  (of-object "GtkSourceStyle")
+  (prop-type "GParamBoolean")
+  (docs "Whether underline color attribute is set")
   (readable #t)
   (writable #t)
   (construct-only #t)
@@ -1394,6 +1444,15 @@
   (of-object "GtkSourceView")
   (prop-type "GParamEnum")
   (docs "Draw a specific background pattern on the view")
+  (readable #t)
+  (writable #t)
+  (construct-only #f)
+)
+
+(define-property smart-backspace
+  (of-object "GtkSourceView")
+  (prop-type "GParamBoolean")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)

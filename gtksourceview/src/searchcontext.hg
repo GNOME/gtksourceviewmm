@@ -146,7 +146,8 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(bool forward(const TextBuffer::iterator& iter, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end), gtk_source_search_context_forward)
+  _WRAP_METHOD(bool forward(const TextBuffer::iterator& iter, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, bool& has_wrapped_around), gtk_source_search_context_forward2)
+  _IGNORE(gtk_source_search_context_forward)
 
   /** Asynchronous forward search. See the GAsyncResult documentation to know how to use this function.
    * If the operation is cancelled, the callback will only be called if cancellable was not NULL. gtk_source_search_context_forward_async() takes ownership of
@@ -170,7 +171,8 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(bool forward_finish(const Glib::RefPtr<Gio::AsyncResult>& result, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end), gtk_source_search_context_forward_finish, errthrow)
+  _WRAP_METHOD(bool forward_finish(const Glib::RefPtr<Gio::AsyncResult>& result, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, bool& has_wrapped_around), gtk_source_search_context_forward_finish2, errthrow)
+  _IGNORE(gtk_source_search_context_forward_finish)
 
   /** Synchronous backward search. It is recommended to use the asynchronous functions instead, to not block the user interface. However, if you are sure that the buffer
    * is small, this function is more convenient to use.
@@ -182,7 +184,8 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(bool backward(const TextBuffer::iterator& iter, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end), gtk_source_search_context_backward)
+  _WRAP_METHOD(bool backward(const TextBuffer::iterator& iter, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, bool& has_wrapped_around), gtk_source_search_context_backward2)
+  _IGNORE(gtk_source_search_context_backward)
 
   /** Asynchronous backward search. See the GAsyncResult documentation to know how to use this function.
    * If the operation is cancelled, the callback will only be called if cancellable was not NULL. gtk_source_search_context_backward_async() takes ownership of
@@ -207,9 +210,13 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(bool backward_finish(const Glib::RefPtr<Gio::AsyncResult>& result, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end), gtk_source_search_context_backward_finish, errthrow)
+  _WRAP_METHOD(bool backward_finish(const Glib::RefPtr<Gio::AsyncResult>& result, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, bool& has_wrapped_around), gtk_source_search_context_backward_finish2, errthrow)
+  _IGNORE(gtk_source_search_context_backward)
 
   /** Replaces a search match by another text. If match_start and match_end doesn't correspond to a search match, FALSE is returned.
+   *
+   * The @a match_start and @a match_end iters are revalidated to point to the replacement text boundaries.
+   *
    * For a regular expression replacement, you can check if replace is valid by calling g_regex_check_replacement(). The replace text can contain backreferences; read
    * the g_regex_replace() documentation for more details.
    *
@@ -222,7 +229,8 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(bool replace(const TextBuffer::iterator& match_start, const TextBuffer::iterator& match_end, const Glib::ustring& replace, int replace_length), gtk_source_search_context_replace, errthrow)
+  _WRAP_METHOD(bool replace(TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, const Glib::ustring& replace, int replace_length), gtk_source_search_context_replace2, errthrow)
+  _IGNORE(gtk_source_search_context_replace)
 
   /** Replaces all search matches by another text. It is a synchronous function, so it can block the user interface.
    * For a regular expression replacement, you can check if replace is valid by calling g_regex_check_replacement(). The replace text can contain backreferences; read

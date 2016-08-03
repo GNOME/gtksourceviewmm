@@ -106,7 +106,7 @@ public:
 
   _WRAP_METHOD(bool get_highlight_matching_brackets() const, gtk_source_buffer_get_highlight_matching_brackets)
 
-  _WRAP_METHOD(void set_highlight_matching_brackets(bool highlight=true), gtk_source_buffer_set_highlight_matching_brackets)
+  _WRAP_METHOD(void set_highlight_matching_brackets(bool highlight = true), gtk_source_buffer_set_highlight_matching_brackets)
 
   _WRAP_METHOD(bool get_highlight_syntax() const, gtk_source_buffer_get_highlight_syntax)
 
@@ -141,7 +141,7 @@ public:
    *
    * @param max_undo_levels The desired maximum number of undo levels.
    */
-  _WRAP_METHOD(void set_max_undo_levels(int max_undo_levels), gtk_source_buffer_set_max_undo_levels)
+  _WRAP_METHOD(void set_max_undo_levels(int max_undo_levels = true), gtk_source_buffer_set_max_undo_levels)
 
   /** Returns the Language associated with the buffer.
    *
@@ -521,7 +521,7 @@ public:
    *
    * @newin{3,14}
    */
-  _WRAP_METHOD(void set_implicit_trailing_newline(bool implicit_trailing_newline), gtk_source_buffer_set_implicit_trailing_newline)
+  _WRAP_METHOD(void set_implicit_trailing_newline(bool implicit_trailing_newline = true), gtk_source_buffer_set_implicit_trailing_newline)
 
   /**
    * @return whether the buffer has an implicit trailing newline.

@@ -162,14 +162,6 @@ public:
    */
   Glib::RefPtr<CompletionContext> create_context();
 
-  /** Move the completion window to a specific iter.
-   *
-   * @param iter A Gtk::TextIter.
-   *
-   * @newin{2,10}
-   */
-  _WRAP_METHOD(void move_window(const Gtk::TextIter& iter), gtk_source_completion_move_window, deprecated "Use SourceCompletionProvider::get_start_iter() instead.")
-
   /** Block interactive completion.
    *
    * This can be used to disable interactive completion when inserting or

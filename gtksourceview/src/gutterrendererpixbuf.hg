@@ -52,10 +52,6 @@ public:
 #m4 _CONVERSION(`const Glib::RefPtr<const Gdk::Pixbuf>&', `GdkPixbuf*', `const_cast<GdkPixbuf*>(Glib::unwrap($3))')
   _WRAP_METHOD(void set_pixbuf(const Glib::RefPtr<const Gdk::Pixbuf>& pixbuf), gtk_source_gutter_renderer_pixbuf_set_pixbuf)
 
-  _WRAP_METHOD(std::string get_stock_id() const, gtk_source_gutter_renderer_pixbuf_get_stock_id, deprecated "This should not be used in newly-written code.")
-
-  _WRAP_METHOD(void set_stock_id(const std::string& stock_id), gtk_source_gutter_renderer_pixbuf_set_stock_id, deprecated "This should not be used in newly-written code.")
-
 #m4 _CONVERSION(`GIcon*', `Glib::RefPtr<Gio::Icon>', `Glib::wrap($3)')
   _WRAP_METHOD(Glib::RefPtr<Gio::Icon> get_icon(), gtk_source_gutter_renderer_pixbuf_get_gicon, refreturn)
 
@@ -69,7 +65,6 @@ public:
   _WRAP_METHOD(void set_icon_name(const std::string& icon_name), gtk_source_gutter_renderer_pixbuf_set_icon_name)
 
   _WRAP_PROPERTY("pixbuf", Glib::RefPtr<Gdk::Pixbuf>)
-  _WRAP_PROPERTY("stock-id", std::string, deprecated "This should not be used in newly-written code.")
   _WRAP_PROPERTY("icon-name", std::string)
   _WRAP_PROPERTY("gicon", Glib::RefPtr<Gio::Icon>)
 };

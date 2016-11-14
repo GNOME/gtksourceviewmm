@@ -64,33 +64,6 @@ class Gutter : public Glib::Object
   _CLASS_GOBJECT(Gutter, GtkSourceGutter, GTK_SOURCE_GUTTER, Glib::Object, GObject)
 
 public:
-// TODO: remove it later - it should take a conversion definition from gtkmm,
-// but it fails with some strange casting to GtkWindowObject.
-#m4 _CONVERSION(`GdkWindow*',`Glib::RefPtr<Gdk::Window>',`Glib::wrap($3)')
-  /** Get the Gdk::Window of the gutter.
-   *
-   * The window will only be available when the gutter has at least one,
-   * non-zero width, cell renderer packed.
-   *
-   * @return The Gdk::Window of the gutter, or empty Glib::RefPtr if the gutter
-   * has no window.
-   *
-   * @newin{2,10}
-   */
-  _WRAP_METHOD(Glib::RefPtr<Gdk::Window> get_window(), gtk_source_gutter_get_window, refreturn, deprecated "Use Gtk::TextView::get_window() instead.")
-
-  /** Get the Gdk::Window of the gutter.
-   *
-   * The window will only be available when the gutter has at least one,
-   * non-zero width, cell renderer packed.
-   *
-   * @return The Gdk::Window of the gutter, or empty Glib::RefPtr if the gutter
-   * has no window.
-   *
-   * @newin{2,10}
-   */
-  _WRAP_METHOD(Glib::RefPtr<const Gdk::Window> get_window() const, gtk_source_gutter_get_window, constversion, deprecated "Use Gtk::TextView::get_window() instead.")
-
   _WRAP_METHOD(void insert(GutterRenderer* renderer, int position), gtk_source_gutter_insert)
 
   _WRAP_METHOD(void remove(GutterRenderer* renderer), gtk_source_gutter_remove)
@@ -99,20 +72,12 @@ public:
 
   _WRAP_METHOD(void queue_draw(), gtk_source_gutter_queue_draw)
 
-  _WRAP_METHOD(void set_padding(int xpad, int ypad), gtk_source_gutter_set_padding, deprecated "Use GutterRenderer::set_padding() instead.")
-
-  // TODO: create a Padding class.
-
-  _WRAP_METHOD(void get_padding(int& xpad, int& ypad) const, gtk_source_gutter_get_padding, deprecated "Use GutterRenderer::get_padding() instead.")
-
   _WRAP_METHOD(GutterRenderer* get_renderer_at_pos(int x, int y), gtk_source_gutter_get_renderer_at_pos, refreturn)
 
   _WRAP_METHOD(const GutterRenderer* get_renderer_at_pos(int x, int y) const, gtk_source_gutter_get_renderer_at_pos, constversion, refreturn)
 
   _WRAP_PROPERTY("view", View*)
   _WRAP_PROPERTY("window-type", Gtk::TextWindowType)
-  _WRAP_PROPERTY("xpad", int, deprecated "Use GutterRenderer's xpad property instead.")
-  _WRAP_PROPERTY("ypad", int, deprecated "Use GutterRenderer's ypad property instead.")
 };
 
 } // namespace Gsv

@@ -70,20 +70,6 @@ public:
    * @newin{2,10}
    */
   void move_to_iter(const Gtk::TextView& view);
-
-  _WRAP_METHOD(void set_widget(Gtk::Widget& widget), gtk_source_completion_info_set_widget, deprecated "Use Gtk::Container:add() instead. If there is already a child widget, remove it with Gtk::Container::remove().")
-
-  _WRAP_METHOD(Gtk::Widget* get_widget(), gtk_source_completion_info_get_widget, deprecated "Use Gtk::Bin::get_child() instead.")
-  _WRAP_METHOD(const Gtk::Widget* get_widget() const, gtk_source_completion_info_get_widget, constversion, deprecated "Use Gtk::Bin::get_child() instead.")
-
-  /** Emited before any "show" management.
-   *
-   * You can connect to this signal if you want to change some properties or
-   * position before the real "show".
-   *
-   * @newin{2,10}
-   */
-  _WRAP_SIGNAL(void before_show(), "before-show", deprecated "This should not be used in newly-written code.")
 };
 
 } /* namespace Gsv */

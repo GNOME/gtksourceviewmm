@@ -20,8 +20,6 @@
 #include <gtksourceviewmm/markup.h>
 #include <gtksourceviewmm/completionproposal.h>
 
-#include <gtkmm/stock.h>
-
 _DEFS(gtksourceviewmm,gtksourceview)
 _PINCLUDE(glibmm/private/object_p.h)
 
@@ -32,13 +30,6 @@ _PINCLUDE(glibmm/private/object_p.h)
 #undef GTK_DISABLE_DEPRECATED
 #define GTK_DISABLE_DEPRECATION_WARNINGS 1
 #m4 _POP()
-
-#ifndef DOXYGEN_SHOULD_SKIP_THIS
-namespace Gtk {
-  //deprecated
-  class StockID;
-} //namespace Gtk
-#endif //#ifndef DOXYGEN_SHOULD_SKIP_THIS
 
 namespace Gsv
 {
@@ -58,13 +49,6 @@ class CompletionItem
 protected:
   explicit CompletionItem(const Glib::ustring& label, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info);
   explicit CompletionItem(const Markup& markup, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info);
-
-#ifndef GTKSOURCEVIEWMM_DISABLE_DEPRECATED
-  /**
-   * @deprecated Use a constructor without a stock ID instead.
-   */
-  explicit CompletionItem(const Glib::ustring& label, const Glib::ustring& text, const Gtk::StockID& stock, const Glib::ustring& info);
-#endif //GTKSOURCEVIEWMM_DISABLE_DEPRECATED
 
 public:
   /** Create a new CompletionItem with label @a label, icon @a icon and
@@ -100,25 +84,6 @@ public:
    * @newin{2,10}
    */
   _WRAP_CREATE(const Markup& markup, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info)
-
-#ifndef GTKSOURCEVIEWMM_DISABLE_DEPRECATED
-  /** Creates a new CompletionItem from a stock item.
-   *
-   * If @a label is empty, then stock label will be used.
-   *
-   * @param label The item label.
-   * @param text The item text.
-   * @param stock The stock icon.
-   * @param info The item extra information.
-   *
-   * @return New CompletionInfo.
-   *
-   * @newin{2,10}
-   *
-   * @deprecated Use a create() method without a stock ID instead.
-   */
-  _WRAP_CREATE(const Glib::ustring& label, const Glib::ustring& text, const Gtk::StockID& stock, const Glib::ustring& info)
-#endif //GTKSOURCEVIEWMM_DISABLE_DEPRECATED
 
   _WRAP_PROPERTY("icon", Glib::RefPtr<Gdk::Pixbuf>)
   _WRAP_PROPERTY("info", Glib::ustring)

@@ -1,7 +1,7 @@
 ;; From gtksourcebuffer.h
 
 ;; Original typedef:
-;; typedef enum
+;; typedef enum _GtkSourceBracketMatchType
 ;; {
 ;; 	GTK_SOURCE_BRACKET_MATCH_NONE,
 ;; 	GTK_SOURCE_BRACKET_MATCH_OUT_OF_RANGE,
@@ -21,7 +21,7 @@
 )
 
 ;; Original typedef:
-;; typedef enum
+;; typedef enum _GtkSourceChangeCaseType
 ;; {
 ;; 	GTK_SOURCE_CHANGE_CASE_LOWER,
 ;; 	GTK_SOURCE_CHANGE_CASE_UPPER,
@@ -41,7 +41,7 @@
 )
 
 ;; Original typedef:
-;; typedef enum
+;; typedef enum _GtkSourceSortFlags
 ;; {
 ;; 	GTK_SOURCE_SORT_FLAGS_NONE              = 0,
 ;; 	GTK_SOURCE_SORT_FLAGS_CASE_SENSITIVE    = 1 << 0,
@@ -63,7 +63,7 @@
 ;; From gtksourcecompletioncontext.h
 
 ;; Original typedef:
-;; typedef enum
+;; typedef enum _GtkSourceCompletionActivation
 ;; {
 ;; 	GTK_SOURCE_COMPLETION_ACTIVATION_NONE = 0,
 ;; 	GTK_SOURCE_COMPLETION_ACTIVATION_INTERACTIVE = 1 << 0,
@@ -83,7 +83,7 @@
 ;; From gtksourcecompletion.h
 
 ;; Original typedef:
-;; typedef enum
+;; typedef enum _GtkSourceCompletionError
 ;; {
 ;; 	GTK_SOURCE_COMPLETION_ERROR_ALREADY_BOUND = 0,
 ;; 	GTK_SOURCE_COMPLETION_ERROR_NOT_BOUND
@@ -101,7 +101,7 @@
 ;; From gtksourcecontextengine.h
 
 ;; Original typedef:
-;; typedef enum {
+;; typedef enum _GtkSourceContextFlags {
 ;; 	GTK_SOURCE_CONTEXT_EXTEND_PARENT	= 1 << 0,
 ;; 	GTK_SOURCE_CONTEXT_END_PARENT		= 1 << 1,
 ;; 	GTK_SOURCE_CONTEXT_END_AT_LINE_END	= 1 << 2,
@@ -124,7 +124,7 @@
 )
 
 ;; Original typedef:
-;; typedef enum {
+;; typedef enum _GtkSourceContextRefOptions {
 ;; 	GTK_SOURCE_CONTEXT_IGNORE_STYLE		= 1 << 0,
 ;; 	GTK_SOURCE_CONTEXT_OVERRIDE_STYLE	= 1 << 1,
 ;; 	GTK_SOURCE_CONTEXT_REF_ORIGINAL		= 1 << 2
@@ -158,10 +158,46 @@
   )
 )
 
+;; From gtksourcefile.h
+
+;; Original typedef:
+;; typedef enum _GtkSourceNewlineType
+;; {
+;; 	GTK_SOURCE_NEWLINE_TYPE_LF,
+;; 	GTK_SOURCE_NEWLINE_TYPE_CR,
+;; 	GTK_SOURCE_NEWLINE_TYPE_CR_LF
+;; } GtkSourceNewlineType;
+
+(define-enum-extended SourceNewlineType
+  (in-module "Gtk")
+  (c-name "GtkSourceNewlineType")
+  (values
+    '("lf" "GTK_SOURCE_NEWLINE_TYPE_LF" "0")
+    '("cr" "GTK_SOURCE_NEWLINE_TYPE_CR" "1")
+    '("cr-lf" "GTK_SOURCE_NEWLINE_TYPE_CR_LF" "2")
+  )
+)
+
+;; Original typedef:
+;; typedef enum _GtkSourceCompressionType
+;; {
+;; 	GTK_SOURCE_COMPRESSION_TYPE_NONE,
+;; 	GTK_SOURCE_COMPRESSION_TYPE_GZIP
+;; } GtkSourceCompressionType;
+
+(define-enum-extended SourceCompressionType
+  (in-module "Gtk")
+  (c-name "GtkSourceCompressionType")
+  (values
+    '("none" "GTK_SOURCE_COMPRESSION_TYPE_NONE" "0")
+    '("gzip" "GTK_SOURCE_COMPRESSION_TYPE_GZIP" "1")
+  )
+)
+
 ;; From gtksourcefileloader.h
 
 ;; Original typedef:
-;; typedef enum
+;; typedef enum _GtkSourceFileLoaderError
 ;; {
 ;; 	GTK_SOURCE_FILE_LOADER_ERROR_TOO_BIG,
 ;; 	GTK_SOURCE_FILE_LOADER_ERROR_ENCODING_AUTO_DETECTION_FAILED,
@@ -181,7 +217,7 @@
 ;; From gtksourcefilesaver.h
 
 ;; Original typedef:
-;; typedef enum
+;; typedef enum _GtkSourceFileSaverError
 ;; {
 ;; 	GTK_SOURCE_FILE_SAVER_ERROR_INVALID_CHARS,
 ;; 	GTK_SOURCE_FILE_SAVER_ERROR_EXTERNALLY_MODIFIED
@@ -197,7 +233,7 @@
 )
 
 ;; Original typedef:
-;; typedef enum
+;; typedef enum _GtkSourceFileSaverFlags
 ;; {
 ;; 	GTK_SOURCE_FILE_SAVER_FLAGS_NONE			= 0,
 ;; 	GTK_SOURCE_FILE_SAVER_FLAGS_IGNORE_INVALID_CHARS	= 1 << 0,
@@ -219,7 +255,7 @@
 ;; From gtksourcegutterrenderer.h
 
 ;; Original typedef:
-;; typedef enum
+;; typedef enum _GtkSourceGutterRendererState
 ;; {
 ;; 	GTK_SOURCE_GUTTER_RENDERER_STATE_NORMAL = 0,
 ;; 	GTK_SOURCE_GUTTER_RENDERER_STATE_CURSOR = 1 << 0,
@@ -239,7 +275,7 @@
 )
 
 ;; Original typedef:
-;; typedef enum
+;; typedef enum _GtkSourceGutterRendererAlignmentMode
 ;; {
 ;; 	GTK_SOURCE_GUTTER_RENDERER_ALIGNMENT_MODE_CELL,
 ;; 	GTK_SOURCE_GUTTER_RENDERER_ALIGNMENT_MODE_FIRST,
@@ -256,62 +292,58 @@
   )
 )
 
-;; From gtksourcetypes.h
+;; From gtksourcespacedrawer.h
 
 ;; Original typedef:
-;; typedef enum
+;; typedef enum _GtkSourceSpaceTypeFlags
 ;; {
-;; 	GTK_SOURCE_NEWLINE_TYPE_LF,
-;; 	GTK_SOURCE_NEWLINE_TYPE_CR,
-;; 	GTK_SOURCE_NEWLINE_TYPE_CR_LF
-;; } GtkSourceNewlineType;
+;; 	GTK_SOURCE_SPACE_TYPE_NONE	= 0,
+;; 	GTK_SOURCE_SPACE_TYPE_SPACE	= 1 << 0,
+;; 	GTK_SOURCE_SPACE_TYPE_TAB	= 1 << 1,
+;; 	GTK_SOURCE_SPACE_TYPE_NEWLINE	= 1 << 2,
+;; 	GTK_SOURCE_SPACE_TYPE_NBSP	= 1 << 3,
+;; 	GTK_SOURCE_SPACE_TYPE_ALL	= 0xf
+;; } GtkSourceSpaceTypeFlags;
 
-(define-enum-extended SourceNewlineType
+(define-flags-extended SourceSpaceTypeFlags
   (in-module "Gtk")
-  (c-name "GtkSourceNewlineType")
+  (c-name "GtkSourceSpaceTypeFlags")
   (values
-    '("lf" "GTK_SOURCE_NEWLINE_TYPE_LF" "0")
-    '("cr" "GTK_SOURCE_NEWLINE_TYPE_CR" "1")
-    '("cr-lf" "GTK_SOURCE_NEWLINE_TYPE_CR_LF" "2")
+    '("none" "GTK_SOURCE_SPACE_TYPE_NONE" "0x0")
+    '("space" "GTK_SOURCE_SPACE_TYPE_SPACE" "1 << 0")
+    '("tab" "GTK_SOURCE_SPACE_TYPE_TAB" "1 << 1")
+    '("newline" "GTK_SOURCE_SPACE_TYPE_NEWLINE" "1 << 2")
+    '("nbsp" "GTK_SOURCE_SPACE_TYPE_NBSP" "1 << 3")
+    '("all" "GTK_SOURCE_SPACE_TYPE_ALL" "0xf")
   )
 )
 
 ;; Original typedef:
-;; typedef enum
+;; typedef enum _GtkSourceSpaceLocationFlags
 ;; {
-;; 	GTK_SOURCE_COMPRESSION_TYPE_NONE,
-;; 	GTK_SOURCE_COMPRESSION_TYPE_GZIP
-;; } GtkSourceCompressionType;
+;; 	GTK_SOURCE_SPACE_LOCATION_NONE		= 0,
+;; 	GTK_SOURCE_SPACE_LOCATION_LEADING	= 1 << 0,
+;; 	GTK_SOURCE_SPACE_LOCATION_INSIDE_TEXT	= 1 << 1,
+;; 	GTK_SOURCE_SPACE_LOCATION_TRAILING	= 1 << 2,
+;; 	GTK_SOURCE_SPACE_LOCATION_ALL		= 0x7
+;; } GtkSourceSpaceLocationFlags;
 
-(define-enum-extended SourceCompressionType
+(define-flags-extended SourceSpaceLocationFlags
   (in-module "Gtk")
-  (c-name "GtkSourceCompressionType")
+  (c-name "GtkSourceSpaceLocationFlags")
   (values
-    '("none" "GTK_SOURCE_COMPRESSION_TYPE_NONE" "0")
-    '("gzip" "GTK_SOURCE_COMPRESSION_TYPE_GZIP" "1")
-  )
-)
-
-;; Original typedef:
-;; typedef enum
-;; {
-;; 	GTK_SOURCE_BACKGROUND_PATTERN_TYPE_NONE,
-;; 	GTK_SOURCE_BACKGROUND_PATTERN_TYPE_GRID
-;; } GtkSourceBackgroundPatternType;
-
-(define-enum-extended SourceBackgroundPatternType
-  (in-module "Gtk")
-  (c-name "GtkSourceBackgroundPatternType")
-  (values
-    '("none" "GTK_SOURCE_BACKGROUND_PATTERN_TYPE_NONE" "0")
-    '("grid" "GTK_SOURCE_BACKGROUND_PATTERN_TYPE_GRID" "1")
+    '("none" "GTK_SOURCE_SPACE_LOCATION_NONE" "0x0")
+    '("leading" "GTK_SOURCE_SPACE_LOCATION_LEADING" "1 << 0")
+    '("inside-text" "GTK_SOURCE_SPACE_LOCATION_INSIDE_TEXT" "1 << 1")
+    '("trailing" "GTK_SOURCE_SPACE_LOCATION_TRAILING" "1 << 2")
+    '("all" "GTK_SOURCE_SPACE_LOCATION_ALL" "0x7")
   )
 )
 
 ;; From gtksourceview.h
 
 ;; Original typedef:
-;; typedef enum
+;; typedef enum _GtkSourceViewGutterPosition
 ;; {
 ;; 	GTK_SOURCE_VIEW_GUTTER_POSITION_LINES = -30,
 ;; 	GTK_SOURCE_VIEW_GUTTER_POSITION_MARKS = -20
@@ -327,7 +359,7 @@
 )
 
 ;; Original typedef:
-;; typedef enum
+;; typedef enum _GtkSourceSmartHomeEndType
 ;; {
 ;; 	GTK_SOURCE_SMART_HOME_END_DISABLED,
 ;; 	GTK_SOURCE_SMART_HOME_END_BEFORE,
@@ -347,30 +379,18 @@
 )
 
 ;; Original typedef:
-;; typedef enum
+;; typedef enum _GtkSourceBackgroundPatternType
 ;; {
-;; 	GTK_SOURCE_DRAW_SPACES_SPACE      = 1 << 0,
-;; 	GTK_SOURCE_DRAW_SPACES_TAB        = 1 << 1,
-;; 	GTK_SOURCE_DRAW_SPACES_NEWLINE    = 1 << 2,
-;; 	GTK_SOURCE_DRAW_SPACES_NBSP       = 1 << 3,
-;; 	GTK_SOURCE_DRAW_SPACES_LEADING    = 1 << 4,
-;; 	GTK_SOURCE_DRAW_SPACES_TEXT       = 1 << 5,
-;; 	GTK_SOURCE_DRAW_SPACES_TRAILING   = 1 << 6,
-;; 	GTK_SOURCE_DRAW_SPACES_ALL        = 0x7f
-;; } GtkSourceDrawSpacesFlags;
+;; 	GTK_SOURCE_BACKGROUND_PATTERN_TYPE_NONE,
+;; 	GTK_SOURCE_BACKGROUND_PATTERN_TYPE_GRID
+;; } GtkSourceBackgroundPatternType;
 
-(define-flags-extended SourceDrawSpacesFlags
+(define-enum-extended SourceBackgroundPatternType
   (in-module "Gtk")
-  (c-name "GtkSourceDrawSpacesFlags")
+  (c-name "GtkSourceBackgroundPatternType")
   (values
-    '("space" "GTK_SOURCE_DRAW_SPACES_SPACE" "1 << 0")
-    '("tab" "GTK_SOURCE_DRAW_SPACES_TAB" "1 << 1")
-    '("newline" "GTK_SOURCE_DRAW_SPACES_NEWLINE" "1 << 2")
-    '("nbsp" "GTK_SOURCE_DRAW_SPACES_NBSP" "1 << 3")
-    '("leading" "GTK_SOURCE_DRAW_SPACES_LEADING" "1 << 4")
-    '("text" "GTK_SOURCE_DRAW_SPACES_TEXT" "1 << 5")
-    '("trailing" "GTK_SOURCE_DRAW_SPACES_TRAILING" "1 << 6")
-    '("all" "GTK_SOURCE_DRAW_SPACES_ALL" "0x7f")
+    '("none" "GTK_SOURCE_BACKGROUND_PATTERN_TYPE_NONE" "0")
+    '("grid" "GTK_SOURCE_BACKGROUND_PATTERN_TYPE_GRID" "1")
   )
 )
 

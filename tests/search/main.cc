@@ -34,8 +34,8 @@ class SearchDialog : public Dialog {
     Gtk::Entry *m_entry ;
     Gtk::Button *m_search_forward_button ;
     Gtk::Button *m_search_backward_button ;
-    sigc::signal<void> m_forward_search_requested_signal ;
-    sigc::signal<void> m_backward_search_requested_signal ;
+    sigc::signal<void()> m_forward_search_requested_signal ;
+    sigc::signal<void()> m_backward_search_requested_signal ;
 
     void init_members ()
     {
@@ -100,12 +100,12 @@ public:
         a_str = m_entry->get_text () ;
     }
 
-    sigc::signal<void>& forward_search_requested_signal ()
+    sigc::signal<void()>& forward_search_requested_signal ()
     {
         return m_forward_search_requested_signal ;
     }
 
-    sigc::signal<void>& backward_search_requested_signal ()
+    sigc::signal<void()>& backward_search_requested_signal ()
     {
         return m_backward_search_requested_signal ;
     }

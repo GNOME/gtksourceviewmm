@@ -172,10 +172,10 @@ TestWindow::TestWindow()
   vbox->pack_start(*scrolledwindow, true, true);
   vbox->pack_end(*hbox, false, false);
 
-  m_remember->signal_toggled().connect(sigc::mem_fun(this, &TestWindow::remember_toggled));
-  m_select_on_show->signal_toggled().connect(sigc::mem_fun(this, &TestWindow::select_on_show_toggled));
-  m_show_headers->signal_toggled().connect(sigc::mem_fun(this, &TestWindow::show_headers_toggled));
-  m_show_icons->signal_toggled().connect(sigc::mem_fun(this, &TestWindow::show_icons_toggled));
+  m_remember->signal_toggled().connect(sigc::mem_fun(*this, &TestWindow::remember_toggled));
+  m_select_on_show->signal_toggled().connect(sigc::mem_fun(*this, &TestWindow::select_on_show_toggled));
+  m_show_headers->signal_toggled().connect(sigc::mem_fun(*this, &TestWindow::show_headers_toggled));
+  m_show_icons->signal_toggled().connect(sigc::mem_fun(*this, &TestWindow::show_icons_toggled));
 
   add(*vbox);
 //completion

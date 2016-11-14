@@ -1,3 +1,21 @@
+3.21.3 (unstable)
+
+* Add SearchContext ad SearchSettings.
+  (Christoph Brill)
+* Add StyleSchemeChooser, StyleSchemeChooserWidget and
+  StyleSchemeChooserButton.
+  (Christoph Brill)
+* Buffer: Add implicit-trailing-newline property.
+  (Christoph Brill)
+* CompletionWords: Add activation property.
+  (Christoph Brill)
+* Language: Add get_style_fallback().
+  (Christoph Brill)
+* Style: Add style and scale-set properties.
+  (Christoph Brill)
+* View: Add get/set_background-pattern().
+  (Christoph Brill)
+
 3.21.2 (unstable);
 
 * C++11: Markup: Deprecated operator const void*(), adding explicit operator bool().

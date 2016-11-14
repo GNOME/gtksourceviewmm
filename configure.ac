@@ -27,7 +27,7 @@ LT_INIT([win32-dll disable-static])
 AC_PROG_CXX
 MM_AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
 
-AC_SUBST([GTKSOURCEVIEWMM_MODULES], ['glibmm-2.4 >= 2.46.1 gtkmm-3.0 >= 3.18.0 gtksourceview-3.0 >= 3.18.0'])
+AC_SUBST([GTKSOURCEVIEWMM_MODULES], ['glibmm-2.4 >= 2.46.1 gtkmm-3.0 >= 3.18.0 gtksourceview-4 >= 3.99.0'])
 PKG_CHECK_MODULES([GTKSOURCEVIEWMM], [$GTKSOURCEVIEWMM_MODULES])
 
 MM_PKG_CONFIG_SUBST([GTHREAD_CFLAGS], [--cflags-only-other gthread-2.0])

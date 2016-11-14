@@ -143,8 +143,8 @@ TestWindow::TestWindow()
   m_show_icons(0)
 {
 // layout
-  Gtk::HBox* hbox (Gtk::manage(new Gtk::HBox(false, 1)));
-  Gtk::VBox* vbox (Gtk::manage(new Gtk::VBox(false, 1)));
+  Gtk::Box* hbox (Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 1)));
+  Gtk::Box* vbox (Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, 1)));
   m_remember = Gtk::manage(new Gtk::CheckButton("Remember info visibility"));
   m_select_on_show = Gtk::manage(new Gtk::CheckButton("Select first on show"));
   m_show_headers = Gtk::manage(new Gtk::CheckButton("Show headers"));

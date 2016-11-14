@@ -30,7 +30,7 @@ class SearchDialog : public Dialog {
     SearchDialog (const SearchDialog&) ;
     SearchDialog& operator= (const SearchDialog&) ;
 
-    Gtk::HBox *m_hbox ;
+    Gtk::Box *m_hbox ;
     Gtk::Entry *m_entry ;
     Gtk::Button *m_search_forward_button ;
     Gtk::Button *m_search_backward_button ;
@@ -49,7 +49,7 @@ class SearchDialog : public Dialog {
     {
         add_button ("Close", RESPONSE_ACCEPT) ;
 
-        m_hbox = manage (new HBox) ;
+        m_hbox = manage (new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL)) ;
         get_content_area ()->pack_start (*m_hbox) ;
 
         Label *label = manage (new Label ("Search: ")) ;
@@ -125,7 +125,7 @@ class App {
     Menu *m_edit_menu;
     MenuItem *m_edit_menu_item ;
     MenuItem *m_search_menu_item ;
-    VBox *m_main_vbox ;
+    Box *m_main_vbox ;
     View *m_source_view;
 
 public:
@@ -317,7 +317,7 @@ public:
     {
         if (m_main_vbox) {return;}
 
-        m_main_vbox = manage (new VBox) ;
+        m_main_vbox = manage (new Gtk::Box(Gtk::ORIENTATION_VERTICAL)) ;
         g_return_if_fail (m_menu_bar) ;
         m_main_vbox->pack_start (*m_menu_bar, PACK_SHRINK) ;
         m_source_view = manage (new View) ;

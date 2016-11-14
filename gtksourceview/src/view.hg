@@ -54,25 +54,6 @@ _WRAP_ENUM(SmartHomeEndType, GtkSourceSmartHomeEndType, s#^SOURCE_##)
  * are pressed.
  */
 
-/** Determines what kind of whitespaces whould be drawn.
- */
-_WRAP_ENUM(DrawSpacesFlags, GtkSourceDrawSpacesFlags, s#^SOURCE_##)
-/** @var DrawSpacesFlags DRAW_SPACES_SPACE
- * Whether the space character should be drawn.
- */
-/** @var DrawSpacesFlags DRAW_SPACES_TAB
- * Whether the tab character should be drawn.
- */
-/** @var DrawSpacesFlags DRAW_SPACES_NEWLINE
- * Whether the line breaks should be drawn.
- */
-/** @var DrawSpacesFlags DRAW_SPACES_NBSP
- * Whether the non-breaking whitespaces should be drawn.
- */
-/** @var DrawSpacesFlags DRAW_SPACES_ALL
- * Whether all kind of whitespaces should be drawn.
- */
-
 _WRAP_ENUM(BackgroundPatternType, GtkSourceBackgroundPatternType, s#^SOURCE_##)
 /** @var BackgroundPatternType BACKGROUND_PATTERN_TYPE_NONE
  * no pattern
@@ -267,22 +248,6 @@ public:
    */
   _WRAP_METHOD(gint get_indent_width() const, gtk_source_view_get_indent_width)
 
-  /** Set if and how the spaces should be visualized.
-   *
-   * Specifying @a flags as 0 will disable display of spaces.
-   *
-   * @param flags DrawSpacesFlags specifing how white spaces should be
-   * displayed.
-   */
-  _WRAP_METHOD(void set_draw_spaces(DrawSpacesFlags flags = DRAW_SPACES_ALL), gtk_source_view_set_draw_spaces)
-
-  /** Returns the DrawSpacesFlags specifying if and how spaces should be
-   *  displayed.
-   *
-   * @return The DrawSpacesFlags, 0 if no spaces should be drawn.
-   */
-  _WRAP_METHOD(DrawSpacesFlags get_draw_spaces() const, gtk_source_view_get_draw_spaces)
-
 #m4 _CONVERSION(`const Gtk::TextIter&',`const GtkTextIter*',`($3).gobj()')
   /** Determines the visual column at @a iter taking into consideration the indent
    *  width of @a view.
@@ -426,8 +391,6 @@ public:
   _WRAP_PROPERTY("highlight-current-line", bool)
 
   _WRAP_PROPERTY("indent-on-tab", bool)
-
-  _WRAP_PROPERTY("draw-spaces", DrawSpacesFlags)
 
   _WRAP_PROPERTY("completion", Glib::RefPtr<Completion>)
 

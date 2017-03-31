@@ -40,20 +40,20 @@ class GutterRenderer : public Gtk::Object
   _CLASS_GTKOBJECT(GutterRenderer, GtkSourceGutterRenderer, GTK_SOURCE_GUTTER_RENDERER, Gtk::Object, GInitiallyUnowned)
 public:
 #m4 _CONVERSION(`const Cairo::RefPtr<Cairo::Context>&', `cairo_t*', `(($3) ? ($3)->cobj() : 0)')
-#m4 _CONVERSION(`Gtk::TextBuffer::iterator&',`GtkTextIter*',($3).gobj())
+#m4 _CONVERSION(`const Gtk::TextBuffer::const_iterator&',`GtkTextIter*',const_cast<GtkTextIter*>(($3).gobj()))
   _WRAP_METHOD(void begin(
                   const Cairo::RefPtr<Cairo::Context>& cr,
                   const Gdk::Rectangle& background_area,
                   const Gdk::Rectangle& cell_area,
-                  Gtk::TextBuffer::iterator& start,
-                  Gtk::TextBuffer::iterator& end), gtk_source_gutter_renderer_begin)
+                  const Gtk::TextBuffer::const_iterator& start,
+                  const Gtk::TextBuffer::const_iterator& end), gtk_source_gutter_renderer_begin)
 
   _WRAP_METHOD(void draw(
                   const Cairo::RefPtr<Cairo::Context>& cr,
                   const Gdk::Rectangle& background_area,
                   const Gdk::Rectangle& cell_area,
-                  Gtk::TextBuffer::iterator& start,
-                  Gtk::TextBuffer::iterator& end,
+                  const Gtk::TextBuffer::const_iterator& start,
+                  const Gtk::TextBuffer::const_iterator& end,
                   GutterRendererState), gtk_source_gutter_renderer_draw)
 
   _WRAP_METHOD(void end(), gtk_source_gutter_renderer_end)
@@ -145,19 +145,19 @@ protected:
   _CTOR_DEFAULT()
 
 #m4 _CONVERSION(`cairo_t*',`const Cairo::RefPtr<Cairo::Context>&',`Cairo::RefPtr<Cairo::Context>(new Cairo::Context($3, false))')
-#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextBuffer::iterator&',`Glib::wrap_iter($3)')
+#m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextBuffer::const_iterator&',`Glib::wrap_const_iter($3)')
 
   _WRAP_VFUNC(void begin(const Cairo::RefPtr<Cairo::Context>& cr,
                          const Gdk::Rectangle& background_area,
                          const Gdk::Rectangle& cell_area,
-                         Gtk::TextBuffer::iterator& start,
-                         Gtk::TextBuffer::iterator& end), begin)
+                         const Gtk::TextBuffer::const_iterator& start,
+                         const Gtk::TextBuffer::const_iterator& end), begin)
 
   _WRAP_VFUNC(void draw(const Cairo::RefPtr<Cairo::Context>& cr,
                         const Gdk::Rectangle& background_area,
                         const Gdk::Rectangle& cell_area,
-                        Gtk::TextBuffer::iterator& start,
-                        Gtk::TextBuffer::iterator& end,
+                        const Gtk::TextBuffer::const_iterator& start,
+                        const Gtk::TextBuffer::const_iterator& end,
                         GutterRendererState), draw)
 
   _WRAP_VFUNC(void end(), end)

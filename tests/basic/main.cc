@@ -25,8 +25,6 @@ main ()
     Window window ;
     window.add (source_view) ;
 
-    window.show_all () ;
-
     app->run (window) ;
 
     return 0 ;

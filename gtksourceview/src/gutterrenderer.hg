@@ -40,20 +40,20 @@ class GutterRenderer : public Gtk::Object
   _CLASS_GTKOBJECT(GutterRenderer, GtkSourceGutterRenderer, GTK_SOURCE_GUTTER_RENDERER, Gtk::Object, GInitiallyUnowned)
 public:
 #m4 _CONVERSION(`const Cairo::RefPtr<Cairo::Context>&', `cairo_t*', `(($3) ? ($3)->cobj() : 0)')
-#m4 _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',($3).gobj())
+#m4 _CONVERSION(`Gtk::TextBuffer::iterator&',`GtkTextIter*',($3).gobj())
   _WRAP_METHOD(void begin(
                   const Cairo::RefPtr<Cairo::Context>& cr,
                   const Gdk::Rectangle& background_area,
                   const Gdk::Rectangle& cell_area,
-                  Gtk::TextIter& start,
-                  Gtk::TextIter& end), gtk_source_gutter_renderer_begin)
+                  Gtk::TextBuffer::iterator& start,
+                  Gtk::TextBuffer::iterator& end), gtk_source_gutter_renderer_begin)
 
   _WRAP_METHOD(void draw(
                   const Cairo::RefPtr<Cairo::Context>& cr,
                   const Gdk::Rectangle& background_area,
                   const Gdk::Rectangle& cell_area,
-                  Gtk::TextIter& start,
-                  Gtk::TextIter& end,
+                  Gtk::TextBuffer::iterator& start,
+                  Gtk::TextBuffer::iterator& end,
                   GutterRendererState), gtk_source_gutter_renderer_draw)
 
   _WRAP_METHOD(void end(), gtk_source_gutter_renderer_end)
@@ -116,28 +116,28 @@ public:
   _WRAP_PROPERTY("background-set", bool)
 
 #m4 _CONVERSION(`GdkRectangle*',`const Gdk::Rectangle&',`Glib::wrap($3)')
-#m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap_iter($3)')
-#m4 _CONVERSION(`const Gtk::TextIter&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
+#m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextBuffer::iterator&',`Glib::wrap_iter($3)')
+#m4 _CONVERSION(`const Gtk::TextBuffer::iterator&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
 #m4 _CONVERSION(`GtkTooltip*', `const Glib::RefPtr<Gtk::Tooltip>&', `Glib::wrap($3, true)')
 #m4 _CONVERSION(`const Glib::RefPtr<Gtk::Tooltip>&',`GtkTooltip*',`const_cast<GtkTooltip*>(Glib::unwrap($3))')
 
-  _WRAP_SIGNAL(bool query_tooltip(const Gtk::TextIter& iter,
+  _WRAP_SIGNAL(bool query_tooltip(const Gtk::TextBuffer::iterator& iter,
                                   const Gdk::Rectangle& area,
                                   int x,
                                   int y,
                                   const Glib::RefPtr<Gtk::Tooltip>& tooltip), "query-tooltip")
 
-  _WRAP_SIGNAL(void activate(const Gtk::TextIter& iter,
+  _WRAP_SIGNAL(void activate(const Gtk::TextBuffer::iterator& iter,
                              const Gdk::Rectangle& area,
                              GdkEvent* event), "activate")
 
   _WRAP_SIGNAL(void queue_draw(), "queue-draw")
 
-  _WRAP_SIGNAL(void query_data(const Gtk::TextIter& start,
-                               const Gtk::TextIter& end,
+  _WRAP_SIGNAL(void query_data(const Gtk::TextBuffer::iterator& start,
+                               const Gtk::TextBuffer::iterator& end,
                                GutterRendererState state), "query-data")
 
-  _WRAP_SIGNAL(bool query_activatable(const Gtk::TextIter& iter,
+  _WRAP_SIGNAL(bool query_activatable(const Gtk::TextBuffer::iterator& iter,
                                       const Gdk::Rectangle& area,
                                       GdkEvent* event), "query-activatable")
 
@@ -145,19 +145,19 @@ protected:
   _CTOR_DEFAULT()
 
 #m4 _CONVERSION(`cairo_t*',`const Cairo::RefPtr<Cairo::Context>&',`Cairo::RefPtr<Cairo::Context>(new Cairo::Context($3, false))')
-#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap_iter($3)')
+#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextBuffer::iterator&',`Glib::wrap_iter($3)')
 
   _WRAP_VFUNC(void begin(const Cairo::RefPtr<Cairo::Context>& cr,
                          const Gdk::Rectangle& background_area,
                          const Gdk::Rectangle& cell_area,
-                         Gtk::TextIter& start,
-                         Gtk::TextIter& end), begin)
+                         Gtk::TextBuffer::iterator& start,
+                         Gtk::TextBuffer::iterator& end), begin)
 
   _WRAP_VFUNC(void draw(const Cairo::RefPtr<Cairo::Context>& cr,
                         const Gdk::Rectangle& background_area,
                         const Gdk::Rectangle& cell_area,
-                        Gtk::TextIter& start,
-                        Gtk::TextIter& end,
+                        Gtk::TextBuffer::iterator& start,
+                        Gtk::TextBuffer::iterator& end,
                         GutterRendererState), draw)
 
   _WRAP_VFUNC(void end(), end)

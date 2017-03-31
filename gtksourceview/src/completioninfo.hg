@@ -49,17 +49,17 @@ public:
   CompletionInfo();
 
 #m4 _CONVERSION(`const Gtk::TextView&',`GtkTextView*',`const_cast<GtkTextView*>(($3).gobj())')
-#m4 _CONVERSION(`const Gtk::TextIter&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
+#m4 _CONVERSION(`const Gtk::TextBuffer::iterator&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
   /** Moves the CompletionInfo to @a iter. Moving will respect the
    * Gdk::Gravity setting of the info window and will ensure the line at @a iter
    * is not occluded by the window.
    *
    * @param view A Gtk::TextView on which the info window should be positioned.
-   * @param iter A Gtk::TextIter.
+   * @param iter A Gtk::TextBuffer::iterator.
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(void move_to_iter(const Gtk::TextView& view, const Gtk::TextIter& iter), gtk_source_completion_info_move_to_iter)
+  _WRAP_METHOD(void move_to_iter(const Gtk::TextView& view, const Gtk::TextBuffer::iterator& iter), gtk_source_completion_info_move_to_iter)
 
   /** Moves the Gtk::CompletionInfo to the cursor position. Moving will
    * respect the Gdk::Gravity setting of the info window and will ensure the

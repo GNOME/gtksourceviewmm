@@ -72,11 +72,11 @@ public:
    *
    * Providers can use this to determine how and if to match proposals.
    *
-   * @return A Gtk::TextIter.
+   * @return A Gtk::TextBuffer::iterator.
    *
    * @newin{2,10}
    */
-  Gtk::TextIter get_iter() const;
+  Gtk::TextBuffer::iterator get_iter() const;
 
   /** Get the context activation
    *
@@ -88,7 +88,7 @@ public:
 
   _WRAP_PROPERTY("activation", CompletionActivation)
   _WRAP_PROPERTY("completion", Glib::RefPtr<Completion>)
-  _WRAP_PROPERTY("iter", Gtk::TextIter)
+  _WRAP_PROPERTY("iter", Gtk::TextBuffer::iterator)
 
   /** Emitted when the current population of proposals has been cancelled.
    *

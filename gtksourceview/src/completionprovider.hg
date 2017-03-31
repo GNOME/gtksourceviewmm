@@ -130,8 +130,8 @@ public:
    */
   _WRAP_METHOD(void update_info(const Glib::RefPtr<const CompletionProposal>& proposal, const CompletionInfo& info), gtk_source_completion_provider_update_info)
 
-#m4 _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',`($3).gobj()')
-  /** Get the Gtk::TextIter at which the completion for @a proposal starts.
+#m4 _CONVERSION(`Gtk::TextBuffer::iterator&',`GtkTextIter*',`($3).gobj()')
+  /** Get the Gtk::TextBuffer::iterator at which the completion for @a proposal starts.
    *
    * When implemented, the completion can use this information to position the
    * completion window accordingly when a proposal is selected in the completion
@@ -139,15 +139,15 @@ public:
    *
    * @param proposal A CompletionProposal.
    * @param context A CompletionContext.
-   * @param iter A Gtk::TextIter.
+   * @param iter A Gtk::TextBuffer::iterator.
    *
    * @return @c true if @a iter was set for @a proposal, @c false otherwise.
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(bool get_start_iter(const Glib::RefPtr<const CompletionContext>& context, const Glib::RefPtr<const CompletionProposal>& proposal, Gtk::TextIter& iter), gtk_source_completion_provider_get_start_iter)
+  _WRAP_METHOD(bool get_start_iter(const Glib::RefPtr<const CompletionContext>& context, const Glib::RefPtr<const CompletionProposal>& proposal, Gtk::TextBuffer::iterator& iter), gtk_source_completion_provider_get_start_iter)
 
-#m4 _CONVERSION(`const Gtk::TextIter&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
+#m4 _CONVERSION(`const Gtk::TextBuffer::iterator&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
   /** Activate @a proposal at @a iter.
    *
    * When this functions returns <tt>false</tt>, the default activation of
@@ -155,14 +155,14 @@ public:
    * label of @a proposal.
    *
    * @param proposal A CompletionProposal.
-   * @param iter A Gtk::TextIter.
+   * @param iter A Gtk::TextBuffer::iterator.
    *
    * @return @c true to indicate that the proposal activation has been handled,
    * @c false otherwise.
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(bool activate_proposal(const Glib::RefPtr<CompletionProposal>& proposal, const Gtk::TextIter& iter), gtk_source_completion_provider_activate_proposal)
+  _WRAP_METHOD(bool activate_proposal(const Glib::RefPtr<CompletionProposal>& proposal, const Gtk::TextBuffer::iterator& iter), gtk_source_completion_provider_activate_proposal)
 
   /** Get with what kind of activation the provider should be activated.
    *
@@ -223,14 +223,14 @@ private:
 
 #m4 _CONVERSION(`GtkSourceCompletionContext*', `const Glib::RefPtr<const CompletionContext>&', `Glib::wrap($3, true)')
 #m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const CompletionProposal>&', `Glib::wrap($3, true)')
-#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap_iter($3)')
-  _WRAP_VFUNC(bool get_start_iter(const Glib::RefPtr<const CompletionContext>& context, const Glib::RefPtr<const CompletionProposal>& proposal, Gtk::TextIter& iter), get_start_iter)
+#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextBuffer::iterator&',`Glib::wrap_iter($3)')
+  _WRAP_VFUNC(bool get_start_iter(const Glib::RefPtr<const CompletionContext>& context, const Glib::RefPtr<const CompletionProposal>& proposal, Gtk::TextBuffer::iterator& iter), get_start_iter)
 #m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const CompletionProposal>&', `Glib::wrap($3)')
 #m4 _CONVERSION(`GtkSourceCompletionContext*', `const Glib::RefPtr<const CompletionContext>&', `Glib::wrap($3)')
 
 #m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<CompletionProposal>&', `Glib::wrap($3, true)')
-#m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap_iter($3)')
-  _WRAP_VFUNC(bool activate_proposal(const Glib::RefPtr<CompletionProposal>& proposal, const Gtk::TextIter& iter), activate_proposal)
+#m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextBuffer::iterator&',`Glib::wrap_iter($3)')
+  _WRAP_VFUNC(bool activate_proposal(const Glib::RefPtr<CompletionProposal>& proposal, const Gtk::TextBuffer::iterator& iter), activate_proposal)
 #m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<CompletionProposal>&', `Glib::wrap($3)')
 
   _WRAP_VFUNC(int get_interactive_delay() const, get_interactive_delay)

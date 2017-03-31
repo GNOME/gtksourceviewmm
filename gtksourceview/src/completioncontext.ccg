@@ -24,9 +24,9 @@
 namespace Gsv
 {
 
-Gtk::TextIter CompletionContext::get_iter() const
+Gtk::TextBuffer::iterator CompletionContext::get_iter() const
 {
-  Gtk::TextIter iter;
+  Gtk::TextBuffer::iterator iter;
   gtk_source_completion_context_get_iter(const_cast<GtkSourceCompletionContext*>(gobj()), iter.gobj());
   return iter;
 }

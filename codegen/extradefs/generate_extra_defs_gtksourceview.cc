@@ -23,9 +23,9 @@
 #include <gtksourceview/gtksource.h>
 #include <gtksourceview/completion-providers/words/gtksourcecompletionwords.h>
 
-int main (int argc, char *argv[])
+int main ()
 {
-  gtk_init(&argc, &argv);
+  gtk_init();
 
   std::cout << get_defs (GTK_SOURCE_TYPE_BUFFER)
             << get_defs (GTK_SOURCE_TYPE_COMPLETION)

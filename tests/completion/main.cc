@@ -232,7 +232,6 @@ main (int argc, char *argv[])
 
   TestWindow window;
 
-  window.show_all();
   app->run(window);
   return 0;
 }

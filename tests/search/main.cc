@@ -68,7 +68,6 @@ class SearchDialog : public Dialog {
                 (*this, &SearchDialog::on_search_backward_button_clicked_signal));
 
         m_hbox->pack_start (*m_search_backward_button, PACK_SHRINK) ;
-        m_hbox->show_all () ;
     }
 
     void on_search_forward_button_clicked_signal ()
@@ -370,7 +369,6 @@ main (int argc, char **argv)
 
     App app ; //TODO: Derive from Gtk::Application?
     app.get_widget ().set_size_request (500, 400) ;
-    app.get_widget ().show_all () ;
     if (argc == 2) {
         app.open_file (filename_to_utf8 (argv[1])) ;
     }

@@ -363,8 +363,7 @@ int
 main (int argc, char **argv)
 {
     Glib::RefPtr<Gtk::Application> gtkmmapp =
-        Gtk::Application::create(argc, argv,
-            "org.gtksourceviewmm.test");
+        Gtk::Application::create("org.gtksourceviewmm.test");
 
     Gsv::init () ;
 

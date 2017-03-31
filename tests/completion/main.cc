@@ -223,11 +223,10 @@ void TestWindow::show_icons_toggled()
 }
 
 int
-main (int argc, char *argv[])
+main ()
 {
   Glib::RefPtr<Gtk::Application> app =
-    Gtk::Application::create(argc, argv,
-      "org.gtksourceviewmm.test");
+    Gtk::Application::create("org.gtksourceviewmm.test");
   Gsv::init();
 
   TestWindow window;

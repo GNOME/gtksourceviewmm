@@ -457,7 +457,7 @@ public:
   _WRAP_PROPERTY("style-scheme", Glib::RefPtr<StyleScheme>)
   _WRAP_PROPERTY("undo-manager", Glib::RefPtr<UndoManager>)
 
-#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap($3)')
+#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap_iter($3)')
   /** Emitted whenever the syntax highlighting information has been updated,
    *  so that views can request a redraw if the region changed is visible.
    *

@@ -116,7 +116,7 @@ public:
   _WRAP_PROPERTY("background-set", bool)
 
 #m4 _CONVERSION(`GdkRectangle*',`const Gdk::Rectangle&',`Glib::wrap($3)')
-#m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap($3)')
+#m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap_iter($3)')
 #m4 _CONVERSION(`const Gtk::TextIter&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
 #m4 _CONVERSION(`GtkTooltip*', `const Glib::RefPtr<Gtk::Tooltip>&', `Glib::wrap($3, true)')
 #m4 _CONVERSION(`const Glib::RefPtr<Gtk::Tooltip>&',`GtkTooltip*',`const_cast<GtkTooltip*>(Glib::unwrap($3))')
@@ -145,7 +145,7 @@ protected:
   _CTOR_DEFAULT()
 
 #m4 _CONVERSION(`cairo_t*',`const Cairo::RefPtr<Cairo::Context>&',`Cairo::RefPtr<Cairo::Context>(new Cairo::Context($3, false))')
-#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap($3)')
+#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap_iter($3)')
 
   _WRAP_VFUNC(void begin(const Cairo::RefPtr<Cairo::Context>& cr,
                          const Gdk::Rectangle& background_area,

@@ -223,13 +223,13 @@ private:
 
 #m4 _CONVERSION(`GtkSourceCompletionContext*', `const Glib::RefPtr<const CompletionContext>&', `Glib::wrap($3, true)')
 #m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const CompletionProposal>&', `Glib::wrap($3, true)')
-#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap($3)')
+#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextIter&',`Glib::wrap_iter($3)')
   _WRAP_VFUNC(bool get_start_iter(const Glib::RefPtr<const CompletionContext>& context, const Glib::RefPtr<const CompletionProposal>& proposal, Gtk::TextIter& iter), get_start_iter)
 #m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<const CompletionProposal>&', `Glib::wrap($3)')
 #m4 _CONVERSION(`GtkSourceCompletionContext*', `const Glib::RefPtr<const CompletionContext>&', `Glib::wrap($3)')
 
 #m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<CompletionProposal>&', `Glib::wrap($3, true)')
-#m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap($3)')
+#m4 _CONVERSION(`GtkTextIter*',`const Gtk::TextIter&',`Glib::wrap_iter($3)')
   _WRAP_VFUNC(bool activate_proposal(const Glib::RefPtr<CompletionProposal>& proposal, const Gtk::TextIter& iter), activate_proposal)
 #m4 _CONVERSION(`GtkSourceCompletionProposal*', `const Glib::RefPtr<CompletionProposal>&', `Glib::wrap($3)')
 

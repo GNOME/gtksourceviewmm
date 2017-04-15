@@ -142,7 +142,7 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(bool forward(const TextBuffer::const_iterator& iter, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, bool& has_wrapped_around), gtk_source_search_context_forward2)
+  _WRAP_METHOD(bool forward(const TextBuffer::const_iterator& iter, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, bool& has_wrapped_around), gtk_source_search_context_forward)
   _IGNORE(gtk_source_search_context_forward)
 
   /** Asynchronous forward search. See the GAsyncResult documentation to know how to use this function.
@@ -166,7 +166,7 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(bool forward_finish(const Glib::RefPtr<Gio::AsyncResult>& result, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, bool& has_wrapped_around), gtk_source_search_context_forward_finish2, errthrow)
+  _WRAP_METHOD(bool forward_finish(const Glib::RefPtr<Gio::AsyncResult>& result, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, bool& has_wrapped_around), gtk_source_search_context_forward_finish, errthrow)
   _IGNORE(gtk_source_search_context_forward_finish)
 
   /** Synchronous backward search. It is recommended to use the asynchronous functions instead, to not block the user interface. However, if you are sure that the buffer
@@ -179,7 +179,7 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(bool backward(const TextBuffer::iterator& iter, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, bool& has_wrapped_around), gtk_source_search_context_backward2)
+  _WRAP_METHOD(bool backward(const TextBuffer::iterator& iter, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, bool& has_wrapped_around), gtk_source_search_context_backward)
   _IGNORE(gtk_source_search_context_backward)
 
   /** Asynchronous backward search. See the GAsyncResult documentation to know how to use this function.
@@ -204,7 +204,7 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(bool backward_finish(const Glib::RefPtr<Gio::AsyncResult>& result, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, bool& has_wrapped_around), gtk_source_search_context_backward_finish2, errthrow)
+  _WRAP_METHOD(bool backward_finish(const Glib::RefPtr<Gio::AsyncResult>& result, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, bool& has_wrapped_around), gtk_source_search_context_backward_finish, errthrow)
   _IGNORE(gtk_source_search_context_backward)
 
   /** Replaces a search match by another text. If match_start and match_end doesn't correspond to a search match, FALSE is returned.
@@ -222,7 +222,7 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(bool replace(TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, const Glib::ustring& replace, int replace_length), gtk_source_search_context_replace2, errthrow)
+  _WRAP_METHOD(bool replace(TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, const Glib::ustring& replace, int replace_length), gtk_source_search_context_replace, errthrow)
   _IGNORE(gtk_source_search_context_replace)
 
   /** Replaces all search matches by another text. It is a synchronous function, so it can block the user interface.

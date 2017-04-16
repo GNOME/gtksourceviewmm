@@ -77,7 +77,6 @@ protected:
 
 public:
   using iterator = TextBuffer::iterator;
-  using const_iterator = TextBuffer::const_iterator;
 
   /** Create a new source buffer.
    *
@@ -229,7 +228,7 @@ public:
    */
   bool forward_iter_to_source_mark(iterator& iter);
 
-#m4 _CONVERSION(`const const_iterator&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
+#m4 _CONVERSION(`const iterator&',`const GtkTextIter*',`($3).gobj()')
   /** Forces buffer to analyze and highlight the given area synchronously.
    *
    * @note This is a potentially slow operation and should be used only when you
@@ -239,7 +238,7 @@ public:
    * @param start Start of the area to highlight.
    * @param end End of the area to highlight.
    */
-  _WRAP_METHOD(void ensure_highlight(const const_iterator& start, const const_iterator& end), gtk_source_buffer_ensure_highlight)
+  _WRAP_METHOD(void ensure_highlight(const iterator& start, const iterator& end), gtk_source_buffer_ensure_highlight)
 
   /** Returns the StyleScheme currently used in buffer.
    *
@@ -287,7 +286,7 @@ public:
    *
    * @return A new Mark.
    */
-  _WRAP_METHOD(Glib::RefPtr<Gsv::Mark> create_source_mark(const Glib::ustring& name, const Glib::ustring& category, const const_iterator& where), gtk_source_buffer_create_source_mark, refreturn)
+  _WRAP_METHOD(Glib::RefPtr<Gsv::Mark> create_source_mark(const Glib::ustring& name, const Glib::ustring& category, const iterator& where), gtk_source_buffer_create_source_mark, refreturn)
 
   /** Creates an anonymous source mark in the buffer of category category.
    *
@@ -310,7 +309,7 @@ public:
    *
    * @newin{2,10}
    */
-  Glib::RefPtr<Gsv::Mark> create_source_mark(const Glib::ustring& category, const const_iterator& where);
+  Glib::RefPtr<Gsv::Mark> create_source_mark(const Glib::ustring& category, const iterator& where);
 
 #m4 _CONVERSION(`GSList*',`std::vector<Glib::RefPtr<Gsv::Mark> >', `Glib::SListHandler<Glib::RefPtr<Gsv::Mark> >::slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')
 #m4 _CONVERSION(`GSList*',`std::vector<Glib::RefPtr<const Gsv::Mark> >', `Glib::SListHandler<Glib::RefPtr<const Gsv::Mark> >slist_to_vector($3, Glib::OWNERSHIP_SHALLOW)')
@@ -340,7 +339,7 @@ public:
    *
    * @return A list of source marks.
    */
-  _WRAP_METHOD(std::vector<Glib::RefPtr<Gsv::Mark> > get_source_marks_at_iter(const const_iterator& iter, const Glib::ustring& category) const, gtk_source_buffer_get_source_marks_at_iter)
+  _WRAP_METHOD(std::vector<Glib::RefPtr<Gsv::Mark> > get_source_marks_at_iter(iterator& iter, const Glib::ustring& category) const, gtk_source_buffer_get_source_marks_at_iter)
 
   /** Returns the list of marks of any category at @a iter.
    *
@@ -348,7 +347,7 @@ public:
    *
    * @return A list of source marks.
    */
-  std::vector<Glib::RefPtr<Gsv::Mark> > get_source_marks_at_iter(const const_iterator& iter) const;
+  std::vector<Glib::RefPtr<Gsv::Mark> > get_source_marks_at_iter(iterator& iter) const;
 
   /** Remove all marks of @a category between start and end from the buffer.
    *
@@ -356,7 +355,7 @@ public:
    * @param end A iterator.
    * @param category Category to search for.
    */
-  _WRAP_METHOD(void remove_source_marks(const const_iterator& start, const const_iterator& end, const Glib::ustring& category), gtk_source_buffer_remove_source_marks)
+  _WRAP_METHOD(void remove_source_marks(const iterator& start, const iterator& end, const Glib::ustring& category), gtk_source_buffer_remove_source_marks)
 
   /** Remove all marks of any category between start and end from the buffer.
    *
@@ -365,7 +364,7 @@ public:
    *
    * @newin{2,10}
    */
-  void remove_source_marks(const const_iterator& start, const const_iterator& end);
+  void remove_source_marks(const iterator& start, const iterator& end);
 
   /** Check if the class @a context_class is set on @c iter.
    *
@@ -376,7 +375,7 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(bool iter_has_context_class(const const_iterator& iter, const Glib::ustring& context_class) const, gtk_source_buffer_iter_has_context_class)
+  _WRAP_METHOD(bool iter_has_context_class(const iterator& iter, const Glib::ustring& context_class) const, gtk_source_buffer_iter_has_context_class)
 
   /** Moves backward to the next toggle (on or off) of the context class.
    *
@@ -420,7 +419,7 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(std::vector<Glib::ustring> get_context_classes_at_iter(const const_iterator& iter) const, gtk_source_buffer_get_context_classes_at_iter)
+  _WRAP_METHOD(std::vector<Glib::ustring> get_context_classes_at_iter(const iterator& iter) const, gtk_source_buffer_get_context_classes_at_iter)
 
   /** Get the undo manager associated with the buffer.
    * @return A UndoManager.
@@ -459,7 +458,7 @@ public:
   _WRAP_PROPERTY("style-scheme", Glib::RefPtr<StyleScheme>)
   _WRAP_PROPERTY("undo-manager", Glib::RefPtr<UndoManager>)
 
-#m4 _CONVERSION(`GtkTextIter*',`iterator&',`Glib::wrap_iter($3)')
+#m4 _CONVERSION(`GtkTextIter*',`iterator&',`Glib::wrap($3)')
   /** Emitted whenever the syntax highlighting information has been updated,
    *  so that views can request a redraw if the region changed is visible.
    *

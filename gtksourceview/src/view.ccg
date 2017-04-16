@@ -50,15 +50,15 @@ View::View(const Glib::RefPtr<Buffer> &a_buffer) :
 Glib::RefPtr<const Buffer>
 View::get_source_buffer () const
 {
-    auto buffer = get_buffer();
-    return std::dynamic_pointer_cast<const Buffer>(buffer);
+    Glib::RefPtr<const Gtk::TextBuffer> buffer = get_buffer();
+    return Glib::RefPtr<const Buffer>::cast_dynamic(buffer);
 }
 
 Glib::RefPtr<Buffer>
 View::get_source_buffer ()
 {
-    auto buffer = get_buffer();
-    return std::dynamic_pointer_cast<Buffer>(buffer);
+    Glib::RefPtr<Gtk::TextBuffer> buffer = get_buffer();
+    return Glib::RefPtr<Buffer>::cast_dynamic(buffer);
 }
 
 void

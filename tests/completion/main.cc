@@ -104,7 +104,7 @@ bool TestProvider::match_vfunc(const Glib::RefPtr<const Gsv::CompletionContext>&
 
 Gsv::CompletionActivation TestProvider::get_activation_vfunc() const
 {
-  return Gsv::CompletionActivation::INTERACTIVE | Gsv::CompletionActivation::USER_REQUESTED;
+  return Gsv::COMPLETION_ACTIVATION_INTERACTIVE | Gsv::COMPLETION_ACTIVATION_USER_REQUESTED;
 }
 
 int TestProvider::get_priority_vfunc() const
@@ -143,8 +143,8 @@ TestWindow::TestWindow()
   m_show_icons(0)
 {
 // layout
-  Gtk::Box* hbox (Gtk::manage(new Gtk::Box(Gtk::Orientation::HORIZONTAL, 1)));
-  Gtk::Box* vbox (Gtk::manage(new Gtk::Box(Gtk::Orientation::VERTICAL, 1)));
+  Gtk::Box* hbox (Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL, 1)));
+  Gtk::Box* vbox (Gtk::manage(new Gtk::Box(Gtk::ORIENTATION_VERTICAL, 1)));
   m_remember = Gtk::manage(new Gtk::CheckButton("Remember info visibility"));
   m_select_on_show = Gtk::manage(new Gtk::CheckButton("Select first on show"));
   m_show_headers = Gtk::manage(new Gtk::CheckButton("Show headers"));
@@ -223,14 +223,16 @@ void TestWindow::show_icons_toggled()
 }
 
 int
-main ()
+main (int argc, char *argv[])
 {
   Glib::RefPtr<Gtk::Application> app =
-    Gtk::Application::create("org.gtksourceviewmm.test");
+    Gtk::Application::create(argc, argv,
+      "org.gtksourceviewmm.test");
   Gsv::init();
 
   TestWindow window;
 
+  window.show_all();
   app->run(window);
   return 0;
 }

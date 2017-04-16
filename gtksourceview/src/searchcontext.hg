@@ -130,7 +130,7 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(int get_occurrence_position(const TextBuffer::const_iterator& match_start, const TextBuffer::const_iterator& match_end) const, gtk_source_search_context_get_occurrence_position)
+  _WRAP_METHOD(int get_occurrence_position(const TextBuffer::iterator& match_start, const TextBuffer::iterator& match_end) const, gtk_source_search_context_get_occurrence_position)
 
   /** Synchronous forward search. It is recommended to use the asynchronous functions instead, to not block the user interface. However, if you are sure that
    * the buffer is small, this function is more convenient to use.
@@ -142,7 +142,7 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(bool forward(const TextBuffer::const_iterator& iter, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, bool& has_wrapped_around), gtk_source_search_context_forward)
+  _WRAP_METHOD(bool forward(const TextBuffer::iterator& iter, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, bool& has_wrapped_around), gtk_source_search_context_forward)
   _IGNORE(gtk_source_search_context_forward)
 
   /** Asynchronous forward search. See the GAsyncResult documentation to know how to use this function.

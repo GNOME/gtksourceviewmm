@@ -27,22 +27,22 @@ LT_INIT([win32-dll disable-static])
 AC_PROG_CXX
 MM_AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
 
-AC_SUBST([GTKSOURCEVIEWMM_MODULES], ['gtkmm-4.0 >= 3.18.0 gtksourceview-4 >= 3.99.0'])
+AC_SUBST([GTKSOURCEVIEWMM_MODULES], ['glibmm-2.4 >= 2.46.1 gtkmm-3.0 >= 3.18.0 gtksourceview-4 >= 3.99.0'])
 PKG_CHECK_MODULES([GTKSOURCEVIEWMM], [$GTKSOURCEVIEWMM_MODULES])
 
 MM_PKG_CONFIG_SUBST([GTHREAD_CFLAGS], [--cflags-only-other gthread-2.0])
-MM_PKG_CONFIG_SUBST([GMMPROC_DIR], [--variable=gmmprocdir glibmm-2.54])
-MM_PKG_CONFIG_SUBST([GMMPROC_EXTRA_M4_DIR], [--variable=gmmprocm4dir pangomm-2.42 atkmm-2.26 gtkmm-4.0])
+MM_PKG_CONFIG_SUBST([GMMPROC_DIR], [--variable=gmmprocdir glibmm-2.4])
+MM_PKG_CONFIG_SUBST([GMMPROC_EXTRA_M4_DIR], [--variable=gmmprocm4dir cairomm-1.0 pangomm-1.4 atkmm-1.6 gtkmm-3.0])
 
 MM_ARG_DISABLE_DEPRECATED_API([GTKSOURCEVIEWMM])
 
 MM_ARG_ENABLE_DOCUMENTATION
 MM_ARG_WITH_TAGFILE_DOC([libstdc++.tag], [mm-common-libstdc++])
-MM_ARG_WITH_TAGFILE_DOC([libsigc++-3.0.tag], [sigc++-3.0])
-MM_ARG_WITH_TAGFILE_DOC([glibmm-2.54.tag], [glibmm-2.54])
-MM_ARG_WITH_TAGFILE_DOC([cairomm-1.14.tag], [cairomm-1.14])
-MM_ARG_WITH_TAGFILE_DOC([pangomm-2.42.tag], [pangomm-2.42])
-MM_ARG_WITH_TAGFILE_DOC([gtkmm-4.0.tag], [gtkmm-4.0])
+MM_ARG_WITH_TAGFILE_DOC([libsigc++-2.0.tag], [sigc++-2.0])
+MM_ARG_WITH_TAGFILE_DOC([glibmm-2.4.tag], [glibmm-2.4])
+MM_ARG_WITH_TAGFILE_DOC([cairomm-1.0.tag], [cairomm-1.0])
+MM_ARG_WITH_TAGFILE_DOC([pangomm-1.4.tag], [pangomm-1.4])
+MM_ARG_WITH_TAGFILE_DOC([gtkmm-3.0.tag], [gtkmm-3.0])
 
 AC_LANG([C++])
 MM_ARG_ENABLE_WARNINGS([GTKSOURCEVIEWMM_WXXFLAGS],

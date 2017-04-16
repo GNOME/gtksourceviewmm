@@ -47,9 +47,9 @@ class SearchDialog : public Dialog {
 
     void build_widget ()
     {
-        add_button ("Close", ResponseType::ACCEPT) ;
+        add_button ("Close", RESPONSE_ACCEPT) ;
 
-        m_hbox = manage (new Gtk::Box(Gtk::Orientation::HORIZONTAL)) ;
+        m_hbox = manage (new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL)) ;
         get_content_area ()->pack_start (*m_hbox) ;
 
         Label *label = manage (new Label ("Search: ")) ;
@@ -68,6 +68,7 @@ class SearchDialog : public Dialog {
                 (*this, &SearchDialog::on_search_backward_button_clicked_signal));
 
         m_hbox->pack_start (*m_search_backward_button, PACK_SHRINK) ;
+        m_hbox->show_all () ;
     }
 
     void on_search_forward_button_clicked_signal ()
@@ -164,12 +165,12 @@ public:
     {
         try {
             FileChooserDialog fc_dialog ("open a file",
-                                         FileChooserAction::OPEN);
+                                         FILE_CHOOSER_ACTION_OPEN);
             fc_dialog.set_select_multiple (false) ;
-            fc_dialog.add_button ("Cancel", ResponseType::CANCEL) ;
-            fc_dialog.add_button ("OK", ResponseType::ACCEPT) ;
+            fc_dialog.add_button ("Cancel", RESPONSE_CANCEL) ;
+            fc_dialog.add_button ("OK", RESPONSE_ACCEPT) ;
             int res = fc_dialog.run () ;
-            if (res != ResponseType::ACCEPT) {return;}
+            if (res != RESPONSE_ACCEPT) {return;}
             ustring filename = fc_dialog.get_filename () ;
             if (filename == "") {return;}
             open_file (filename) ;
@@ -208,8 +209,7 @@ public:
         if (!do_search (search_str, a_forward)) {
             MessageDialog dialog (*a_dialog,
                                   "Did not find string " + search_str,
-                                  false,
-                                  MessageType::WARNING) ;
+                                  MESSAGE_WARNING) ;
             dialog.run () ;
             dialog.hide () ;
         }
@@ -237,7 +237,7 @@ public:
             limit = source_buffer->end () ;
             found = search_iter.forward_search
                                     (a_text,
-                                     TextSearchFlags::TEXT_ONLY | TextSearchFlags::CASE_INSENSITIVE,
+                                     TEXT_SEARCH_TEXT_ONLY | TEXT_SEARCH_CASE_INSENSITIVE,
                                      start,
                                      end,
                                      limit) ;
@@ -248,7 +248,7 @@ public:
             limit = source_buffer->begin () ;
             found = search_iter.backward_search
                                     (a_text,
-                                     TextSearchFlags::TEXT_ONLY | TextSearchFlags::CASE_INSENSITIVE,
+                                     TEXT_SEARCH_TEXT_ONLY | TEXT_SEARCH_CASE_INSENSITIVE,
                                      start,
                                      end,
                                      limit) ;
@@ -317,7 +317,7 @@ public:
     {
         if (m_main_vbox) {return;}
 
-        m_main_vbox = manage (new Gtk::Box(Gtk::Orientation::VERTICAL)) ;
+        m_main_vbox = manage (new Gtk::Box(Gtk::ORIENTATION_VERTICAL)) ;
         g_return_if_fail (m_menu_bar) ;
         m_main_vbox->pack_start (*m_menu_bar, PACK_SHRINK) ;
         m_source_view = manage (new View) ;
@@ -363,12 +363,14 @@ int
 main (int argc, char **argv)
 {
     Glib::RefPtr<Gtk::Application> gtkmmapp =
-        Gtk::Application::create("org.gtksourceviewmm.test");
+        Gtk::Application::create(argc, argv,
+            "org.gtksourceviewmm.test");
 
     Gsv::init () ;
 
     App app ; //TODO: Derive from Gtk::Application?
     app.get_widget ().set_size_request (500, 400) ;
+    app.get_widget ().show_all () ;
     if (argc == 2) {
         app.open_file (filename_to_utf8 (argv[1])) ;
     }

@@ -338,7 +338,7 @@ public:
    */
   _WRAP_SIGNAL(void undo(), "undo")
 
-#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextBuffer::iterator&',`Glib::wrap_iter($3)')
+#m4 _CONVERSION(`GtkTextIter*',`Gtk::TextBuffer::iterator&',`Glib::wrap($3)')
 #m4 _CONVERSION(`Gtk::TextBuffer::iterator&',`GtkTextIter*',`($3).gobj()')
   /** Emitted when a line mark has been activated (for instance when there
    *  was a button press in the line marks gutter).

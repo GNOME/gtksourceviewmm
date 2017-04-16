@@ -8,10 +8,11 @@ using namespace std ;
 using namespace Gsv ;
 
 int
-main ()
+main (int argc, char **argv)
 {
     Glib::RefPtr<Gtk::Application> app =
-        Gtk::Application::create("org.gtksourceviewmm.test");
+        Gtk::Application::create(argc, argv,
+            "org.gtksourceviewmm.test");
 
     Gsv::init ();
 

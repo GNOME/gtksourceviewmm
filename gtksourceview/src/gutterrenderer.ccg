@@ -19,6 +19,9 @@
 
 #include <gtksourceview/gtksource.h>
 
+using State = Gsv::GutterRenderer::State;
+using AlignmentMode = Gsv::GutterRenderer::AlignmentMode;
+
 namespace Gsv
 {
 

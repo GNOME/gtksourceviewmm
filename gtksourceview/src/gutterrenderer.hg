@@ -30,15 +30,15 @@ _PINCLUDE(gtkmm/private/object_p.h)
 namespace Gsv
 {
 
-_WRAP_ENUM(GutterRendererState, GtkSourceGutterRendererState, s#^SOURCE_##)
-
-_WRAP_ENUM(GutterRendererAlignmentMode, GtkSourceGutterRendererAlignmentMode, s#^SOURCE_##)
-
 // TODO: write docs.
 class GutterRenderer : public Gtk::Object
 {
   _CLASS_GTKOBJECT(GutterRenderer, GtkSourceGutterRenderer, GTK_SOURCE_GUTTER_RENDERER, Gtk::Object, GInitiallyUnowned)
 public:
+
+  _WRAP_ENUM(State, GtkSourceGutterRendererState)
+  _WRAP_ENUM(AlignmentMode, GtkSourceGutterRendererAlignmentMode)
+
 #m4 _CONVERSION(`const Cairo::RefPtr<Cairo::Context>&', `cairo_t*', `(($3) ? ($3)->cobj() : 0)')
 #m4 _CONVERSION(`const Gtk::TextBuffer::const_iterator&',`GtkTextIter*',const_cast<GtkTextIter*>(($3).gobj()))
   _WRAP_METHOD(void begin(
@@ -54,7 +54,7 @@ public:
                   const Gdk::Rectangle& cell_area,
                   const Gtk::TextBuffer::const_iterator& start,
                   const Gtk::TextBuffer::const_iterator& end,
-                  GutterRendererState), gtk_source_gutter_renderer_draw)
+                  State), gtk_source_gutter_renderer_draw)
 
   _WRAP_METHOD(void end(), gtk_source_gutter_renderer_end)
 
@@ -78,9 +78,9 @@ public:
 
   _WRAP_METHOD(void set_alignment(float xalign, float yalign), gtk_source_gutter_renderer_set_alignment)
 
-  _WRAP_METHOD(GutterRendererAlignmentMode get_alignment_mode() const, gtk_source_gutter_renderer_get_alignment_mode)
+  _WRAP_METHOD(AlignmentMode get_alignment_mode() const, gtk_source_gutter_renderer_get_alignment_mode)
 
-  _WRAP_METHOD(void set_alignment_mode(GutterRendererAlignmentMode mode), gtk_source_gutter_renderer_set_alignment_mode)
+  _WRAP_METHOD(void set_alignment_mode(AlignmentMode mode), gtk_source_gutter_renderer_set_alignment_mode)
 
   _WRAP_METHOD(Gtk::TextWindowType get_window_type() const, gtk_source_gutter_renderer_get_window_type)
 
@@ -109,7 +109,7 @@ public:
   _WRAP_PROPERTY("xalign", float)
   _WRAP_PROPERTY("yalign", float)
   _WRAP_PROPERTY("view", Gtk::TextView*)
-  _WRAP_PROPERTY("alignment-mode", GutterRendererAlignmentMode)
+  _WRAP_PROPERTY("alignment-mode", AlignmentMode)
   _WRAP_PROPERTY("window-type", Gtk::TextWindowType)
   _WRAP_PROPERTY("size", int)
   _WRAP_PROPERTY("background-rgba", Gdk::RGBA)
@@ -135,7 +135,7 @@ public:
 
   _WRAP_SIGNAL(void query_data(const Gtk::TextBuffer::iterator& start,
                                const Gtk::TextBuffer::iterator& end,
-                               GutterRendererState state), "query-data")
+                               State state), "query-data")
 
   _WRAP_SIGNAL(bool query_activatable(const Gtk::TextBuffer::iterator& iter,
                                       const Gdk::Rectangle& area,
@@ -158,7 +158,7 @@ protected:
                         const Gdk::Rectangle& cell_area,
                         const Gtk::TextBuffer::const_iterator& start,
                         const Gtk::TextBuffer::const_iterator& end,
-                        GutterRendererState), draw)
+                        State), draw)
 
   _WRAP_VFUNC(void end(), end)
 

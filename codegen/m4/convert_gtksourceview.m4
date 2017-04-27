@@ -12,6 +12,11 @@
 ## GTKSOURCE
 #
 
+# _CONV_GSV_INCLASS_ENUM(class_name, enum_name[, C_enum_name])
+# Specify C_enum_name, if it's not the concatenation of Gsv+class_name+enum_name.
+define(`_CONV_GSV_INCLASS_ENUM',`dnl
+_CONV_INCLASS_ENUM(`Gsv',`$1',`$2',`m4_ifelse(`$3',,`GtkSource$1$2',`$3')')
+')dnl
 
 # GtkSourceBuffer -> Gsv::Buffer
 _CONVERSION(`GtkSourceBuffer*',`Glib::RefPtr<Buffer>',`Glib::wrap($3)')
@@ -142,5 +147,5 @@ _CONV_ENUM(GtkSource,DrawSpacesFlags)
 _CONV_ENUM(GtkSource,BackgroundPatternType)
 _CONV_ENUM(GtkSource,CompletionActivation)
 _CONV_ENUM(GtkSource,BracketMatchType)
-_CONV_ENUM(GtkSource,GutterRendererState)
-_CONV_ENUM(GtkSource,GutterRendererAlignmentMode)
+_CONV_GSV_INCLASS_ENUM(GutterRenderer,State)
+_CONV_GSV_INCLASS_ENUM(GutterRenderer,AlignmentMode)

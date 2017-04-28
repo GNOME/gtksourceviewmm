@@ -61,13 +61,13 @@ class SearchDialog : public Dialog {
         m_search_forward_button = manage (new Button ("search forward")) ;
         m_search_forward_button->signal_clicked ().connect (sigc::mem_fun
                 (*this, &SearchDialog::on_search_forward_button_clicked_signal)) ;
-        m_hbox->pack_start (*m_search_forward_button, PACK_SHRINK) ;
+        m_hbox->pack_start (*m_search_forward_button, PackOptions::SHRINK) ;
 
         m_search_backward_button = manage (new Button ("search backward")) ;
         m_search_backward_button->signal_clicked ().connect (sigc::mem_fun
                 (*this, &SearchDialog::on_search_backward_button_clicked_signal));
 
-        m_hbox->pack_start (*m_search_backward_button, PACK_SHRINK) ;
+        m_hbox->pack_start (*m_search_backward_button, PackOptions::SHRINK) ;
     }
 
     void on_search_forward_button_clicked_signal ()
@@ -319,7 +319,7 @@ public:
 
         m_main_vbox = manage (new Gtk::Box(Gtk::Orientation::VERTICAL)) ;
         g_return_if_fail (m_menu_bar) ;
-        m_main_vbox->pack_start (*m_menu_bar, PACK_SHRINK) ;
+        m_main_vbox->pack_start (*m_menu_bar, PackOptions::SHRINK) ;
         m_source_view = manage (new View) ;
         m_main_vbox->pack_start (*m_source_view) ;
         get_widget ().add (*m_main_vbox) ;

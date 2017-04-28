@@ -164,13 +164,13 @@ TestWindow::TestWindow()
   m_show_headers->set_active( m_completion->property_show_headers().get_value() );
   m_show_icons->set_active( m_completion->property_show_icons().get_value() );
 
-  hbox->pack_start(*m_remember, false, false);
-  hbox->pack_start(*m_select_on_show, false, false);
-  hbox->pack_start(*m_show_headers, false, false);
-  hbox->pack_start(*m_show_icons, false, false);
+  hbox->pack_start(*m_remember, Gtk::PackOptions::SHRINK);
+  hbox->pack_start(*m_select_on_show, Gtk::PackOptions::SHRINK);
+  hbox->pack_start(*m_show_headers, Gtk::PackOptions::SHRINK);
+  hbox->pack_start(*m_show_icons, Gtk::PackOptions::SHRINK);
 
-  vbox->pack_start(*scrolledwindow, true, true);
-  vbox->pack_end(*hbox, false, false);
+  vbox->pack_start(*scrolledwindow, Gtk::PackOptions::EXPAND_WIDGET);
+  vbox->pack_end(*hbox, Gtk::PackOptions::SHRINK);
 
   m_remember->signal_toggled().connect(sigc::mem_fun(*this, &TestWindow::remember_toggled));
   m_select_on_show->signal_toggled().connect(sigc::mem_fun(*this, &TestWindow::select_on_show_toggled));

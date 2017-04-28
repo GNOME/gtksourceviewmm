@@ -164,7 +164,7 @@ public:
     {
         try {
             FileChooserDialog fc_dialog ("open a file",
-                                         FileChooserAction::OPEN);
+                                         FileChooser::Action::OPEN);
             fc_dialog.set_select_multiple (false) ;
             fc_dialog.add_button ("Cancel", ResponseType::CANCEL) ;
             fc_dialog.add_button ("OK", ResponseType::ACCEPT) ;

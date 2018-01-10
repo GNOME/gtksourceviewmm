@@ -136,7 +136,8 @@ public:
   _WRAP_METHOD(const View* get_view() const, gtk_source_completion_get_view, constversion)
 
   // TODO: Does "The reference being returned is a 'floating' reference, so if you invoke gtk_source_completion_show with this context you don't need to unref it." something mean for us? krnowak
-#m4 _CONVERSION(`const Gtk::TextBuffer::iterator&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
+#m4 _CONVERSION(`const Gtk::TextBuffer::const_iterator&',`GtkTextIter*',`const_cast<GtkTextIter*>(($3).gobj())')
+
   /** Create a new CompletionContext for completion.
    *
    * The position at which the completion using the new context will consider
@@ -148,7 +149,7 @@ public:
    *
    * @newin{2,10}
    */
-  _WRAP_METHOD(Glib::RefPtr<CompletionContext> create_context(const Gtk::TextBuffer::iterator& position), gtk_source_completion_create_context)
+  _WRAP_METHOD(Glib::RefPtr<CompletionContext> create_context(const Gtk::TextBuffer::const_iterator& position), gtk_source_completion_create_context)
 
   // TODO: better wording could be used here - it is too convoluted. krnowak
   /** Create a new CompletionContext for completion.

@@ -3,10 +3,10 @@
 #include <gtksourceviewmm.h>
 
 int
-main (int argc, char* argv[])
+main ()
 {
     Glib::RefPtr<Gtk::Application> app =
-        Gtk::Application::create(argc, argv,
+        Gtk::Application::create(
             "org.gtksourceviewmm.test");
 
     Gsv::init () ;

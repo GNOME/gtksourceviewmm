@@ -25,6 +25,7 @@
 #include <glibmm/vectorutils.h>
 
 using iterator = Gsv::Buffer::iterator;
+using const_iterator = Gsv::Buffer::const_iterator;
 
 namespace Gsv
 {
@@ -53,7 +54,7 @@ bool Buffer::forward_iter_to_source_mark(iterator& iter)
 }
 
 Glib::RefPtr<Gsv::Mark>
-Buffer::create_source_mark(const Glib::ustring& category, const iterator& where)
+Buffer::create_source_mark(const Glib::ustring& category, const const_iterator& where)
 {
   return Glib::wrap(gtk_source_buffer_create_source_mark(gobj(), 0, category.c_str(), where.gobj()));
 }
@@ -63,13 +64,13 @@ std::vector<Glib::RefPtr<Gsv::Mark> > Buffer::get_source_marks_at_line(int line)
     return Glib::SListHandler<Glib::RefPtr<Gsv::Mark> >::slist_to_vector(gtk_source_buffer_get_source_marks_at_line(const_cast<GtkSourceBuffer*>(gobj()), line, 0), Glib::OWNERSHIP_SHALLOW);
 }
 
-std::vector<Glib::RefPtr<Gsv::Mark> > Buffer::get_source_marks_at_iter(iterator& iter) const
+std::vector<Glib::RefPtr<Gsv::Mark> > Buffer::get_source_marks_at_iter(const const_iterator& iter) const
 {
-    return Glib::SListHandler<Glib::RefPtr<Gsv::Mark> >::slist_to_vector(gtk_source_buffer_get_source_marks_at_iter(const_cast<GtkSourceBuffer*>(gobj()), iter.gobj(), 0), Glib::OWNERSHIP_SHALLOW);
+    return Glib::SListHandler<Glib::RefPtr<Gsv::Mark> >::slist_to_vector(gtk_source_buffer_get_source_marks_at_iter(const_cast<GtkSourceBuffer*>(gobj()), const_cast<GtkTextIter*>(iter.gobj()), 0), Glib::OWNERSHIP_SHALLOW);
 }
 
 void
-Buffer::remove_source_marks(const iterator& start, const iterator& end)
+Buffer::remove_source_marks(const const_iterator& start, const const_iterator& end)
 {
   gtk_source_buffer_remove_source_marks(gobj(), start.gobj(), end.gobj(), 0);
 }

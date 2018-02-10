@@ -35,7 +35,7 @@ namespace Gsv
  */
 class StyleSchemeChooserWidget : public Gtk::Bin
 {
-  _CLASS_GTKOBJECT(StyleSchemeChooserWidget, GtkSourceStyleStyleSchemeChooserWidget, GTK_SOURCE_STYLE_SCHEME_CHOOSER_WIDGET, Gtk::Bin, GtkBin)
+  _CLASS_GTKOBJECT(StyleSchemeChooserWidget, GtkSourceStyleSchemeChooserWidget, GTK_SOURCE_STYLE_SCHEME_CHOOSER_WIDGET, Gtk::Bin, GtkBin)
 
 public:
 

@@ -1,21 +1,9 @@
 ;; From GtkSourceBuffer
 
-(define-signal undo
-  (of-object "GtkSourceBuffer")
-  (return-type "void")
-  (when "last")
-)
-
-(define-signal redo
-  (of-object "GtkSourceBuffer")
-  (return-type "void")
-  (when "last")
-)
-
 (define-signal highlight-updated
   (of-object "GtkSourceBuffer")
   (return-type "void")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("GtkTextIter*" "p0")
     '("GtkTextIter*" "p1")
@@ -25,16 +13,28 @@
 (define-signal source-mark-updated
   (of-object "GtkSourceBuffer")
   (return-type "void")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("GtkTextMark*" "p0")
   )
 )
 
+(define-signal undo
+  (of-object "GtkSourceBuffer")
+  (return-type "void")
+  (flags "Run Last")
+)
+
+(define-signal redo
+  (of-object "GtkSourceBuffer")
+  (return-type "void")
+  (flags "Run Last")
+)
+
 (define-signal bracket-matched
   (of-object "GtkSourceBuffer")
   (return-type "void")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("GtkTextIter*" "p0")
     '("GtkSourceBracketMatchType" "p1")
@@ -48,6 +48,7 @@
   (readable #t)
   (writable #f)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property can-redo
@@ -57,6 +58,7 @@
   (readable #t)
   (writable #f)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property highlight-syntax
@@ -66,6 +68,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "TRUE")
 )
 
 (define-property highlight-matching-brackets
@@ -75,6 +78,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "TRUE")
 )
 
 (define-property max-undo-levels
@@ -84,6 +88,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "-1")
 )
 
 (define-property language
@@ -120,6 +125,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "TRUE")
 )
 
 ;; From GtkSourceCompletion
@@ -127,38 +133,38 @@
 (define-signal show
   (of-object "GtkSourceCompletion")
   (return-type "void")
-  (when "last")
+  (flags "Run Last, Action")
 )
 
 (define-signal hide
   (of-object "GtkSourceCompletion")
   (return-type "void")
-  (when "last")
+  (flags "Run Last, Action")
+)
+
+(define-signal populate-context
+  (of-object "GtkSourceCompletion")
+  (return-type "void")
+  (flags "Run Last, Action")
+  (parameters
+    '("GtkSourceCompletionContext*" "p0")
+  )
 )
 
 (define-signal move-cursor
   (of-object "GtkSourceCompletion")
   (return-type "void")
-  (when "last")
+  (flags "Run Last, Action")
   (parameters
     '("GtkScrollStep" "p0")
     '("gint" "p1")
   )
 )
 
-(define-signal populate-context
-  (of-object "GtkSourceCompletion")
-  (return-type "void")
-  (when "last")
-  (parameters
-    '("GtkSourceCompletionContext*" "p0")
-  )
-)
-
 (define-signal move-page
   (of-object "GtkSourceCompletion")
   (return-type "void")
-  (when "last")
+  (flags "Run Last, Action")
   (parameters
     '("GtkScrollStep" "p0")
     '("gint" "p1")
@@ -168,7 +174,7 @@
 (define-signal activate-proposal
   (of-object "GtkSourceCompletion")
   (return-type "void")
-  (when "last")
+  (flags "Run Last, Action")
 )
 
 (define-property view
@@ -187,6 +193,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property select-on-show
@@ -196,6 +203,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "TRUE")
 )
 
 (define-property show-headers
@@ -205,6 +213,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "TRUE")
 )
 
 (define-property show-icons
@@ -214,6 +223,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "TRUE")
 )
 
 (define-property accelerators
@@ -223,6 +233,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "5")
 )
 
 (define-property auto-complete-delay
@@ -232,6 +243,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "250")
 )
 
 (define-property provider-page-size
@@ -241,6 +253,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "5")
 )
 
 (define-property proposal-page-size
@@ -250,6 +263,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "5")
 )
 
 ;; From GtkSourceCompletionContext
@@ -257,7 +271,7 @@
 (define-signal cancelled
   (of-object "GtkSourceCompletionContext")
   (return-type "void")
-  (when "last")
+  (flags "Run Last, Action")
 )
 
 (define-property completion
@@ -285,50 +299,47 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "GTK_SOURCE_COMPLETION_ACTIVATION_USER_REQUESTED")
 )
 
 ;; From GtkSourceCompletionInfo
-
-(define-signal before-show
-  (of-object "GtkSourceCompletionInfo")
-  (return-type "void")
-  (when "last")
-  (deprecated #t)
-)
 
 ;; From GtkSourceCompletionItem
 
 (define-property label
   (of-object "GtkSourceCompletionItem")
   (prop-type "GParamString")
-  (docs "Label to be shown for this item")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property markup
   (of-object "GtkSourceCompletionItem")
   (prop-type "GParamString")
-  (docs "Markup to be shown for this item")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property text
   (of-object "GtkSourceCompletionItem")
   (prop-type "GParamString")
-  (docs "Item text")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property icon
   (of-object "GtkSourceCompletionItem")
   (prop-type "GParamObject")
-  (docs "Pixbuf of the icon to be shown for this item")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -337,16 +348,17 @@
 (define-property icon-name
   (of-object "GtkSourceCompletionItem")
   (prop-type "GParamString")
-  (docs "Icon name of the icon to be shown for this item")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property gicon
   (of-object "GtkSourceCompletionItem")
   (prop-type "GParamObject")
-  (docs "GIcon of the icon to be shown for this item")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
@@ -355,10 +367,11 @@
 (define-property info
   (of-object "GtkSourceCompletionItem")
   (prop-type "GParamString")
-  (docs "Info to be shown for this item")
+  (docs "")
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 ;; From GtkSourceCompletionProposal
@@ -366,7 +379,7 @@
 (define-signal changed
   (of-object "GtkSourceCompletionProposal")
   (return-type "void")
-  (when "last")
+  (flags "Run Last, Action")
 )
 
 ;; From GtkSourceCompletionProvider
@@ -389,26 +402,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
-)
-
-(define-property xpad
-  (of-object "GtkSourceGutter")
-  (prop-type "GParamInt")
-  (docs "The x-padding")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-  (deprecated #t)
-)
-
-(define-property ypad
-  (of-object "GtkSourceGutter")
-  (prop-type "GParamInt")
-  (docs "The y-padding")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-  (deprecated #t)
+  (default-value "GTK_TEXT_WINDOW_PRIVATE")
 )
 
 ;; From GtkSourceGutterRenderer
@@ -416,7 +410,7 @@
 (define-signal query-tooltip
   (of-object "GtkSourceGutterRenderer")
   (return-type "gboolean")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("GtkTextIter*" "p0")
     '("GdkRectangle*" "p1")
@@ -429,7 +423,7 @@
 (define-signal activate
   (of-object "GtkSourceGutterRenderer")
   (return-type "void")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("GtkTextIter*" "p0")
     '("GdkRectangle*" "p1")
@@ -440,13 +434,13 @@
 (define-signal queue-draw
   (of-object "GtkSourceGutterRenderer")
   (return-type "void")
-  (when "last")
+  (flags "Run Last")
 )
 
 (define-signal query-data
   (of-object "GtkSourceGutterRenderer")
   (return-type "void")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("GtkTextIter*" "p0")
     '("GtkTextIter*" "p1")
@@ -457,7 +451,7 @@
 (define-signal query-activatable
   (of-object "GtkSourceGutterRenderer")
   (return-type "gboolean")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("GtkTextIter*" "p0")
     '("GdkRectangle*" "p1")
@@ -472,6 +466,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "TRUE")
 )
 
 (define-property xpad
@@ -481,6 +476,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "0")
 )
 
 (define-property ypad
@@ -490,6 +486,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "0")
 )
 
 (define-property xalign
@@ -499,6 +496,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "0")
 )
 
 (define-property yalign
@@ -508,6 +506,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "0")
 )
 
 (define-property view
@@ -526,6 +525,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "GTK_SOURCE_GUTTER_RENDERER_ALIGNMENT_MODE_CELL")
 )
 
 (define-property window-type
@@ -535,6 +535,7 @@
   (readable #t)
   (writable #f)
   (construct-only #f)
+  (default-value "GTK_TEXT_WINDOW_PRIVATE")
 )
 
 (define-property size
@@ -544,6 +545,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "0")
 )
 
 (define-property background-rgba
@@ -562,6 +564,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 ;; From GtkSourceGutterRendererPixbuf
@@ -575,16 +578,6 @@
   (construct-only #f)
 )
 
-(define-property stock-id
-  (of-object "GtkSourceGutterRendererPixbuf")
-  (prop-type "GParamString")
-  (docs "The stock id")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-  (deprecated #t)
-)
-
 (define-property icon-name
   (of-object "GtkSourceGutterRendererPixbuf")
   (prop-type "GParamString")
@@ -592,6 +585,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property gicon
@@ -612,6 +606,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property text
@@ -621,6 +616,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 ;; From GtkSourceLanguage
@@ -632,6 +628,7 @@
   (readable #t)
   (writable #f)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property name
@@ -641,6 +638,7 @@
   (readable #t)
   (writable #f)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property section
@@ -650,6 +648,7 @@
   (readable #t)
   (writable #f)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property hidden
@@ -659,6 +658,7 @@
   (readable #t)
   (writable #f)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 ;; From GtkSourceLanguageManager
@@ -690,6 +690,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "")
 )
 
 ;; From GtkSourceMarkAttributes
@@ -697,7 +698,7 @@
 (define-signal query-tooltip-text
   (of-object "GtkSourceMarkAttributes")
   (return-type "const-gchar*")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("GtkSourceMark*" "p0")
   )
@@ -706,7 +707,7 @@
 (define-signal query-tooltip-markup
   (of-object "GtkSourceMarkAttributes")
   (return-type "const-gchar*")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("GtkSourceMark*" "p0")
   )
@@ -719,16 +720,6 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
-)
-
-(define-property stock-id
-  (of-object "GtkSourceMarkAttributes")
-  (prop-type "GParamString")
-  (docs "The stock id")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
-  (deprecated #t)
 )
 
 (define-property pixbuf
@@ -747,6 +738,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property gicon
@@ -776,6 +768,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "8")
 )
 
 (define-property wrap-mode
@@ -785,6 +778,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "GTK_WRAP_NONE")
 )
 
 (define-property highlight-syntax
@@ -794,6 +788,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "TRUE")
 )
 
 (define-property print-line-numbers
@@ -803,6 +798,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "1")
 )
 
 (define-property print-header
@@ -812,6 +808,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property print-footer
@@ -821,6 +818,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property body-font-name
@@ -830,6 +828,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property line-numbers-font-name
@@ -839,6 +838,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property header-font-name
@@ -848,6 +848,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property footer-font-name
@@ -857,6 +858,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property n-pages
@@ -866,6 +868,7 @@
   (readable #t)
   (writable #f)
   (construct-only #f)
+  (default-value "-1")
 )
 
 ;; From GtkSourceSearchContext
@@ -885,7 +888,7 @@
   (docs "The associated GtkSourceSearchSettings")
   (readable #t)
   (writable #t)
-  (construct-only #f)
+  (construct-only #t)
 )
 
 (define-property highlight
@@ -895,6 +898,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "TRUE")
 )
 
 (define-property match-style
@@ -913,6 +917,7 @@
   (readable #t)
   (writable #f)
   (construct-only #f)
+  (default-value "0")
 )
 
 (define-property regex-error
@@ -933,6 +938,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property case-sensitive
@@ -942,6 +948,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property at-word-boundaries
@@ -951,6 +958,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property wrap-around
@@ -960,6 +968,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property regex-enabled
@@ -969,6 +978,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 ;; From GtkSourceStyle
@@ -980,6 +990,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "")
 )
 
 (define-property line-background-set
@@ -989,6 +1000,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "FALSE")
 )
 
 (define-property background
@@ -998,6 +1010,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "")
 )
 
 (define-property background-set
@@ -1007,6 +1020,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "FALSE")
 )
 
 (define-property foreground
@@ -1016,6 +1030,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "")
 )
 
 (define-property foreground-set
@@ -1025,6 +1040,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "FALSE")
 )
 
 (define-property bold
@@ -1034,6 +1050,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "FALSE")
 )
 
 (define-property bold-set
@@ -1043,6 +1060,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "FALSE")
 )
 
 (define-property italic
@@ -1052,6 +1070,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "FALSE")
 )
 
 (define-property italic-set
@@ -1061,15 +1080,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
-)
-
-(define-property underline
-  (of-object "GtkSourceStyle")
-  (prop-type "GParamBoolean")
-  (docs "Underline")
-  (readable #t)
-  (writable #t)
-  (construct-only #t)
+  (default-value "FALSE")
 )
 
 (define-property pango-underline
@@ -1079,6 +1090,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "PANGO_UNDERLINE_NONE")
 )
 
 (define-property underline-set
@@ -1088,6 +1100,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "FALSE")
 )
 
 (define-property strikethrough
@@ -1097,6 +1110,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "FALSE")
 )
 
 (define-property strikethrough-set
@@ -1106,6 +1120,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "FALSE")
 )
 
 (define-property scale
@@ -1115,6 +1130,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "")
 )
 
 (define-property scale-set
@@ -1124,6 +1140,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "FALSE")
 )
 
 (define-property underline-color
@@ -1133,6 +1150,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "")
 )
 
 (define-property underline-color-set
@@ -1142,6 +1160,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "FALSE")
 )
 
 ;; From GtkSourceStyleScheme
@@ -1153,6 +1172,7 @@
   (readable #t)
   (writable #t)
   (construct-only #t)
+  (default-value "")
 )
 
 (define-property name
@@ -1162,6 +1182,7 @@
   (readable #t)
   (writable #f)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property description
@@ -1171,6 +1192,7 @@
   (readable #t)
   (writable #f)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property filename
@@ -1180,6 +1202,7 @@
   (readable #t)
   (writable #f)
   (construct-only #f)
+  (default-value "")
 )
 
 ;; From GtkSourceStyleSchemeChooser
@@ -1222,49 +1245,49 @@
 (define-signal can-undo-changed
   (of-object "GtkSourceUndoManager")
   (return-type "void")
-  (when "last")
+  (flags "Run Last, Action")
 )
 
 (define-signal can-redo-changed
   (of-object "GtkSourceUndoManager")
   (return-type "void")
-  (when "last")
+  (flags "Run Last, Action")
 )
 
 ;; From GtkSourceView
 
+(define-signal undo
+  (of-object "GtkSourceView")
+  (return-type "void")
+  (flags "Run Last, Action")
+)
+
+(define-signal redo
+  (of-object "GtkSourceView")
+  (return-type "void")
+  (flags "Run Last, Action")
+)
+
 (define-signal smart-home-end
   (of-object "GtkSourceView")
   (return-type "void")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("GtkTextIter*" "p0")
     '("gint" "p1")
   )
 )
 
-(define-signal undo
-  (of-object "GtkSourceView")
-  (return-type "void")
-  (when "last")
-)
-
-(define-signal redo
-  (of-object "GtkSourceView")
-  (return-type "void")
-  (when "last")
-)
-
 (define-signal show-completion
   (of-object "GtkSourceView")
   (return-type "void")
-  (when "last")
+  (flags "Run Last, Action")
 )
 
 (define-signal line-mark-activated
   (of-object "GtkSourceView")
   (return-type "void")
-  (when "last")
+  (flags "Run Last")
   (parameters
     '("GtkTextIter*" "p0")
     '("GdkEvent*" "p1")
@@ -1274,17 +1297,16 @@
 (define-signal move-lines
   (of-object "GtkSourceView")
   (return-type "void")
-  (when "last")
+  (flags "Run Last, Action")
   (parameters
     '("gboolean" "p0")
-    '("gint" "p1")
   )
 )
 
 (define-signal move-words
   (of-object "GtkSourceView")
   (return-type "void")
-  (when "last")
+  (flags "Run Last, Action")
   (parameters
     '("gint" "p0")
   )
@@ -1293,7 +1315,7 @@
 (define-signal move-to-matching-bracket
   (of-object "GtkSourceView")
   (return-type "void")
-  (when "last")
+  (flags "Run Last, Action")
   (parameters
     '("gboolean" "p0")
   )
@@ -1302,7 +1324,7 @@
 (define-signal change-number
   (of-object "GtkSourceView")
   (return-type "void")
-  (when "last")
+  (flags "Run Last, Action")
   (parameters
     '("gint" "p0")
   )
@@ -1311,7 +1333,7 @@
 (define-signal change-case
   (of-object "GtkSourceView")
   (return-type "void")
-  (when "last")
+  (flags "Run Last, Action")
   (parameters
     '("GtkSourceChangeCaseType" "p0")
   )
@@ -1320,7 +1342,7 @@
 (define-signal join-lines
   (of-object "GtkSourceView")
   (return-type "void")
-  (when "last")
+  (flags "Run Last, Action")
 )
 
 (define-property completion
@@ -1339,6 +1361,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property show-line-marks
@@ -1348,6 +1371,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property tab-width
@@ -1357,6 +1381,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "8")
 )
 
 (define-property indent-width
@@ -1366,6 +1391,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "-1")
 )
 
 (define-property auto-indent
@@ -1375,6 +1401,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property insert-spaces-instead-of-tabs
@@ -1384,6 +1411,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property show-right-margin
@@ -1393,6 +1421,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property right-margin-position
@@ -1402,6 +1431,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "80")
 )
 
 (define-property smart-home-end
@@ -1411,6 +1441,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "GTK_SOURCE_SMART_HOME_END_DISABLED")
 )
 
 (define-property highlight-current-line
@@ -1420,6 +1451,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "FALSE")
 )
 
 (define-property indent-on-tab
@@ -1429,15 +1461,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
-)
-
-(define-property draw-spaces
-  (of-object "GtkSourceView")
-  (prop-type "GParamFlags")
-  (docs "Set if and how the spaces should be visualized")
-  (readable #t)
-  (writable #t)
-  (construct-only #f)
+  (default-value "TRUE")
 )
 
 (define-property background-pattern
@@ -1447,6 +1471,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "GTK_SOURCE_BACKGROUND_PATTERN_TYPE_NONE")
 )
 
 (define-property smart-backspace
@@ -1455,6 +1480,16 @@
   (docs "")
   (readable #t)
   (writable #t)
+  (construct-only #f)
+  (default-value "FALSE")
+)
+
+(define-property space-drawer
+  (of-object "GtkSourceView")
+  (prop-type "GParamObject")
+  (docs "")
+  (readable #t)
+  (writable #f)
   (construct-only #f)
 )
 
@@ -1467,6 +1502,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "")
 )
 
 (define-property icon
@@ -1485,6 +1521,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "300")
 )
 
 (define-property scan-batch-size
@@ -1494,6 +1531,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "50")
 )
 
 (define-property minimum-word-size
@@ -1503,6 +1541,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "2")
 )
 
 (define-property interactive-delay
@@ -1512,6 +1551,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "50")
 )
 
 (define-property priority
@@ -1521,6 +1561,7 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "0")
 )
 
 (define-property activation
@@ -1530,5 +1571,6 @@
   (readable #t)
   (writable #t)
   (construct-only #f)
+  (default-value "GTK_SOURCE_COMPLETION_ACTIVATION_INTERACTIVE | GTK_SOURCE_COMPLETION_ACTIVATION_USER_REQUESTED")
 )
 

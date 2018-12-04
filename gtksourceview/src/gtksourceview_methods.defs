@@ -294,10 +294,6 @@
 ;; Enumerations and flags ...
 
 
-;; From gconstructor.h
-
-
-
 ;; From gtksourceautocleanups.h
 
 
@@ -724,9 +720,9 @@
   (return-type "GList*")
 )
 
-(define-method show
+(define-method start
   (of-object "GtkSourceCompletion")
-  (c-name "gtk_source_completion_show")
+  (c-name "gtk_source_completion_start")
   (return-type "gboolean")
   (parameters
     '("GList*" "providers")
@@ -807,8 +803,9 @@
   (return-type "GType")
 )
 
-(define-function gtk_source_completion_item_new2
-  (c-name "gtk_source_completion_item_new2")
+(define-function gtk_source_completion_item_new
+  (c-name "gtk_source_completion_item_new")
+  (is-constructor-of "GtkSourceCompletionItem")
   (return-type "GtkSourceCompletionItem*")
 )
 
@@ -1893,6 +1890,20 @@
 
 
 
+;; From gtksourceinit.h
+
+(define-function gtk_source_init
+  (c-name "gtk_source_init")
+  (return-type "none")
+)
+
+(define-function gtk_source_finalize
+  (c-name "gtk_source_finalize")
+  (return-type "none")
+)
+
+
+
 ;; From gtksourceiter.h
 
 
@@ -2753,9 +2764,9 @@
   )
 )
 
-(define-method forward2
+(define-method forward
   (of-object "GtkSourceSearchContext")
-  (c-name "gtk_source_search_context_forward2")
+  (c-name "gtk_source_search_context_forward")
   (return-type "gboolean")
   (parameters
     '("const-GtkTextIter*" "iter")
@@ -2777,9 +2788,9 @@
   )
 )
 
-(define-method forward_finish2
+(define-method forward_finish
   (of-object "GtkSourceSearchContext")
-  (c-name "gtk_source_search_context_forward_finish2")
+  (c-name "gtk_source_search_context_forward_finish")
   (return-type "gboolean")
   (parameters
     '("GAsyncResult*" "result")
@@ -2790,9 +2801,9 @@
   )
 )
 
-(define-method backward2
+(define-method backward
   (of-object "GtkSourceSearchContext")
-  (c-name "gtk_source_search_context_backward2")
+  (c-name "gtk_source_search_context_backward")
   (return-type "gboolean")
   (parameters
     '("const-GtkTextIter*" "iter")
@@ -2814,9 +2825,9 @@
   )
 )
 
-(define-method backward_finish2
+(define-method backward_finish
   (of-object "GtkSourceSearchContext")
-  (c-name "gtk_source_search_context_backward_finish2")
+  (c-name "gtk_source_search_context_backward_finish")
   (return-type "gboolean")
   (parameters
     '("GAsyncResult*" "result")
@@ -2827,9 +2838,9 @@
   )
 )
 
-(define-method replace2
+(define-method replace
   (of-object "GtkSourceSearchContext")
-  (c-name "gtk_source_search_context_replace2")
+  (c-name "gtk_source_search_context_replace")
   (return-type "gboolean")
   (parameters
     '("GtkTextIter*" "match_start")
@@ -3328,36 +3339,7 @@
 
 
 
-;; From gtksourceversion.h
-
-(define-function gtk_source_get_major_version
-  (c-name "gtk_source_get_major_version")
-  (return-type "guint")
-)
-
-(define-function gtk_source_get_minor_version
-  (c-name "gtk_source_get_minor_version")
-  (return-type "guint")
-)
-
-(define-function gtk_source_get_micro_version
-  (c-name "gtk_source_get_micro_version")
-  (return-type "guint")
-)
-
-(define-function gtk_source_check_version
-  (c-name "gtk_source_check_version")
-  (return-type "gboolean")
-  (parameters
-    '("guint" "major")
-    '("guint" "minor")
-    '("guint" "micro")
-  )
-)
-
-
-
-;; From gtksourceview-enumtypes.h
+;; From gtksourceutils-private.h
 
 
 
@@ -3647,22 +3629,6 @@
   (c-name "gtk_source_view_get_space_drawer")
   (return-type "GtkSourceSpaceDrawer*")
 )
-
-
-
-;; From gtksourceview-i18n.h
-
-
-
-;; From gtksourceview-utils.h
-
-
-
-;; From stamp-gtksourceview-enumtypes.h
-
-
-
-;; From stamp-gtksourceview-typebuiltins.h
 
 
 

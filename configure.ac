@@ -1,4 +1,4 @@
-AC_INIT([gtksourceviewmm], [3.21.3],
+AC_INIT([gtksourceviewmm], [4.91.1],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gtksourceviewmm],
         [gtksourceviewmm], [http://projects.gnome.org/gtksourceviewmm/])
 AC_PREREQ([2.62])
@@ -14,7 +14,7 @@ AM_MAINTAINER_MODE
 AC_ARG_VAR([ACLOCAL_FLAGS], [aclocal flags, e.g. -I <macro dir>])
 
 MM_PREREQ([0.9.8])
-MM_INIT_MODULE([gtksourceviewmm-4.0])
+MM_INIT_MODULE([gtksourceviewmm-5.0])
 
 # Copy the mm-common .pl scripts into docs/,
 # and use them from there,

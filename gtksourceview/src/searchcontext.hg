@@ -142,7 +142,7 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(bool forward(const TextBuffer::iterator& iter, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, bool& has_wrapped_around), gtk_source_search_context_forward2)
+  _WRAP_METHOD(bool forward(const TextBuffer::iterator& iter, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, bool& has_wrapped_around), gtk_source_search_context_forward)
   _IGNORE(gtk_source_search_context_forward)
 
   /** Asynchronous forward search. See the GAsyncResult documentation to know how to use this function.
@@ -179,7 +179,7 @@ public:
    *
    * @newin{3,10}
    */
-  _WRAP_METHOD(bool backward(const TextBuffer::iterator& iter, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, bool& has_wrapped_around), gtk_source_search_context_backward2)
+  _WRAP_METHOD(bool backward(const TextBuffer::iterator& iter, TextBuffer::iterator& match_start, TextBuffer::iterator& match_end, bool& has_wrapped_around), gtk_source_search_context_backward)
   _IGNORE(gtk_source_search_context_backward)
 
   /** Asynchronous backward search. See the GAsyncResult documentation to know how to use this function.

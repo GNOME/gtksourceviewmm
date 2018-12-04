@@ -45,10 +45,12 @@ MM_ARG_WITH_TAGFILE_DOC([pangomm-1.4.tag], [pangomm-1.4])
 MM_ARG_WITH_TAGFILE_DOC([gtkmm-3.0.tag], [gtkmm-3.0])
 
 AC_LANG([C++])
+
+# Re-enable disabling of PANGO API when gtksourceview and gtk+ stop using deprecated API (PangoDirection) in their API.
 MM_ARG_ENABLE_WARNINGS([GTKSOURCEVIEWMM_WXXFLAGS],
                        [-Wall -Wno-long-long],
                        [-pedantic -Wall -Wextra -Wno-long-long],
-                       [G PANGO ATK GDK GDK_PIXBUF GTK GTKSOURCEVIEW GLIBMM PANGOMM ATKMM GDKMM GTKMM])
+                       [G ATK GDK GDK_PIXBUF GTK GTKSOURCEVIEW GLIBMM PANGOMM ATKMM GDKMM GTKMM])
 
 AC_CONFIG_FILES([Makefile
                  codegen/Makefile

@@ -1,3 +1,25 @@
+3.91.1 (unstable)
+
+* Adapt to new-style enum values.
+  (Murray Cumming)
+* Use gtksourceview-4 instead of gtksourceview-3.0,
+  and change ABI from gtksourceviewmm-3.0 to gtksourceviewmm-4.0.
+  (Murray Cumming)
+  https://gitlab.gnome.org/GNOME/gtksourceviewmm/issues/1 (Jeremy Bicha)
+* StyleSchemeChooserWidget: Correct the underlying GType name.
+  (Kip Warner) Bug #793204
+* Completion:
+  - Remove get/set_draw_spaces().
+  - show(): Rename to start().
+  (Murray Cumming)
+* tests:
+  - Remove Gtk::Container::show_all() calls.
+  - Avoid deprecated Gtk::HBox and Gtk::VBox.
+  - Use the libsigc++-3.0 syntax.
+  (Murray Cumming)
+* Remove deprecated API.
+  (Murray Cumming)
+
 3.21.3 (unstable)
 
 * Add SearchContext ad SearchSettings.

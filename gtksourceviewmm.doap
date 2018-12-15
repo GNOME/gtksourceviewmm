@@ -16,7 +16,7 @@ autocompletion and other mostly programming-oriented features.</description>
   <homepage rdf:resource="http://www.gtkmm.org/" />
   <mailing-list rdf:resource="mailto:gtkmm-list@gnome.org" />
   <category rdf:resource="http://api.gnome.org/doap-extensions#bindings" />
-  <bug-database rdf:resource="https://bugzilla.gnome.org/browse.cgi?product=gtksourceviewmm" />
+  <bug-database rdf:resource="https://gitlab.gnome.org/GNOME/gtksourceviewmm/issues/" />
   <download-page rdf:resource="http://download.gnome.org/sources/gtksourceviewmm/" />
 
   <maintainer>

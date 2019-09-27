@@ -31,7 +31,7 @@ AC_SUBST([GTKSOURCEVIEWMM_MODULES], ['gtkmm-4.0 >= 3.18.0 gtksourceview-4 >= 3.9
 PKG_CHECK_MODULES([GTKSOURCEVIEWMM], [$GTKSOURCEVIEWMM_MODULES])
 
 MM_PKG_CONFIG_SUBST([GTHREAD_CFLAGS], [--cflags-only-other gthread-2.0])
-MM_PKG_CONFIG_SUBST([GMMPROC_DIR], [--variable=gmmprocdir glibmm-2.56])
+MM_PKG_CONFIG_SUBST([GMMPROC_DIR], [--variable=gmmprocdir glibmm-2.64])
 MM_PKG_CONFIG_SUBST([GMMPROC_EXTRA_M4_DIR], [--variable=gmmprocm4dir pangomm-2.42 atkmm-2.26 gtkmm-4.0])
 
 MM_ARG_DISABLE_DEPRECATED_API([GTKSOURCEVIEWMM])
@@ -39,7 +39,7 @@ MM_ARG_DISABLE_DEPRECATED_API([GTKSOURCEVIEWMM])
 MM_ARG_ENABLE_DOCUMENTATION
 MM_ARG_WITH_TAGFILE_DOC([libstdc++.tag], [mm-common-libstdc++])
 MM_ARG_WITH_TAGFILE_DOC([libsigc++-3.0.tag], [sigc++-3.0])
-MM_ARG_WITH_TAGFILE_DOC([glibmm-2.56.tag], [glibmm-2.56])
+MM_ARG_WITH_TAGFILE_DOC([glibmm-2.64.tag], [glibmm-2.64])
 MM_ARG_WITH_TAGFILE_DOC([cairomm-1.14.tag], [cairomm-1.14])
 MM_ARG_WITH_TAGFILE_DOC([pangomm-2.42.tag], [pangomm-2.42])
 MM_ARG_WITH_TAGFILE_DOC([gtkmm-4.0.tag], [gtkmm-4.0])

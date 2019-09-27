@@ -99,7 +99,7 @@ public:
 
   _WRAP_PROPERTY("activation", CompletionActivation)
   _WRAP_PROPERTY("completion", Glib::RefPtr<Completion>)
-  _WRAP_PROPERTY("iter", Gtk::TextBuffer::iterator)
+  // TODO? _WRAP_PROPERTY("iter", Gtk::TextBuffer::iterator)
 
   /** Emitted when the current population of proposals has been cancelled.
    *

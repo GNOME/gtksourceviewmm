@@ -199,6 +199,7 @@ public:
 private:
 
 #m4 _CONVERSION(`char*',`Glib::ustring',`Glib::convert_return_gchar_ptr_to_ustring($3)')
+#m4 _CONVERSION(`Glib::ustring', `char*', `g_strdup(($3).c_str())')
   _WRAP_VFUNC(Glib::ustring get_name() const, get_name)
 
   _WRAP_VFUNC(Glib::RefPtr<Gdk::Pixbuf> get_icon(), get_icon, refreturn)

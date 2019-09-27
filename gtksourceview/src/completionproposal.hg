@@ -50,6 +50,7 @@ public:
    *
    * @newin{2,10}
    */
+#m4 _CONVERSION(`Glib::ustring', `char*', `g_strdup(($3).c_str())')
   _WRAP_METHOD(Glib::ustring get_label() const, gtk_source_completion_proposal_get_label)
 
   /** Gets the label of a proposal with markup. The label is shown in the list

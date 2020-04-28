@@ -13,7 +13,7 @@ htmlrefpub=http://library.gnome.org/devel/@PACKAGE_TARNAME@/unstable/
 Name: gtksourceviewmm
 Description: C++ binding for gtksourceview
 Version: @PACKAGE_VERSION@
-URL: http://projects.gnome.org/gtksourceviewmm/
+URL: https://wiki.gnome.org/Projects/GtkSourceView
 Requires: @GTKSOURCEVIEWMM_MODULES@
 Libs: -L${libdir} -lgtksourceviewmm-@GTKSOURCEVIEWMM_API_VERSION@
 Cflags: -I${includedir}/@GTKSOURCEVIEWMM_MODULE_NAME@ -I${libdir}/@GTKSOURCEVIEWMM_MODULE_NAME@/include

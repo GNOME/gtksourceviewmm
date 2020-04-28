@@ -1,6 +1,6 @@
 AC_INIT([gtksourceviewmm], [4.91.1],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gtksourceviewmm],
-        [gtksourceviewmm], [http://projects.gnome.org/gtksourceviewmm/])
+        [gtksourceviewmm], [https://wiki.gnome.org/Projects/GtkSourceView])
 AC_PREREQ([2.62])
 
 AC_CONFIG_SRCDIR([gtksourceview/gtksourceviewmm.h])

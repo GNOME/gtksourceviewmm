@@ -28,4 +28,9 @@ nodist_gtksourceviewmm_libinclude_HEADERS = gtksourceview/gtksourceviewmmconfig.
 pkgconfigdir = $(libdir)/pkgconfig
 nodist_pkgconfig_DATA = gtksourceview/$(GTKSOURCEVIEWMM_MODULE_NAME).pc
 
+include $(srcdir)/MSVC_NMake/filelist.am
+
+msvc_files = $(addprefix MSVC_NMake/,$(msvc_nmake_data))
+dist_noinst_DATA = $(msvc_files)
+
 include $(top_srcdir)/build/dist-changelog.am

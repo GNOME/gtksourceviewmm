@@ -15,5 +15,22 @@
 /* Micro version number of gtksourceviewmm. */
 #undef GTKSOURCEVIEWMM_MICRO_VERSION
 
+/* Enable DLL-specific stuff only when not building a static library nor using gendef. */
+#if !defined(__CYGWIN__) && defined(_WIN32) && \
+    !defined(GTKSOURCEVIEWMM_STATIC_LIB) && !defined(GTKSOURCEVIEWMM_USE_GENDEF)
+# define GTKSOURCEVIEWMM_DLL 1
+#endif
+
+#ifdef GTKSOURCEVIEWMM_DLL
+# ifdef GTKSOURCEVIEWMM_BUILD
+#  define GTKSOURCEVIEWMM_API __declspec(dllexport)
+# else
+#  define GTKSOURCEVIEWMM_API __declspec(dllimport)
+# endif /* GTKSOURCEVIEWMM_BUILD */
+#else
+/* Build a static library or a non-native-Windows library */
+# define GTKSOURCEVIEWMM_API
+#endif /* GTKSOURCEVIEWMM_DLL */
+
 #endif /* _GTKSOURCEVIEWMM_CONFIG_H */
 

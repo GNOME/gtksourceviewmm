@@ -25,6 +25,8 @@
 #include <glibmm/ustring.h>
 #include <glibmm/containerhandle_shared.h>
 
+#include <gtksourceviewmmconfig.h>
+
 namespace Gsv
 {
 /** It is just a class holding markup string.
@@ -34,7 +36,7 @@ namespace Gsv
  *
  * @newin{2,10}
  */
-class Markup
+class GTKSOURCEVIEWMM_API Markup
 {
 public:
   /** Creates empty Markup.

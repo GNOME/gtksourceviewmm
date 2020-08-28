@@ -22,11 +22,13 @@
 #ifndef _GTKSOURCEVIEWMM_WRAP_INIT_H
 #define _GTKSOURCEVIEWMM_WRAP_INIT_H
 
+#include <gtksourceviewmmconfig.h>
+
 namespace Gsv
 {
   /** Initializes wrapper types.
    */
-  void wrap_init () ;
+  GTKSOURCEVIEWMM_API void wrap_init () ;
 } // namespace Gsv
 
 #endif //_GTKSOURCEVIEWMM_WRAP_INIT_H

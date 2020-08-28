@@ -22,11 +22,13 @@
 #ifndef _GTKSOURCEVIEWMM_INIT_H
 #define _GTKSOURCEVIEWMM_INIT_H
 
+#include <gtksourceviewmmconfig.h>
+
 namespace Gsv
 {
   /** Initializes all type internals.
    */
-  void init () ;
+  GTKSOURCEVIEWMM_API void init () ;
 } // namespace Gsv
 
 #endif //_GTKSOURCEVIEWMM_INIT_H

@@ -14,7 +14,7 @@ using namespace Glib;
 using namespace Gsv ;
 
 #define LOG(message) \
-std::cout << __PRETTY_FUNCTION__ << ":" << __FILE__<< ":" << __LINE__ << ":" \
+std::cout << G_STRFUNC << ":" << __FILE__<< ":" << __LINE__ << ":" \
 << message << endl
 
 #define THROW(message) \

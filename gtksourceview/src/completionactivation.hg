@@ -17,6 +17,8 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+_CONFIGINCLUDE(gtksourceviewmmconfig.h)
+
 _DEFS(gtksourceviewmm,gtksourceview)
 
 #include <glibmm/value.h>
@@ -29,7 +31,7 @@ namespace Gsv
  *
  * @newin{2,10}
  */
-_WRAP_ENUM(CompletionActivation, GtkSourceCompletionActivation, s#^SOURCE_##)
+_WRAP_ENUM(CompletionActivation, GtkSourceCompletionActivation, s#^SOURCE_##, decl_prefix GTKSOURCEVIEWMM_API)
 
  /** @var CompletionActivation COMPLETION_ACTIVATION_NONE
   * None.

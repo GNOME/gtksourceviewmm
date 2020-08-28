@@ -17,6 +17,8 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+_CONFIGINCLUDE(gtksourceviewmmconfig.h)
+
 #include <vector>
 
 #include <gtksourceview/gtksourceview-typebuiltins.h>
@@ -36,18 +38,18 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace Gsv
 {
 
-class CompletionProvider;
-class Completion;
-class View;
+class GTKSOURCEVIEWMM_API CompletionProvider;
+class GTKSOURCEVIEWMM_API Completion;
+class GTKSOURCEVIEWMM_API View;
 
 // TODO: need docs here. krnowak
 /** CompletionContext
  *
  * @newin{2,10}
  */
-class CompletionContext : public Glib::Object
+class GTKSOURCEVIEWMM_API CompletionContext : public Glib::Object
 {
-  _CLASS_GOBJECT(CompletionContext, GtkSourceCompletionContext, GTK_SOURCE_COMPLETION_CONTEXT, Glib::Object, GObject)
+  _CLASS_GOBJECT(CompletionContext, GtkSourceCompletionContext, GTK_SOURCE_COMPLETION_CONTEXT, Glib::Object, GObject, , , GTKSOURCEVIEWMM_API)
 public:
 #m4 _CONVERSION(`const Glib::RefPtr<CompletionProvider>&',`struct _GtkSourceCompletionProvider*',`Glib::unwrap($3)')
 #m4 _CONVERSION(`const std::vector<Glib::RefPtr<CompletionProposal> >&',`GList*',`Glib::ListHandler<Glib::RefPtr<CompletionProposal> >::vector_to_list($3).data()')

@@ -36,7 +36,7 @@ _PINCLUDE(glibmm/private/object_p.h)
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 namespace Gtk {
   //deprecated
-  class StockID;
+  class GTKSOURCEVIEWMM_API StockID;
 } //namespace Gtk
 #endif //#ifndef DOXYGEN_SHOULD_SKIP_THIS
 
@@ -48,12 +48,12 @@ namespace Gsv
  *
  * @newin{2,10}
  */
-class CompletionItem
+class GTKSOURCEVIEWMM_API CompletionItem
 :
   public Glib::Object,
   public CompletionProposal
 {
-  _CLASS_GOBJECT(CompletionItem, GtkSourceCompletionItem, GTK_SOURCE_COMPLETION_ITEM, Glib::Object, GObject)
+  _CLASS_GOBJECT(CompletionItem, GtkSourceCompletionItem, GTK_SOURCE_COMPLETION_ITEM, Glib::Object, GObject, , , GTKSOURCEVIEWMM_API)
   _IMPLEMENTS_INTERFACE(CompletionProposal)
 protected:
   explicit CompletionItem(const Glib::ustring& label, const Glib::ustring& text, const Glib::RefPtr<const Gdk::Pixbuf>& icon, const Glib::ustring& info);

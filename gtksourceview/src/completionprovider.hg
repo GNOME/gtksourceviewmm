@@ -31,7 +31,7 @@ _PINCLUDE(glibmm/private/interface_p.h)
 namespace Gsv
 {
 
-class CompletionContext;
+class GTKSOURCEVIEWMM_API CompletionContext;
 
 /** Completion provider interface.
  *
@@ -39,9 +39,9 @@ class CompletionContext;
  *
  * @newin{2,10}
  */
-class CompletionProvider : public Glib::Interface
+class GTKSOURCEVIEWMM_API CompletionProvider : public Glib::Interface
 {
-  _CLASS_INTERFACE(CompletionProvider, GtkSourceCompletionProvider, GTK_SOURCE_COMPLETION_PROVIDER, GtkSourceCompletionProviderIface)
+  _CLASS_INTERFACE(CompletionProvider, GtkSourceCompletionProvider, GTK_SOURCE_COMPLETION_PROVIDER, GtkSourceCompletionProviderIface, , , GTKSOURCEVIEWMM_API)
 public:
   _WRAP_METHOD(Glib::ustring get_name() const, gtk_source_completion_provider_get_name)
 

@@ -18,6 +18,8 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+_CONFIGINCLUDE(gtksourceviewmmconfig.h)
+
 #include <glibmm/object.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
@@ -28,9 +30,9 @@ namespace Gsv
 
 /** Class representing a style.
  */
-class Style : public Glib::Object
+class GTKSOURCEVIEWMM_API Style : public Glib::Object
 {
-  _CLASS_GOBJECT(Style, GtkSourceStyle, GTK_SOURCE_STYLE, Glib::Object, GObject)
+  _CLASS_GOBJECT(Style, GtkSourceStyle, GTK_SOURCE_STYLE, Glib::Object, GObject, , , GTKSOURCEVIEWMM_API)
 
 public:
   /** Creates a copy of a style, that is a new Style instance which has

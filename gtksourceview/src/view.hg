@@ -31,13 +31,13 @@ _PINCLUDE(gtkmm/private/textview_p.h)
 namespace Gsv
 {
 
-class Completion;
-class Gutter;
-class MarkAttributes;
+class GTKSOURCEVIEWMM_API Completion;
+class GTKSOURCEVIEWMM_API Gutter;
+class GTKSOURCEVIEWMM_API MarkAttributes;
 
 /** Defines a behaviour of smart Home/End keys.
  */
-_WRAP_ENUM(SmartHomeEndType, GtkSourceSmartHomeEndType, s#^SOURCE_##)
+_WRAP_ENUM(SmartHomeEndType, GtkSourceSmartHomeEndType, s#^SOURCE_##, decl_prefix GTKSOURCEVIEWMM_API)
 /** @var SmartHomeEndType SMART_HOME_END_DISABLED
  * Smart-home-end disabled.
  */
@@ -56,7 +56,7 @@ _WRAP_ENUM(SmartHomeEndType, GtkSourceSmartHomeEndType, s#^SOURCE_##)
 
 /** Determines what kind of whitespaces whould be drawn.
  */
-_WRAP_ENUM(DrawSpacesFlags, GtkSourceDrawSpacesFlags, s#^SOURCE_##)
+_WRAP_ENUM(DrawSpacesFlags, GtkSourceDrawSpacesFlags, s#^SOURCE_##, decl_prefix GTKSOURCEVIEWMM_API)
 /** @var DrawSpacesFlags DRAW_SPACES_SPACE
  * Whether the space character should be drawn.
  */
@@ -79,9 +79,9 @@ _WRAP_ENUM(DrawSpacesFlags, GtkSourceDrawSpacesFlags, s#^SOURCE_##)
  * a text view which has syntax highlighting, undo/redo and text marks. Use a
  * Buffer to display text with a GtkSourceView.
  */
-class View : public Gtk::TextView
+class GTKSOURCEVIEWMM_API View : public Gtk::TextView
 {
-  _CLASS_GTKOBJECT(View, GtkSourceView, GTK_SOURCE_VIEW, Gtk::TextView, GtkTextView)
+  _CLASS_GTKOBJECT(View, GtkSourceView, GTK_SOURCE_VIEW, Gtk::TextView, GtkTextView, , , GTKSOURCEVIEWMM_API)
 
 public:
   /// The gutter position of the lines renderer.

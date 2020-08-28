@@ -46,9 +46,9 @@ _CC_INCLUDE(gtksourceview/gtksourceview-typebuiltins.h)
  * and guess_language() to get a Language for given file name and content
  * type.
  */
-class LanguageManager : public Glib::Object
+class GTKSOURCEVIEWMM_API LanguageManager : public Glib::Object
 {
-  _CLASS_GOBJECT(LanguageManager, GtkSourceLanguageManager, GTK_SOURCE_LANGUAGE_MANAGER, Glib::Object, GObject)
+  _CLASS_GOBJECT(LanguageManager, GtkSourceLanguageManager, GTK_SOURCE_LANGUAGE_MANAGER, Glib::Object, GObject, , , GTKSOURCEVIEWMM_API)
 protected:
   _CTOR_DEFAULT()
 

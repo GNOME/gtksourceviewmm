@@ -39,9 +39,9 @@ namespace Gsv
 {
 
 // TODO: write docs.
-class GutterRendererPixbuf : public GutterRenderer
+class GTKSOURCEVIEWMM_API GutterRendererPixbuf : public GutterRenderer
 {
-  _CLASS_GTKOBJECT(GutterRendererPixbuf, GtkSourceGutterRendererPixbuf, GTK_SOURCE_GUTTER_RENDERER_PIXBUF, GutterRenderer, GtkSourceGutterRenderer)
+  _CLASS_GTKOBJECT(GutterRendererPixbuf, GtkSourceGutterRendererPixbuf, GTK_SOURCE_GUTTER_RENDERER_PIXBUF, GutterRenderer, GtkSourceGutterRenderer, , , GTKSOURCEVIEWMM_API)
 public:
   _CTOR_DEFAULT()
 

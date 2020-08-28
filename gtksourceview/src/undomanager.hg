@@ -17,6 +17,8 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+_CONFIGINCLUDE(gtksourceviewmmconfig.h)
+
 #include <glibmm/interface.h>
 #include <glibmm/ustring.h>
 #include <gdkmm/pixbuf.h>
@@ -41,9 +43,9 @@ namespace Gsv
  *
  * @newin{2,10}
  */
-class UndoManager : public Glib::Interface
+class GTKSOURCEVIEWMM_API UndoManager : public Glib::Interface
 {
-  _CLASS_INTERFACE(UndoManager, GtkSourceUndoManager, GTK_SOURCE_UNDO_MANAGER, GtkSourceUndoManagerIface)
+  _CLASS_INTERFACE(UndoManager, GtkSourceUndoManager, GTK_SOURCE_UNDO_MANAGER, GtkSourceUndoManagerIface, , , GTKSOURCEVIEWMM_API)
 
 public:
 

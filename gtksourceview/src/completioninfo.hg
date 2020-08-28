@@ -17,6 +17,8 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+_CONFIGINCLUDE(gtksourceviewmmconfig.h)
+
 #include <gtkmm/widget.h>
 #include <gtkmm/textview.h>
 #include <gtkmm/window.h>
@@ -35,9 +37,9 @@ namespace Gsv
  *
  * @newin{2,10}
  */
-class CompletionInfo : public Gtk::Window
+class GTKSOURCEVIEWMM_API CompletionInfo : public Gtk::Window
 {
-  _CLASS_GTKOBJECT(CompletionInfo, GtkSourceCompletionInfo, GTK_SOURCE_COMPLETION_INFO, Gtk::Window, GtkWindow)
+  _CLASS_GTKOBJECT(CompletionInfo, GtkSourceCompletionInfo, GTK_SOURCE_COMPLETION_INFO, Gtk::Window, GtkWindow, , , GTKSOURCEVIEWMM_API)
 
 public:
   /** Creates new CompletionInfo popup window.

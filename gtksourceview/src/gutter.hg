@@ -32,8 +32,8 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace Gsv
 {
 
-class GutterRenderer;
-class View;
+class GTKSOURCEVIEWMM_API GutterRenderer;
+class GTKSOURCEVIEWMM_API View;
 
 // TODO: update docs.
 /** Gutter object for View
@@ -59,9 +59,9 @@ class View;
  *
  * @newin{2,10}
  */
-class Gutter : public Glib::Object
+class GTKSOURCEVIEWMM_API Gutter : public Glib::Object
 {
-  _CLASS_GOBJECT(Gutter, GtkSourceGutter, GTK_SOURCE_GUTTER, Glib::Object, GObject)
+  _CLASS_GOBJECT(Gutter, GtkSourceGutter, GTK_SOURCE_GUTTER, Glib::Object, GObject, , , GTKSOURCEVIEWMM_API)
 
 public:
 // TODO: remove it later - it should take a conversion definition from gtkmm,

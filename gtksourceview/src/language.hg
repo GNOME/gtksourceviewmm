@@ -33,7 +33,7 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace Gsv
 {
 
-class LanguageManager ;
+class GTKSOURCEVIEWMM_API LanguageManager ;
 
 _CC_INCLUDE(gtksourceview/gtksourcelanguage.h)
 _CC_INCLUDE(gtksourceview/gtksourceview-typebuiltins.h)
@@ -44,9 +44,9 @@ _CC_INCLUDE(gtksourceview/gtksourceview-typebuiltins.h)
  * language. Use LanguageManager to obtain a Language instance, and
  * Buffer::set_language() to apply it to a Buffer.
  */
-class Language : public Glib::Object
+class GTKSOURCEVIEWMM_API Language : public Glib::Object
 {
-  _CLASS_GOBJECT(Language, GtkSourceLanguage, GTK_SOURCE_LANGUAGE, Glib::Object, GObject)
+  _CLASS_GOBJECT(Language, GtkSourceLanguage, GTK_SOURCE_LANGUAGE, Glib::Object, GObject, , , GTKSOURCEVIEWMM_API)
 
 public:
 

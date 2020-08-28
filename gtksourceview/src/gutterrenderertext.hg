@@ -30,9 +30,9 @@ namespace Gsv
 {
 
 // TODO: write docs.
-class GutterRendererText : public GutterRenderer
+class GTKSOURCEVIEWMM_API GutterRendererText : public GutterRenderer
 {
-  _CLASS_GTKOBJECT(GutterRendererText, GtkSourceGutterRendererText, GTK_SOURCE_GUTTER_RENDERER_TEXT, GutterRenderer, GtkSourceGutterRenderer)
+  _CLASS_GTKOBJECT(GutterRendererText, GtkSourceGutterRendererText, GTK_SOURCE_GUTTER_RENDERER_TEXT, GutterRenderer, GtkSourceGutterRenderer, , , GTKSOURCEVIEWMM_API)
 public:
   _CTOR_DEFAULT()
 

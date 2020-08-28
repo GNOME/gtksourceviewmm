@@ -32,9 +32,9 @@ namespace Gsv
  *
  * @newin{2,10}
  */
-class PrintCompositor : public Glib::Object
+class GTKSOURCEVIEWMM_API PrintCompositor : public Glib::Object
 {
-  _CLASS_GOBJECT(PrintCompositor, GtkSourcePrintCompositor, GTK_SOURCE_PRINT_COMPOSITOR, Glib::Object, GObject)
+  _CLASS_GOBJECT(PrintCompositor, GtkSourcePrintCompositor, GTK_SOURCE_PRINT_COMPOSITOR, Glib::Object, GObject, , , GTKSOURCEVIEWMM_API)
 
 protected:
   _WRAP_CTOR(PrintCompositor(const Glib::RefPtr<Buffer>& buffer), gtk_source_print_compositor_new)

@@ -38,7 +38,7 @@ namespace Gsv
  *
  * @newin{3,0}
  */
-_WRAP_ENUM(BracketMatchType, GtkSourceBracketMatchType, s#^SOURCE_##)
+_WRAP_ENUM(BracketMatchType, GtkSourceBracketMatchType, s#^SOURCE_##, decl_prefix GTKSOURCEVIEWMM_API)
 /** @var BracketMatchType BRACKET_MATCH_NONE
  * There was no bracket to match.
  */
@@ -65,9 +65,9 @@ _WRAP_ENUM(BracketMatchType, GtkSourceBracketMatchType, s#^SOURCE_##)
  * By default highlighting is enabled, but you can disable it with
  * Buffer::set_highlight_syntax().
  */
-class Buffer : public Gtk::TextBuffer
+class GTKSOURCEVIEWMM_API Buffer : public Gtk::TextBuffer
 {
-  _CLASS_GOBJECT(Buffer, GtkSourceBuffer, GTK_SOURCE_BUFFER, Gtk::TextBuffer, GtkTextBuffer)
+  _CLASS_GOBJECT(Buffer, GtkSourceBuffer, GTK_SOURCE_BUFFER, Gtk::TextBuffer, GtkTextBuffer, , , GTKSOURCEVIEWMM_API)
 
 protected:
 

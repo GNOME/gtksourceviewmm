@@ -18,6 +18,8 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+_CONFIGINCLUDE(gtksourceviewmmconfig.h)
+
 #include <gtkmm/textmark.h>
 
 _DEFS(gtksourceviewmm,gtksourceview)
@@ -30,9 +32,9 @@ namespace Gsv
  *
  * @newin{2,2}
  */
-class Mark : public Gtk::TextMark
+class GTKSOURCEVIEWMM_API Mark : public Gtk::TextMark
 {
-  _CLASS_GOBJECT(Mark, GtkSourceMark, GTK_SOURCE_MARK, Gtk::TextMark, GtkTextMark)
+  _CLASS_GOBJECT(Mark, GtkSourceMark, GTK_SOURCE_MARK, Gtk::TextMark, GtkTextMark, , , GTKSOURCEVIEWMM_API)
 
 protected:
 

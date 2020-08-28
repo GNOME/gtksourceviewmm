@@ -32,10 +32,10 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace Gsv
 {
 
-class CompletionContext;
-class CompletionProvider;
+class GTKSOURCEVIEWMM_API CompletionContext;
+class GTKSOURCEVIEWMM_API CompletionProvider;
 
-_WRAP_GERROR(SourceCompletionError, GtkSourceCompletionError, GTK_SOURCE_COMPLETION_ERROR)
+_WRAP_GERROR(SourceCompletionError, GtkSourceCompletionError, GTK_SOURCE_COMPLETION_ERROR, decl_prefix GTKSOURCEVIEWMM_API)
 
 /** Main Completion Object
  *
@@ -43,7 +43,7 @@ _WRAP_GERROR(SourceCompletionError, GtkSourceCompletionError, GTK_SOURCE_COMPLET
  */
 class Completion : public Glib::Object
 {
-  _CLASS_GOBJECT(Completion, GtkSourceCompletion, GTK_SOURCE_COMPLETION, Glib::Object, GObject)
+  _CLASS_GOBJECT(Completion, GtkSourceCompletion, GTK_SOURCE_COMPLETION, Glib::Object, GObject, , , GTKSOURCEVIEWMM_API)
 public:
 
   /** Add a new CompletionProvider to the completion object.

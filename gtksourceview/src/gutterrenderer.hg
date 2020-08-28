@@ -30,14 +30,14 @@ _PINCLUDE(gtkmm/private/object_p.h)
 namespace Gsv
 {
 
-_WRAP_ENUM(GutterRendererState, GtkSourceGutterRendererState, s#^SOURCE_##)
+_WRAP_ENUM(GutterRendererState, GtkSourceGutterRendererState, s#^SOURCE_##, decl_prefix GTKSOURCEVIEWMM_API)
 
-_WRAP_ENUM(GutterRendererAlignmentMode, GtkSourceGutterRendererAlignmentMode, s#^SOURCE_##)
+_WRAP_ENUM(GutterRendererAlignmentMode, GtkSourceGutterRendererAlignmentMode, s#^SOURCE_##, decl_prefix GTKSOURCEVIEWMM_API)
 
 // TODO: write docs.
-class GutterRenderer : public Gtk::Object
+class GTKSOURCEVIEWMM_API GutterRenderer : public Gtk::Object
 {
-  _CLASS_GTKOBJECT(GutterRenderer, GtkSourceGutterRenderer, GTK_SOURCE_GUTTER_RENDERER, Gtk::Object, GInitiallyUnowned)
+  _CLASS_GTKOBJECT(GutterRenderer, GtkSourceGutterRenderer, GTK_SOURCE_GUTTER_RENDERER, Gtk::Object, GInitiallyUnowned, , , GTKSOURCEVIEWMM_API)
 public:
 #m4 _CONVERSION(`const Cairo::RefPtr<Cairo::Context>&', `cairo_t*', `(($3) ? ($3)->cobj() : 0)')
 #m4 _CONVERSION(`Gtk::TextIter&',`GtkTextIter*',($3).gobj())

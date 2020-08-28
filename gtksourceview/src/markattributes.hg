@@ -20,6 +20,8 @@
 /// \file
 /// \brief MarkAttributes class
 
+_CONFIGINCLUDE(gtksourceviewmmconfig.h)
+
 #include <glibmm/object.h>
 #include <glibmm/refptr.h>
 //#include <gtksourceviewmm/view.h>
@@ -38,34 +40,34 @@ _PINCLUDE(glibmm/private/object_p.h)
 namespace Gio
 {
 
-class Icon;
+class GTKSOURCEVIEWMM_API Icon;
 
 } // namespace Gio
 
 namespace Gdk
 {
 
-class Pixbuf;
-class RGBA;
+class GTKSOURCEVIEWMM_API Pixbuf;
+class GTKSOURCEVIEWMM_API RGBA;
 
 } // namespace Gdk
 
 namespace Gtk
 {
 
-class Widget;
+class GTKSOURCEVIEWMM_API Widget;
 
 } // namespace Gtk
 
 namespace Gsv
 {
 
-class Mark;
+class GTKSOURCEVIEWMM_API Mark;
 
 // TODO: write docs.
-class MarkAttributes : public Glib::Object
+class GTKSOURCEVIEWMM_API MarkAttributes : public Glib::Object
 {
-  _CLASS_GOBJECT(MarkAttributes, GtkSourceMarkAttributes, GTK_SOURCE_MARK_ATTRIBUTES, Glib::Object, GObject)
+  _CLASS_GOBJECT(MarkAttributes, GtkSourceMarkAttributes, GTK_SOURCE_MARK_ATTRIBUTES, Glib::Object, GObject, , , GTKSOURCEVIEWMM_API)
 protected:
   _CTOR_DEFAULT
 public:

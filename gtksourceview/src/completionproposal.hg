@@ -17,6 +17,8 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+_CONFIGINCLUDE(gtksourceviewmmconfig.h)
+
 #include <glibmm/interface.h>
 #include <glibmm/ustring.h>
 #include <gdkmm/pixbuf.h>
@@ -36,9 +38,9 @@ namespace Gsv
  *
  * @newin{2,10}
  */
-class CompletionProposal : public Glib::Interface
+class GTKSOURCEVIEWMM_API CompletionProposal : public Glib::Interface
 {
-  _CLASS_INTERFACE(CompletionProposal, GtkSourceCompletionProposal, GTK_SOURCE_COMPLETION_PROPOSAL, GtkSourceCompletionProposalIface)
+  _CLASS_INTERFACE(CompletionProposal, GtkSourceCompletionProposal, GTK_SOURCE_COMPLETION_PROPOSAL, GtkSourceCompletionProposalIface, , , GTKSOURCEVIEWMM_API)
 
 public:
   /** Gets the label of a proposal.

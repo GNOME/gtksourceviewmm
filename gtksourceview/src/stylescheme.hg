@@ -48,9 +48,9 @@ namespace Gsv
  *
  * @newin{2,2}
  */
-class StyleScheme : public Glib::Object
+class GTKSOURCEVIEWMM_API StyleScheme : public Glib::Object
 {
-  _CLASS_GOBJECT(StyleScheme, GtkSourceStyleScheme, GTK_SOURCE_STYLE_SCHEME, Glib::Object, GObject)
+  _CLASS_GOBJECT(StyleScheme, GtkSourceStyleScheme, GTK_SOURCE_STYLE_SCHEME, Glib::Object, GObject, , , GTKSOURCEVIEWMM_API)
 
 public:
 

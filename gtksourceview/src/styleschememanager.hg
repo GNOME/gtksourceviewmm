@@ -32,9 +32,9 @@ namespace Gsv
 
 /** Class providing access to SourceStyleSchemes.
  */
-class StyleSchemeManager : public Glib::Object
+class GTKSOURCEVIEWMM_API StyleSchemeManager : public Glib::Object
 {
-  _CLASS_GOBJECT(StyleSchemeManager, GtkSourceStyleSchemeManager, GTK_SOURCE_STYLE_SCHEME_MANAGER, Glib::Object, GObject)
+  _CLASS_GOBJECT(StyleSchemeManager, GtkSourceStyleSchemeManager, GTK_SOURCE_STYLE_SCHEME_MANAGER, Glib::Object, GObject, , , GTKSOURCEVIEWMM_API)
 
 protected:
   _CTOR_DEFAULT

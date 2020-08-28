@@ -1,5 +1,6 @@
 include $(top_srcdir)/gtksourceview/src/filelist.am
 include $(top_srcdir)/gtksourceview/gtksourceviewmm/filelist.am
+include $(top_srcdir)/gtksourceview/gtksourceviewmm/filelist.gmake.am
 
 gtksourceviewmm_files_h = $(files_built_h) $(filter-out wrap_init.h,$(files_extra_h))
 

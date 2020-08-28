@@ -2,6 +2,7 @@ lib_LTLIBRARIES = libgtksourceviewmm-@GTKSOURCEVIEWMM_API_VERSION@.la
 
 include $(srcdir)/../src/filelist.am
 include $(srcdir)/filelist.am
+include $(srcdir)/filelist.gmake.am
 include $(top_srcdir)/build/compile-binding.am
 
 AM_CPPFLAGS = $(binding_includes) $(binding_cppflags) $(GTHREAD_CFLAGS) $(GTKSOURCEVIEWMM_CFLAGS)

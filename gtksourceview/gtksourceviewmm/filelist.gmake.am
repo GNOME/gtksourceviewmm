@@ -1,0 +1,1 @@
+files_built_ph = $(patsubst %.hg,private/%_p.h,$(files_hg))

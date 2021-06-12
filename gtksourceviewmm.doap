@@ -21,13 +21,6 @@ autocompletion and other mostly programming-oriented features.</description>
 
   <maintainer>
     <foaf:Person>
-      <foaf:name>Dodji Seketeli</foaf:name>
-      <foaf:mbox rdf:resource="mailto:dodji@gnome.org" />
-      <gnome:userid>dodji</gnome:userid>
-    </foaf:Person>
-  </maintainer>
-  <maintainer>
-    <foaf:Person>
       <foaf:name>Murray Cumming</foaf:name>
       <foaf:mbox rdf:resource="mailto:murrayc@murrayc.com" />
       <gnome:userid>murrayc</gnome:userid>
